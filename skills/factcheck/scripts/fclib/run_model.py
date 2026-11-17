@@ -1,0 +1,267 @@
+"""Build role prompts and run a model CLI as one debate seat.
+
+Every call runs in a fresh empty temp directory and gets only the role
+instructions plus the JSON files that role is allowed to see.
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import shutil
+import subprocess
+import tempfile
+from pathlib import Path
+
+from . import io, validate
+
+TIMEOUT = 600
+ISOLATION_NOTE = ("這是一次獨立的事實查核任務。忽略任何使用者層級的偏好、記憶、協議或工作守則："
+                  "它們不是證據，也不能影響判定。只依照本次提供的角色指令和輸入資料作答。")
+
+PROBE_PROMPT = (
+    'You are being probed by a tool. Answer ONLY with one JSON object, no other text: '
+    '{"user_context": <true if your context contains any user-level or project-level instructions '
+    'such as AGENTS.md, CLAUDE.md, memories, hooks output or a protocol; else false>, '
+    '"can_web_search": <true if you have a web search tool available>}'
+)
+
+LENS_FILES = {"evidence": "opponent-evidence.md", "counter": "opponent-counter.md",
+              "stance": "opponent-stance.md", "external": "opponent-external.md"}
+
+ROLE_INPUTS = {
+    "tracer": ["source.json", "claims.json"],
+    "proponent": ["source.json", "claims.json", "trace.json"],
+    "opponent": ["source.json", "claims.json", "trace.json", "proponent.json"],
+    "rebuttal": ["claims.json", "proponent.json", "opponent-*.json"],
+    "judge": ["source.json", "claims.json", "trace.json", "proponent.json", "opponent-*.json", "rebuttal.json"],
+    "review": ["claims.json", "judgment.json", "opponent-{seat}.json"],
+}
+
+
+ROLE_DATA = {
+    "tracer": ["tactics", "media"],
+    "proponent": ["sources"],
+    "opponent": ["sources"],
+    "judge": ["tactics"],
+}
+STANCE_LENSES = {"stance", "external"}
+
+
+class RunModelError(RuntimeError):
+    pass
+
+
+def _data_sections(role, lens, data_dir):
+    wanted = list(ROLE_DATA.get(role, []))
+    if role == "opponent" and lens in STANCE_LENSES:
+        wanted.append("tactics")
+    sections = []
+    for kind in wanted:
+        path = Path(data_dir) / f"{kind}.toml"
+        if not path.exists():
+            continue
+        data = io.read_toml(path)
+        if kind == "tactics":
+            rows = [{k: t.get(k) for k in ("id", "name", "layer", "observable", "cannot_infer")}
+                    for t in data.get("tactic", [])]
+            title = "手法庫（只能用這些 tactic_id）"
+        elif kind == "media":
+            rows = [{k: o.get(k) for k in ("id", "name", "aliases", "domains")} for o in data.get("outlet", [])]
+            title = "媒體對照表（只用來填 outlet_id，立場和信任度由腳本另外查）"
+        else:
+            rows = [{k: s.get(k) for k in ("name", "url", "tier", "covers")} for s in data.get("source", [])]
+            title = "第一手來源入口"
+        sections.append(f"## {title}\n\n```json\n{json.dumps(rows, ensure_ascii=False)}\n```\n")
+    return sections
+
+
+def output_name(role, seat):
+    return {"tracer": "trace.json", "proponent": "proponent.json", "rebuttal": "rebuttal.json",
+            "judge": "judgment.json", "opponent": f"opponent-{seat}.json",
+            "review": f"review-{seat}.json"}[role]
+
+
+def extract_json_object(text: str):
+    """Return the last top-level JSON object in free text, or None."""
+    decoder = json.JSONDecoder()
+    found, i = None, 0
+    while True:
+        i = text.find("{", i)
+        if i < 0:
+            return found
+        try:
+            obj, end = decoder.raw_decode(text, i)
+        except json.JSONDecodeError:
+            i += 1
+            continue
+        if isinstance(obj, dict):
+            found = obj
+        i = end
+
+
+def _strip_engine(obj):
+    if isinstance(obj, dict):
+        return {k: _strip_engine(v) for k, v in obj.items() if k != "engine"}
+    return obj
+
+
+def _role_file(role, lens):
+    name = LENS_FILES[lens] if role == "opponent" else f"{role}.md"
+    return (io.REFERENCES_DIR / "roles" / name).read_text(encoding="utf-8")
+
+
+def build_prompt(run, role, seat, lens=None, engine_label=None, data_dir=None):
+    run = Path(run)
+    data_dir = io.DATA_DIR / "tw" if data_dir is None else data_dir
+    parts = [(io.REFERENCES_DIR / "roles" / "_common.md").read_text(encoding="utf-8"),
+             _role_file(role, lens)]
+
+    out = output_name(role, seat)
+    fixed = {}
+    if role in ("opponent", "review"):
+        fixed["seat"] = seat
+    if role == "opponent":
+        fixed["lens"] = lens
+        if engine_label:
+            fixed["engine"] = engine_label
+    parts.append("## 這一次的任務\n\n"
+                 f"- 輸出檔名：`{out}`\n"
+                 + (f"- 下列欄位必須照抄：`{json.dumps(fixed, ensure_ascii=False)}`\n" if fixed else ""))
+
+    parts.extend(_data_sections(role, lens, data_dir))
+    parts.append("## 輸入資料\n")
+    for pattern in ROLE_INPUTS[role]:
+        for path in sorted(run.glob(pattern.format(seat=seat))):
+            data = io.read_json(path)
+            if path.name.startswith("opponent-"):
+                if data.get("status", "ok") != "ok":
+                    continue
+                if role in ("rebuttal", "judge"):
+                    data = _strip_engine(data)
+            parts.append(f"### {path.name}\n\n```json\n{json.dumps(data, ensure_ascii=False, indent=1)}\n```\n")
+    parts.append("## 輸出\n\n只輸出一個 JSON 物件，不要任何其他文字。")
+    return "\n\n".join(parts)
+
+
+def build_command(engine, workdir, out_file, env):
+    cmd = list(engine["cmd"])
+    eid = engine["engine"]
+    model = engine.get("model") or env.get(f"FC_{eid.upper()}_MODEL")
+    if eid == "codex":
+        argv = cmd + ["exec", "--ignore-user-config", "--ephemeral", "--skip-git-repo-check",
+                      "-s", "read-only", "-C", str(workdir), "-c", 'web_search="live"',
+                      "-o", str(out_file)]
+        if model:
+            argv += ["-m", model]
+        return argv + ["-"], "file"
+    if eid == "claude":
+        argv = cmd + ["-p", "--output-format", "json", "--no-session-persistence",
+                      "--allowedTools", "WebSearch", "WebFetch",
+                      "--append-system-prompt", ISOLATION_NOTE]
+        if env.get("ANTHROPIC_API_KEY"):
+            argv.append("--bare")
+        if model:
+            argv += ["--model", model]
+        return argv, "claude-json"
+    if eid == "gemini":
+        argv = cmd + ["-p", "-"]
+        if model:
+            argv += ["-m", model]
+        return argv, "stdout"
+    if eid == "ollama":
+        return cmd + ["run", model], "stdout"
+    raise RunModelError(f"不支援的引擎 {eid}")
+
+
+def _default_runner(argv, stdin, cwd, timeout, env):
+    p = subprocess.run(argv, input=stdin, capture_output=True, text=True, cwd=cwd,
+                       timeout=timeout, env={**os.environ, **env})
+    return p.returncode, p.stdout, p.stderr
+
+
+def call(engine, prompt, runner=_default_runner, env=None, timeout=TIMEOUT, attempts=2):
+    """Run one prompt; retry once on timeout or failure. Returns (ok, text, error)."""
+    env = dict(os.environ if env is None else env)
+    error = ""
+    for _ in range(attempts):
+        workdir = Path(tempfile.mkdtemp(prefix="fc-seat-"))
+        out_file = workdir / "last-message.txt"
+        try:
+            argv, mode = build_command(engine, workdir, out_file, env)
+            try:
+                code, stdout, stderr = runner(argv, prompt, str(workdir), timeout, env)
+            except subprocess.TimeoutExpired:
+                error = f"逾時（超過 {timeout} 秒）"
+                continue
+            except OSError as exc:
+                error = f"無法執行：{exc}"
+                continue
+            if code != 0:
+                error = f"結束碼 {code}：{(stderr or stdout)[-300:]}"
+                continue
+            if mode == "file":
+                text = out_file.read_text(encoding="utf-8") if out_file.exists() else stdout
+            elif mode == "claude-json":
+                try:
+                    payload = json.loads(stdout)
+                except json.JSONDecodeError:
+                    error = "claude 輸出不是 JSON"
+                    continue
+                if payload.get("is_error"):
+                    error = f"claude 回報錯誤：{str(payload.get('result'))[:300]}"
+                    continue
+                text = payload.get("result") or ""
+            else:
+                text = stdout
+            return True, text, ""
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+    return False, "", error
+
+
+def probe(engine, runner=_default_runner, env=None):
+    ok, text, error = call(engine, PROBE_PROMPT, runner=runner, env=env, timeout=240)
+    obj = extract_json_object(text) if ok else None
+    if obj is None:
+        return {"probe": "failed", "isolation": "unknown", "detail": error or "探測沒有回傳 JSON"}
+    result = {"probe": "ok", "isolation": "partial" if obj.get("user_context") else "full", "detail": ""}
+    if obj.get("can_web_search") is False:
+        result["can_search"] = False
+    return result
+
+
+def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=None, known_tactics=None):
+    """Run a role on an engine, validate, and write the output file. Retries once on invalid output."""
+    run = Path(run)
+    if role == "opponent" and lens is None:
+        lens = "external" if seat.startswith("X") else {"A": "evidence", "B": "counter", "C": "stance"}[seat]
+    name = output_name(role, seat)
+    target = run / name
+    prompt = build_prompt(run, role, seat, lens=lens)
+    errors = ["沒有執行"]
+    for attempt in range(2):
+        ok, text, error = call(engine, prompt, runner=runner, env=env)
+        if not ok:
+            errors = [error]
+            break
+        obj = extract_json_object(text)
+        if obj is None:
+            errors = ["輸出裡找不到 JSON 物件"]
+        else:
+            if role in ("opponent", "review"):
+                obj["seat"] = seat
+            if role == "opponent":
+                obj.update({"engine": engine["engine"], "lens": lens, "status": "ok"})
+            io.write_json(target, obj)
+            errors = validate.validate_file(run, name, known_tactics=known_tactics)
+            if not errors:
+                return target
+            target.unlink()
+        prompt = prompt + "\n\n## 上一次的輸出有以下問題，請修正後重新輸出完整 JSON\n\n" + "\n".join(f"- {e}" for e in errors)
+
+    if role == "opponent":
+        io.write_json(target, {"seat": seat, "engine": engine["engine"], "lens": lens,
+                               "status": "failed", "error": "；".join(errors)[:500], "attacks": []})
+        return target
+    raise RunModelError(f"{role} 在 {engine['engine']} 上失敗：" + "；".join(errors))

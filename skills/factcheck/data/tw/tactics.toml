@@ -1,0 +1,1078 @@
+schema_version = 1
+updated = "2026-11-17"
+license = "CC BY-SA 4.0"
+
+# 操弄手法庫：這裡收的是「手法」，不是立場或敘事。
+# example.target 是被攻擊、被抹黑或被扭曲的一方，不是散布者（散布者屬於歸因，不在這裡判斷）。
+# 每個案例都附查核或研究報告的網址與發布日期。
+
+# ───────────── 脈絡操弄 ─────────────
+
+[[tactic]]
+id = "TW-T01"
+name = "斷章取義"
+category = "脈絡操弄"
+layer = "content"
+definition = "只截一句話或一小段，拿掉前後文，讓人以為當事人在講另一件事，或意思和原本相反。"
+observable = [
+  "只有一句話或幾秒鐘片段，沒有附完整影片或全文",
+  "引用的話被接到原本沒有談到的人或事件上",
+  "標題或說明文字的解讀比原句更強烈",
+]
+cannot_infer = "截得不完整不代表一定是故意的；也不能拿來判斷當事人原本的立場對不對，只能說這個片段撐不起傳言的說法。"
+how_to_spot = "找到完整影片或全文，看這句話前後在講什麼、是在回答哪個問題。"
+context_flag = "out_of_context"
+disarm = ["T0023.001"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0023.001.md"]
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳台中市長盧秀燕回應幼兒園疑似性侵案時說「吃飽太閒」；查核發現這句話是在回應中正路改名，對幼兒園案她說的是「正在調查中」。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/lu-xiuyan-remark-about-road-renaming-not-kindergarten-case/"
+date = "2025-05-28"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳川普說「有合適的總統就不會有戰爭」是在暗指賴清德是麻煩製造者；查核比對白宮記者會原始脈絡，川普說的「合適總統」指的是他自己。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/trump-suitable-president-comment-misquoted-lai/"
+date = "2026-05-15"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳農業部長陳駿季說馬太鞍溪堰塞湖「沒有立即危險」卻還是潰堤；查核指出這是他8月的答詢片段，完整發言有說明當時蓄水未滿、開挖風險高等前提。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/factcheck-mataian-creek-dam-overflow-minister-quote-misused/"
+date = "2025-09-26"
+
+[[tactic]]
+id = "TW-T02"
+name = "剪接移花接木（影音）"
+category = "脈絡操弄"
+layer = "content"
+definition = "把影片或錄音剪掉關鍵字句、重新排列，或把不同場合的片段拼在一起，做出當事人沒有表達過的意思。"
+observable = [
+  "畫面或聲音有跳接，同一句話被重複播放",
+  "片段很短，看不到記者的提問或前一句話",
+  "不同場合的畫面被接在一起，再配上新的標題或字幕",
+]
+cannot_infer = "影片被剪過不代表內容全是假的，也看不出是誰剪的；要和原始完整影音比對，才知道哪裡被改了。"
+how_to_spot = "用畫面上的台標、浮水印或關鍵字找原始完整影片，對照時間點看哪幾句被剪掉。"
+context_flag = "out_of_context"
+disarm = ["T0087.002", "T0088.002"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0087.002.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳影片中賴清德喊出「變成中國台灣，大家說好不好」；查核發現影片剪掉前半句，原句是「絕對不讓民主台灣走回頭路，變成中國台灣」。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/lai-ching-te-speech-edited-video-china-taiwan-claim-fabricated/"
+date = "2026-10-05"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳影片稱韓國瑜說賴清德是「礦工的兒子憑什麼當副總統」；查核發現影片只擷取20秒、拿掉「沒有中華民國的保護，沒有政府的照顧」這句，傳言文字還加上原話沒有的「憑什麼」。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-10145/"
+date = "2024-01-11"
+
+[[tactic]]
+id = "TW-T03"
+name = "舊圖舊影片新用"
+category = "脈絡操弄"
+layer = "content"
+definition = "把過去或其他地方的照片、影片配上新的說明，當成最近發生的事，或當成另一件事的證據。"
+observable = [
+  "畫面裡的季節、服裝、招牌或人物樣貌和說明對不上",
+  "畫質很差、有舊的浮水印，或看得出被轉存很多次",
+  "以圖搜圖可以找到時間更早的版本",
+]
+cannot_infer = "畫面本身可能是真的；舊圖新用只表示它不能證明傳言講的那件事，也看不出是誰挪用的。"
+how_to_spot = "用以圖搜圖（例如 Google 智慧鏡頭）找這張圖或這段影片最早出現的時間和場合。"
+context_flag = "recycled_media"
+disarm = ["T0084.003"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0084.003.md"]
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳影片稱韓國瑜呼籲反對罷免的人不要出門投票、去監票就好；查核發現這是2020年高雄市長罷免案前的舊影片，他在2025年罷免案中其實呼籲大家去投票。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/old-video-of-han-kuo-yu-recall-remarks-resurfaces/"
+date = "2025-07-11"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳影片稱蔡英文呼籲7月26日回家投同意罷免票；查核發現這是2020年總統大選前的舊影片，被刪掉大選內容後再加上罷免字幕和圖卡。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/tsai-ing-wen-vote-july-26-video-reused-from-2020/"
+date = "2025-07-11"
+
+[[tactic.example]]
+target = "民眾黨"
+summary = "網傳照片稱柯文哲去中國時和女性合影、配上「任柯挑選」文字；查核發現照片是2018年他在台北電音派對和台灣網紅的合照。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2023/11/2018.html"
+date = "2023-11-03"
+
+[[tactic]]
+id = "TW-T04"
+name = "舊聞新炒"
+category = "脈絡操弄"
+layer = "content"
+definition = "把幾年前的新聞、早就結束的事件，或已經被澄清過的謠言，重新包裝成「最新消息」再傳一次。"
+observable = [
+  "內容沒有寫日期，或只用「本週」「最近」「明天起」這類模糊時間",
+  "同樣的內容過去已經被查核過",
+  "提到的職稱、政策或法案進度和現在對不上",
+]
+cannot_infer = "舊消息重傳不代表當年的內容是假的，也不能推論轉傳的人知道它已經過時。"
+how_to_spot = "拿內容裡的關鍵句去搜尋，看它最早什麼時候出現，事情後來怎麼發展。"
+context_flag = "old_news"
+disarm = ["T0084"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0084.md"]
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳圖卡稱「軍人效忠中共取消退休金」的法案「本週」被國民黨擋下；查核發現這張圖2025年5月就流傳過，講的是當時的程序爭議，不是近期的事。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/outdated-claim-kmt-blocked-military-pension-bill/"
+date = "2026-10-28"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳台電圖卡稱「明天起電費分三段式」；查核指出這是2020年起就被查核過的老謠言，一般住家是累進電價，和用電時段無關。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/three-tier-electricity-rate-rumor-resurfaces/"
+date = "2025-06-23"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳影片稱吳敦義卸下公職後才說出「談統不切實際」的真心話，搭著近期陸配事件流傳；查核發現影片是他2017年競選黨主席時的專訪。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/wu-den-yih-2017-cross-strait-remarks-miscontextualized/"
+date = "2025-04-11"
+
+[[tactic]]
+id = "TW-T05"
+name = "把提案說成已通過"
+category = "脈絡操弄"
+layer = "content"
+definition = "把還在提案、一讀、委員會審查或草案預告階段的法案，說成已經通過或馬上上路，用來製造恐慌或攻擊提案的一方。"
+observable = [
+  "用「已三讀」「已通過」「明年起」等字眼，卻沒有附立法院的議事紀錄",
+  "把提案、草案、預告和定案混在一起講",
+  "只講是誰提的、哪一黨的，不講法案現在走到哪一步",
+]
+cannot_infer = "進度講錯不代表提案內容沒有爭議；法案內容好不好，要另外討論。"
+how_to_spot = "到立法院議事暨公報資訊網或公共政策網路參與平台，查這個案子現在的進度。"
+context_flag = "legal_stage_confusion"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳國民黨立委提的選罷法修正案「已二讀通過」、罷免門檻將提高；查核發現該案只完成一讀，交付內政委員會審查。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-10619/"
+date = "2024-05-22"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳圖卡稱民進黨立委莊瑞雄提案處罰「記錄他人進出投票所」是在為2024作票做準備；查核指出這是仍在審議、尚未通過的修法草案，傳言錯把它說成是為了作票。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-9946/"
+date = "2023-11-29"
+
+[[tactic]]
+id = "TW-T06"
+name = "數字缺分母、選擇性數據"
+category = "脈絡操弄"
+layer = "content"
+definition = "只給總數不給比例，或只挑對自己有利的年份、項目來比，讓數字看起來支持某個結論。"
+observable = [
+  "只有人數或金額，沒有母數、比例或比較基準",
+  "拿來比的年份、範圍或單位不一致",
+  "只挑最高點或最低點，不看整體變化",
+]
+cannot_infer = "數字本身可能是對的，問題出在比較方式；也不能因此就說相反的結論成立。"
+how_to_spot = "先問「跟什麼比？分母是多少？」，再找完整的官方統計自己算一次。"
+context_flag = "missing_denominator"
+disarm = ["T0023"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0023.md"]
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳指揮中心數據顯示「打滿三劑死的比沒打的多」；專家指出要用各劑次的接種人數當分母算死亡率，直接比死亡人數是錯誤的推論。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-7769/"
+date = "2022-07-04"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳圖卡比較四個直轄市的油品檢驗次數，說台北4年沒驗、台中8年只驗一次；查核發現圖卡有的只算單一油廠、有的算全部，基期也不一致，不能直接比較。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/oil-inspection-data-comparison/"
+date = "2026-08-07"
+
+[[tactic]]
+id = "TW-T07"
+name = "錯譯、捏造字幕"
+category = "脈絡操弄"
+layer = "content"
+definition = "拿外國官員或名人的真實畫面，配上和原音意思不同的中文字幕或翻譯，讓人以為對方說了某句話。"
+observable = [
+  "字幕常是簡體字，或用語不像台灣的媒體",
+  "字幕的長度、語氣和畫面裡講話的節奏對不上",
+  "這麼重大的發言，卻找不到外媒報導或官方逐字稿",
+]
+cannot_infer = "字幕被編造不代表原始畫面是假的；也看不出是誰加上字幕的。"
+how_to_spot = "找原始畫面的出處和官方逐字稿，或把原音丟進翻譯工具，對照字幕說的是不是同一件事。"
+disarm = ["T0084.003"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0084.003.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳美國記者會影片字幕稱美方說不會收留「逃到美國」的蔡英文，還罵她背叛祖國；查核發現兩段畫面是談別的事的白宮與五角大廈簡報，字幕是捏造的。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-8154/"
+date = "2022-09-14"
+
+[[tactic.example]]
+target = "外國政府"
+summary = "網傳影片字幕稱白宮發言人說美國只想讓台海兩岸自相殘殺、賣武器而已；查核發現原始畫面是2021年白宮記者會回答墮胎議題，字幕和原音不符。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-8075/"
+date = "2022-08-29"
+
+# ───────────── 來源與冒名 ─────────────
+
+[[tactic]]
+id = "TW-T08"
+name = "偽造截圖、假公文、假新聞截圖"
+category = "來源與冒名"
+layer = "content"
+definition = "做出看起來像官方公文、對話紀錄、新聞報導或照片的圖片，或把真的截圖、照片改掉部分內容，拿來當作「證據」。"
+observable = [
+  "公文格式、用語不像台灣官方，或出現簡體字、中國用語",
+  "截圖的字距、對齊、字型不一致，或關鍵欄位被裁掉",
+  "找不到這張公文或這則報導的原始出處",
+]
+cannot_infer = "看出偽造痕跡不等於知道是誰做的；反過來，看不出痕跡也不代表是真的。"
+how_to_spot = "去發文機關或媒體的官網找原件，找不到就先當成來源不明。"
+disarm = ["T0085.004", "T0089.003", "T0086.003"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0089.003.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳海委會主委管碧玲和段宜康討論中國快艇翻覆事件的對話截圖；查核發現這是變造2017年兩人討論同婚議題外流的截圖，對話內容是捏造的。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-10340/"
+date = "2024-02-27"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳國防部「機密公文」要資通電軍炒作泰國旅遊負面新聞；查核發現公文格式、稱謂不符台灣官方用法，還有簡體字和合成的印章，是捏造的假公文。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-9228/"
+date = "2023-06-05"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳圖卡稱侯友宜的市長名牌英文翻成「Monkey Friendship」；查核發現圖卡是變造《聯合報》2018年的報導照片，原本的名牌只有「市長」兩個字。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-10884/"
+date = "2024-08-06"
+
+[[tactic.example]]
+target = "民眾黨"
+summary = "網傳柯文哲年輕時的當兵照「高腰褲、胯下有水漬」，配上「這副德性選總統？」；查核發現原始照片是他1986年入伍時的舊照，網傳版本被刻意修圖拉高褲頭、加上水漬。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-10010/"
+date = "2023-12-19"
+
+[[tactic]]
+id = "TW-T09"
+name = "冒用官方或媒體名義"
+category = "來源與冒名"
+layer = "content"
+definition = "在內容上放政府機關、查核機構或媒體的名稱、標誌，或把別的影片包裝成新聞畫面，借用對方的公信力讓人相信。"
+observable = [
+  "圖卡有機關或媒體的標誌，但官網和官方帳號都找不到",
+  "所謂「外國新聞畫面」沒有台標，或內容和主播講的話對不上",
+  "網址、帳號名稱和官方的只差幾個字",
+]
+cannot_infer = "有標誌不代表是官方發的，沒標誌也不代表是假的；冒用名義也不能推論背後是誰。"
+how_to_spot = "直接到該機關或媒體的官網、官方帳號找同一則消息。"
+disarm = ["T0097.206", "T0097.202", "T0143.003"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0097.206.md"]
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳印有交通部字樣的圖卡稱9月有12項機車交通新制上路；查核發現圖卡不是交通部或公路局發的，內容多是舊制，還夾雜錯誤資訊。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/september-scooter-traffic-rules/"
+date = "2026-09-07"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳影片號稱是韓國新聞報導「賴清德丟臉到國外」；查核發現左半邊是2014年韓國食品廣告，被拼上賴清德2025年演講畫面，這段廣告以前也被拿來編過陳時中等人的版本。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2025/10/korea-news.html"
+date = "2025-10-28"
+
+[[tactic.example]]
+target = "非政黨"
+summary = "網傳帶有民視新聞標誌的圖卡，評論核三公投意見發表會反方代表吳亞昕的外貌；查核發現民視原始報導沒有這些說法，圖卡是後製P圖、自行加上評論。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/fake-minshi-image-criticizing-wu-ya-xin/"
+date = "2025-08-14"
+
+[[tactic]]
+id = "TW-T10"
+name = "冒用名人說話（假語錄）"
+category = "來源與冒名"
+layer = "content"
+definition = "把一篇文章或一段話掛上政治人物、名人的名字，讓人以為是他本人說的，常見做法是拿別人的文章改掉作者。"
+observable = [
+  "長篇文章掛名某人，但本人的臉書、官網都沒有",
+  "文中的語氣或立場和當事人平常差很多，例如綠營人物突然大力替藍營說話、或反過來",
+  "同一篇文字在網路上曾掛過不同人的名字",
+]
+cannot_infer = "假語錄只說明那段話不是當事人說的，不能拿來推論當事人真正的想法，也看不出是誰編的。"
+how_to_spot = "到當事人的官方帳號找原文，再拿文中一段話去搜尋，看有沒有更早、掛別人名字的版本。"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳吳敦義發文嗆中共是黑幫、預言國民黨下場；查核發現文章不是他寫的，是把媒體報導曹興誠的新聞裡的名字全換成吳敦義，吳敦義已報警提告。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2025/08/wu.html"
+date = "2025-08-09"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳〈呂秀蓮的覺醒〉一文，聲稱呂秀蓮呼籲大家支持韓國瑜；查核發現這篇文章不是呂秀蓮寫的，也不是新聞報導。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-1060/"
+date = "2019-10-24"
+
+[[tactic.example]]
+target = "民眾黨"
+summary = "網傳一篇作者署名柯文哲的〈這個總統〉，描述他拜訪總統的情形並批評總統；查核發現原文是媒體人徐宗懋2018年的文章被改寫，柯文哲沒有發表過。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-4128/"
+date = "2020-07-08"
+
+[[tactic]]
+id = "TW-T11"
+name = "匿名爆料、「內部人士」"
+category = "來源與冒名"
+layer = "content"
+definition = "用「內部人士透露」「朋友在醫院工作說」「暗網外流」這類查不到的來源，讓沒有證據的說法聽起來像內幕。"
+observable = [
+  "消息來源只有「據了解」「知情人士」「朋友說」，沒有名字也沒有文件",
+  "源頭是剛註冊的帳號、匿名論壇或來路不明的檔案",
+  "強調「新聞都不敢報」「被封鎖了」",
+]
+cannot_infer = "匿名不等於一定是假的，新聞也會保護消息來源；但光靠匿名說法不能證明任何事，也看不出是誰放出來的。"
+how_to_spot = "問一句「誰說的？有沒有文件或第二個獨立來源？」找不到就先別轉。"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳「暗網外流郵件」顯示前駐日代表謝長廷用珠寶賄賂日本首相高市早苗；查核發現源頭是海外匿名論壇一個才註冊3天的帳號，文件用語有明顯的「中式日文」特徵，日本媒體也查無報導。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/false-claim-hsieh-chang-ting-bribery-rumor-from-anonymous-forum-2/"
+date = "2025-11-25"
+
+[[tactic.example]]
+target = "外國政府"
+summary = "網傳推文稱「白宮內部人士透露」拜登說溜嘴毀滅台灣計畫；查核發現發文的美國電台主持人表示那是諷刺，推文沒有引述任何消息來源。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-8860/"
+date = "2023-03-03"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳訊息稱「朋友在林口長庚工作的醫護人員」說很多內科醫生被隔離、本土疫情被封鎖；查核比對門診表，相關醫師都照常看診，指揮中心也持續公布疫情。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-4120/"
+date = "2020-07-07"
+
+[[tactic]]
+id = "TW-T12"
+name = "假專家、借用權威"
+category = "來源與冒名"
+layer = "content"
+definition = "搬出「專家」「學者」「醫師」來替說法背書，但專家是假的、名字被盜用，或他其實沒說過那樣的結論。"
+observable = [
+  "只寫「日本學者」「美國專家」「台大醫師」，查不到這個人或他的原始發言",
+  "影片中的醫師長相、聲音和本人不符",
+  "專家講的內容和他的專業領域無關，或結論比原話誇大很多",
+]
+cannot_infer = "頭銜是假的不代表結論一定錯，頭銜是真的也不代表結論一定對；要回到證據本身。"
+how_to_spot = "查這位專家本人有沒有公開說過同樣的話，以及他的專業是不是和這個題目有關。"
+disarm = ["T0045"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0045.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳「日本學者爆料」大選後蔡英文會把全國核廢料集中貯存、已鎖定15處場址；查核發現所謂的15處是台電簡報中「應禁止設立場址」的排除區，而且尚未定案。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-1804/"
+date = "2020-01-03"
+
+[[tactic.example]]
+target = "非政黨"
+summary = "網傳影片由自稱腎臟科醫師江守山的人說多吃綠香蕉能改善夜尿、減緩腎衰竭；查核發現影片是AI生成，主講人和真實的江守山長相不符，內容也是錯誤的醫療觀念。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/ai-fake-doctor-falsely-claims-green-bananas-improve-kidney-function-and-nocturia/"
+date = "2026-06-03"
+
+[[tactic]]
+id = "TW-T13"
+name = "假民調、曲解民調"
+category = "來源與冒名"
+layer = "content"
+definition = "公布不存在的民調公司做的「民調」，或用方法不專業的調查、網路問卷冒充正式民調，影響大家對選情的判斷。"
+observable = [
+  "查不到這家民調公司，或沒有公布樣本數、調查時間和方法",
+  "結果和同時期其他民調差很多，卻只在特定網站或群組流傳",
+  "把網路投票、媒體自辦問卷說成正式民調",
+]
+cannot_infer = "民調結果不合預期不代表是假的；方法不嚴謹也不代表有人在背後操作，除非有司法或調查報告。"
+how_to_spot = "找民調的執行單位、樣本數和調查方法；三樣都找不到，就不要當真。"
+disarm = ["T0085.007"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0085.007.md"]
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳「巧虎島民調」圖卡稱民進黨六都市長選舉全面領先；查核發現經濟部查無這家民調公司，調查方法也交代不清，不是可信的民調。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/qiaohu-island-poll-six-municipal-elections-dpp-lead-fabricated/"
+date = "2026-10-20"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "《指傳媒》民調稱侯康配首度超車賴蕭配並被多家媒體轉載；亞洲事實查核實驗室調查發現這份民調方法幾乎沒有專業可言，台中地檢署後來以涉嫌製作假民調、違反反滲透法聲押該媒體記者。"
+org = "亞洲事實查核實驗室"
+url = "https://www.rfa.org/cantonese/news/factcheck-tw1-12222023163055.html"
+date = "2023-12-22"
+
+[[tactic]]
+id = "TW-T14"
+name = "AI 生成或深偽影音"
+category = "來源與冒名"
+layer = "content"
+definition = "用 AI 生成、換臉、換嘴型或合成聲音，做出某人沒說過的話、沒做過的事的影片、照片或錄音。"
+observable = [
+  "嘴型和聲音對不太上，臉部邊緣、牙齒或眼睛反光不自然",
+  "背景物件扭曲、字糊掉，或同一段畫面被正放、倒放拉長",
+  "只有這一份影音，找不到其他角度或原始出處",
+]
+cannot_infer = "看起來像 AI 不等於確定是 AI，看起來很真也不代表是真的；就算確定是深偽，也看不出是誰做的。"
+how_to_spot = "找原始影片或節目來比對，再看當事人、檢調或查核機構有沒有出面說明。"
+disarm = ["T0087.001", "T0088.001", "T0086.002"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0087.001.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳影片中民進黨立委柯建銘在記者會上批評民進黨、說自己被台獨洗腦；查核發現原始畫面是他2024年12月21日回應修法的記者會，嘴型用深偽置換，聲音是 AI 合成。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2024/12/deepfake.html"
+date = "2024-12-23"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳影片中桃園市議員于北辰稱讚解放軍軍演、說共軍登陸就直接投降；查核發現影片是拿他5月上政論節目的畫面配上 AI 假聲音，原節目他談的是台灣難攻。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-11120/"
+date = "2024-10-16"
+
+[[tactic.example]]
+target = "中國官方"
+summary = "網傳影片稱習近平在台灣大選前表示三組候選人都是台獨、一個都不投；查核發現影片用深偽技術換臉換嘴型，原始畫面是2023年11月一場和台灣無關的座談會。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2024/01/xi-video.html"
+date = "2024-01-10"
+
+# ───────────── 情緒操弄 ─────────────
+
+[[tactic]]
+id = "TW-T15"
+name = "情緒煽動與恐慌"
+category = "情緒操弄"
+layer = "content"
+definition = "用「完了」「太可怕」這類字眼，或說你的福利、健保、存款要被拿走，先讓人害怕或生氣，讓人來不及查證就相信。"
+observable = [
+  "大量驚嘆號，或「完了」「快看」「太扯」等字眼",
+  "強調會失去錢、健康、安全或自由",
+  "只有結論和情緒，沒有可以查證的來源或數字",
+]
+cannot_infer = "情緒很強烈不代表內容一定是假的；會害怕或生氣也很正常，這只是提醒你先停下來查一下。"
+how_to_spot = "看完覺得很生氣或很害怕時，先停一下，找到原始出處再決定要不要轉。"
+disarm = ["T0138.002"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0138.002.md"]
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳國民黨和民眾黨立委聯手通過，明年起不再發老人津貼、育兒津貼和租屋補貼；查核指出總預算當時只是卡在程序委員會、還沒審查，就算沒過，法定和延續性的社福經費仍可動支。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-11052/"
+date = "2024-09-27"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳民進黨「下台前把腦筋動到外匯存底」、修法淘空全民資產；查核指出這項草案的提案人是民眾黨吳欣盈和國民黨羅明才，有跨黨派連署，修法也沒有進度。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-9910/"
+date = "2023-11-17"
+
+[[tactic.example]]
+target = "中國官方"
+summary = "網傳圖卡稱國台辦宣布統一後會取消台灣健保、軍公教年金和存款保險；查核指出國台辦沒有這樣說過，兩岸媒體都沒有相關報導，是捏造的說法。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/factcheck-china-taiwan-unification-healthcare/"
+date = "2025-08-22"
+
+[[tactic]]
+id = "TW-T16"
+name = "急迫轉傳（「快轉傳不然會被刪」）"
+category = "情緒操弄"
+layer = "content"
+definition = "用「緊急」「刪前必看」「一定要轉發」「媒體不敢報」催你馬上分享，讓訊息在被查證之前就先傳出去。"
+observable = [
+  "要求「轉給親朋好友」「轉到群組」",
+  "說「很快會被刪」「媒體都不敢報」",
+  "標題寫「緊急」「速看」，卻沒有具體時間和發布單位",
+]
+cannot_infer = "催人轉傳不能證明內容是假的；但真正的緊急通知通常有明確的發布單位，可以直接查到。"
+how_to_spot = "看到「快轉」「刪前必看」先別轉，到官方網站或查核平台查一下再說。"
+disarm = ["T0120"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0120.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳影片稱民進黨又要作票、「全台17000多個票箱都有我的人」，並要大家「瘋狂大力轉發」；查核發現這句話出自造勢直播中一名畫面外、身分不明的男子和主持人的對話，影片的推論忽略了投開票所的監督機制。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-10161/"
+date = "2024-01-12"
+
+[[tactic.example]]
+target = "非政黨"
+summary = "網傳影片標題「外媒不敢報導！刪前必看！輝瑞新冠口服藥的秘密」；查核發現影片把針對輝瑞疫苗的報導內容，移花接木到另一家藥廠的口服藥，多處說法錯誤。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-6581/"
+date = "2021-11-18"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳訊息提醒投票時不能戴候選人口罩、否則最高罰2萬6千元，並要大家「請轉傳」；查核指出現場會先勸導，不聽制止才會依選罷法處罰，罰則也不是傳言說的金額。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-8461/"
+date = "2022-11-21"
+
+[[tactic]]
+id = "TW-T17"
+name = "標題黨、聳動標題"
+category = "情緒操弄"
+layer = "content"
+definition = "用誇張、驚悚或誤導的標題吸引點閱，標題講的事在內文裡根本沒有，或和事實差很遠。"
+observable = [
+  "標題用「急報」「震撼」「慘遭」「痛罵」等字眼",
+  "標題的說法在內文或影片裡找不到",
+  "只看標題和看完內文，會得到不同的結論",
+]
+cannot_infer = "標題誇張不代表整篇都是假的，也不能推論作者的政治立場；要看內文和原始資料。"
+how_to_spot = "不要只看標題就轉，點進去看內文有沒有真的講到標題那件事。"
+disarm = ["T0016"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0016.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳媒體圖卡標題「川普點名台灣 痛罵他愚蠢的總統」，讓人以為川普罵賴清德是蠢貨；查核發現川普從沒說過這種話，傳言最早來自簡體字幕的虛構影片，後來又被誤導性的圖卡標題帶起來。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2026/06/trump-eez.html"
+date = "2026-06-22"
+
+[[tactic.example]]
+target = "外國政府"
+summary = "網傳影片標題稱美國國防部長赫格塞斯在香格里拉對話宣示「中共若敢動台灣，美國就會直接開戰」；查核發現他是警告中共犯台會對全球造成毀滅性後果，並沒有說這句話。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/misleading-claim-us-will-war-over-taiwan/"
+date = "2025-06-17"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳影片標題「急報！解放軍擊落台灣戰機！飛行員被押送回京！」；查核發現影片題文不符，那架幻象戰機是機械故障失事，飛行員跳傘後已獲救。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-7096/"
+date = "2022-03-17"
+
+# ───────────── 邏輯謬誤 ─────────────
+
+[[tactic]]
+id = "TW-T18"
+name = "稻草人"
+category = "邏輯謬誤"
+layer = "content"
+definition = "先把對方的主張講歪、講到最極端，再去攻擊這個被扭曲的版本，好像這樣就駁倒了對方。"
+observable = [
+  "「他們就是要……」這類轉述，卻沒有附對方原話或法條",
+  "把「加重」說成「放寬」、把「要求」說成「要公投」這種反轉",
+  "被批評的內容，對方其實從來沒有主張過",
+]
+cannot_infer = "抓到稻草人不代表被攻擊的一方就是對的，只代表這段批評打錯了對象。"
+how_to_spot = "找對方的原始發言或法條原文，對照轉述的版本差在哪裡。"
+disarm = ["T0023"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0023.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳「民進黨通過毒品條例，校園可以持有5克毒品」；查核指出修法是把持有三、四級毒品的入刑門檻從20克降到5克，是加重處罰，傳言把持有和販賣混為一談。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-1670/"
+date = "2019-12-25"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳圖卡稱國民黨立委陳玉珍揚言「不讓金門馬上小三通，就發動回歸公投」；查核發現她只要求儘快恢復小三通，從沒提過回歸公投，圖卡是拼湊合成的。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-8562/"
+date = "2022-12-20"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳國民黨和民眾黨聯手讓「軍公教18%回歸」；查核發現國民黨的修正草案是調整退休金隨物價調整的方式、凍結所得替代率，沒有恢復18%優惠存款。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2024/04/18.html"
+date = "2024-04-27"
+
+[[tactic]]
+id = "TW-T19"
+name = "轉移焦點（「那你們之前呢」）"
+category = "邏輯謬誤"
+layer = "content"
+definition = "被批評時不回應問題本身，而是改講對方過去也做過、或以前更糟，把焦點從眼前的事移開。"
+observable = [
+  "「那你們執政時呢」「當年是誰提的」這類反問",
+  "拿另一個時期、另一件事來比，跳過原本被質疑的重點",
+  "拿來比的那件事，年份或內容常常講錯",
+]
+cannot_infer = "對方以前做過，不代表現在的批評不成立；現在的批評成立，也不代表對方以前就沒問題。兩件事要分開查。"
+how_to_spot = "把「那你們之前呢」先放一邊，問：原本被質疑的那件事，答案是什麼？"
+disarm = ["T0077"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0077.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳「國會五法都是2014年民進黨提案」，反問民進黨為何現在要擋；查核發現年份和內容都有誤，部分條文原本就存在，各黨過去提過的版本也不一樣。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-10668/"
+date = "2024-05-31"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "2024年4月電價調漲時，網傳圖卡反問「你還在堅信蔡比馬任內電價漲更兇嗎？」，稱馬政府時期電價較高；查核發現圖卡刻意拿馬政府2012年的電價高點來比，若用2016年4月比，當時各級距都比2024年便宜。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-10488/"
+date = "2024-04-15"
+
+[[tactic]]
+id = "TW-T20"
+name = "假兩難"
+category = "邏輯謬誤"
+layer = "content"
+definition = "把事情說成只有兩個選項、而且其中一個很糟，藏起其他可行的做法，逼人選邊。"
+observable = [
+  "「要嘛……要嘛……」「不……就只能……」的句型",
+  "說「沒得選」，卻沒說明為什麼其他做法不行",
+  "把複雜的規定簡化成二選一",
+]
+cannot_infer = "看出假兩難只表示選項被刻意縮小，不代表那兩個選項本身是錯的。"
+how_to_spot = "問自己：真的只有這兩條路嗎？查一下官方規定有沒有第三種做法。"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳民進黨政府要求老師開學前一定要打國產疫苗，「不打就進不了學校」；查核指出多數教師打的是 AZ 或莫德納，沒打疫苗的人也可以改交快篩陰性證明。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-6225/"
+date = "2021-08-23"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳罷免投票「不去投不同意，你那張票就會自動變成同意票」；查核指出沒有投票就不列入計算，不會自動變成同意票。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2025/07/recall-election.html"
+date = "2025-07-10"
+
+[[tactic.example]]
+target = "非政黨"
+summary = "網傳高端疫苗「要嘛7月底打二期沒做完的疫苗，要嘛拖到10月」；查核指出二期主試驗已完成收案、送交解盲，5月12日開始招募的是另一項次要試驗。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-5701/"
+date = "2021-06-04"
+
+[[tactic]]
+id = "TW-T21"
+name = "滑坡"
+category = "邏輯謬誤"
+layer = "content"
+definition = "從一件事一路推到很嚴重的後果，中間每一步都沒有證據，卻講得好像一定會發生。"
+observable = [
+  "「一旦……就會……最後……」的連鎖推論",
+  "結局通常是亡國、垮掉、被解散這類極端後果",
+  "中間的因果步驟沒有資料或專家說明",
+]
+cannot_infer = "推論誇大不代表那件事完全沒有風險；風險可以討論，但要一步一步拿出證據。"
+how_to_spot = "把推論拆成一步一步，問每一步有沒有證據支持。"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳國民黨立委提的國道6東延法案會影響佳山基地，「讓中國從台灣直接突破第一島鏈」；查核指出國道6東延的出口在吉安、佳山基地在新城，專家也說兩者無關。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-10637/"
+date = "2024-05-25"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳憲法法庭判決「暗藏陷阱」，在野黨不處理大法官人事同意權就會被解散，「台灣越來越像泰國」；查核指出判決說的「為憲法所不許」不等於違憲，政黨違憲要經嚴格程序並有三分之二大法官同意。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-11179/"
+date = "2024-11-04"
+
+[[tactic.example]]
+target = "非政黨"
+summary = "網傳「一旦同婚合法化」，同運團體會湧進台灣、靠免費愛滋藥拖垮健保；健保署指出同婚後健保支付的愛滋費用沒有增加，傳言對跨國同婚登記資格的描述也不正確。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-8647/"
+date = "2023-01-07"
+
+[[tactic]]
+id = "TW-T22"
+name = "相關當因果"
+category = "邏輯謬誤"
+layer = "content"
+definition = "兩件事剛好同時或先後發生，就說是其中一件造成另一件，卻沒有拿出因果證據。"
+observable = [
+  "「自從……之後就……」「難怪……」的句型",
+  "把時間上接近的兩件事直接連在一起",
+  "沒有提到任何其他可能的原因",
+]
+cannot_infer = "沒有證據證明因果，不代表兩件事一定無關；只是目前的說法不足以下結論。"
+how_to_spot = "問：還有沒有其他原因？有沒有資料或專家真的證明兩者有因果關係？"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳圖卡「砸2400億無人機掛零」，把無人機預算和驗收不及格、測試場不足連在一起；查核指出這筆預算還沒編列執行，和圖卡提到的事件沒有關係。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/2400-billion-drone-budget-not-yet-allocated-misleading-claim/"
+date = "2026-09-29"
+
+[[tactic.example]]
+target = "外國政府"
+summary = "網傳北海道函館大量死亡的沙丁魚和日本排放福島核處理水有關；查核指出沒有科學證據支持，當地專家推測和海水低溫或大型掠食者追趕有關。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-9987/"
+date = "2023-12-12"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳影片稱台北內湖淹大水是因為水利處太晚開閘門；查核發現影片中的大溝溪滯洪閘門和主要淹水區屬於不同排水系統，當天閘門也沒有動。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/neihu-flooding-dagouxi-detention-basin-unrelated/"
+date = "2026-07-03"
+
+# ───────────── 人身攻擊與抹黑 ─────────────
+
+[[tactic]]
+id = "TW-T23"
+name = "人身攻擊與私德抹黑"
+category = "人身攻擊與抹黑"
+layer = "content"
+definition = "不談政策或事實，而是捏造或誇大對方的私生活、品格、金錢問題，讓人對這個人反感。"
+observable = [
+  "焦點放在外遇、私吞、洗錢這類個人醜聞",
+  "只有指控沒有證據，或證據是P圖、匿名說法",
+  "和正在討論的公共議題沒有關係",
+]
+cannot_infer = "抹黑內容被證實是假的，不代表當事人其他作為都沒問題；但沒有證據的私德指控不能當成事實。"
+how_to_spot = "問：這個指控有沒有文件、判決或可查證的報導？還是只有一張圖和一段話？"
+disarm = ["T0135.001", "T0140.001"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0140.001.md"]
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳趙少康1994年私吞3億元競選結餘款、被王建煊譴責後退出新黨；查核發現他當年的結餘加補助款最多約2300萬元，選後也繼續擔任新黨秘書長，傳言情節和事實不符。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-9958/"
+date = "2023-12-01"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳影片稱賴清德有三名情婦；查核發現除了一則2015年的舊報導，其餘只是名嘴說法和匿名網友發言，沒有證據，影片本身也是 AI 深偽做的。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2023/12/deepfake.html"
+date = "2023-12-21"
+
+[[tactic.example]]
+target = "民眾黨"
+summary = "網傳柯文哲、黃珊珊等四人同機從澳門回台、去澳門銀行開戶洗錢；查核發現照片是圖文創作者的P圖諷刺作品，柯文哲和黃珊珊是後製合成上去的。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-10993/"
+date = "2024-09-09"
+
+[[tactic]]
+id = "TW-T24"
+name = "貼標籤、扣帽子"
+category = "人身攻擊與抹黑"
+layer = "content"
+definition = "用「網軍」「1450」「小粉紅」「中共同路人」「賣國賊」這類標籤套在對方身上，直接否定對方，不必回應對方說了什麼。指控別人是網軍，本身也常是一種抹黑。"
+observable = [
+  "用標籤代替論點，例如「這就是1450」「中共同路人」",
+  "標籤背後的「證據」是捏造的數字或無關的截圖",
+  "被貼標籤的對象從個人擴大到整個政黨、族群或公司",
+]
+cannot_infer = "貼標籤本身不能證明對方是或不是那種人；要有具體證據，例如判決，或研究機構、平台針對這個案例的報告。"
+how_to_spot = "把標籤拿掉，看剩下的內容還有沒有論點和證據。"
+disarm = ["T0075.001", "T0135.001"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0135.001.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳圖卡拿 LINE 群組裡「急徵30位線上操作員」的訊息，說這就是「網軍治國」；查核發現那是包裝成徵才的詐騙訊息，和網軍無關。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-8326/"
+date = "2022-10-18"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網傳圖卡稱「國民黨36萬人、民眾黨1.9萬人已領中國身分證」，並罵是「親中舔共的賣國賊」；查核發現數字是捏造的，內政部也沒有掌握各政黨的黨員名冊。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/fake-data-parties-china-id-numbers/"
+date = "2025-03-06"
+
+[[tactic.example]]
+target = "非政黨"
+summary = "網傳世界民主運動大會的兩大贊助商君悅酒店和中華電信是「中共同路人」；查核發現兩家公司都不是贊助商，主辦單位公布的名單裡也沒有它們。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-8354/"
+date = "2022-10-25"
+
+[[tactic]]
+id = "TW-T25"
+name = "影射暗示（只是問問）"
+category = "人身攻擊與抹黑"
+layer = "content"
+definition = "不直接指控，而是用「是不是」「值得追問」「合理懷疑」這類問句或暗示，讓人自己往壞處想，被追究時又能說「我只是問問」。"
+observable = [
+  "用問句或「合理揣測」代替指控",
+  "提出的「疑點」沒有附任何證據",
+  "常搭配來源不明的錄音、截圖或查詢網站",
+]
+cannot_infer = "提出疑問是正當的，但問句本身不是證據，「被質疑」也不等於「被證實」。"
+how_to_spot = "把問句改成肯定句，再問自己：有任何證據支持這句話嗎？"
+disarm = ["T0140.001"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0140.001.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳號稱「沈伯洋私下錄音」的影片涉及軍購回扣，並寫「是否存在利益輸送？這些問題都值得追問」；查核指出錄音來源和真實性都無法驗證，發布的粉專也缺乏可靠背景。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2026/10/audio-puma.html"
+date = "2026-10-30"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "網紅質疑國民黨立委陳玉珍「有沒有中國身分證」，網友再拿中國網站「驗證」；查核發現這些網站都無法證明任何人是否持有中國身分證。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/chen-yu-chen-china-id-claim-unverifiable/"
+date = "2025-01-07"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "網傳投開票所工作人員的遴選資格「有貓膩」，還「合理揣測這就是他們的xx部隊」；查核指出未滿20歲的大專生依規定還不能當監察員，優先找有選務經驗的人是常規做法，不是強制條件。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-8441/"
+date = "2022-11-16"
+
+[[tactic.example]]
+target = "民眾黨"
+summary = "網傳柯文哲和女性的合照是「中共放出的照片」，暗示他在中國受到招待；查核發現兩張照片都在台北拍的，一張是2019年東區商圈活動，一張是2015年他在松山機場候機。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/migration-9842/"
+date = "2023-11-02"
+
+# ───────────── 傳播跡象 ─────────────
+
+[[tactic]]
+id = "TW-T26"
+name = "內容農場"
+category = "傳播跡象"
+layer = "spread"
+definition = "大量產製拼湊、聳動、沒有署名內容的網站或影音頻道，多半靠流量賺錢或累積觀眾，常把舊聞、謠言和不相干的畫面拼在一起。"
+observable = [
+  "網站或頻道沒有作者、聯絡方式或登記資料",
+  "每天固定大量上片，標題都用「完了」「慘遭」這類開頭",
+  "用機器配音或 AI 畫面，內容東拼西湊、沒有消息來源",
+]
+cannot_infer = "是內容農場不代表每一則都是假的，也不能從這點推論背後是哪個國家或政黨在經營。"
+how_to_spot = "看這個網站或頻道的其他內容：如果都是同一種聳動標題、沒有署名，就要特別小心。"
+disarm = ["T0096", "T0049.007"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0096.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "查核中心分析2020年 YouTube 上的影音內容農場，發現這些頻道每天穩定產出拼湊影片，標題多以「蔡英文完了」「蔡英文認輸了」開頭，內容圍繞論文造假、選舉作票等說法。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/migration_article_103938_4172/"
+date = "2020-07-17"
+
+[[tactic.example]]
+target = "中國官方"
+summary = "網傳影片稱中共官員在聯合國教科文組織論壇說繁體字是「裹腳布」，被美國教授打臉；查核發現沒有這場論壇，影片出自專拍虛構台灣故事的 AI 內容農場頻道。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2025/07/ai-UNESCO.html"
+date = "2025-07-07"
+
+[[tactic.example]]
+target = "非政黨"
+summary = "網傳影片稱郭台銘「深夜慘遭逮捕」；查核發現影片來自用聳動標題吸引點閱的內容農場頻道，內容是把新聞和名嘴說法東拼西湊，郭台銘並沒有被逮捕。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2024/01/terry.html"
+date = "2024-01-05"
+
+[[tactic]]
+id = "TW-T27"
+name = "協同散布"
+category = "傳播跡象"
+layer = "spread"
+definition = "很多帳號在短時間內貼出幾乎一樣的文案、影片或留言，或用同一份稿子重錄成不同版本，讓某個說法看起來很多人在講。"
+observable = [
+  "不同帳號貼出一字不差、或只改幾個字的文案",
+  "新帳號或平常不活躍的帳號同時大量轉貼",
+  "同一份旁白被不同帳號重新錄製、換上不同畫面",
+]
+cannot_infer = "看到協同的跡象，只能說「觀察到協同散布」，不能判斷是誰在指揮，也不能推論所有轉貼的人都是假帳號。"
+how_to_spot = "複製一段文字去搜尋，看是不是很多帳號在差不多時間貼出一樣的內容。"
+disarm = ["T0084.001", "T0119", "T0049.003"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0084.001.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "網傳中共懲戒民進黨立委沈伯洋家族的3家上市公司、市值蒸發47億；查核發現這3家公司根本不存在，傳言源自抖音影片，多個帳號轉貼或用相同旁白重錄，以「一稿多版」擴大流傳。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/shen-boyang-family-sanction-fake-news/"
+date = "2025-11-10"
+
+[[tactic.example]]
+target = "國民黨"
+summary = "台灣人工智慧實驗室觀察2023年11月藍白合期間的社群，發現 PTT 上抨擊國民黨的協同聲量逐週上升，手法是造謠和散播負面論述；實驗室也說明，系統抓得到協同操作，但無法確知背後是誰，很多發文帳號其實是被盜用的。"
+org = "中央社"
+url = "https://www.cna.com.tw/news/aipl/202311290266.aspx"
+date = "2023-11-29"
+
+[[tactic]]
+id = "TW-T28"
+name = "假帳號、盜用帳號"
+category = "傳播跡象"
+layer = "spread"
+definition = "用捏造的身分、盜來的照片或冒充名人的帳號發文、留言或私訊，讓人以為是真實的人或本人在說話。"
+observable = [
+  "大頭貼是網路上找得到的別人照片，或像 AI 生成的臉",
+  "帳號剛建立、追蹤者很少，卻大量發政治內容",
+  "帳號名稱和名人只差一兩個字，還會私訊找你投資",
+]
+cannot_infer = "認出假帳號只說明帳號身分不實，不能推論是誰在經營；也不要因為對方立場不同，就說他是假帳號。"
+how_to_spot = "點進帳號看建立時間、過去的貼文，並用以圖搜圖查大頭貼是不是別人的照片。"
+disarm = ["T0143.002", "T0143.003", "T0150.005"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0143.002.md"]
+
+[[tactic.example]]
+target = "民進黨"
+summary = "美國社群分析公司 Graphika 的報告指出，超過800個臉書假帳號跟著台灣時事發文，宣傳國民黨並抨擊民進黨等對手，部分帳號盜用真人照片當大頭貼。"
+org = "中央社"
+url = "https://www.cna.com.tw/news/aipl/202312140022.aspx"
+date = "2023-12-14"
+
+[[tactic.example]]
+target = "政府機關"
+summary = "國防部發布國家級警報後，台灣人工智慧實驗室觀察到臉書上有虛假帳號有系統地把相關新聞分享到各社團，宣傳政府和執政黨介入選舉。"
+org = "中央社"
+url = "https://www.cna.com.tw/news/aipl/202401100152.aspx"
+date = "2024-01-10"
+
+[[tactic.example]]
+target = "非政黨"
+summary = "Threads 上出現郭台銘、魏哲家等財經名人的帳號說要分享投資經驗；查核發現全是仿冒帳號，郭台銘的假帳號來自境外，提醒民眾小心詐騙。"
+org = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/fact-check-reports/terry-gou-tsai-wei-investment-sharing-fake-social-media-accounts/"
+date = "2026-10-30"
+
+# ───────────── 歸因 ─────────────
+# 歸因層只能寫「特徵和 X 相符，但無法確認背後是誰」，除非引用政府、學術機構或平台針對該案例的正式報告。
+# 下面案例的 summary 會寫明是哪個單位點名了操作者。
+
+[[tactic]]
+id = "TW-T29"
+name = "網軍、境外資訊操作"
+category = "歸因"
+layer = "attribution"
+definition = "有組織的團體（包括外國政府或它的代理人）用大量帳號、媒體或協力者，有計畫地散布特定說法、帶風向。這是在講「誰在背後」，不是內容本身看得出來的特徵。"
+observable = [
+  "大量新帳號或異常帳號在短時間內轉傳同一則內容",
+  "同一個說法先出現在境外官媒或平台，再轉進台灣社群",
+  "政府、研究機構或平台的正式報告點名了這個案例",
+]
+cannot_infer = "內容的立場、用語（例如有簡體字或中國用語）或傳播方式，都不能確定是誰在操作；只有政府、學術機構或平台針對這個特定案例的正式報告點名，才能寫出背後是誰。沒有這類報告時，只能說「特徵相符，但無法確認背後是誰」。另外，把意見不同的人直接叫「網軍」，本身也是一種貼標籤。"
+how_to_spot = "先找國安單位、研究機構或平台有沒有報告點名這個案例；沒有的話，只描述看到的傳播跡象，不要說是誰。"
+disarm = ["T0049.001", "T0091.003"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0049.001.md"]
+
+[[tactic.example]]
+target = "政府機關"
+summary = "中共圍台軍演期間流傳「共艦抵近我24浬」等假訊息；國安人士指出，這是中國網路水軍用異常帳號、以「四階層」模式透過大量假帳號轉傳到台灣社群。"
+org = "中央社"
+url = "https://www.cna.com.tw/news/acn/202304130300.aspx"
+date = "2023-04-13"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "路透社委託資訊環境研究中心（IORG）的研究發現，「蔡英文開戰後會搭美國飛機落跑」的說法源自2021年中共控制的《福建日報》，再由其他中國官方媒體轉發散布。"
+org = "中央社"
+url = "https://www.cna.com.tw/news/aipl/202404010341.aspx"
+date = "2024-04-01"
+
+[[tactic.example]]
+target = "非政黨"
+summary = "微軟報告指出，2024年總統大選期間出現 AI 合成的假錄音，讓原本獨立參選的郭台銘「表態支持」另一名參選人；微軟點名這波假訊息的主要散布者是它稱為 Storm-1376 的中國威脅行為者。"
+org = "中央社"
+url = "https://www.cna.com.tw/news/aopl/202404050246.aspx"
+date = "2024-04-05"
+
+[[tactic]]
+id = "TW-T30"
+name = "假旗行動"
+category = "歸因"
+layer = "attribution"
+definition = "操作者假裝成另一方（例如某政黨的支持者、台灣在地團體或外國人）發布內容，讓人以為是那一方說的、做的，藉此抹黑對方或挑起對立。"
+observable = [
+  "帳號或網站自稱某陣營或在地團體，但成立時間很短、沒有其他活動紀錄",
+  "用語、時區或網站主機位置和自稱的身分對不上",
+  "內容刻意誇張，好像是要讓自稱的那一方難堪",
+]
+cannot_infer = "就算帳號身分看起來可疑，也不能從內容特徵確定真正的操作者，更不能反過來推論是對手陣營做的；只有政府、學術機構或平台針對這個特定案例的正式報告點名，才能寫出背後是誰。"
+how_to_spot = "查帳號或網站的成立時間、過去貼文，以及有沒有官方或平台的調查報告；沒有報告就只說「身分無法確認」。"
+disarm = ["T0129.010", "T0097.101"]
+refs = ["https://github.com/DISARMFoundation/DISARMframeworks/blob/main/generated_pages/techniques/T0129.010.md"]
+
+[[tactic.example]]
+target = "政府機關"
+summary = "Meta 2025年第一季威脅報告指出，它移除了一批源自中國的假帳號和粉專，其中一群在台灣冒充當地人，張貼台灣政治人物和軍方高層貪腐的說法，並經營號稱刊登「匿名投稿」的粉專，營造真實民意的假象。"
+org = "Meta"
+url = "https://transparency.meta.com/sr/Q1-2025-Adversarial-threat-report"
+date = "2025-05-29"
+
+[[tactic.example]]
+target = "民進黨"
+summary = "一個名為「真．轉型正義聯盟」、2023年12月才成立的網站發布影片，稱賴清德學生時期當過調查局線民；影片中的退休調查官否認錄音是本人聲音，調查局查出網站主機 IP 在中國大陸，但沒有點名操作者，全案由檢方偵辦。"
+org = "MyGoPen"
+url = "https://www.mygopen.com/2023/12/informer.html"
+date = "2023-12-26"

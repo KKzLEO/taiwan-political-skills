@@ -1,0 +1,86 @@
+id = "case-005"
+title = "新聞報導2024政黨票：民眾黨得票率翻倍、8席不分區（開票夜票數與最終數小差）"
+input_type = "url"
+input = """https://newtalk.tw/news/view/2024-01-13/905127"""
+target = "民眾黨"
+expected_result = "符合"
+notes = """網址輸入路徑測試，報導內容對民眾黨偏正面。
+判定關鍵：中選會選舉資料庫（db.cec.gov.tw，下列 JSON 是同站前端讀取的原始資料）第11屆、第10屆不分區政黨票。
+1. 得票率與席次全部正確：民進黨36.16%／13席、國民黨34.58%／13席、民眾黨22.07%／8席；2020年民眾黨11.22%／5席。
+2. 2024年的票數是開票當晚數字，和中選會最終數字有小差：民進黨 4,984,060 對 4,982,062、國民黨 4,764,293 對 4,764,576、民眾黨 3,040,334 對 3,040,615。差距都在0.05%以內，不影響結論，所以判 mostly_true，不是 false。
+3. 2020年票數和中選會一致。
+4.「幾乎翻倍」：票數 1,588,806 → 3,040,615（1.91倍）、得票率 11.22% → 22.07%（1.97倍），「幾乎」用得準確，判 true。
+5. 時代力量2.57%，其餘政黨更低，「僅前三大黨超過5%」成立。
+「推測可能跟柯文哲參選總統的風潮有關」是記者推測，屬 not_factual。"""
+
+[[claim]]
+original = "民眾黨獲得 3,040,334 票，占 22.07% ，分配到 8 席不分區立委"
+expected_label = "mostly_true"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/L0/L4/e753a8e7a7bcc09fa51d1aea0024a843/N/00_000_00_000_0000.json"
+excerpt = '''"ticket_num": 3040615, "ticket_percent": 22.07, "ris_prv_code": "00", "ris_city_code": "000", "ris_area_code": "00", "ris_dept_code": "000", "area_name": "全國", "party_code": 350, "party_name": "台灣民眾黨", "first_rate": 22.0706, "second_rate": 23.7785, "elected_num": 8'''
+
+[[claim]]
+original = "民進黨獲得 4,984,060 票，占 36.16% ，有 13 席不分區立委；國民黨獲得 4,764,293 票，占 34.58% ，能分配 13 席不分區立委"
+expected_label = "mostly_true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/L0/L4/e753a8e7a7bcc09fa51d1aea0024a843/N/00_000_00_000_0000.json"
+excerpt = '''"ticket_num": 4982062, "ticket_percent": 36.16, "ris_prv_code": "00", "ris_city_code": "000", "ris_area_code": "00", "ris_dept_code": "000", "area_name": "全國", "party_code": 16, "party_name": "民主進步黨", "first_rate": 36.1629, "second_rate": 38.9612, "elected_num": 13'''
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/L0/L4/e753a8e7a7bcc09fa51d1aea0024a843/N/00_000_00_000_0000.json"
+excerpt = '''"ticket_num": 4764576, "ticket_percent": 34.58, "ris_prv_code": "00", "ris_city_code": "000", "ris_area_code": "00", "ris_dept_code": "000", "area_name": "全國", "party_code": 1, "party_name": "中國國民黨", "first_rate": 34.5842, "second_rate": 37.2604, "elected_num": 13'''
+
+[[claim]]
+original = "本屆僅有前三大黨獲得超過 5% 的政黨票，有分配立委席次的權力"
+expected_label = "true"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/L0/L4/e753a8e7a7bcc09fa51d1aea0024a843/N/00_000_00_000_0000.json"
+excerpt = '''"ticket_num": 353412, "ticket_percent": 2.57, "ris_prv_code": "00", "ris_city_code": "000", "ris_area_code": "00", "ris_dept_code": "000", "area_name": "全國", "party_code": 267, "party_name": "時代力量", "first_rate": 2.5653, "second_rate": 0.0, "elected_num": 0'''
+
+[[claim]]
+original = "對比 2020 年時，民進黨獲得 4,811,241 票，占 33.98% ，分配到 13 席；國民黨獲得 4,723,504 票，占 33.36% ，分配到 13 席；民眾黨獲得 1,588,806 票，占 11.22% ，分配到 5 席"
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/L0/L4/e002307160cbb898376da0c9cbb9ba16/N/00_000_00_000_0000.json"
+excerpt = '''"ticket_num": 1588806, "ticket_percent": 11.22, "ris_prv_code": "00", "ris_city_code": "000", "ris_area_code": "00", "ris_dept_code": "000", "area_name": "全國", "party_code": 350, "party_name": "台灣民眾黨", "first_rate": 11.2203, "second_rate": 12.9999, "elected_num": 5'''
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/L0/L4/e002307160cbb898376da0c9cbb9ba16/N/00_000_00_000_0000.json"
+excerpt = '''"ticket_num": 4811241, "ticket_percent": 33.98, "ris_prv_code": "00", "ris_city_code": "000", "ris_area_code": "00", "ris_dept_code": "000", "area_name": "全國", "party_code": 16, "party_name": "民主進步黨"'''
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/L0/L4/e002307160cbb898376da0c9cbb9ba16/N/00_000_00_000_0000.json"
+excerpt = '''"ticket_num": 4723504, "ticket_percent": 33.36, "ris_prv_code": "00", "ris_city_code": "000", "ris_area_code": "00", "ris_dept_code": "000", "area_name": "全國", "party_code": 1, "party_name": "中國國民黨"'''
+
+[[claim]]
+original = "民眾黨這次的得票數幾乎翻倍，比 2020 年多獲得 3 席不分區立委的席次，總計來到了 8 席"
+expected_label = "true"
+core = true
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/L0/L4/e753a8e7a7bcc09fa51d1aea0024a843/N/00_000_00_000_0000.json"
+excerpt = '''"ticket_num": 3040615, "ticket_percent": 22.07'''
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/L0/L4/e002307160cbb898376da0c9cbb9ba16/N/00_000_00_000_0000.json"
+excerpt = '''"ticket_num": 1588806, "ticket_percent": 11.22'''
+
+[[claim]]
+original = "推測可能跟黨主席柯文哲參選總統帶來的風潮有關"
+expected_label = "not_factual"
+core = false
+importance = 1

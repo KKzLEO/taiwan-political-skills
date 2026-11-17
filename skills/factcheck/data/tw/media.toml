@@ -1,0 +1,575 @@
+# 台灣媒體背景對照表
+#
+# 用途：fc.py media <網址或名稱> 只從這張表查媒體背景，模型不得自行推論媒體立場。
+# 每一列都附上實際開啟過的來源。沒有可引用研究的媒體就不放 lean，這是刻意的。
+#
+# 欄位說明
+# - trust：只取自 Reuters Institute Digital News Report（CC BY 4.0）。score 是受訪者在 0–10 分量表給 6–10 分
+#   （編為「信任」）的百分比；沒聽過該品牌的人不列入計算。這是民眾主觀評價的彙總，不是對媒體可信度的客觀評定。
+#   brand 是報告原文的品牌名稱，方便回查。
+# - lean：只取自學術期刊或研究機構的研究，label 照研究本身的說法改寫，year 是出版年，data_years 是研究資料的年份。
+# - ownership：營運主體與登記資料。「商工登記」指經濟部商工登記公示資料（data.gcis.nat.gov.tw 開放資料 API），
+#   查詢日 2026-11-17；董監事的「法人代表」是登記內容，不代表本表推論誰是實際控制者。
+#   ownership_source 為主要來源，ownership_source_2 為輔助來源（選填）。
+# - record：只記媒體層級的正式紀錄（NCC 處分、更正頁、研究發現），不評價個別記者。
+# - 網域比對採「完全相同或為其子網域」且取第一個符合者，所以子網域較長的媒體（例如 money.udn.com）要排在前面。
+
+schema_version = 1
+updated = "2026-11-17"
+license = "CC BY-SA 4.0"
+trust_report = "Reuters Institute Digital News Report 2026（CC BY 4.0），台灣品牌信任度表見 PDF 第 160 頁"
+trust_report_pdf = "https://reutersinstitute.politics.ox.ac.uk/sites/default/files/2026-06/DNR%202026%20FINAL_2.pdf"
+
+# ───────────── 報紙 ─────────────
+
+[[outlet]]
+id = "ltn"
+name = "自由時報"
+aliases = ["自由電子報", "自由", "Liberty Times", "LTN"]
+domains = ["ltn.com.tw"]
+kind = "newspaper"
+ownership = "自由時報企業股份有限公司（統一編號 52570683）。商工登記董事長林鴻邦，董事長與監察人均登記為德泰投資股份有限公司之法人代表。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2052570683&$skip=0&$top=50"
+
+[outlet.trust]
+score = 40
+year = 2026
+brand = "Liberty Times"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet.lean]]
+label = "研究依民眾認知分析，指其報導內容偏向「泛綠」政黨；其讀者也較傾向泛綠政黨、臺灣獨立與臺灣人認同"
+year = 2006
+data_years = "1992–2004（五次立委選後民調）"
+source = "蕭怡靖（2006）。臺灣閱報民眾的人口結構及政治態度之變遷—1992 至 2004 年。臺灣民主季刊，3(4)，37–70。"
+url = "https://ah.lib.nccu.edu.tw/bitstream/140.119/74605/1/37-70.pdf"
+
+[[outlet.lean]]
+label = "研究依既有內容分析（劉嘉薇，2018，統獨立場）將其設為「綠營報紙」"
+year = 2023
+data_years = "報紙分類依劉嘉薇（2018）；迴歸分析用 TEDS2020 面訪資料"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+# 經濟日報要排在聯合報前面（money.udn.com 是 udn.com 的子網域）
+[[outlet]]
+id = "edn"
+name = "經濟日報"
+aliases = ["Economic Daily", "Economic Daily News", "經濟日報網"]
+domains = ["money.udn.com"]
+kind = "newspaper"
+ownership = "聯合報系旗下財經報紙，1967 年 4 月 20 日創立（聯合報系官網「多元事業」頁）。"
+ownership_source = "https://www.udngroup.com/company"
+
+[outlet.trust]
+score = 54
+year = 2026
+brand = "Economic Daily"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet]]
+id = "udn"
+name = "聯合報"
+aliases = ["聯合新聞網", "聯合報系", "United Daily", "United Daily News", "UDN"]
+domains = ["udn.com"]
+kind = "newspaper"
+ownership = "聯合報股份有限公司（統一編號 03799802），聯合報系核心公司。商工登記董事長王文杉，董監事登記為杉怡實業、文怡投資、金南實業、沛盛實業、愛和實業、聯經資訊等公司之法人代表。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2003799802&$skip=0&$top=50"
+ownership_source_2 = "https://www.udngroup.com/company"
+
+[outlet.trust]
+score = 48
+year = 2026
+brand = "United Daily"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet.lean]]
+label = "研究依民眾認知分析，指其報導內容偏向「泛藍」政黨；其讀者也較傾向泛藍政黨、兩岸統一與中國人認同，但「藍多於綠」的差距逐漸縮小"
+year = 2006
+data_years = "1992–2004（五次立委選後民調）"
+source = "蕭怡靖（2006）。臺灣閱報民眾的人口結構及政治態度之變遷—1992 至 2004 年。臺灣民主季刊，3(4)，37–70。"
+url = "https://ah.lib.nccu.edu.tw/bitstream/140.119/74605/1/37-70.pdf"
+
+[[outlet.lean]]
+label = "研究依既有內容分析（劉嘉薇，2018，統獨立場）將其設為「藍營報紙」"
+year = 2023
+data_years = "報紙分類依劉嘉薇（2018）；迴歸分析用 TEDS2020 面訪資料"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+[[outlet]]
+id = "chinatimes"
+name = "中國時報"
+aliases = ["中時新聞網", "中時", "中時電子報", "China Times", "Chinatimes"]
+domains = ["chinatimes.com"]
+kind = "newspaper"
+ownership = "中國時報文化事業股份有限公司（統一編號 03798509）。商工登記董事長王丰，董事長與兩名董事登記為蔡合旺事業股份有限公司之法人代表。中視官網沿革記載「旺旺集團入主經營中時媒體集團」。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2003798509&$skip=0&$top=50"
+ownership_source_2 = "https://www.ctv.com.tw/AboutUs"
+
+[[outlet.lean]]
+label = "研究依民眾認知分析，指其報導內容偏向「泛藍」政黨；其讀者也較傾向泛藍政黨、兩岸統一與中國人認同，但「藍多於綠」的差距逐漸縮小"
+year = 2006
+data_years = "1992–2004（五次立委選後民調）"
+source = "蕭怡靖（2006）。臺灣閱報民眾的人口結構及政治態度之變遷—1992 至 2004 年。臺灣民主季刊，3(4)，37–70。"
+url = "https://ah.lib.nccu.edu.tw/bitstream/140.119/74605/1/37-70.pdf"
+
+[[outlet.lean]]
+label = "研究依既有內容分析（劉嘉薇，2018，統獨立場）將其設為「藍營報紙」"
+year = 2023
+data_years = "報紙分類依劉嘉薇（2018）；迴歸分析用 TEDS2020 面訪資料"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+# ───────────── 電視 ─────────────
+
+[[outlet]]
+id = "tvbs"
+name = "TVBS"
+aliases = ["TVBS新聞", "TVBS新聞網", "TVBS News", "TVBS-N", "聯利媒體"]
+domains = ["tvbs.com.tw"]
+kind = "tv"
+ownership = "聯利媒體股份有限公司（統一編號 84305300）。商工登記董事長陳文琦（信望愛文化事業股份有限公司之法人代表），董事王雪紅、簡民一、張育達登記為利茂投資股份有限公司之法人代表。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2084305300&$skip=0&$top=50"
+ownership_source_2 = "https://www.tvbs.com.tw/ours/company"
+
+[outlet.trust]
+score = 52
+year = 2026
+brand = "TVBS News"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet.lean]]
+label = "研究依 TEDS 網路調查中受訪者對新聞臺政黨色彩的認知，將其歸為「藍營電視」（該台在全部「藍」勾選中占 19%、在「綠」勾選中占 1.0%）"
+year = 2023
+data_years = "2019（TEDS2019_SE05）"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+[[outlet]]
+id = "ebc"
+name = "東森新聞"
+aliases = ["東森電視", "東森", "EBC", "EBC News", "東森新聞台"]
+domains = ["ebc.net.tw"]
+kind = "tv"
+ownership = "東森電視事業股份有限公司（統一編號 86121480）。商工登記董事長林文淵，登記董事均為茂德國際投資股份有限公司之法人代表。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2086121480&$skip=0&$top=50"
+ownership_source_2 = "https://www.ebc.net.tw/about"
+
+[outlet.trust]
+score = 48
+year = 2026
+brand = "Eastern Broadcasting Company News"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet.lean]]
+label = "研究依 TEDS 網路調查中受訪者對新聞臺政黨色彩的認知，將其歸為「藍營電視」（該台在全部「藍」勾選中占 11.8%、在「綠」勾選中占 2.5%，差距 5–10 個百分點）"
+year = 2023
+data_years = "2019（TEDS2019_SE05）"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+[[outlet]]
+id = "set"
+name = "三立新聞"
+aliases = ["三立", "三立電視", "三立新聞網", "SETN", "SET News", "Sanlih E-Television"]
+domains = ["setn.com", "settv.com.tw"]
+kind = "tv"
+ownership = "三立電視股份有限公司（統一編號 23740512）。商工登記董事長張榮華；官網以「三立集團」自稱。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2023740512&$skip=0&$top=50"
+ownership_source_2 = "https://www.settv.com.tw/about"
+
+[outlet.trust]
+score = 36
+year = 2026
+brand = "SET News"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet.lean]]
+label = "研究依 TEDS 網路調查中受訪者對新聞臺政黨色彩的認知，將其歸為「綠營電視」（該台在全部「綠」勾選中占 32.2%、在「藍」勾選中占 0.7%）"
+year = 2023
+data_years = "2019（TEDS2019_SE05）"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+[[outlet]]
+id = "ftv"
+name = "民視新聞"
+aliases = ["民視", "民間全民電視", "FTV", "FTV News", "Formosa TV", "Formosa TV News"]
+domains = ["ftvnews.com.tw", "ftv.com.tw"]
+kind = "tv"
+ownership = "民間全民電視股份有限公司（統一編號 96975768）。商工登記董事長王明玉。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2096975768&$skip=0&$top=50"
+
+[outlet.trust]
+score = 40
+year = 2026
+brand = "Formosa TV News"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet.lean]]
+label = "研究依 TEDS 網路調查中受訪者對新聞臺政黨色彩的認知，將其歸為「綠營電視」（該台在全部「綠」勾選中占 34.1%、在「藍」勾選中占 0.4%）"
+year = 2023
+data_years = "2019（TEDS2019_SE05）"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+[[outlet]]
+id = "ttv"
+name = "台視新聞"
+aliases = ["台視", "臺視", "台灣電視", "臺灣電視", "TTV", "TTV News", "Taiwan Television"]
+domains = ["ttv.com.tw"]
+kind = "tv"
+ownership = "臺灣電視事業股份有限公司（統一編號 20685000）。官網「主要股東」列：非凡國際科技公司 32.46%、黃崧 9.67%、林鴻邦 8.14%、台灣水泥 4.84%、永豐商業銀行 4.84%；官網沿革記載 2007 年公股釋出，非凡國際科技標得 25.77% 股權。"
+ownership_source = "https://www.ttv.com.tw/group/15/aboutTTV/default.asp"
+ownership_source_2 = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2020685000&$skip=0&$top=50"
+
+[outlet.trust]
+score = 48
+year = 2026
+brand = "TTV News"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet.lean]]
+label = "研究以內容分析發現：民營化前三屆總統選舉（1996、2000、2004）的選舉新聞都有明顯政黨偏差，方向均對當時執政黨較有利；民營化後的 2008 年選舉偏差已不明顯"
+year = 2010
+data_years = "1996–2008（四屆總統選舉新聞）"
+source = "林裕展、羅文輝（2010）。臺灣電視公司四屆總統選舉新聞報導政黨偏差研究。選舉研究，17(1)，55–90。"
+url = "https://jestw.nccu.edu.tw/uploads/paper/tw/%E8%87%BA%E7%81%A3%E9%9B%BB%E8%A6%96%E5%85%AC%E5%8F%B8%E5%9B%9B%E5%B1%86%E7%B8%BD%E7%B5%B1%E9%81%B8%E8%88%89%E6%96%B0%E8%81%9E%E5%A0%B1%E5%B0%8E%E6%94%BF%E9%BB%A8%E5%81%8F%E5%B7%AE%E7%A0%94%E7%A9%B6%EF%BC%8DPDF%E6%AA%94.pdf"
+
+[[outlet.lean]]
+label = "研究依 TEDS 網路調查中受訪者的認知（該台在全部「藍」勾選中占 3.7%、在「綠」勾選中占 3.1%），差距未達研究門檻，未歸入藍營或綠營，列為「中立電視」"
+year = 2023
+data_years = "2019（TEDS2019_SE05）"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+[[outlet]]
+id = "ctv"
+name = "中視新聞"
+aliases = ["中視", "中國電視", "CTV", "China TV", "China TV News"]
+domains = ["ctv.com.tw"]
+kind = "tv"
+ownership = "中國電視事業股份有限公司（統一編號 18556774）。商工登記董事長胡雪珠，董事長與四名董事登記為神旺投資股份有限公司之法人代表；官網沿革記載「中時媒體集團入主經營」及「旺旺集團入主經營中時媒體集團」。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2018556774&$skip=0&$top=50"
+ownership_source_2 = "https://www.ctv.com.tw/AboutUs"
+
+[outlet.trust]
+score = 46
+year = 2026
+brand = "China TV News"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet.lean]]
+label = "研究依 TEDS 網路調查中受訪者對新聞臺政黨色彩的認知，將其歸為「藍營電視」（該台在全部「藍」勾選中占 19.3%、在「綠」勾選中占 0.6%）"
+year = 2023
+data_years = "2019（TEDS2019_SE05）"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+[[outlet]]
+id = "ctitv"
+name = "中天新聞"
+aliases = ["中天", "中天電視", "中天新聞台", "CTi", "CTiTV", "ChungTien News"]
+domains = ["ctitv.com.tw"]
+kind = "tv"
+ownership = "中天電視股份有限公司（統一編號 97178489）。商工登記董事長梁天俠，董事長與三名董事登記為神旺投資股份有限公司之法人代表；官網頁尾標示「China Times Group」。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2097178489&$skip=0&$top=50"
+ownership_source_2 = "https://www.ctitv.com.tw/category/about-cti"
+
+[[outlet.lean]]
+label = "研究依 TEDS 網路調查中受訪者對新聞臺政黨色彩的認知，將其歸為「藍營電視」（該台在全部「藍」勾選中占 27.3%、在「綠」勾選中占 1.0%）"
+year = 2023
+data_years = "2019（TEDS2019_SE05）"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+[[outlet.record]]
+kind = "ncc_sanction"
+date = "2020-11-18"
+summary = "NCC 委員會議以 7 比 0 決議中天新聞台換照申請「不予許可」，該台自 2020-12-12 起退出有線電視頻道；中天聲請假處分遭臺北高等行政法院駁回，最高行政法院 2020-12-11 裁定駁回抗告確定。本案行政訴訟一審（臺北高等行政法院，2023-05-10）撤銷原處分，NCC 上訴。"
+url = "https://news.pts.org.tw/article/636194"
+appeal = "臺北高等行政法院 2023-05-10 一審撤銷不予換照處分；NCC 上訴後，最高行政法院 2025-03-06 廢棄原判決、發回更審（見下一筆）；本表編修時（2026-11-17）未查得更審結果"
+
+[[outlet.record]]
+kind = "ncc_sanction"
+date = "2025-03-06"
+summary = "中天新聞台換照案上訴審：最高行政法院廢棄臺北高等行政法院 2023 年判中天勝訴的一審判決，發回更審。"
+url = "https://today.line.me/tw/v2/article/yzvLY9Q"
+appeal = "發回臺北高等行政法院更審；本表編修時未查得更審結果"
+
+[[outlet]]
+id = "era"
+name = "年代新聞"
+aliases = ["年代", "年代電視", "年代新聞台", "ERA News"]
+domains = ["eracom.com.tw"]
+kind = "tv"
+ownership = "年代網際事業股份有限公司（統一編號 05091991）。商工登記董事長練台生，董事登記為同佳開發股份有限公司之法人代表。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2005091991&$skip=0&$top=50"
+ownership_source_2 = "https://www.eracom.com.tw/EraNews/About/2018-11-14/6917.html"
+
+[[outlet.lean]]
+label = "研究依 TEDS 網路調查中受訪者的認知（該台在全部「藍」勾選中占 3.7%、在「綠」勾選中占 6.9%），差距未達研究門檻，未歸入藍營或綠營，列為「中立電視」"
+year = 2023
+data_years = "2019（TEDS2019_SE05）"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+[[outlet]]
+id = "mnews"
+name = "鏡新聞"
+aliases = ["鏡電視", "鏡新聞台", "Mirror TV", "MNews"]
+domains = ["mnews.tw"]
+kind = "tv"
+ownership = "鏡電視股份有限公司（統一編號 83726795），2020 年成立。商工登記董事長鄭優。與出版《鏡週刊》的精鏡傳媒股份有限公司為不同登記公司。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2083726795&$skip=0&$top=50"
+ownership_source_2 = "https://www.mnews.tw/story/aboutus"
+
+# ───────────── 公共媒體 ─────────────
+
+[[outlet]]
+id = "pts"
+name = "公視"
+aliases = ["公共電視", "公視新聞", "公視新聞網", "PNN", "PTS", "Public Television Service"]
+domains = ["pts.org.tw"]
+kind = "public"
+ownership = "財團法人公共電視文化事業基金會，依《公共電視法》第 2 條成立，經費由政府依該法編列預算捐贈；為台灣公共廣播電視集團（公廣集團）成員。"
+ownership_source = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=P0050025"
+ownership_source_2 = "https://info.pts.org.tw/"
+corrections_url = "https://news.pts.org.tw/correct"
+
+[outlet.trust]
+score = 54
+year = 2026
+brand = "Public Television Service"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet.lean]]
+label = "研究依 TEDS 網路調查中受訪者的認知（該台在全部「藍」勾選中占 0.4%、在「綠」勾選中占 2.1%），差距未達研究門檻，未歸入藍營或綠營，列為「中立電視」"
+year = 2023
+data_years = "2019（TEDS2019_SE05）"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+[[outlet]]
+id = "cts"
+name = "華視新聞"
+aliases = ["華視", "中華電視", "CTS", "Chinese Television System", "Chinese Television System News"]
+domains = ["cts.com.tw"]
+kind = "public"
+ownership = "中華電視股份有限公司（統一編號 20516997），官網稱為台灣公共廣播電視集團成員。商工登記多數董事為財團法人公共電視文化事業基金會之法人代表。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2020516997&$skip=0&$top=50"
+ownership_source_2 = "https://www.cts.com.tw/about"
+
+[outlet.trust]
+score = 46
+year = 2026
+brand = "Chinese Television System News"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet.lean]]
+label = "研究依 TEDS 網路調查中受訪者的認知（該台在全部「藍」勾選中占 4.7%、在「綠」勾選中占 4.2%），差距未達研究門檻，未歸入藍營或綠營，列為「中立電視」"
+year = 2023
+data_years = "2019（TEDS2019_SE05）"
+source = "申佳健（2023）。政黨選擇性暴露視角下大眾傳媒對台灣民眾政治信任的意義探究。行政暨政策學報，76，101–130。"
+url = "https://pa.ntpu.edu.tw/storage/app/media/Journal/7604.pdf"
+
+# ───────────── 通訊社 ─────────────
+
+[[outlet]]
+id = "cna"
+name = "中央社"
+aliases = ["中央通訊社", "CNA", "Central News Agency", "Focus Taiwan"]
+domains = ["cna.com.tw", "focustaiwan.tw"]
+kind = "wire"
+ownership = "財團法人中央通訊社，依《中央通訊社設置條例》設立，由中央政府捐助創立基金；官網記載 1996 年由股份有限公司改制為財團法人，定位為國家通訊社。"
+ownership_source = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=P0000006"
+ownership_source_2 = "https://www.cna.com.tw/about/info.aspx"
+
+# ───────────── 雜誌 ─────────────
+
+[[outlet]]
+id = "bw"
+name = "商業周刊"
+aliases = ["商周", "Business Weekly"]
+domains = ["businessweekly.com.tw"]
+kind = "magazine"
+ownership = "城邦出版集團旗下刊物（網站頁尾標示「Business Weekly a division of Cite Publishing Ltd」）。"
+ownership_source = "https://www.businessweekly.com.tw/"
+
+[outlet.trust]
+score = 55
+year = 2026
+brand = "Business Weekly"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet]]
+id = "cw"
+name = "天下雜誌"
+aliases = ["天下", "CommonWealth", "CommonWealth Magazine"]
+domains = ["cw.com.tw"]
+kind = "magazine"
+ownership = "天下雜誌股份有限公司（統一編號 22039731）。商工登記董事長殷允芃，四名董事登記為天彤文化股份有限公司之法人代表。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2022039731&$skip=0&$top=50"
+
+[outlet.trust]
+score = 55
+year = 2026
+brand = "CommonWealth Magazine"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet]]
+id = "mirrormedia"
+name = "鏡週刊"
+aliases = ["鏡傳媒", "精鏡傳媒", "Mirror Media"]
+domains = ["mirrormedia.mg"]
+kind = "magazine"
+ownership = "精鏡傳媒股份有限公司（統一編號 42868209）出版《鏡週刊》並經營鏡傳媒網站（網站授權說明頁）。商工登記董事長裴偉。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2042868209&$skip=0&$top=50"
+ownership_source_2 = "https://www.mirrormedia.mg/story/webauthorize/"
+
+# ───────────── 網路媒體 ─────────────
+
+[[outlet]]
+id = "ettoday"
+name = "ETtoday新聞雲"
+aliases = ["ETtoday", "ETtoday新聞", "Ettoday.net", "東森新媒體"]
+domains = ["ettoday.net"]
+kind = "online"
+ownership = "東森新媒體控股股份有限公司（統一編號 24328949）。商工登記董事長王令麟，董事登記為東森國際股份有限公司之法人代表。與東森電視事業股份有限公司為不同登記公司。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2024328949&$skip=0&$top=50"
+ownership_source_2 = "https://events.ettoday.net/about-ettoday/index.htm"
+
+[outlet.trust]
+score = 46
+year = 2026
+brand = "Ettoday.net"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet]]
+id = "storm"
+name = "風傳媒"
+aliases = ["Storm Media", "風傳媒集團", "國風傳媒"]
+domains = ["storm.mg"]
+kind = "online"
+ownership = "由國風傳媒有限公司經營，屬「風傳媒集團」；官網稱集團於 2013 年 7 月由張果軍獨資創辦，《風傳媒》2014 年 2 月上線。"
+ownership_source = "https://www.storm.mg/about"
+
+[outlet.trust]
+score = 36
+year = 2026
+brand = "Storm Media"
+source = "Reuters Institute Digital News Report 2026 — Taiwan"
+url = "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/taiwan"
+
+[[outlet]]
+id = "twreporter"
+name = "報導者"
+aliases = ["The Reporter", "報導者文化基金會"]
+domains = ["twreporter.org"]
+kind = "online"
+ownership = "財團法人報導者文化基金會成立的非營利網路媒體；官網記載基金會由童子賢個人捐助 500 萬元成立，之後接受各界贊助營運。"
+ownership_source = "https://www.twreporter.org/about-us"
+
+[[outlet]]
+id = "nextapple"
+name = "壹蘋新聞網"
+aliases = ["壹蘋", "Nextapple"]
+domains = ["nextapple.com"]
+kind = "online"
+ownership = "龍丞創意股份有限公司（統一編號 90378933）創立與經營，2022 年 9 月創立。商工登記董事長羅哲雄。"
+ownership_source = "https://news.nextapple.com/aboutus"
+ownership_source_2 = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2090378933&$skip=0&$top=50"
+corrections_url = "https://news.nextapple.com/corrections"
+
+[[outlet]]
+id = "newtalk"
+name = "新頭殼"
+aliases = ["Newtalk", "Newtalk新聞", "新頭殼newtalk"]
+domains = ["newtalk.tw"]
+kind = "online"
+ownership = "先驅媒體社會企業股份有限公司（統一編號 29080164）經營，2009 年 9 月 1 日上線。商工登記董事長杜耀仁（競鋒國際股份有限公司之法人代表）。"
+ownership_source = "https://newtalk.tw/about"
+ownership_source_2 = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2029080164&$skip=0&$top=50"
+
+[[outlet]]
+id = "nownews"
+name = "NOWnews今日新聞"
+aliases = ["NOWnews", "今日新聞", "今日傳媒"]
+domains = ["nownews.com"]
+kind = "online"
+ownership = "今日傳媒股份有限公司（統一編號 28331543）。官網稱現有股東為遊戲橘子、信義房屋、大亞電纜與大亞投資，由遊戲橘子派任專業經理人經營。"
+ownership_source = "https://www.nownews.com/aboutus"
+ownership_source_2 = "https://data.gcis.nat.gov.tw/od/data/api/4E5F7653-1B91-4DDC-99D5-468530FAE396?$format=json&$filter=Business_Accounting_NO%20eq%2028331543&$skip=0&$top=50"
+
+[[outlet]]
+id = "upmedia"
+name = "上報"
+aliases = ["Up Media", "上報UP Media", "世代傳媒"]
+domains = ["upmedia.mg"]
+kind = "online"
+ownership = "世代傳媒股份有限公司（統一編號 43940974），商工登記代表人王健壯；網站「關於我們」記載上報 2016 年 7 月成立（官網本次無法以自動化工具讀取，引用 2025-09-03 網頁存檔）。"
+ownership_source = "https://data.gcis.nat.gov.tw/od/data/api/5F64D864-61CB-4D0D-8AD9-492047CC1EA6?$format=json&$filter=Business_Accounting_NO%20eq%2043940974&$skip=0&$top=50"
+ownership_source_2 = "https://web.archive.org/web/20250903144008/https://www.upmedia.mg/about.php"
+
+# ───────────── 中國官方媒體 ─────────────
+
+[[outlet]]
+id = "xinhua"
+name = "新華社"
+aliases = ["新華通訊社", "新华社", "新华网", "新華網", "Xinhua"]
+domains = ["news.cn", "xinhuanet.com"]
+kind = "state_media_prc"
+ownership = "中華人民共和國國家通訊社。新華社官網自述：「是中国国家通讯社和世界性通讯社，履行党中央喉舌、耳目和智库职责」。"
+ownership_source = "https://www.news.cn/xinhuashe/jbqk.htm"
+
+[[outlet]]
+id = "peoplesdaily"
+name = "人民日報"
+aliases = ["人民日报", "人民網", "人民网", "People's Daily"]
+domains = ["people.com.cn", "people.cn"]
+kind = "state_media_prc"
+ownership = "中國共產黨中央委員會機關報，由人民日報社編輯出版；人民日報社另主管主辦人民網、《環球時報》等 20 多種報刊（人民網「人民日报社简介」）。"
+ownership_source = "http://www.people.com.cn/GB/50142/104580/index.html"
+
+[[outlet]]
+id = "cctv"
+name = "中央電視台"
+aliases = ["央視", "央视", "CCTV", "中央廣播電視總台", "中央广播电视总台", "央視網"]
+domains = ["cctv.com"]
+kind = "state_media_prc"
+ownership = "2018 年中共中央《深化黨和國家機構改革方案》整合中央電視台（中國國際電視台）、中央人民廣播電台、中國國際廣播電台，組建中央廣播電視總台，作為國務院直屬事業單位，歸口中央宣傳部領導。"
+ownership_source = "https://www.gov.cn/zhengce/2018-03/21/content_5276191.htm"
+
+[[outlet]]
+id = "globaltimes"
+name = "環球時報"
+aliases = ["环球时报", "環球網", "环球网", "Global Times"]
+domains = ["huanqiu.com", "globaltimes.cn"]
+kind = "state_media_prc"
+ownership = "人民日報社主管主辦的報刊之一（人民網「人民日报社简介」）；環球網自述由人民網和環球時報社聯合主辦。"
+ownership_source = "http://www.people.com.cn/GB/50142/104580/index.html"
+ownership_source_2 = "https://corp.huanqiu.com/about/"
+
+[[outlet]]
+id = "taiwancn"
+name = "中國台灣網"
+aliases = ["中国台湾网", "taiwan.cn"]
+domains = ["taiwan.cn"]
+kind = "state_media_prc"
+ownership = "網站「關於我們」自述：1999 年 7 月創建，是「国务院台办管理的国家重点新闻网站」。"
+ownership_source = "http://www.taiwan.cn/gywm/"

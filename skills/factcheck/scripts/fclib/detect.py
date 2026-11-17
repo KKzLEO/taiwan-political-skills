@@ -1,0 +1,104 @@
+"""Find which model CLIs exist on this machine and assign debate seats.
+
+A CLI counts only if it is on PATH (or overridden with FC_<ENGINE>_CMD),
+belongs to a different vendor than the host, is on the same-tier whitelist,
+and — when probed — actually answered.
+"""
+
+from __future__ import annotations
+
+import fnmatch
+import shlex
+import shutil
+import subprocess
+
+INTERNAL_SEATS = [("A", "evidence"), ("B", "counter"), ("C", "stance")]
+
+
+def _list_ollama(cmd):
+    try:
+        out = subprocess.run(cmd + ["list"], capture_output=True, text=True, timeout=20)
+    except (OSError, subprocess.TimeoutExpired):
+        return []
+    if out.returncode != 0:
+        return []
+    lines = out.stdout.strip().splitlines()[1:]
+    return [line.split()[0] for line in lines if line.strip()]
+
+
+def _command(e, which, env):
+    override = env.get(f"FC_{e['id'].upper()}_CMD")
+    if override:
+        return shlex.split(override)
+    path = which(e["cli"])
+    return [path] if path else None
+
+
+def detect(host, tiers, which=shutil.which, env=None, list_ollama=_list_ollama, probe=None):
+    env = env or {}
+    host_vendor = tiers["hosts"][host]
+    patterns = tiers.get("local", {}).get("same_tier_patterns", [])
+    engines = []
+    for e in tiers["engine"]:
+        cmd = _command(e, which, env)
+        base = {"engine": e["id"], "vendor": e["vendor"], "available": cmd is not None, "cmd": cmd,
+                "cross_model": e["vendor"] != host_vendor, "can_search": e["can_search"],
+                "same_tier": e["same_tier"], "model": None, "probe": "skipped", "isolation": "unknown"}
+        if e["id"] == "ollama":
+            if cmd is None:
+                engines.append(base)
+                continue
+            for name in list_ollama(cmd):
+                same = any(fnmatch.fnmatch(name, p) for p in patterns)
+                engines.append({**base, "model": name, "same_tier": same})
+            continue
+        engines.append(base)
+
+    if probe is not None:
+        for e in engines:
+            if e["available"] and e["cross_model"] and e["same_tier"]:
+                e.update(probe(e))
+    return {"host": host, "host_vendor": host_vendor, "engines": engines}
+
+
+def assign_seats(models, mode):
+    host = models["host"]
+    external = [e for e in models["engines"]
+                if e["available"] and e["cross_model"] and e["same_tier"] and e["probe"] != "failed"]
+    ext_seats = [{"seat": f"X{i}", "engine": e["engine"], "model": e.get("model"), "kind": "external",
+                  "lens": "external", "vendor": e["vendor"], "can_search": e["can_search"]}
+                 for i, e in enumerate(external, start=1)]
+    internal = [{"seat": s, "engine": host, "model": None, "kind": "internal", "lens": lens,
+                 "vendor": models["host_vendor"], "can_search": True} for s, lens in INTERNAL_SEATS]
+    if mode == "quick":
+        return ext_seats[:1] if ext_seats else [internal[1]]
+    return internal + ext_seats
+
+
+def seat_status(run):
+    """Summarise every opponent seat for scoring. cross_model is computed here, never read from model output."""
+    from pathlib import Path
+
+    from . import io
+
+    run = Path(run)
+    models = io.read_json(run / "models.json")
+    host_vendor = models["host_vendor"]
+    by_engine = {}
+    for e in models.get("engines", []):
+        by_engine.setdefault(e["engine"], e)
+    out = []
+    for path in sorted(run.glob("opponent-*.json")):
+        data = io.read_json(path)
+        engine = data.get("engine")
+        if engine == models["host"] or not data.get("seat", "").startswith("X"):
+            vendor, can_search, isolation = host_vendor, True, "host"
+        else:
+            info = by_engine.get(engine, {})
+            vendor = info.get("vendor", "unknown")
+            can_search = bool(info.get("can_search", False))
+            isolation = info.get("isolation", "unknown")
+        out.append({"seat": data.get("seat"), "engine": engine, "status": data.get("status", "ok"),
+                    "cross_model": vendor not in (host_vendor, "unknown"), "can_search": can_search,
+                    "isolation": isolation, "lens": data.get("lens")})
+    return out

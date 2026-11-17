@@ -1,0 +1,62 @@
+id = "case-010"
+title = "捏造總統令：「兵役法修正，役期改兩年、女性也要當兵」"
+input_type = "text"
+input = """兵役法又改了！
+總統令 華總一義字第11400038251號，114年5月20日公布修正兵役法第一條、第五條、第十六條：
+役期從一年延長為兩年，女性國民也要服兵役！
+賴清德要全台灣陪葬嗎？"""
+target = "民進黨"
+expected_result = "不符"
+found_via = "https://tfc-taiwan.org.tw/fact-check-reports/military-service-2-years-women-conscription-fake/"
+notes = """第二個法條路徑案例：和 case-001 相反，這裡是「聲稱修了法，其實沒修」。2025年5月賴清德就職週年時流傳的假總統令圖卡，訊息依查核中心報告3639描述的圖卡內容改寫。
+判定關鍵：全國法規資料庫兵役法。
+1. 沿革最新一筆是112年5月3日修正第44條，資料截止日民國115年11月06日；沒有114年5月20日的修正，也沒有「11400038251」這個字號。
+2. 現行第16條：現役「為期一年」。
+3. 現行第1條：服兵役義務的主體是「中華民國男子」。
+三個事實命題都有直接反證，判 false。
+「賴清德要全台灣陪葬嗎？」是評價，屬 not_factual。
+公式估算：全部 false、證據品質 1、脈絡無扣分 → 40，落在「部分符合」下緣；人工判定「不符」（同 case-003 的門檻問題）。"""
+
+[[claim]]
+original = "總統令 華總一義字第11400038251號，114年5月20日公布修正兵役法第一條、第五條、第十六條"
+expected_label = "false"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=F0040001"
+excerpt = "20. 中華民國一百十二年五月三日總統華總一義字第 11200036381 號令 修正公布第 44 條條文"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=F0040001"
+excerpt = "法規整編資料截止日：民國 115 年 11 月 06 日"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=F0040001"
+excerpt = "修正日期：民國 112 年 05 月 03 日"
+
+[[claim]]
+original = "役期從一年延長為兩年"
+expected_label = "false"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=F0040001"
+excerpt = "一、現役：以徵兵及齡男子，經徵兵檢查合格於除役前，徵集入營服之，為期一年，期滿退伍。"
+
+[[claim]]
+original = "女性國民也要服兵役"
+expected_label = "false"
+core = true
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=F0040001"
+excerpt = "中華民國男子依法皆有服兵役之義務。"
+
+[[claim]]
+original = "賴清德要全台灣陪葬嗎？"
+expected_label = "not_factual"
+core = false
+importance = 1

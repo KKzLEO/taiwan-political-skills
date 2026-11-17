@@ -1,0 +1,37 @@
+id = "case-009"
+title = "假冒［監理服務網］交通違規催繳簡訊"
+input_type = "text"
+input = """［監理服務網］您違反道路交通管理事件，即將過線上處理期限，請於10/15之前盡快處理https://bit.ly/tgov"""
+target = "非政黨"
+expected_result = "不符"
+notes = """非政治類的詐騙基準案例。簡訊原文取自交通部公路局澄清公告引用的詐騙簡訊（公告中的日期被遮成「10/O」，這裡填入10/15）。
+判定關鍵：公路局114年3月19日澄清公告。
+1. 網址 bit.ly 不是以 gov.tw 結尾，公路局明確說「是假訊息」。
+2. 監理機關的罰單到期簡訊要車主申請才有，而且只提醒、不附網址；正確網址是 www.mvdis.gov.tw。
+注意：公告證明的是「這則簡訊不是官方通知」，不能推論收件人一定沒有違規未繳；查核報告應建議到監理服務網或監理服務 APP 自行查詢，而不是說「你沒有罰單」。
+這則簡訊沒有意見陳述。
+公式估算：全部 false、證據品質約 0.5–1、脈絡無扣分 → 30–40，落在「不符」或剛好「部分符合」下緣；人工判定「不符」。"""
+
+[[claim]]
+original = "［監理服務網］您違反道路交通管理事件，即將過線上處理期限"
+expected_label = "false"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://www.thb.gov.tw/News_Content_table.aspx?n=13855&s=268113"
+excerpt = "公路局表示最近有民眾收到簡訊通知，簡訊內容為「［監理服務網］您違反道路交通管理事件，即將過線上處理期限，請於10/O之前盡快處理https://bit.ly/tgov」，經查證該簡訊實際所載網址並非以「gov.tw」結尾，不屬於政府機關網址，是假訊息。"
+
+[[claim.ground_truth]]
+url = "https://www.thb.gov.tw/News_Content_table.aspx?n=13855&s=268113"
+excerpt = "公路局特別澄清，監理單位及裁決機關雖有交通違規罰單到期簡訊提醒通知服務，但需要車主提出申請，才有此種服務，而且此服務僅限於「提醒通知」，不會附上網址供下載及點選。"
+
+[[claim]]
+original = "請於10/15之前盡快處理https://bit.ly/tgov"
+expected_label = "false"
+core = true
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://www.thb.gov.tw/News_Content_table.aspx?n=13855&s=268113"
+excerpt = "詐騙集團假冒政府機關通知交通違規罰單或汽車燃料使用費未繳，皆係利用假網址，監理服務網正確網址為「https://www.mvdis.gov.tw/」，請民眾勿點擊來源不明的簡訊或連結，以免上當受騙。"

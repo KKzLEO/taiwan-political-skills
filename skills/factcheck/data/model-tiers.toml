@@ -1,0 +1,43 @@
+schema_version = 1
+updated = "2026-11-17"
+
+# 主體平台對應的廠商。同一家的模型不算跨模型。
+[hosts]
+claude = "anthropic"
+codex = "openai"
+
+[[engine]]
+id = "claude"
+vendor = "anthropic"
+cli = "claude"
+can_search = true
+same_tier = true
+note = "claude -p。有 ANTHROPIC_API_KEY 時加 --bare，跳過 CLAUDE.md 和自動記憶。"
+
+[[engine]]
+id = "codex"
+vendor = "openai"
+cli = "codex"
+can_search = true
+same_tier = true
+note = "codex exec，加 --ignore-user-config --ephemeral，在空的暫存資料夾執行。"
+
+[[engine]]
+id = "gemini"
+vendor = "google"
+cli = "gemini"
+can_search = true
+same_tier = true
+note = "gemini -p。本專案尚未實測，歡迎回報。"
+
+[[engine]]
+id = "ollama"
+vendor = "local"
+cli = "ollama"
+can_search = false
+same_tier = false
+note = "本機模型不能上網，只能當審稿人。只有符合 local.same_tier_patterns 的模型才會入席。"
+
+[local]
+# 本機模型預設不算同等級。要加入請附公開評測的出處，並提 PR。
+same_tier_patterns = []

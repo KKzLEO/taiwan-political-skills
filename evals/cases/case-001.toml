@@ -1,0 +1,55 @@
+id = "case-001"
+title = "「藐視國會罪早就上路」：法條原文還在，但已被憲法法庭宣告違憲失效"
+input_type = "text"
+input = """【轉傳】國會改革真的做到了！
+立法院三讀的「藐視國會罪」早就上路了，刑法第141條之1寫得清清楚楚：公務員在立法院質詢、聽證時說謊，最重可以關一年或罰20萬！
+以後官員再敢在國會睜眼說瞎話，就等著移送法辦！
+感謝藍白立委守住國會，大家轉傳讓更多人知道！"""
+target = "國民黨"
+expected_result = "不符"
+notes = """法條路徑測試。訊息稱讚藍白推動的國會改革，核心主張是刑法第141條之1「已經上路、現在有效」。
+判定關鍵：
+1. 條文內容本身沒有寫錯：113年6月24日增訂公布，罰則為一年以下有期徒刑、拘役或二十萬元以下罰金（全國法規資料庫條文頁、沿革第53筆）。
+2. 但憲法法庭113年憲判字第9號（113年10月25日宣示）主文第七項宣告此條違憲、自宣示之日起失效。沿革到「法規整編資料截止日：民國115年11月06日」為止，沒有任何重新增訂第141-1條的紀錄。
+陷阱：全國法規資料庫的條文頁仍然顯示第141-1條原文（下方只掛一個「憲法法庭裁判（新制）」連結），只看條文頁會誤判為現行有效。這正是 spec 第10節要求「條文原文＋版本日期」之外，還要查憲法法庭裁判的理由。
+脈絡問題：legal_stage_confusion。
+「感謝藍白立委」是意見；「就等著移送法辦」是建立在已失效條文上的推論，不另列命題。
+公式估算：正確度 3/8=0.375 → 約 22.5＋20＋15 ≈ 57（部分符合）；人工判定為「不符」，因為訊息的主旨（現在有效）是錯的。此落差可用來校正門檻。"""
+
+[[claim]]
+original = "刑法第141條之1寫得清清楚楚：公務員在立法院質詢、聽證時說謊，最重可以關一年或罰20萬"
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=141-1"
+excerpt = "公務員於立法院聽證或受質詢時，就其所知之重要關係事項，為虛偽陳述者，處一年以下有期徒刑、拘役或二十萬元以下罰金。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=C0000001"
+excerpt = "53. 中華民國一百十三年六月二十四日總統華總一義字第 11300056391 號令增訂公布第 141-1 條條文及第二編第五章之一章名"
+
+[[claim]]
+original = "立法院三讀的「藐視國會罪」早就上路了"
+expected_label = "false"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://cons.judicial.gov.tw/download/download.aspx?id=496630"
+excerpt = "七、刑法第 141 條之 1 規定違憲，自本判決宣示之日起，失其效力。"
+
+[[claim.ground_truth]]
+url = "https://www.judicial.gov.tw/tw/cp-1887-1187874-5cd85-1.html"
+excerpt = "判決宣示日期：113年10月25日"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=C0000001"
+excerpt = "58. 中華民國一百十五年七月二十二日總統華總一義字第 11500067801 號令修正公布第 80 條條文"
+
+[[claim]]
+original = "感謝藍白立委守住國會，大家轉傳讓更多人知道"
+expected_label = "not_factual"
+core = false
+importance = 1

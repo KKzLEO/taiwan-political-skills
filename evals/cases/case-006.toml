@@ -1,0 +1,61 @@
+id = "case-006"
+title = "「柯文哲收小沈1500萬是事實，一審重判28年半」：有罪是真，刑期和1500萬都不對"
+input_type = "text"
+input = """法院判了！！柯文哲京華城案一審有罪。
+他收小沈1500萬是事實，台北地院重判28年半！
+民眾黨還不解散？"""
+target = "民眾黨"
+expected_result = "部分符合"
+notes = """攻擊民眾黨的訊息，真假混雜，用來測試三種判定的區分：true、unverified、false。
+判定關鍵（臺灣臺北地方法院113年度金訴字第51號新聞稿，115年3月26日宣判）：
+1. 一審有罪：成立。違背職務收受賄賂罪判13年，連同公益侵占、背信，應執行有期徒刑17年、褫奪公權6年。
+2.「收小沈1500萬是事實」判 unverified，不是 false：法院認為這部分除柯文哲自己在 excel 檔的書面陳述外，沒有其他補強證據，所以「不能認定此部分犯罪事實」。這是證據不足，不是法院認定他沒收；北檢已表示要上訴，所以也沒有直接反證。符合 spec 7.1「證據不足，也沒有直接反證」。法院認定的收賄金額是210萬元。
+3.「重判28年半」判 false：28年6月是北檢113年12月26日起訴時的具體求刑，不是判決。一審應執行17年。
+脈絡問題：legal_stage_confusion（把求刑當判決，也沒說明一審可以上訴，新聞稿寫「本案得上訴」）。
+公式估算：正確度 (3×1＋4×0.35＋5×0)/12 ≈ 0.37 → 約 22＋20＋15 ≈ 57，部分符合，和人工判定一致。unverified 權重 4/12 未達50%，不會變成「無法判定」。
+技術細節：新聞稿摘要第一段「109年」的「年」是 CJK 相容字元 U+F98E，摘錄照原樣保留；eval-compare 比對摘錄時應先做 NFKC 正規化。
+這是一審判決，日後二審結果不會改變「一審判17年、1500萬部分不能認定」這兩件已發生的事。"""
+
+[[claim]]
+original = "柯文哲京華城案一審有罪"
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://www.judicial.gov.tw/tw/cp-1888-1516567-f62f6-1.html"
+excerpt = "一、柯文哲於109年3月24日至26日收受沈慶京以威京集團內之7人以捐贈政治獻金名義交付之賄賂新臺幣（下同）210萬元，犯貪污治罪條例之違背職務收受賄賂罪，處有期徒刑13年。"
+
+[[claim]]
+original = "他收小沈1500萬是事實"
+expected_label = "unverified"
+core = true
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://www.judicial.gov.tw/tw/cp-1888-1516567-f62f6-1.html"
+excerpt = "柯文哲被訴收賄1,500萬元部分，因此部分除柯文哲於excel檔案自承的「審判外不利於己之書面陳述」外，並無其他「補強證據」佐證，不能認定此部分犯罪事實。"
+
+[[claim.ground_truth]]
+url = "https://www.judicial.gov.tw/tw/cp-1888-1516567-f62f6-1.html"
+excerpt = "伍、本案得上訴。"
+
+[[claim]]
+original = "台北地院重判28年半"
+expected_label = "false"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://www.judicial.gov.tw/tw/cp-1888-1516567-f62f6-1.html"
+excerpt = "應執行有期徒刑拾柒年。褫奪公權陸年。"
+
+[[claim.ground_truth]]
+url = "https://www.cna.com.tw/news/aipl/202412260203.aspx"
+excerpt = "（中央社記者林長順台北26日電）台北地檢署偵辦京華城案今天依貪污等罪起訴柯文哲，具體求刑28年6月。"
+
+[[claim]]
+original = "民眾黨還不解散？"
+expected_label = "not_factual"
+core = false
+importance = 1

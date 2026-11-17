@@ -1,0 +1,58 @@
+id = "case-008"
+title = "「陸委會說媽祖、關帝爺都是統戰工具」：2024年舊影片去脈絡重傳"
+input_type = "text"
+input = """大甲媽遶境前夕，陸委會的梁文傑竟然公開說：媽祖、保生大帝、神農大帝、關帝爺通通都是統戰工具！
+照他的意思，拜媽祖、去進香就是被中共統戰？
+全台信眾評評理，民進黨政府到底有多看不起民間信仰！
+（附影片）"""
+target = "政府機關"
+expected_result = "不符"
+found_via = "https://tfc-taiwan.org.tw/fact-check-reports/misleading-video-liang-wen-chieh-religious-united-front-claims/"
+notes = """舊影片新用＋斷章取義。2026年4月白沙屯、大甲媽祖進香期間流傳，訊息依查核中心報告4113描述的傳言改寫。
+判定關鍵：原始影片是2024年6月20日陸委會例行記者會全程直播（聯合報 udn video 頻道上傳）。我自己用 whisper 轉寫影片0:30–4:30，再人工校正語音辨識的同音錯字（「借選」改「介選」、「大地」改「大帝」），下列摘錄是校正後的轉寫，時間碼以原影片為準。
+1. 梁文傑是回答記者關於「中共透過媽祖廟影響台灣選舉」的提問，說的是各種民間信仰「是中共用來作對台灣統戰的一些利用的工具」，也就是中共利用民間信仰，不是說神明本身或信仰就是統戰。訊息改寫成「媽祖…通通都是統戰工具」，材料是真的，意思被扭曲，判 misleading。
+2.「拜媽祖、去進香就是被統戰」：同一段回答明講正常交流政府完全支持，只注意「不太正常的交流活動」，完整紀錄證明他說的是別的，判 false。
+3.「遶境前夕…公開說」：影片標題「0620陸委會例行記者會」，YouTube 上傳日期 2024-06-20，發言日期是2024年6月20日，記者提問提到的民進黨座談會是2024年6月18日，不是2026年遶境前的新發言，判 false。
+脈絡問題：out_of_context、recycled_media。
+「民進黨政府到底有多看不起民間信仰」是評價，屬 not_factual。
+查核中心報告背景段寫「陸委會主委梁文傑」，摘要寫「副主委」；2024年記者會當時他是副主委，訊息本身沒寫職稱，所以這個出入不影響本案。"""
+
+[[claim]]
+original = "陸委會的梁文傑竟然公開說：媽祖、保生大帝、神農大帝、關帝爺通通都是統戰工具"
+expected_label = "misleading"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://www.youtube.com/watch?v=k05bvDDEcMk"
+excerpt = "（1:50–2:35，轉寫）那第二個問題，關於你說，用媽祖文化來介選的問題，其實我們觀察到的其實不只是媽祖，各種民間信仰，包括保生大帝，神農大帝，關帝爺這些，其實在這幾年來，都是中共用來作對台灣統戰的一些利用的工具。所以它不只是媽祖，不只是媽祖而已。"
+
+[[claim]]
+original = "照他的意思，拜媽祖、去進香就是被中共統戰"
+expected_label = "false"
+core = true
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://www.youtube.com/watch?v=k05bvDDEcMk"
+excerpt = "（2:36–3:03，轉寫）那對於類似這樣的一些交流活動，正常的交流，我們政府都是完全支持的。但是如果說中間牽涉到了一些，我們認為是不太正常的一些交流活動的話，那我們對這些活動，我們也都會很密切的注意。"
+
+[[claim]]
+original = "大甲媽遶境前夕，陸委會的梁文傑竟然公開說"
+expected_label = "false"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://www.youtube.com/watch?v=k05bvDDEcMk"
+excerpt = "0620陸委會例行記者會"
+
+[[claim.ground_truth]]
+url = "https://www.dpp.org.tw/media/contents/10862"
+excerpt = "2024-06-18 學者研究證實中國利用媽祖介選 民進黨：兩岸健康有序交流應排除「統戰黑手」 民主進步黨中國事務部今（18）日舉行「中國對台介選與統戰滲透」座談會"
+
+[[claim]]
+original = "全台信眾評評理，民進黨政府到底有多看不起民間信仰"
+expected_label = "not_factual"
+core = false
+importance = 1

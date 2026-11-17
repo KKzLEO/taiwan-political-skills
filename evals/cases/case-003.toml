@@ -1,0 +1,44 @@
+id = "case-003"
+title = "「蔡英文博士學位是假的、論文不存在」"
+input_type = "text"
+input = """拜託大家傳出去！蔡英文的博士學位根本是假的！
+倫敦政經學院（LSE）從來沒有頒過博士給她，她的博士論文也根本不存在，誰都找不到！
+騙了台灣人幾十年！"""
+target = "民進黨"
+expected_result = "不符"
+notes = """長期反覆流傳的謠言，答案已定。判定只用授予學位一方的正式聲明，不用任何查核機構或媒體的結論。
+判定關鍵：LSE 2019年10月8日聲明，LSE 與當時的學位授予單位倫敦大學的紀錄都確認她1984年取得法學博士；論文曾由 Senate House Library 收件並轉送 IALS，1985年出版的 IALS 索引列有論文題目，LSE 圖書館閱覽室也有她提供的個人副本影本。
+細節：當年送存 IALS 的那一本確實下落不明，所以「圖書館一度找不到原始送存本」有其來由；但訊息說的是「論文根本不存在」，這點有直接反證，仍判 false。查核時若把這段來由講清楚，是加分，不是改判。
+倫敦大學2022年的補充聲明（london.ac.uk）有 Cloudflare 擋自動抓取，沒有列入證據。
+「騙了台灣人幾十年」是指控性評價，屬 not_factual。
+公式估算：全部 false、證據品質 1、沒有脈絡扣分 → 0＋20＋20＝40，剛好落在「部分符合」下緣；人工判定為「不符」。完全錯誤、證據充分的訊息分數下限是40，門檻需要校正。"""
+
+[[claim]]
+original = "蔡英文的博士學位根本是假的！倫敦政經學院（LSE）從來沒有頒過博士給她"
+expected_label = "false"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://www.lse.ac.uk/news/latest-news-from-lse/j-october-2019/lse-statement-on-phd-of-dr-tsai-ing-wen"
+excerpt = "We can be clear the records of LSE and of the University of London - the degree awarding body at the time - confirm that Dr Tsai was correctly awarded a PhD in Law in 1984."
+
+[[claim]]
+original = "她的博士論文也根本不存在，誰都找不到"
+expected_label = "false"
+core = true
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://www.lse.ac.uk/news/latest-news-from-lse/j-october-2019/lse-statement-on-phd-of-dr-tsai-ing-wen"
+excerpt = "The Senate House Library records confirm that a copy was received and sent by them to the Institute of Advanced Legal Studies (IALS). There is a listing of Dr Tsai’s thesis ‘Unfair trade practices and safeguard actions’ in the IALS index document \"Legal Research in the United Kingdom 1905-1984\", which was published in 1985."
+
+[[claim.ground_truth]]
+url = "https://www.lse.ac.uk/news/latest-news-from-lse/j-october-2019/lse-statement-on-phd-of-dr-tsai-ing-wen"
+excerpt = "Dr Tsai recently provided the LSE Library with a facsimile of a personal copy of the thesis, Unfair trade practices and safeguard actions which is available to view in the Library Reading Room."
+
+[[claim]]
+original = "騙了台灣人幾十年"
+expected_label = "not_factual"
+core = false
+importance = 1

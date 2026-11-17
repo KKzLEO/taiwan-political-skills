@@ -1,0 +1,290 @@
+# 台灣查核用的第一手與官方入口
+#
+# tier：1 第一手原始資料、2 官方說明、3 獨立可靠媒體／通訊社、4 具名專家分析與查核機構、
+#       5 利害關係人自述、6 來源不明
+# 每個網址都在 2026-11-17 以自動化工具檢查過。少數網站有防機器人驗證，自動化工具讀不到，
+# notes 會註明；status = "inactive" 表示已停止更新。
+
+schema_version = 1
+updated = "2026-11-17"
+
+# ───────────── 第一手原始資料（tier 1） ─────────────
+
+[[source]]
+id = "moj-law"
+name = "全國法規資料庫"
+url = "https://law.moj.gov.tw/"
+tier = 1
+covers = ["中央法規現行條文", "法規沿革", "司法解釋", "條約協定", "兩岸協議"]
+notes = "法務部維護。引用條文時記下條號與「修正日期」，確認是不是命題當時的版本。"
+
+[[source]]
+id = "ly-lis"
+name = "立法院法律系統"
+url = "https://lis.ly.gov.tw/lglawc/lglawkm"
+tier = 1
+covers = ["法律立法歷程", "條文異動對照", "立法理由"]
+notes = "查某條文何時、由誰提案、如何修正，比新聞轉述可靠。"
+
+[[source]]
+id = "ly-ivod"
+name = "立法院議事轉播（IVOD）"
+url = "https://ivod.ly.gov.tw/"
+tier = 1
+covers = ["立委質詢發言", "委員會", "院會", "公聽會"]
+notes = "原始影音。查「某立委說了什麼」時，以影片前後文為準，並記下會議名稱、日期與時間碼。"
+
+[[source]]
+id = "ly-ppg"
+name = "立法院議事暨公報資訊網"
+url = "https://ppg.ly.gov.tw/ppg/"
+tier = 1
+covers = ["議案與提案", "表決紀錄", "立法院公報", "委員會議事錄"]
+notes = "查提案人、連署人、表決結果與公報紀錄。公報是正式紀錄，優先於會後新聞稿。"
+
+[[source]]
+id = "ly-meet"
+name = "立法院議事及發言系統"
+url = "https://lis.ly.gov.tw/lylgmeetc/lgmeetkm"
+tier = 1
+covers = ["會議發言紀錄", "質詢紀錄"]
+notes = "以文字查發言，再回 IVOD 對影片。"
+
+[[source]]
+id = "president-order"
+name = "總統府公布法律、預決算、條約（總統令）"
+url = "https://www.president.gov.tw/Page/36"
+tier = 1
+covers = ["法律公布日期", "總統令"]
+notes = "確認法律是否已公布、何時公布。"
+
+[[source]]
+id = "gazette"
+name = "行政院公報資訊網"
+url = "https://gazette.nat.gov.tw/"
+tier = 1
+covers = ["法規命令發布", "行政規則", "公告", "預告修法"]
+notes = "行政命令與公告的正式刊登處。"
+
+[[source]]
+id = "judicial-fjud"
+name = "司法院裁判書查詢"
+url = "https://judgment.judicial.gov.tw/FJUD/default.aspx"
+tier = 1
+covers = ["各級法院裁判書全文", "裁定", "判決"]
+notes = "看判決全文的主文與理由，不要只看新聞標題；注意是否已上訴、是否確定。批次資料另見司法院資料開放平台 https://opendata.judicial.gov.tw/。"
+
+[[source]]
+id = "cons-court"
+name = "憲法法庭"
+url = "https://cons.judicial.gov.tw/"
+tier = 1
+covers = ["憲法法庭判決", "大法官解釋", "言詞辯論", "暫時處分"]
+notes = "查判決主文、理由與各大法官意見書。"
+
+[[source]]
+id = "cec-db"
+name = "中選會選舉資料庫"
+url = "https://db.cec.gov.tw/"
+tier = 1
+covers = ["歷屆選舉結果", "得票數", "投票率", "公投結果"]
+notes = "選舉數字以這裡為準；新聞報導的開票數字可能是未確定的即時數。"
+
+[[source]]
+id = "cy-ardata"
+name = "監察院政治獻金公開查閱平臺"
+url = "https://ardata.cy.gov.tw/"
+tier = 1
+covers = ["政治獻金會計報告", "競選經費收支"]
+notes = "依政治獻金法公開的申報資料；申報內容屬當事人申報，不等於查核結論。"
+
+[[source]]
+id = "data-gov"
+name = "政府資料開放平臺"
+url = "https://data.gov.tw/"
+tier = 1
+covers = ["各機關開放資料集", "統計原始檔"]
+notes = "下載原始資料自行計算；記下資料集名稱、提供機關與更新日期。"
+
+[[source]]
+id = "stat-gov"
+name = "中華民國統計資訊網（主計總處）"
+url = "https://www.stat.gov.tw/"
+tier = 1
+covers = ["物價指數", "國民所得與經濟成長", "薪資", "就業與失業"]
+notes = "官方統計原始數據；比對時注意基期、名目或實質、季調與否。"
+
+[[source]]
+id = "moj-stat"
+name = "法務部法務統計資訊網"
+url = "https://www.rjsd.moj.gov.tw/rjsdweb/"
+tier = 1
+covers = ["犯罪與起訴統計", "矯正統計", "檢察統計"]
+notes = "查犯罪率、起訴數等數字；注意統計口徑（案件數或人數）。"
+
+# ───────────── 官方說明（tier 2） ─────────────
+
+[[source]]
+id = "president-news"
+name = "總統府新聞稿"
+url = "https://www.president.gov.tw/Page/35"
+tier = 2
+covers = ["總統談話", "總統府新聞稿", "總統行程"]
+notes = "官方對自身言行的說明；總統談話全文可在此核對，但其中的事實主張仍要回第一手資料驗證。"
+
+[[source]]
+id = "ey-news"
+name = "行政院新聞稿（本院新聞）"
+url = "https://www.ey.gov.tw/Page/6485009ABEC1CB9C"
+tier = 2
+covers = ["院會決議", "政策說明", "院長談話"]
+notes = "官方說明；政策數字要回到主管機關原始資料或預算書核對。"
+
+[[source]]
+id = "ey-clarify"
+name = "行政院即時新聞澄清"
+url = "https://www.ey.gov.tw/Page/5519E969E8931E4E"
+tier = 2
+covers = ["政府對報導或傳言的澄清"]
+notes = "政府是利害關係方之一；澄清內容要看它引用的資料，不能直接當作結論。"
+
+[[source]]
+id = "cec"
+name = "中央選舉委員會"
+url = "https://www.cec.gov.tw/"
+tier = 2
+covers = ["選舉公告", "選務新聞稿", "候選人登記"]
+notes = "選務規定與公告的官方入口；數字以選舉資料庫為準。"
+
+[[source]]
+id = "cy"
+name = "監察院"
+url = "https://www.cy.gov.tw/"
+tier = 2
+covers = ["院新聞稿", "調查報告", "糾正案", "彈劾案"]
+notes = "調查報告與糾正、彈劾案文本身屬第一手文件；院新聞稿是摘要，需回原文核對。"
+
+[[source]]
+id = "dgbas"
+name = "行政院主計總處"
+url = "https://www.dgbas.gov.tw/"
+tier = 2
+covers = ["統計新聞稿", "總預算與決算", "即時新聞澄清"]
+notes = "新聞稿是官方說明；統計原始數據見中華民國統計資訊網。"
+
+[[source]]
+id = "ndc"
+name = "國家發展委員會"
+url = "https://www.ndc.gov.tw/"
+tier = 2
+covers = ["景氣指標", "人口推估", "國家發展計畫"]
+notes = "2026-11-17 以自動化工具檢查時遭網站防機器人驗證（Cloudflare）阻擋，未能確認頁面內容；需人工開啟。"
+
+[[source]]
+id = "mohw"
+name = "衛生福利部"
+url = "https://www.mohw.gov.tw/"
+tier = 2
+covers = ["衛福政策新聞稿", "健保與長照說明", "衛生福利統計"]
+notes = "官方說明；統計數字以衛福部統計處原始表格為準。"
+
+[[source]]
+id = "cdc"
+name = "衛生福利部疾病管制署"
+url = "https://www.cdc.gov.tw/"
+tier = 2
+covers = ["傳染病疫情", "疫苗與防疫指引", "新聞稿"]
+notes = "疫情數字以疾管署公布的統計為準，留意公布日期與統計截止日。"
+
+[[source]]
+id = "ncc"
+name = "國家通訊傳播委員會（NCC）"
+url = "https://www.ncc.gov.tw/"
+tier = 2
+covers = ["廣電裁處", "換照審查", "委員會議紀錄"]
+notes = "查媒體裁罰與換照決議的官方入口。2026-11-17 以自動化工具檢查時遭網站防機器人驗證（Cloudflare）阻擋，未能確認頁面內容；需人工開啟。"
+
+[[source]]
+id = "moi-party"
+name = "內政部政黨資訊網"
+url = "https://party.moi.gov.tw/"
+tier = 2
+covers = ["政黨名冊", "政黨備案資料", "政黨財務申報"]
+notes = "確認某政黨是否存在、登記狀態與負責人。"
+
+# ───────────── 利害關係人自述（tier 5） ─────────────
+
+[[source]]
+id = "party-dpp"
+name = "民主進步黨官網"
+url = "https://www.dpp.org.tw/"
+tier = 5
+covers = ["黨的聲明", "新聞稿", "黨綱"]
+notes = "政黨對自己的說法，屬利害關係人自述。可證明「該黨說了什麼」，不能證明說法本身為真。"
+
+[[source]]
+id = "party-kmt"
+name = "中國國民黨官網"
+url = "https://www.kmt.org.tw/"
+tier = 5
+covers = ["黨的聲明", "新聞稿", "黨章"]
+notes = "政黨對自己的說法，屬利害關係人自述。可證明「該黨說了什麼」，不能證明說法本身為真。"
+
+[[source]]
+id = "party-tpp"
+name = "台灣民眾黨官網"
+url = "https://www.tpp.org.tw/"
+tier = 5
+covers = ["黨的聲明", "新聞稿", "黨章"]
+notes = "政黨對自己的說法，屬利害關係人自述。可證明「該黨說了什麼」，不能證明說法本身為真。2026-11-17 以自動化工具檢查時遭網站防機器人驗證（Cloudflare）阻擋，未能確認頁面內容。"
+
+[[source]]
+id = "party-npp"
+name = "時代力量官網"
+url = "https://newpowerparty.tw/"
+tier = 5
+covers = ["黨的聲明", "新聞稿"]
+notes = "政黨對自己的說法，屬利害關係人自述。可證明「該黨說了什麼」，不能證明說法本身為真。"
+
+# ───────────── 查核機構（tier 4） ─────────────
+
+[[source]]
+id = "tfc"
+name = "台灣事實查核中心"
+url = "https://tfc-taiwan.org.tw/"
+tier = 4
+covers = ["事實查核報告", "錯誤訊息分析"]
+notes = "結論只當線索，要回到其引用的原始資料重驗。"
+
+[[source]]
+id = "mygopen"
+name = "MyGoPen"
+url = "https://www.mygopen.com/"
+tier = 4
+covers = ["謠言與詐騙訊息查證", "LINE 轉傳訊息"]
+notes = "結論只當線索，要回到其引用的原始資料重驗。"
+
+[[source]]
+id = "cofacts"
+name = "Cofacts 真的假的"
+url = "https://cofacts.tw/"
+tier = 4
+covers = ["LINE 轉傳訊息資料庫", "志工協作回應"]
+notes = "結論只當線索，要回到其引用的原始資料重驗。回應由志工撰寫，品質不一，要看每則回應附的出處。2026-11-17 以自動化工具檢查時遭網站防機器人驗證（Cloudflare）阻擋；專案原始碼與說明見 https://github.com/cofacts 。"
+
+[[source]]
+id = "afp-factcheck"
+name = "法新社事實查核"
+url = "https://factcheck.afp.com/"
+tier = 4
+covers = ["國際與亞洲錯誤訊息查核"]
+notes = "結論只當線索，要回到其引用的原始資料重驗。2026-11-17 以自動化工具檢查時網站拒絕存取，未能確認；2026-11 網頁存檔的語言版本清單中未見獨立的中文版入口，中文查核內容的現況需人工確認。"
+
+[[source]]
+id = "rumtoast"
+name = "蘭姆酒吐司"
+url = "https://www.rumtoast.com/"
+tier = 4
+status = "inactive"
+covers = ["網路謠言查證（舊文）"]
+notes = "已停止更新：RSS 最後一篇文章日期為 2021-10-06。舊文只能當歷史線索，結論只當線索，要回到其引用的原始資料重驗。"

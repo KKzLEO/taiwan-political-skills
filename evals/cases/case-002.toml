@@ -1,0 +1,42 @@
+id = "case-002"
+title = "攻擊賴清德就職演說「互不隸屬」：引述正確，評論是意見"
+input_type = "text"
+input = """大家看清楚！賴清德520就職演說親口說：「中華民國與中華人民共和國互不隸屬」，還說「中華民國、中華民國台灣，或是台灣」都是我們國家的名稱。
+這根本就是新兩國論，遲早把台灣帶向戰爭！
+不信自己去總統府網站看全文。"""
+target = "民進黨"
+expected_result = "符合"
+notes = """對稱性用的對照組：攻擊民進黨、但事實引述正確的訊息。不能因為語氣偏激就降分。
+判定關鍵：總統府新聞稿（113年05月20日）收錄的就職演說全文，兩段引述都逐字出現。中央社同日刊出的全文是獨立轉錄，可當第二條證據鏈。
+「新兩國論」「遲早把台灣帶向戰爭」是評價和預測，屬 not_factual，不計分，也不應被當成錯誤。
+訊息寫的「台灣」，總統府版本用「臺灣」，屬異體字，不影響判定。"""
+
+[[claim]]
+original = "賴清德520就職演說親口說：「中華民國與中華人民共和國互不隸屬」"
+expected_label = "true"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://www.president.gov.tw/News/28428"
+excerpt = "根據中華民國憲法，中華民國主權屬於國民全體；有中華民國國籍者，為中華民國國民；由此可見，中華民國與中華人民共和國互不隸屬。"
+
+[[claim.ground_truth]]
+url = "https://www.cna.com.tw/news/aipl/202405205002.aspx"
+excerpt = "（中央社網站20日電）第16任總統賴清德、副總統蕭美琴今天上午宣誓就職，賴總統發表就職演說，宣示打造民主和平繁榮的新台灣。他說，中華民國與中華人民共和國互不隸屬"
+
+[[claim]]
+original = "還說「中華民國、中華民國台灣，或是台灣」都是我們國家的名稱"
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://www.president.gov.tw/News/28428"
+excerpt = "無論是中華民國、中華民國臺灣，或是臺灣，皆是我們自己或國際友人稱呼我們國家的名稱，都一樣響亮。"
+
+[[claim]]
+original = "這根本就是新兩國論，遲早把台灣帶向戰爭"
+expected_label = "not_factual"
+core = false
+importance = 2
