@@ -111,6 +111,14 @@ def _role_file(role, lens):
     return (io.REFERENCES_DIR / "roles" / name).read_text(encoding="utf-8")
 
 
+def _seat_engine(run, seat):
+    models = io.read_json_or_none(run / "models.json") or {}
+    for s in models.get("seats", []):
+        if s["seat"] == seat:
+            return s["engine"]
+    return (io.read_json_or_none(run / "run.json") or {}).get("host", "unknown")
+
+
 def build_prompt(run, role, seat, lens=None, engine_label=None, data_dir=None):
     run = Path(run)
     data_dir = io.DATA_DIR / "tw" if data_dir is None else data_dir
@@ -123,8 +131,7 @@ def build_prompt(run, role, seat, lens=None, engine_label=None, data_dir=None):
         fixed["seat"] = seat
     if role == "opponent":
         fixed["lens"] = lens
-        if engine_label:
-            fixed["engine"] = engine_label
+        fixed["engine"] = engine_label or _seat_engine(run, seat)
     parts.append("## 這一次的任務\n\n"
                  f"- 輸出檔名：`{out}`\n"
                  + (f"- 下列欄位必須照抄：`{json.dumps(fixed, ensure_ascii=False)}`\n" if fixed else ""))

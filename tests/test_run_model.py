@@ -168,6 +168,17 @@ class PromptTest(unittest.TestCase):
         self.assertIn("opponent-B.json", p)
         self.assertNotIn("opponent-A.json", p)
 
+    def test_internal_seat_prompt_states_host_engine(self):
+        run = make_run(fx.run_files())
+        p = run_model.build_prompt(run, "opponent", "A", lens="evidence")
+        self.assertIn('"engine": "claude"', p)
+
+    def test_external_seat_prompt_states_its_engine(self):
+        run = make_run(fx.run_files(models_json=dict(fx.MODELS, seats=[
+            {"seat": "X1", "engine": "codex", "kind": "external", "lens": "external"}])))
+        p = run_model.build_prompt(run, "opponent", "X1", lens="external")
+        self.assertIn('"engine": "codex"', p)
+
     def test_prompt_states_output_file_and_seat(self):
         run = make_run(fx.run_files())
         p = run_model.build_prompt(run, "opponent", "A", lens="evidence")
