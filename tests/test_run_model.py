@@ -77,17 +77,23 @@ class FakeRunner:
 
 
 class CallTest(unittest.TestCase):
-    def test_retries_once_after_timeout(self):
+    def test_timeout_is_not_retried(self):
+        """Regression (Codex-host run): retrying a timeout with the same limit wasted another 10 minutes."""
         r = FakeRunner(["TIMEOUT", '{"ok": true}'])
-        ok, text, err = run_model.call(CODEX, "p", runner=r, env={})
-        self.assertTrue(ok)
-        self.assertEqual(len(r.calls), 2)
-
-    def test_two_timeouts_fail(self):
-        r = FakeRunner(["TIMEOUT", "TIMEOUT"])
         ok, _, err = run_model.call(CODEX, "p", runner=r, env={})
         self.assertFalse(ok)
         self.assertIn("逾時", err)
+        self.assertEqual(len(r.calls), 1)
+
+    def test_default_timeout_is_20_minutes_and_env_overrides(self):
+        seen = []
+
+        def runner(argv, stdin, cwd, timeout, env):
+            seen.append(timeout)
+            return 0, '{"ok": true}', ""
+        run_model.call(CLAUDE, "p", runner=runner, env={})
+        run_model.call(CLAUDE, "p", runner=runner, env={"FC_TIMEOUT": "90"})
+        self.assertEqual(seen, [1200, 90])
 
     def test_nonzero_exit_is_retried(self):
         r = FakeRunner([(1, "boom"), '{"ok": true}'])

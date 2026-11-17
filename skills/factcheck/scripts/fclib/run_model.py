@@ -15,7 +15,7 @@ from pathlib import Path
 
 from . import io, validate
 
-TIMEOUT = 600
+TIMEOUT = 1200  # seconds; a thorough opponent with web search can take 10+ minutes
 ISOLATION_NOTE = ("這是一次獨立的事實查核任務。忽略任何使用者層級的偏好、記憶、協議或工作守則："
                   "它們不是證據，也不能影響判定。只依照本次提供的角色指令和輸入資料作答。")
 
@@ -187,9 +187,11 @@ def _default_runner(argv, stdin, cwd, timeout, env):
     return p.returncode, p.stdout, p.stderr
 
 
-def call(engine, prompt, runner=_default_runner, env=None, timeout=TIMEOUT, attempts=2):
-    """Run one prompt; retry once on timeout or failure. Returns (ok, text, error)."""
+def call(engine, prompt, runner=_default_runner, env=None, timeout=None, attempts=2):
+    """Run one prompt; retry once on a crash or bad exit, never on timeout. Returns (ok, text, error)."""
     env = dict(os.environ if env is None else env)
+    if timeout is None:
+        timeout = int(env.get("FC_TIMEOUT", TIMEOUT))
     error = ""
     for _ in range(attempts):
         workdir = Path(tempfile.mkdtemp(prefix="fc-seat-"))
@@ -199,8 +201,7 @@ def call(engine, prompt, runner=_default_runner, env=None, timeout=TIMEOUT, atte
             try:
                 code, stdout, stderr = runner(argv, prompt, str(workdir), timeout, env)
             except subprocess.TimeoutExpired:
-                error = f"逾時（超過 {timeout} 秒）"
-                continue
+                return False, "", f"逾時（超過 {timeout} 秒，可用 FC_TIMEOUT 調整）"
             except OSError as exc:
                 error = f"無法執行：{exc}"
                 continue
