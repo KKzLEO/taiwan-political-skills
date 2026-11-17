@@ -125,16 +125,16 @@ def _confidence(claims, ledger_by_id, run, seats):
 
     limited = []
     for c in claims:
-        if not c.get("core"):
+        if not c.get("core") or FACTORS[c["label"]] is None:
             continue
-        for eid in c.get("evidence_ids", []):
-            e = ledger_by_id[eid]
-            if e.get("access_note", "full") != "full" and eid not in limited:
-                limited.append(eid)
+        direct = [ledger_by_id[e] for e in c.get("evidence_ids", [])
+                  if ledger_by_id[e]["stance"] in DIRECT_STANCES]
+        if direct and not any(e.get("access_note", "full") == "full" for e in direct):
+            limited.append(c["claim_id"])
     if limited:
         n = min(3, len(limited))
-        deduct(10 * n, f"核心命題的證據有存取限制：{', '.join(limited[:3])}"
-                       + ("（只計前 3 筆）" if len(limited) > 3 else ""))
+        deduct(10 * n, f"核心命題只有存取受限的直接證據（付費牆、被擋、只有摘要、未核對原始貼文等）：{', '.join(limited)}"
+                       + ("（最多扣 3 項）" if len(limited) > 3 else ""))
 
     if any(c.get("legal") and c.get("law_text_obtained") is not True for c in claims):
         deduct(15, "涉及法條，但沒有取得條文原文")

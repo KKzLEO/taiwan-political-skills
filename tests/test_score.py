@@ -142,10 +142,19 @@ class ConfidenceTest(unittest.TestCase):
                      claim("C3", "true", importance=5)])
         self.assertEqual(self.conf(r), 80)
 
-    def test_access_limits_on_core_evidence_capped_at_30(self):
-        ledger = [ev(f"S{i}", access="paywall") for i in range(1, 5)]
-        r = compute([claim("C1", "true", evidence=["S1", "S2", "S3", "S4"])], ledger=ledger)
+    def test_core_claim_relying_only_on_limited_sources_deducts_10_each_capped_at_30(self):
+        ledger = [ev("S1", tier=1, chain="a", access="paywall"), ev("S2", tier=1, chain="b", access="blocked")]
+        claims = [claim(f"C{i}", "true", evidence=["S1", "S2"]) for i in range(1, 5)]
+        r = compute(claims, ledger=ledger)
         self.assertEqual(self.conf(r), 70)
+
+    def test_supplementary_limited_source_does_not_deduct(self):
+        """Regression (first E2E run): extra mirror/snippet evidence must not lower confidence
+        when the claim already has full-access direct evidence."""
+        ledger = FULL_LEDGER + [ev("S3", tier=1, chain="c", access="not_original"),
+                                ev("S4", tier=3, chain="d", access="snippet")]
+        r = compute([claim("C1", "true", evidence=["S1", "S2", "S3", "S4"])], ledger=ledger)
+        self.assertEqual(self.conf(r), 100)
 
     def test_access_limits_on_non_core_claims_are_ignored(self):
         ledger = FULL_LEDGER + [ev("S3", access="blocked")]
@@ -164,7 +173,7 @@ class ConfidenceTest(unittest.TestCase):
         self.assertFalse(r["publishable"])
 
     def test_confidence_floors_at_zero(self):
-        ledger = [ev(f"S{i}", access="blocked") for i in range(1, 5)]
+        ledger = [ev(f"S{i}", access="blocked", tier=6) for i in range(1, 5)]
         claims = [claim(f"C{i}", "true", review="failed", legal=True, law=False,
                         evidence=["S1", "S2", "S3", "S4"]) for i in range(1, 8)]
         r = compute(claims, ledger=ledger, seats=[])

@@ -1,0 +1,20 @@
+{
+  "prompt_was_leading": false,
+  "claims": [
+    {"id": "C1", "original": "立法院昨天三讀通過", "neutral": "立法院在訊息發出的前一天，三讀通過了要求機車開大燈的法案",
+     "type": "F", "importance": 4, "core": true, "legal": true,
+     "time_place": "訊息未標日期；台灣", "entities": ["立法院", "道路交通管理處罰條例", "道路交通安全規則"],
+     "search_seeds": {"pro": ["立法院 三讀 機車 大燈", "機車 頭燈 三讀通過"], "con": ["機車 開大燈 謠言", "機車 頭燈 罰三千 查核"]}},
+    {"id": "C2", "original": "以後騎機車一律要開大燈", "neutral": "法規規定機車行駛時一律必須開啟頭燈",
+     "type": "F", "importance": 4, "core": true, "legal": true,
+     "time_place": "台灣現行法規", "entities": ["道路交通安全規則", "機車頭燈"],
+     "search_seeds": {"pro": ["道路交通安全規則 機車 頭燈 開啟"], "con": ["機車 白天 不開燈 合法"]}},
+    {"id": "C3", "original": "沒開罰三千", "neutral": "機車行駛時未開頭燈，罰鍰為新臺幣三千元",
+     "type": "F", "importance": 5, "core": true, "legal": true,
+     "time_place": "台灣現行法規", "entities": ["道路交通管理處罰條例", "罰鍰"],
+     "search_seeds": {"pro": ["機車 未開大燈 罰 3000"], "con": ["道路交通管理處罰條例 第42條 燈光 罰鍰"]}},
+    {"id": "C4", "original": "快轉給家人", "neutral": "呼籲轉傳",
+     "type": "O", "importance": 1, "core": false, "legal": false,
+     "time_place": "", "entities": [], "search_seeds": {"pro": [], "con": []}}
+  ]
+}

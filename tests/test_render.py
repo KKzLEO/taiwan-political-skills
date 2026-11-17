@@ -64,6 +64,14 @@ class BodyTest(unittest.TestCase):
         self.assertIn("非事實陳述", out)
         self.assertIn("某部長說明年油價一定漲三成", out)
 
+    def test_conclusion_uses_first_sentence_only(self):
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["verdicts"][0]["reasoning"] = "第一句結論。第二句很長的細節" + "細" * 200
+        out = md(build(judgment_json=judgment))
+        section = out.split("## 結論")[1].split("##")[0]
+        self.assertIn("第一句結論。", section)
+        self.assertNotIn("第二句", section)
+
     def test_checked_objections(self):
         self.assertIn("中央社報導日期早於影片", md(build()))
 

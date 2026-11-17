@@ -11,6 +11,7 @@
 5. **重驗既有查核：** `trace.json` 的 `prior_factchecks` 每一筆都要打開，找出它引用的原始資料，自己重新驗證，結果填進 `prior_factchecks_rechecked`。
 6. **法條命題（`legal: true`）：** 一定要取得條文原文（全國法規資料庫，或可用的法規查詢工具），註明條號和版本日期，並把條文放進證據摘錄。取得了就把 `law_text_obtained` 設成 `true`，拿不到就設成 `false`，並判 `unverified`。非法條命題填 `null`。
 7. 意見、預測、口號判 `not_factual`，不需要證據。
+8. 每個 `reasoning` 的**第一句直接寫結論**，不要先重述命題。
 
 ## 輸出格式（`proponent.json`）
 

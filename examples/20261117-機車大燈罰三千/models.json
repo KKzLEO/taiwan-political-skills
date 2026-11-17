@@ -1,0 +1,85 @@
+{
+  "host": "claude",
+  "host_vendor": "anthropic",
+  "engines": [
+    {
+      "engine": "claude",
+      "vendor": "anthropic",
+      "available": true,
+      "cmd": [
+        "claude"
+      ],
+      "cross_model": false,
+      "can_search": true,
+      "same_tier": true,
+      "model": null,
+      "probe": "skipped",
+      "isolation": "unknown"
+    },
+    {
+      "engine": "codex",
+      "vendor": "openai",
+      "available": true,
+      "cmd": [
+        "codex"
+      ],
+      "cross_model": true,
+      "can_search": true,
+      "same_tier": true,
+      "model": null,
+      "probe": "ok",
+      "isolation": "partial",
+      "detail": ""
+    },
+    {
+      "engine": "gemini",
+      "vendor": "google",
+      "available": false,
+      "cmd": null,
+      "cross_model": true,
+      "can_search": true,
+      "same_tier": true,
+      "model": null,
+      "probe": "skipped",
+      "isolation": "unknown"
+    }
+  ],
+  "seats": [
+    {
+      "seat": "A",
+      "engine": "claude",
+      "model": null,
+      "kind": "internal",
+      "lens": "evidence",
+      "vendor": "anthropic",
+      "can_search": true
+    },
+    {
+      "seat": "B",
+      "engine": "claude",
+      "model": null,
+      "kind": "internal",
+      "lens": "counter",
+      "vendor": "anthropic",
+      "can_search": true
+    },
+    {
+      "seat": "C",
+      "engine": "claude",
+      "model": null,
+      "kind": "internal",
+      "lens": "stance",
+      "vendor": "anthropic",
+      "can_search": true
+    },
+    {
+      "seat": "X1",
+      "engine": "codex",
+      "model": null,
+      "kind": "external",
+      "lens": "external",
+      "vendor": "openai",
+      "can_search": true
+    }
+  ]
+}

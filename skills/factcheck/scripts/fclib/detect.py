@@ -30,8 +30,8 @@ def _command(e, which, env):
     override = env.get(f"FC_{e['id'].upper()}_CMD")
     if override:
         return shlex.split(override)
-    path = which(e["cli"])
-    return [path] if path else None
+    # Store the bare name, not the absolute path: run folders are shared and must not leak $HOME.
+    return [e["cli"]] if which(e["cli"]) else None
 
 
 def detect(host, tiers, which=shutil.which, env=None, list_ollama=_list_ollama, probe=None):

@@ -1,0 +1,153 @@
+{
+  "first_seen": null,
+  "variants": [
+    {
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/1929237",
+      "date": "2016-12-27",
+      "difference": "自由時報報導 LINE 流傳的早期版本：「近期LINE上面有謠傳，元旦起汽機車若未在白天開大燈，將會開罰，並且無勸導期、一次一罰，機車將被罰600元、汽車1200元，高速公路上將加倍罰2400元。」與本訊息不同處：以「元旦起」為生效時間，沒有提到立法院三讀；對象含汽車與機車；機車罰額為 600 元，不是三千元。"
+    },
+    {
+      "url": "https://cofacts.tw/article/5411359264724-rumor",
+      "date": "2016-12-27",
+      "difference": "Cofacts 收錄的文字版本：「元旦起汽機車上路需強制開大燈，並且強調無勸導期，違者將直接開罰。」沒有罰款金額，也沒有提到立法院。"
+    },
+    {
+      "url": "https://cofacts.tw/article/5507860730717-rumor",
+      "date": "2017-01-15",
+      "difference": "「2⃣0⃣1⃣7⃣年0⃣1⃣月0⃣1⃣日起，汽機車白天ㄧ律『強制』開頭燈！千萬要記得。。。」並附上 TVBS 2016-09-03 的新聞連結。與本訊息同樣使用「一律」；沒有罰款金額，也沒有提到立法院。所附 TVBS 報導原文寫的是舊款車輛「不開也不會受罰」。"
+    },
+    {
+      "url": "https://cofacts.tw/article/AV2OEO7XyCdS-nWhudPq",
+      "date": "2017-07-29",
+      "difference": "「今天起騎車一定要開大燈，開始罰款」。只針對騎車，用相對時間「今天起」，沒有金額，沒有提到立法院。"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sgfSfsuu0yc",
+      "date": "2018-01-02",
+      "difference": "三立新聞台報導 2018 年元旦前後再次流傳的版本：「元旦起汽、機車白天不開燈就開罰」，內容和 2016 年底的版本相同，屬於同一則傳言再次流傳。"
+    },
+    {
+      "url": "https://cofacts.tw/article/2wzjrlzmodtjz",
+      "date": "2019-07-17",
+      "difference": "「現在新規定，機車白天、晚上都要開燈的。否則被抓了就要罰錢。」只針對機車，用「新規定」表述，沒有金額，沒有提到立法院。"
+    },
+    {
+      "url": "https://www.mygopen.com/2023/06/traffic.html",
+      "date": "2023-06-22",
+      "difference": "相關但地區不同的變體：「台北市自本月20日起下午5時至翌日上午7時未打開大燈 罰台幣600元」。限台北市、限特定時段，罰額 600 元；MyGoPen 追到 2000 年 1 月 27 日已有類似文章。"
+    }
+  ],
+  "prior_factchecks": [
+    {
+      "org": "Cofacts 真的假的",
+      "url": "https://cofacts.tw/article/5411359264724-rumor",
+      "label": "含有不實訊息（RUMOR）",
+      "date": "2017-06-08"
+    },
+    {
+      "org": "Cofacts 真的假的",
+      "url": "https://cofacts.tw/article/5507860730717-rumor",
+      "label": "含有不實訊息（RUMOR）",
+      "date": "2017-10-13"
+    },
+    {
+      "org": "Cofacts 真的假的",
+      "url": "https://cofacts.tw/article/AV2OEO7XyCdS-nWhudPq",
+      "label": "含有不實訊息（RUMOR）",
+      "date": "2017-07-29"
+    },
+    {
+      "org": "Cofacts 真的假的",
+      "url": "https://cofacts.tw/article/2wzjrlzmodtjz",
+      "label": "含有正確訊息（NOT_RUMOR）",
+      "date": "2019-07-19"
+    },
+    {
+      "org": "MyGoPen",
+      "url": "https://www.mygopen.com/2023/06/traffic.html",
+      "label": "錯誤",
+      "date": "2023-06-22"
+    }
+  ],
+  "publisher": {
+    "kind": "unknown",
+    "name": "不明：使用者貼上的轉傳文字，沒有附來源、作者或日期",
+    "outlet_id": null,
+    "byline": "n/a",
+    "wording_issues": [
+      {
+        "quote": "以後騎機車一律要開大燈",
+        "issue": "用「一律」這類絕對化說法，沒有交代適用的時段、路段或天候條件。"
+      },
+      {
+        "quote": "沒開罰三千！",
+        "issue": "用驚嘆號強調罰款金額，沒有附法條名稱或條號。"
+      },
+      {
+        "quote": "快轉給家人。",
+        "issue": "是要求轉傳的呼籲，不是資訊內容。"
+      }
+    ],
+    "flagged": []
+  },
+  "spread_signals": [
+    {
+      "signal": "同主題的「汽機車白天沒開大燈要開罰」傳言，2016 年底就已經在 LINE 流傳，並有媒體報導。",
+      "evidence_url": "https://news.ltn.com.tw/news/life/breakingnews/1929237",
+      "excerpt": "近期LINE上面有謠傳，元旦起汽機車若未在白天開大燈，將會開罰，並且無勸導期、一次一罰，機車將被罰600元、汽車1200元，高速公路上將加倍罰2400元。"
+    },
+    {
+      "signal": "2017 年 1 月的「一律強制開頭燈」版本被多次回報到 Cofacts，公開 API 顯示回報次數（replyRequestCount）為 11。",
+      "evidence_url": "https://cofacts.tw/article/5507860730717-rumor",
+      "excerpt": "2⃣0⃣1⃣7⃣年0⃣1⃣月0⃣1⃣日起，汽機車白天ㄧ律『強制』開頭燈！千萬要記得。。。"
+    },
+    {
+      "signal": "同一則傳言在 2017 年年中被重新轉傳，Cofacts 回覆者指出這是舊謠言。",
+      "evidence_url": "https://cofacts.tw/article/AV2OEO7XyCdS-nWhudPq",
+      "excerpt": "此為2016年底的謠言。"
+    },
+    {
+      "signal": "2018 年元旦前後，同一則傳言再次流傳，有電視新聞報導。",
+      "evidence_url": "https://www.youtube.com/watch?v=sgfSfsuu0yc",
+      "excerpt": "原來是最近網路流傳「元旦起汽、機車白天不開燈就開罰」，讓不少駕駛信以為真，但警方表示是「假的」。"
+    },
+    {
+      "signal": "查核機構觀察到，聲稱交通罰鍰有新規定的文字訊息會週期性重複流傳。",
+      "evidence_url": "https://www.mygopen.com/2023/06/traffic.html",
+      "excerpt": "就會發現每年幾乎都有類似的文字訊息在每個月的 20 日左右開始流傳"
+    }
+  ],
+  "attribution": [],
+  "tactics": [
+    {
+      "tactic_id": "TW-T05",
+      "quote": "立法院昨天三讀通過",
+      "explanation": "訊息說已經三讀通過，卻沒有附法案名稱、條號或立法院議事紀錄。"
+    },
+    {
+      "tactic_id": "TW-T04",
+      "quote": "以後騎機車一律要開大燈",
+      "explanation": "訊息只用「昨天」「以後」這類模糊時間，沒有日期；「機車要開大燈，不開就罰」的同主題說法，2016 到 2019 年已多次被 Cofacts 查核過。"
+    },
+    {
+      "tactic_id": "TW-T15",
+      "quote": "沒開罰三千！",
+      "explanation": "用驚嘆號強調會被罰錢，但沒有附可以查證的法條或來源。"
+    },
+    {
+      "tactic_id": "TW-T16",
+      "quote": "快轉給家人。",
+      "explanation": "要求轉傳給親人，訊息卻沒有寫發布單位或具體日期。"
+    }
+  ],
+  "limits": [
+    "這則訊息的源頭不是新聞，outlet_id 依規則填 null。tactics 只記錄文字上觀察得到的特徵，看不出是誰寫的，也看不出轉傳的人是否知道內容過時。",
+    "用完整原文和關鍵句（「騎機車一律要開大燈」「沒開罰三千」「立法院昨天三讀通過」）搜尋網頁、查 Cofacts 公開資料庫、查 MyGoPen 文章 feed，都找不到相同文字。這則訊息可能只在 LINE 等封閉通訊軟體流傳，也可能是新的變體，所以 first_seen 填 null。封閉群組和私訊裡的傳播時間與規模無法觀察。",
+    "原訊息沒有日期，「昨天」對應不到特定日期。溯源時沒有找到與這則訊息對應的三讀新聞報導。法案是否存在、處於哪個階段，由正方和反方判斷，溯源只記錄搜尋結果。",
+    "「罰三千」這個金額的來源無法確認。已知的早期版本，機車罰額是 600 元（2016 年版、台北版），其他版本沒有寫金額。",
+    "早期版本的背景：交通部 2016-12-27 新聞稿（https://168.motc.gov.tw/theme/news/post/1906121101839）說明「本項規定並沒有要求使用中已領有牌照之汽機車車輛需強制加裝晝行燈或啟動即開啟頭燈功能」。TVBS 2016-09-03 報導（https://news.tvbs.com.tw/life/672145）提到新款機車強制配備日行燈。2017 年 1 月的版本附上的就是這則 TVBS 連結。這些只說明這類傳言的時間脈絡，不直接對應這次的文字。",
+    "以上 prior_factchecks 查的都是早期或相關的變體，不是這次這段文字本身。Cofacts 2wzjrlzmodtjz 的回覆標籤是「含有正確訊息」，但回覆內文寫「並無罰則」，標籤和內文方向不一致，這裡照原樣列出。",
+    "cofacts.tw 與 en.cofacts.tw 網頁對自動化存取回 403，Cofacts 的內容改從公開 GraphQL API（https://api.cofacts.tw/graphql）讀取。Cofacts 早期以「-rumor」結尾的條目是匯入的舊資料，createdAt 不一定是實際最早回報的時間。",
+    "沒有找到台灣事實查核中心或法新社事實查核針對這個主題（機車開大燈罰款）的報告；搜尋到的台灣事實查核中心報告（https://tfc-taiwan.org.tw/?p=108769）談的是手機與抽菸罰則，和這次主題無關。"
+  ]
+}

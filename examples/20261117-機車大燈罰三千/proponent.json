@@ -1,0 +1,340 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": ["C1", "C3"],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=42",
+      "title": "道路交通管理處罰條例§42-全國法規資料庫",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "law-道路交通管理處罰條例",
+      "stance": "context",
+      "excerpt": "第 42 條 汽車駕駛人，不依規定使用燈光者，處新臺幣一千二百元以上三千六百元以下罰鍰。",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": ["C1"],
+      "url": "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=K0040012",
+      "title": "道路交通管理處罰條例 沿革-全國法規資料庫",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "law-道路交通管理處罰條例",
+      "stance": "refutes",
+      "excerpt": "50. 中華民國一百十五年八月十七日總統華總一義字第 11500076171 號令修正公布第 21、21-1、35、67、73、85-2、85-3 條條文；……15. 中華民國九十四年十二月二十八日總統華總一義字第 09400212581 號令修正公布第 3、5、7-2、8～10、12～16、18、20～26、29、29-2、29-3、30、31、32、33、35～38、40、42～50……第 29-2、31、31-2、32-1、42、73、82、83、84 條，定自九十六年一月一日施行",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": ["C1", "C2"],
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=K0040012",
+      "title": "道路交通管理處罰條例（全文，修正日期民國115年08月17日）",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "law-道路交通管理處罰條例",
+      "stance": "context",
+      "excerpt": "第 92 條 車輛分類、汽車牌照申領、異動、管理規定……行人通行、道路障礙及其他有關道路交通安全事項之規則，由交通部會同內政部定之。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": ["C2"],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=109",
+      "title": "道路交通安全規則§109-全國法規資料庫",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "law-道路交通安全規則",
+      "stance": "refutes",
+      "excerpt": "第 109 條 汽車行駛時，應依下列規定使用燈光：一、夜間應開亮頭燈。二、行經隧道、調撥車道應開亮頭燈。三、遇濃霧、雨、雪、天色昏暗或視線不清時，應開亮頭燈。",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": ["C1", "C2"],
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=K0040013",
+      "title": "道路交通安全規則（全文，修正日期民國115年11月06日）",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "law-道路交通安全規則",
+      "stance": "context",
+      "excerpt": "第 1 條 本規則依道路交通管理處罰條例第九十二條第一項規定訂定之。第 2 條 本規則用詞，定義如下：一、汽車：指在道路上不依軌道或電力架線而以原動機行駛之車輛（包括機車）。",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": ["C1", "C2"],
+      "url": "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=K0040013",
+      "title": "道路交通安全規則 沿革-全國法規資料庫",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "law-道路交通安全規則",
+      "stance": "context",
+      "excerpt": "134.中華民國一百十五年十一月六日交通部交運字第 11550140761 號令、內政部台內警字第 1150874538 號令會銜修正發布第 52-1、61-1 條條文；並自一百十五年十一月六日施行……114.中華民國一百零八年十月一日交通部交路字第 10850124421 號令、內政部台內警字第 1080872962 號令會銜修正發布第 6、24、39、39-1、65、77、79、88、93、103、109、115、119、122、126、138 條條文；並定自一百零八年十月一日施行",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": ["C3"],
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0080029",
+      "title": "違反道路交通管理事件統一裁罰基準及處理細則（修正日期民國115年10月30日）",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "law-統一裁罰基準及處理細則",
+      "stance": "context",
+      "excerpt": "第 2 條 處理違反道路交通管理事件之程序及統一裁罰基準依本細則之規定辦理。前項統一裁罰基準，如附件違反道路交通管理事件統一裁罰基準表（以下簡稱基準表）。大型重型機車違反本條例規定之處罰，除基準表另有規定外，應比照小型車之裁罰基準辦理。",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": ["C3"],
+      "url": "https://law.moj.gov.tw/LawClass/LawGetFile.ashx?FileId=0000427700&lan=C",
+      "title": "附表 違反道路交通管理事件統一裁罰基準表.PDF",
+      "publisher": "法務部全國法規資料庫（交通部、內政部會銜發布）",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "law-統一裁罰基準及處理細則",
+      "stance": "refutes",
+      "excerpt": "汽車駕駛人，不依規定使用燈光｜第四十二條｜一二ＯＯ│三六ＯＯ｜機車或小型車｜一二ＯＯ｜一三ＯＯ｜一四ＯＯ｜一五ＯＯ｜一、道路交通安全規則第一百零九條第一項。二、記違規點數一點。｜大型車｜二八ＯＯ｜三ＯＯＯ｜三三ＯＯ｜三六ＯＯ",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": ["C3"],
+      "url": "https://law.moj.gov.tw/LawClass/LawGetFile.ashx?FileId=0000427700&lan=C",
+      "title": "附表 違反道路交通管理事件統一裁罰基準表.PDF",
+      "publisher": "法務部全國法規資料庫（交通部、內政部會銜發布）",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "law-統一裁罰基準及處理細則",
+      "stance": "context",
+      "excerpt": "大型重型機車行駛高、快速公路，未開亮頭燈｜第三十三條第一項第六款｜三ＯＯＯ│六ＯＯＯ｜三ＯＯＯ｜三三ＯＯ｜三九ＯＯ｜四五ＯＯ｜一、高速公路及快速公路交通管制規則第二十條第三款。二、應記違規點數一點。",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": ["C2"],
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=K0040019",
+      "title": "高速公路及快速公路交通管制規則（全文，修正日期民國115年01月02日）",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "law-高速公路及快速公路交通管制規則",
+      "stance": "context",
+      "excerpt": "第 20 條 大型重型機車行駛於快速公路，除本規則另有規定外，應比照小型車行駛規定，並應遵守下列規定：一、禁止同車道併駛或超車。二、……三、全天開亮頭燈。汽缸總排氣量五百五十立方公分以上之大型重型機車行駛於高速公路，除前項規定外，並應遵守下列規定：",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": ["C3"],
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=K0040012",
+      "title": "道路交通管理處罰條例（全文，修正日期民國115年08月17日）",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "law-道路交通管理處罰條例",
+      "stance": "context",
+      "excerpt": "第 33 條 汽車行駛於高速公路、快速公路，不遵使用限制、禁止、行車管制及管理事項之管制規則而有下列行為者，處汽車駕駛人新臺幣三千元以上六千元以下罰鍰：……六、不依規定使用燈光。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": ["C1"],
+      "url": "https://ly.govapi.tw/v2/laws/02017",
+      "title": "立法院 API：道路交通管理處罰條例（法律編號 02017）",
+      "publisher": "立法院議事資料（g0v 立法院 API 鏡像）",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "ly-records",
+      "stance": "refutes",
+      "excerpt": "\"名稱\": \"道路交通管理處罰條例\" … \"最新版本\": {\"日期\": \"2026-07-28\", \"動作\": \"修正\", \"版本編號\": \"2026-07-28-修正\"}",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S13",
+      "claim_ids": ["C1"],
+      "url": "https://ly.govapi.tw/v2/laws/02017/bills?屆=11&limit=300",
+      "title": "立法院 API：道路交通管理處罰條例第11屆相關議案",
+      "publisher": "立法院議事資料（g0v 立法院 API 鏡像）",
+      "accessed": "2026-11-17",
+      "tier": 1,
+      "chain": "ly-records",
+      "stance": "refutes",
+      "excerpt": "\"會議代碼:str\": \"第11屆第6會期第7次會議\" … \"最新進度日期\": \"2026-11-17\" … \"議案名稱\": \"「道路交通管理處罰條例部分條文修正草案」，請審議案。\" … \"議案狀態\": \"排入院會\"；\"會議代碼:str\": \"第11屆第5會期第19次會議\" … \"最新進度日期\": \"2026-07-28\" … \"議案狀態\": \"三讀\"",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S14",
+      "claim_ids": ["C1"],
+      "url": "https://www.cna.com.tw/news/aipl/202607280040.aspx",
+      "title": "立院三讀道交條例　毒駕或拒測者吊銷駕照、沒入車輛",
+      "publisher": "中央社",
+      "accessed": "2026-11-17",
+      "tier": 3,
+      "chain": "cna-20260728",
+      "stance": "context",
+      "excerpt": "為防制毒駕，立法院會今天三讀通過修正道交條例部分條文，增訂毒駕或拒絕毒測者一律吊銷駕照，且不論車輛屬何人所有都將沒入",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": ["C2", "C3"],
+      "url": "https://168.motc.gov.tw/theme/news/post/1906121101839",
+      "title": "交通部澄清說明汽機車自106年起分階段實施晝行燈規定",
+      "publisher": "交通部 168交通安全入口網",
+      "accessed": "2026-11-17",
+      "tier": 2,
+      "chain": "motc-drl-2016",
+      "stance": "refutes",
+      "excerpt": "目前道路交通安全規則並未修正汽機車白天都要開亮頭燈的規定，所以白天行車除了依規定於隧道、調撥車道、設有標誌指示之山區或特殊路段、涵洞或車行地下道等路段應該開亮頭燈外，於其他道路不開亮頭燈並不會有處罰，併予澄明。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": ["C2", "C3"],
+      "url": "https://tfc-taiwan.org.tw/?p=106952",
+      "title": "【錯誤】網傳「台北市自6月20日起，下午5時至翌日上午7時未打開大燈，罰台幣600元...還有四項交通新規定」？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-17",
+      "tier": 4,
+      "chain": "tfc-20230620",
+      "stance": "refutes",
+      "excerpt": "台北市交通大隊執法組表示，機車及小型車未依規定使用燈光處1200-1500元罰鍰，大型車則罰2800-3600元，並非網傳的600元……現行交通法規並未明訂幾點到幾點之間需開大燈，交通大隊執法時會依據實際天色判斷是否為夜間",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": ["C2"],
+      "url": "https://www.mygopen.com/2023/06/traffic.html",
+      "title": "【錯誤】網傳台北不開大燈罰600元新罰則？資深傳言！台北市並無相關規定",
+      "publisher": "MyGoPen",
+      "accessed": "2026-11-17",
+      "tier": 4,
+      "chain": "mygopen-20230622",
+      "stance": "refutes",
+      "excerpt": "台北市並無強制規定在哪個時間段必須開大燈，車輛燈光的使用，還是依照現有的《道路交通安全規則》第 109 條規定",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": ["C2"],
+      "url": "https://news.tvbs.com.tw/life/672145",
+      "title": "交通部推汽機車「白天開燈」　2017年上路",
+      "publisher": "TVBS新聞網",
+      "accessed": "2026-11-17",
+      "tier": 3,
+      "chain": "motc-drl-2016",
+      "stance": "context",
+      "excerpt": "新款的機車也將強制配備一發動引擎就會自動開啟的日行燈或頭燈，否則不得出廠領牌，新款的汽車則將於2018年實施。至於已經領牌在路上跑的舊款車輛，交通部僅希望駕駛人白天開車要開頭燈，不開也不會受罰。",
+      "access_note": "full"
+    },
+    {
+      "id": "S19",
+      "claim_ids": ["C2"],
+      "url": "http://web.archive.org/web/20161229172001/http://www.appledaily.com.tw:80/realtimenews/article/new/20161227/1021548/",
+      "title": "元旦新制汽機車白天開大燈？　別被騙了！",
+      "publisher": "蘋果日報（存檔）",
+      "accessed": "2026-11-17",
+      "tier": 3,
+      "chain": "motc-drl-2016",
+      "stance": "refutes",
+      "excerpt": "事實上，針對頭燈，交通部明年元旦起的確有新制，但是要求新款式機車將強制配備一發動引擎就會自動開啟的晝行燈或頭燈，否則不得出廠領牌，後年擴及新款式汽車。至於已上路的舊車將宣導白天要開車燈，但並無罰則，不會處罰。",
+      "access_note": "archived"
+    },
+    {
+      "id": "S20",
+      "claim_ids": ["C2"],
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/1929237",
+      "title": "元旦起汽機車白天強制開大燈？別被網路謠言騙了",
+      "publisher": "自由時報",
+      "accessed": "2026-11-17",
+      "tier": 3,
+      "chain": "ltn-20161227",
+      "stance": "refutes",
+      "excerpt": "其實元旦起實施強制開大燈是逐步要求新車需強制安裝日燈，舊車只會勸導並不會處罰，所以網路上的謠言並不正確。",
+      "access_note": "full"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "false",
+      "reasoning": "立法院議事資料顯示，道路交通管理處罰條例最近一次三讀是2026年7月28日的毒駕修法，8月17日公布修正第21、21-1、35、67、73、85-2、85-3條；規範燈光罰則的第42條自2005年修正後沒有再變動，第11屆第6會期截至11月17日的道交條例提案仍停在排入院會或交付審查，案名都不涉及第42條。機車何時要開頭燈規定在道路交通安全規則第109條，這是交通部會同內政部依道交條例第92條訂定的行政命令，不經立法院三讀，該條最近一次修正在2019年。查無任何要求機車一律開大燈的三讀紀錄，關鍵內容和原始議事紀錄衝突。",
+      "evidence_ids": ["S1", "S2", "S3", "S5", "S6", "S12", "S13", "S14"],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C2",
+      "label": "false",
+      "reasoning": "道路交通安全規則第109條只要求在夜間、行經隧道或調撥車道、遇濃霧雨雪或視線不清等情形開亮頭燈，第2條明定機車屬於「汽車」；交通部2016年也說明白天在一般道路不開頭燈不會處罰，台灣事實查核中心與MyGoPen 2023年向警方查證的結果相同。唯一「全天開亮頭燈」的規定是大型重型機車行駛高速公路、快速公路（高速公路及快速公路交通管制規則第20條），屬既有的特定路段規定；2017年起新型式機車須配備晝行燈或啟動即亮的頭燈，是出廠設備規定，不是騎士一律開燈的義務。",
+      "evidence_ids": ["S3", "S4", "S5", "S6", "S10", "S15", "S16", "S17", "S18", "S19", "S20"],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C3",
+      "label": "false",
+      "reasoning": "道交條例第42條規定不依規定使用燈光的法定罰鍰是1200至3600元，統一裁罰基準表把機車或小型車定為期限內1200元、逾期最多1500元，3000元只出現在大型車逾期繳納的級距；台灣事實查核中心2023年訪問台北市交通大隊，得到的也是機車1200至1500元。機車燈光違規以3000元起罰的只有大型重型機車在高速公路、快速公路未開亮頭燈（第33條第1項第6款，期限內3000元），這是既有的特定路段規定，一般機車不得行駛高速公路，白天在一般道路未開頭燈也不罰；把「罰三千」套用到所有騎機車沒開大燈的情形，與裁罰基準不符。",
+      "evidence_ids": ["S1", "S7", "S8", "S9", "S11", "S15", "S16"],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C4",
+      "label": "not_factual",
+      "reasoning": "「快轉給家人」是要求轉傳的呼籲，不是可以查證的事實陳述。",
+      "evidence_ids": [],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": [
+    {
+      "org": "Cofacts 真的假的",
+      "url": "https://cofacts.tw/article/5411359264724-rumor",
+      "their_label": "含有不實訊息（RUMOR）",
+      "claim_ids": ["C2", "C3"],
+      "agree": true,
+      "note": "cofacts.tw 網頁對自動化存取回 403，改從公開 GraphQL API 讀取回覆全文。回覆引用兩項資料：聯合新聞網 2193800 已回 404，Wayback 存檔頁沒有呈現內文，無法核對；蘋果日報 2016-12-27 報導以存檔讀到全文（S19），內容寫舊車「並無罰則，不會處罰」。另以交通部 2016-12-27 新聞稿（S15）及現行道安規則第109條（S4）獨立核對，元旦起汽機車一律強制開大燈、違者開罰的說法不成立，同意其判定。"
+    },
+    {
+      "org": "Cofacts 真的假的",
+      "url": "https://cofacts.tw/article/5507860730717-rumor",
+      "their_label": "含有不實訊息（RUMOR）",
+      "claim_ids": ["C2"],
+      "agree": true,
+      "note": "經 Cofacts API 讀取回覆，回覆引用的資料只有一項：TVBS 2016-09-03 報導。已讀到全文（S18），報導寫新款機車須配備啟動即亮的日行燈或頭燈，已領牌的舊車「不開也不會受罰」。再以交通部 2016-12-27 新聞稿（S15）及現行道安規則第109條（S4）核對，「汽機車白天一律強制開頭燈」不成立，同意其判定。"
+    },
+    {
+      "org": "Cofacts 真的假的",
+      "url": "https://cofacts.tw/article/AV2OEO7XyCdS-nWhudPq",
+      "their_label": "含有不實訊息（RUMOR）",
+      "claim_ids": ["C2", "C3"],
+      "agree": true,
+      "note": "經 Cofacts API 讀取回覆，回覆引用的資料只有一項：聯合新聞網 2193800，已回 404，存檔頁沒有呈現內文，無法核對。改以交通部 2016-12-27 新聞稿（S15）、現行道安規則第109條（S4）及統一裁罰基準表（S8）核對：沒有「騎車一定要開大燈」的一律規定，白天在一般道路不開頭燈不罰，同意其判定。"
+    },
+    {
+      "org": "Cofacts 真的假的",
+      "url": "https://cofacts.tw/article/2wzjrlzmodtjz",
+      "their_label": "含有正確訊息（NOT_RUMOR）",
+      "claim_ids": ["C2", "C3"],
+      "agree": false,
+      "note": "經 Cofacts API 讀取回覆，回覆引用的資料只有一項：交通部 2016-12-27 新聞稿，已讀到全文（S15）。回覆內文說新款機車須配備晝行燈、對民眾「並無罰則」，這和原始資料一致；但待查訊息說「機車白天、晚上都要開燈，否則被抓了就要罰錢」，依道安規則第109條（S4）和交通部說明，白天在一般道路不開頭燈不罰。標籤和回覆內文的方向不一致，就這則訊息的罰則說法，不同意「含有正確訊息」的標籤。"
+    },
+    {
+      "org": "MyGoPen",
+      "url": "https://www.mygopen.com/2023/06/traffic.html",
+      "their_label": "錯誤",
+      "claim_ids": ["C2", "C3"],
+      "agree": true,
+      "note": "已讀到全文。報告引用道安規則第109條、道交條例第42條，並致電台北市警察局交通警察大隊。已從全國法規資料庫獨立核對兩條條文的現行內容（S4、S1），也用台灣事實查核中心同期向台北市交通大隊查證的報告（S16）交叉確認：機車未依規定使用燈光罰1200至1500元，沒有固定時段一律開大燈的規定。同意其判定；不過該報告處理的是台北「罰600元」變體，不是這次的文字。"
+    }
+  ]
+}

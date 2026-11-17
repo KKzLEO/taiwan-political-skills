@@ -44,6 +44,11 @@ class DetectTest(unittest.TestCase):
         m = run(found=())
         self.assertFalse(engine(m, "codex")["available"])
 
+    def test_stored_command_has_no_absolute_path(self):
+        """Run folders are meant to be shared; they must not leak the user's home directory."""
+        e = engine(run(found=("codex",)), "codex")
+        self.assertEqual(e["cmd"], ["codex"])
+
     def test_env_override_command(self):
         m = run(found=(), env={"FC_CODEX_CMD": "zsh -ic codex"})
         e = engine(m, "codex")

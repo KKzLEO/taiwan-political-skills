@@ -22,6 +22,13 @@ def _cell(text) -> str:
     return str(text or "").replace("|", "／").replace("\n", " ").strip()
 
 
+def _first_sentence(text, limit=120) -> str:
+    text = _cell(text)
+    cut = text.find("。")
+    first = text[:cut + 1] if cut >= 0 else text
+    return first if len(first) <= limit else first[:limit] + "…"
+
+
 def _spectrum(score) -> list:
     pos = round_half_up(score * WIDTH / 100)
     bar = "━" * pos + "▲" + "━" * (WIDTH - pos)
@@ -73,7 +80,7 @@ def render(run, outlets=None, tactics=None) -> str:
                   key=lambda c: (-c["importance"], c["claim_id"]))
     for c in core or verdicts["claims"]:
         out.append(f"- **{c['claim_id']}「{_cell(claims[c['claim_id']]['original'])}」：{ZH_LABELS[c['label']]}。**"
-                   f"{_cell(c['reasoning'])}")
+                   f"{_first_sentence(c['reasoning'])}")
     out.append("")
 
     # 範圍與限制
