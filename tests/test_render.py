@@ -96,6 +96,35 @@ class BodyTest(unittest.TestCase):
         out = md(build(review__B_json=review))
         self.assertIn("爭議點", out)
         self.assertIn("還是低估了", out)
+        self.assertIn("改判「無法證實」", out)
+
+    def test_dispute_with_accepted_label_says_the_label_stays(self):
+        review = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": True,
+                                            "reason": "只引了一半"}]}
+        out = md(build(review__B_json=review))
+        self.assertIn("判定維持「誤導」", out)
+        self.assertIn("只引了一半", out)
+        self.assertNotIn("改判「無法證實」", out)
+
+    def test_withdrawn_tag_is_not_shown_as_identified(self):
+        out = md(build(**fx.tactic_attack_overrides()))
+        section = out.split("## 操弄手法")[1].split("\n## ")[0]
+        self.assertNotIn("**急迫轉傳**（TW-T01）：", section)
+        self.assertIn("辯論後撤回：急迫轉傳（TW-T01）", section)
+        self.assertIn("裁判核對後認為特徵對不上，撤下", section)
+
+    def test_corrections_come_after_every_section_written_before_the_debate(self):
+        """Re-review: the prior-fact-check table sat below the corrections and still said 一致."""
+        out = md(build(**fx.tactic_attack_overrides()))
+        self.assertGreater(out.index("## 辯論後的修正"), out.index("## 和既有查核的比對"))
+        self.assertIn("和既有查核的比對", out.split("## 辯論後的修正")[1].split("\n## ")[0])
+
+    def test_corrections_quote_the_judge_not_the_opponent(self):
+        """Red-team: opponent arguments can contain parts the judge rejected; only the ruling is authoritative."""
+        out = md(build(**fx.tactic_attack_overrides()))
+        corrections = out.split("## 辯論後的修正")[1].split("\n## ")[0]
+        self.assertIn("裁判核對後認為特徵對不上，撤下", corrections)
+        self.assertNotIn("TW-T01 只對得上一項特徵，不該標", corrections)
 
     def test_media_without_lean_says_no_research(self):
         trace = copy.deepcopy(fx.TRACE)

@@ -85,7 +85,8 @@ class CallTest(unittest.TestCase):
         self.assertIn("逾時", err)
         self.assertEqual(len(r.calls), 1)
 
-    def test_default_timeout_is_20_minutes_and_env_overrides(self):
+    def test_default_timeout_is_60_minutes_and_env_overrides(self):
+        """2026-11-18 eval batch: proponents took 9–33 minutes; a 40-claim article needed 33."""
         seen = []
 
         def runner(argv, stdin, cwd, timeout, env):
@@ -93,7 +94,7 @@ class CallTest(unittest.TestCase):
             return 0, '{"ok": true}', ""
         run_model.call(CLAUDE, "p", runner=runner, env={})
         run_model.call(CLAUDE, "p", runner=runner, env={"FC_TIMEOUT": "90"})
-        self.assertEqual(seen, [1200, 90])
+        self.assertEqual(seen, [3600, 90])
 
     def test_nonzero_exit_is_retried(self):
         r = FakeRunner([(1, "boom"), '{"ok": true}'])

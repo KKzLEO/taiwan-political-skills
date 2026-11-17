@@ -151,10 +151,14 @@ def render(run, outlets=None, tactics=None) -> str:
         out.append(f"- 被點名或更正：{_cell(f.get('note'))}（{f.get('url', '')}）")
     out.append("")
 
-    # 操弄手法
+    # 操弄手法（裁判撤回的標記不列為已辨識）
     if trace.get("tactics"):
+        removed = {w["tactic_id"]: w.get("attack_ids", []) for w in verdicts.get("removed_tactics", [])}
+        reasons = {a["attack_id"]: a["ruling_reason"] for a in verdicts.get("trace_attacks_upheld", [])}
         out += ["## 操弄手法（不影響可信度）", ""]
         for t in trace["tactics"]:
+            if t["tactic_id"] in removed:
+                continue
             info = tactics.get(t["tactic_id"], {})
             line = f"- **{info.get('name', t['tactic_id'])}**（{t['tactic_id']}）：「{_cell(t['quote'])}」{_cell(t.get('explanation'))}"
             if info.get("layer") == "attribution" and not trace.get("attribution"):
@@ -162,6 +166,11 @@ def render(run, outlets=None, tactics=None) -> str:
             out.append(line)
             if info.get("how_to_spot"):
                 out.append(f"  - 怎麼辨認：{info['how_to_spot']}")
+        if removed and all(t["tactic_id"] in removed for t in trace["tactics"]):
+            out.append("- 辯論後沒有留下任何手法標記。")
+        for tid in sorted(removed):
+            why = "；".join(_cell(reasons[a]) for a in removed[tid] if a in reasons)
+            out.append(f"- 辯論後撤回：{tactics.get(tid, {}).get('name', tid)}（{tid}）。裁判：{why}")
         out.append("")
 
     # 既有查核
@@ -180,12 +189,25 @@ def render(run, outlets=None, tactics=None) -> str:
                        f"{check} | {_cell(p.get('note'))} |")
         out.append("")
 
+    # 辯論後的修正（成立的溯源和手法攻擊；上面的溯源內容是辯論前寫的）
+    if verdicts.get("trace_attacks_upheld"):
+        out += ["## 辯論後的修正", "",
+                "前面的溯源、報導品質、操弄手法、和既有查核的比對，以及查核範圍裡關於溯源的說明，都是辯論前寫的。"
+                "以下是裁判判定成立的修正，和前文不同時以這裡為準。", ""]
+        for a in verdicts["trace_attacks_upheld"]:
+            out.append(f"- 反方 {a['seat']} 的質疑成立（{a['attack_id']}）：{_cell(a['ruling_reason'])}")
+        out.append("")
+
     # 爭議點
     if verdicts.get("disputes"):
         out += ["## 爭議點", ""]
         for d in verdicts["disputes"]:
-            out.append(f"- **{d['claim_id']}**：裁判原本判「{ZH_LABELS[d['judge_label']]}」（{_cell(d['judge_reasoning'])}），"
-                       "覆核沒有通過，所以改判「無法證實」。")
+            if d.get("label_kept"):
+                out.append(f"- **{d['claim_id']}**：判定維持「{ZH_LABELS[d['judge_label']]}」（{_cell(d['judge_reasoning'])}）。"
+                           "覆核同意這個判定，但認為理由或證據還有缺漏。")
+            else:
+                out.append(f"- **{d['claim_id']}**：裁判原本判「{ZH_LABELS[d['judge_label']]}」（{_cell(d['judge_reasoning'])}），"
+                           "覆核沒有通過，所以改判「無法證實」。")
             for o in d["objections"]:
                 out.append(f"  - 反方 {o['seat']}：{_cell(o['argument'])}")
             for r in d["review_reasons"]:

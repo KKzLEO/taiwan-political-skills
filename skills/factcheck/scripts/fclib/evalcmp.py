@@ -18,13 +18,16 @@ def compare(case, claims_doc, verdicts_doc, score_doc):
     pool = [(c["id"], c["original"]) for c in claims_doc["claims"]]
     used, details = set(), []
     for exp in case.get("claim", []):
-        best, best_ratio = None, 0.0
+        # Closest sentence wins. A run may split one sentence into several readings (an implied
+        # fact and an opinion) that quote it identically; among those, take the expected reading.
+        best, best_key = None, (0.0, False)
         for cid, text in pool:
             if cid in used:
                 continue
-            ratio = similarity(exp["original"], text)
-            if ratio > best_ratio:
-                best, best_ratio = cid, ratio
+            key = (similarity(exp["original"], text), labels.get(cid) == exp["expected_label"])
+            if key > best_key:
+                best, best_key = cid, key
+        best_ratio = best_key[0]
         if best is not None and best_ratio >= MATCH_THRESHOLD:
             used.add(best)
             got = labels.get(best)

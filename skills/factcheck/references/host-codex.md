@@ -28,4 +28,4 @@ python3 "$SKILL/scripts/fc.py" reviewers --run "$RUN"            # 列出要覆�
 python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role review --seat B   # 每個列出的席位跑一次
 ```
 
-每個子程序可能要跑好幾分鐘，`claude -p` 當外部反方時可能超過 10 分鐘。`run-model` 的逾時上限預設 1200 秒，可以用環境變數 `FC_TIMEOUT` 調整；你自己執行指令時，工具的 timeout 也要設得比它長。
+每個子程序可能要跑好幾分鐘，`claude -p` 當外部反方時可能超過 10 分鐘。`run-model` 的逾時上限預設 3600 秒，可以用環境變數 `FC_TIMEOUT` 調整；你自己執行指令時，工具的 timeout 也要設得比它長。

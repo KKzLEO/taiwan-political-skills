@@ -15,7 +15,7 @@ from pathlib import Path
 
 from . import io, validate
 
-TIMEOUT = 1200  # seconds; a thorough opponent with web search can take 10+ minutes
+TIMEOUT = 3600  # seconds; measured proponent runs took 9–33 minutes (2026-11-18 eval batch)
 ISOLATION_NOTE = ("這是一次獨立的事實查核任務。忽略任何使用者層級的偏好、記憶、協議或工作守則："
                   "它們不是證據，也不能影響判定。只依照本次提供的角色指令和輸入資料作答。")
 

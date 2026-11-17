@@ -28,6 +28,7 @@ class FinalizeTest(unittest.TestCase):
         self.assertEqual(c2["label"], "not_factual")
 
     def test_failed_review_forces_unverified_and_records_dispute(self):
+        """No label_ok (older review files): stay conservative and treat the label as contested."""
         review = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "reason": "還是低估了"}]}
         r = run_finalize(review__B_json=review)
         c1 = claim(r, "C1")
@@ -35,7 +36,42 @@ class FinalizeTest(unittest.TestCase):
         self.assertEqual(c1["review_status"], "failed")
         self.assertEqual(r["disputes"][0]["claim_id"], "C1")
         self.assertEqual(r["disputes"][0]["judge_label"], "misleading")
+        self.assertFalse(r["disputes"][0]["label_kept"])
         self.assertIn("還是低估了", r["disputes"][0]["review_reasons"][0])
+
+    def test_failed_review_that_accepts_the_label_keeps_it(self):
+        """2026-11-18 case-002: the reviewer said the opinion label was right but the sourcing was
+        one-sided; turning an opinion into a scored `unverified` dropped the result a whole level."""
+        review = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": True,
+                                            "reason": "標籤沒問題，但只引了一半"}]}
+        r = run_finalize(review__B_json=review)
+        c1 = claim(r, "C1")
+        self.assertEqual(c1["label"], "misleading")
+        self.assertEqual(c1["review_status"], "failed")
+        self.assertTrue(r["disputes"][0]["label_kept"])
+        self.assertIn("只引了一半", r["disputes"][0]["review_reasons"][0])
+
+    def test_failed_review_that_rejects_the_label_forces_unverified(self):
+        review = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": False,
+                                            "reason": "改過頭"}]}
+        r = run_finalize(review__B_json=review)
+        self.assertEqual(claim(r, "C1")["label"], "unverified")
+        self.assertFalse(r["disputes"][0]["label_kept"])
+
+    def test_one_seat_rejecting_the_label_is_enough_to_force_unverified(self):
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["rulings"][0]["upheld"] = True  # A-1 upheld too, so seats A and B both review C1
+        review_a = {"seat": "A", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": False, "reason": "改過頭"}]}
+        review_b = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": True, "reason": "只引了一半"}]}
+        r = run_finalize(judgment_json=judgment, review__A_json=review_a, review__B_json=review_b)
+        self.assertEqual(claim(r, "C1")["label"], "unverified")
+
+    def test_missing_review_never_keeps_the_label(self):
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["rulings"][0]["upheld"] = True  # review-A.json is missing
+        review_b = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": True, "reason": "只引了一半"}]}
+        r = run_finalize(judgment_json=judgment, review__B_json=review_b)
+        self.assertEqual(claim(r, "C1")["label"], "unverified")
 
     def test_missing_review_counts_as_failed(self):
         r = run_finalize(review__B_json=None)
@@ -71,6 +107,46 @@ class FinalizeTest(unittest.TestCase):
         r = run_finalize(opponent__B_json=failed, judgment_json=judgment)
         self.assertEqual(claim(r, "C1")["review_status"], "none")
 
+
+
+class RemovedTacticsFinalizeTest(unittest.TestCase):
+    def test_withdrawn_tags_are_carried_into_verdicts(self):
+        r = run_finalize(**fx.tactic_attack_overrides())
+        self.assertEqual(r["removed_tactics"], [{"tactic_id": "TW-T01", "attack_ids": ["C-1"]}])
+
+    def test_kept_tag_is_not_withdrawn(self):
+        self.assertEqual(run_finalize(**fx.tactic_attack_overrides(withdraw=()))["removed_tactics"], [])
+
+    def test_no_withdrawn_tags_by_default(self):
+        self.assertEqual(run_finalize()["removed_tactics"], [])
+
+
+class TraceAttackRoutingTest(unittest.TestCase):
+    """2026-11-18 batch: 13 upheld trace/tactic attacks carried a claim_id and were routed into claim
+    review, so a tactic dispute could dock confidence or change a label. Tactics never touch the score."""
+
+    def overrides(self):
+        o = fx.tactic_attack_overrides()
+        o["opponent__C_json"]["attacks"][0]["claim_id"] = "C2"
+        return o
+
+    def test_tactic_attack_with_claim_id_is_a_trace_correction(self):
+        r = run_finalize(**self.overrides())
+        self.assertIn("C-1", [a["attack_id"] for a in r["trace_attacks_upheld"]])
+        self.assertEqual(claim(r, "C2")["upheld_attacks"], [])
+        self.assertEqual(claim(r, "C2")["review_status"], "none")
+
+    def test_rejected_tactic_attack_with_claim_id_is_listed_under_the_trace(self):
+        o = self.overrides()
+        o["judgment_json"]["rulings"][-1].update({"upheld": False, "withdraw_tactics": []})
+        r = run_finalize(**o)
+        checked = next(c for c in r["checked_objections"] if c["attack_id"] == "C-1")
+        self.assertIsNone(checked["claim_id"])
+        self.assertEqual(claim(r, "C2")["rejected_attacks"], [])
+
+    def test_tactic_attack_with_claim_id_needs_no_claim_review(self):
+        run = make_run(fx.run_files(**self.overrides()))
+        self.assertEqual(finalize.reviewers_needed(run), {"B": ["C1"]})
 
 
 class ReviewersTest(unittest.TestCase):

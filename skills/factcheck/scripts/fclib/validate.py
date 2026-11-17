@@ -209,8 +209,38 @@ def _judgment(d, run, ctx):
                      f"rulings[{i}] 判定攻擊成立，但沒有列出實際打開核對過的 verified_urls")
     ledger_ids = _check_ledger(err, d.get("ledger"), "judgment")
     _check_verdicts(err, d.get("verdicts"), _claim_ids(run), ledger_ids, "judgment")
+    _check_withdrawals(err, d, run, attacks)
     return err
 
+
+def _check_withdrawals(err, d, run, attacks):
+    """Every upheld trace/tactic ruling lists the tags it withdraws (`withdraw_tactics`, [] to keep them).
+    A withdrawn tag must be one the tracer made, and must be named in that attack or ruling."""
+    tagged = None
+    for i, r in enumerate(d.get("rulings", [])):
+        aid = r.get("attack_id")
+        attack = attacks[aid][1] if isinstance(aid, str) and aid in attacks else {}
+        upheld = r.get("upheld") is True
+        on_trace = attack.get("target") in ("trace", "tactic")
+        p = f"rulings[{i}].withdraw_tactics"
+        if upheld and on_trace and "withdraw_tactics" not in r:
+            err.append(f"{p}：判成立的溯源或手法攻擊要列出撤回哪些標記，不撤就填 []")
+            continue
+        w = r.get("withdraw_tactics")
+        if w is None or w == []:
+            continue
+        if not (upheld and on_trace):
+            err.append(f"{p}：只有判定成立的溯源或手法攻擊可以撤回標記")
+            continue
+        if not isinstance(w, list) or not all(isinstance(x, str) for x in w):
+            err.append(f"{p} 必須是手法編號的陣列，不撤就填 []")
+            continue
+        if tagged is None:
+            tagged = {t.get("tactic_id") for t in (io.read_json_or_none(run / "trace.json") or {}).get("tactics", [])}
+        text = f"{attack.get('argument', '')} {r.get('reason', '')}"
+        for tid in w:
+            err.need(tid in tagged, f"{p}：{tid} 不在 trace.json 的 tactics 裡")
+            err.need(tid in text, f"{p}：{tid} 要寫在這條攻擊的論點或裁決理由裡")
 
 def _review(d, run, ctx):
     err = _Errors()
@@ -220,6 +250,11 @@ def _review(d, run, ctx):
         err.need(r.get("claim_id") in claim_ids, f"reviews[{i}].claim_id 不在 claims.json")
         err.need(isinstance(r.get("pass"), bool), f"reviews[{i}].pass 必須是 true/false")
         err.need(_nonempty(r.get("reason")), f"reviews[{i}].reason 不能是空的")
+        if r.get("pass") is False:
+            err.need(isinstance(r.get("label_ok"), bool),
+                     f"reviews[{i}].label_ok 必須是 true/false（不通過時要說明標籤本身對不對）")
+        elif r.get("pass") is True:
+            err.need(r.get("label_ok", True) is True, f"reviews[{i}].label_ok：通過就代表同意標籤，不能是 false")
     return err
 
 

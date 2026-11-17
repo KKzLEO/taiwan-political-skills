@@ -15,12 +15,15 @@
 2. 產出每個命題修改後的判定（`verdicts`）。沒有成立攻擊的命題，沿用正方的判定。`reasoning` 的**第一句直接寫結論**（例如「現行罰鍰是 1200 到 1500 元，不是 3000 元。」），報告的結論區只會取第一句。
 3. 產出最終證據表（`ledger`）：正方的證據表，加上成立攻擊或答辯裡經過你核對的新證據（照共同規則的欄位補齊，`id` 接續編號）。
 4. 判定規則和共同規則一樣：找不到證據不等於錯誤；法條命題沒有條文原文就是 `unverified`。
+5. **手法標記：** 每一條判成立的溯源或手法攻擊（`target` 是 `trace` 或 `tactic`），裁決都要有 `withdraw_tactics`：攻擊證明哪些標記不成立（原文對不上手法庫的特徵），就列出那些手法編號，報告不會把它們列為已辨識的手法，並附上你這條裁決的理由；手法本身成立、只是引文或說明寫得不準，或這條攻擊和手法標記無關時，填 `[]`。撤回的編號要寫在攻擊的論點或你的理由裡。沒有人攻擊的標記不要撤回。
+6. **裁決理由會刊在公開報告裡。** 用讀者看得懂的完整句子寫明修正後的事實，不要寫內部編號（例如 S12、C-3）或給流程的指示（例如「trace 刪除某某」）。
 
 ## 輸出格式（`judgment.json`）
 
 ```json
 {
-  "rulings": [ { "attack_id": "B-1", "upheld": true, "reason": "…", "verified_urls": ["https://…"] } ],
+  "rulings": [ { "attack_id": "B-1", "upheld": true, "reason": "…", "verified_urls": ["https://…"] },
+               { "attack_id": "C-3", "upheld": true, "reason": "…TW-T15…", "verified_urls": [], "withdraw_tactics": ["TW-T15"] } ],
   "verdicts": [ { "claim_id": "C1", "label": "misleading", "reasoning": "…", "evidence_ids": ["S1", "S3"],
                   "context_flags": ["out_of_context"], "law_text_obtained": null } ],
   "ledger": [ { "id": "S1", "…": "…" } ]
@@ -28,4 +31,5 @@
 ```
 
 - 每一條攻擊都要剛好一個裁決。
+- `withdraw_tactics` 只能出現在判成立的溯源或手法攻擊上，編號必須是 `trace.json` 有標的。
 - `claims.json` 的每個命題都要剛好一個判定。

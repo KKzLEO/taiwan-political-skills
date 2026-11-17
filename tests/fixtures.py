@@ -100,6 +100,21 @@ JUDGMENT = {
 REVIEW_B = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": True, "reason": "改判誤導合理"}]}
 
 
+def tactic_attack_overrides(upheld=True, withdraw=("TW-T01",)):
+    """Seat C attacks the trace's TW-T01 tag; the judge's ruling says whether the tag is withdrawn."""
+    opp_c = copy.deepcopy(OPP_C)
+    opp_c["attacks"] = [{"id": "C-1", "claim_id": None, "target": "tactic",
+                         "argument": "TW-T01 只對得上一項特徵，不該標", "proposed_label": None, "evidence": []}]
+    rebuttal = copy.deepcopy(REBUTTAL)
+    rebuttal["responses"].append({"attack_id": "C-1", "accept": True, "response": "同意撤下", "evidence": []})
+    judgment = copy.deepcopy(JUDGMENT)
+    ruling = {"attack_id": "C-1", "upheld": upheld, "reason": "裁判核對後認為特徵對不上，撤下", "verified_urls": []}
+    if withdraw != "omit":
+        ruling["withdraw_tactics"] = list(withdraw) if isinstance(withdraw, tuple) else withdraw
+    judgment["rulings"].append(ruling)
+    return {"opponent__C_json": opp_c, "rebuttal_json": rebuttal, "judgment_json": judgment}
+
+
 def run_files(**overrides):
     files = {
         "run.json": RUN, "models.json": MODELS, "source.json": SOURCE, "claims.json": CLAIMS,
