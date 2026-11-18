@@ -12,7 +12,7 @@
 
 ## 怎麼攻擊
 
-- 每一條攻擊都要具體，指向某個命題（`claim_id`）。針對溯源的攻擊，`claim_id` 填 `null`。
+- 每一條攻擊都要具體，指向某個命題（`claim_id`）。針對溯源的攻擊，`claim_id` 填 `null`；針對手法標記的攻擊，`target` 填 `tactic`，`tactic_id` 填那個標記的編號。
 - `target` 是 `label` 或 `evidence` 時，**一定要附證據**：網址加逐字摘錄。
 - 找了但真的找不到反證，就回傳空的 `attacks`，並在 `searches_run` 誠實填你搜尋了幾次。
 

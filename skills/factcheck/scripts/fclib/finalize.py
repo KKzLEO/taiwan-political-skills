@@ -31,25 +31,41 @@ def _claim_of(attack):
     return None if attack.get("target") in ("trace", "tactic") else attack.get("claim_id")
 
 
-def _withdrawn(rulings, attacks):
-    """Tags the judge withdrew, each with the upheld trace/tactic attacks that justified it."""
-    out = {}
-    for aid, ruling in rulings.items():
-        if not ruling["upheld"] or attacks[aid].get("target") not in ("trace", "tactic"):
-            continue
-        for tid in ruling.get("withdraw_tactics") or []:
-            out.setdefault(tid, []).append(aid)
-    return [{"tactic_id": tid, "attack_ids": sorted(ids)} for tid, ids in sorted(out.items())]
+NOT_CHECKED = "裁判沒有完成手法檢查（格式驗證沒有通過），這個標記不列為已辨識。"
+
+
+def _removed(judgment, trace):
+    """Tags that do not appear as identified: the judge's checks with keep false, or every tag when the
+    judge's checks had to be set aside."""
+    if "tactic_checks_set_aside" in judgment:
+        return [{"tactic_id": t.get("tactic_id"), "reason": NOT_CHECKED}
+                for t in trace.get("tactics", []) if isinstance(t, dict)]
+    return [{"tactic_id": c["tactic_id"], "reason": c["reason"]}
+            for c in judgment.get("tactic_checks", []) if c.get("keep") is False]
+
+
+def _weight_only(attack):
+    """An importance challenge: neutral_rewrite with a proposed one-step change and nothing else."""
+    return attack.get("target") == "neutral_rewrite" and "proposed_importance" in attack
+
+
+def _importance(orig, weight_attacks, attacks):
+    """Upheld importance challenges move the weight to the adjacent level they proposed; opposite
+    directions cancel. The judge never sets the value, so one ruling cannot swing it further."""
+    directions = {(attacks[a]["proposed_importance"] > orig) - (attacks[a]["proposed_importance"] < orig)
+                  for a in weight_attacks} - {0}
+    return orig + directions.pop() if len(directions) == 1 else orig
 
 
 def reviewers_needed(run) -> dict:
-    """seat -> claim ids that seat must re-review (claims where its attack was upheld)."""
+    """seat -> claim ids that seat must re-review (claims where its attack was upheld). Importance
+    challenges never question the label, so they open no review that could fail."""
     run = Path(run)
     attacks = _successful_attacks(run)
     out = {}
     for r in io.read_json(run / "judgment.json").get("rulings", []):
         a = attacks.get(r["attack_id"])
-        if r["upheld"] and a and _claim_of(a):
+        if r["upheld"] and a and _claim_of(a) and not _weight_only(a):
             out.setdefault(a["seat"], set()).add(_claim_of(a))
     return {seat: sorted(ids) for seat, ids in sorted(out.items())}
 
@@ -61,12 +77,14 @@ def finalize(run) -> dict:
     attacks = _successful_attacks(run)
     rulings = {r["attack_id"]: r for r in judgment.get("rulings", []) if r["attack_id"] in attacks}
 
-    upheld_by_claim, rejected_by_claim = {}, {}
+    upheld_by_claim, rejected_by_claim, weight_by_claim = {}, {}, {}
     checked, trace_upheld = [], []
     for aid, ruling in rulings.items():
         a = attacks[aid]
         bucket = upheld_by_claim if ruling["upheld"] else rejected_by_claim
-        if _claim_of(a) is None:
+        if ruling["upheld"] and _weight_only(a):
+            weight_by_claim.setdefault(a.get("claim_id"), []).append(aid)
+        elif _claim_of(a) is None:
             if ruling["upheld"]:
                 trace_upheld.append({"attack_id": aid, "seat": a["seat"], "argument": a["argument"],
                                      "ruling_reason": ruling["reason"]})
@@ -111,10 +129,16 @@ def finalize(run) -> dict:
                                     "argument": attacks[aid]["argument"]} for aid in upheld],
                     "review_reasons": reasons,
                 })
+        weight = sorted(weight_by_claim.get(cid, []))
+        importance = _importance(meta["importance"], weight, attacks)
         claims_out.append({
             "claim_id": cid,
             "label": label,
-            "importance": meta["importance"],
+            "importance": importance,
+            **({"importance_from": meta["importance"]} if importance != meta["importance"] else {}),
+            **({"importance_attacks": [{"attack_id": aid, "seat": attacks[aid]["seat"],
+                                        "proposed": attacks[aid]["proposed_importance"],
+                                        "ruling_reason": rulings[aid]["reason"]} for aid in weight]} if weight else {}),
             "core": meta["core"],
             "legal": meta.get("legal", False),
             "law_text_obtained": v.get("law_text_obtained"),
@@ -132,5 +156,5 @@ def finalize(run) -> dict:
         "disputes": disputes,
         "checked_objections": checked,
         "trace_attacks_upheld": trace_upheld,
-        "removed_tactics": _withdrawn(rulings, attacks),
+        "removed_tactics": _removed(judgment, io.read_json_or_none(run / "trace.json") or {}),
     }

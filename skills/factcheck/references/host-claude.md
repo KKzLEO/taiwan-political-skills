@@ -18,6 +18,8 @@ python3 <skill 資料夾的完整路徑>/scripts/fc.py prompt --run <RUN 路徑>
 
 輸出檔名：`trace.json`、`proponent.json`、`opponent-A.json`、`rebuttal.json`、`judgment.json`、`review-B.json`…（和 `fc.py prompt` 輸出裡寫的一致）。
 
+**隔離程度：** 2026-11-18 的金絲雀實測顯示，Agent 子代理看得到使用者的 CLAUDE.md 和專案記憶，只能靠這段 prompt 和共同規則要求它們忽略。外部席位用的 `claude -p --safe-mode` 看不到。
+
 Sub-agent 回覆「完成」之後，執行 `python3 "$SKILL/scripts/fc.py" validate --run "$RUN" <檔名>`。沒通過就再派一次同一個角色，並在 prompt 最後加上「上一次的輸出有以下問題：」和錯誤清單。
 
 ## 外部反方（X 開頭的席位）

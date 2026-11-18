@@ -33,7 +33,7 @@ ROLE_INPUTS = {
     "tracer": ["source.json", "claims.json"],
     "proponent": ["source.json", "claims.json", "trace.json"],
     "opponent": ["source.json", "claims.json", "trace.json", "proponent.json"],
-    "rebuttal": ["claims.json", "proponent.json", "opponent-*.json"],
+    "rebuttal": ["source.json", "claims.json", "trace.json", "proponent.json", "opponent-*.json"],
     "judge": ["source.json", "claims.json", "trace.json", "proponent.json", "opponent-*.json", "rebuttal.json"],
     "review": ["claims.json", "judgment.json", "opponent-{seat}.json"],
 }
@@ -43,6 +43,7 @@ ROLE_DATA = {
     "tracer": ["tactics", "media"],
     "proponent": ["sources"],
     "opponent": ["sources"],
+    "rebuttal": ["tactics"],
     "judge": ["tactics"],
 }
 STANCE_LENSES = {"stance", "external"}
@@ -66,6 +67,7 @@ def _data_sections(role, lens, data_dir):
             rows = [{k: t.get(k) for k in ("id", "name", "layer", "observable", "cannot_infer")}
                     for t in data.get("tactic", [])]
             title = "手法庫（只能用這些 tactic_id）"
+            sections.append((io.REFERENCES_DIR / "tactic-rules.md").read_text(encoding="utf-8"))
         elif kind == "media":
             rows = [{k: o.get(k) for k in ("id", "name", "aliases", "domains")} for o in data.get("outlet", [])]
             title = "媒體對照表（只用來填 outlet_id，立場和信任度由腳本另外查）"
@@ -163,13 +165,18 @@ def build_command(engine, workdir, out_file, env):
             argv += ["-m", model]
         return argv + ["-"], "file"
     if eid == "claude":
-        argv = cmd + ["-p", "--output-format", "json", "--no-session-persistence",
+        # --safe-mode skips CLAUDE.md, hooks, plugins and MCP but keeps OAuth login and web search
+        # (2026-11-18 canary: without it, claude -p saw the user's CLAUDE.md and SessionStart hook output).
+        argv = cmd + ["-p", "--output-format", "json", "--no-session-persistence", "--safe-mode",
                       "--allowedTools", "WebSearch", "WebFetch",
                       "--append-system-prompt", ISOLATION_NOTE]
         if env.get("ANTHROPIC_API_KEY"):
             argv.append("--bare")
         if model:
             argv += ["--model", model]
+        effort = engine.get("effort") or env.get("FC_CLAUDE_EFFORT")
+        if effort:
+            argv += ["--effort", effort]
         return argv, "claude-json"
     if eid == "gemini":
         argv = cmd + ["-p", "-"]
@@ -247,7 +254,7 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
     name = output_name(role, seat)
     target = run / name
     prompt = build_prompt(run, role, seat, lens=lens)
-    errors = ["沒有執行"]
+    errors, last = ["沒有執行"], None
     for attempt in range(2):
         ok, text, error = call(engine, prompt, runner=runner, env=env)
         if not ok:
@@ -265,8 +272,18 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
             errors = validate.validate_file(run, name, known_tactics=known_tactics)
             if not errors:
                 return target
+            last = obj
             target.unlink()
         prompt = prompt + "\n\n## 上一次的輸出有以下問題，請修正後重新輸出完整 JSON\n\n" + "\n".join(f"- {e}" for e in errors)
+
+    # Tags never affect the score: if only they still break the rules after the retry, set them aside
+    # (kept in the file, listed as not identified) instead of stopping the whole check.
+    fixed = validate.set_aside_tactics(last, run, name, known_tactics, errors) if last is not None else None
+    if fixed is not None:
+        io.write_json(target, fixed)
+        if not validate.validate_file(run, name, known_tactics=known_tactics):
+            return target
+        target.unlink()
 
     if role == "opponent":
         io.write_json(target, {"seat": seat, "engine": engine["engine"], "lens": lens,

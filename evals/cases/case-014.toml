@@ -1,0 +1,94 @@
+id = "case-014"
+title = "「紀念日條例三讀，全國上班族每年多放五天假」：條例是真的，但勞工本來就放勞動節，只多四天"
+input_type = "text"
+input = """［立法院快訊］
+
+還假於民，下午紀念日條例三讀通過。
+
+未來全國上班族每年多放五天假！
+
+五一勞動節（5/1）
+敎師節         （9/28）
+光復節        （10/25）
+行憲紀念曰（12/25）
+小年夜"""
+target = "國民黨"
+expected_result = "大致符合"
+found_via = "https://cofacts.tw/article/108phui4q18hj"
+notes = """主旨真、細節錯：天數錯。訊息原文取自 Cofacts（文章 108phui4q18hj，2025-05-09 收錄，當天下午），逐字照抄，「敎師節」「行憲紀念曰」等原文用字和空白都保留。
+判定關鍵：
+1. 條例確實當天三讀：人事行政總處新聞稿寫「立法院今（9）日三讀通過「紀念日及節日實施條例」」；立法院法律系統記載「中華民國114年5月9日制定」、5月28日公布，全國法規資料庫沿革記載114年5月28日制定公布、自公布日施行。「下午」沒有找到第一手時間紀錄，訊息收錄時間是當天下午，不影響判定，判 true。
+2. 多出的假日：條例第4條讓孔子誕辰紀念日、臺灣光復暨金門古寧頭大捷紀念日、行憲紀念日放假；第6條的春節假期從「農曆十二月末日之前一日」（小年夜）開始，勞動節改為「均放假一日」。人事總處也說增訂這5個放假日。對公務員、教師來說，五天都是新的。
+3. 但「全國上班族」不對：已廢止的紀念日及節日實施辦法第5條原本就規定「勞動節：勞工放假」，勞動基準法第37條也把勞動節列為勞工應休假日（這條在條例公布後沒有修改）。所以適用勞基法的上班族實際是多四天，只有公教人員多五天。訊息把全國上班族都說成五天，公教對、勞工錯，判 mixed。
+4. 列出的五個日子本身都對，判 true。
+為什麼是大致符合：主旨（條例三讀、國定假日變多）正確，錯在「每個上班族都多五天」這個天數，對多數受僱者差一天，是細節錯。查核時如果只看人事總處「5個放假日」的說法就判全對，會漏掉勞工原本就放勞動節這一層。
+「還假於民」是推動本案的藍白陣營口號，屬 not_factual。鏡週刊2025-05-09報導，國民黨團整合版本以57比50三讀，國民黨立委牛煦庭稱這是國民黨團定調的民生優先法案，民眾黨立委也用「還假於民」；同一篇報導把版本稱為「4+1」（新增放假4天，另外勞動節改為全國統一放假），正好對應本案的陷阱。訊息稱讚這項由藍白多數通過的條例，target 取國民黨。
+公式估算：(4×1＋5×0.5＋3×1)/12 ≈ 79，大致符合，與人工判定一致。"""
+
+[[claim]]
+original = "下午紀念日條例三讀通過"
+expected_label = "true"
+core = true
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://www.dgpa.gov.tw/information?uid=82&pid=12440"
+excerpt = "立法院今（9）日三讀通過「紀念日及節日實施條例」，增訂小年夜（農曆除夕前一日）、勞動節（5月1日）、教師節（9月28日）、臺灣光復暨金門古寧頭大捷紀念日（10月25日）及行憲紀念日(12月25日)計5個放假日，並自總統公布日施行。"
+
+[[claim.ground_truth]]
+url = "https://www.ly.gov.tw/Pages/ashx/LawRedirect.ashx?CODE=01259"
+excerpt = "中華民國114年5月9日制定 中華民國114年5月28日公布"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=D0020095"
+excerpt = "1.中華民國一百十四年五月二十八日總統華總一義字第 11400053171 號令制定公布全文 10 條；並自公布日施行"
+
+[[claim]]
+original = "未來全國上班族每年多放五天假"
+expected_label = "mixed"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0020095"
+excerpt = "下列紀念日均放假一日，其餘均不放假：一、中華民國開國紀念日。二、和平紀念日。三、孔子誕辰紀念日。四、國慶日。五、臺灣光復暨金門古寧頭大捷紀念日。六、行憲紀念日。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0020095"
+excerpt = "前條所列節日之放假依下列規定辦理：一、除夕及春節：自農曆十二月末日之前一日至翌年一月三日，放假五日。二、兒童節、清明節、勞動節、端午節、教師節及中秋節：均放假一日。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0020033"
+excerpt = "前項節日，按下列規定放假：一、兒童節：放假一日。兒童節與民族掃墓節同一日時，於前一日放假。但逢星期四時，於後一日放假。二、勞動節：勞工放假。三、軍人節：依國防部規定放假。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0020033"
+excerpt = "下列民俗節日，除春節放假三日外，其餘均放假一日：一、春節。二、民族掃墓節。三、端午節。四、中秋節。五、農曆除夕。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=37"
+excerpt = "內政部所定應放假之紀念日、節日、勞動節及其他中央主管機關指定應放假日，均應休假。"
+
+[[claim]]
+original = """五一勞動節（5/1）
+敎師節         （9/28）
+光復節        （10/25）
+行憲紀念曰（12/25）
+小年夜"""
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0020095"
+excerpt = "十四、孔子誕辰紀念日：九月二十八日。十五、國慶日：十月十日。十六、臺灣聯合國日：十月二十四日。十七、臺灣光復暨金門古寧頭大捷紀念日：十月二十五日。十八、國父誕辰紀念日：十一月十二日。十九、行憲紀念日：十二月二十五日。"
+
+[[claim.ground_truth]]
+url = "https://www.dgpa.gov.tw/information?uid=82&pid=12440"
+excerpt = "增訂小年夜（農曆除夕前一日）、勞動節（5月1日）、教師節（9月28日）、臺灣光復暨金門古寧頭大捷紀念日（10月25日）及行憲紀念日(12月25日)計5個放假日"
+
+[[claim]]
+original = "還假於民"
+expected_label = "not_factual"
+core = false
+importance = 1

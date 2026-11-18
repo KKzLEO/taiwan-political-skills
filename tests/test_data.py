@@ -94,6 +94,28 @@ class TacticsTest(unittest.TestCase):
                 if "context_flag" in t:
                     self.assertIn(t["context_flag"], CONTEXT_FLAGS)
 
+    def test_features_have_stable_ids_and_kinds(self):
+        for t in self.tactics:
+            with self.subTest(tactic=t["id"]):
+                ids = [f["id"] for f in t["observable"]]
+                self.assertEqual(len(ids), len(set(ids)))
+                for f in t["observable"]:
+                    self.assertRegex(f["id"], r"^[a-z]$")
+                    self.assertIn(f["kind"], {"visible", "verified", "clue"})
+                    self.assertTrue(f["text"].strip())
+
+    def test_every_tactic_can_be_established_without_clues_alone(self):
+        for t in self.tactics:
+            with self.subTest(tactic=t["id"]):
+                self.assertTrue(any(f["kind"] != "clue" for f in t["observable"]))
+
+    def test_attribution_tactics_need_a_report_to_be_tagged(self):
+        # validate enforces it; the library text must not promise otherwise (2026-11-18 re-review)
+        for t in self.tactics:
+            if t["layer"] == "attribution":
+                with self.subTest(tactic=t["id"]):
+                    self.assertNotIn("只能說「特徵相符", t["cannot_infer"])
+
     def test_examples_cover_at_least_two_camps(self):
         """中立性規則：每種手法至少兩個案例，被攻擊方至少涵蓋兩個不同陣營。"""
         for t in self.tactics:

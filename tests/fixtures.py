@@ -38,8 +38,17 @@ TRACE = {
                   "wording_issues": [], "flagged": []},
     "spread_signals": [],
     "attribution": [],
-    "tactics": [{"tactic_id": "TW-T01", "quote": "快轉傳！", "explanation": "急迫轉傳"}],
+    "tactics": [{"tactic_id": "TW-T16", "features": ["a"], "quote": "快轉傳！", "explanation": "急迫轉傳"}],
     "limits": [],
+}
+
+# Test library: same shape as io.tactic_library(), and the same kinds as the real tactics.toml for these ids,
+# because the CLI tests validate the fixtures against the real library.
+TACTIC_LIB = {
+    "TW-T01": {"layer": "content", "features": {"a": "clue", "b": "verified", "c": "verified"}},
+    "TW-T16": {"layer": "content", "features": {"a": "visible", "b": "visible", "c": "visible"}},
+    "TW-T25": {"layer": "content", "features": {"a": "visible", "b": "clue", "c": "clue"}},
+    "TW-T29": {"layer": "attribution", "features": {"a": "verified", "b": "verified", "c": "verified"}},
 }
 
 LEDGER = [
@@ -95,24 +104,47 @@ JUDGMENT = {
         {"id": "S3", "claim_ids": ["C1"], "url": "https://example.org/presser", "title": "記者會逐字稿",
          "publisher": "經濟部", "accessed": "2026-11-17", "tier": 1, "chain": "moea",
          "stance": "refutes", "excerpt": "油價可能上漲兩到三成", "access_note": "full"}],
+    "tactic_checks": [{"tactic_id": "TW-T16", "features": {"a": True}, "keep": True,
+                       "reason": "訊息最後確實要求讀者轉傳"}],
 }
 
 REVIEW_B = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": True, "reason": "改判誤導合理"}]}
 
 
-def tactic_attack_overrides(upheld=True, withdraw=("TW-T01",)):
-    """Seat C attacks the trace's TW-T01 tag; the judge's ruling says whether the tag is withdrawn."""
+def tactic_attack_overrides(upheld=True, keep=False):
+    """Seat C attacks the trace's TW-T16 tag; the judge rules on the attack and checks the tag."""
     opp_c = copy.deepcopy(OPP_C)
-    opp_c["attacks"] = [{"id": "C-1", "claim_id": None, "target": "tactic",
-                         "argument": "TW-T01 只對得上一項特徵，不該標", "proposed_label": None, "evidence": []}]
+    opp_c["attacks"] = [{"id": "C-1", "claim_id": None, "target": "tactic", "tactic_id": "TW-T16",
+                         "argument": "TW-T16 只對得上一項特徵，不該標", "proposed_label": None, "evidence": []}]
     rebuttal = copy.deepcopy(REBUTTAL)
     rebuttal["responses"].append({"attack_id": "C-1", "accept": True, "response": "同意撤下", "evidence": []})
     judgment = copy.deepcopy(JUDGMENT)
-    ruling = {"attack_id": "C-1", "upheld": upheld, "reason": "裁判核對後認為特徵對不上，撤下", "verified_urls": []}
-    if withdraw != "omit":
-        ruling["withdraw_tactics"] = list(withdraw) if isinstance(withdraw, tuple) else withdraw
-    judgment["rulings"].append(ruling)
+    judgment["rulings"].append({"attack_id": "C-1", "upheld": upheld, "reason": "裁判核對後認為特徵對不上，撤下",
+                                "verified_urls": []})
+    judgment["tactic_checks"] = [{"tactic_id": "TW-T16", "features": {"a": keep}, "keep": keep,
+                                  "reason": "訊息最後確實要求讀者轉傳" if keep else "裁判核對後認為特徵對不上，撤下"}]
     return {"opponent__C_json": opp_c, "rebuttal_json": rebuttal, "judgment_json": judgment}
+
+
+def importance_attack_overrides(proposals=(("C-1", 4, True),), importance=5, review_pass=True):
+    """Seat C challenges C1's importance through neutral_rewrite. proposals: (attack id, proposed value, upheld)."""
+    claims = copy.deepcopy(CLAIMS)
+    claims["claims"][0]["importance"] = importance
+    opp_c = copy.deepcopy(OPP_C)
+    opp_c["attacks"] = [{"id": aid, "claim_id": "C1", "target": "neutral_rewrite",
+                         "argument": "部長有沒有說三成只是背景，不是主旨", "proposed_label": None, "evidence": [],
+                         "proposed_importance": p} for aid, p, _ in proposals]
+    rebuttal = copy.deepcopy(REBUTTAL)
+    rebuttal["responses"] += [{"attack_id": aid, "accept": up, "response": "依量表判斷", "evidence": []}
+                              for aid, _, up in proposals]
+    judgment = copy.deepcopy(JUDGMENT)
+    judgment["rulings"] += [{"attack_id": aid, "upheld": up, "reason": "依量表，這句是支撐主旨的細節", "verified_urls": []}
+                            for aid, _, up in proposals]
+    review = {"claim_id": "C1", "pass": review_pass, "reason": "調整合理"}
+    if not review_pass:
+        review["label_ok"] = True
+    return {"claims_json": claims, "opponent__C_json": opp_c, "rebuttal_json": rebuttal,
+            "judgment_json": judgment, "review__C_json": {"seat": "C", "reviews": [review]}}
 
 
 def run_files(**overrides):

@@ -109,16 +109,59 @@ class FinalizeTest(unittest.TestCase):
 
 
 
+class ImportanceChallengeTest(unittest.TestCase):
+    """A neutral_rewrite attack may propose a new importance; if upheld, the program moves one step toward it."""
+
+    def test_upheld_challenge_moves_to_the_proposed_adjacent_level(self):
+        c1 = claim(run_finalize(**fx.importance_attack_overrides((("C-1", 4, True),))), "C1")
+        self.assertEqual(c1["importance"], 4)
+        self.assertEqual(c1["importance_from"], 5)
+
+    def test_rejected_challenge_changes_nothing(self):
+        c1 = claim(run_finalize(**fx.importance_attack_overrides((("C-1", 4, False),))), "C1")
+        self.assertEqual(c1["importance"], 5)
+        self.assertNotIn("importance_from", c1)
+
+    def test_upheld_challenges_in_opposite_directions_cancel(self):
+        c1 = claim(run_finalize(**fx.importance_attack_overrides((("C-1", 2, True), ("C-2", 4, True)), importance=3)), "C1")
+        self.assertEqual(c1["importance"], 3)
+        self.assertNotIn("importance_from", c1)
+
+    def test_two_upheld_challenges_in_the_same_direction_still_move_one_step(self):
+        c1 = claim(run_finalize(**fx.importance_attack_overrides((("C-1", 4, True), ("C-2", 4, True)))), "C1")
+        self.assertEqual(c1["importance"], 4)
+
+    def test_importance_challenge_needs_no_claim_review(self):
+        # A weight dispute never questions the label, so it must not open a review that can fail (-10).
+        run = make_run(fx.run_files(**fx.importance_attack_overrides()))
+        self.assertEqual(finalize.reviewers_needed(run), {"B": ["C1"]})
+
+    def test_missing_review_for_an_importance_challenge_does_not_touch_the_label(self):
+        overrides = {**fx.importance_attack_overrides(), "review__C_json": None}
+        c1 = claim(run_finalize(**overrides), "C1")
+        self.assertEqual((c1["label"], c1["review_status"]), ("misleading", "passed"))
+        self.assertEqual(c1["upheld_attacks"], ["B-1"])
+        self.assertEqual([a["attack_id"] for a in c1["importance_attacks"]], ["C-1"])
+
+
 class RemovedTacticsFinalizeTest(unittest.TestCase):
-    def test_withdrawn_tags_are_carried_into_verdicts(self):
+    def test_withdrawn_tags_come_from_the_judges_checks(self):
         r = run_finalize(**fx.tactic_attack_overrides())
-        self.assertEqual(r["removed_tactics"], [{"tactic_id": "TW-T01", "attack_ids": ["C-1"]}])
+        self.assertEqual(r["removed_tactics"], [{"tactic_id": "TW-T16", "reason": "裁判核對後認為特徵對不上，撤下"}])
 
     def test_kept_tag_is_not_withdrawn(self):
-        self.assertEqual(run_finalize(**fx.tactic_attack_overrides(withdraw=()))["removed_tactics"], [])
+        self.assertEqual(run_finalize(**fx.tactic_attack_overrides(upheld=False, keep=True))["removed_tactics"], [])
 
     def test_no_withdrawn_tags_by_default(self):
         self.assertEqual(run_finalize()["removed_tactics"], [])
+
+    def test_tags_the_judge_could_not_check_are_not_listed_as_identified(self):
+        j = copy.deepcopy(fx.JUDGMENT)
+        j.pop("tactic_checks")
+        j["tactic_checks_set_aside"] = ["tactic_checks：缺少 TW-T16"]
+        r = run_finalize(judgment_json=j)
+        self.assertEqual([t["tactic_id"] for t in r["removed_tactics"]], ["TW-T16"])
+        self.assertIn("沒有完成", r["removed_tactics"][0]["reason"])
 
 
 class TraceAttackRoutingTest(unittest.TestCase):

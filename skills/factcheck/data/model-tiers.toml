@@ -12,7 +12,7 @@ vendor = "anthropic"
 cli = "claude"
 can_search = true
 same_tier = true
-note = "claude -p。有 ANTHROPIC_API_KEY 時加 --bare，跳過 CLAUDE.md 和自動記憶。"
+note = "claude -p。一律加 --safe-mode，跳過 CLAUDE.md、hooks、外掛和 MCP；有 ANTHROPIC_API_KEY 時再加 --bare。"
 
 [[engine]]
 id = "codex"

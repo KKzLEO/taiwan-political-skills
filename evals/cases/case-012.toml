@@ -1,0 +1,110 @@
+id = "case-012"
+title = "「退撫基金賺1654億，銓敘部還說3到4年就破產」：收益數字都對，但銓敘部說的是「提早3到4年用罄」"
+input_type = "text"
+input = """銓敘部，你還要騙多久？
+退撫基金賺1654億，你們還敢講破產？
+銓敘部，
+請你抬頭看看自己公布的數字。
+👉 退撫基金一年賺 1654 億
+👉 連三年創新高
+👉 收益率 15.96%
+結果你們在立法院說什麼？
+👉「再不砍年金，3～4年就破產」
+
+請問：你們是在算帳，還是在演戲？"""
+target = "政府機關"
+expected_result = "不符"
+found_via = "https://tfc-taiwan.org.tw/fact-check-reports/pension-halt-fund-bankruptcy-claim-misinterpreted/"
+notes = """背景真、重點假：真的收益數字，配上被改掉意思的引述。訊息原文取自 Cofacts 收錄的臉書貼文（文章 2gr3q9g31hyy8，2026-02-08 收錄，5人回報）。全文約七百字，本案逐字截取開頭第一段（到「還是在演戲？」為止）；後段另有「2025年三大退休基金合計大賺1.37兆」「退撫基金長期重押台積電，資本利得超過30%」等主張，不在本案範圍。查核中心報告4025只當線索。
+判定關鍵：
+1. 數字是真的：退撫基金管理局「退撫基金投資績效表（114年截至12月31日止）」整體收益數1,654.62億元、收益率15.96%。同一份檔案的歷年績效表，整體收益數112年997.75億、113年1,600.26億、114年1,654.62億；管理局新聞稿也分別寫112年「收益數創歷史新高」、113年「續創歷史新高」，所以「連三年創新高」成立。這是加計未實現損益的整體收益（同表114年已實現收益為577.66億元），訊息說「賺」不算錯。
+2. 引述是錯的：銓敘部114年12月12日（停砍年金修法三讀當天）的新聞稿說，修法「預估造成公、教退撫基金會分別提早3-4年在134、131年用罄」，而年改原本已把用罄年度延後到138年、134年。也就是用罄時間提早3到4年、落在民國131到134年，不是「3到4年內破產」，也沒有「再不砍年金」這個條件句。訊息的「3～4年」和新聞稿的「提早3-4年」是同一組數字，意思被改了。完整紀錄證明他說的是別的，依 spec 7.1 判 false。訊息說「在立法院說」，本案沒有取得立法院的逐字紀錄，以銓敘部同日的正式新聞稿為準；查核中心引述銓敘部退撫司長否認「3到4年破產」，只當旁證。
+3.「賺1654億，你們還敢講破產？」是誤導：同一份新聞稿寫明整體退撫基金未提存精算負債已高達2.96兆元，提早用罄後每年公教退休給付缺口會超過2千億元。一年的收益是真的，但拿它否定長期缺口的推估，判 misleading。
+陷阱：前半段三個數字都能在官方資料逐字對上，容易讓人連帶相信後面的引述。新聞稿標題寫「提早4年」，內文寫「提早3-4年」，兩者都是「提早」，不是「幾年後」。
+脈絡問題：out_of_context（引述意思被改）、missing_denominator（只看單年收益，不看未提存負債）。
+「銓敘部，你還要騙多久？」「請問：你們是在算帳，還是在演戲？」屬 not_factual。
+摘錄說明：PDF 摘錄只把表格欄位之間的空白壓成一格。
+公式估算：(3×1＋1×1＋2×1＋5×0＋4×0.25)/15 ≈ 47，部分符合；人工判定「不符」，因為訊息要讀者相信的主旨（銓敘部說謊、說3到4年就破產）是錯的，真的部分只有收益數字，而且被拿來支撐錯誤的推論。和 case-001 一樣，這個落差可用來校正門檻。"""
+
+[[claim]]
+original = "退撫基金一年賺 1654 億"
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://ws.fund.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvOC9yZWxmaWxlLzExNzM3LzIxMDU4LzE2MmQyYzI2LWQwMzctNDFkYS1iNDg2LTMzMmIyZjA4MDgwZS5wZGY%3D&n=MTE05bm0MTLmnIjln7rph5HpgYvnlKjmg4XlvaIucGRm&icon=.pdf"
+excerpt = "退撫基金投資績效表 114 年截至 12 月 31 日止"
+
+[[claim.ground_truth]]
+url = "https://ws.fund.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvOC9yZWxmaWxlLzExNzM3LzIxMDU4LzE2MmQyYzI2LWQwMzctNDFkYS1iNDg2LTMzMmIyZjA4MDgwZS5wZGY%3D&n=MTE05bm0MTLmnIjln7rph5HpgYvnlKjmg4XlvaIucGRm&icon=.pdf"
+excerpt = "整 體 1,654.62 15.96"
+
+[[claim]]
+original = "連三年創新高"
+expected_label = "true"
+core = false
+importance = 1
+
+[[claim.ground_truth]]
+url = "https://www.fund.gov.tw/News_Content.aspx?n=383&s=19793"
+excerpt = "退撫基金112年度運用收益數達997.75億元，年收益率為13.10%，收益數創歷史新高"
+
+[[claim.ground_truth]]
+url = "https://www.fund.gov.tw/News_Content.aspx?n=383&s=20311"
+excerpt = "退撫基金113年度運用收益數續創歷史新高達1,600.26億元，年收益率為17.49%"
+
+[[claim.ground_truth]]
+url = "https://ws.fund.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvOC9yZWxmaWxlLzExNzM3LzIxMDU4LzE2MmQyYzI2LWQwMzctNDFkYS1iNDg2LTMzMmIyZjA4MDgwZS5wZGY%3D&n=MTE05bm0MTLmnIjln7rph5HpgYvnlKjmg4XlvaIucGRm&icon=.pdf"
+excerpt = "113 523.02 5.72 1,600.26 17.49 1.70 114 577.66 5.57 1,654.62 15.96 1.73"
+
+[[claim]]
+original = "收益率 15.96%"
+expected_label = "true"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://ws.fund.gov.tw/Download.ashx?u=LzAwMS9VcGxvYWQvOC9yZWxmaWxlLzExNzM3LzIxMDU4LzE2MmQyYzI2LWQwMzctNDFkYS1iNDg2LTMzMmIyZjA4MDgwZS5wZGY%3D&n=MTE05bm0MTLmnIjln7rph5HpgYvnlKjmg4XlvaIucGRm&icon=.pdf"
+excerpt = "註 2：實際收益數(率)係指已實現加計未實現損益(含備供出售金融資產投資評價損益)後之收益數(率)。"
+
+[[claim]]
+original = """結果你們在立法院說什麼？
+👉「再不砍年金，3～4年就破產」"""
+expected_label = "false"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://www.mocs.gov.tw/pages/detail.aspx?Node=489&Page=15160&Index=1"
+excerpt = "今日立法院三讀通過分別修正公、教人員退撫相關法令，此舉，將造成政府對退撫基金挹注款撥補減少，月退所得給付支出增加，預估造成公、教退撫基金會分別提早3-4年在134、131年用罄"
+
+[[claim.ground_truth]]
+url = "https://www.mocs.gov.tw/pages/detail.aspx?Node=489&Page=15160&Index=1"
+excerpt = "年改措施對基金財務產生很重大效益，將公、教人員退撫基金用罄年度分別自120年、119年延後至138年、134年"
+
+[[claim]]
+original = "退撫基金賺1654億，你們還敢講破產？"
+expected_label = "misleading"
+core = false
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://www.mocs.gov.tw/pages/detail.aspx?Node=489&Page=15160&Index=1"
+excerpt = "由於過去30年間退撫基金都是不足額提撥，加上退休人員給付年限拉長，致使整體退撫基金未提存精算負債持續增加已高達2.96兆元。"
+
+[[claim.ground_truth]]
+url = "https://www.mocs.gov.tw/pages/detail.aspx?Node=489&Page=15160&Index=1"
+excerpt = "最後，提早用罄後，每年公教退休給付缺口會快速增至超過2千億元"
+
+[[claim]]
+original = "銓敘部，你還要騙多久？"
+expected_label = "not_factual"
+core = false
+importance = 1
+
+[[claim]]
+original = "請問：你們是在算帳，還是在演戲？"
+expected_label = "not_factual"
+core = false
+importance = 1

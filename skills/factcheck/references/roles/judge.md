@@ -15,7 +15,15 @@
 2. 產出每個命題修改後的判定（`verdicts`）。沒有成立攻擊的命題，沿用正方的判定。`reasoning` 的**第一句直接寫結論**（例如「現行罰鍰是 1200 到 1500 元，不是 3000 元。」），報告的結論區只會取第一句。
 3. 產出最終證據表（`ledger`）：正方的證據表，加上成立攻擊或答辯裡經過你核對的新證據（照共同規則的欄位補齊，`id` 接續編號）。
 4. 判定規則和共同規則一樣：找不到證據不等於錯誤；法條命題沒有條文原文就是 `unverified`。
-5. **手法標記：** 每一條判成立的溯源或手法攻擊（`target` 是 `trace` 或 `tactic`），裁決都要有 `withdraw_tactics`：攻擊證明哪些標記不成立（原文對不上手法庫的特徵），就列出那些手法編號，報告不會把它們列為已辨識的手法，並附上你這條裁決的理由；手法本身成立、只是引文或說明寫得不準，或這條攻擊和手法標記無關時，填 `[]`。撤回的編號要寫在攻擊的論點或你的理由裡。沒有人攻擊的標記不要撤回。
+   - 重要性挑戰（帶 `proposed_importance` 的 neutral_rewrite 攻擊）照共同規則的量表判斷成不成立。判成立，程式就會把重要性往提議的方向調一級，你不用、也不能在 `verdicts` 裡改重要性。
+5. **手法標記：** 照手法庫開頭的「標記規則」，逐項檢查 trace.json 的**每一個**標記，不論有沒有被攻擊，結果寫進 `tactic_checks`：
+   - `features`：這個標記列的每一項非線索特徵，成立填 `true`，不成立填 `false`。
+     - 看得到的特徵：核對引文確實在訊息原文裡，而且真的符合特徵的描述。
+     - 查證得到的特徵：打開證據網址核對。
+   - `keep`：至少一項特徵成立才是 `true`；全部不成立就是 `false`，報告不會把它列為已辨識的手法。
+   - 判成立的手法攻擊（`target: "tactic"`），它指的那個標記一定要 `keep: false`。手法本身成立、攻擊只挑到說明寫得不準時，判攻擊不成立。
+   - 只靠查證得到的特徵保留時，`verified_urls` 要列出你實際打開核對過的溯源員證據網址。
+   - 同一套標準用在每個標記上：換成另一個政黨或人物，同樣的文字和證據要得到同樣的結果。
 6. **裁決理由會刊在公開報告裡。** 用讀者看得懂的完整句子寫明修正後的事實，不要寫內部編號（例如 S12、C-3）或給流程的指示（例如「trace 刪除某某」）。
 
 ## 輸出格式（`judgment.json`）
@@ -23,7 +31,9 @@
 ```json
 {
   "rulings": [ { "attack_id": "B-1", "upheld": true, "reason": "…", "verified_urls": ["https://…"] },
-               { "attack_id": "C-3", "upheld": true, "reason": "…TW-T15…", "verified_urls": [], "withdraw_tactics": ["TW-T15"] } ],
+               { "attack_id": "C-3", "upheld": true, "reason": "…", "verified_urls": [] } ],
+  "tactic_checks": [ { "tactic_id": "TW-T15", "features": { "a": false, "b": false }, "keep": false,
+                       "reason": "訊息裡沒有驚嘆號或恐慌字眼，也沒有強調會失去什麼。" } ],
   "verdicts": [ { "claim_id": "C1", "label": "misleading", "reasoning": "…", "evidence_ids": ["S1", "S3"],
                   "context_flags": ["out_of_context"], "law_text_obtained": null } ],
   "ledger": [ { "id": "S1", "…": "…" } ]
@@ -31,5 +41,5 @@
 ```
 
 - 每一條攻擊都要剛好一個裁決。
-- `withdraw_tactics` 只能出現在判成立的溯源或手法攻擊上，編號必須是 `trace.json` 有標的。
+- `tactic_checks`：`trace.json` 的每個標記剛好一筆，`features` 的代號要和那個標記列的非線索特徵完全一樣。
 - `claims.json` 的每個命題都要剛好一個判定。

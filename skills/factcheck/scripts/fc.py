@@ -60,7 +60,8 @@ def cmd_detect(args):
         print(f"{s['seat']}\t{s['kind']}\t{s['engine']}{'/' + s['model'] if s.get('model') else ''}\t{s['lens']}")
     for e in models["engines"]:
         if e["available"] and e["cross_model"]:
-            print(f"# {e['engine']}: probe={e['probe']} isolation={e['isolation']} same_tier={e['same_tier']}",
+            reason = f"（原因：{e['detail']}）" if e["probe"] == "failed" and e.get("detail") else ""
+            print(f"# {e['engine']}: probe={e['probe']} isolation={e['isolation']} same_tier={e['same_tier']}{reason}",
                   file=sys.stderr)
 
 
@@ -91,7 +92,7 @@ def cmd_run_model(args):
     engine = _engine_for(run, args.role, args.seat, args.engine)
     try:
         path = run_model.run_role(run, args.role, args.seat, engine, lens=args.lens,
-                                  known_tactics=io.known_tactic_ids())
+                                  known_tactics=io.tactic_library())
     except run_model.RunModelError as exc:
         sys.exit(f"錯誤：{exc}")
     print(path)
@@ -99,7 +100,7 @@ def cmd_run_model(args):
 
 def cmd_validate(args):
     run = _run_dir(args)
-    known = io.known_tactic_ids()
+    known = io.tactic_library()
     bad = False
     for name in args.files:
         errors = validate.validate_file(run, name, known_tactics=known)
@@ -134,7 +135,7 @@ def cmd_video(args):
 
 def cmd_finalize(args):
     run = _run_dir(args)
-    errors = validate.validate_file(run, "judgment.json", known_tactics=io.known_tactic_ids())
+    errors = validate.validate_file(run, "judgment.json", known_tactics=io.tactic_library())
     if errors:
         sys.exit("錯誤：judgment.json 沒有通過檢查：\n" + "\n".join(errors))
     io.write_json(run / "verdicts.json", finalize.finalize(run))
@@ -172,7 +173,7 @@ def cmd_render(args):
 
 def cmd_status(args):
     run = _run_dir(args)
-    known = io.known_tactic_ids()
+    known = io.tactic_library()
     for pattern in STAGES:
         paths = sorted(run.glob(pattern))
         if not paths:
@@ -192,6 +193,32 @@ def cmd_eval_compare(args):
     r = evalcmp.compare(case, io.read_json(run / "claims.json"), io.read_json(run / "verdicts.json"),
                         io.read_json(run / "score.json"))
     print(json.dumps(r, ensure_ascii=False, indent=2))
+
+
+def cmd_set_aside_tactics(args):
+    """After a role has redone its output once and only the tags (trace.json) or tag checks
+    (judgment.json) are still wrong: move those out, keep them in the file, and carry on."""
+    run = _run_dir(args)
+    known = io.tactic_library()
+    for name in args.files:
+        errors = validate.validate_file(run, name, known_tactics=known)
+        if not errors:
+            print(f"✓ {name}：沒有問題，不需要移出")
+            continue
+        fixed = validate.set_aside_tactics(io.read_json(run / name), run, name, known, errors)
+        if fixed is None:
+            print(f"✗ {name}：錯誤不只在手法標記，不能移出，請照錯誤訊息重做")
+            for e in errors:
+                print(f"  - {e}")
+            sys.exit(1)
+        io.write_json(run / name, fixed)
+        left = validate.validate_file(run, name, known_tactics=known)
+        if left:
+            print(f"✗ {name}：移出之後仍有錯誤")
+            for e in left:
+                print(f"  - {e}")
+            sys.exit(1)
+        print(f"✓ {name}：已移出不合格的手法標記（原內容保留在檔案裡），報告不會列出它們")
 
 
 def main(argv=None):
@@ -224,6 +251,9 @@ def main(argv=None):
 
     p = add("validate", cmd_validate)
     p.add_argument("files", nargs="+")
+
+    p = add("set-aside-tactics", cmd_set_aside_tactics)
+    p.add_argument("files", nargs="+", choices=["trace.json", "judgment.json"])
 
     p = add("media", cmd_media, run=False)
     p.add_argument("query", help="網址、媒體名稱或代號")

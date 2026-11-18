@@ -1,3 +1,4 @@
+import copy
 import json
 import subprocess
 import unittest
@@ -38,11 +39,21 @@ class CommandTest(unittest.TestCase):
         self.assertEqual(argv[argv.index("-o") + 1], "/tmp/w/out.txt")
         self.assertEqual(mode, "file")
 
-    def test_claude_uses_bare_only_with_api_key(self):
+    def test_claude_always_uses_safe_mode_and_bare_only_with_api_key(self):
+        # 2026-11-18 canary: without --safe-mode, claude -p sees ~/.claude/CLAUDE.md and SessionStart hook output.
         argv, _ = run_model.build_command(CLAUDE, "/tmp/w", None, env={})
+        self.assertIn("--safe-mode", argv)
         self.assertNotIn("--bare", argv)
         argv, _ = run_model.build_command(CLAUDE, "/tmp/w", None, env={"ANTHROPIC_API_KEY": "k"})
+        self.assertIn("--safe-mode", argv)
         self.assertIn("--bare", argv)
+
+    def test_claude_effort_override_from_env(self):
+        # --safe-mode may skip the user's settings.json, so effort can be pinned explicitly.
+        argv, _ = run_model.build_command(CLAUDE, "/tmp/w", None, env={"FC_CLAUDE_EFFORT": "xhigh"})
+        self.assertEqual(argv[argv.index("--effort") + 1], "xhigh")
+        argv, _ = run_model.build_command(CLAUDE, "/tmp/w", None, env={})
+        self.assertNotIn("--effort", argv)
 
     def test_claude_gets_isolation_note_and_search_tools(self):
         argv, mode = run_model.build_command(CLAUDE, "/tmp/w", None, env={})
@@ -146,6 +157,36 @@ class RunRoleTest(unittest.TestCase):
         self.assertEqual(data["status"], "failed")
         self.assertEqual(data["attacks"], [])
 
+    def test_tracer_tags_that_keep_failing_are_set_aside_not_fatal(self):
+        """Red-team: a section that never affects the score must not stop the whole check."""
+        run = make_run(fx.run_files(trace_json=None))
+        bad = copy.deepcopy(fx.TRACE)
+        bad["tactics"] = [bad["tactics"][0], {"tactic_id": "TW-T01", "features": ["a"], "quote": "快轉傳！"}]
+        r = FakeRunner([json.dumps(bad), json.dumps(bad)])
+        run_model.run_role(run, "tracer", None, CLAUDE, runner=r, env={}, known_tactics=fx.TACTIC_LIB)
+        data = json.loads((run / "trace.json").read_text())
+        self.assertEqual([t["tactic_id"] for t in data["tactics"]], ["TW-T16"])
+        self.assertEqual(len(data["set_aside_tactics"]), 1)
+        self.assertTrue(data["set_aside_tactics"][0]["errors"])
+
+    def test_judge_whose_tag_checks_keep_failing_still_finishes(self):
+        run = make_run(fx.run_files(judgment_json=None, review__B_json=None))
+        bad = copy.deepcopy(fx.JUDGMENT)
+        bad["tactic_checks"] = []
+        r = FakeRunner([json.dumps(bad), json.dumps(bad)])
+        run_model.run_role(run, "judge", None, CLAUDE, runner=r, env={}, known_tactics=fx.TACTIC_LIB)
+        data = json.loads((run / "judgment.json").read_text())
+        self.assertNotIn("tactic_checks", data)
+        self.assertTrue(data["tactic_checks_set_aside"])
+
+    def test_other_tracer_errors_still_fail(self):
+        run = make_run(fx.run_files(trace_json=None))
+        bad = copy.deepcopy(fx.TRACE)
+        bad["publisher"]["kind"] = "網軍"
+        r = FakeRunner([json.dumps(bad), json.dumps(bad)])
+        with self.assertRaises(run_model.RunModelError):
+            run_model.run_role(run, "tracer", None, CLAUDE, runner=r, env={}, known_tactics=fx.TACTIC_LIB)
+
     def test_non_opponent_role_failure_raises(self):
         run = make_run(fx.run_files(proponent_json=None))
         r = FakeRunner(["nope", "nope"])
@@ -226,7 +267,8 @@ class PromptDataTest(unittest.TestCase):
         d = Path(tempfile.mkdtemp(prefix="fc-data-"))
         (d / "tactics.toml").write_text(
             'schema_version = 1\n[[tactic]]\nid = "TW-T07"\nname = "急迫轉傳"\nlayer = "content"\n'
-            'observable = ["快轉傳"]\ncannot_infer = "不能推論散布者身分"\n', encoding="utf-8")
+            'observable = [{id = "a", kind = "visible", text = "快轉傳"}, {id = "b", kind = "clue", text = "沒寫日期"}]\n'
+            'cannot_infer = "不能推論散布者身分"\n', encoding="utf-8")
         (d / "media.toml").write_text(
             'schema_version = 1\n[[outlet]]\nid = "cna"\nname = "中央社"\ndomains = ["cna.com.tw"]\n', encoding="utf-8")
         (d / "sources.toml").write_text(
@@ -240,6 +282,20 @@ class PromptDataTest(unittest.TestCase):
         self.assertIn("TW-T07", p)
         self.assertIn("不能推論散布者身分", p)
         self.assertIn("cna", p)
+
+    def test_every_role_that_touches_tags_gets_the_same_rules_and_feature_kinds(self):
+        run = make_run(fx.run_files())
+        for role, seat, lens in (("tracer", None, None), ("opponent", "C", "stance"), ("opponent", "X1", "external"),
+                                 ("rebuttal", None, None), ("judge", None, None)):
+            with self.subTest(role=role, seat=seat):
+                p = run_model.build_prompt(run, role, seat, lens=lens, data_dir=self.data_dir())
+                self.assertIn("標記規則", p)
+                self.assertIn('"kind": "clue"', p)
+
+    def test_rebuttal_sees_the_trace_and_the_message(self):
+        p = run_model.build_prompt(make_run(fx.run_files()), "rebuttal", None, data_dir=self.data_dir())
+        self.assertIn("### trace.json", p)
+        self.assertIn("### source.json", p)
 
     def test_proponent_prompt_includes_first_hand_sources(self):
         run = make_run(fx.run_files())

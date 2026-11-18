@@ -6,10 +6,11 @@ next stage reads it. Returns a list of human-readable errors (empty = valid).
 
 from __future__ import annotations
 
+import copy
 import re
 from pathlib import Path
 
-from . import io
+from . import io, spans
 from .labels import (ACCESS_NOTES, ATTACK_TARGETS, CLAIM_TYPES, CONTEXT_FLAGS, FACTORS,
                      HOSTS, MODES, PUBLISHER_KINDS, REVIEW_STATUSES, STANCES)
 
@@ -118,7 +119,142 @@ def _claims(d, run, ctx):
         err.need(isinstance(c.get("core"), bool), f"{p}.core 必須是 true/false")
         err.need(isinstance(c.get("legal", False), bool), f"{p}.legal 必須是 true/false")
     err.need(isinstance(d.get("prompt_was_leading", False), bool), "prompt_was_leading 必須是 true/false")
+    _check_claim_spans(err, claims, run)
     return err
+
+
+STATED, IMPLIED = {"F", "S"}, {"I"}
+
+
+def _library(ctx):
+    """tactic_id -> {layer, features: {id: kind}}; a plain set of ids only checks the ids; None skips both."""
+    known = ctx.get("known_tactics")
+    if known is None or isinstance(known, dict):
+        return known
+    return {tid: None for tid in known}
+
+
+def tactic_errors(trace, run, lib, only=None):
+    """Errors for trace.json's tactic tags, each starting with "tactics". `only` limits to one entry index."""
+    tactics = trace.get("tactics", [])
+    if not isinstance(tactics, list):
+        return ["tactics 必須是陣列"]
+    hay = spans.literal((io.read_json_or_none(run / "source.json") or {}).get("original_text"))
+    has_report = bool(trace.get("attribution"))
+    errs, first = [], {}
+    for i, t in enumerate(tactics):
+        if only is not None and i != only:
+            continue
+        tid = t.get("tactic_id") if isinstance(t, dict) else None
+        if tid in first and _nonempty(tid):
+            errs.append(f"tactics[{i}]：{tid} 標了兩次。同一個手法只列一次，把特徵合併、引文用「……」接起來")
+            continue
+        first.setdefault(tid, i)
+        errs.extend(_tag_errors(i, t, lib, hay, has_report))
+    return errs
+
+
+_TAG_INDEX = re.compile(r"^tactics\[(\d+)\]")
+
+
+def set_aside_tactics(obj, run, name, lib, errors):
+    """Last resort once a role has retried: move the tags (trace.json) or tag checks (judgment.json)
+    that still break the rules out of the way, keeping their content and errors in the file.
+    Returns the new object, or None when anything other than tags is wrong."""
+    if not errors or not isinstance(obj, dict):
+        return None
+    new = copy.deepcopy(obj)
+    if name == "trace.json":
+        found = [_TAG_INDEX.match(e) for e in errors]
+        if not all(found) or not isinstance(obj.get("tactics"), list):
+            return None
+        bad = {}
+        for e, m in zip(errors, found):
+            bad.setdefault(int(m.group(1)), []).append(e)
+        new["tactics"] = [t for i, t in enumerate(obj["tactics"]) if i not in bad]
+        new["set_aside_tactics"] = list(obj.get("set_aside_tactics", [])) + [
+            {"entry": obj["tactics"][i], "errors": bad[i]} for i in sorted(bad) if i < len(obj["tactics"])]
+        return new
+    if name == "judgment.json" and all(e.startswith("tactic_checks") for e in errors):
+        new.pop("tactic_checks", None)
+        new["tactic_checks_set_aside"] = list(errors)
+        return new
+    return None
+
+
+def _tag_errors(i, t, lib, hay, has_report):
+    p = f"tactics[{i}]"
+    if not isinstance(t, dict) or not _nonempty(t.get("tactic_id")):
+        return [f"{p}.tactic_id 不能是空的；手法庫沒有的手法不要列"]
+    tid = t["tactic_id"]
+    if lib is None:
+        return []
+    if tid not in lib:
+        return [f"{p}.tactic_id {tid} 不在手法庫裡"]
+    if lib[tid] is None:
+        return []
+    kinds, errs = lib[tid]["features"], []
+    feats = t.get("features")
+    if not isinstance(feats, list) or not feats or not all(isinstance(f, str) for f in feats):
+        return [f"{p}.features 要列出符合的特徵代號（例如 [\"a\", \"c\"]），不能是空的"]
+    unknown = [f for f in feats if f not in kinds]
+    if unknown:
+        errs.append(f"{p}.features：{tid} 沒有特徵 {'、'.join(unknown)}")
+    if len(set(feats)) != len(feats):
+        errs.append(f"{p}.features 有重複的代號")
+    cited = {kinds[f] for f in feats if f in kinds}
+    if cited and cited <= {"clue"}:
+        errs.append(f"{p}：{tid} 只列了「只是線索」的特徵，至少要有一項「看得到」或「查證得到」的特徵成立")
+    quote = t.get("quote")
+    if "visible" in cited and not _nonempty(quote):
+        errs.append(f"{p}.quote 必填：列了「看得到」的特徵，就要逐字引用訊息原文")
+    if _nonempty(quote):
+        parts = [x for x in (spans.literal(q) for q in spans.pieces(quote)) if x]
+        if not parts:
+            errs.append(f"{p}.quote 不能只有刪節號或空白")
+        for x in parts:
+            if hay and x not in hay:
+                errs.append(f"{p}.quote 的「{x[:30]}」在訊息原文裡找不到：要逐字照抄，包括標點；幾段之間用「……」連接")
+    if "verified" in cited:
+        ev = t.get("evidence")
+        ok = isinstance(ev, list) and bool(ev) and all(
+            isinstance(e, dict) and _is_url(e.get("url")) and _nonempty(e.get("excerpt")) for e in ev)
+        if not ok:
+            errs.append(f"{p}.evidence：列了「查證得到」的特徵，就要附網址和逐字摘錄")
+    if lib[tid].get("layer") == "attribution" and not has_report:
+        errs.append(f"{p}：{tid} 是歸因層的手法，attribution 要有政府、研究機構或平台的正式報告才能標")
+    return errs
+
+
+def _check_claim_spans(err, claims, run):
+    """Every claim quotes the message, and two stated (or two implied) claims never share words,
+    so one sentence cannot be scored both whole and in fragments. Skipped when only a URL was given."""
+    source = io.read_json_or_none(run / "source.json") or {}
+    hay = spans.content(source.get("original_text"))
+    if not hay:
+        return
+    found = {}
+    for c in claims:
+        if not isinstance(c, dict) or not _nonempty(c.get("original")):
+            continue
+        cid = c.get("id")
+        needle = spans.content(c["original"])
+        if not needle:
+            err.append(f"{cid} 的原文只有標點或空白，要照抄訊息裡的一段文字")
+            continue
+        where = spans.occurrences(needle, hay)
+        if where:
+            found[cid] = where
+        else:
+            err.append(f"{cid} 的原文在訊息裡找不到，要逐字照抄訊息的一段")
+    for kind, types in (("明說", STATED), ("隱含", IMPLIED)):
+        group = {c.get("id"): found[c.get("id")] for c in claims
+                 if isinstance(c, dict) and c.get("type") in types and c.get("id") in found}
+        ok, groups = spans.clash_groups(group)
+        if not ok:
+            err.append(f"{'；'.join('、'.join(g) for g in groups)} 的原文在訊息裡重疊（分號隔開的是不同組）："
+                       f"同一段話只能有一個{kind}的命題。請合併成一條；只有那句話真的有幾個能各自成立的主張時，"
+                       "才切成不重疊的幾段（見中立化的拆題規則）")
 
 
 def _trace(d, run, ctx):
@@ -131,13 +267,7 @@ def _trace(d, run, ctx):
     for i, a in enumerate(d.get("attribution", [])):
         err.need(_is_url(a.get("report_url")) and _nonempty(a.get("report_org")),
                  f"attribution[{i}] 必須引用政府、研究機構或平台的正式報告（report_url、report_org）")
-    known = ctx.get("known_tactics")
-    for i, t in enumerate(d.get("tactics", [])):
-        tid = t.get("tactic_id")
-        err.need(_nonempty(tid), f"tactics[{i}].tactic_id 不能是空的；手法庫沒有的手法不要列")
-        if known is not None:
-            err.need(tid in known, f"tactics[{i}].tactic_id {tid} 不在手法庫裡")
-        err.need(_nonempty(t.get("quote")), f"tactics[{i}] 要引用原文是哪一段")
+    err.extend(tactic_errors(d, run, _library(ctx)))
     for i, f in enumerate(d.get("prior_factchecks", [])):
         err.need(_is_url(f.get("url")), f"prior_factchecks[{i}].url 必須是網址")
     return err
@@ -160,6 +290,10 @@ def _opponent(d, run, ctx):
     if status == "failed":
         return err
     claim_ids = _claim_ids(run)
+    importance = {c.get("id"): c.get("importance")
+                  for c in (io.read_json_or_none(run / "claims.json") or {}).get("claims", [])}
+    tags = {t.get("tactic_id") for t in (io.read_json_or_none(run / "trace.json") or {}).get("tactics", [])
+            if isinstance(t, dict)}
     ids = set()
     for i, a in enumerate(d.get("attacks", [])):
         p = f"attacks[{i}]"
@@ -179,7 +313,21 @@ def _opponent(d, run, ctx):
             err.need(_is_url(e.get("url")) and _nonempty(e.get("excerpt")), f"{p}.evidence[{j}] 要有網址和原文摘錄")
         if target in EVIDENCE_REQUIRED_TARGETS:
             err.need(bool(evidence), f"{p} 攻擊的是 {target}，必須附證據（網址和摘錄）")
+        if target == "tactic":
+            err.need(a.get("tactic_id") in tags, f"{p}.tactic_id：攻擊手法標記要填 trace.json 裡標的手法編號")
+        if "proposed_importance" in a:
+            _check_importance_proposal(err, p, a, importance)
     return err
+
+
+def _check_importance_proposal(err, p, a, importance):
+    """Importance is challenged through neutral_rewrite on one claim; finalize moves it one step if upheld."""
+    v = a.get("proposed_importance")
+    cur = importance.get(a.get("claim_id"))
+    ok = (a.get("target") == "neutral_rewrite" and isinstance(cur, int)
+          and isinstance(v, int) and not isinstance(v, bool) and 1 <= v <= 5 and abs(v - cur) == 1)
+    err.need(ok, f"{p}.proposed_importance：只能用在 target 是 neutral_rewrite、有 claim_id 的攻擊，"
+                 "而且只能提相鄰的一級（現在是 3 就只能提 2 或 4）")
 
 
 def _rebuttal(d, run, ctx):
@@ -209,38 +357,54 @@ def _judgment(d, run, ctx):
                      f"rulings[{i}] 判定攻擊成立，但沒有列出實際打開核對過的 verified_urls")
     ledger_ids = _check_ledger(err, d.get("ledger"), "judgment")
     _check_verdicts(err, d.get("verdicts"), _claim_ids(run), ledger_ids, "judgment")
-    _check_withdrawals(err, d, run, attacks)
+    _check_tactic_checks(err, d, run, attacks, _library(ctx))
     return err
 
 
-def _check_withdrawals(err, d, run, attacks):
-    """Every upheld trace/tactic ruling lists the tags it withdraws (`withdraw_tactics`, [] to keep them).
-    A withdrawn tag must be one the tracer made, and must be named in that attack or ruling."""
-    tagged = None
-    for i, r in enumerate(d.get("rulings", [])):
-        aid = r.get("attack_id")
-        attack = attacks[aid][1] if isinstance(aid, str) and aid in attacks else {}
-        upheld = r.get("upheld") is True
-        on_trace = attack.get("target") in ("trace", "tactic")
-        p = f"rulings[{i}].withdraw_tactics"
-        if upheld and on_trace and "withdraw_tactics" not in r:
-            err.append(f"{p}：判成立的溯源或手法攻擊要列出撤回哪些標記，不撤就填 []")
+def _check_tactic_checks(err, d, run, attacks, lib):
+    """The judge checks every tag in trace.json, attacked or not: which non-clue features hold, and
+    keep it only if at least one does. An upheld attack on a tag means the tag goes."""
+    if "tactic_checks_set_aside" in d:
+        return
+    tags = {t.get("tactic_id"): t for t in (io.read_json_or_none(run / "trace.json") or {}).get("tactics", [])
+            if isinstance(t, dict)}
+    checks = d.get("tactic_checks", [])
+    if not isinstance(checks, list) or not all(isinstance(c, dict) for c in checks):
+        err.append("tactic_checks 必須是陣列，每個標記一筆")
+        return
+    seen = [c.get("tactic_id") for c in checks]
+    for tid in tags:
+        err.need(seen.count(tid) == 1, f"tactic_checks：{tid} 需要剛好一筆檢查（trace.json 的每個標記都要檢查，不論有沒有被攻擊）")
+    for tid in seen:
+        err.need(tid in tags, f"tactic_checks：{tid} 不在 trace.json 的標記裡")
+    struck = {attacks[r["attack_id"]][1].get("tactic_id"): r["attack_id"] for r in d.get("rulings", [])
+              if r.get("upheld") is True and r.get("attack_id") in attacks
+              and attacks[r["attack_id"]][1].get("target") == "tactic"}
+    for i, c in enumerate(checks):
+        tid = c.get("tactic_id")
+        if tid not in tags:
             continue
-        w = r.get("withdraw_tactics")
-        if w is None or w == []:
-            continue
-        if not (upheld and on_trace):
-            err.append(f"{p}：只有判定成立的溯源或手法攻擊可以撤回標記")
-            continue
-        if not isinstance(w, list) or not all(isinstance(x, str) for x in w):
-            err.append(f"{p} 必須是手法編號的陣列，不撤就填 []")
-            continue
-        if tagged is None:
-            tagged = {t.get("tactic_id") for t in (io.read_json_or_none(run / "trace.json") or {}).get("tactics", [])}
-        text = f"{attack.get('argument', '')} {r.get('reason', '')}"
-        for tid in w:
-            err.need(tid in tagged, f"{p}：{tid} 不在 trace.json 的 tactics 裡")
-            err.need(tid in text, f"{p}：{tid} 要寫在這條攻擊的論點或裁決理由裡")
+        p = f"tactic_checks[{i}]"
+        kinds = ((lib or {}).get(tid) or {}).get("features") or {}
+        cited = tags[tid].get("features") if isinstance(tags[tid].get("features"), list) else []
+        expected = {f for f in cited if kinds.get(f, "visible") != "clue"}
+        feats = c.get("features")
+        ok = isinstance(feats, dict) and set(feats) == expected and all(isinstance(v, bool) for v in feats.values())
+        err.need(ok, f"{p}.features 要剛好列出 {tid} 每一項非線索的特徵（{'、'.join(sorted(expected))}），值是 true/false")
+        keep = c.get("keep")
+        err.need(isinstance(keep, bool), f"{p}.keep 必須是 true/false")
+        err.need(_nonempty(c.get("reason")), f"{p}.reason 不能是空的，會刊在報告裡")
+        if ok and isinstance(keep, bool):
+            err.need(keep == any(feats.values()), f"{p}.keep：至少一項特徵成立才保留，全部不成立就撤回")
+        if keep is True and tid in struck:
+            err.append(f"{p}：攻擊 {struck[tid]} 判成立，{tid} 就要撤回（keep: false）")
+        held = [f for f, v in (feats or {}).items() if v is True] if ok else []
+        if keep is True and held and all(kinds.get(f) == "verified" for f in held):
+            urls = c.get("verified_urls")
+            allowed = {e.get("url") for e in tags[tid].get("evidence", []) if isinstance(e, dict)}
+            err.need(isinstance(urls, list) and bool(urls) and all(u in allowed for u in urls),
+                     f"{p}.verified_urls：只靠查證得到的特徵保留時，要列出你實際打開核對過的溯源員證據網址")
+
 
 def _review(d, run, ctx):
     err = _Errors()

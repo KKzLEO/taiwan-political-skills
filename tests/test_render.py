@@ -5,7 +5,8 @@ from tests import fixtures as fx
 from tests.helpers import make_run
 from fclib import detect, finalize, io, render, score
 
-TACTICS = [{"id": "TW-T01", "name": "急迫轉傳", "layer": "content", "how_to_spot": "看到「快轉傳」先停下來查"}]
+TACTICS = [{"id": "TW-T16", "name": "急迫轉傳", "layer": "content", "how_to_spot": "看到「快轉傳」先停下來查"},
+           {"id": "TW-T01", "name": "斷章取義", "layer": "content", "how_to_spot": "找完整影片或全文"}]
 OUTLETS = [
     {"id": "cna", "name": "中央社", "domains": ["cna.com.tw"],
      "trust": {"score": 50, "year": 2026, "source": "Reuters DNR 2026", "url": "https://example.org/dnr"}},
@@ -109,9 +110,29 @@ class BodyTest(unittest.TestCase):
     def test_withdrawn_tag_is_not_shown_as_identified(self):
         out = md(build(**fx.tactic_attack_overrides()))
         section = out.split("## 操弄手法")[1].split("\n## ")[0]
-        self.assertNotIn("**急迫轉傳**（TW-T01）：", section)
-        self.assertIn("辯論後撤回：急迫轉傳（TW-T01）", section)
+        self.assertNotIn("**急迫轉傳**（TW-T16）：", section)
+        self.assertIn("辯論後撤回：急迫轉傳（TW-T16）", section)
         self.assertIn("裁判核對後認為特徵對不上，撤下", section)
+
+    def test_tactic_section_warns_against_quoting_it(self):
+        section = md(build()).split("## 操弄手法")[1].split("\n## ")[0]
+        self.assertIn("這一段還沒通過跨陣營一致性驗證，不要引用在公開貼文", section)
+
+    def test_tags_set_aside_for_format_are_counted_but_not_named(self):
+        trace = copy.deepcopy(fx.TRACE)
+        trace["set_aside_tactics"] = [{"entry": {"tactic_id": "TW-T29", "features": ["a"]}, "errors": ["x"]}]
+        out = md(build(trace_json=trace))
+        self.assertIn("溯源員有 1 個手法標記不符合標記規則", out)
+        self.assertNotIn("TW-T29", out)
+
+    def test_tag_without_quote_shows_its_explanation(self):
+        trace = copy.deepcopy(fx.TRACE)
+        trace["tactics"] = [{"tactic_id": "TW-T01", "features": ["c"], "explanation": "前後文被剪掉",
+                             "evidence": [{"url": "https://example.org/fc", "excerpt": "2019"}]}]
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["tactic_checks"] = [{"tactic_id": "TW-T01", "features": {"c": True}, "keep": True, "reason": "查到了",
+                                      "verified_urls": ["https://example.org/fc"]}]
+        self.assertIn("**斷章取義**（TW-T01）：前後文被剪掉", md(build(trace_json=trace, judgment_json=judgment)))
 
     def test_corrections_come_after_every_section_written_before_the_debate(self):
         """Re-review: the prior-fact-check table sat below the corrections and still said 一致."""
@@ -124,7 +145,23 @@ class BodyTest(unittest.TestCase):
         out = md(build(**fx.tactic_attack_overrides()))
         corrections = out.split("## 辯論後的修正")[1].split("\n## ")[0]
         self.assertIn("裁判核對後認為特徵對不上，撤下", corrections)
-        self.assertNotIn("TW-T01 只對得上一項特徵，不該標", corrections)
+        self.assertNotIn("TW-T16 只對得上一項特徵，不該標", corrections)
+
+    def test_claims_table_shows_importance_and_any_adjustment(self):
+        report = md(build(**fx.importance_attack_overrides((("C-1", 2, True),))))
+        self.assertIn("| 重要性 |", report)
+        self.assertIn("4（辯論後由 5 調整）", report)
+
+    def test_importance_adjustment_quotes_the_judge(self):
+        report = md(build(**fx.importance_attack_overrides((("C-1", 4, True),))))
+        self.assertIn("C1 的重要性由 5 調為 4（反方 C 提出）。裁判：依量表，這句是支撐主旨的細節", report)
+
+    def test_result_without_importance_changes_is_shown_when_it_differs(self):
+        run = build()
+        s = io.read_json(run / "score.json")
+        s["without_importance_changes"] = {"result": "部分符合", "credibility": 45, "publishable": False}
+        io.write_json(run / "score.json", s)
+        self.assertIn("不調整的話，結果是「部分符合」（可信度 45，不可公開）", md(run))
 
     def test_media_without_lean_says_no_research(self):
         trace = copy.deepcopy(fx.TRACE)

@@ -71,6 +71,11 @@ def render(run, outlets=None, tactics=None) -> str:
     out.append("")
     if sc.get("result_reason"):
         out += [f"> {sc['result_reason']}", ""]
+    alt = sc.get("without_importance_changes")
+    if alt:
+        alt_cred = f"可信度 {alt['credibility']}" if alt.get("credibility") is not None else "可信度 —"
+        out += [f"> 辯論中調整了命題的重要性。不調整的話，結果是「{alt['result']}」"
+                f"（{alt_cred}，{'可公開' if alt['publishable'] else '不可公開'}）。", ""]
     if claims_doc.get("prompt_was_leading"):
         out += ["> 提問已改寫為中立命題。", ""]
 
@@ -93,6 +98,8 @@ def render(run, outlets=None, tactics=None) -> str:
                    f"{'成功' if s['status'] == 'ok' else '失敗'} | {'是' if s['cross_model'] else '否'} | "
                    f"{'是' if s['can_search'] else '否'} | {ISOLATION.get(s['isolation'], s['isolation'])} |")
     limits = list(trace.get("limits", []))
+    if trace.get("set_aside_tactics"):
+        limits.append(f"溯源員有 {len(trace['set_aside_tactics'])} 個手法標記不符合標記規則，已移出（原內容保留在 trace.json），報告不列出")
     for e in ledger.values():
         if e.get("access_note", "full") != "full":
             limits.append(f"{e['id']}（{_cell(e.get('publisher'))}）：{ACCESS.get(e['access_note'], e['access_note'])}")
@@ -101,12 +108,21 @@ def render(run, outlets=None, tactics=None) -> str:
     out.append("")
 
     # 逐項判定
-    out += ["## 逐項判定", "", "| 命題 | 原文說法 | 判定 | 理由 | 證據 |", "|---|---|---|---|---|"]
+    out += ["## 逐項判定", "", "| 命題 | 原文說法 | 重要性 | 判定 | 理由 | 證據 |", "|---|---|---|---|---|---|"]
     for c in verdicts["claims"]:
         meta = claims[c["claim_id"]]
         status = {"passed": "（覆核通過）", "failed": "（覆核未通過）"}.get(c["review_status"], "")
-        out.append(f"| {c['claim_id']} | {_cell(meta['original'])} | {ZH_LABELS[c['label']]}{status} | "
+        weight = str(c["importance"]) + (f"（辯論後由 {c['importance_from']} 調整）" if "importance_from" in c else "")
+        out.append(f"| {c['claim_id']} | {_cell(meta['original'])} | {weight} | {ZH_LABELS[c['label']]}{status} | "
                    f"{_cell(c['reasoning'])} | {', '.join(c.get('evidence_ids', [])) or '—'} |")
+    adjusted = [c for c in verdicts["claims"] if "importance_from" in c]
+    if adjusted:
+        out.append("")
+        for c in adjusted:
+            seats = "、".join(sorted({a["seat"] for a in c.get("importance_attacks", [])}))
+            why = "；".join(_cell(a["ruling_reason"]) for a in c.get("importance_attacks", []))
+            out.append(f"- {c['claim_id']} 的重要性由 {c['importance_from']} 調為 {c['importance']}"
+                       f"（反方 {seats} 提出）。裁判：{why}")
     out.append("")
 
     # 溯源
@@ -151,16 +167,16 @@ def render(run, outlets=None, tactics=None) -> str:
         out.append(f"- 被點名或更正：{_cell(f.get('note'))}（{f.get('url', '')}）")
     out.append("")
 
-    # 操弄手法（裁判撤回的標記不列為已辨識）
+    # 操弄手法（裁判逐項檢查後撤回的標記不列為已辨識）
     if trace.get("tactics"):
-        removed = {w["tactic_id"]: w.get("attack_ids", []) for w in verdicts.get("removed_tactics", [])}
-        reasons = {a["attack_id"]: a["ruling_reason"] for a in verdicts.get("trace_attacks_upheld", [])}
-        out += ["## 操弄手法（不影響可信度）", ""]
+        removed = {w["tactic_id"]: w.get("reason", "") for w in verdicts.get("removed_tactics", [])}
+        out += ["## 操弄手法（不影響可信度）", "", "> 這一段還沒通過跨陣營一致性驗證，不要引用在公開貼文。", ""]
         for t in trace["tactics"]:
             if t["tactic_id"] in removed:
                 continue
             info = tactics.get(t["tactic_id"], {})
-            line = f"- **{info.get('name', t['tactic_id'])}**（{t['tactic_id']}）：「{_cell(t['quote'])}」{_cell(t.get('explanation'))}"
+            said = f"「{_cell(t['quote'])}」" if t.get("quote") else ""
+            line = f"- **{info.get('name', t['tactic_id'])}**（{t['tactic_id']}）：{said}{_cell(t.get('explanation'))}"
             if info.get("layer") == "attribution" and not trace.get("attribution"):
                 line += "。特徵相符，但無法確認背後是誰。"
             out.append(line)
@@ -169,8 +185,7 @@ def render(run, outlets=None, tactics=None) -> str:
         if removed and all(t["tactic_id"] in removed for t in trace["tactics"]):
             out.append("- 辯論後沒有留下任何手法標記。")
         for tid in sorted(removed):
-            why = "；".join(_cell(reasons[a]) for a in removed[tid] if a in reasons)
-            out.append(f"- 辯論後撤回：{tactics.get(tid, {}).get('name', tid)}（{tid}）。裁判：{why}")
+            out.append(f"- 辯論後撤回：{tactics.get(tid, {}).get('name', tid)}（{tid}）。裁判：{_cell(removed[tid])}")
         out.append("")
 
     # 既有查核

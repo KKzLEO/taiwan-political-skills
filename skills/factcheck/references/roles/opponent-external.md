@@ -10,7 +10,7 @@
 
 ## 怎麼攻擊
 
-- 每一條攻擊都要具體，指向某個命題（`claim_id`）；針對溯源的攻擊，`claim_id` 填 `null`。
+- 每一條攻擊都要具體，指向某個命題（`claim_id`）；針對溯源的攻擊，`claim_id` 填 `null`。攻擊手法標記時，`target` 填 `tactic`，`tactic_id` 填那個標記的編號，並照手法庫開頭的標記規則說明哪幾項特徵不成立。
 - `target` 是 `label` 或 `evidence` 時，**一定要附證據**：網址加逐字摘錄。
 - `target` 是 `reasoning`、`neutral_rewrite`、`trace`、`tactic` 時，可以只說明理由。
 - 都沒問題就回傳空的 `attacks`，並誠實填 `searches_run`。

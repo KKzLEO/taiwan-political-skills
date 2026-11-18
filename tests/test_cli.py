@@ -1,4 +1,5 @@
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -36,6 +37,24 @@ class PipelineCliTest(unittest.TestCase):
         run = make_run(fx.run_files())
         p = fc("validate", "--run", run, "claims.json", "proponent.json")
         self.assertEqual(p.returncode, 0, p.stdout)
+
+    def test_set_aside_moves_only_bad_tags_out(self):
+        files = fx.run_files()
+        files["trace.json"]["tactics"].append({"tactic_id": "TW-T01", "features": ["a"], "quote": "快轉傳！"})
+        run = make_run(files)
+        p = fc("set-aside-tactics", "--run", run, "trace.json")
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        trace = json.loads((run / "trace.json").read_text())
+        self.assertEqual([t["tactic_id"] for t in trace["tactics"]], ["TW-T16"])
+        self.assertEqual(trace["set_aside_tactics"][0]["entry"]["tactic_id"], "TW-T01")
+
+    def test_set_aside_refuses_when_more_than_tags_is_wrong(self):
+        files = fx.run_files()
+        files["trace.json"]["publisher"]["kind"] = "網軍"
+        run = make_run(files)
+        p = fc("set-aside-tactics", "--run", run, "trace.json")
+        self.assertEqual(p.returncode, 1)
+        self.assertEqual(json.loads((run / "trace.json").read_text())["publisher"]["kind"], "網軍")
 
     def test_score_refuses_invalid_verdicts(self):
         run = make_run(fx.run_files())
@@ -91,6 +110,15 @@ class SetupCliTest(unittest.TestCase):
         self.assertEqual(p.returncode, 0, p.stderr)
         models = json.loads((run / "models.json").read_text())
         self.assertEqual([s["seat"] for s in models["seats"]][:3], ["A", "B", "C"])
+
+    def test_detect_probe_failure_prints_the_reason(self):
+        base = Path(tempfile.mkdtemp())
+        run = Path(fc("init", "--mode", "full", "--host", "claude", "--slug", "d", "--base", base).stdout.strip())
+        p = subprocess.run([sys.executable, str(FC), "detect", "--run", str(run), "--probe"], capture_output=True,
+                           text=True, env={**os.environ, "FC_CODEX_CMD": "false"})
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("codex: probe=failed", p.stderr)
+        self.assertIn("結束碼 1", p.stderr)
 
 
 if __name__ == "__main__":

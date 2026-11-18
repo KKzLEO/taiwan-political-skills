@@ -92,6 +92,25 @@ class CredibilityTest(unittest.TestCase):
             compute([claim("C1", "true", evidence=["S99"])])
 
 
+class ImportanceChangeTest(unittest.TestCase):
+    def adjusted(self, c, original):
+        return {**c, "importance_from": original}
+
+    def test_result_without_the_change_is_reported_when_it_differs(self):
+        # adjusted: (0*4 + 1*3)/7 = 43 部分符合; original: (0*5 + 1*3)/8 = 38 不符
+        r = compute([self.adjusted(claim("C1", "false", 4), 5), claim("C2", "true", 3)])
+        self.assertEqual(r["result"], "部分符合")
+        self.assertEqual(r["without_importance_changes"], {"result": "不符", "credibility": 38, "publishable": True})
+        self.assertFalse(r["publishable"])  # a conclusion that hangs on a contested weight is not publishable
+
+    def test_nothing_extra_when_no_importance_changed(self):
+        self.assertIsNone(compute([claim("C1", "false", 4), claim("C2", "true", 3)]).get("without_importance_changes"))
+
+    def test_nothing_extra_when_the_change_does_not_matter(self):
+        r = compute([self.adjusted(claim("C1", "true", 4), 5), claim("C2", "true", 3)])
+        self.assertIsNone(r.get("without_importance_changes"))
+
+
 class RoundingAndBandsTest(unittest.TestCase):
     def test_round_half_up(self):
         self.assertEqual(score.round_half_up(79.5), 80)

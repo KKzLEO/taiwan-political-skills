@@ -41,8 +41,10 @@ def read_toml(path: Path) -> dict:
         return tomllib.load(fh)
 
 
-def known_tactic_ids(region: str = "tw"):
+def tactic_library(region: str = "tw"):
+    """tactic_id -> {"layer", "features": {feature id: kind}}, or None when the region has no library."""
     path = DATA_DIR / region / "tactics.toml"
     if not path.exists():
         return None
-    return {t["id"] for t in read_toml(path).get("tactic", [])}
+    return {t["id"]: {"layer": t.get("layer"), "features": {f["id"]: f["kind"] for f in t.get("observable", [])}}
+            for t in read_toml(path).get("tactic", [])}

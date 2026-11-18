@@ -2,6 +2,8 @@
 
 Codex 當主體時，所有角色都用 `fc.py run-model` 開一個獨立的 `codex exec` 子程序執行。子程序在空的暫存資料夾裡跑，只拿到該角色的指令和輸入資料，看不到這段對話。
 
+**隔離程度：** 2026-11-18 的金絲雀實測顯示，子程序一定會讀到使用者的 `~/.codex/AGENTS.md`，`--ignore-user-config` 只會跳過 config.toml。要完整隔離，用 `FC_CODEX_CMD` 指向另一個乾淨、自己登入過的 Codex 設定。
+
 ```bash
 python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role tracer
 python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role proponent
@@ -17,7 +19,7 @@ wait
 ```
 
 - A、B、C 席位跑在 Codex 上，X 席位會自動用 `models.json` 裡對應的外部 CLI（例如 `claude -p`）。
-- `run-model` 會自己檢查輸出格式、重試一次，所以不需要另外 validate。主模型的角色（溯源員、正方、答辯、裁判）重試後還是失敗，指令會以非零結束碼停止，這時告訴使用者是哪一步出錯。
+- `run-model` 會自己檢查輸出格式、重試一次，所以不需要另外 validate。溯源員和裁判重試後只剩手法標記的錯誤時，它會自動把不合格的標記移出（同 `set-aside-tactics`）。主模型的角色（溯源員、正方、答辯、裁判）重試後還是失敗，指令會以非零結束碼停止，這時告訴使用者是哪一步出錯。
 
 ## 接下來
 

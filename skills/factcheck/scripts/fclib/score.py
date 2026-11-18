@@ -166,12 +166,24 @@ def compute(verdicts: dict, run: dict, seats: list) -> dict:
     confidence, has_cross = _confidence(claims, ledger_by_id, run, seats)
     publishable = run.get("mode") == "full" and confidence["level"] == "高" and has_cross
 
+    without = None
+    if any("importance_from" in c for c in claims):
+        original = [{**c, "importance": c.get("importance_from", c["importance"])} for c in claims]
+        alt = compute({**verdicts, "claims": [{k: v for k, v in c.items() if k != "importance_from"} for c in original]},
+                      run, seats)
+        if (alt["result"], alt["publishable"]) != (result, publishable):
+            without = {"result": alt["result"], "credibility": (alt["credibility"] or {}).get("score"),
+                       "publishable": alt["publishable"]}
+        if alt["result"] != result:
+            publishable = False  # the conclusion hangs on a contested weight
+
     return {
         "credibility": cred,
         "result": result,
         "result_reason": reason,
         "confidence": confidence,
         "publishable": publishable,
+        "without_importance_changes": without,
         "claims": [
             {"claim_id": c["claim_id"], "label": c["label"], "importance": c["importance"],
              "factor": None if FACTORS[c["label"]] is None else float(FACTORS[c["label"]])}

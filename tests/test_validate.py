@@ -11,7 +11,7 @@ def errors_for(name, mutate=None, **overrides):
     if mutate:
         mutate(files[name])
     run = make_run(files)
-    return validate.validate_file(run, name, known_tactics={"TW-T01"})
+    return validate.validate_file(run, name, known_tactics=fx.TACTIC_LIB)
 
 
 class ValidRunTest(unittest.TestCase):
@@ -19,7 +19,7 @@ class ValidRunTest(unittest.TestCase):
         run = make_run(fx.run_files())
         for name in fx.run_files():
             with self.subTest(name=name):
-                self.assertEqual(validate.validate_file(run, name, known_tactics={"TW-T01"}), [])
+                self.assertEqual(validate.validate_file(run, name, known_tactics=fx.TACTIC_LIB), [])
 
     def test_unknown_file_name_is_an_error(self):
         run = make_run(fx.run_files())
@@ -44,6 +44,80 @@ class ClaimsTest(unittest.TestCase):
         def m(c):
             c["claims"][0]["neutral"] = " "
         self.assertTrue(errors_for("claims.json", m))
+
+
+def _claim(cid, original, type_="F"):
+    return {"id": cid, "original": original, "neutral": original, "type": type_, "importance": 3,
+            "core": False, "legal": False, "time_place": "", "entities": [], "search_seeds": {"pro": [], "con": []}}
+
+
+class ClaimSpanTest(unittest.TestCase):
+    """Each claim quotes the message; stated claims never double-count the same words (2026-11-18 eval)."""
+
+    def test_original_must_come_from_the_message(self):
+        def m(c):
+            c["claims"][0]["original"] = "某部長說明年油價會漲三成"
+        self.assertTrue(any("C1" in e and "找不到" in e for e in errors_for("claims.json", m)))
+
+    def test_punctuation_differences_are_ignored(self):
+        # fixture C1 drops the colon that the message has
+        self.assertEqual(errors_for("claims.json"), [])
+
+    def test_fragment_of_a_stated_claim_is_rejected(self):
+        def m(c):
+            c["claims"].append(_claim("C3", "明年油價一定漲三成"))
+        errs = errors_for("claims.json", m)
+        self.assertTrue(any("C1" in e and "C3" in e and "重疊" in e for e in errs), errs)
+
+    def test_implied_claim_may_share_a_stated_claims_words(self):
+        def m(c):
+            c["claims"].append(_claim("C3", "某部長說：明年油價一定漲三成", "I"))
+        self.assertEqual(errors_for("claims.json", m), [])
+
+    def test_two_implied_claims_on_the_same_words_are_rejected(self):
+        def m(c):
+            c["claims"].append(_claim("C3", "明年油價一定漲三成", "I"))
+            c["claims"].append(_claim("C4", "油價一定漲三成", "I"))
+        self.assertTrue(any("C3" in e and "C4" in e for e in errors_for("claims.json", m)))
+
+    def test_opinions_may_share_words_with_anything(self):
+        def m(c):
+            c["claims"].append(_claim("C3", "某部長說明年油價一定漲三成", "O"))
+        self.assertEqual(errors_for("claims.json", m), [])
+
+    def test_original_that_is_only_punctuation_is_rejected(self):
+        def m(c):
+            c["claims"][1]["original"] = "！"
+        self.assertTrue(any("C2" in e for e in errors_for("claims.json", m)))
+
+    def test_checks_are_skipped_when_only_a_url_was_given(self):
+        source = copy.deepcopy(fx.SOURCE)
+        source.update({"input_type": "url", "original_text": "", "url": "https://example.org/news"})
+
+        def m(c):
+            c["claims"].append(_claim("C3", "明年油價一定漲三成"))
+        self.assertEqual(errors_for("claims.json", m, source_json=source), [])
+
+
+class ImportanceProposalTest(unittest.TestCase):
+    def errs(self, **attack_changes):
+        o = fx.importance_attack_overrides()
+        o["opponent__C_json"]["attacks"][0].update(attack_changes)
+        return errors_for("opponent-C.json", **o)
+
+    def test_valid_proposal(self):
+        self.assertEqual(self.errs(proposed_importance=4), [])
+
+    def test_only_neutral_rewrite_attacks_may_propose_importance(self):
+        self.assertTrue(any("proposed_importance" in e for e in self.errs(target="reasoning")))
+
+    def test_proposal_needs_a_claim(self):
+        self.assertTrue(any("proposed_importance" in e for e in self.errs(claim_id=None)))
+
+    def test_proposal_must_be_one_step_from_the_current_value(self):
+        for bad in (0, 6, "3", True, 5, 3):  # current importance is 5; only 4 (one step) is allowed
+            with self.subTest(value=bad):
+                self.assertTrue(any("proposed_importance" in e for e in self.errs(proposed_importance=bad)))
 
 
 class ProponentTest(unittest.TestCase):
@@ -156,60 +230,155 @@ class TraceTest(unittest.TestCase):
         self.assertTrue(errors_for("trace.json", m))
 
 
-class WithdrawTacticTest(unittest.TestCase):
-    """2026-11-18 symmetry probe: the judge withdrew TW-T15 but the report still showed it.
-    Every upheld trace/tactic ruling must say which tags it withdraws, so nothing can be forgotten."""
+def _tag(tid="TW-T16", features=("a",), quote="快轉傳！", **extra):
+    return {"tactic_id": tid, "features": list(features), "quote": quote, "explanation": "說明", **extra}
 
-    def errs(self, mutate=None, **kw):
-        return errors_for("judgment.json", mutate, **fx.tactic_attack_overrides(**kw))
 
-    def test_withdrawal_on_an_upheld_tactic_attack_is_valid(self):
+EVIDENCE = [{"url": "https://example.org/factcheck", "excerpt": "這段話在 2019 年就流傳過"}]
+
+
+class TagStandardTest(unittest.TestCase):
+    """2026-11-18 symmetry probe: the same message got different tags per party. Every tag must rest on
+    at least one visible or verified feature from the shared library; clues alone never count."""
+
+    def errs(self, *tags, mutate=None):
+        def m(t):
+            t["tactics"] = list(tags)
+            if mutate:
+                mutate(t)
+        return errors_for("trace.json", m)
+
+    def test_fixture_tag_is_valid(self):
+        self.assertEqual(errors_for("trace.json"), [])
+
+    def test_tag_needs_features(self):
+        self.assertTrue(any("features" in e for e in self.errs(_tag(features=()))))
+
+    def test_unknown_feature_id(self):
+        self.assertTrue(any("z" in e for e in self.errs(_tag(features=("z",)))))
+
+    def test_clue_alone_cannot_support_a_tag(self):
+        self.assertTrue(any("線索" in e for e in self.errs(_tag("TW-T01", features=("a",)))))
+
+    def test_visible_feature_needs_a_quote_from_the_message(self):
+        self.assertTrue(any("原文" in e for e in self.errs(_tag(quote="這句不在訊息裡"))))
+        self.assertTrue(any("quote" in e for e in self.errs(_tag(quote=""))))
+
+    def test_quote_keeps_the_messages_punctuation(self):
+        # red-team: with letters-only matching, an invented "！！！" could prop up 大量驚嘆號
+        self.assertTrue(any("原文" in e for e in self.errs(_tag(quote="快轉傳！！！"))))
+
+    def test_quote_may_join_passages_with_an_ellipsis(self):
+        self.assertEqual(self.errs(_tag(quote="某部長說：……快轉傳！")), [])
+        self.assertEqual(self.errs(_tag(quote="某部長說：⋯⋯快轉傳！")), [])
+
+    def test_quote_of_nothing_but_an_ellipsis_is_rejected(self):
+        self.assertTrue(any("quote" in e for e in self.errs(_tag(quote="……"))))
+
+    def test_verified_feature_needs_evidence_and_no_quote(self):
+        self.assertTrue(any("evidence" in e for e in self.errs(_tag("TW-T01", features=("c",), quote=None))))
+        self.assertEqual(self.errs(_tag("TW-T01", features=("c",), quote=None, evidence=EVIDENCE)), [])
+
+    def test_same_tactic_twice_is_rejected(self):
+        errs = self.errs(_tag(), _tag(quote="某部長說："))
+        self.assertTrue(any("TW-T16" in e and "兩次" in e for e in errs))
+
+    def test_attribution_tactic_needs_a_formal_report(self):
+        tag = _tag("TW-T29", features=("a",), quote=None, evidence=EVIDENCE)
+        self.assertTrue(any("attribution" in e for e in self.errs(tag)))
+
+        def with_report(t):
+            t["attribution"] = [{"statement": "報告點名此案", "report_url": "https://example.org/r", "report_org": "某研究院"}]
+        self.assertEqual(self.errs(tag, mutate=with_report), [])
+
+    def test_tactic_errors_name_the_entry(self):
+        # the set-aside fallback recognises tactic errors by this prefix
+        self.assertTrue(all(e.startswith("tactics") for e in self.errs(_tag("TW-T01", features=("a",)))))
+
+
+class TacticAttackTest(unittest.TestCase):
+    def test_tactic_attack_must_name_a_tagged_tactic(self):
+        for bad in (None, "TW-T25"):
+            with self.subTest(tactic_id=bad):
+                o = fx.tactic_attack_overrides()
+                o["opponent__C_json"]["attacks"][0]["tactic_id"] = bad
+                self.assertTrue(any("tactic_id" in e for e in errors_for("opponent-C.json", **o)))
+
+    def test_valid_tactic_attack(self):
+        self.assertEqual(errors_for("opponent-C.json", **fx.tactic_attack_overrides()), [])
+
+
+class TacticCheckTest(unittest.TestCase):
+    """The judge checks every tag, attacked or not (round 1: who happened to be attacked decided the tags)."""
+
+    def errs(self, mutate=None, trace=None, **kw):
+        o = fx.tactic_attack_overrides(**kw)
+        if trace is not None:
+            o["trace_json"] = trace
+        return errors_for("judgment.json", mutate, **o)
+
+    def test_valid_checks(self):
+        self.assertEqual(errors_for("judgment.json"), [])
         self.assertEqual(self.errs(), [])
 
-    def test_upheld_tactic_attack_that_keeps_the_tag_is_valid(self):
-        self.assertEqual(self.errs(withdraw=()), [])
+    def test_every_tag_needs_exactly_one_check(self):
+        def missing(j):
+            j["tactic_checks"] = []
 
-    def test_upheld_tactic_attack_must_say_what_it_withdraws(self):
-        """Skeptic: an upheld attack with no withdrawal left the tag in the report and contradicted it."""
-        self.assertTrue(any("withdraw_tactics" in e for e in self.errs(withdraw="omit")))
+        def twice(j):
+            j["tactic_checks"].append(copy.deepcopy(j["tactic_checks"][0]))
 
-    def test_upheld_trace_attack_must_say_what_it_withdraws_too(self):
-        """Re-review: injection-injected removed TW-T04 through attacks aimed at the trace."""
-        o = fx.tactic_attack_overrides(withdraw="omit")
-        o["opponent__C_json"]["attacks"][0]["target"] = "trace"
-        self.assertTrue(any("withdraw_tactics" in e for e in errors_for("judgment.json", **o)))
+        def extra(j):
+            j["tactic_checks"].append({"tactic_id": "TW-T25", "features": {"a": False}, "keep": False, "reason": "x"})
+        for m in (missing, twice, extra):
+            with self.subTest(case=m.__name__):
+                self.assertTrue(any("tactic_checks" in e for e in errors_for("judgment.json", m)))
 
-    def test_one_ruling_can_withdraw_several_tags(self):
-        o = fx.tactic_attack_overrides(withdraw=("TW-T01", "TW-T25"))
+    def test_check_covers_exactly_the_tags_non_clue_features(self):
+        for features in ({}, {"b": True}, {"a": True, "c": True}, {"a": "yes"}):
+            with self.subTest(features=features):
+                def m(j, f=features):
+                    j["tactic_checks"][0]["features"] = f
+                self.assertTrue(any("features" in e for e in errors_for("judgment.json", m)))
+
+    def test_keep_follows_the_features(self):
+        def contradict(j):
+            j["tactic_checks"][0]["keep"] = False
+        self.assertTrue(any("keep" in e for e in errors_for("judgment.json", contradict)))
+
+    def test_upheld_attack_on_a_tag_means_the_tag_goes(self):
+        # red-team: an upheld "T15 does not match" next to a kept T15 contradicted the report
+        self.assertTrue(any("C-1" in e for e in self.errs(upheld=True, keep=True)))
+
+    def test_rejected_attack_leaves_the_tag_to_the_check(self):
+        self.assertEqual(self.errs(upheld=False, keep=True), [])
+
+    def test_kept_tag_resting_on_verified_features_needs_opened_urls(self):
         trace = copy.deepcopy(fx.TRACE)
-        trace["tactics"].append({"tactic_id": "TW-T25", "quote": "快轉傳！", "explanation": "只是問問"})
-        o["opponent__C_json"]["attacks"][0]["argument"] = "TW-T01 和 TW-T25 都對不上特徵"
-        self.assertEqual(errors_for("judgment.json", trace_json=trace, **o), [])
+        trace["tactics"] = [_tag("TW-T01", features=("c",), quote=None, evidence=EVIDENCE)]
 
-    def test_withdrawn_tag_must_exist_in_the_trace(self):
-        self.assertTrue(any("TW-T99" in e for e in self.errs(withdraw=("TW-T99",))))
+        def check(urls):
+            def m(j):
+                j["tactic_checks"] = [{"tactic_id": "TW-T01", "features": {"c": True}, "keep": True,
+                                       "reason": "查到 2019 年的版本", **({"verified_urls": urls} if urls is not None else {})}]
+            return m
+        self.assertTrue(any("verified_urls" in e for e in errors_for("judgment.json", check(None), trace_json=trace)))
+        self.assertTrue(any("verified_urls" in e for e in errors_for("judgment.json", check(["https://other.org"]), trace_json=trace)))
+        self.assertEqual(errors_for("judgment.json", check(["https://example.org/factcheck"]), trace_json=trace), [])
 
-    def test_withdrawn_tag_must_be_named_by_the_attack_or_the_ruling(self):
-        """Red-team: a ruling about the first-seen date could withdraw any tag."""
+    def test_set_aside_checks_are_not_validated(self):
         def m(j):
-            j["rulings"][-1]["reason"] = "最早出現的日期應該更正"
-        o = fx.tactic_attack_overrides()
-        o["opponent__C_json"]["attacks"][0]["argument"] = "first_seen 日期錯了"
-        self.assertTrue(any("TW-T01" in e for e in errors_for("judgment.json", m, **o)))
+            j.pop("tactic_checks")
+            j["tactic_checks_set_aside"] = ["tactic_checks：缺少 TW-T16"]
+        self.assertEqual(errors_for("judgment.json", m), [])
 
-    def test_rejected_attack_cannot_withdraw_a_tag(self):
-        self.assertTrue(any("withdraw_tactics" in e for e in self.errs(upheld=False)))
+    def test_no_tags_needs_no_checks(self):
+        trace = copy.deepcopy(fx.TRACE)
+        trace["tactics"] = []
 
-    def test_claim_attack_cannot_withdraw_a_tag(self):
-        """Red-team: any unrelated upheld attack used to be enough to withdraw any tag."""
         def m(j):
-            j["rulings"][1]["withdraw_tactics"] = ["TW-T01"]  # B-1 is an upheld label attack
-        self.assertTrue(any("withdraw_tactics" in e for e in self.errs(m, withdraw=())))
-
-    def test_malformed_withdrawal_is_an_error_not_a_crash(self):
-        for bad in ("TW-T01", [{"id": "TW-T01"}], [1], {"TW-T01": True}):
-            with self.subTest(bad=bad):
-                self.assertTrue(any("withdraw_tactics" in e for e in self.errs(withdraw=bad)))
+            j.pop("tactic_checks")
+        self.assertEqual(errors_for("judgment.json", m, trace_json=trace), [])
 
 
 class ReviewTest(unittest.TestCase):
