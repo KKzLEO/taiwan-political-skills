@@ -99,7 +99,7 @@ class BodyTest(unittest.TestCase):
                                          for s, lens in (("A", "evidence"), ("B", "counter"), ("C", "stance"))]
                       + [{"seat": "X1", "engine": "codex", "kind": "external", "lens": "external"}])
         out = md(build(models_json=models, opponent__C_json=None))
-        self.assertIn("| C | 反方 C：立場 | claude | 沒有執行 |", out)
+        self.assertIn("| C | 反方 C：立場 | claude（預設模型，推理強度 預設） | 沒有執行 |", out)
         self.assertIn("反方 C 沒有跑成功", out)
 
     def test_conclusion_uses_first_sentence_only(self):

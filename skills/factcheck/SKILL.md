@@ -15,27 +15,28 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方�
 
 下面的指令裡，`$SKILL` 是這個 skill 的資料夾，`$RUN` 是第 0 步建立的查核資料夾。**每次執行指令都要把兩個都寫成完整路徑**（例如開頭寫 `SKILL=/完整/路徑; RUN=/完整/路徑;`），因為每個指令可能在新的 shell 裡執行，變數不會保留。
 
-需要 Python 3.11 以上。
+需要 Python 3.11 以上。`python3` 不到 3.11 時（macOS 內建的是 3.9），`fc.py` 會印「需要 Python 3.11 以上」：改用 `python3.11`、`python3.12` 這類指令執行下面每一個指令；都沒有就停下來，請使用者安裝。
 
 **第 2 步以後的角色都用 `fc.py run-model` 執行，** 它會自己檢查格式、重試一次。重試後只剩下面兩種錯誤時，它會自動走退路，流程繼續；原內容都保留在檔案裡：
 - **手法標記不合格：** 移出，報告不列出。手法標記不影響分數，不值得因此停掉整次查核。裁判的手法逐項檢查不合格時，所有手法標記都不列，報告只寫有幾個、不寫名稱，並註明這是格式問題、不是辯論的結論。
 - **裁判判附證據的攻擊成立，卻沒列出實際核對過的網址：** 判決照用，報告開頭會註明，這份報告不能標「可公開」。
 
-其他錯誤時，讀入與拆題、溯源員、正方、答辯、裁判會以非零結束碼停止。這時停下來，告訴使用者是哪一步出錯，**不要自己重跑或補檔**。覆核（第 8 步）失敗時不用停：那一席重跑一次，還是失敗就照樣結算，做法見第 3–8 步最後的說明。
+其他錯誤時，讀入與拆題、溯源員、正方、答辯、裁判會以非零結束碼停止。前一步的檔案缺少或沒有通過檢查時，`run-model` 也會停下來，不會呼叫模型。這時停下來，告訴使用者是哪一步出錯，**不要自己重跑或補檔**。已經完成的步驟（輸出檔通過檢查，而且不比它讀的檔案舊）再執行一次不會重跑，只印出檔案路徑。兩次都沒通過檢查時，最後一份輸出會存成 `<檔名>.rejected`，錯誤訊息會印出路徑，流程不會讀它。覆核（第 8 步）失敗時不用停：那一席重跑一次，還是失敗就照樣結算，做法見第 3–8 步最後的說明。
 
 ### 0. 建立資料夾、偵測模型
 
 1. **模式：** 預設完整模式。使用者說「快速」「簡單查一下」才用快速模式。先告訴使用者：完整模式實測短訊息約 20–35 分鐘、新聞或長訊息約 50–90 分鐘，角色的子程序會用掉上百萬 token；快速模式也要 20 到 40 分鐘，而且報告不能標「可公開」。
 2. 建立資料夾：
    ```bash
-   RUN=$(python3 "$SKILL/scripts/fc.py" init --mode full --host <claude 或 codex> --slug <幾個字的主題>)
+   python3 "$SKILL/scripts/fc.py" init --mode <full 或 quick> --host <claude 或 codex> --slug <幾個字的主題>
    ```
+   印出來的那一行就是查核資料夾的完整路徑，也就是之後每個指令的 `$RUN`。
 3. 偵測模型（`--probe` 會實際呼叫每個外部 CLI 一次，確認有登入、能不能上網、讀不讀得到使用者設定）：
    ```bash
    python3 "$SKILL/scripts/fc.py" detect --run "$RUN" --probe
    ```
-   Claude Code 上要另外加 `--host-model` 和 `--host-effort`，見 host-claude.md。把列出的席位告訴使用者。沒有任何外部席位時，提醒他報告的信心度會扣 20 分，可以裝 Codex、Claude Code 或 Gemini CLI 補上。
-4. **中斷後重跑：** 先執行 `python3 "$SKILL/scripts/fc.py" status --run "$RUN"`，標「完成」的步驟直接跳過。
+   Claude Code 上要另外加 `--host-model` 和 `--host-effort`，見 host-claude.md；Codex 的角色用哪個模型和推理強度，見 host-codex.md。把列出的席位告訴使用者。沒有任何外部席位時，提醒他報告的信心度會扣 20 分，可以裝 Codex、Claude Code 或 Gemini CLI 補上。
+4. **中斷後重跑：** 先確認沒有還在跑的 `fc.py` 指令，再執行 `python3 "$SKILL/scripts/fc.py" status --run "$RUN"`。標「完成」的步驟跳過。`rebuttal.json` 還是「缺少」時，反方標「失敗」或「缺少」的席位先重跑那一席；覆核標「缺少（要覆核…）」的席位重跑那一席；其餘照順序往下做。用 `--force` 重跑過某一步之後，它後面的步驟都要照順序重跑（`status` 只看格式，看不出後面的檔案已經過期）。
 
 ### 1. 收集輸入 → `input.json`
 
@@ -48,8 +49,9 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方�
 |---|---|
 | 貼上的文字 | 訊息原文存成 `$RUN/message.txt`，執行 `fc.py input --run "$RUN" --type text --file "$RUN/message.txt" --prompt-file "$RUN/prompt.txt"` |
 | 新聞網址 | 網址存成 `$RUN/url.txt`，執行 `fc.py input --run "$RUN" --type url --url-file "$RUN/url.txt" --prompt-file "$RUN/prompt.txt"`，全文由下一步的子程序自己讀 |
-| 截圖 | 逐字抄下畫面上的所有文字，連同帳號名稱、時間、平台，存成 `$RUN/message.txt`。看不清楚的字寫 `[辨識不清]`，不要猜，也不要判斷圖片真假。再用 `--type image --file` 執行 |
-| 影片 | 網址存成 `$RUN/url.txt`，執行 `fc.py video --url-file "$RUN/url.txt" --out "$RUN/transcript.txt"`，成功的話用 `--type video --file "$RUN/transcript.txt" --url-file "$RUN/url.txt"`。沒有字幕時，有裝 whisper 可以轉文字，或請使用者提供逐字稿；都沒有就停止 |
+| 文字加網址（例如「朋友說這篇新聞證明…」加一個連結） | 要查的是那段話：連結照原樣留在 `$RUN/message.txt` 裡，用 `--type text`。要查的是那篇報導：用 `--type url`。兩個都要查就分兩次，各開一個資料夾。`fc.py input` 一次只收一種，混著給會報錯 |
+| 截圖 | 逐字抄下畫面上的所有文字，連同帳號名稱、時間、平台，存成 `$RUN/message.txt`。人名、數字、日期、法條、網址要特別再核對一次。看不清楚的字寫 `[辨識不清]`，不要猜，也不要判斷圖片真假。再用 `--type image --file` 執行 |
+| 影片 | 網址存成 `$RUN/url.txt`，執行 `fc.py video --url-file "$RUN/url.txt" --out "$RUN/transcript.txt"`，成功的話用 `--type video --file "$RUN/transcript.txt" --url-file "$RUN/url.txt"`。只用上傳者自己放的字幕，不用自動產生或機器翻譯的字幕。印出「抓字幕失敗」或「沒有上傳者自己放的字幕」時，把那一行告訴使用者，請他提供逐字稿（存成 `$RUN/transcript.txt`）；沒有就停止。抓到的字幕不是中文時（例如印出「人工字幕：….en.vtt」），先告訴使用者用的是哪個語言的字幕；影片裡說的是中文的話，那份可能是翻譯，請他提供逐字稿 |
 
 完全無法上網就停止，告訴使用者這次沒辦法查核，不要只靠記憶回答。
 
@@ -60,6 +62,8 @@ python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role prep
 ```
 
 由獨立的子程序照 [references/ingest.md](references/ingest.md) 和 [references/neutralize.md](references/neutralize.md) 做，它看不到你的記憶和這段對話。文字、截圖、影片的原文由程式照 `input.json` 填寫，子程序改不了；網址輸入的全文由子程序自己讀取。
+
+**網址讀不到**（付費牆、要登入、被擋）時，這一步會以「這個網址讀不到內文」停下。請使用者貼上全文或截圖，存成 `$RUN/message.txt`，在同一個資料夾重新執行 `fc.py input`（`--type text` 或 `--type image`），再跑這一步。
 
 ### 3–8. 辯論
 
@@ -87,18 +91,30 @@ python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role tracer     # 第 4�
 
 ```bash
 for s in $(python3 -c "import json,sys;print(' '.join(x['seat'] for x in json.load(open(sys.argv[1]))['seats']))" "$RUN/models.json"); do
-  python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role opponent --seat "$s" &
+  python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role opponent --seat "$s" || echo "反方沒有跑起來：$s" &
 done
 wait
 ```
 
-第 8 步：`fc.py reviewers` 列出的每個席位，各跑一次 `--role review --seat <席位>`，可以同時跑。沒有列出任何席位就跳過。
+印出「反方沒有跑起來」的席位沒有留下結果檔（例如那個席位不在 `models.json` 裡、或前一步的檔案不對），答辯會被擋下來：照它印的錯誤處理，再單獨重跑那一席。
 
-- 第 5 步的席位以 `models.json` 的 `seats` 為準：完整模式是 A、B、C 加每個外部模型，快速模式只有一席。A、B、C 用主體的模型，X 席位用對應的外部 CLI。
-- 反方席位失敗時會被記成 `failed`，流程繼續：
+第 8 步：`fc.py reviewers` 列出的每個席位，各跑一次 `--role review --seat <席位>`，同時跑。沒有列出任何席位時迴圈不會執行：
+
+```bash
+for s in $(python3 "$SKILL/scripts/fc.py" reviewers --run "$RUN" | cut -f1); do
+  python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role review --seat "$s" || echo "覆核失敗：$s" &
+done
+wait
+```
+
+同時跑的時候看不到每一席的結束碼，所以失敗的席位會在輸出裡留下一行「覆核失敗：<席位>」。
+
+- 第 5 步的席位以 `models.json` 的 `seats` 為準：完整模式是 A、B、C 加每個外部模型，快速模式只有一席。A、B、C 用主體平台的 CLI 和 `models.json` 記的模型：Claude Code 照 `--host-model`；Codex 沒有指定模型時用 Codex CLI 的預設模型（見 host-codex.md）。X 席位用對應的外部 CLI。
+- 第 6、7 步要等 `models.json` 的每一席都有反方檔（成功或失敗都算）才會開始；少了哪一席，`run-model` 會停下來說是哪幾席。
+- 反方席位失敗時會被記成 `failed`，`run-model` 會在畫面上印一行警告，流程繼續：
   - 外部席位（X 開頭）全部失敗，照規則扣信心度。
   - 完整模式少了 A、B、C 任何一席（失敗或沒有執行），報告不能標「可公開」。
-- 第 8 步覆核的指令以非零結束碼結束時，**用同一個指令把那一席重跑一次**；還是失敗就照樣執行第 9 步：
+- 第 8 步覆核的指令以非零結束碼結束、或輸出裡有「覆核失敗：<席位>」時，**用同一個指令把那一席重跑一次**；還是失敗就照樣執行第 9 步：
   - 那一席會記成「覆核未完成」，它要覆核的命題改列「無法證實」。報告通常會因此不能標「可公開」，原因列在結果行下方。
   - `fc.py finalize` 會印出是哪一席沒有覆核檔。回報時告訴使用者是哪一席沒有覆核。
   - 之後（例如額度恢復後）可以補跑那一席，再重新執行第 9 步結算，報告會改用補上的覆核。

@@ -1,3 +1,4 @@
+import copy
 import json
 import os
 import subprocess
@@ -34,6 +35,23 @@ class PipelineCliTest(unittest.TestCase):
         self.assertNotEqual(p.returncode, 0)
         self.assertIn("proponent.json", p.stderr)
         self.assertFalse((run / "verdicts.json").exists())
+
+    def test_finalize_refuses_a_run_with_a_step_missing_or_out_of_date(self):
+        """Audit: with no rebuttal.json, or an attack the rebuttal never answered, finalize, score and render all
+        passed and the report was publishable."""
+        o = fx.tactic_attack_overrides()
+        o["rebuttal_json"] = copy.deepcopy(fx.REBUTTAL)
+        broken_review = {"seat": "B", "reviews": ["C1"]}
+        for what, files, named in (("no rebuttal", fx.run_files(rebuttal_json=None), "rebuttal.json"),
+                                   ("late attack", fx.run_files(**o), "rebuttal.json"),
+                                   ("broken review", fx.run_files(review__B_json=broken_review), "review-B.json")):
+            with self.subTest(what):
+                run = make_run(files)
+                p = fc("finalize", "--run", run)
+                self.assertNotEqual(p.returncode, 0)
+                self.assertIn(named, p.stderr)
+                self.assertNotIn("Traceback", p.stderr)
+                self.assertFalse((run / "verdicts.json").exists())
 
     def test_validate_reports_errors_with_exit_1(self):
         files = fx.run_files()
@@ -110,6 +128,140 @@ class PipelineCliTest(unittest.TestCase):
         run = make_run(fx.run_files())
         fc("finalize", "--run", run)
         self.assertEqual(json.loads(fc("score", "--run", run).stdout)["credibility"], 25)
+
+
+FAKE_CLAUDE = """import json, os, sys
+sys.stdin.read()
+with open(os.environ["FAKE_LOG"], "a", encoding="utf-8") as fh:
+    fh.write("call\\n")
+print(json.dumps({"result": os.environ.get("FAKE_REPLY", ""), "is_error": False}))
+"""
+
+
+def with_fake_claude(files, seats=("A", "B", "C", "X1")):
+    """A run folder whose host engine is a fake claude CLI that logs each call (no model is called)."""
+    run = make_run(files)
+    (run / "fake_claude.py").write_text(FAKE_CLAUDE, encoding="utf-8")
+    lenses = {"A": "evidence", "B": "counter", "C": "stance"}
+    models = dict(fx.MODELS, engines=fx.MODELS["engines"] + [
+        {"engine": "claude", "vendor": "anthropic", "available": True, "cross_model": False, "can_search": True,
+         "same_tier": True, "model": None, "probe": "skipped", "isolation": "unknown",
+         "cmd": [sys.executable, str(run / "fake_claude.py")]}],
+        seats=[{"seat": s, "engine": "codex" if s.startswith("X") else "claude", "kind": "external" if s.startswith("X")
+                else "internal", "lens": lenses.get(s, "external"), "model": None} for s in seats])
+    (run / "models.json").write_text(json.dumps(models), encoding="utf-8")
+    return run
+
+
+def fc_env(run, *args, reply=""):
+    env = {**os.environ, "FAKE_LOG": str(run / "calls.log"), "FAKE_REPLY": reply}
+    (run / "calls.log").unlink(missing_ok=True)
+    p = subprocess.run([sys.executable, str(FC), *map(str, args)], capture_output=True, text=True, env=env)
+    calls = (run / "calls.log").read_text().count("call") if (run / "calls.log").exists() else 0
+    return p, calls
+
+
+class RunModelCliTest(unittest.TestCase):
+    def test_a_finished_step_is_not_run_again(self):
+        """Audit: rerunning a finished judge called the model, and a worse answer deleted the valid judgment."""
+        run = with_fake_claude(fx.run_files())
+        before = (run / "judgment.json").read_text()
+        p, calls = fc_env(run, "run-model", "--run", run, "--role", "judge")
+        self.assertEqual((p.returncode, calls), (0, 0), p.stderr)
+        self.assertEqual(p.stdout.strip(), str(run.resolve() / "judgment.json"))
+        self.assertIn("已經完成", p.stderr)
+        self.assertIn("--force", p.stderr)
+        self.assertEqual((run / "judgment.json").read_text(), before)
+
+    def test_force_runs_a_finished_step_again(self):
+        run = with_fake_claude(fx.run_files())
+        p, calls = fc_env(run, "run-model", "--run", run, "--role", "judge", "--force",
+                          reply=json.dumps(fx.JUDGMENT, ensure_ascii=False))
+        self.assertEqual((p.returncode, calls), (0, 1), p.stderr)
+
+    def test_a_missing_review_is_still_run(self):
+        run = with_fake_claude(fx.run_files(review__B_json=None))
+        p, calls = fc_env(run, "run-model", "--run", run, "--role", "review", "--seat", "B",
+                          reply=json.dumps(fx.REVIEW_B, ensure_ascii=False))
+        self.assertEqual((p.returncode, calls), (0, 1), p.stderr)
+        self.assertTrue((run / "review-B.json").exists())
+
+
+def no_review_needed():
+    """The judge rejects B-1 and keeps the proponent's labels, so no seat has anything to review."""
+    judgment = copy.deepcopy(fx.JUDGMENT)
+    judgment["rulings"][1]["upheld"] = False
+    judgment["verdicts"][0]["label"] = "false"
+    return {"judgment_json": judgment, "review__B_json": None}
+
+
+class StatusCliTest(unittest.TestCase):
+    """Audit: status listed failed seats as 完成 and left out seats with no file, so resuming from it skipped them."""
+
+    def status(self, run):
+        p = subprocess.run([sys.executable, str(FC), "status", "--run", str(run)], capture_output=True, text=True)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        return p.stdout
+
+    def test_every_seat_is_listed_done_failed_or_missing(self):
+        failed = {"seat": "A", "engine": "claude", "lens": "evidence", "status": "failed", "error": "額度用完", "attacks": []}
+        out = self.status(with_fake_claude(fx.run_files(opponent__A_json=failed, opponent__C_json=None)))
+        self.assertRegex(out, r"opponent-A\.json\s+失敗（可以重跑這一席）")
+        self.assertRegex(out, r"opponent-B\.json\s+完成")
+        self.assertRegex(out, r"opponent-C\.json\s+缺少")
+        self.assertRegex(out, r"opponent-X1\.json\s+完成")
+
+    def test_reviews_are_listed_by_the_seats_that_must_review(self):
+        out = self.status(with_fake_claude(fx.run_files(review__B_json=None)))
+        self.assertRegex(out, r"review-B\.json\s+缺少（要覆核 C1）")
+        self.assertRegex(self.status(with_fake_claude(fx.run_files())), r"review-B\.json\s+完成")
+
+    def test_no_review_needed_is_not_shown_as_missing(self):
+        out = self.status(with_fake_claude(fx.run_files(**no_review_needed())))
+        self.assertRegex(out, r"review-\*\.json\s+不需要")
+        self.assertNotIn("缺少（要覆核", out)
+
+
+class SeatCliTest(unittest.TestCase):
+    def test_a_failed_seat_says_so_on_stderr(self):
+        """Audit: a seat that failed exited 0 with only the file path, so nobody saw it fail."""
+        run = with_fake_claude(fx.run_files(opponent__A_json=None, rebuttal_json=None, judgment_json=None,
+                                            review__B_json=None))
+        p, calls = fc_env(run, "run-model", "--run", run, "--role", "opponent", "--seat", "A", reply="not json")
+        self.assertEqual((p.returncode, calls), (0, 2), p.stderr)
+        self.assertIn("反方 A 失敗", p.stderr)
+        self.assertEqual(json.loads((run / "opponent-A.json").read_text())["status"], "failed")
+
+    def test_a_seat_that_is_not_in_models_json_is_refused(self):
+        """Audit: --seat D was a KeyError traceback, and --seat X9 ran as an extra seat on the host model."""
+        run = with_fake_claude(fx.run_files(opponent__X1_json=None))
+        for args in (("run-model", "--run", run, "--role", "opponent", "--seat", "X9"),
+                     ("run-model", "--run", run, "--role", "review", "--seat", "不需要派覆核"),
+                     ("prompt", "--run", run, "--role", "opponent", "--seat", "D")):
+            with self.subTest(args[0] + " " + args[-1]):
+                p, calls = fc_env(run, *args)
+                self.assertNotEqual(p.returncode, 0)
+                self.assertEqual(calls, 0)
+                self.assertNotIn("Traceback", p.stderr)
+                self.assertIn("A、B、C、X1", p.stderr)
+        self.assertFalse((run / "opponent-X9.json").exists())
+
+    def test_fc_timeout_that_is_not_a_number_is_one_clear_line(self):
+        run = with_fake_claude(fx.run_files(trace_json=None, proponent_json=None))
+        p = subprocess.run([sys.executable, str(FC), "run-model", "--run", str(run), "--role", "tracer"],
+                           capture_output=True, text=True, env={**os.environ, "FC_TIMEOUT": "60m",
+                                                                "FAKE_LOG": str(run / "calls.log")})
+        self.assertNotEqual(p.returncode, 0)
+        self.assertNotIn("Traceback", p.stderr)
+        self.assertIn("FC_TIMEOUT", p.stderr)
+        self.assertFalse((run / "calls.log").exists())
+
+    def test_reviewers_prints_nothing_on_stdout_when_no_seat_reviews(self):
+        """Audit: the loop over `fc.py reviewers | cut -f1` ran once with the seat 不需要派覆核."""
+        p = fc("reviewers", "--run", make_run(fx.run_files(**no_review_needed())))
+        self.assertEqual((p.returncode, p.stdout), (0, ""))
+        self.assertIn("不需要派覆核", p.stderr)
+        self.assertEqual(fc("reviewers", "--run", make_run(fx.run_files())).stdout, "B\tC1\n")
 
 
 class MissingFileCliTest(unittest.TestCase):
@@ -197,6 +349,19 @@ class InputCliTest(unittest.TestCase):
         self.assertNotEqual(p.returncode, 0)
         self.assertEqual((run / "input.json").read_text(), before)
 
+    def test_text_and_a_link_together_are_refused_instead_of_dropping_one(self):
+        """Audit: --type url ignored --file (the user's sentence was lost) and --type text dropped the link."""
+        for kind, other in (("url", ("--file", "msg.txt")), ("text", ("--url-file", "url.txt"))):
+            with self.subTest(kind):
+                run = self.run_dir()
+                self.write(run, "msg.txt", "朋友說這篇新聞證明健保費要漲三成")
+                self.write(run, "url.txt", "https://news.example.tw/a")
+                main = ("--url-file", run / "url.txt") if kind == "url" else ("--file", run / "msg.txt")
+                p = self.input(run, "--type", kind, *main, other[0], run / other[1])
+                self.assertNotEqual(p.returncode, 0)
+                self.assertIn("分兩次", p.stderr)
+                self.assertFalse((run / "input.json").exists())
+
     def test_file_that_is_not_utf8_is_a_clear_error(self):
         run = self.run_dir()
         (run / "big5.txt").write_bytes("油價".encode("big5"))
@@ -243,6 +408,50 @@ class SetupCliTest(unittest.TestCase):
         if p.returncode == 0:
             self.assertEqual(json.loads(p.stdout)["id"], "cna")
 
+    def test_media_lookup_takes_a_domain_without_https(self):
+        """Audit: cna.com.tw and udn.com/news/story/1 were 'not in the table'; only https:// links matched."""
+        for query, outlet in (("cna.com.tw", "cna"), ("www.cna.com.tw/news/aipl/1.aspx", "cna"),
+                              ("udn.com/news/story/1", "udn"), ("中央社", "cna")):
+            with self.subTest(query):
+                p = fc("media", query)
+                self.assertEqual(p.returncode, 0, p.stdout)
+                self.assertEqual(json.loads(p.stdout)["id"], outlet)
+
+    def test_video_needs_a_real_link(self):
+        """Audit: url.txt holding `--version` or `-U` went to yt-dlp as an option."""
+        d = Path(tempfile.mkdtemp())
+        (d / "yt-dlp").write_text(f"#!{sys.executable}\nopen({str(d / 'called')!r}, 'w').close()\n", encoding="utf-8")
+        (d / "yt-dlp").chmod(0o755)  # a fake on a PATH of its own: the real yt-dlp must never get these
+        for bad in ("--version", "-U", "not a url", "file:///etc/passwd"):
+            with self.subTest(bad):
+                (d / "url.txt").write_text(bad, encoding="utf-8")
+                p = subprocess.run([sys.executable, str(FC), "video", "--url-file", str(d / "url.txt")],
+                                   capture_output=True, text=True, env={"PATH": str(d)})
+                self.assertNotEqual(p.returncode, 0)
+                self.assertIn("http(s)", p.stderr)
+                self.assertFalse((d / "called").exists())
+
+    def test_output_is_utf8_whatever_the_terminal_encoding(self):
+        """Audit: with an English-Windows encoding, `score` crashed printing Chinese after writing score.json."""
+        run = make_run(fx.run_files(trace_json=None))
+        p = subprocess.run([sys.executable, str(FC), "status", "--run", str(run)], capture_output=True,
+                           env={**os.environ, "PYTHONIOENCODING": "cp1252"})
+        self.assertEqual(p.returncode, 0, p.stderr.decode("utf-8", "replace"))
+        self.assertIn("缺少", p.stdout.decode("utf-8"))
+
+    def test_old_python_gets_one_line_naming_the_version(self):
+        """Audit: macOS's own python3 is 3.9, and the first command was an 8-line traceback about tomllib."""
+        old = next((p for p in ("/usr/bin/python3", "/usr/bin/python3.9", "/usr/bin/python3.10") if os.path.exists(p)), None)
+        version = subprocess.run([old, "-c", "import sys;print(sys.version_info[:2] < (3, 11))"], capture_output=True,
+                                 text=True).stdout.strip() if old else ""
+        if version != "True":
+            self.skipTest("no Python older than 3.11 on this machine")
+        p = subprocess.run([old, str(FC), "init", "--mode", "full", "--host", "claude", "--slug", "x",
+                            "--base", tempfile.mkdtemp()], capture_output=True, text=True)
+        self.assertNotEqual(p.returncode, 0)
+        self.assertNotIn("Traceback", p.stderr)
+        self.assertIn("需要 Python 3.11 以上", p.stderr)
+
     def test_detect_without_probe_writes_models_and_seats(self):
         base = Path(tempfile.mkdtemp())
         run = Path(fc("init", "--mode", "full", "--host", "claude", "--slug", "d", "--base", base).stdout.strip())
@@ -258,6 +467,19 @@ class SetupCliTest(unittest.TestCase):
         self.assertEqual(p.returncode, 0, p.stderr)
         host = next(e for e in json.loads((run / "models.json").read_text())["engines"] if e["engine"] == "claude")
         self.assertEqual((host["model"], host["effort"]), ("claude-opus-5-5", "xhigh"))
+
+    def test_host_effort_applies_to_codex_when_codex_is_the_host(self):
+        """Host decision: --host-effort used to be recorded for a Codex host but never passed to codex."""
+        base = Path(tempfile.mkdtemp())
+        for host, effort, expected in (("codex", "xhigh", "xhigh"), ("claude", "xhigh", "high")):
+            with self.subTest(host):
+                run = Path(fc("init", "--mode", "full", "--host", host, "--slug", "d", "--base", base).stdout.strip())
+                p = subprocess.run([sys.executable, str(FC), "detect", "--run", str(run), "--host-effort", effort],
+                                   capture_output=True, text=True,
+                                   env={"PATH": "/usr/bin:/bin", "FC_CODEX_CMD": "codex", "FC_CLAUDE_CMD": "claude"})
+                self.assertEqual(p.returncode, 0, p.stderr)
+                codex = next(e for e in json.loads((run / "models.json").read_text())["engines"] if e["engine"] == "codex")
+                self.assertEqual(codex["effort"], expected)
 
     def test_detect_rejects_an_unknown_effort(self):
         base = Path(tempfile.mkdtemp())

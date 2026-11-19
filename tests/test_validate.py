@@ -226,6 +226,17 @@ class OpponentTest(unittest.TestCase):
         self.assertEqual(errors_for("opponent-X1.json", opponent__X1_json={
             **fx.OPP_X1, "attacks": [{**fx.OPP_A["attacks"][0], "id": "X1-12"}]}), [])
 
+    def test_a_successful_seat_needs_an_attacks_array(self):
+        """Audit: a reply with an unescaped quote parsed as its innermost evidence object, which has no `attacks`,
+        and passed as a seat that found nothing (one more cross-model seat, and the report publishable)."""
+        for bad in ("missing", None, "沒有", {"id": "X1-1"}, ["X1-1"]):
+            o = {k: v for k, v in fx.OPP_X1.items() if k != "attacks"}
+            if bad != "missing":
+                o["attacks"] = bad
+            errs = errors_for("opponent-X1.json", opponent__X1_json=o)
+            self.assertTrue(any(e.startswith("attacks 必須是物件的陣列") for e in errs), (bad, errs))
+        self.assertEqual(errors_for("opponent-X1.json"), [])  # an empty list is a seat that found nothing
+
 
 class RebuttalJudgmentTest(unittest.TestCase):
     def test_rebuttal_must_answer_every_attack(self):

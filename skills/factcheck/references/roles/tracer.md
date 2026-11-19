@@ -39,7 +39,7 @@
   "attribution": [{"statement": "…", "report_url": "https://…", "report_org": "…"}],
   "tactics": [{"tactic_id": "TW-T16", "features": ["a"], "quote": "原文片段……原文片段",
                "evidence": [{"url": "https://…", "excerpt": "只在列了查證得到的特徵時需要"}], "explanation": "一句話說明"}],
-  "limits": ["哪些東西查不到、為什麼"]
+  "limits": ["查不到什麼、為什麼（用白話寫；不寫欄位名、檔名，也不寫存檔、工具或權限的事，程式會存檔）"]
 }
 ```
 

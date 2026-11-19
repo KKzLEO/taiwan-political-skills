@@ -55,3 +55,18 @@
   - 企業管理的設定和受管外掛的 hooks，在這個模式下仍然有效。
 - **Claude Code 主體的內部席位：** 用 Agent 工具派出的子代理看得到 CLAUDE.md 和專案記憶。要真正隔離，得改成每個角色都用 `run-model` 開 `claude -p --safe-mode`，這屬於架構改動，交給使用者決定。
 - **這次沒有測：** 看得到的內容會不會真的影響判定。`evals/README.md` 第 2 節的帶立場金絲雀要跑完整流程，這次沒做。
+
+## 2026-11-20 補測：角色能不能自己讀本機檔案
+
+上面測的是「看不看得到使用者設定」，沒有測角色能不能用工具。這次在空資料夾放一個 `canary.txt`（內容是隨機字串），叫角色讀它：
+
+| 引擎 | 參數 | 結果 |
+|---|---|---|
+| claude（haiku） | 當時的參數：`--safe-mode --allowedTools WebSearch WebFetch` | **讀到了**，而且回報自己有 Read、Bash、Edit、Write、Agent |
+| claude（haiku） | 加 `--tools "WebSearch,WebFetch"` | 讀不到，回報只有 WebFetch 和 WebSearch 兩個工具 |
+| claude（haiku） | 加 `--tools`，叫它搜尋 | 搜尋正常 |
+| codex | 當時的參數：`exec --ignore-user-config --ephemeral -s read-only -c web_search="live"` | **讀到了** |
+| codex | 加 `-c features.shell_tool=false` | 讀不到，回報沒有 shell 或讀檔工具 |
+| codex | 加 `-c features.shell_tool=false`，叫它搜尋 | 搜尋正常 |
+
+之後 `run_model.build_command` 一律帶這兩個參數（`--allowedTools` 保留，它負責免問放行）。

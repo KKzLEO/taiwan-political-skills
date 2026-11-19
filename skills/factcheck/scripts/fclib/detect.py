@@ -17,7 +17,8 @@ INTERNAL_SEATS = [("A", "evidence"), ("B", "counter"), ("C", "stance")]
 
 def _list_ollama(cmd):
     try:
-        out = subprocess.run(cmd + ["list"], capture_output=True, text=True, timeout=20)
+        out = subprocess.run(cmd + ["list"], capture_output=True, text=True, encoding="utf-8", errors="replace",
+                             timeout=20)  # not the locale's encoding (Big5, cp950)
     except (OSError, subprocess.TimeoutExpired):
         return []
     if out.returncode != 0:
@@ -41,9 +42,15 @@ def detect(host, tiers, which=shutil.which, env=None, list_ollama=_list_ollama, 
     engines = []
     for e in tiers["engine"]:
         cmd = _command(e, which, env)
+        # The model and effort the roles will run with, so the report can show them; build_command reads these first.
         base = {"engine": e["id"], "vendor": e["vendor"], "available": cmd is not None, "cmd": cmd,
                 "cross_model": e["vendor"] != host_vendor, "can_search": e["can_search"],
-                "same_tier": e["same_tier"], "model": None, "probe": "skipped", "isolation": "unknown"}
+                "same_tier": e["same_tier"], "model": env.get(f"FC_{e['id'].upper()}_MODEL") or None,
+                "probe": "skipped", "isolation": "unknown"}
+        if e["id"] == "codex":  # always given to codex, whose CLI default was none (run_model.build_command)
+            base["effort"] = env.get("FC_CODEX_EFFORT") or "high"
+        elif e["id"] == "claude" and env.get("FC_CLAUDE_EFFORT"):  # the other engines take no effort setting
+            base["effort"] = env["FC_CLAUDE_EFFORT"]
         if e["id"] == "ollama":
             if cmd is None:
                 engines.append(base)

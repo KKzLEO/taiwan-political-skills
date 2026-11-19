@@ -14,6 +14,10 @@ import re
 import sys
 from pathlib import Path
 
+if sys.version_info < (3, 11):  # fclib needs tomllib; macOS's own python3 is 3.9, which gave a traceback here
+    sys.exit(f"錯誤：需要 Python 3.11 以上，目前是 {sys.version.split()[0]}。"
+             "請改用 python3.11、python3.12 這類指令執行同一個指令。")
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from fclib import detect, evalcmp, finalize, io, media, render, run_model, score, validate, video  # noqa: E402
@@ -77,8 +81,17 @@ def cmd_detect(args):
                   file=sys.stderr)
 
 
+def _check_seat(run: Path, seat):
+    """A seat that detect never assigned would run as an extra seat on the host model (or crash on its lens)."""
+    seats = io.read_json(run / "models.json").get("seats")
+    if seat and seats is not None and seat not in [s["seat"] for s in seats]:
+        sys.exit(f"錯誤：models.json 沒有席位 {seat}（有的席位：{'、'.join(s['seat'] for s in seats) or '沒有'}）")
+
+
 def cmd_prompt(args):
     run = _run_dir(args)
+    if args.seat:
+        _check_seat(run, args.seat)
     lens = args.lens
     if args.role == "opponent" and lens is None:
         lens = "external" if args.seat.startswith("X") else {"A": "evidence", "B": "counter", "C": "stance"}[args.seat]
@@ -101,12 +114,24 @@ def _engine_for(run: Path, role: str, seat, name):
 
 def cmd_run_model(args):
     run = _run_dir(args)
+    done = None if args.force else run_model.finished(run, args.role, args.seat, io.tactic_library())
+    if done:  # spec 3.2: rerunning a finished step could only replace a valid file, or lose it when the new one fails
+        print(f"# {done.name} 已經完成而且通過檢查，沒有重跑（要重跑加 --force）", file=sys.stderr)
+        print(done)
+        return
+    _check_seat(run, args.seat)
     engine = _engine_for(run, args.role, args.seat, args.engine)
     try:
         path = run_model.run_role(run, args.role, args.seat, engine, lens=args.lens,
                                   known_tactics=io.tactic_library())
     except run_model.RunModelError as exc:
         sys.exit(f"錯誤：{exc}")
+    if args.role == "opponent":  # a failed seat exits 0 so the other seats carry on, so it has to be said here
+        data = io.read_json(path)
+        if data.get("status") != "ok":
+            kept = path.with_name(path.name + ".rejected")
+            print(f"# 警告：反方 {args.seat} 失敗，已記成 failed：{data.get('error', '')}"
+                  + (f"（完整路徑：{kept}）" if kept.exists() else ""), file=sys.stderr)
     print(path)
 
 
@@ -125,6 +150,10 @@ def cmd_input(args):
     run = _run_dir(args)
     if (run / "source.json").exists():  # a new message would mix with the old debate files
         sys.exit("錯誤：這個資料夾已經讀入過訊息；要查另一則，先用 fc.py init 開新的資料夾")
+    # A URL input reads only the link and a text input drops it, so either mix would lose half of what was given.
+    if (args.type == "url" and args.file) or (args.type == "text" and args.url_file):
+        sys.exit("錯誤：一次只能查一種內容。要查的是那段話（連結照原樣留在文字裡），用 --type text --file；"
+                 "要查的是那篇報導，用 --type url --url-file；兩個都要查就分兩次，各開一個資料夾")
     url = _read_text(args.url_file).strip() if args.url_file else None
     content = url if args.type == "url" else (_read_text(args.file) if args.file else "")
     data = {"input_type": args.type, "content": content or "", "prompt": _read_text(args.prompt_file).strip(), "url": url}
@@ -152,17 +181,20 @@ def cmd_validate(args):
 
 
 def cmd_media(args):
-    hit = media.lookup(args.query, media.load(args.region))
+    outlets, q = media.load(args.region), args.query.strip()
+    # A domain without https:// (cna.com.tw/news/1) only matched by name before, so it was never found.
+    bare = "://" not in q and "." in q and not any(c.isspace() for c in q)
+    hit = (media.lookup("https://" + q, outlets) if bare else None) or media.lookup(q, outlets)
     if hit is None:
-        print("對照表裡沒有這個媒體。報告會寫「對照表沒有收錄」，不要自己推斷立場。")
+        print("對照表裡沒有這個媒體，不要自己推斷立場。")
         sys.exit(1)
     print(json.dumps(hit, ensure_ascii=False, indent=2))
 
 
 def cmd_video(args):
     url = _read_text(args.url_file).strip() if args.url_file else args.url
-    if not url:
-        sys.exit("錯誤：需要影片網址（--url-file）")
+    if not validate._is_url(url):  # anything else reached yt-dlp as an option (`--version`, `-U`)
+        sys.exit("錯誤：需要 http(s) 開頭的影片網址（--url-file）")
     text, note = video.fetch_transcript(url)
     print(note, file=sys.stderr)
     if text is None:
@@ -175,10 +207,14 @@ def cmd_video(args):
 
 def cmd_finalize(args):
     run = _run_dir(args)
-    for name in ("proponent.json", "judgment.json"):  # finalize compares the two (judge-only changes)
+    # Every step still has to fit: a missing rebuttal, or an attack the rebuttal never answered, used to settle
+    # into a complete-looking report. The proponent is compared with the judge (judge-only changes).
+    names = ["claims.json", "proponent.json", "rebuttal.json", "judgment.json"]
+    names += sorted(p.name for pattern in ("opponent-*.json", "review-*.json") for p in run.glob(pattern))
+    for name in names:
         errors = validate.validate_file(run, name, known_tactics=io.tactic_library())
         if errors:
-            sys.exit(f"錯誤：{name} 沒有通過檢查：\n" + "\n".join(errors))
+            sys.exit(f"錯誤：{name} 沒有通過檢查：" + ("\n" if len(errors) > 1 else "") + "\n".join(errors))
     io.write_json(run / "verdicts.json", finalize.finalize(run))
     # A review that never arrived overturns the judge's label; this is the one place the host is told which seat.
     missing = {s: ids for s, ids in finalize.reviewers_needed(run).items() if not (run / f"review-{s}.json").exists()}
@@ -192,8 +228,8 @@ def cmd_finalize(args):
 def cmd_reviewers(args):
     run = _run_dir(args)
     needed = finalize.reviewers_needed(run)
-    if not needed:
-        print("不需要派覆核")
+    if not needed:  # stderr: stdout is read as the list of seats (SKILL.md step 8 loops over its first column)
+        print("不需要派覆核", file=sys.stderr)
     for seat, ids in needed.items():
         print(f"{seat}\t{','.join(ids)}")
 
@@ -219,11 +255,48 @@ def cmd_render(args):
     print(run / "report.md")
 
 
+def _review_lines(run: Path, known):
+    """Each seat that has to review, by the same list `fc.py reviewers` prints; None when the judgment is not ready."""
+    if validate.validate_file(run, "judgment.json", known_tactics=known):
+        return None
+    try:
+        needed = finalize.reviewers_needed(run)
+    except (io.ReadError, KeyError, TypeError, AttributeError):
+        return None
+    if not needed:
+        return [f"{'review-*.json':<18} 不需要"]
+    lines = []
+    for seat, ids in needed.items():
+        name = f"review-{seat}.json"
+        errs = validate.validate_file(run, name, known_tactics=known) if (run / name).exists() else None
+        state = f"缺少（要覆核 {'、'.join(ids)}）" if errs is None else f"格式錯誤（{len(errs)}）" if errs else "完成"
+        lines.append(f"{name:<18} {state}")
+    return lines
+
+
 def cmd_status(args):
+    """Resuming follows this list (SKILL.md step 0), so a failed seat, a seat with no file and a missing review
+    each get their own line; a glob of the files that exist showed none of them."""
     run = _run_dir(args)
     known = io.tactic_library()
+    models = io.read_json_or_none(run / "models.json") or {}
     for pattern in STAGES:
         paths = sorted(run.glob(pattern))
+        if pattern == "review-*.json":
+            lines = _review_lines(run, known)
+            if lines is not None:
+                print("\n".join(lines))
+                continue
+        if pattern == "opponent-*.json" and models.get("seats"):
+            names = sorted({p.name for p in paths} | {f"opponent-{s['seat']}.json" for s in models["seats"]})
+            for name in names:
+                if not (run / name).exists():
+                    print(f"{name:<18} 缺少")
+                    continue
+                errs = validate.validate_file(run, name, known_tactics=known)
+                failed = not errs and (io.read_json(run / name).get("status", "ok") != "ok")
+                print(f"{name:<18} {'格式錯誤（' + str(len(errs)) + '）' if errs else '失敗（可以重跑這一席）' if failed else '完成'}")
+            continue
         if not paths:
             print(f"{pattern:<18} 缺少")
             continue
@@ -270,6 +343,9 @@ def cmd_set_aside_tactics(args):
 
 
 def main(argv=None):
+    for stream in (sys.stdout, sys.stderr):  # cp1252 or cp950 cannot print the Chinese every command prints
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(prog="fc.py", description="台灣訊息查核 skill 的固定步驟")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
@@ -290,7 +366,7 @@ def main(argv=None):
     p.add_argument("--probe", action="store_true", help="實際呼叫外部 CLI，確認登入、能否上網、隔離程度")
     p.add_argument("--host-model", help="主模型角色用的模型 ID，記在 models.json（例如 claude-opus-5-5）")
     p.add_argument("--host-effort", choices=["low", "medium", "high", "xhigh", "max"],
-                   help="主模型角色的推理強度，記在 models.json（目前只有 claude 會用到）")
+                   help="主模型角色的推理強度，記在 models.json（claude 和 codex 都會照這個跑）")
 
     for name, fn in (("prompt", cmd_prompt), ("run-model", cmd_run_model)):
         p = add(name, fn)
@@ -299,6 +375,9 @@ def main(argv=None):
         p.add_argument("--lens", choices=sorted(run_model.LENS_FILES))
         if name == "run-model":
             p.add_argument("--engine", help="預設用 models.json 裡該席位的引擎；其他角色用主體平台")
+            p.add_argument("--force", action="store_true",
+                           help="這一步已經完成也重跑。新的輸出沒通過檢查時，原本的檔案會被刪掉（反方席位會改記成失敗）；"
+                                "重跑之後，後面的步驟都要照順序重跑")
 
     p = add("input", cmd_input)
     p.add_argument("--type", required=True, choices=["text", "url", "image", "video"])
@@ -335,7 +414,7 @@ def main(argv=None):
         ap.error("opponent 和 review 需要 --seat")
     try:
         args.fn(args)
-    except io.ReadError as exc:  # a missing or broken file is one line that names it, not a traceback
+    except (io.ReadError, run_model.RunModelError) as exc:  # one line that names the file or setting, not a traceback
         sys.exit(f"錯誤：{exc}")
 
 

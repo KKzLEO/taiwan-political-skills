@@ -61,6 +61,29 @@ class DetectTest(unittest.TestCase):
         self.assertFalse(engine(m, "ollama", "tiny:7b")["same_tier"])
         self.assertFalse(engine(m, "ollama", "bigmodel:120b")["can_search"])
 
+    def test_codex_records_the_effort_and_model_its_roles_will_use(self):
+        """Host decision: the report's seat table shows the model and effort, so models.json has to hold them."""
+        e = engine(run(found=("codex",)), "codex")
+        self.assertEqual((e["model"], e["effort"]), (None, "high"))
+        m = run(found=("codex",), env={"FC_CODEX_EFFORT": "medium", "FC_CODEX_MODEL": "m1"})
+        e = engine(m, "codex", "m1")
+        self.assertEqual((e["model"], e["effort"]), ("m1", "medium"))
+        self.assertEqual([s["model"] for s in detect.assign_seats(m, "full") if s["seat"] == "X1"], ["m1"])
+
+    def test_claude_records_its_env_overrides(self):
+        e = engine(run(found=("claude", "codex"), env={"FC_CLAUDE_MODEL": "c1", "FC_CLAUDE_EFFORT": "max"}), "claude", "c1")
+        self.assertEqual(e["effort"], "max")
+        self.assertIsNone(engine(run(found=("claude",)), "claude").get("effort"))
+        self.assertNotIn("effort", engine(run(found=("gemini",), env={"FC_GEMINI_EFFORT": "max"}), "gemini"))
+
+    def test_ollama_list_is_read_as_utf8(self):
+        from unittest import mock
+        import subprocess
+        with mock.patch.object(detect.subprocess, "run") as run:
+            run.return_value = subprocess.CompletedProcess([], 0, "NAME\nbigmodel:120b x\n", "")
+            self.assertEqual(detect._list_ollama(["ollama"]), ["bigmodel:120b"])
+        self.assertEqual(run.call_args.kwargs.get("encoding"), "utf-8")
+
     def test_probe_result_is_recorded(self):
         m = run(found=("codex",), probe=lambda e: {"probe": "failed", "isolation": "unknown", "detail": "not logged in"})
         self.assertEqual(engine(m, "codex")["probe"], "failed")

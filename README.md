@@ -6,7 +6,7 @@
 
 ## 它會做什麼
 
-- **查核四種輸入：** 新聞網址、LINE 轉傳文字、截圖、影片連結（YouTube 等，需要 `yt-dlp`）
+- **查核四種輸入：** 新聞網址、LINE 轉傳文字、截圖、影片連結（YouTube 等，需要 `yt-dlp`，只用上傳者自己放的字幕）
 - **一個正方對三個反方：**
   - 反方 A 檢查證據
   - 反方 B 自己去找反證
@@ -54,7 +54,7 @@
 
 ## 安裝
 
-需要 Python 3.11 以上，不用另外裝任何套件。影片查核需要 [yt-dlp](https://github.com/yt-dlp/yt-dlp)。
+需要 Python 3.11 以上，不用另外裝任何套件。影片查核需要 [yt-dlp](https://github.com/yt-dlp/yt-dlp)。目前只在 macOS 上實測過；Windows 請在 WSL 裡使用。
 
 **Claude Code：**
 
@@ -88,13 +88,16 @@ ln -s "$PWD/taiwan-political-skills/skills/factcheck" ~/.codex/skills/factcheck
 
 - **有些角色看得到你自己的設定**（2026-11-18 金絲雀實測，見 `evals/results/2026-11-18-isolation.md`）：
   - `claude -p` 一律加 `--safe-mode`，看不到 `~/.claude/CLAUDE.md`、hooks、外掛和 MCP，網路搜尋照常。
-    - 需要支援這個參數的 Claude Code 版本。舊版會在偵測或第一次執行時失敗，`fc.py detect --probe` 會印出原因。
+    - 需要支援這個參數的 Claude Code 版本。主體是 Claude Code 時，舊版會在第 2 步失敗並印出原因；Claude Code 當外部模型時，`fc.py detect --probe` 就會印出原因。
     - 企業管理的設定和受管外掛的 hooks，在這個模式下仍然有效。
-  - `codex exec` 一定會讀到 `~/.codex/AGENTS.md`，目前沒有參數關得掉，報告的席位表會標「部分隔離」。要完整隔離，另外準備一個乾淨的 Codex 設定，自己登入一次，再用 `FC_CODEX_CMD="env CODEX_HOME=$HOME/.codex-factcheck codex"` 指定。
+  - `codex exec` 一定會讀到 `~/.codex/AGENTS.md`，目前沒有參數關得掉，報告的席位表會標「部分隔離」。要完整隔離，另外準備一個乾淨的 Codex 設定，自己登入一次，再用 `FC_CODEX_CMD="env CODEX_HOME=$HOME/.codex-factcheck codex"` 指定。這個指令會原樣寫進 `models.json`，分享查核資料夾時會帶出你的帳號名稱。
+  - **Codex 的角色不讀你的 Codex 設定**（為了隔離加了 `--ignore-user-config`），`~/.codex/config.toml` 裡的模型和推理強度不會套用。沒有指定時用 Codex CLI 的預設模型，推理強度是 `high`；要換模型設 `FC_CODEX_MODEL`，要換強度設 `FC_CODEX_EFFORT`，再重跑偵測。報告的席位表會寫出每一席用的模型和推理強度。
+  - **角色讀不到你電腦上的檔案**（2026-11-20 實測）：`claude -p` 的角色只有網頁搜尋和網頁讀取兩個工具（`--tools "WebSearch,WebFetch"`）；`codex exec` 的角色關掉了 shell 工具。不加的時候，兩種角色都讀得到電腦上的檔案；加了之後讀不到本機的文字檔，搜尋照常。Codex 其他內建工具有沒有關掉，沒有逐一實測。
   - 在 Claude Code 裡執行時，辯論角色也用 `claude -p --safe-mode` 跑，看不到你的 CLAUDE.md 和專案記憶。終端機裡要有 `claude` 指令；只裝了桌面版時會停下來，請你安裝命令列版本，或用 `FC_CLAUDE_CMD` 指定路徑。
   - 讀入和拆題也用獨立的子程序跑。主體只負責把你給的內容原封不動交給程式；截圖上的文字由主體照抄，只抄寫、不判斷。
   - 席位表的「隔離」欄是模型自己回報的，不是金絲雀實測。
 - **不判斷圖片或影片是不是偽造的，** 只查內容說了什麼。
+- **影片只用上傳者自己放的字幕。** 自動產生和機器翻譯的字幕不採用；影片沒有上傳者自己放的字幕時，要你自己提供逐字稿。抓字幕失敗時，會照實印出 yt-dlp 的錯誤；中文字幕沒抓到、只抓到英文這種排在後面的字幕時，也算抓字幕失敗，不會拿可能是翻譯的字幕當成當事人的原話。逐字稿和影片對不對得上不會另外查核，人名或數字轉錯會直接影響結果。
 - **社群平台常常抓不到原始貼文，** 這時會請你貼上連結或截圖。
 - **主旨錯、前提真的訊息，結論可能偏高。**
   - 2026-11-18 第一輪的標準案例裡，有兩則主旨錯誤的訊息拿到「部分符合」，而且報告標了「可公開」。原因是拆題太細，真的細節稀釋了錯的主旨。

@@ -224,7 +224,7 @@ def render(run, outlets=None, tactics=None) -> str:
             + (f"；網址：{_cell(source['url'])}" if source.get("url") else ""),
             "", "| 席位 | 角色 | 模型 | 狀態 | 跨模型 | 能上網 | 隔離 |", "|---|---|---|---|---|---|---|"]
     for s in seats:
-        out.append(f"| {s['seat']} | {LENS.get(s['lens'], s['lens'])} | {s['engine']} | "
+        out.append(f"| {s['seat']} | {LENS.get(s['lens'], s['lens'])} | {_model_cell(models, s)} | "
                    f"{ {'ok': '成功', 'missing': '沒有執行'}.get(s['status'], '失敗')} | {'是' if s['cross_model'] else '否'} | "
                    f"{'是' if s['can_search'] else '否'} | {ISOLATION.get(s['isolation'], s['isolation'])} |")
     if timed:
@@ -500,3 +500,13 @@ def render(run, outlets=None, tactics=None) -> str:
 def _load_tactics():
     path = io.DATA_DIR / "tw" / "tactics.toml"
     return io.read_toml(path).get("tactic", []) if path.exists() else []
+
+
+def _model_cell(models, s):
+    """The seat table's 模型 cell: the model and reasoning effort detect recorded for the seat's engine (Codex roles
+    do not read the user's own Codex settings, so these are what ran)."""
+    seat = next((x for x in models.get("seats", []) if x.get("seat") == s["seat"]), {})
+    engine = next((e for e in models.get("engines", []) if e.get("engine") == s["engine"]
+                   and (not seat.get("model") or e.get("model") == seat.get("model"))), {})
+    model = seat.get("model") or engine.get("model")
+    return f"{_cell(s['engine'])}（{_cell(model) or '預設模型'}，推理強度 {_cell(engine.get('effort')) or '預設'}）"

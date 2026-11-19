@@ -1,6 +1,6 @@
 # 在 Claude Code 上派出角色
 
-流程和指令見 SKILL.md 的第 2–8 步。第 2 步的讀入與拆題和主模型的席位都跑 `claude -p --safe-mode`。2026-11-18 的金絲雀實測顯示，它看不到使用者的 CLAUDE.md 和專案記憶；Agent 子代理看得到，所以**不要用 Agent 工具派角色**。
+流程和指令見 SKILL.md 的第 2–8 步。第 2 步的讀入與拆題和主模型的席位都跑 `claude -p --safe-mode`。2026-11-18 的金絲雀實測顯示，它看不到使用者的 CLAUDE.md 和專案記憶；Agent 子代理看得到，所以**不要用 Agent 工具派角色**。每個角色只有網頁搜尋和網頁讀取兩個工具（`--tools "WebSearch,WebFetch"`；2026-11-20 實測：不加時角色讀得到本機檔案，加了之後讀不到，搜尋照常）。
 
 **第 0 步偵測時，記下你自己的模型：**
 
@@ -15,6 +15,8 @@ python3 "$SKILL/scripts/fc.py" detect --run "$RUN" --probe --host-model <你自�
 **每個 `run-model` 都用 `run_in_background` 執行：**
 - 等完成通知再進下一步，不要輪詢。每個角色要跑幾分鐘到半小時以上，超過 Bash 工具 10 分鐘的上限。
 - 背景指令還沒結束時，不要重跑同一步。`fc.py status` 會把還在跑的步驟顯示成「缺少」。
+
+**`detect --probe` 和 `fc.py video` 也可能跑超過 2 分鐘**（探測每個外部 CLI 最多等 4 分鐘、失敗會再試一次；抓字幕最多 5 分鐘）。執行時把 Bash 工具的 timeout 設成 600000，或一樣用 `run_in_background`。
 
 **detect 印出「找不到主體的 CLI」時：** 通常是只裝了桌面版或 IDE 外掛，終端機裡沒有 `claude` 指令。停下來告訴使用者，請他選一個做法，再重跑第 0 步：
 - 安裝 Claude Code 的命令列版本，或把 `claude` 所在的資料夾加進 PATH。

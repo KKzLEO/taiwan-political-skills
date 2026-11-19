@@ -1,3 +1,4 @@
+import copy
 import unittest
 
 from tests import fixtures as fx
@@ -44,6 +45,30 @@ class SeatStatusTest(unittest.TestCase):
     def test_cross_model_is_computed_not_trusted(self):
         lying = dict(fx.OPP_A, cross_model=True)
         self.assertFalse(self.seats(opponent__A_json=lying)["A"]["cross_model"])
+
+    def test_seat_table_shows_the_model_and_effort_each_seat_ran_with(self):
+        """Host decision: the 模型 column showed only `codex` or `claude`, not which model or how much reasoning."""
+        from fclib import finalize, io, render, score
+        models = copy.deepcopy(fx.MODELS)
+        models["engines"][0].update(model=None, effort="high")
+        models["engines"].append({"engine": "claude", "vendor": "anthropic", "available": True, "cross_model": False,
+                                  "can_search": True, "same_tier": True, "model": "claude-opus-5-5", "effort": "xhigh",
+                                  "probe": "skipped", "isolation": "unknown"})
+        models["seats"] = ([{"seat": s, "engine": "claude", "kind": "internal", "lens": lens, "model": None}
+                            for s, lens in (("A", "evidence"), ("B", "counter"), ("C", "stance"))]
+                           + [{"seat": "X1", "engine": "codex", "kind": "external", "lens": "external", "model": None}])
+        run = make_run(fx.run_files(models_json=models))
+        v = finalize.finalize(run)
+        io.write_json(run / "verdicts.json", v)
+        io.write_json(run / "score.json", score.compute(v, io.read_json(run / "run.json"), detect.seat_status(run)))
+        out = render.render(run, outlets=[], tactics=[])
+        self.assertIn("| A | 反方 A：證據 | claude（claude-opus-5-5，推理強度 xhigh） | 成功 |", out)
+        self.assertIn("| X1 | 外部反方 | codex（預設模型，推理強度 high） | 成功 |", out)
+        models["engines"][1].update(model=None, effort=None)
+        run = make_run(fx.run_files(models_json=models))
+        io.write_json(run / "verdicts.json", v)
+        io.write_json(run / "score.json", score.compute(v, io.read_json(run / "run.json"), detect.seat_status(run)))
+        self.assertIn("| B | 反方 B：反證 | claude（預設模型，推理強度 預設） |", render.render(run, outlets=[], tactics=[]))
 
     def test_external_seat_without_search(self):
         models = {"host": "claude", "host_vendor": "anthropic", "engines": [

@@ -394,7 +394,8 @@ def _opponent(d, run, ctx):
     tags = {t.get("tactic_id") for t in (io.read_json_or_none(run / "trace.json") or {}).get("tactics", [])
             if isinstance(t, dict)}
     ids = set()
-    for i, a in enumerate(d.get("attacks", [])):
+    # No default: a broken reply parses as a fragment without `attacks`, which must not pass as a seat that found nothing.
+    for i, a in enumerate(_items(err, d.get("attacks"), "attacks", dict)):
         p = f"attacks[{i}]"
         aid = a.get("id")
         # Every later step keys on the id across seats, so two seats must never share one (fullmatch: no line break).

@@ -41,6 +41,7 @@ python3 evals/harness/analyze.py --base <輸出資料夾>
 - `run_cases.py` 照 SKILL.md 的順序執行同一批 `fc.py` 指令：每批先做一次真的 `detect --probe`，每則再跑收集輸入、讀入與拆題、溯源、正方、所有反方、答辯、裁判、覆核和結算。它不讀答案卷。
 - `analyze.py` 把結論分成完全相同、差一級、嚴重錯誤、其他錯誤（定義在 `results/2026-11-19-release-criteria.md`），列出結論錯卻標可公開的則數，並檢查同一組探測的各版本是否一致。
 - 它代替的是主體「照 SKILL.md 下指令」這一段，所以量不到主體自己會不會照做、轉述對不對。這要另外在真的 Claude Code 和 Codex 裡各跑一次。
+- `--host-effort` 預設是 `xhigh`。主體是 Codex（`--host codex`）時，這個強度現在也會套用到 Codex 的角色；2026-11-20 以前 Codex 的角色實際上是用推理強度 `none` 跑的，所以時間和用量不能和更早的評測直接比。
 - 輸出資料夾請放在不會被清掉的地方。每則會同時啟動好幾個模型 CLI，筆電上 `--workers` 不要開大。
 - 用量會記在輸出資料夾的 `usage.jsonl`（claude）和 `usage-codex.jsonl`（codex）。
 
@@ -48,7 +49,7 @@ python3 evals/harness/analyze.py --base <輸出資料夾>
 
 **自動探測（每次查核都會做）：** `fc.py detect --probe` 會問每個外部 CLI「你的脈絡裡有沒有使用者層級的設定」，結果記在 `models.json` 的 `isolation`，報告的席位表會顯示。這是模型自己回報的，算是快篩。
 
-**手動金絲雀測試（發版前做）：** 有兩種，2026-11-18 做過第一種（結果見 `results/2026-11-18-isolation.md`）。
+**手動金絲雀測試（發版前做）：** 有三種，2026-11-18 做過第一種、2026-11-20 做過第三種（結果都在 `results/2026-11-18-isolation.md`）。
 
 1. **看不看得到：**
    - 先備份 `~/.claude/CLAUDE.md` 和 `~/.codex/AGENTS.md`，記下 sha256。`~/.codex/AGENTS.md` 如果是 symlink，就寫它指向的檔案。
@@ -61,6 +62,10 @@ python3 evals/harness/analyze.py --base <輸出資料夾>
    - 用完整模式查核 `probes/symmetry.toml` 的其中一個版本。
    - 用 `grep -rl "PURPLE-ELEPHANT-42" <查核資料夾>` 檢查，不能有任何檔案出現這個字串；判定也要和沒加這一行時一樣。
    - 跑完整流程要半小時以上，這段期間你的其他 session 都會讀到這一行。
+3. **能不能用工具讀本機檔案：**
+   - 在空資料夾放一個寫著隨機字串的 `canary.txt`。
+   - 用 `run_model.build_command` 組出來的參數，叫 claude 和 codex 的角色各做兩件事：讀那個檔、搜尋一件事。
+   - 要看到讀不到、搜尋照常。另外用拿掉 `--tools`（claude）或 `features.shell_tool=false`（codex）的呼叫當對照組。
 
 ## 3. 誘導式提問（`probes/leading.toml`）
 
