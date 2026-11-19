@@ -41,6 +41,10 @@ CLAIM_TYPES = {
     "U": "無法查證",
 }
 
+# Opinion, prediction and vague claims never count, whatever label the judge gives them: they may share
+# text with scored claims (spans only checks F/S and I), so scoring them would count one sentence twice.
+UNSCORED_TYPES = {"O", "P", "U"}
+
 STANCES = {"supports", "refutes", "context"}
 DIRECT_STANCES = {"supports", "refutes"}
 ACCESS_NOTES = {"full", "paywall", "blocked", "archived", "snippet", "not_original", "no_transcript"}

@@ -85,6 +85,10 @@ class FinalizeTest(unittest.TestCase):
         r = run_finalize(judgment_json=judgment)  # review-A.json is missing
         self.assertEqual(claim(r, "C1")["review_status"], "failed")
 
+    def test_claim_type_comes_from_claims_json(self):
+        r = run_finalize()
+        self.assertEqual([claim(r, c)["type"] for c in ("C1", "C2")], ["F", "O"])
+
     def test_claim_metadata_comes_from_claims_json(self):
         c1 = claim(run_finalize(), "C1")
         self.assertEqual((c1["importance"], c1["core"], c1["legal"]), (5, True, False))
@@ -142,6 +146,34 @@ class ImportanceChallengeTest(unittest.TestCase):
         self.assertEqual((c1["label"], c1["review_status"]), ("misleading", "passed"))
         self.assertEqual(c1["upheld_attacks"], ["B-1"])
         self.assertEqual([a["attack_id"] for a in c1["importance_attacks"]], ["C-1"])
+
+
+def unverified_judgment():
+    j = copy.deepcopy(fx.JUDGMENT)
+    j["rulings"][1]["verified_urls"] = []
+    j["rulings_unverified"] = ["B-1"]
+    return j
+
+
+class UnverifiedRulingTest(unittest.TestCase):
+    """The judge still left out the URLs it checked after a retry (validate.fallback): the ruling stands and
+    is listed once at the top; labels, reviews and disputes are untouched."""
+
+    def test_ruling_is_listed_and_the_verdict_stands(self):
+        r = run_finalize(judgment_json=unverified_judgment())
+        self.assertEqual(r["unverified_rulings"], [{"attack_id": "B-1", "seat": "B", "claim_id": "C1", "target": "label"}])
+        self.assertEqual(claim(r, "C1")["label"], "misleading")
+        self.assertEqual(r["disputes"], [])
+
+    def test_nothing_listed_by_default(self):
+        self.assertEqual(run_finalize()["unverified_rulings"], [])
+
+    def test_trace_attack_is_listed_without_a_claim(self):
+        o = fx.tactic_attack_overrides(upheld=True, keep=False)
+        o["opponent__C_json"]["attacks"][0]["evidence"] = [{"url": "https://example.org/t", "excerpt": "原文"}]
+        o["judgment_json"]["rulings_unverified"] = ["C-1"]
+        r = run_finalize(**o)
+        self.assertEqual(r["unverified_rulings"], [{"attack_id": "C-1", "seat": "C", "claim_id": None, "target": "tactic"}])
 
 
 class RemovedTacticsFinalizeTest(unittest.TestCase):

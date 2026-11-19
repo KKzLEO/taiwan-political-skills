@@ -1,0 +1,127 @@
+id = "case-018"
+title = "「無照駕駛重罰三讀，無照教人開車也通通中」：三讀和罰鍰上限都對，但無照教人開車在低一級的罰則"
+input_type = "text"
+input = """🚨【最新！立法院三讀通過：無照駕駛、改裝噪音車 重罰上路！】
+⚖️ 無照駕駛，罰到你哭！
+🔸 機車無照 → 最高 3.6 萬
+🔸 汽車無照 → 最高 6 萬 + 當場扣車
+👉 包含：機車駕照開汽車、假駕照、吊銷後還開、吊扣期硬要開、無照教人開車…通通中！
+📊 為什麼要罰這麼重？
+2023 年無照駕駛：
+❌ 5.5 萬件
+❌ 763 人死亡、7.8 萬人受傷
+❌ 是酒駕死傷的 6 倍！
+
+🔇 改裝排氣管不登記？加倍罰！
+🔸 原本 1,800 → 3,600 元
+🔸 15 天內不去檢驗 → 吊扣牌照
+🔸 拖 2 個月以上 → 直接註銷牌照！"""
+target = "政府機關"
+expected_result = "大致符合"
+notes = """主旨真、細節錯：政策懶人包把一種行為歸錯罰則級距，另一個期限算短。訊息原文取自 Cofacts（文章 1zbejjbcc3xtx，2025-10-30 收錄，5人回報，三讀後兩天），逐字照抄，表情符號都保留。2026-01-22 另有一則較短的同主題訊息（T5XF5JsB9EfTQQdN9uAo），本案只用這一則。沒有找到針對這則訊息的查核報告，答案來自立法院議事錄和全國法規資料庫。訊息介紹立法院通過、交通部主管的罰則，沒有攻擊或稱讚特定政黨，target 取政府機關。
+判定關鍵：
+1. 三讀是真的：立法院第11屆第4會期第6次會議（114年10月28日）決議道路交通管理處罰條例第16、21條等條文修正通過；114年11月19日公布，第21條自115年1月31日施行，第16條自115年3月31日施行（全國法規資料庫沿革第48筆）。訊息發出時「上路」還早了三個月，但今天（2026-11-19）兩條都已施行，判 true。
+2. 罰鍰上限都對：現行第21條第1項第1至5款，機車處1萬8千到3萬6千元、汽車處3萬6千到6萬元，並當場移置保管車輛。判 true。
+3.「包含…無照教人開車…通通中」判 mixed：機車駕照開汽車（第2款）、假駕照（第3款）、吊銷後還開（第4款）、吊扣期間開（第5款）都在高額罰則裡；但「未領有駕駛執照，以教導他人學習駕車為業」是第8款，屬於第6至9款，罰6千到1萬2千元，不是3.6萬或6萬。我用立法院公報第114卷第83期（114年10月28日院會紀錄）的文字版比對三讀條文，第8款在三讀版本就已經是這個級距（第21條在115年8月17日又修正過，現行條文的第1項和第8款沒有變），所以不是時間造成的差異。公報文字版取自 ly.govapi.tw 鏡像，沒有另外對照官方 PDF 的頁面，所以沒有列為摘錄。
+4. 排氣管：第16條第1項原罰900到1,800元，第2項規定非原型式排氣管不申報異動登記「按前項罰鍰最高額加倍處罰」，即3,600元，判 true；「責令其於十五日內檢驗」，但吊扣牌照是「逾期十五日以上」才發生，也就是期限過後再超過15天，訊息寫成「15天內不去檢驗就吊扣」，期限算短了，判 mostly_true；「逾期二個月以上者，註銷其牌照」判 true。
+5.「2023年無照駕駛5.5萬件、763人死亡、7.8萬人受傷、是酒駕死傷的6倍」判 unverified：交通部114年9月16日新聞稿只說「113年無照駕駛件數仍遠高於酒駕及危險駕車」，沒有公布2023年的這組數字；我沒有取得交通部道安資料庫的原始統計。媒體報導（Taipei Times 2025-11-01社論寫2023年55,492件、763人死亡、近7.9萬人受傷；聯合報引用同年酒駕死亡253人）只當線索，照死亡人數算約3倍，「6倍」的算法不明。
+為什麼是大致符合：訊息要讀者知道的是「無照駕駛和改裝排氣管的罰則已經三讀加重」，這件事和主要金額都正確；錯在把「無照教人開車」也歸進最高罰則，以及吊扣牌照的期限，都是不影響主旨的細節。統計數字查不到，但屬於說明修法理由的背景，不影響結論。
+「無照駕駛，罰到你哭！」是修辭，屬 not_factual。
+摘錄說明：議事錄和沿革摘錄只去掉排版造成的換行和空白。"""
+
+[[claim]]
+original = "立法院三讀通過：無照駕駛、改裝噪音車 重罰上路！"
+expected_label = "true"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/04/06LCEWC03_110406.pdf"
+excerpt = "決議：道路交通管理處罰條例增訂第九十二條之二條文；並將第十六條、第二十一條、第二十一條之一、第三十五條、第四十四條、第四十五條、第五十六條、第六十五條、第六十七條、第七十二條、第七十八條、第八十條、第八十四條、第八十五條之三及第八十七條條文修正通過。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=K0040012"
+excerpt = "48. 中華民國一百十四年十一月十九日總統華總一義字第 11400117171 號令修正公布第 16、21、21-1、35、44、45、56、65、67、72、78、80、84、85-3、87 條條文；增訂第 92-2 條條文；施行日期，由行政院以命令定之"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=K0040012"
+excerpt = "中華民國一百十五年三月二十七日行政院院臺交字第 1151007003 號令發布第 16 條定自一百十五年三月三十一日施行"
+
+[[claim]]
+original = """🔸 機車無照 → 最高 3.6 萬
+🔸 汽車無照 → 最高 6 萬 + 當場扣車"""
+expected_label = "true"
+core = false
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=21"
+excerpt = "汽機車駕駛人有下列第一款至第五款情形之一者，機車駕駛人處新臺幣一萬八千元以上三萬六千元以下罰鍰，汽車駕駛人處新臺幣三萬六千元以上六萬元以下罰鍰，第六款至第九款情形之一者，處新臺幣六千元以上一萬二千元以下罰鍰，並均當場移置保管該汽機車："
+
+[[claim]]
+original = "包含：機車駕照開汽車、假駕照、吊銷後還開、吊扣期硬要開、無照教人開車…通通中！"
+expected_label = "mixed"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=21"
+excerpt = "二、領有機車駕駛執照，駕駛小型車。三、使用偽造、變造或矇領之駕駛執照駕駛小型車或機車。四、駕駛執照業經吊銷、註銷仍駕駛小型車或機車。五、駕駛執照吊扣期間駕駛小型車或機車。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=21"
+excerpt = "八、未領有駕駛執照，以教導他人學習駕車為業。"
+
+[[claim]]
+original = """2023 年無照駕駛：
+❌ 5.5 萬件
+❌ 763 人死亡、7.8 萬人受傷
+❌ 是酒駕死傷的 6 倍！"""
+expected_label = "unverified"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://www.motc.gov.tw/ch/app/data/view?id=14&module=news&serno=4c8abbbb-f008-4565-a8de-d5fc719bdbf4"
+excerpt = "無照駕駛經112年6月30日修法加重處罰，舉發件數及死傷人數皆已有下降，然而113年無照駕駛件數仍遠高於酒駕及危險駕車，交通部已再研擬修正草案，比照酒駕方式加重處罰"
+
+[[claim]]
+original = """🔇 改裝排氣管不登記？加倍罰！
+🔸 原本 1,800 → 3,600 元"""
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=16"
+excerpt = "汽車有下列情形之一者，處汽車所有人新臺幣九百元以上一千八百元以下罰鍰："
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=16"
+excerpt = "前項第一款屬非原型式排氣管不依規定申報異動登記者，按前項罰鍰最高額加倍處罰之，並責令其於十五日內檢驗，公路監理機關得收取檢驗費用，逾期十五日以上者並吊扣其牌照，至檢驗合格後發還，逾期二個月以上者，註銷其牌照；"
+
+[[claim]]
+original = "🔸 15 天內不去檢驗 → 吊扣牌照"
+expected_label = "mostly_true"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=16"
+excerpt = "並責令其於十五日內檢驗，公路監理機關得收取檢驗費用，逾期十五日以上者並吊扣其牌照，至檢驗合格後發還"
+
+[[claim]]
+original = "🔸 拖 2 個月以上 → 直接註銷牌照！"
+expected_label = "true"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=16"
+excerpt = "逾期二個月以上者，註銷其牌照"
+
+[[claim]]
+original = "⚖️ 無照駕駛，罰到你哭！"
+expected_label = "not_factual"
+core = false
+importance = 1

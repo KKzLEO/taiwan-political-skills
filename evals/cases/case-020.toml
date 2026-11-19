@@ -1,0 +1,125 @@
+id = "case-020"
+title = "「吳欣盈、蕭美琴有美國籍不能選副總統」：兩人都早已放棄美國籍並經中選會審定，比利時國籍和柯文哲的說法查不到"
+input_type = "text"
+input = """柯屁類日畜奴才本性露出了！
+國民黨沒打過柯，柯卻抹黑國民黨
+現在更是說白了，不會挺韓當院長；
+大家還想指望柯屁、翻詐騙淫黨的帳？
+吳欣盈有美國籍、也有比利時國籍!
+中華民國憲法不允許外籍人士参選總統/副總統!
+
+柯文哲和賴清德何不依法秉公處理?
+制止美國籍的蕭美琴和吳欣盈参選中華民國副總統!
+下架詐騙集團綠蛆賴清德與柯文哲!
+https://ynews.page.link/BVVNz"""
+target = "民眾黨"
+expected_result = "不符"
+notes = """主要說法有第一手反證，次要說法查不到。訊息原文取自 Cofacts（文章 38ao3o1moq43x，2024-01-08 收錄，1人回報，總統大選前5天）。Cofacts 收錄的文字前後各多一個半形引號，是複製時帶進來的，這裡去掉，其餘逐字照抄，「参選」的異體字和辱罵用語都保留。結尾連結是 Yahoo 奇摩轉載的風傳媒專訪〈專訪》「連游錫堃都沒講過我」 柯文哲撂話：國民黨把我打一頓，我還挺韓國瑜？〉（2024-01-04）。訊息主要攻擊柯文哲和民眾黨副總統參選人吳欣盈，也同時攻擊民進黨的蕭美琴，target 取民眾黨。
+判定關鍵：
+1.「吳欣盈有美國籍」判 false：總統副總統選舉罷免法第27條規定具有外國國籍者不得申請登記，第28條規定公告後發現也要撤銷登記。中選會的選舉工作進行程序表列明登記時要附「候選人授權查證外國國籍同意書」，並由委員會議審定候選人名單。吳欣盈是正式登記、審定並列入選票的副總統候選人（中選會選舉資料庫，1號柯文哲、吳欣盈，3,690,466票）。美國國稅局在聯邦公報公布的放棄國籍名單（2014年5月2日刊出，涵蓋2014年第1季）有「WU CYNTHIA」一筆；吳欣盈的英文名是 Cynthia Wu，但名單只有姓名，單靠這一筆不能百分之百確認是同一人，所以主要依據是中選會的國籍查證和審定，聯邦公報只當補強。
+2.「美國籍的蕭美琴」判 false：聯邦公報2002年7月22日刊出、涵蓋2002年第2季的名單有「Hsiao Bi-Khim Louise」，姓名完整對得上；她也是審定合格的2號副總統候選人，後來當選。
+3.「也有比利時國籍」判 unverified：沒有任何公開的第一手紀錄提到比利時國籍。中選會的查證程序和審定結果是反方向的旁證，但公開文件沒有說明查證涵蓋哪些國家，所以不判 false。
+4.「中華民國憲法不允許外籍人士参選總統/副總統」判 mostly_true：限制寫在總統副總統選舉罷免法第27條，不是憲法本文，但「有外國國籍不能登記參選」這個實質內容正確。
+5.「現在更是說白了，不會挺韓當院長」判 unverified：訊息附的連結是風傳媒專訪，標題是柯文哲的反問「國民黨把我打一頓，我還挺韓國瑜？」，屬於媒體轉述；我沒有取得專訪錄音或逐字稿，無法確認他是否明講「不會挺韓當院長」。
+為什麼是不符：訊息最想讓讀者相信的是「兩位副總統參選人有外國籍、依法不能參選」，這有直接反證；真的只剩「法律禁止外國籍者參選」這個背景，而且出處說錯。比利時國籍和柯文哲說法兩點查不到，不影響主旨的判定。
+時間點：今天（2026-11-19）再讀，大選早已結束，蕭美琴是現任副總統，兩人沒有外國國籍的結論不變。
+「柯屁類日畜奴才本性露出了」「國民黨沒打過柯，柯卻抹黑國民黨」「柯文哲和賴清德何不依法秉公處理」「下架詐騙集團綠蛆賴清德與柯文哲」都是辱罵、評價或呼籲，屬 not_factual。「大家還想指望柯屁、翻詐騙淫黨的帳？」同樣是辱罵，不另列。
+摘錄說明：聯邦公報摘錄照網頁原樣保留點線和兩格空白；中選會 PDF 摘錄只去掉排版造成的換行。"""
+
+[[claim]]
+original = "吳欣盈有美國籍"
+expected_label = "false"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0020053&flno=27"
+excerpt = "下列人員不得申請登記為總統、副總統候選人：一、現役軍人。二、辦理選舉事務人員。三、具有外國國籍者。四、依其他法律規定不得登記為候選人者。"
+
+[[claim.ground_truth]]
+url = "https://2024.cec.gov.tw/data/file/77648444b6064b72b610acaaa76aee40.pdf"
+excerpt = "（11）候選人授權查證外國國籍同意書。同意書應經認證。"
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/P0/00/4d83db17c1707e3defae5dc4d4e9c800/N/00_000_00_000_0000.json"
+excerpt = '''"cand_id": 203250, "cand_name": "吳欣盈", "cand_sex": "2", "cand_birthyear": "1978", "cand_edu": "碩士", "party_code": 350, "party_name": "台灣民眾黨", "is_current": "N", "is_vice": "Y"'''
+
+[[claim.ground_truth]]
+url = "https://www.govinfo.gov/content/pkg/FR-2014-05-02/html/2014-10139.htm"
+excerpt = "WU..........................  CYNTHIA"
+
+[[claim]]
+original = "美國籍的蕭美琴"
+expected_label = "false"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://www.govinfo.gov/content/pkg/FR-2002-07-22/html/02-18326.htm"
+excerpt = "Hsiao...................  Bi-Khim.................  Louise"
+
+[[claim.ground_truth]]
+url = "https://www.govinfo.gov/content/pkg/FR-2002-07-22/html/02-18326.htm"
+excerpt = "with respect to whom the Secretary received information during the quarter ending June 30, 2002."
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/P0/00/4d83db17c1707e3defae5dc4d4e9c800/N/00_000_00_000_0000.json"
+excerpt = '''"cand_id": 203252, "cand_name": "蕭美琴", "cand_sex": "2", "cand_birthyear": "1971", "cand_edu": "碩士", "party_code": 16, "party_name": "民主進步黨", "is_current": "N", "is_vice": "Y"'''
+
+[[claim]]
+original = "也有比利時國籍"
+expected_label = "unverified"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://2024.cec.gov.tw/data/file/77648444b6064b72b610acaaa76aee40.pdf"
+excerpt = "（11）候選人授權查證外國國籍同意書。同意書應經認證。"
+
+[[claim]]
+original = "中華民國憲法不允許外籍人士参選總統/副總統"
+expected_label = "mostly_true"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0020053&flno=27"
+excerpt = "三、具有外國國籍者。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0020053&flno=28"
+excerpt = "總統、副總統候選人名單公告後，經發現候選人在公告前或投票前有下列情事之一者，投票前由中央選舉委員會撤銷其候選人登記；當選後依第一百零五條規定提起當選無效之訴："
+
+[[claim]]
+original = "現在更是說白了，不會挺韓當院長"
+expected_label = "unverified"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://tw.news.yahoo.com/%E5%B0%88%E8%A8%AA-%E9%80%A3%E6%B8%B8%E9%8C%AB%E5%A0%83%E9%83%BD%E6%B2%92%E8%AC%9B%E9%81%8E%E6%88%91-%E6%9F%AF%E6%96%87%E5%93%B2%E6%92%82%E8%A9%B1-%E5%9C%8B%E6%B0%91%E9%BB%A8%E6%8A%8A%E6%88%91%E6%89%93-%E9%A0%93-005001458.html"
+excerpt = "專訪》「連游錫堃都沒講過我」　柯文哲撂話：國民黨把我打一頓，我還挺韓國瑜？"
+
+[[claim]]
+original = "柯屁類日畜奴才本性露出了！"
+expected_label = "not_factual"
+core = false
+importance = 1
+
+[[claim]]
+original = "國民黨沒打過柯，柯卻抹黑國民黨"
+expected_label = "not_factual"
+core = false
+importance = 1
+
+[[claim]]
+original = "柯文哲和賴清德何不依法秉公處理?"
+expected_label = "not_factual"
+core = false
+importance = 1
+
+[[claim]]
+original = "下架詐騙集團綠蛆賴清德與柯文哲!"
+expected_label = "not_factual"
+core = false
+importance = 1

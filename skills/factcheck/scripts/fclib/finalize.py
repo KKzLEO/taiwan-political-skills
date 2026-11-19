@@ -139,6 +139,7 @@ def finalize(run) -> dict:
             **({"importance_attacks": [{"attack_id": aid, "seat": attacks[aid]["seat"],
                                         "proposed": attacks[aid]["proposed_importance"],
                                         "ruling_reason": rulings[aid]["reason"]} for aid in weight]} if weight else {}),
+            "type": meta.get("type"),
             "core": meta["core"],
             "legal": meta.get("legal", False),
             "law_text_obtained": v.get("law_text_obtained"),
@@ -150,8 +151,16 @@ def finalize(run) -> dict:
             "rejected_attacks": sorted(rejected_by_claim.get(cid, [])),
         })
 
+    # Upheld rulings whose checked URLs the judge still left out after a retry (validate.fallback):
+    # the ruling stands; score blocks publishing and render says so under the result line.
+    unverified = [{"attack_id": aid, "seat": attacks[aid]["seat"], "claim_id": _claim_of(attacks[aid]),
+                   "target": attacks[aid]["target"]}
+                  for aid in sorted(set(judgment.get("rulings_unverified") or []))
+                  if aid in rulings and rulings[aid]["upheld"]]
+
     return {
         "claims": claims_out,
+        "unverified_rulings": unverified,
         "ledger": judgment["ledger"],
         "disputes": disputes,
         "checked_objections": checked,

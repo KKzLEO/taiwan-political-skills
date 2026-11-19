@@ -111,6 +111,38 @@ class SetupCliTest(unittest.TestCase):
         models = json.loads((run / "models.json").read_text())
         self.assertEqual([s["seat"] for s in models["seats"]][:3], ["A", "B", "C"])
 
+    def test_detect_records_the_host_model_and_effort(self):
+        base = Path(tempfile.mkdtemp())
+        run = Path(fc("init", "--mode", "full", "--host", "claude", "--slug", "d", "--base", base).stdout.strip())
+        p = fc("detect", "--run", run, "--host-model", "claude-opus-5-5", "--host-effort", "xhigh")
+        self.assertEqual(p.returncode, 0, p.stderr)
+        host = next(e for e in json.loads((run / "models.json").read_text())["engines"] if e["engine"] == "claude")
+        self.assertEqual((host["model"], host["effort"]), ("claude-opus-5-5", "xhigh"))
+
+    def test_detect_rejects_an_unknown_effort(self):
+        base = Path(tempfile.mkdtemp())
+        run = Path(fc("init", "--mode", "full", "--host", "claude", "--slug", "d", "--base", base).stdout.strip())
+        self.assertNotEqual(fc("detect", "--run", run, "--host-effort", "turbo").returncode, 0)
+
+    def test_detect_reports_the_host_model_and_a_missing_host_cli(self):
+        """Red-team re-review: a forgotten --host-model or a missing claude command only surfaced at step 3."""
+        base = Path(tempfile.mkdtemp())
+        run = Path(fc("init", "--mode", "full", "--host", "claude", "--slug", "d", "--base", base).stdout.strip())
+        p = subprocess.run([sys.executable, str(FC), "detect", "--run", str(run)], capture_output=True, text=True,
+                           env={"PATH": "/usr/bin:/bin"})
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("沒有指定模型", p.stderr)
+        self.assertIn("找不到主體的 CLI", p.stderr)
+
+    def test_detect_mentions_an_api_key_without_printing_it(self):
+        base = Path(tempfile.mkdtemp())
+        run = Path(fc("init", "--mode", "full", "--host", "claude", "--slug", "d", "--base", base).stdout.strip())
+        p = subprocess.run([sys.executable, str(FC), "detect", "--run", str(run)], capture_output=True, text=True,
+                           env={"PATH": "/usr/bin:/bin", "FC_CLAUDE_CMD": "false", "ANTHROPIC_API_KEY": "sk-test-SECRET"})
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("ANTHROPIC_API_KEY", p.stderr)
+        self.assertNotIn("sk-test-SECRET", p.stderr + p.stdout + (run / "models.json").read_text())
+
     def test_detect_probe_failure_prints_the_reason(self):
         base = Path(tempfile.mkdtemp())
         run = Path(fc("init", "--mode", "full", "--host", "claude", "--slug", "d", "--base", base).stdout.strip())

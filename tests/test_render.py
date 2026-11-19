@@ -65,6 +65,41 @@ class BodyTest(unittest.TestCase):
         self.assertIn("非事實陳述", out)
         self.assertIn("某部長說明年油價一定漲三成", out)
 
+    def test_opinion_with_a_factual_label_is_marked_not_scored(self):
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["verdicts"][1]["label"] = "unverified"
+        out = md(build(judgment_json=judgment))
+        row = next(l for l in out.splitlines() if l.startswith("| C2 |"))
+        self.assertIn("無法證實（不計分）", row)
+        self.assertIn("意見、預測或模糊到無法查證的說法", out)
+
+    def test_no_not_scored_note_when_every_opinion_is_labelled_not_factual(self):
+        self.assertNotIn("不計分", md(build()))
+
+    def test_unverified_ruling_is_disclosed_under_the_result(self):
+        j = copy.deepcopy(fx.JUDGMENT)
+        j["rulings"][1]["verified_urls"] = []
+        j["rulings_unverified"] = ["B-1"]
+        head = md(build(judgment_json=j)).split("## 結論")[0]
+        self.assertIn("不可公開", head)
+        self.assertIn("沒有列出實際核對過的網址", head)
+
+    def test_conclusion_marks_a_key_unscored_claim(self):
+        claims = copy.deepcopy(fx.CLAIMS)
+        claims["claims"][1]["core"] = True
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["verdicts"][1]["label"] = "false"
+        out = md(build(claims_json=claims, judgment_json=judgment))
+        self.assertIn("錯誤（不計分）", out.split("## 結論")[1].split("## 查核範圍")[0])
+
+    def test_seat_that_never_ran_is_shown_as_not_run(self):
+        models = dict(fx.MODELS, seats=[{"seat": s, "engine": "claude", "kind": "internal", "lens": lens}
+                                         for s, lens in (("A", "evidence"), ("B", "counter"), ("C", "stance"))]
+                      + [{"seat": "X1", "engine": "codex", "kind": "external", "lens": "external"}])
+        out = md(build(models_json=models, opponent__C_json=None))
+        self.assertIn("| C | 反方 C：立場 | claude | 沒有執行 |", out)
+        self.assertIn("反方 C 沒有跑成功", out)
+
     def test_conclusion_uses_first_sentence_only(self):
         judgment = copy.deepcopy(fx.JUDGMENT)
         judgment["verdicts"][0]["reasoning"] = "第一句結論。第二句很長的細節" + "細" * 200

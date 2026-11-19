@@ -179,6 +179,51 @@ class RunRoleTest(unittest.TestCase):
         self.assertNotIn("tactic_checks", data)
         self.assertTrue(data["tactic_checks_set_aside"])
 
+    def test_judge_that_keeps_leaving_out_checked_urls_still_finishes(self):
+        """Regression (round 2, case-011)."""
+        run = make_run(fx.run_files(judgment_json=None, review__B_json=None))
+        bad = copy.deepcopy(fx.JUDGMENT)
+        bad["rulings"][1]["verified_urls"] = []
+        r = FakeRunner([json.dumps(bad), json.dumps(bad)])
+        run_model.run_role(run, "judge", None, CLAUDE, runner=r, env={}, known_tactics=fx.TACTIC_LIB)
+        self.assertEqual(json.loads((run / "judgment.json").read_text())["rulings_unverified"], ["B-1"])
+
+    def test_program_only_fields_in_model_output_are_dropped(self):
+        run = make_run(fx.run_files(judgment_json=None, review__B_json=None))
+        out = copy.deepcopy(fx.JUDGMENT)
+        out["rulings_unverified"] = ["B-1"]
+        out["tactic_checks_set_aside"] = ["x"]
+        run_model.run_role(run, "judge", None, CLAUDE, runner=FakeRunner([json.dumps(out)]), env={},
+                           known_tactics=fx.TACTIC_LIB)
+        data = json.loads((run / "judgment.json").read_text())
+        self.assertNotIn("rulings_unverified", data)
+        self.assertNotIn("tactic_checks_set_aside", data)
+
+    def test_fallback_still_applies_when_the_retry_breaks(self):
+        """Red-team: a retry that returns no JSON or crashes must not throw away a first answer whose
+        only problems the fallback handles."""
+        bad = copy.deepcopy(fx.JUDGMENT)
+        bad["rulings"][1]["verified_urls"] = []
+        for second in (["no json here"], [(1, "boom"), (1, "boom")]):
+            run = make_run(fx.run_files(judgment_json=None, review__B_json=None))
+            run_model.run_role(run, "judge", None, CLAUDE, runner=FakeRunner([json.dumps(bad)] + second), env={},
+                               known_tactics=fx.TACTIC_LIB)
+            self.assertEqual(json.loads((run / "judgment.json").read_text())["rulings_unverified"], ["B-1"], second)
+
+    def test_fallback_tries_an_earlier_output_when_the_retry_breaks_something_else(self):
+        """Red-team re-review: the retry fixed the URLs but dropped a verdict; the first answer only
+        lacked URLs, so it is the one to keep."""
+        first = copy.deepcopy(fx.JUDGMENT)
+        first["rulings"][1]["verified_urls"] = []
+        second = copy.deepcopy(fx.JUDGMENT)
+        second["verdicts"].pop()
+        run = make_run(fx.run_files(judgment_json=None, review__B_json=None))
+        run_model.run_role(run, "judge", None, CLAUDE, runner=FakeRunner([json.dumps(first), json.dumps(second)]),
+                           env={}, known_tactics=fx.TACTIC_LIB)
+        data = json.loads((run / "judgment.json").read_text())
+        self.assertEqual(data["rulings_unverified"], ["B-1"])
+        self.assertEqual(len(data["verdicts"]), 2)
+
     def test_other_tracer_errors_still_fail(self):
         run = make_run(fx.run_files(trace_json=None))
         bad = copy.deepcopy(fx.TRACE)
@@ -196,6 +241,11 @@ class RunRoleTest(unittest.TestCase):
 
 
 class PromptTest(unittest.TestCase):
+    def test_prompt_states_the_check_date(self):
+        """Answers are judged as of the day the user asked (2026-11-19 decision on case-013)."""
+        p = run_model.build_prompt(make_run(fx.run_files()), "judge", None)
+        self.assertIn("查核日期：2026-11-17", p)
+
     def test_opponent_prompt_has_only_its_inputs(self):
         run = make_run(fx.run_files())
         p = run_model.build_prompt(run, "opponent", "X1", lens="external")

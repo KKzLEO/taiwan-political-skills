@@ -6,7 +6,7 @@ from pathlib import Path
 
 from . import detect, io, media
 from .labels import CONTEXT_FLAGS, TIER_NAMES, ZH_LABELS
-from .score import round_half_up
+from .score import not_scored, round_half_up
 
 WIDTH = 30
 ISOLATION = {"full": "完整隔離", "partial": "部分隔離", "unknown": "未確認", "host": "主模型"}
@@ -71,6 +71,8 @@ def render(run, outlets=None, tactics=None) -> str:
     out.append("")
     if sc.get("result_reason"):
         out += [f"> {sc['result_reason']}", ""]
+    for b in sc.get("publish_blocks") or []:
+        out += [f"> {b}。這份報告不能標可公開。", ""]
     alt = sc.get("without_importance_changes")
     if alt:
         alt_cred = f"可信度 {alt['credibility']}" if alt.get("credibility") is not None else "可信度 —"
@@ -84,7 +86,8 @@ def render(run, outlets=None, tactics=None) -> str:
     core = sorted([c for c in verdicts["claims"] if claims[c["claim_id"]]["core"]],
                   key=lambda c: (-c["importance"], c["claim_id"]))
     for c in core or verdicts["claims"]:
-        out.append(f"- **{c['claim_id']}「{_cell(claims[c['claim_id']]['original'])}」：{ZH_LABELS[c['label']]}。**"
+        out.append(f"- **{c['claim_id']}「{_cell(claims[c['claim_id']]['original'])}」：{ZH_LABELS[c['label']]}"
+                   f"{'（不計分）' if not_scored(c) else ''}。**"
                    f"{_first_sentence(c['reasoning'])}")
     out.append("")
 
@@ -95,7 +98,7 @@ def render(run, outlets=None, tactics=None) -> str:
             "", "| 席位 | 角色 | 模型 | 狀態 | 跨模型 | 能上網 | 隔離 |", "|---|---|---|---|---|---|---|"]
     for s in seats:
         out.append(f"| {s['seat']} | {LENS.get(s['lens'], s['lens'])} | {s['engine']} | "
-                   f"{'成功' if s['status'] == 'ok' else '失敗'} | {'是' if s['cross_model'] else '否'} | "
+                   f"{ {'ok': '成功', 'missing': '沒有執行'}.get(s['status'], '失敗')} | {'是' if s['cross_model'] else '否'} | "
                    f"{'是' if s['can_search'] else '否'} | {ISOLATION.get(s['isolation'], s['isolation'])} |")
     limits = list(trace.get("limits", []))
     if trace.get("set_aside_tactics"):
@@ -109,12 +112,18 @@ def render(run, outlets=None, tactics=None) -> str:
 
     # 逐項判定
     out += ["## 逐項判定", "", "| 命題 | 原文說法 | 重要性 | 判定 | 理由 | 證據 |", "|---|---|---|---|---|---|"]
+    unscored_ids = []
     for c in verdicts["claims"]:
         meta = claims[c["claim_id"]]
         status = {"passed": "（覆核通過）", "failed": "（覆核未通過）"}.get(c["review_status"], "")
+        if not_scored(c):
+            status += "（不計分）"
+            unscored_ids.append(c["claim_id"])
         weight = str(c["importance"]) + (f"（辯論後由 {c['importance_from']} 調整）" if "importance_from" in c else "")
         out.append(f"| {c['claim_id']} | {_cell(meta['original'])} | {weight} | {ZH_LABELS[c['label']]}{status} | "
                    f"{_cell(c['reasoning'])} | {', '.join(c.get('evidence_ids', [])) or '—'} |")
+    if unscored_ids:
+        out += ["", f"- {'、'.join(unscored_ids)} 是意見、預測或模糊到無法查證的說法，判定只供參考，不算進可信度。"]
     adjusted = [c for c in verdicts["claims"] if "importance_from" in c]
     if adjusted:
         out.append("")

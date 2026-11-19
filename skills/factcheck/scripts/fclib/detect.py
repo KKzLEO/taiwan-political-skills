@@ -76,7 +76,8 @@ def assign_seats(models, mode):
 
 
 def seat_status(run):
-    """Summarise every opponent seat for scoring. cross_model is computed here, never read from model output."""
+    """Summarise every opponent seat for scoring. cross_model is computed here, never read from model output.
+    A seat assigned in models.json without an opponent file is listed as missing."""
     from pathlib import Path
 
     from . import io
@@ -87,18 +88,24 @@ def seat_status(run):
     by_engine = {}
     for e in models.get("engines", []):
         by_engine.setdefault(e["engine"], e)
-    out = []
-    for path in sorted(run.glob("opponent-*.json")):
-        data = io.read_json(path)
-        engine = data.get("engine")
-        if engine == models["host"] or not data.get("seat", "").startswith("X"):
+
+    def entry(seat, engine, status, lens):
+        if engine == models["host"] or not str(seat).startswith("X"):
             vendor, can_search, isolation = host_vendor, True, "host"
         else:
             info = by_engine.get(engine, {})
             vendor = info.get("vendor", "unknown")
             can_search = bool(info.get("can_search", False))
             isolation = info.get("isolation", "unknown")
-        out.append({"seat": data.get("seat"), "engine": engine, "status": data.get("status", "ok"),
-                    "cross_model": vendor not in (host_vendor, "unknown"), "can_search": can_search,
-                    "isolation": isolation, "lens": data.get("lens")})
-    return out
+        return {"seat": seat, "engine": engine, "status": status,
+                "cross_model": vendor not in (host_vendor, "unknown"), "can_search": can_search,
+                "isolation": isolation, "lens": lens}
+
+    out = []
+    for path in sorted(run.glob("opponent-*.json")):
+        data = io.read_json(path)
+        out.append(entry(data.get("seat"), data.get("engine"), data.get("status", "ok"), data.get("lens")))
+    present = {s["seat"] for s in out}
+    out += [entry(s["seat"], s.get("engine"), "missing", s.get("lens"))
+            for s in models.get("seats", []) if s["seat"] not in present]
+    return sorted(out, key=lambda s: str(s["seat"]))

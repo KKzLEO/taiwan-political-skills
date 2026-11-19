@@ -47,6 +47,8 @@ ROLE_DATA = {
     "judge": ["tactics"],
 }
 STANCE_LENSES = {"stance", "external"}
+# Fields only the program writes (validate.fallback); a model must not set them itself.
+PROGRAM_FIELDS = {"tracer": ("set_aside_tactics",), "judge": ("tactic_checks_set_aside", "rulings_unverified")}
 
 
 class RunModelError(RuntimeError):
@@ -134,8 +136,10 @@ def build_prompt(run, role, seat, lens=None, engine_label=None, data_dir=None):
     if role == "opponent":
         fixed["lens"] = lens
         fixed["engine"] = engine_label or _seat_engine(run, seat)
+    checked_on = str((io.read_json_or_none(run / "run.json") or {}).get("created_at", ""))[:10]
     parts.append("## 這一次的任務\n\n"
                  f"- 輸出檔名：`{out}`\n"
+                 + (f"- 查核日期：{checked_on}（台灣時間）\n" if checked_on else "")
                  + (f"- 下列欄位必須照抄：`{json.dumps(fixed, ensure_ascii=False)}`\n" if fixed else ""))
 
     parts.extend(_data_sections(role, lens, data_dir))
@@ -254,7 +258,7 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
     name = output_name(role, seat)
     target = run / name
     prompt = build_prompt(run, role, seat, lens=lens)
-    errors, last = ["沒有執行"], None
+    errors, parsed = ["沒有執行"], []
     for attempt in range(2):
         ok, text, error = call(engine, prompt, runner=runner, env=env)
         if not ok:
@@ -264,6 +268,8 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
         if obj is None:
             errors = ["輸出裡找不到 JSON 物件"]
         else:
+            for k in PROGRAM_FIELDS.get(role, ()):
+                obj.pop(k, None)
             if role in ("opponent", "review"):
                 obj["seat"] = seat
             if role == "opponent":
@@ -272,14 +278,17 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
             errors = validate.validate_file(run, name, known_tactics=known_tactics)
             if not errors:
                 return target
-            last = obj
+            parsed.append((obj, errors))
             target.unlink()
         prompt = prompt + "\n\n## 上一次的輸出有以下問題，請修正後重新輸出完整 JSON\n\n" + "\n".join(f"- {e}" for e in errors)
 
-    # Tags never affect the score: if only they still break the rules after the retry, set them aside
-    # (kept in the file, listed as not identified) instead of stopping the whole check.
-    fixed = validate.set_aside_tactics(last, run, name, known_tactics, errors) if last is not None else None
-    if fixed is not None:
+    # If only tags or the judge's checked-URL lists still break the rules after the retry, take the
+    # fallback (validate.fallback) instead of stopping the whole check.
+    # Red-team: try every output that parsed, newest first, even when the retry broke in another way.
+    for obj, errs in reversed(parsed):
+        fixed = validate.fallback(obj, run, name, known_tactics, errs)
+        if fixed is None:
+            continue
         io.write_json(target, fixed)
         if not validate.validate_file(run, name, known_tactics=known_tactics):
             return target

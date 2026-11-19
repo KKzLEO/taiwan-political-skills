@@ -1,0 +1,122 @@
+id = "case-019"
+title = "「韓國瑜、江啟臣關鍵一票，停砍年金復議全擋下」：韓國瑜裁決平手是真的，江啟臣那次48比47因誤插表決卡被撤銷"
+input_type = "text"
+input = """大快人心
+今天的英雄：韓國瑜、江啟臣
+
+國民黨提案停止繼續遞減軍公教退休金所得替代率，民進黨提復議反對，今天上演表決大戰！
+
+表決！國民黨獲勝！
+第一個民進黨提的復議案
+第一次投票， 國民黨47票vs民進黨47票
+第二次投票，立法院副院長江啓臣現身
+投下關鍵一票 48:47
+國民黨勝利
+
+第二、第三個民進黨提的復議案
+投票兩黨平手
+韓國瑜院長投下反對票
+國民黨勝利！
+民進黨崩潰叫罵
+
+韓國瑜、江啟臣就是帥"""
+target = "國民黨"
+expected_result = "部分符合"
+notes = """兩件同樣重要的事，一真一假。訊息原文取自 Cofacts（文章 26o7ov6jdinrd，2024-04-12 收錄，UTC 18:18，即台灣時間4月13日凌晨，42人回報；同文縮短版 mor88x3rw4sb 2024-05-23 又被回報31次），逐字照抄，「江啓臣」「江啟臣」兩種寫法都保留。沒有找到針對這則訊息的查核報告，答案全部來自立法院公報、議事錄和議案原文。
+主題說明：這則講的是2024年4月立法院處理復議案的表決經過，和 case-012（2025年退撫基金收益與銓敘部說法）同屬年金議題但事件、命題和查證路徑都不同。
+判定關鍵：
+1.「國民黨提案停止繼續遞減…所得替代率，民進黨提復議反對」判 mostly_true：國民黨黨團的「公立學校教職員退休資遣撫卹條例第三十七條條文修正草案」說明寫「停止所得替代率之逐年降低」，民進黨黨團對這些交付審查的決定提出復議（議事錄討論事項一至三）。但這批提案改的是公務人員和公立學校教職員的退撫法規，沒有軍人，「軍公教」多寫了軍。
+2. 第二、第三個復議案判 true：議事錄記載兩案記名表決都是出席94人、47比47「可否同數」，「嗣經主席決定反對，不予通過」，當天主席是院長韓國瑜。訊息說「投票兩黨平手，韓國瑜院長投下反對票，國民黨勝利」正確。
+3. 第一個復議案判 misleading：公報記錄當天上午10時47分第一次表決94人、47比47，依議事規則第36條重行表決，10時50分95人、48比47，江啟臣出現在第二次的反對名單裡。數字跟訊息一樣。但4月16日主席在院會宣告：4月12日第一案的表決結果「係因會場幹事誤認委員，造成誤插盧縣一委員之表決卡，由於表決結果與事實不符」，第一案改為「另定期處理」。盧縣一的名字在兩次表決的反對名單裡都有，也就是說扣掉誤插的卡，第一次是47比46、第二次才是47比47，江啟臣那一票不是讓國民黨過半的「關鍵一票」，那次「勝利」也被撤銷。第一案後來在4月19日重新表決，50比54復議不通過，國民黨最後還是贏了，但不是靠訊息講的那次表決。
+4.「第一次投票，國民黨47票vs民進黨47票」單獨看和公報紀錄相符，但主席已宣告那次結果與事實不符，判 misleading，併入第3點的理由。
+為什麼是部分符合：訊息的兩個主要說法同樣重要，標題「今天的英雄：韓國瑜、江啟臣」也正好一人一半。韓國瑜裁決兩案平手是真的；江啟臣「關鍵一票48:47」那次結果四天後就被撤銷，原因是多算了一張誤插的表決卡。三個復議案最後都沒通過，所以「國民黨獲勝」的結局不算錯，但訊息描述的第一案經過是錯的，不能判大致符合。
+時間點：今天（2026-11-19）再讀，4月16日的撤銷宣告和4月19日的重新表決都已經發生，要用這兩筆紀錄判第一案。
+「大快人心」「今天的英雄：韓國瑜、江啟臣」「民進黨崩潰叫罵」「韓國瑜、江啟臣就是帥」是評價，屬 not_factual。
+摘錄說明：公報、議事錄和議案 PDF 摘錄只去掉排版造成的換行和空白，名單欄位之間壓成一格。議事錄網址直接開啟會被轉回議事網首頁，要從會議頁面點「本次會議議事錄」下載。"""
+
+[[claim]]
+original = "國民黨提案停止繼續遞減軍公教退休金所得替代率，民進黨提復議反對"
+expected_label = "mostly_true"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/01/06/LCEWA01_110106_00112.pdf"
+excerpt = "爰此，提案修正「公立學校教職員退休資遣撫卹條例第三十七條」，將年金重新隨同在職人員薪俸調整，並停止所得替代率之逐年降低。"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/01/09LCEWC03_110109.pdf"
+excerpt = "二、本院民進黨黨團，針對第 11 屆第 1 會期第 6 次會議報告事項第一○三案委員張嘉郡等 23 人擬具「公務人員退休資遣撫卹法第三十七條條文修正草案」及第一○八案國民黨黨團擬具「公立學校教職員退休資遣撫卹條例第三十七條條文修正草案」院會所作之決定提出復議，請公決案。"
+
+[[claim]]
+original = """第二、第三個民進黨提的復議案
+投票兩黨平手
+韓國瑜院長投下反對票
+國民黨勝利！"""
+expected_label = "true"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/01/09LCEWC03_110109.pdf"
+excerpt = "決議：復議案不通過。本案報告事項各案均照原作決定通過。【經記名表決結果，可否同數，表決結果附後(1)；嗣經主席決定反對，不予通過】"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/01/09LCEWC03_110109.pdf"
+excerpt = "(2)「討論事項第三案民進黨黨團所提復議案」部分： 出席人數：94 贊成人數：47 反對人數：47 棄權人數：0"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/01/09LCEWC03_110109.pdf"
+excerpt = "主 席 院 長 韓國瑜"
+
+[[claim]]
+original = """第二次投票，立法院副院長江啓臣現身
+投下關鍵一票 48:47
+國民黨勝利"""
+expected_label = "misleading"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/PublicationBulletinDetail/download/communique1/final/pdf/113/25/LCIDC01_1132501_00003.pdf"
+excerpt = "主席：各位委員，報告表決結果：出席委員 95 人，贊成者 47 人，反對者 48 人，贊成者少數，決議：復議案不通過。本案報告事項各案均照原作決定通過。"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/01/09LCEWC03_110109.pdf"
+excerpt = "一、有關 4 月 12 日（上週五）院會處理討論事項第一案表決結果，經查明係因會場幹事誤認委員，造成誤插盧縣一委員之表決卡，由於表決結果與事實不符，第一案重作如下宣告：另定期處理。至於誤插表決卡部分，將予以行政懲處。"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/01/10LCEWC03_110110.pdf"
+excerpt = "(3)「討論事項第三案民進黨黨團所提復議案不予通過」部分： 出席人數：104 贊成人數：50 反對人數：54 棄權人數：0"
+
+[[claim]]
+original = "第一次投票， 國民黨47票vs民進黨47票"
+expected_label = "misleading"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/PublicationBulletinDetail/download/communique1/final/pdf/113/25/LCIDC01_1132501_00003.pdf"
+excerpt = "報告院會，本案表決結果：出席委員 94 人，贊成者 47 人，反對者 47 人。"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/PublicationBulletinDetail/download/communique1/final/pdf/113/25/LCIDC01_1132501_00003.pdf"
+excerpt = "黃 仁 魯明哲 李彥秀 吳宗憲 邱鎮軍 徐欣瑩 盧縣一 廖先翔"
+
+[[claim]]
+original = "今天的英雄：韓國瑜、江啟臣"
+expected_label = "not_factual"
+core = false
+importance = 2
+
+[[claim]]
+original = "民進黨崩潰叫罵"
+expected_label = "not_factual"
+core = false
+importance = 1
+
+[[claim]]
+original = "韓國瑜、江啟臣就是帥"
+expected_label = "not_factual"
+core = false
+importance = 1

@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from decimal import Decimal, ROUND_HALF_UP
 
-from .labels import ACCESS_NOTES, CONTEXT_FLAGS, DIRECT_STANCES, FACTORS, PRIMARY_TIERS
+from .labels import ACCESS_NOTES, CONTEXT_FLAGS, DIRECT_STANCES, FACTORS, PRIMARY_TIERS, UNSCORED_TYPES
 
 UNVERIFIED_SHARE_LIMIT = Decimal("0.5")
 QUICK_CAP = 60
@@ -70,8 +70,18 @@ def _weighted(items, value):
     return sum(Decimal(c["importance"]) * value(c) for c in items) / total
 
 
+def _counts(c) -> bool:
+    """Opinion, prediction and vague claims never count, whatever the judge labelled them (labels.UNSCORED_TYPES)."""
+    return FACTORS[c["label"]] is not None and c.get("type") not in UNSCORED_TYPES
+
+
+def not_scored(c) -> bool:
+    """An opinion, prediction or vague claim the judge still gave a scoring label: shown, not counted."""
+    return c.get("type") in UNSCORED_TYPES and FACTORS[c["label"]] is not None
+
+
 def _scored(claims):
-    return [c for c in claims if FACTORS[c["label"]] is not None]
+    return [c for c in claims if _counts(c)]
 
 
 def _credibility(claims):
@@ -120,12 +130,12 @@ def _confidence(claims, ledger_by_id, run, seats):
         deduct(10, "跨模型反方都不能上網，只能當審稿人")
 
     for c in claims:
-        if c.get("review_status") == "failed":
+        if c.get("review_status") == "failed" and c.get("type") not in UNSCORED_TYPES:
             deduct(10, f"{c['claim_id']} 覆核沒有通過")
 
     limited = []
     for c in claims:
-        if not c.get("core") or FACTORS[c["label"]] is None:
+        if not c.get("core") or not _counts(c):
             continue
         direct = [ledger_by_id[e] for e in c.get("evidence_ids", [])
                   if ledger_by_id[e]["stance"] in DIRECT_STANCES]
@@ -136,7 +146,8 @@ def _confidence(claims, ledger_by_id, run, seats):
         deduct(10 * n, f"核心命題只有存取受限的直接證據（付費牆、被擋、只有摘要、未核對原始貼文等）：{', '.join(limited)}"
                        + ("（最多扣 3 項）" if len(limited) > 3 else ""))
 
-    if any(c.get("legal") and c.get("law_text_obtained") is not True for c in claims):
+    if any(c.get("legal") and c.get("law_text_obtained") is not True and c.get("type") not in UNSCORED_TYPES
+           for c in claims):
         deduct(15, "涉及法條，但沒有取得條文原文")
 
     value = max(0, 100 - sum(d["points"] for d in deductions))
@@ -145,6 +156,33 @@ def _confidence(claims, ledger_by_id, run, seats):
         value = QUICK_CAP
     return {"score": value, "level": confidence_level(value), "deductions": deductions,
             "evidence_quality": None if evidence is None else float(round(evidence, 4))}, bool(ok_cross)
+
+
+def _publish_blocks(verdicts, claims, run, seats) -> list:
+    """Reasons a report cannot be publishable even though its scores stand. Each is shown under the result line."""
+    blocks = []
+    for u in verdicts.get("unverified_rulings") or []:
+        about = u.get("claim_id") or ("手法標記" if u.get("target") == "tactic" else "溯源")
+        blocks.append(f"反方 {u['seat']} 的攻擊（{u['attack_id']}，{about}）判成立，但裁判沒有列出實際核對過的網址，判決照用")
+    # Red-team: typing a damaging fact as vague hides it from the score. If counting the claims the judge
+    # still labelled would change the result, the result hangs on that classification.
+    contested = [c["claim_id"] for c in claims if not_scored(c)]
+    if contested:
+        counted = _result_of([{**c, "type": None} if not_scored(c) else c for c in claims])[2]
+        if counted != _result_of(claims)[2]:
+            blocks.append(f"{'、'.join(contested)} 被分成意見、預測或模糊說法，所以不計分，但裁判照事實判了；"
+                          f"算進去的話，結果會是「{counted}」")
+    if run.get("mode") == "full":
+        for s in seats:
+            if not str(s.get("seat", "")).startswith("X") and s.get("status") != "ok":
+                blocks.append(f"反方 {s['seat']} 沒有跑成功，完整模式少了一席")
+    return blocks
+
+
+def _result_of(claims):
+    cred, reason = _credibility(claims)
+    result = "無法判定" if cred is None or not cred["show_on_spectrum"] else result_label(cred["score"])
+    return cred, reason, result
 
 
 def compute(verdicts: dict, run: dict, seats: list) -> dict:
@@ -157,14 +195,11 @@ def compute(verdicts: dict, run: dict, seats: list) -> dict:
             raise ScoreError(f"證據 {e['id']}：未知的 access_note {e['access_note']!r}")
     _check(claims, ledger_by_id)
 
-    cred, reason = _credibility(claims)
-    if cred is None or not cred["show_on_spectrum"]:
-        result = "無法判定"
-    else:
-        result = result_label(cred["score"])
+    cred, reason, result = _result_of(claims)
 
     confidence, has_cross = _confidence(claims, ledger_by_id, run, seats)
-    publishable = run.get("mode") == "full" and confidence["level"] == "高" and has_cross
+    blocks = _publish_blocks(verdicts, claims, run, seats)
+    publishable = run.get("mode") == "full" and confidence["level"] == "高" and has_cross and not blocks
 
     without = None
     if any("importance_from" in c for c in claims):
@@ -176,6 +211,9 @@ def compute(verdicts: dict, run: dict, seats: list) -> dict:
                        "publishable": alt["publishable"]}
         if alt["result"] != result:
             publishable = False  # the conclusion hangs on a contested weight
+        elif publishable and not alt["publishable"]:
+            blocks.append("辯論中調整了命題的重要性；不調整的話，這份報告不能公開")
+            publishable = False  # so does publishing
 
     return {
         "credibility": cred,
@@ -183,10 +221,11 @@ def compute(verdicts: dict, run: dict, seats: list) -> dict:
         "result_reason": reason,
         "confidence": confidence,
         "publishable": publishable,
+        "publish_blocks": blocks,
         "without_importance_changes": without,
         "claims": [
             {"claim_id": c["claim_id"], "label": c["label"], "importance": c["importance"],
-             "factor": None if FACTORS[c["label"]] is None else float(FACTORS[c["label"]])}
+             "factor": float(FACTORS[c["label"]]) if _counts(c) else None}
             for c in claims
         ],
     }

@@ -1,4 +1,5 @@
 import copy
+import json
 import unittest
 
 from tests import fixtures as fx
@@ -200,6 +201,58 @@ class RebuttalJudgmentTest(unittest.TestCase):
         def m(j):
             j["verdicts"][0]["evidence_ids"] = ["S1", "S4"]
         self.assertTrue(any("S4" in e for e in errors_for("judgment.json", m)))
+
+
+def judgment_missing_url():
+    """B-1 carries evidence and is upheld, but the judge listed no URL it checked."""
+    j = copy.deepcopy(fx.JUDGMENT)
+    j["rulings"][1]["verified_urls"] = []
+    return j
+
+
+class UnverifiedRulingFallbackTest(unittest.TestCase):
+    """Regression (round 2, case-011): the judge twice left out the URLs it had checked for one upheld
+    attack, and the whole check stopped at its most expensive step."""
+
+    def fallback(self, judgment):
+        run = make_run(fx.run_files(judgment_json=judgment))
+        errors = validate.validate_file(run, "judgment.json", known_tactics=fx.TACTIC_LIB)
+        fixed = validate.fallback(judgment, run, "judgment.json", fx.TACTIC_LIB, errors)
+        if fixed is not None:
+            (run / "judgment.json").write_text(json.dumps(fixed, ensure_ascii=False), encoding="utf-8")
+        return fixed, validate.validate_file(run, "judgment.json", known_tactics=fx.TACTIC_LIB)
+
+    def test_only_missing_urls_are_accepted_as_unverified_rulings(self):
+        fixed, left = self.fallback(judgment_missing_url())
+        self.assertEqual(fixed["rulings_unverified"], ["B-1"])
+        self.assertTrue(fixed["rulings"][1]["upheld"])
+        self.assertEqual(left, [])
+
+    def test_no_fallback_when_anything_else_is_wrong(self):
+        j = judgment_missing_url()
+        j["rulings"].pop(0)
+        fixed, _ = self.fallback(j)
+        self.assertIsNone(fixed)
+
+    def test_missing_urls_and_bad_tag_checks_are_both_handled(self):
+        j = judgment_missing_url()
+        j["tactic_checks"] = []
+        fixed, left = self.fallback(j)
+        self.assertEqual(fixed["rulings_unverified"], ["B-1"])
+        self.assertTrue(fixed["tactic_checks_set_aside"])
+        self.assertEqual(left, [])
+
+    def test_the_list_must_name_upheld_attacks_that_carry_evidence(self):
+        """Skeptic/red-team: a malformed list passed validation and crashed finalize."""
+        for bad in ([{"attack_id": "B-1"}], ["A-1"], "B-1", [3]):
+            j = copy.deepcopy(fx.JUDGMENT)
+            j["rulings_unverified"] = bad
+            self.assertTrue(any("rulings_unverified" in e for e in errors_for("judgment.json", judgment_json=j)), bad)
+
+    def test_the_list_only_excuses_the_rulings_it_names(self):
+        j = judgment_missing_url()
+        j["rulings_unverified"] = ["A-1"]
+        self.assertTrue(any("verified_urls" in e for e in errors_for("judgment.json", judgment_json=j)))
 
 
 class TraceTest(unittest.TestCase):

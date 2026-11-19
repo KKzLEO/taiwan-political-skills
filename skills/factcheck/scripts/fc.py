@@ -54,7 +54,19 @@ def cmd_detect(args):
     tiers = io.read_toml(io.DATA_DIR / "model-tiers.toml")
     probe = (lambda e: run_model.probe(e)) if args.probe else None
     models = detect.detect(rj["host"], tiers, env=dict(os.environ), probe=probe)
+    for e in models["engines"]:  # recorded in the run folder, so every host-model role uses the same model
+        if e["engine"] == models["host"]:
+            e.update({k: v for k, v in (("model", args.host_model), ("effort", args.host_effort)) if v})
     models["seats"] = detect.assign_seats(models, rj["mode"])
+    host = next((e for e in models["engines"] if e["engine"] == models["host"]), None)
+    if host is not None:
+        if not host["available"]:
+            print(f"# 警告：找不到主體的 CLI（{host['engine']}），主模型的角色沒辦法跑", file=sys.stderr)
+        print(f"# 主模型的角色：{host['engine']}，"
+              + (f"模型 {host['model']}" if host.get("model") else "沒有指定模型（用 CLI 的預設）")
+              + (f"，推理強度 {host['effort']}" if host.get("effort") else ""), file=sys.stderr)
+    if os.environ.get("ANTHROPIC_API_KEY") and any(e["engine"] == "claude" and e["available"] for e in models["engines"]):
+        print("# 偵測到 ANTHROPIC_API_KEY（不印內容）：claude 的角色會加 --bare，費用算在這把 key 上", file=sys.stderr)
     io.write_json(run / "models.json", models)
     for s in models["seats"]:
         print(f"{s['seat']}\t{s['kind']}\t{s['engine']}{'/' + s['model'] if s.get('model') else ''}\t{s['lens']}")
@@ -240,6 +252,9 @@ def main(argv=None):
 
     p = add("detect", cmd_detect)
     p.add_argument("--probe", action="store_true", help="實際呼叫外部 CLI，確認登入、能否上網、隔離程度")
+    p.add_argument("--host-model", help="主模型角色用的模型 ID，記在 models.json（例如 claude-opus-5-5）")
+    p.add_argument("--host-effort", choices=["low", "medium", "high", "xhigh", "max"],
+                   help="主模型角色的推理強度，記在 models.json（目前只有 claude 會用到）")
 
     for name, fn in (("prompt", cmd_prompt), ("run-model", cmd_run_model)):
         p = add(name, fn)

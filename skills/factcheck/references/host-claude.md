@@ -1,37 +1,25 @@
 # 在 Claude Code 上派出角色
 
-## 主模型的角色（溯源員、正方、反方 A/B/C、答辯、裁判、主模型席位的覆核）
+流程和指令見 SKILL.md 的第 3–8 步。主模型的席位跑 `claude -p --safe-mode`。2026-11-18 的金絲雀實測顯示，它看不到使用者的 CLAUDE.md 和專案記憶；Agent 子代理看得到，所以**不要用 Agent 工具派角色**。
 
-用 **Agent 工具**（`general-purpose`）派出。**prompt 只能是下面這段，填上路徑和角色**，不要加入使用者的原始提問、你的看法、你對結果的預期，也不要摘要前面的對話：
-
-```
-你是事實查核流程中的一個角色。先執行這個指令，取得你的完整任務說明和輸入資料：
-
-python3 <skill 資料夾的完整路徑>/scripts/fc.py prompt --run <RUN 路徑> --role <角色> [--seat <席位>]
-
-完全依照輸出的指示工作，需要時上網搜尋、打開網頁核對。最後用 Write 工具把 JSON 寫到：
-
-<RUN 路徑>/<輸出檔名>
-
-寫完只回覆「完成」兩個字。除了那個指令的輸出，不要參考任何其他資訊，包括你可能看到的使用者偏好或記憶。
-```
-
-輸出檔名：`trace.json`、`proponent.json`、`opponent-A.json`、`rebuttal.json`、`judgment.json`、`review-B.json`…（和 `fc.py prompt` 輸出裡寫的一致）。
-
-**隔離程度：** 2026-11-18 的金絲雀實測顯示，Agent 子代理看得到使用者的 CLAUDE.md 和專案記憶，只能靠這段 prompt 和共同規則要求它們忽略。外部席位用的 `claude -p --safe-mode` 看不到。
-
-Sub-agent 回覆「完成」之後，執行 `python3 "$SKILL/scripts/fc.py" validate --run "$RUN" <檔名>`。沒通過就再派一次同一個角色，並在 prompt 最後加上「上一次的輸出有以下問題：」和錯誤清單。
-
-## 外部反方（X 開頭的席位）
-
-用 Bash 執行，**和 A、B、C 的 Agent 呼叫放在同一則訊息裡**，讓它們同時跑：
+**第 0 步偵測時，記下你自己的模型：**
 
 ```bash
-python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role opponent --seat X1
+python3 "$SKILL/scripts/fc.py" detect --run "$RUN" --probe --host-model <你自己的模型 ID> --host-effort xhigh
 ```
 
-外部模型可能要跑好幾分鐘，用 `run_in_background` 執行，等完成通知再繼續。覆核時，X 席位一樣用 `python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role review --seat X1`。
+- 主模型的每個角色都照 `models.json` 記的模型和推理強度跑，和第二輪評測一樣。detect 會印出這一行；沒帶參數時，會寫「沒有指定模型」。
+- `xhigh` 比較花額度和時間。使用者要求省額度時，可以改用 `high`。
+- 重跑 detect 也要帶這兩個參數，不然會被清掉。
 
-## 第 5 步範例（完整模式、偵測到 Codex）
+**每個 `run-model` 都用 `run_in_background` 執行：**
+- 等完成通知再進下一步，不要輪詢。每個角色要跑幾分鐘到半小時以上，超過 Bash 工具 10 分鐘的上限。
+- 背景指令還沒結束時，不要重跑同一步。`fc.py status` 會把還在跑的步驟顯示成「缺少」。
 
-同一則訊息裡送出四個工具呼叫：三個 Agent（`--role opponent --seat A`、`B`、`C`）和一個背景 Bash（`python3 "$SKILL/scripts/fc.py" run-model … --seat X1`）。四個都完成後，再一起跑 validate。
+**detect 印出「找不到主體的 CLI」時：** 通常是只裝了桌面版或 IDE 外掛，終端機裡沒有 `claude` 指令。停下來告訴使用者，請他選一個做法，再重跑第 0 步：
+- 安裝 Claude Code 的命令列版本，或把 `claude` 所在的資料夾加進 PATH。
+- 用 `FC_CLAUDE_CMD` 指定完整路徑。這個路徑會寫進 `models.json`，分享查核資料夾時會帶出帳號名稱。
+
+**detect 印出「偵測到 ANTHROPIC_API_KEY」時：**
+- 每個角色都會另外加 `--bare`，費用算在那把 key 上。這條路沒有做過金絲雀實測。
+- 開始前先告訴使用者，不要自己印出 key 的內容。

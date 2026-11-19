@@ -69,6 +69,22 @@ class CredibilityTest(unittest.TestCase):
         self.assertEqual(r["result"], "無法判定")
         self.assertIn("意見", r["result_reason"])
 
+    def test_opinion_prediction_and_vague_claims_never_count_whatever_their_label(self):
+        """They may share text with scored claims, so scoring them would count one sentence twice.
+        Regression (round 2, case-013): an opinion judged unverified and a vague claim judged misleading were scored."""
+        for t in ("O", "P", "U"):
+            r = compute([claim("C1", "true"), {**claim("C2", "misleading", importance=5, core=False), "type": t}])
+            self.assertEqual(r["credibility"]["score"], 100, t)
+            self.assertIsNone(next(c for c in r["claims"] if c["claim_id"] == "C2")["factor"], t)
+
+    def test_unscored_types_do_not_count_toward_the_unverified_share(self):
+        r = compute([claim("C1", "true", importance=3), {**claim("C2", "unverified", importance=5, core=False), "type": "O"}])
+        self.assertEqual(r["result"], "符合")
+
+    def test_message_with_only_unscored_types_is_undetermined(self):
+        r = compute([{**claim("C1", "false"), "type": "P"}])
+        self.assertEqual(r["result"], "無法判定")
+
     def test_context_flags_are_listed_but_not_double_counted(self):
         r = compute([claim("C1", "true", flags=["out_of_context"]),
                      claim("C2", "true", flags=["out_of_context", "time_shift"])])
@@ -161,6 +177,14 @@ class ConfidenceTest(unittest.TestCase):
                      claim("C3", "true", importance=5)])
         self.assertEqual(self.conf(r), 80)
 
+    def test_failed_review_of_an_unscored_type_does_not_deduct(self):
+        r = compute([claim("C1", "true"), {**claim("C2", "false", core=False, importance=2, review="failed"), "type": "O"}])
+        self.assertEqual(self.conf(r), 100)
+
+    def test_missing_law_text_on_an_unscored_type_does_not_deduct(self):
+        r = compute([claim("C1", "true"), {**claim("C2", "unverified", core=False, importance=1, legal=True, law=False), "type": "P"}])
+        self.assertEqual(self.conf(r), 100)
+
     def test_core_claim_relying_only_on_limited_sources_deducts_10_each_capped_at_30(self):
         ledger = [ev("S1", tier=1, chain="a", access="paywall"), ev("S2", tier=1, chain="b", access="blocked")]
         claims = [claim(f"C{i}", "true", evidence=["S1", "S2"]) for i in range(1, 5)]
@@ -223,11 +247,82 @@ class ConfidenceTest(unittest.TestCase):
         self.assertEqual(r["confidence"]["evidence_quality"], 1)
         self.assertEqual(self.conf(r), 100)
 
+    def test_unscored_types_are_ignored_for_evidence_quality_and_access_limits(self):
+        ledger = FULL_LEDGER + [ev("S3", tier=6, chain="c", access="blocked")]
+        r = compute([claim("C1", "true"), {**claim("C2", "misleading", evidence=["S3"]), "type": "U"}], ledger=ledger)
+        self.assertEqual(r["confidence"]["evidence_quality"], 1)
+        self.assertEqual(self.conf(r), 100)
+
     def test_deductions_are_itemised(self):
         r = compute([claim("C1", "true")], seats=[])
         reasons = [d["reason"] for d in r["confidence"]["deductions"]]
         self.assertTrue(any("跨模型" in x for x in reasons))
         self.assertEqual(sum(d["points"] for d in r["confidence"]["deductions"]), 20)
+
+
+def verdicts_with(claims, unverified):
+    return {"claims": claims, "ledger": FULL_LEDGER, "unverified_rulings": unverified}
+
+
+class PublishBlockTest(unittest.TestCase):
+    """Conditions that keep a report from being publishable without changing its scores."""
+
+    def test_unverified_ruling_blocks_publishing_without_lowering_confidence(self):
+        u = [{"attack_id": "B-1", "seat": "B", "claim_id": "C1", "target": "label"}]
+        r = score.compute(verdicts_with([claim("C1", "false")], u), FULL_RUN, OK_SEAT)
+        self.assertEqual(r["confidence"]["score"], 100)
+        self.assertFalse(r["publishable"])
+        self.assertTrue(any("核對過的網址" in b for b in r["publish_blocks"]))
+
+    def test_unverified_trace_ruling_blocks_publishing_too(self):
+        u = [{"attack_id": "C-1", "seat": "C", "claim_id": None, "target": "trace"}]
+        self.assertFalse(score.compute(verdicts_with([claim("C1", "false")], u), FULL_RUN, OK_SEAT)["publishable"])
+
+    def test_unscored_claim_that_would_change_the_result_blocks_publishing(self):
+        """Red-team: typing a damaging fact as vague hides it from the score. If counting the opinion,
+        prediction or vague claims the judge still labelled would change the result, do not publish."""
+        hidden = {**claim("C2", "false", importance=5, core=True), "type": "U"}
+        r = compute([claim("C1", "true", core=False), hidden])
+        self.assertEqual(r["result"], "符合")
+        self.assertFalse(r["publishable"])
+        self.assertTrue(any("C2" in b and "不符" in b for b in r["publish_blocks"]))
+
+    def test_lowering_importance_or_core_does_not_get_around_the_check(self):
+        """Red-team re-review: the first guard only looked at core or importance >= 4."""
+        r = compute([claim("C1", "true"), {**claim("C2", "false", core=False), "type": "U"},
+                     {**claim("C3", "false", core=False), "type": "O"}])
+        self.assertFalse(r["publishable"])
+
+    def test_key_unscored_claim_judged_unverified_blocks_when_it_would_make_the_result_undetermined(self):
+        """Simplifier re-review: excluding unverified left a hole (符合 instead of 無法判定)."""
+        r = compute([claim("C1", "true"), {**claim("C2", "unverified", importance=5), "type": "O"}])
+        self.assertFalse(r["publishable"])
+
+    def test_unscored_claim_that_would_not_change_the_result_does_not_block(self):
+        r = compute([claim("C1", "false", importance=5), {**claim("C2", "false", importance=2, core=False), "type": "O"}])
+        self.assertTrue(r["publishable"])
+
+    def test_unscored_claim_judged_not_factual_never_blocks(self):
+        r = compute([claim("C1", "true"), {**claim("C2", "not_factual", importance=5), "type": "O"}])
+        self.assertTrue(r["publishable"])
+
+    def test_importance_challenge_cannot_lift_a_publish_block(self):
+        """Skeptic re-review: lowering a weight in the debate must not make a report publishable."""
+        lowered = {**claim("C2", "false", importance=1, core=False), "type": "O", "importance_from": 2}
+        r = compute([claim("C1", "true", importance=5), lowered])
+        self.assertEqual(r["result"], "符合")
+        self.assertFalse(r["publishable"])
+        self.assertTrue(any("重要性" in b for b in r["publish_blocks"]))
+
+    def test_failed_or_missing_internal_seat_blocks_publishing_in_full_mode(self):
+        for status in ("failed", "missing"):
+            seats = OK_SEAT + [{"seat": "B", "engine": "claude", "cross_model": False, "can_search": True, "status": status}]
+            r = compute([claim("C1", "true")], seats=seats)
+            self.assertFalse(r["publishable"], status)
+            self.assertTrue(any("反方 B" in b for b in r["publish_blocks"]), status)
+
+    def test_clean_run_has_no_blocks(self):
+        self.assertEqual(compute([claim("C1", "true")])["publish_blocks"], [])
 
 
 class DeterminismTest(unittest.TestCase):

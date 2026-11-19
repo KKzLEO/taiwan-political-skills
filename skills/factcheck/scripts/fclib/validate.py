@@ -155,6 +155,8 @@ def tactic_errors(trace, run, lib, only=None):
 
 
 _TAG_INDEX = re.compile(r"^tactics\[(\d+)\]")
+_RULING_URL_MSG = "判定攻擊成立，但沒有列出實際打開核對過的 verified_urls"
+_RULING_URL = re.compile(r"^rulings\[(\d+)\] " + _RULING_URL_MSG + "$")
 
 
 def set_aside_tactics(obj, run, name, lib, errors):
@@ -180,6 +182,30 @@ def set_aside_tactics(obj, run, name, lib, errors):
         new["tactic_checks_set_aside"] = list(errors)
         return new
     return None
+
+
+def fallback(obj, run, name, lib, errors):
+    """Last resort once a role has retried; returns the new object, or None when anything else is wrong.
+
+    - Tags (trace.json) or tag checks (judgment.json) that still break the rules are set aside: tags
+      never affect the score.
+    - Upheld rulings whose checked URLs the judge still leaves out stay upheld but are listed in
+      `rulings_unverified`: finalize discloses them and score blocks publishing. Regression (round 2,
+      case-011): one missing URL list stopped the whole check at its most expensive step.
+    """
+    if not errors or not isinstance(obj, dict):
+        return None
+    if name != "judgment.json":
+        return set_aside_tactics(obj, run, name, lib, errors)
+    tags = [e for e in errors if e.startswith("tactic_checks")]
+    urls = [_RULING_URL.match(e) for e in errors if not e.startswith("tactic_checks")]
+    if not all(urls):
+        return None
+    new = set_aside_tactics(obj, run, name, lib, tags) if tags else copy.deepcopy(obj)
+    if urls:
+        rulings = obj.get("rulings") or []
+        new["rulings_unverified"] = sorted({rulings[int(m.group(1))].get("attack_id") for m in urls})
+    return new
 
 
 def _tag_errors(i, t, lib, hay, has_report):
@@ -345,6 +371,7 @@ def _judgment(d, run, ctx):
     err = _Errors()
     attacks = _attacks(run)
     ruled = [r.get("attack_id") for r in d.get("rulings", [])]
+    excused = _unverified_rulings(err, d, attacks)
     for aid in attacks:
         err.need(ruled.count(aid) == 1, f"攻擊 {aid} 需要剛好一個裁決")
     for i, r in enumerate(d.get("rulings", [])):
@@ -352,13 +379,22 @@ def _judgment(d, run, ctx):
         err.need(aid in attacks, f"rulings[{i}].attack_id {aid} 不存在")
         err.need(isinstance(r.get("upheld"), bool), f"rulings[{i}].upheld 必須是 true/false")
         err.need(_nonempty(r.get("reason")), f"rulings[{i}].reason 不能是空的")
-        if r.get("upheld") is True and aid in attacks and attacks[aid][1].get("evidence"):
-            err.need(bool(r.get("verified_urls")),
-                     f"rulings[{i}] 判定攻擊成立，但沒有列出實際打開核對過的 verified_urls")
+        if r.get("upheld") is True and aid in attacks and attacks[aid][1].get("evidence") and aid not in excused:
+            err.need(bool(r.get("verified_urls")), f"rulings[{i}] {_RULING_URL_MSG}")
     ledger_ids = _check_ledger(err, d.get("ledger"), "judgment")
     _check_verdicts(err, d.get("verdicts"), _claim_ids(run), ledger_ids, "judgment")
     _check_tactic_checks(err, d, run, attacks, _library(ctx))
     return err
+
+
+def _unverified_rulings(err, d, attacks):
+    """`rulings_unverified` is written only by fallback(): upheld attacks that carry evidence."""
+    listed = d.get("rulings_unverified", [])
+    upheld = {r.get("attack_id") for r in d.get("rulings", []) if r.get("upheld") is True}
+    ok = isinstance(listed, list) and all(
+        isinstance(a, str) and a in upheld and a in attacks and attacks[a][1].get("evidence") for a in listed)
+    err.need(ok, "rulings_unverified 由程式填寫，只能列出判成立、而且附了證據的攻擊編號")
+    return set(listed) if ok else set()
 
 
 def _check_tactic_checks(err, d, run, attacks, lib):

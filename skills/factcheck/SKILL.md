@@ -5,21 +5,27 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方�
 
 # 訊息查核
 
-把一則訊息拆成命題，由乾淨的 sub-agent 擔任溯源員、正方、三個反方、裁判，再找另一家模型當外部反方，最後由腳本套固定規則算分、產報告。
+把一則訊息拆成命題，由獨立的子程序擔任溯源員、正方、三個反方、裁判，再找另一家模型當外部反方，最後由腳本套固定規則算分、產報告。
 
-**你（主 agent）只負責安排流程和執行腳本。** 你看得到使用者的記憶和原始提問，所以不參與判定、不當任何辯論角色，也不把自己的看法寫進任何 sub-agent 的指令。
+**你（主 agent）只負責安排流程和執行腳本。** 你看得到使用者的記憶和原始提問，所以不參與判定、不當任何辯論角色，也不把自己的看法寫進任何角色的指令。
 
 ## 準備
 
 下面的指令裡，`$SKILL` 是這個 skill 的資料夾，`$RUN` 是第 0 步建立的查核資料夾。**每次執行指令都要把兩個都寫成完整路徑**（例如開頭寫 `SKILL=/完整/路徑; RUN=/完整/路徑;`），因為每個指令可能在新的 shell 裡執行，變數不會保留。
 
-需要 Python 3.11 以上。每一步產出的 JSON 都要先通過 `python3 "$SKILL/scripts/fc.py" validate`，沒通過就把錯誤訊息交回給產出它的角色重做一次；第二次還不過就停止，告訴使用者是哪一步出錯。
+需要 Python 3.11 以上。
 
-例外：`trace.json` 或 `judgment.json` 重做一次之後，錯誤**只剩**手法標記（`tactics…`、`tactic_checks…` 開頭的錯誤），就執行 `python3 "$SKILL/scripts/fc.py" set-aside-tactics --run "$RUN" <檔名>`。它會把不合格的標記移出（原內容保留在檔案裡），報告不列出它們，流程繼續。手法標記不影響分數，不值得因此停掉整次查核。
+**第 1、2 步**（你自己做的）產出的 JSON 要先通過 `python3 "$SKILL/scripts/fc.py" validate`。沒通過就照錯誤訊息重做一次，第二次還不過就停止，告訴使用者是哪一步出錯。
+
+**第 3 步以後的角色都用 `fc.py run-model` 執行，** 它會自己檢查格式、重試一次。重試後只剩下面兩種錯誤時，它會自動走退路，流程繼續；原內容都保留在檔案裡：
+- **手法標記不合格：** 移出，報告不列出。手法標記不影響分數，不值得因此停掉整次查核。
+- **裁判判附證據的攻擊成立，卻沒列出實際核對過的網址：** 判決照用，報告開頭會註明，這份報告不能標「可公開」。
+
+其他錯誤時，溯源員、正方、答辯、裁判會以非零結束碼停止。這時停下來，告訴使用者是哪一步出錯，**不要自己重跑或補檔**。
 
 ### 0. 建立資料夾、偵測模型
 
-1. **模式：** 預設完整模式。使用者說「快速」「簡單查一下」才用快速模式。先告訴使用者：完整模式實測短訊息約 20–35 分鐘、新聞或長訊息約 50–90 分鐘，sub-agent 會用掉上百萬 token；快速模式也要 20 到 40 分鐘，而且報告不能標「可公開」。
+1. **模式：** 預設完整模式。使用者說「快速」「簡單查一下」才用快速模式。先告訴使用者：完整模式實測短訊息約 20–35 分鐘、新聞或長訊息約 50–90 分鐘，角色的子程序會用掉上百萬 token；快速模式也要 20 到 40 分鐘，而且報告不能標「可公開」。
 2. 建立資料夾：
    ```bash
    RUN=$(python3 "$SKILL/scripts/fc.py" init --mode full --host <claude 或 codex> --slug <幾個字的主題>)
@@ -28,7 +34,7 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方�
    ```bash
    python3 "$SKILL/scripts/fc.py" detect --run "$RUN" --probe
    ```
-   把列出的席位告訴使用者。沒有任何外部席位時，提醒他報告的信心度會扣 20 分，可以裝 Codex、Claude Code 或 Gemini CLI 補上。
+   Claude Code 上要另外加 `--host-model` 和 `--host-effort`，見 host-claude.md。把列出的席位告訴使用者。沒有任何外部席位時，提醒他報告的信心度會扣 20 分，可以裝 Codex、Claude Code 或 Gemini CLI 補上。
 4. **中斷後重跑：** 先執行 `python3 "$SKILL/scripts/fc.py" status --run "$RUN"`，標「完成」的步驟直接跳過。
 
 ### 1. 讀入 → `source.json`
@@ -41,12 +47,12 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方�
 
 ### 3–8. 辯論
 
-每個角色怎麼派出去，看你所在的平台：
+每個角色都用 `fc.py run-model` 開一個獨立的子程序執行。各平台另外要注意的事：
 
 - Claude Code → [references/host-claude.md](references/host-claude.md)
 - Codex → [references/host-codex.md](references/host-codex.md)
 
-順序（每一步完成並通過檢查，才進下一步）：
+順序（每一步完成，才進下一步）：
 
 | 步驟 | 角色 | 指令參數 | 產出 |
 |---|---|---|---|
@@ -57,9 +63,25 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方�
 | 7 | 裁判 | `--role judge` | `judgment.json` |
 | 8 | 覆核：`python3 "$SKILL/scripts/fc.py" reviewers --run "$RUN"` 列出的每個席位 | `--role review --seat <席位>` | `review-<席位>.json` |
 
-- 第 5 步的席位以 `models.json` 的 `seats` 為準：完整模式是 A、B、C 加每個外部模型；快速模式只有一席。
-- 外部席位（X 開頭）一律用 `python3 "$SKILL/scripts/fc.py" run-model` 執行，它會自己處理逾時、重試、失敗。失敗的席位會被記成 `failed`，照規則扣信心度，流程繼續。
-- 第 8 步沒有列出任何席位時直接跳過。
+```bash
+python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role tracer     # 第 4、6、7 步換成 proponent、rebuttal、judge
+```
+
+第 5 步所有反方同時跑，放在同一個指令裡：
+
+```bash
+for s in $(python3 -c "import json,sys;print(' '.join(x['seat'] for x in json.load(open(sys.argv[1]))['seats']))" "$RUN/models.json"); do
+  python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role opponent --seat "$s" &
+done
+wait
+```
+
+第 8 步：`fc.py reviewers` 列出的每個席位，各跑一次 `--role review --seat <席位>`，可以同時跑。沒有列出任何席位就跳過。
+
+- 第 5 步的席位以 `models.json` 的 `seats` 為準：完整模式是 A、B、C 加每個外部模型，快速模式只有一席。A、B、C 用主體的模型，X 席位用對應的外部 CLI。
+- 反方席位失敗時會被記成 `failed`，流程繼續：
+  - 外部席位（X 開頭）全部失敗，照規則扣信心度。
+  - 完整模式少了 A、B、C 任何一席（失敗或沒有執行），報告不能標「可公開」。
 
 ### 9. 結算
 
@@ -77,7 +99,7 @@ python3 "$SKILL/scripts/fc.py" finalize --run "$RUN" && python3 "$SKILL/scripts/
 ## 特殊狀況
 
 - **社群平台原始貼文抓不到**（Facebook、Instagram、Threads 常擋自動存取）：先請使用者貼上貼文連結或截圖。只有使用者明確要求、而且你有瀏覽器工具時，才可以用他自己的登入狀態去抓；動手前先警告：這可能違反 Meta 的服務條款，帳號有被鎖的風險。
-- **涉及法條：** 正方會查條文原文。有裝 `lawchat-oss/mcp-taiwan-legal-db` 這類法規 MCP 時，在派正方的指令裡告訴它可以使用。報告的法條區塊一律標「非法律意見」。
+- **涉及法條：** 正方會到全國法規資料庫查條文原文。角色在隔離的子程序裡跑，用不到法規 MCP。報告的法條區塊一律標「非法律意見」。
 - **追到一般民眾：** 不追查真實身分，背景調查只做媒體和公眾人物。
 - **使用者要求「判他錯」「幫我反駁」：** 照樣跑中立流程，結果照實回報。
 

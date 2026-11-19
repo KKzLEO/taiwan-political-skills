@@ -25,6 +25,22 @@ class SeatStatusTest(unittest.TestCase):
         failed = {"seat": "X1", "engine": "codex", "lens": "external", "status": "failed", "error": "t", "attacks": []}
         self.assertEqual(self.seats(opponent__X1_json=failed)["X1"]["status"], "failed")
 
+    def test_seat_assigned_in_models_without_a_file_is_missing(self):
+        """Red-team: a seat that never ran must not silently disappear from the seat table."""
+        models = dict(fx.MODELS, seats=[{"seat": s, "engine": "claude", "kind": "internal", "lens": lens}
+                                         for s, lens in (("A", "evidence"), ("B", "counter"), ("C", "stance"))]
+                      + [{"seat": "X1", "engine": "codex", "kind": "external", "lens": "external"}])
+        s = self.seats(models_json=models, opponent__C_json=None)
+        self.assertEqual(s["C"]["status"], "missing")
+        self.assertFalse(s["C"]["cross_model"])
+        self.assertEqual(s["A"]["status"], "ok")
+
+    def test_missing_external_seat_is_described_like_a_failed_one(self):
+        """Skeptic re-review: a missing X1 showed 'not cross-model, cannot search' in the seat table."""
+        models = dict(fx.MODELS, seats=[{"seat": "X1", "engine": "codex", "kind": "external", "lens": "external"}])
+        s = self.seats(models_json=models, opponent__X1_json=None)["X1"]
+        self.assertEqual((s["status"], s["cross_model"], s["can_search"], s["isolation"]), ("missing", True, True, "partial"))
+
     def test_cross_model_is_computed_not_trusted(self):
         lying = dict(fx.OPP_A, cross_model=True)
         self.assertFalse(self.seats(opponent__A_json=lying)["A"]["cross_model"])

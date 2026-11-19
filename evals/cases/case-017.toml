@@ -1,0 +1,87 @@
+id = "case-017"
+title = "「藍白54比45三讀普發一萬」：三讀和藍白過關都是真的，但全案表決是60比44"
+input_type = "text"
+input = """國民黨&民眾黨壓倒性在
+剛剛17:31分強闖成功
+54比45全民普發現金1萬
+元立法院三讀通過業業"""
+target = "國民黨"
+expected_result = "大致符合"
+notes = """主旨真、細節錯：票數錯。訊息原文取自 Cofacts（文章 oOgF-ZcBDktNo1YhjXGT，2025-07-11 收錄，UTC 10:26，即台灣時間當天18:26，1人回報），是臉書貼文截圖的文字。去掉開頭的粉專名稱「竹東小鎮」和發文者與發文時間「高傑·2分鐘..」兩行，其餘逐字照抄；結尾「業業」是截圖文字辨識的雜訊，照原樣保留。沒有找到針對這則訊息的查核報告，答案全部來自立法院議事錄和全國法規資料庫。
+判定關鍵（立法院第11屆第3會期第20次會議議事錄，114年7月11日）：
+1. 三讀是真的：討論事項第一案決議「因應國際情勢強化經濟社會及民生國安韌性特別條例制定通過」，三讀照二讀文字通過，全案記名表決通過。條例第3條第11款就是「發放現金每人新臺幣一萬元」（全國法規資料庫），114年8月1日制定公布。判 true。
+2.「國民黨&民眾黨」也對：全案表決的60張贊成票包括國民黨團委員和民眾黨8位委員（黃國昌、黃珊珊、張啓楷等），44張反對票都是民進黨委員。判 true。
+3. 票數錯：議事錄附的全案表決結果是出席104人、贊成60、反對44。二讀逐條表決時，名稱和第1、2、3、6條都是97人出席、52比45（只有國民黨團和兩位無黨籍委員投贊成，民眾黨沒有投），第5條51比45，第9條52比44。當天這個案子沒有任何一次表決是54比45。判 false。
+4.「剛剛17:31分」：議事錄只記下午會議時間是2時30分到6時8分，沒有記每次表決的時刻，判 unverified。Cofacts 收錄時間是18:26，跟「剛剛」大致吻合，但不能當證據。
+為什麼是大致符合：訊息要讀者知道的是「藍白讓普發一萬在立法院三讀過了」，這件事和誰投贊成都正確；錯的是票數，而且錯成較小的差距，不影響「三讀通過」這個結論。查核時如果只看新聞報導的二讀票數（52比45）就判全對或全錯，都不準確。
+時間點：今天（2026-11-19）再讀，三讀是已經發生的事，判定不變。條例後來在114年9月5日修正第6、9條，把普發時程改成特別預算公布後一個月內開始、七個月內發完，這不影響「7月11日三讀通過」這件事。
+「壓倒性」「強闖成功」是評價：60比44是過半，但「強闖」暗示程序不正常，議事錄看到的是正常的記名表決。這兩個詞不另外查證，「強闖成功」列為 not_factual。
+摘錄說明：議事錄 PDF 摘錄只去掉排版造成的換行和空白，表格欄位之間的空白壓成一格。這個網址直接開啟會被轉回議事網首頁，要從會議頁面（https://ppg.ly.gov.tw/ppg/sittings/2025070915/details?meetingDate=114/07/11）點「本次會議議事錄」下載。
+"""
+
+[[claim]]
+original = """全民普發現金1萬
+元立法院三讀通過"""
+expected_label = "true"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/20LCEWC03_110320.pdf"
+excerpt = "決議：因應國際情勢強化經濟社會及民生國安韌性特別條例制定通過。"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/20LCEWC03_110320.pdf"
+excerpt = "三讀時，均照二讀文字通過；全案並經記名表決結果，予以通過，表決結果附後(8)"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=J0080065"
+excerpt = "十一、發放現金每人新臺幣一萬元，強化民眾消費韌性，擴大內需，提振經濟效益。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=J0080065"
+excerpt = "1.中華民國一百十四年八月一日總統華總一經字第 11400074701 號令制定公布全文 9 條"
+
+[[claim]]
+original = "國民黨&民眾黨壓倒性在"
+expected_label = "true"
+core = false
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/20LCEWC03_110320.pdf"
+excerpt = "贊成者：60 人 傅崐萁 王鴻薇 羅智強 謝龍介 涂權吉 馬文君 林憶君 麥玉珍 劉書彬 林國成 陳昭姿 黃國昌 黃珊珊 張啓楷 高金素梅"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/20LCEWC03_110320.pdf"
+excerpt = "反對者：44 人 郭昱晴 林月琴 陳培瑜 柯建銘 吳思瑤"
+
+[[claim]]
+original = "54比45"
+expected_label = "false"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/20LCEWC03_110320.pdf"
+excerpt = "(8)「討論事項第一案全案付表決予以通過」部分： 出席人數：104 贊成人數：60 反對人數：44 棄權人數：0"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/20LCEWC03_110320.pdf"
+excerpt = "(4)「討論事項第一案第三條照國民黨黨團再修正動議條文予以通過」部分： 出席人數：97 贊成人數：52 反對人數：45 棄權人數：0"
+
+[[claim]]
+original = "剛剛17:31分"
+expected_label = "unverified"
+core = false
+importance = 1
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/20LCEWC03_110320.pdf"
+excerpt = "時 間 中華民國 114 年 7 月 11 日（星期五）上午 9 時至 9 時 17 分、10 時至 12 時 3 分、下午 2 時 30 分至 6 時 8 分"
+
+[[claim]]
+original = "強闖成功"
+expected_label = "not_factual"
+core = false
+importance = 1
