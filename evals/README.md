@@ -13,15 +13,32 @@
 - **不符：** 主旨是錯的或誤導的，即使有些細節正確。
 - **無法判定：** 關鍵說法查不到足夠的證據，對錯都無法確認。
 
-時間照 `skills/factcheck/references/neutralize.md` 第 6 條和共同規則的「時間」：查核日期是使用者收到訊息的那一天；沒有日期的轉傳文字算查不到發布時間（2026-11-19 起）。
+時間照 `skills/factcheck/references/neutralize.md` 第 6 條和共同規則的「時間」（2026-11-19 起）：
+- 查核日期是使用者收到訊息的那一天；沒有日期的轉傳文字算查不到發布時間。
+- **訊息叫讀者做的事已經過期**（投票日已過、期限已過）：主旨不成立，預期「不符」。
+- **把舊消息說成新消息**（沒有日期的轉傳文字用「剛剛」「最新」），內容本身正確：時間算細節錯誤，預期最高「大致符合」。時間的錯只算一次，內容照它描述的那件事判。
+- 這類「舊聞當新聞傳」的案例，兩位獨立的重判者給過相鄰一級的不同答案（大致符合、部分符合），所以答案卷在這一類有一級的雜訊。
 
-1. 在 Claude Code 或 Codex 裡用完整模式查核案例的 `input`。
+1. 在 Claude Code 或 Codex 裡用完整模式查核案例的 `input`。要一次跑很多則時，用 `evals/harness/run_cases.py`（見下面「批次工具」）。
 2. 比對：
    ```bash
    python3 skills/factcheck/scripts/fc.py eval-compare --case evals/cases/case-001.toml --run <查核資料夾>
    ```
 3. 把每個案例的 `label_correct / total` 和 `result_correct` 記到 `evals/results/<日期>.md`，並列出每種判定的準確率。
 4. 根據結果調整 `references/scoring.md` 和 `scripts/fclib/score.py` 的門檻，兩邊一起改，並在 CHANGELOG 寫理由。
+
+### 批次工具（`evals/harness/`）
+
+```bash
+python3 evals/harness/run_cases.py --base <輸出資料夾> --host-model <模型 ID> --workers 2 case-027 probes/symmetry-time/國民黨
+python3 evals/harness/analyze.py --base <輸出資料夾>
+```
+
+- `run_cases.py` 照 SKILL.md 的順序執行同一批 `fc.py` 指令：每批先做一次真的 `detect --probe`，每則再跑收集輸入、讀入與拆題、溯源、正方、所有反方、答辯、裁判、覆核和結算。它不讀答案卷。
+- `analyze.py` 把結論分成完全相同、差一級、嚴重錯誤、其他錯誤（定義在 `results/2026-11-19-release-criteria.md`），列出結論錯卻標可公開的則數，並檢查同一組探測的各版本是否一致。
+- 它代替的是主體「照 SKILL.md 下指令」這一段，所以量不到主體自己會不會照做、轉述對不對。這要另外在真的 Claude Code 和 Codex 裡各跑一次。
+- 輸出資料夾請放在不會被清掉的地方。每則會同時啟動好幾個模型 CLI，筆電上 `--workers` 不要開大。
+- 用量會記在輸出資料夾的 `usage.jsonl`（claude）和 `usage-codex.jsonl`（codex）。
 
 ## 2. 記憶隔離
 

@@ -3,3 +3,4 @@ __pycache__/
 factcheck-runs/
 .DS_Store
 .gstack/
+.work/

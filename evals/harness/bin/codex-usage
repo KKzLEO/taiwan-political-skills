@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+"""Eval-only wrapper around `codex`: passes stdin/stdout/stderr/exit code through unchanged and appends the
+"tokens used" number codex prints on stderr to usage-codex.jsonl next to $FC_USAGE_LOG (one line per call)."""
+import json, os, re, shutil, subprocess, sys, time
+
+real = shutil.which("codex")
+data = sys.stdin.buffer.read()
+t0 = time.time()
+p = subprocess.run([real, *sys.argv[1:]], input=data, capture_output=True)
+sys.stdout.buffer.write(p.stdout)
+sys.stderr.buffer.write(p.stderr)
+err = p.stderr.decode("utf-8", "ignore")
+m = re.findall(r"tokens used\s*[:\n]\s*([\d,]+)", err)
+rec = {"t": time.strftime("%Y-%m-%d %H:%M:%S"), "tag": os.environ.get("FC_USAGE_TAG", "?"), "code": p.returncode,
+       "secs": round(time.time() - t0), "tokens_used": int(m[-1].replace(",", "")) if m else None}
+log = os.environ.get("FC_USAGE_LOG")
+if log:
+    with open(os.path.join(os.path.dirname(log), "usage-codex.jsonl"), "a", encoding="utf-8") as fh:
+        fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+sys.exit(p.returncode)

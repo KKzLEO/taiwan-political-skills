@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+"""Eval-only wrapper around `claude`: passes stdin/stdout/exit code through unchanged and appends the
+usage numbers from claude's JSON output to $FC_USAGE_LOG (one line per call)."""
+import json, os, re, shutil, subprocess, sys, time
+
+real = shutil.which("claude")
+data = sys.stdin.buffer.read()
+t0 = time.time()
+p = subprocess.run([real, *sys.argv[1:]], input=data, capture_output=True)
+sys.stdout.buffer.write(p.stdout)
+sys.stderr.buffer.write(p.stderr)
+rec = {"t": time.strftime("%Y-%m-%d %H:%M:%S"), "tag": os.environ.get("FC_USAGE_TAG", "?"), "code": p.returncode,
+       "secs": round(time.time() - t0)}
+m = re.search("輸出檔名：`([^`]+)`", data.decode("utf-8", "ignore"))
+rec["out"] = m.group(1) if m else None
+try:
+    j = json.loads(p.stdout)
+    for k in ("total_cost_usd", "usage", "num_turns", "duration_ms", "modelUsage", "is_error"):
+        rec[k] = j.get(k)
+except Exception:
+    rec["parse_error"] = True
+log = os.environ.get("FC_USAGE_LOG")
+if log:
+    with open(log, "a", encoding="utf-8") as fh:
+        fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+sys.exit(p.returncode)

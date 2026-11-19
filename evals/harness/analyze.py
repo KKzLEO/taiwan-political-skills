@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+"""Compare a finished batch (run_cases.py --base <folder>) with the answer keys.
+
+    python3 evals/harness/analyze.py --base <output folder> [--repo <repo or snapshot>]
+
+Prints, for cases: the result against expected_result, classified as exact / adjacent (one level apart) /
+severe / other, using the definitions in evals/results/2026-11-19-release-criteria.md; whether a wrong result was
+marked publishable; claim-level label matches (fc.py's evalcmp). For probes: whether the variants of one probe got
+the same result, the same surviving tactic tags, and how far apart their credibility is. Then the usage totals.
+"""
+import argparse
+import json
+import sys
+import tomllib
+from collections import Counter, defaultdict
+from pathlib import Path
+
+LEVEL = {"符合": 3, "大致符合": 2, "部分符合": 1, "不符": 0}
+UNDETERMINED = "無法判定"
+
+
+def classify(expected, got):
+    """exact, adjacent, severe or other (wrong but not severe), as the release criteria define them."""
+    if got == expected:
+        return "exact"
+    if UNDETERMINED in (expected, got):
+        definite = got if expected == UNDETERMINED else expected
+        return "severe" if definite in ("符合", "不符") else "other"
+    return "adjacent" if abs(LEVEL[expected] - LEVEL[got]) == 1 else "severe"
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--base", required=True)
+    ap.add_argument("--repo", default=str(Path(__file__).resolve().parents[2]))
+    args = ap.parse_args()
+    base, repo = Path(args.base), Path(args.repo)
+    sys.path.insert(0, str(repo / "skills/factcheck/scripts"))
+    from fclib import evalcmp, io  # the snapshot's own comparison code
+
+    results = json.loads((base / "results.json").read_text())
+    batch = json.loads((base / "batch.json").read_text()) if (base / "batch.json").exists() else {}
+    print(f"程式：{batch.get('commit', '?')}；主模型：{batch.get('host_model', '?')}，推理強度 {batch.get('host_effort', '?')}\n")
+
+    cases = sorted((r for r in results if r.get("kind") == "case"), key=lambda r: r["name"])
+    tally = Counter()
+    if cases:
+        print("| 案例 | 預期 | 結果 | 比對 | 可信度 | 信心度 | 可公開 | 不能公開的原因 | 命題判對 | 分鐘 |")
+        print("|---|---|---|---|---|---|---|---|---|---|")
+    for r in cases:
+        case = tomllib.load(open(repo / "evals/cases" / f"{r['name']}.toml", "rb"))
+        exp = case["expected_result"]
+        if r["status"] != "ok":
+            tally["failed"] += 1
+            print(f"| {r['name']} | {exp} | 沒有跑完（{r['status']}） | | | | | | | {r['minutes']} |")
+            continue
+        run = Path(r["run"])
+        sc, v = io.read_json(run / "score.json"), io.read_json(run / "verdicts.json")
+        kind = classify(exp, sc["result"])
+        tally[kind] += 1
+        tally["wrong_publishable_" + kind] += bool(sc["publishable"] and kind != "exact")
+        cmp = evalcmp.compare(case, io.read_json(run / "claims.json"), v, sc)
+        why = "；".join(sc.get("publish_blocks") or []) or ("—" if sc["publishable"] else "信心度或模式")
+        print(f"| {r['name']} | {exp} | {sc['result']} | {kind} | {(sc['credibility'] or {}).get('score')} | "
+              f"{sc['confidence']['score']} | {'是' if sc['publishable'] else '否'} | {why[:50]} | "
+              f"{cmp['label_correct']}/{cmp['total']} | {r['minutes']} |")
+    n = sum(tally[k] for k in ("exact", "adjacent", "severe", "other"))
+    if n:
+        print(f"\n跑完 {n} 則：完全相同 {tally['exact']}（{tally['exact'] / n:.0%}）、差一級 {tally['adjacent']}、"
+              f"嚴重錯誤 {tally['severe']}、其他錯誤 {tally['other']}；沒跑完 {tally['failed']}")
+        print(f"結論錯卻標可公開：嚴重 {tally['wrong_publishable_severe']}、差一級 {tally['wrong_publishable_adjacent']}、"
+              f"其他 {tally['wrong_publishable_other']}")
+
+    probes = defaultdict(list)
+    for r in results:
+        if r.get("kind") == "probe":
+            probes[r["probe"]].append(r)
+    for stem, rows in sorted(probes.items()):
+        print(f"\n| 探測 {stem} | 結果 | 可信度 | 信心度 | 可公開 | 留下的手法標記 | 計分命題的判定 |\n|---|---|---|---|---|---|---|")
+        seen = []
+        for r in sorted(rows, key=lambda r: r["target"]):
+            if r["status"] != "ok":
+                print(f"| {r['target']} | 沒有跑完（{r['status']}） | | | | | |")
+                continue
+            run = Path(r["run"])
+            sc, v = io.read_json(run / "score.json"), io.read_json(run / "verdicts.json")
+            trace = io.read_json_or_none(run / "trace.json") or {}
+            removed = {x["tactic_id"] for x in v.get("removed_tactics", [])}
+            tags = tuple(sorted(t["tactic_id"] for t in trace.get("tactics", []) if t["tactic_id"] not in removed))
+            labels = sorted(c["label"] for c in sc["claims"] if c.get("factor") is not None)
+            cred = (sc["credibility"] or {}).get("score")
+            seen.append((sc["result"], tags, cred, sc["publishable"]))
+            print(f"| {r['target']} | {sc['result']} | {cred} | {sc['confidence']['score']} | "
+                  f"{'是' if sc['publishable'] else '否'} | {'、'.join(tags) or '—'} | {'、'.join(labels) or '—'} |")
+        if len(seen) > 1:
+            creds = [c for _, _, c, _ in seen if c is not None]
+            print(f"三版結論相同：{'是' if len({s[0] for s in seen}) == 1 else '否'}；手法標記相同："
+                  f"{'是' if len({s[1] for s in seen}) == 1 else '否'}；可公開相同：{'是' if len({s[3] for s in seen}) == 1 else '否'}；"
+                  f"可信度差距：{max(creds) - min(creds) if creds else '—'}")
+
+    usage = defaultdict(Counter)
+    for name, kind in (("usage.jsonl", "claude"), ("usage-codex.jsonl", "codex")):
+        p = base / name
+        for line in (p.read_text().splitlines() if p.exists() else []):
+            rec = json.loads(line)
+            t = usage[rec["tag"]]
+            if kind == "claude":
+                u = rec.get("usage") or {}
+                t["calls"] += 1
+                t["usd"] += rec.get("total_cost_usd") or 0
+                t["tokens"] += sum(u.get(k) or 0 for k in ("input_tokens", "cache_creation_input_tokens",
+                                                            "cache_read_input_tokens", "output_tokens"))
+            else:
+                t["codex_tokens"] += rec.get("tokens_used") or 0
+    if usage:
+        print("\n| 工作 | claude 呼叫 | API 等值美元 | token（含快取） | Codex token |\n|---|---|---|---|---|")
+        for tag, t in sorted(usage.items()):
+            print(f"| {tag} | {t['calls']} | {t['usd']:.2f} | {t['tokens']:,} | {t['codex_tokens']:,} |")
+        total = lambda k: sum(t[k] for t in usage.values())  # noqa: E731
+        print(f"| 合計 | {total('calls')} | {total('usd'):.2f} | {total('tokens'):,} | {total('codex_tokens'):,} |")
+
+
+if __name__ == "__main__":
+    main()
