@@ -508,8 +508,9 @@ class SetupCliTest(unittest.TestCase):
     def test_detect_probe_failure_prints_the_reason(self):
         base = Path(tempfile.mkdtemp())
         run = Path(fc("init", "--mode", "full", "--host", "claude", "--slug", "d", "--base", base).stdout.strip())
+        # PATH without the user's folders: a gemini CLI installed there would otherwise be probed for real.
         p = subprocess.run([sys.executable, str(FC), "detect", "--run", str(run), "--probe"], capture_output=True,
-                           text=True, env={**os.environ, "FC_CODEX_CMD": "false"})
+                           text=True, env={"PATH": "/usr/bin:/bin", "FC_CODEX_CMD": "false"})
         self.assertEqual(p.returncode, 0, p.stderr)
         self.assertIn("codex: probe=failed", p.stderr)
         self.assertIn("結束碼 1", p.stderr)

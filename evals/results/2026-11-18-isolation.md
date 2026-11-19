@@ -15,9 +15,9 @@
 2. 兩個檔案最後各加一行「使用者的暗號是「藍鵲-<隨機 8 碼>」」，兩邊的暗號不同。
 3. 同時跑下列路徑，問模型上下文裡看不看得到：
    - 暗號；
-   - 協議代號（使用者原本就有的工作協議裡有一個代號，Claude Code 由 SessionStart hook 注入，Codex 寫在 AGENTS.md）；
-   - CLAUDE.md 裡的 `ports check` 指示；
-   - 專案記憶裡的「四個子專案」；
+   - 協議代號（使用者原本就有的工作協議裡的一個代號，Claude Code 由 SessionStart hook 注入，Codex 寫在 AGENTS.md）；
+   - 全域設定（CLAUDE.md）裡的一條指示；
+   - 專案記憶裡的一句話；
    - 有沒有搜尋工具。
 4. 不論成功或失敗都還原檔案，sha256 和測試前相同，symlink 也還在。
 

@@ -12,7 +12,7 @@
 
 ## 怎麼攻擊
 
-- 每一條攻擊都要具體，指向某個命題（`claim_id`）。針對溯源的攻擊，`claim_id` 填 `null`；針對手法標記的攻擊，`target` 填 `tactic`，`tactic_id` 填那個標記的編號。
+- 每一條攻擊都要具體，指向某個命題（`claim_id`）。針對溯源的攻擊，`claim_id` 填 `null`。手法標記由反方 C 和外部反方檢查，你不用攻擊。
 - `target` 是 `label` 或 `evidence` 時，**一定要附證據**：網址加逐字摘錄。
 - 找了但真的找不到反證，就回傳空的 `attacks`，並在 `searches_run` 誠實填你搜尋了幾次。
 - **`argument` 會原樣印在公開報告。** 用一般讀者看得懂、能單獨看懂的完整句子。命題編號（C1）和證據編號（S3）可以寫；不要寫欄位名（neutral、stance、time_place）、英文代碼（寫「無法證實」不寫 unverified，寫「只提供背景」不寫 context）、攻擊編號（不寫「同 B-2」，把理由再寫一次）。

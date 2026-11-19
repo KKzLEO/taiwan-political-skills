@@ -1,5 +1,5 @@
 schema_version = 1
-updated = "2026-11-17"
+updated = "2026-11-19"
 
 # 主體平台對應的廠商。同一家的模型不算跨模型。
 [hosts]

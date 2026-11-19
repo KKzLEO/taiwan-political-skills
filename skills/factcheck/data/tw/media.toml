@@ -11,11 +11,13 @@
 # - ownership：營運主體與登記資料。「商工登記」指經濟部商工登記公示資料（data.gcis.nat.gov.tw 開放資料 API），
 #   查詢日 2026-11-17；董監事的「法人代表」是登記內容，不代表本表推論誰是實際控制者。
 #   ownership_source 為主要來源，ownership_source_2 為輔助來源（選填）。
-# - record：只記媒體層級的正式紀錄（NCC 處分、更正頁、研究發現），不評價個別記者。
+# - record：只記媒體層級的正式紀錄（NCC 處分、更正頁、研究發現），不評價個別記者。這一版報告不印 record：
+#   目前只有一家媒體有紀錄，等收錄標準訂好、每一家都照標準查過之後才顯示。同一件事只記一筆，後續的訴訟寫在
+#   同一筆的 appeal，appeal_source 是後續發展的出處（選填）。
 # - 網域比對採「完全相同或為其子網域」且取第一個符合者，所以子網域較長的媒體（例如 money.udn.com）要排在前面。
 
 schema_version = 1
-updated = "2026-11-17"
+updated = "2026-11-20"
 license = "CC BY-SA 4.0"
 trust_report = "Reuters Institute Digital News Report 2026（CC BY 4.0），台灣品牌信任度表見 PDF 第 160 頁"
 trust_report_pdf = "https://reutersinstitute.politics.ox.ac.uk/sites/default/files/2026-06/DNR%202026%20FINAL_2.pdf"
@@ -298,14 +300,8 @@ kind = "ncc_sanction"
 date = "2020-11-18"
 summary = "NCC 委員會議以 7 比 0 決議中天新聞台換照申請「不予許可」，該台自 2020-12-12 起退出有線電視頻道；中天聲請假處分遭臺北高等行政法院駁回，最高行政法院 2020-12-11 裁定駁回抗告確定。本案行政訴訟一審（臺北高等行政法院，2023-05-10）撤銷原處分，NCC 上訴。"
 url = "https://news.pts.org.tw/article/636194"
-appeal = "臺北高等行政法院 2023-05-10 一審撤銷不予換照處分；NCC 上訴後，最高行政法院 2025-03-06 廢棄原判決、發回更審（見下一筆）；本表編修時（2026-11-17）未查得更審結果"
-
-[[outlet.record]]
-kind = "ncc_sanction"
-date = "2025-03-06"
-summary = "中天新聞台換照案上訴審：最高行政法院廢棄臺北高等行政法院 2023 年判中天勝訴的一審判決，發回更審。"
-url = "https://today.line.me/tw/v2/article/yzvLY9Q"
-appeal = "發回臺北高等行政法院更審；本表編修時未查得更審結果"
+appeal = "臺北高等行政法院 2023-05-10 一審撤銷不予換照處分；NCC 上訴後，最高行政法院 2025-03-06 廢棄原判決，發回臺北高等行政法院更審；本表編修時（2026-11-17）未查得更審結果"
+appeal_source = "https://today.line.me/tw/v2/article/yzvLY9Q"
 
 [[outlet]]
 id = "era"

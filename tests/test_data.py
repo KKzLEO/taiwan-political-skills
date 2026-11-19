@@ -59,6 +59,8 @@ class MediaTest(unittest.TestCase):
                     self.assertIn(r["kind"], {"ncc_sanction", "correction", "research_finding"})
                     self.assertRegex(r["url"], URL)
                     self.assertRegex(str(r["date"]), DATE)
+                    if "appeal_source" in r:  # the later court steps are a claim too
+                        self.assertRegex(r["appeal_source"], URL)
 
     def test_domains_do_not_collide(self):
         seen = {}

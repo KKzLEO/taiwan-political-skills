@@ -29,3 +29,11 @@ https://creativecommons.org/licenses/by-sa/4.0/
 The tactic catalogue references technique IDs from the DISARM Framework
 (https://github.com/DISARMFoundation/DISARMframeworks, CC BY-SA 4.0).
 Media trust scores are from the Reuters Institute Digital News Report (CC BY 4.0).
+
+---
+
+The message texts and excerpts quoted in evals/cases/ and examples/ belong to
+their original authors and are not covered by the MIT License above. Message
+texts taken from Cofacts are provided under CC BY-SA 4.0, as Cofacts requires:
+本編輯資料取自「Cofacts 真的假的」訊息回報機器人與查證協作社群，採 CC BY-SA 4.0 授權提供。若欲補充資訊請訪問 Cofacts LINE bot https://line.me/ti/p/@cofacts
+Each case file names the Cofacts article it was taken from.

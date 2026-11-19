@@ -13,7 +13,7 @@
 
 ## 怎麼攻擊
 
-- 每一條攻擊都要具體，指向某個命題（`claim_id`）。針對溯源的攻擊，`claim_id` 填 `null`；針對手法標記的攻擊，`target` 填 `tactic`，`tactic_id` 填那個標記的編號。
+- 每一條攻擊都要具體，指向某個命題（`claim_id`）。針對溯源的攻擊，`claim_id` 填 `null`。手法標記由反方 C 和外部反方檢查，你不用攻擊。
 - `target` 是 `label`（判定本身）或 `evidence`（證據）時，**一定要附證據**：網址加逐字摘錄。
 - `target` 是 `reasoning` 時，可以只指出推理錯誤，但要說清楚錯在哪一步。
 - 找不到問題就回傳空的 `attacks`。**不要為了攻擊而攻擊**，沒有根據的攻擊會被裁判駁回。
@@ -25,7 +25,7 @@
 {
   "seat": "A", "lens": "evidence", "searches_run": 3,
   "attacks": [
-    { "id": "A-1", "claim_id": "C1", "target": "label | evidence | reasoning | neutral_rewrite | trace | tactic",
+    { "id": "A-1", "claim_id": "C1", "target": "label | evidence | reasoning | neutral_rewrite | trace",
       "argument": "具體說明哪裡錯", "proposed_label": "misleading 或 null",
       "evidence": [ { "url": "https://…", "excerpt": "逐字摘錄" } ] }
   ]
