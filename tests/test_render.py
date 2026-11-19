@@ -448,6 +448,12 @@ class TimeClaimTest(unittest.TestCase):
                       "暗示的時間讓可信度最高 79。", scope)
         self.assertIn("C3（期限前提）", section(md(build(**fx.time_claim_overrides("deadline", "true"))), "查核範圍和限制"))
 
+    def test_the_time_line_is_not_glued_to_the_seat_table(self):
+        """A list item on the line right after a table row is read as part of the table by some viewers."""
+        lines = section(md(build()), "查核範圍和限制").splitlines()
+        i = next(n for n, l in enumerate(lines) if l.startswith("- 時間命題："))
+        self.assertEqual(lines[i - 1], "")
+
     def test_scope_says_so_when_there_are_none(self):
         self.assertIn("- 時間命題：沒有（拆題沒有標出期限前提或暗示的時間）。", section(md(build()), "查核範圍和限制"))
 

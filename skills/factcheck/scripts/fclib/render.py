@@ -227,6 +227,7 @@ def render(run, outlets=None, tactics=None) -> str:
         out.append(f"| {s['seat']} | {LENS.get(s['lens'], s['lens'])} | {_model_cell(models, s)} | "
                    f"{ {'ok': '成功', 'missing': '沒有執行'}.get(s['status'], '失敗')} | {'是' if s['cross_model'] else '否'} | "
                    f"{'是' if s['can_search'] else '否'} | {ISOLATION.get(s['isolation'], s['isolation'])} |")
+    out.append("")  # a list item right under a table row is read as part of the table by some viewers
     if timed:
         out.append(f"- 時間命題：{'、'.join(c['claim_id'] + '（' + TIME_KINDS[c['time']] + '）' for c in timed)}。"
                    "判對不加分；判錯時，期限前提讓可信度不高於它的正確度，暗示的時間讓可信度最高 79。")
