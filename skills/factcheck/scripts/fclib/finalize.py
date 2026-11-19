@@ -15,6 +15,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from . import io
+from .labels import ZH_LABELS
 
 
 def _successful_attacks(run: Path):
@@ -135,7 +136,7 @@ def finalize(run) -> dict:
         cid = v["claim_id"]
         meta = claims_meta[cid]
         upheld = sorted(upheld_by_claim.get(cid, []))
-        status, label, reasons = "none", v["label"], []
+        status, label, reasons, reasoning = "none", v["label"], [], v["reasoning"]
         if upheld or cid in judge_only:
             status, label_kept = "passed", True
             seats = ok_seats if cid in judge_only else {attacks[aid]["seat"] for aid in upheld}
@@ -153,6 +154,8 @@ def finalize(run) -> dict:
                     reasons.append(f"席位 {seat}：{r['reason']}")
             if status == "failed":
                 if not label_kept:
+                    if label != "unverified":  # the judge's reasoning argues for a label the claim no longer has
+                        reasoning = f"覆核沒有通過，改列「無法證實」；裁判原本判「{ZH_LABELS[label]}」，理由是：{reasoning}"
                     label = "unverified"
                 disputes.append({
                     "claim_id": cid,
@@ -181,7 +184,7 @@ def finalize(run) -> dict:
             "law_text_obtained": v.get("law_text_obtained"),
             "context_flags": v.get("context_flags", []),
             "evidence_ids": v.get("evidence_ids", []),
-            "reasoning": v["reasoning"],
+            "reasoning": reasoning,
             "review_status": status,
             "upheld_attacks": upheld,
             "rejected_attacks": sorted(rejected_by_claim.get(cid, [])),

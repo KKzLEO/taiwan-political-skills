@@ -75,6 +75,72 @@ class PipelineCliTest(unittest.TestCase):
         p = fc("score", "--run", run)
         self.assertEqual(p.returncode, 2)
 
+    def test_finalize_says_which_seats_left_no_review(self):
+        """Audit: with review-B.json missing, finalize turned the judge's 誤導 into 無法證實 and printed nothing."""
+        run = make_run(fx.run_files(review__B_json=None))
+        p = fc("finalize", "--run", run)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertEqual(p.stdout.strip(), str(run.resolve() / "verdicts.json"))  # stdout stays the path alone
+        self.assertIn("席位 B 沒有覆核檔", p.stderr)
+        self.assertIn("C1", p.stderr)
+        self.assertIn("無法證實", p.stderr)
+
+    def test_finalize_names_every_seat_that_left_no_review(self):
+        run = make_run(fx.run_files(**fx.judge_only_overrides(),  # every seat that ran must review C1
+                                    review__A_json={"seat": "A", "reviews": [{"claim_id": "C1", "pass": True, "reason": "合理"}]}))
+        p = fc("finalize", "--run", run)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("席位 B、C、X1 沒有覆核檔", p.stderr)
+
+    def test_finalize_is_quiet_when_every_review_is_there(self):
+        p = fc("finalize", "--run", make_run(fx.run_files()))
+        self.assertEqual((p.returncode, p.stderr), (0, ""))
+
+    def test_score_prints_no_credibility_when_the_report_shows_none(self):
+        """Audit: for 無法判定 the report says 可信度 —, but this line said 35, and the host reads this line."""
+        run = make_run(fx.run_files(review__B_json=None))  # C1 becomes 無法證實, so the result is 無法判定
+        fc("finalize", "--run", run)
+        p = fc("score", "--run", run)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        printed = json.loads(p.stdout)
+        self.assertEqual((printed["result"], printed["credibility"]), ("無法判定", None))
+        self.assertEqual(json.loads((run / "score.json").read_text())["credibility"]["score"], 35)  # the file is unchanged
+
+    def test_score_prints_the_credibility_the_report_shows(self):
+        run = make_run(fx.run_files())
+        fc("finalize", "--run", run)
+        self.assertEqual(json.loads(fc("score", "--run", run).stdout)["credibility"], 25)
+
+
+class MissingFileCliTest(unittest.TestCase):
+    """Audit: a missing or broken file gave a 28-line traceback instead of one line saying which file."""
+
+    def one_line_error(self, p, name):
+        self.assertNotEqual(p.returncode, 0)
+        self.assertNotIn("Traceback", p.stderr)
+        self.assertEqual(len(p.stderr.strip().splitlines()), 1, p.stderr)
+        self.assertTrue(p.stderr.startswith("錯誤："), p.stderr)
+        self.assertIn(name, p.stderr)
+
+    def test_reviewers_without_a_judgment(self):
+        run = make_run(fx.run_files(judgment_json=None, review__B_json=None))
+        self.one_line_error(fc("reviewers", "--run", run), "judgment.json")
+
+    def test_render_without_a_score(self):
+        run = make_run(fx.run_files())
+        fc("finalize", "--run", run)
+        self.one_line_error(fc("render", "--run", run), "score.json")
+        self.assertFalse((run / "report.md").exists())
+
+    def test_finalize_with_a_review_file_that_is_not_json(self):
+        run = make_run(fx.run_files())
+        (run / "review-B.json").write_text("{not json", encoding="utf-8")
+        self.one_line_error(fc("finalize", "--run", run), "review-B.json")
+
+    def test_prompt_without_the_input_it_needs(self):
+        run = make_run(fx.run_files(judgment_json=None, review__B_json=None))
+        self.one_line_error(fc("prompt", "--run", run, "--role", "review", "--seat", "B"), "judgment.json")
+
 
 class InputCliTest(unittest.TestCase):
     """User text reaches fc.py only through files (reviews: the shell ate $ and backticks and ran $(...), and a

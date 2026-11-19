@@ -58,6 +58,27 @@ class FinalizeTest(unittest.TestCase):
         self.assertEqual(claim(r, "C1")["label"], "unverified")
         self.assertFalse(r["disputes"][0]["label_kept"])
 
+    def test_reasoning_of_an_overturned_label_says_whose_reasoning_it_is(self):
+        """Audit: the label became 無法證實 but the reasoning was still the judge's case for 誤導, so the report's
+        conclusion read "無法證實。部長說的是…，訊息改成…"."""
+        judged = fx.JUDGMENT["verdicts"][0]["reasoning"]
+        for review in ({"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": False, "reason": "改過頭"}]},
+                       None):  # a missing review overturns the label the same way
+            r = run_finalize(review__B_json=review)
+            self.assertEqual(claim(r, "C1")["reasoning"],
+                             "覆核沒有通過，改列「無法證實」；裁判原本判「誤導」，理由是：" + judged)
+            self.assertEqual(r["disputes"][0]["judge_reasoning"], judged)
+
+    def test_reasoning_is_the_judges_own_when_the_label_did_not_change(self):
+        kept = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": True, "reason": "只引了一半"}]}
+        self.assertEqual(claim(run_finalize(review__B_json=kept), "C1")["reasoning"], fx.JUDGMENT["verdicts"][0]["reasoning"])
+        self.assertEqual(claim(run_finalize(), "C1")["reasoning"], fx.JUDGMENT["verdicts"][0]["reasoning"])
+        # the judge already said 無法證實: a failed review changes nothing, so there is nothing to explain
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["verdicts"][0].update({"label": "unverified", "reasoning": "找不到完整影片。", "evidence_ids": []})
+        r = run_finalize(judgment_json=judgment, review__B_json=None)
+        self.assertEqual((claim(r, "C1")["label"], claim(r, "C1")["reasoning"]), ("unverified", "找不到完整影片。"))
+
     def test_one_seat_rejecting_the_label_is_enough_to_force_unverified(self):
         judgment = copy.deepcopy(fx.JUDGMENT)
         judgment["rulings"][0]["upheld"] = True  # A-1 upheld too, so seats A and B both review C1

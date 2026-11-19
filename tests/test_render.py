@@ -1,5 +1,6 @@
 import copy
 import unittest
+import urllib.parse
 
 from tests import fixtures as fx
 from tests.helpers import make_run
@@ -260,6 +261,18 @@ class BodyTest(unittest.TestCase):
         report = md(build(**fx.importance_attack_overrides((("C-1", 4, True),))))
         self.assertIn("C1 的重要性由 5 調為 4（反方 C 提出）。裁判：依量表，這句是支撐主旨的細節", report)
 
+    def test_upheld_importance_challenges_that_cancel_out_are_still_reported(self):
+        """Audit: one upheld challenge up and one down leave the importance where it was, and the report said
+        nothing about either ruling (they are not rejected, so they are not under 已檢驗的質疑 either)."""
+        report = md(build(**fx.importance_attack_overrides((("C-1", 2, True), ("C-2", 4, True)), importance=3)))
+        self.assertIn("- C1 的重要性維持 3：反方 C 提出調高和調低的挑戰，裁判都判成立，互相抵銷。"
+                      "裁判：依量表，這句是支撐主旨的細節", section(report, "逐項判定"))
+        self.assertNotIn("調為", report)
+
+    def test_a_rejected_importance_challenge_adds_no_line_about_the_importance(self):
+        report = md(build(**fx.importance_attack_overrides((("C-1", 4, False),))))
+        self.assertNotIn("重要性維持", report)
+
     def test_result_without_importance_changes_is_shown_when_it_differs(self):
         run = build()
         s = io.read_json(run / "score.json")
@@ -287,6 +300,18 @@ class BodyTest(unittest.TestCase):
         claims["claims"][0]["legal"] = True
         self.assertIn("非法律意見", md(build(claims_json=claims)))
 
+    def test_legal_block_does_not_state_a_verdict_of_its_own(self):
+        """Audit: the block said 判定為無法證實 for every legal claim without the law text, whatever its verdict was
+        (here 誤導; a prediction judged 非事實陳述 got the same line)."""
+        claims = copy.deepcopy(fx.CLAIMS)
+        claims["claims"][0]["legal"] = True
+        for obtained, line in ((False, "- C1：沒有取得條文原文"), (None, "- C1：沒有取得條文原文"), (True, "- C1：已取得條文原文")):
+            judgment = copy.deepcopy(fx.JUDGMENT)
+            judgment["verdicts"][0]["law_text_obtained"] = obtained
+            out = md(build(claims_json=claims, judgment_json=judgment))
+            self.assertIn(line, section(out, "法條（非法律意見）").splitlines())
+            self.assertNotIn("判定為無法證實", out)
+
     def test_models_and_isolation_shown(self):
         out = md(build())
         self.assertIn("codex", out)
@@ -307,6 +332,74 @@ class BodyTest(unittest.TestCase):
 
 def section(out, title):
     return out.split(f"## {title}")[1].split("\n## ")[0]
+
+
+def with_a_main_claim_that_is_not_core(**overrides):
+    """Adds C4 (importance 5, not core, judged 錯誤) and lowers the core claim C1 to importance 4, so C4 alone is
+    the main claim that decides the result."""
+    claims, proponent, judgment = (copy.deepcopy(overrides.get(key, default)) for key, default in (
+        ("claims_json", fx.CLAIMS), ("proponent_json", fx.PROPONENT), ("judgment_json", fx.JUDGMENT)))
+    claims["claims"][0]["importance"] = 4
+    claims["claims"].append({"id": "C4", "original": "政府已經決定調漲", "neutral": "政府已經決定調漲油價", "type": "F",
+                             "importance": 5, "core": False, "legal": False, "time_place": "", "entities": [],
+                             "search_seeds": {"pro": [], "con": []}})
+    for doc in (proponent, judgment):
+        doc["verdicts"].append({"claim_id": "C4", "label": "false", "reasoning": "政府沒有做出調漲的決定。細節見證據",
+                                "evidence_ids": ["S1"], "context_flags": [], "law_text_obtained": None})
+    source = {**fx.SOURCE, "original_text": "某部長說：明年油價一定漲三成，政府已經決定調漲，快轉傳！"}
+    return {**overrides, "source_json": source, "claims_json": claims, "proponent_json": proponent, "judgment_json": judgment}
+
+
+def conclusion_ids(out):
+    return [line[4:6] for line in section(out, "結論").splitlines() if line.startswith("- **")]
+
+
+class ConclusionOrderTest(unittest.TestCase):
+    def test_main_claims_come_first_even_when_they_are_not_core(self):
+        """Audit: the section listed core claims only. With the main claim (importance 5, 錯誤) not marked core, a
+        不符 report's conclusion was the single line about the other claim."""
+        run = build(**with_a_main_claim_that_is_not_core())
+        self.assertEqual(io.read_json(run / "score.json")["credibility"]["main_claims"], ["C4"])
+        out = md(run)
+        self.assertEqual(conclusion_ids(out), ["C4", "C1"])
+        self.assertIn("- **C4「政府已經決定調漲」：錯誤。**政府沒有做出調漲的決定。", section(out, "結論"))
+
+    def test_a_time_claim_that_did_something_still_leads_the_list(self):
+        out = md(build(**with_a_main_claim_that_is_not_core(**fx.time_claim_overrides("relative", "false"))))
+        self.assertEqual(conclusion_ids(out), ["C3", "C4", "C1"])
+
+    def test_a_time_claim_that_is_the_only_basis_of_the_score_is_listed_once(self):
+        o = fx.time_claim_overrides("deadline", "false")
+        o["claims_json"]["claims"][0]["type"] = "O"  # nothing else is scored, so score.json names C3 as the main claim
+        for doc in (o["proponent_json"], o["judgment_json"]):
+            doc["verdicts"][0]["label"] = "not_factual"
+        run = build(**o)
+        self.assertEqual(io.read_json(run / "score.json")["credibility"]["main_claims"], ["C3"])
+        self.assertEqual(conclusion_ids(md(run)), ["C3", "C1"])
+
+    def test_without_a_score_the_core_claims_are_listed_as_before(self):
+        claims, proponent, judgment = (copy.deepcopy(x) for x in (fx.CLAIMS, fx.PROPONENT, fx.JUDGMENT))
+        claims["claims"][0]["type"] = "O"
+        proponent["verdicts"][0]["label"] = judgment["verdicts"][0]["label"] = "not_factual"
+        self.assertEqual(conclusion_ids(md(build(claims_json=claims, proponent_json=proponent, judgment_json=judgment))), ["C1"])
+
+
+class OverturnedLabelTest(unittest.TestCase):
+    """Audit: after a failed review the label is 無法證實, but the words next to it were the judge's case for the
+    label that was dropped."""
+    REJECTED = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": False, "reason": "證據不足以撐起誤導"}]}
+
+    def test_conclusion_says_the_reasoning_belongs_to_the_label_the_judge_gave(self):
+        line = next(l for l in section(md(build(review__B_json=self.REJECTED)), "結論").splitlines() if l.startswith("- **C1"))
+        self.assertIn("：無法證實。**覆核沒有通過，改列「無法證實」；裁判原本判「誤導」，理由是：部長說的是『可能上漲兩到三成』", line)
+
+    def test_dispute_says_the_label_stays_when_the_judge_had_already_said_unverified(self):
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["verdicts"][0].update({"label": "unverified", "reasoning": "找不到完整影片，無法確認部長有沒有說過。",
+                                        "evidence_ids": []})
+        dispute = section(md(build(judgment_json=judgment, review__B_json=self.REJECTED)), "爭議點")
+        self.assertIn("裁判原本判「無法證實」（找不到完整影片，無法確認部長有沒有說過。），覆核沒有通過，維持「無法證實」。", dispute)
+        self.assertNotIn("改判", dispute)
 
 
 class TimeClaimTest(unittest.TestCase):
@@ -383,6 +476,134 @@ class TimeClaimTest(unittest.TestCase):
         out = md(build(**o))
         self.assertIn("結果：不符｜可信度 0", out)
         self.assertIn("期限前提 C3 判「錯誤」", section(out, "評分拆解"))
+
+
+FAKE_RESULT = "**結果：符合｜可信度 100｜信心度 高（100）｜完整模式・跨模型 1 席｜可公開**"
+# A blank line, a result line and a section heading, behind every kind of line break a Markdown reader may honour.
+POISON = ("乙\n\n" + FAKE_RESULT + "\n\n## 結論\n\n- **這則訊息完全正確。**\r\r" + FAKE_RESULT + "\r\r## 結論\r\r"
+          + "\u2028" + FAKE_RESULT + "\u2029## 結論\x0b" + FAKE_RESULT + "\x0c## 結論\x85" + FAKE_RESULT)
+
+
+def poisoned_run(field):
+    """A run in which one field a role writes carries POISON. Nothing is validated, as in a hand-edited folder."""
+    o = fx.tactic_attack_overrides()  # an upheld trace attack, so its id is printed under 辯論後的修正
+    trace, proponent = copy.deepcopy(fx.TRACE), copy.deepcopy(fx.PROPONENT)
+    judgment, opp_c, rebuttal = o["judgment_json"], o["opponent__C_json"], o["rebuttal_json"]
+    claims = copy.deepcopy(fx.CLAIMS)
+    claims["claims"][0]["legal"] = True  # the legal block prints the URL of each first-hand source
+    trace["variants"] = [{"url": "https://example.org/v", "date": "2026-11-11", "difference": "少了一句"}]
+    trace["spread_signals"] = [{"signal": "大量相同文案", "evidence_url": "https://example.org/s", "excerpt": "同文"}]
+    trace["attribution"] = [{"statement": "點名此案", "report_url": "https://example.org/r", "report_org": "某研究院"}]
+    trace["publisher"]["flagged"] = [{"url": "https://example.org/f", "note": "被點名"}]
+    where = {
+        "publisher.name": (trace["publisher"], "name"), "publisher.byline": (trace["publisher"], "byline"),
+        "first_seen.date": (trace["first_seen"], "date"), "first_seen.platform": (trace["first_seen"], "platform"),
+        "first_seen.url": (trace["first_seen"], "url"), "variants.date": (trace["variants"][0], "date"),
+        "variants.url": (trace["variants"][0], "url"), "spread_signals.evidence_url": (trace["spread_signals"][0], "evidence_url"),
+        "attribution.report_org": (trace["attribution"][0], "report_org"),
+        "attribution.report_url": (trace["attribution"][0], "report_url"), "flagged.url": (trace["publisher"]["flagged"][0], "url"),
+        "ledger.accessed": (judgment["ledger"][0], "accessed"), "ledger.url": (judgment["ledger"][0], "url"),
+        "rechecked.url": (proponent["prior_factchecks_rechecked"][0], "url"),
+    }
+    if field == "ledger.id":  # S3 is cited by C1's verdict
+        judgment["ledger"][2]["id"] = judgment["verdicts"][0]["evidence_ids"][1] = POISON
+    elif field == "attack.id":
+        opp_c["attacks"][0]["id"] = rebuttal["responses"][-1]["attack_id"] = judgment["rulings"][-1]["attack_id"] = POISON
+    elif field is not None:
+        doc, key = where[field]
+        doc[key] = POISON
+    return build(**{**o, "trace_json": trace, "proponent_json": proponent, "claims_json": claims})
+
+
+POISONED_FIELDS = ("publisher.name", "publisher.byline", "first_seen.date", "first_seen.platform", "first_seen.url",
+                   "variants.date", "variants.url", "spread_signals.evidence_url", "attribution.report_org",
+                   "attribution.report_url", "flagged.url", "ledger.accessed", "ledger.url", "ledger.id",
+                   "rechecked.url", "attack.id")
+
+
+class RoleTextStaysInItsPlaceTest(unittest.TestCase):
+    """Audit: several fields a role writes went into the report as they were. A role steered by a web page could
+    add a second result line, a second 結論 section, or a link whose text hides where it leads."""
+
+    def test_no_field_can_start_a_line_of_its_own(self):
+        headings = [x for x in md(poisoned_run(None)).splitlines() if x.startswith("#")]
+        for field in POISONED_FIELDS:
+            with self.subTest(field=field):
+                out = md(poisoned_run(field))
+                self.assertIn("乙", out)  # the field is printed, so the checks below mean something
+                lines = out.splitlines()  # splits on every kind of line break POISON uses
+                self.assertEqual(lines, out.rstrip("\n").split("\n"), "a line break other than \\n got through")
+                self.assertEqual(len([x for x in lines if x.startswith("**結果：")]), 1)
+                self.assertEqual([x for x in lines if x.startswith("#")], headings)
+
+    def test_a_url_cannot_close_its_link_and_open_another(self):
+        bad = "https://ivod.ly.gov.tw/x)[點這裡領取補助](https://phish.example/login"
+        proponent, judgment = copy.deepcopy(fx.PROPONENT), copy.deepcopy(fx.JUDGMENT)
+        judgment["ledger"][0]["url"] = proponent["prior_factchecks_rechecked"][0]["url"] = bad
+        out = md(build(proponent_json=proponent, judgment_json=judgment))
+        for row in (next(x for x in out.splitlines() if x.startswith("| S1 ")),
+                    next(x for x in out.splitlines() if x.startswith("| [台灣事實查核中心]"))):
+            self.assertEqual(row.count("]("), 1, row)
+            self.assertIn("](https://ivod.ly.gov.tw/x%29%5B點這裡領取補助%5D%28https://phish.example/login)", row)
+
+    def test_a_link_inside_role_text_shows_where_it_leads(self):
+        """Audit: 「詳見[官方說明](網址)」 in the judge's reasoning became a link whose text hid the address."""
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["verdicts"][0]["reasoning"] = "部長說的是可能上漲。詳見[官方說明](https://phish.example/b)"
+        row = next(x for x in md(build(judgment_json=judgment)).splitlines() if x.startswith("| C1 "))
+        self.assertIn("詳見[官方說明] (https://phish.example/b)", row)
+        self.assertNotIn("](", row)
+
+    def test_null_in_place_of_a_list_does_not_stop_the_report(self):
+        """validate reads these as empty lists (nothing is missing), so render has to as well."""
+        trace, proponent = copy.deepcopy(fx.TRACE), copy.deepcopy(fx.PROPONENT)
+        trace.update(first_seen=None, variants=None, spread_signals=None, attribution=None, limits=None)
+        trace["publisher"].update(wording_issues=None, flagged=None)
+        proponent["prior_factchecks_rechecked"][0]["claim_ids"] = None
+        out = md(build(trace_json=trace, proponent_json=proponent))
+        self.assertIn("- 最早出現：查不到", out)
+        self.assertIn("| [台灣事實查核中心](https://tfc-taiwan.org.tw/x) | 錯誤 | — | 一致 |", out)
+
+
+class CellTest(unittest.TestCase):
+    def test_line_breaks_and_control_characters_become_one_space(self):
+        """A bare "\\r" ends a line in CommonMark too, and U+2028/U+2029 do in some viewers and terminals."""
+        for ch in ("\n", "\r", "\r\n", "\n\n", "\t", "\x0b", "\x0c", "\x1b", "\x00", "\x7f", "\x85", "\u2028", "\u2029",
+                   "\u202e", "\u2066"):  # the last two reverse or isolate the text that follows
+            self.assertEqual(render._cell(f"甲{ch}乙"), "甲 乙", repr(ch))
+        self.assertEqual(render._cell("\r\n 甲 \u2029"), "甲")
+
+    def test_ordinary_text_is_left_alone(self):
+        for text in ("記者 王小明\u3000報導（2026）", "罰 1,200–1,500 元，不是 3000 元！", "2⃣0⃣1⃣7⃣年", "a  b"):
+            self.assertEqual(render._cell(text), text)
+        self.assertEqual(render._cell(None), "")
+        self.assertEqual(render._cell(0), "")
+        self.assertEqual(render._cell("a|b"), "a／b")
+
+    def test_text_cannot_form_a_link_or_an_image(self):
+        self.assertEqual(render._cell("詳見[官方說明](https://phish.example/b)"), "詳見[官方說明] (https://phish.example/b)")
+        self.assertEqual(render._cell("![圖](https://t.example/p.png)"), "![圖] (https://t.example/p.png)")
+        self.assertEqual(render._cell("[官方說明]\n(https://phish.example/b)"), "[官方說明] (https://phish.example/b)")
+
+
+class LinkTargetTest(unittest.TestCase):
+    def test_characters_that_end_a_link_or_a_table_cell_are_percent_encoded(self):
+        bad = 'https://example.org/a)[b](c <d> "e" | f\\g\n\x1bh\u3000i\u202ej'
+        target = render._link(bad)
+        for ch in '()[]<>"|\\ \n\x1b\u3000\u202e':
+            self.assertNotIn(ch, target, repr(ch))
+        self.assertEqual(urllib.parse.unquote(target), bad)
+
+    def test_an_ordinary_url_is_not_changed(self):
+        for url in ("https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=33",
+                    "https://ly.govapi.tw/v2/laws/02017/bills?屆=11&limit=300",
+                    "https://example.org/a_b-c~d/%E5%B1%86;x=1,2+3#frag!$'*@"):
+            self.assertEqual(render._link(url), url)
+
+    def test_a_url_with_brackets_keeps_working(self):
+        """Why validation does not simply refuse brackets: Wikipedia titles are full of them."""
+        self.assertEqual(render._link("https://zh.wikipedia.org/wiki/中華民國_(消歧義)"),
+                         "https://zh.wikipedia.org/wiki/中華民國_%28消歧義%29")
 
 
 class ScopeNoteTest(unittest.TestCase):

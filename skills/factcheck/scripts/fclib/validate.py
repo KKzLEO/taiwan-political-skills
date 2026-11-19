@@ -10,7 +10,7 @@ import copy
 import re
 from pathlib import Path
 
-from . import io, spans
+from . import finalize, io, spans
 from .labels import (ACCESS_NOTES, ATTACK_TARGETS, CLAIM_TYPES, CONTEXT_FLAGS, FACTORS,
                      HOSTS, MODES, PUBLISHER_KINDS, REVIEW_STATUSES, STANCES)
 
@@ -29,6 +29,14 @@ class _Errors(list):
     def need(self, ok, msg):
         if not ok:
             self.append(msg)
+
+
+def _items(err, value, where, kind=None) -> list:
+    """A list field; the caller passes [] for a key that was left out. Anything else, null included, is one error
+    that names the field, and so is an item that is not a `kind`: later steps index these without checking again."""
+    ok = isinstance(value, list) and (kind is None or all(isinstance(x, kind) for x in value))
+    err.need(ok, f"{where} 必須是{'物件的' if kind is dict else ''}陣列（沒有就寫 []，不要寫 null）")
+    return value if ok else []
 
 
 def _claim_ids(run: Path):
@@ -78,9 +86,9 @@ def _check_verdicts(err, verdicts, claim_ids, ledger_ids, where):
         label = v.get("label")
         err.need(label in FACTORS, f"{p}.label {label!r} 不是合法的判定")
         err.need(_nonempty(v.get("reasoning")), f"{p}.reasoning 不能是空的")
-        for f in v.get("context_flags", []):
+        for f in _items(err, v.get("context_flags", []), f"{p}.context_flags"):
             err.need(f in CONTEXT_FLAGS, f"{p}.context_flags 有未知的值 {f!r}")
-        for eid in v.get("evidence_ids", []):
+        for eid in _items(err, v.get("evidence_ids", []), f"{p}.evidence_ids"):
             err.need(eid in ledger_ids, f"{p} 引用的證據 {eid} 不在證據表裡")
         if label in FACTORS and label not in ("not_factual", "unverified"):
             err.need(bool(v.get("evidence_ids")), f"{p} 判定 {label} 但沒有引用任何證據")
@@ -334,14 +342,24 @@ def _trace(d, run, ctx):
     err = _Errors()
     pub = d.get("publisher") or {}
     err.need(pub.get("kind") in PUBLISHER_KINDS, f"publisher.kind 必須是 {sorted(PUBLISHER_KINDS)}")
-    for i, s in enumerate(d.get("spread_signals", [])):
-        err.need(_is_url(s.get("evidence_url")) and _nonempty(s.get("excerpt")),
-                 f"spread_signals[{i}] 要附 evidence_url 和 excerpt，只能描述看得到的現象")
-    for i, a in enumerate(d.get("attribution", [])):
-        err.need(_is_url(a.get("report_url")) and _nonempty(a.get("report_org")),
-                 f"attribution[{i}] 必須引用政府、研究機構或平台的正式報告（report_url、report_org）")
+    # render reads every field below without checking, so a shape it cannot read has to be sent back here, not
+    # found at the last step. null in place of a list reads as empty (render does the same): nothing is missing.
+    err.need(not d.get("first_seen") or isinstance(d["first_seen"], dict), "first_seen 必須是物件；查不到就填 null")
+    err.need(not pub.get("byline") or isinstance(pub["byline"], str), "publisher.byline 必須是文字：present、absent 或 n/a")
+    _items(err, d.get("variants") or [], "variants", dict)
+    _items(err, d.get("limits") or [], "limits")
+    _items(err, pub.get("flagged") or [], "publisher.flagged", dict)
+    for i, w in enumerate(_items(err, pub.get("wording_issues") or [], "publisher.wording_issues", dict)):
+        err.need(_nonempty(w.get("quote")) and _nonempty(w.get("issue")),
+                 f"publisher.wording_issues[{i}] 要有 quote（原句）和 issue（為什麼不中立）")
+    for i, s in enumerate(_items(err, d.get("spread_signals") or [], "spread_signals", dict)):
+        err.need(_nonempty(s.get("signal")) and _is_url(s.get("evidence_url")) and _nonempty(s.get("excerpt")),
+                 f"spread_signals[{i}] 要有 signal，並附 evidence_url 和 excerpt，只能描述看得到的現象")
+    for i, a in enumerate(_items(err, d.get("attribution") or [], "attribution", dict)):
+        err.need(_nonempty(a.get("statement")) and _is_url(a.get("report_url")) and _nonempty(a.get("report_org")),
+                 f"attribution[{i}] 必須引用政府、研究機構或平台的正式報告（statement、report_url、report_org）")
     err.extend(tactic_errors(d, run, _library(ctx)))
-    for i, f in enumerate(d.get("prior_factchecks", [])):
+    for i, f in enumerate(_items(err, d.get("prior_factchecks") or [], "prior_factchecks", dict)):
         err.need(_is_url(f.get("url")), f"prior_factchecks[{i}].url 必須是網址")
     return err
 
@@ -350,6 +368,14 @@ def _proponent(d, run, ctx):
     err = _Errors()
     ledger_ids = _check_ledger(err, d.get("ledger"), "proponent")
     _check_verdicts(err, d.get("verdicts"), _claim_ids(run), ledger_ids, "proponent")
+    # Read by render for the comparison table, without checking (see _trace).
+    rechecked = _items(err, d.get("prior_factchecks_rechecked") or [], "prior_factchecks_rechecked", dict)
+    for i, p in enumerate(rechecked):
+        err.need(_nonempty(p.get("org")) and _is_url(p.get("url")),
+                 f"prior_factchecks_rechecked[{i}] 要有 org（機構名稱）和 url（http(s) 網址）")
+        ids = p.get("claim_ids") or []
+        err.need(isinstance(ids, list) and all(isinstance(c, str) for c in ids),
+                 f"prior_factchecks_rechecked[{i}].claim_ids 必須是命題編號的陣列，例如 [\"C1\"]")
     return err
 
 
@@ -371,7 +397,9 @@ def _opponent(d, run, ctx):
     for i, a in enumerate(d.get("attacks", [])):
         p = f"attacks[{i}]"
         aid = a.get("id")
-        err.need(_nonempty(aid), f"{p}.id 不能是空的")
+        # Every later step keys on the id across seats, so two seats must never share one (fullmatch: no line break).
+        err.need(isinstance(aid, str) and re.fullmatch(re.escape(seat) + r"-\d+", aid) is not None,
+                 f"{p}.id 必須是 {seat}-1、{seat}-2…（席位加流水號）")
         err.need(aid not in ids, f"{p}.id {aid} 重複")
         ids.add(aid)
         cid = a.get("claim_id")
@@ -381,7 +409,7 @@ def _opponent(d, run, ctx):
         err.need(_nonempty(a.get("argument")), f"{p}.argument 不能是空的")
         pl = a.get("proposed_label")
         err.need(pl is None or pl in FACTORS, f"{p}.proposed_label {pl!r} 不是合法的判定")
-        evidence = a.get("evidence", [])
+        evidence = a.get("evidence") or []  # null reads as none; no later step indexes an attack's evidence
         for j, e in enumerate(evidence):
             err.need(_is_url(e.get("url")) and _nonempty(e.get("excerpt")), f"{p}.evidence[{j}] 要有網址和原文摘錄")
         if target in EVIDENCE_REQUIRED_TARGETS:
@@ -405,10 +433,11 @@ def _check_importance_proposal(err, p, a, importance):
 
 def _rebuttal(d, run, ctx):
     err = _Errors()
-    answered = [r.get("attack_id") for r in d.get("responses", [])]
+    responses = d.get("responses") or []  # null reads as none, so the errors name the attacks left unanswered
+    answered = [r.get("attack_id") for r in responses]
     for aid in _attacks(run):
         err.need(answered.count(aid) == 1, f"攻擊 {aid} 需要剛好一則答辯")
-    for i, r in enumerate(d.get("responses", [])):
+    for i, r in enumerate(responses):
         err.need(isinstance(r.get("accept"), bool), f"responses[{i}].accept 必須是 true/false")
         err.need(_nonempty(r.get("response")), f"responses[{i}].response 不能是空的")
     return err
@@ -427,7 +456,9 @@ def _judgment(d, run, ctx):
         err.need(isinstance(r.get("upheld"), bool), f"rulings[{i}].upheld 必須是 true/false")
         err.need(_nonempty(r.get("reason")), f"rulings[{i}].reason 不能是空的")
         if r.get("upheld") is True and aid in attacks and attacks[aid][1].get("evidence") and aid not in excused:
-            err.need(bool(r.get("verified_urls")), f"rulings[{i}] {_RULING_URL_MSG}")
+            urls = r.get("verified_urls")  # the message stays as it is: fallback() recognises this error by it
+            err.need(isinstance(urls, list) and bool(urls) and all(_is_url(u) for u in urls),
+                     f"rulings[{i}] {_RULING_URL_MSG}")
     ledger_ids = _check_ledger(err, d.get("ledger"), "judgment")
     _check_verdicts(err, d.get("verdicts"), _claim_ids(run), ledger_ids, "judgment")
     _check_tactic_checks(err, d, run, attacks, _library(ctx))
@@ -493,7 +524,15 @@ def _review(d, run, ctx):
     err = _Errors()
     err.need(d.get("seat") == ctx["seat"], f"seat 必須是 {ctx['seat']}（和檔名一致）")
     claim_ids = _claim_ids(run)
-    for i, r in enumerate(d.get("reviews", [])):
+    try:  # finalize reads a review that was left out as a failed one, so the seat is sent back for it here
+        needed = finalize.reviewers_needed(run).get(ctx["seat"], [])
+    except (io.ReadError, KeyError, TypeError, AttributeError):
+        needed = []  # the judgment or an opponent file cannot be read; their own checks say so
+    reviews = _items(err, d.get("reviews", []), "reviews", dict)  # finalize iterates it, so null is refused here
+    reviewed = [r.get("claim_id") for r in reviews]
+    for cid in needed:
+        err.need(reviewed.count(cid) == 1, f"reviews：{cid} 需要剛好一筆覆核（任務區列出的命題每條都要寫，而且只寫一筆）")
+    for i, r in enumerate(reviews):
         err.need(r.get("claim_id") in claim_ids, f"reviews[{i}].claim_id 不在 claims.json")
         err.need(isinstance(r.get("pass"), bool), f"reviews[{i}].pass 必須是 true/false")
         err.need(_nonempty(r.get("reason")), f"reviews[{i}].reason 不能是空的")

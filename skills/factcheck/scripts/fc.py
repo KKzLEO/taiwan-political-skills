@@ -180,6 +180,12 @@ def cmd_finalize(args):
         if errors:
             sys.exit(f"錯誤：{name} 沒有通過檢查：\n" + "\n".join(errors))
     io.write_json(run / "verdicts.json", finalize.finalize(run))
+    # A review that never arrived overturns the judge's label; this is the one place the host is told which seat.
+    missing = {s: ids for s, ids in finalize.reviewers_needed(run).items() if not (run / f"review-{s}.json").exists()}
+    if missing:
+        claims = sorted({c for ids in missing.values() for c in ids}, key=lambda c: (len(c), c))
+        print(f"# 注意：席位 {'、'.join(missing)} 沒有覆核檔，{'、'.join(claims)} 記成「覆核未完成」，改列「無法證實」。"
+              "回報時要告訴使用者是哪一席沒有覆核。", file=sys.stderr)
     print(run / "verdicts.json")
 
 
@@ -201,7 +207,8 @@ def cmd_score(args):
         print(f"錯誤：{exc}", file=sys.stderr)
         sys.exit(2)
     io.write_json(run / "score.json", result)
-    print(json.dumps({"result": result["result"], "credibility": (result["credibility"] or {}).get("score"),
+    cred = result["credibility"] or {}  # the host reads this line: no number where the report shows none (無法判定)
+    print(json.dumps({"result": result["result"], "credibility": cred.get("score") if cred.get("show_on_spectrum") else None,
                       "confidence": result["confidence"]["score"], "publishable": result["publishable"]},
                      ensure_ascii=False))
 
@@ -326,7 +333,10 @@ def main(argv=None):
     args = ap.parse_args(argv)
     if args.cmd in ("prompt", "run-model") and args.role in ("opponent", "review") and not args.seat:
         ap.error("opponent 和 review 需要 --seat")
-    args.fn(args)
+    try:
+        args.fn(args)
+    except io.ReadError as exc:  # a missing or broken file is one line that names it, not a traceback
+        sys.exit(f"錯誤：{exc}")
 
 
 if __name__ == "__main__":

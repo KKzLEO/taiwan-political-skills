@@ -55,7 +55,36 @@ class CompareTest(unittest.TestCase):
         self.assertEqual(evalcmp.compare(case, claims, verdicts, {"result": "不符"})["matched"], 1)
 
 
+class AnswerKeyOrderTest(unittest.TestCase):
+    """Audit (case-015): matching went down the answer key, each line taking the closest run claim still free. The
+    first-stage line took the run's second-stage claim (0.615), and the second-stage line, an exact match, got none."""
+    FIRST = {"original": "用1％32票達成一階連署", "expected_label": "true"}
+    SECOND = {"original": "以10％320票通過二階連署", "expected_label": "true"}
+    CLAIMS = {"claims": [{"id": "C2", "original": "一位村民不滿意村長，發動罷免，先用1％、也就是32票達成第一階段連署"},
+                         {"id": "C3", "original": "以10％320票通過二階連署"}]}
+    VERDICTS = {"claims": [{"claim_id": "C2", "label": "true"}, {"claim_id": "C3", "label": "false"}]}
+
+    def pairs(self, order):
+        r = evalcmp.compare({"id": "c", "expected_result": "不符", "claim": order}, self.CLAIMS, self.VERDICTS, {"result": "不符"})
+        return (r["matched"], r["label_correct"]), {d["expected_original"]: d["run_claim"] for d in r["details"]}
+
+    def test_the_closest_pair_is_matched_first_whatever_the_order_of_the_answer_key(self):
+        expected = {self.FIRST["original"]: "C2", self.SECOND["original"]: "C3"}
+        for order in ([self.FIRST, self.SECOND], [self.SECOND, self.FIRST]):
+            self.assertEqual(self.pairs(order), ((2, 1), expected), [e["original"] for e in order])
+
+    def test_details_stay_in_the_order_of_the_answer_key(self):
+        r = evalcmp.compare({"id": "c", "expected_result": "不符", "claim": [self.SECOND, self.FIRST]},
+                            self.CLAIMS, self.VERDICTS, {"result": "不符"})
+        self.assertEqual([d["expected_original"] for d in r["details"]], [self.SECOND["original"], self.FIRST["original"]])
+
+
 class NormalizationTest(unittest.TestCase):
+    def test_a_long_sentence_is_not_scored_as_unrelated(self):
+        """difflib's autojunk drops common characters in texts over 200 characters: the same sentence scored 0.0."""
+        long = "立法院三讀通過新法，以後騎機車一律要開大燈" * 12
+        self.assertGreater(evalcmp.similarity(long, "「" + long), 0.99)
+
     def test_compatibility_characters_are_normalized(self):
         case = {"id": "c", "expected_result": "不符", "claim": [
             {"original": "判刑二十八年半", "expected_label": "false", "core": True, "importance": 5}]}

@@ -239,6 +239,21 @@ class RunRoleTest(unittest.TestCase):
             run_model.run_role(run, "proponent", None, CODEX, runner=r, env={})
         self.assertFalse((run / "proponent.json").exists())
 
+    def test_review_that_leaves_out_a_listed_claim_is_retried(self):
+        """Audit: an empty `reviews` was accepted on the first call and silently overturned the judge."""
+        run = make_run(fx.run_files(review__B_json=None))
+        r = FakeRunner([json.dumps({"seat": "B", "reviews": []}), json.dumps(fx.REVIEW_B, ensure_ascii=False)])
+        run_model.run_role(run, "review", "B", CLAUDE, runner=r, env={})
+        self.assertEqual(len(r.calls), 2)
+        self.assertIn("C1 需要剛好一筆覆核", r.calls[1]["stdin"].split("上一次的輸出有以下問題")[1])
+        self.assertEqual(json.loads((run / "review-B.json").read_text())["reviews"][0]["claim_id"], "C1")
+
+    def test_review_that_keeps_leaving_a_claim_out_fails_and_leaves_no_file(self):
+        run = make_run(fx.run_files(review__B_json=None))
+        with self.assertRaises(run_model.RunModelError):
+            run_model.run_role(run, "review", "B", CLAUDE, runner=FakeRunner([json.dumps({"reviews": []})] * 2), env={})
+        self.assertFalse((run / "review-B.json").exists())
+
 
 class PromptTest(unittest.TestCase):
     def test_prompt_states_the_check_date(self):
@@ -296,6 +311,20 @@ class PromptTest(unittest.TestCase):
     def test_review_prompt_has_no_judge_only_section_by_default(self):
         run = make_run(fx.run_files())
         self.assertNotIn("裁判自行改判、你也要覆核的命題", run_model.build_prompt(run, "review", "B"))
+
+    def test_review_prompt_lists_the_claims_this_seat_must_review(self):
+        """Audit: the task section named the output file and the seat only; `fc.py reviewers` knew the claims."""
+        task = run_model.build_prompt(make_run(fx.run_files()), "review", "B").split("## 這一次的任務")[1].split("\n## ")[0]
+        self.assertIn("- 你要覆核的命題（每條剛好寫一筆，其他命題不用寫）：C1\n", task)
+
+    def test_review_prompt_list_includes_judge_only_changes(self):
+        o = fx.judge_only_overrides()
+        o["judgment_json"]["verdicts"][1]["label"] = "unverified"  # C2 changed too; no attack was ever made on it
+        task = run_model.build_prompt(make_run(fx.run_files(**o)), "review", "X1").split("## 這一次的任務")[1].split("\n## ")[0]
+        self.assertIn("- 你要覆核的命題（每條剛好寫一筆，其他命題不用寫）：C1、C2\n", task)
+
+    def test_other_roles_get_no_review_list(self):
+        self.assertNotIn("你要覆核的命題", run_model.build_prompt(make_run(fx.run_files()), "judge", None))
 
     def test_internal_seat_prompt_states_host_engine(self):
         run = make_run(fx.run_files())

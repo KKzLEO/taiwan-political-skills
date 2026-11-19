@@ -215,6 +215,17 @@ class OpponentTest(unittest.TestCase):
             o["seat"] = "Z"
         self.assertTrue(errors_for("opponent-A.json", m))
 
+    def test_attack_id_is_the_seat_and_a_number(self):
+        """Audit: seats A and B both numbered an attack "1"; every later step keys on the id, so one attack
+        vanished without a ruling. A trailing line break must not pass either (the id is printed in the report)."""
+        for bad in ("1", "B-1", "A-1\n", "A-x", "A-1）\n\n**結果：符合**", 1, None):
+            def m(o, bad=bad):
+                o["attacks"][0]["id"] = bad
+            errs = errors_for("opponent-A.json", m)
+            self.assertTrue(any("attacks[0].id 必須是 A-1、A-2" in e for e in errs), (bad, errs))
+        self.assertEqual(errors_for("opponent-X1.json", opponent__X1_json={
+            **fx.OPP_X1, "attacks": [{**fx.OPP_A["attacks"][0], "id": "X1-12"}]}), [])
+
 
 class RebuttalJudgmentTest(unittest.TestCase):
     def test_rebuttal_must_answer_every_attack(self):
@@ -232,10 +243,52 @@ class RebuttalJudgmentTest(unittest.TestCase):
             j["rulings"][1]["verified_urls"] = []
         self.assertTrue(any("verified_urls" in e for e in errors_for("judgment.json", m)))
 
+    def test_verified_urls_must_be_a_list_of_urls(self):
+        """Audit: the check was only "not empty", so ["已核對"], [""] and the string "none" all passed."""
+        for bad in (["已核對"], [""], "none", ["https://example.org/presser", "已核對"], [None], {"url": "https://example.org"}):
+            def m(j, bad=bad):
+                j["rulings"][1]["verified_urls"] = bad
+            errs = errors_for("judgment.json", m)
+            self.assertTrue(any(e.startswith("rulings[1] ") and "verified_urls" in e for e in errs), (bad, errs))
+
     def test_judgment_verdict_evidence_must_be_in_its_ledger(self):
         def m(j):
             j["verdicts"][0]["evidence_ids"] = ["S1", "S4"]
         self.assertTrue(any("S4" in e for e in errors_for("judgment.json", m)))
+
+
+class NullListTest(unittest.TestCase):
+    """Audit: a list field written as null gave "結構不對（TypeError…）" without naming the field. That line was all
+    the judge's retry prompt carried, and a second null stopped the whole check."""
+
+    def test_a_null_list_in_a_verdict_is_an_error_that_names_the_field(self):
+        for name in ("proponent.json", "judgment.json"):
+            for key in ("evidence_ids", "context_flags"):
+                def m(d, key=key):
+                    d["verdicts"][1][key] = None
+                errs = errors_for(name, m)
+                self.assertTrue(any(f"verdicts[1].{key} 必須是陣列" in e for e in errs), (name, key, errs))
+                self.assertFalse(any("結構不對" in e for e in errs), (name, key, errs))
+
+    def test_a_list_left_out_of_a_verdict_still_counts_as_empty(self):
+        def m(d):
+            del d["verdicts"][1]["evidence_ids"], d["verdicts"][1]["context_flags"]
+        self.assertEqual(errors_for("judgment.json", m), [])
+
+    def test_null_attack_evidence_counts_as_no_evidence(self):
+        def m(o):
+            o["attacks"][0]["evidence"] = None
+        self.assertEqual(errors_for("opponent-A.json", m), [])  # a reasoning attack needs none
+        errs = errors_for("opponent-B.json", m)  # a label attack does
+        self.assertTrue(any("必須附證據" in e for e in errs), errs)
+        self.assertFalse(any("結構不對" in e for e in errs), errs)
+
+    def test_null_responses_are_reported_as_the_answers_that_are_missing(self):
+        def m(r):
+            r["responses"] = None
+        errs = errors_for("rebuttal.json", m)
+        self.assertTrue(any("A-1 需要剛好一則答辯" in e for e in errs), errs)
+        self.assertFalse(any("結構不對" in e for e in errs), errs)
 
 
 def judgment_missing_url():
@@ -261,6 +314,13 @@ class UnverifiedRulingFallbackTest(unittest.TestCase):
         fixed, left = self.fallback(judgment_missing_url())
         self.assertEqual(fixed["rulings_unverified"], ["B-1"])
         self.assertTrue(fixed["rulings"][1]["upheld"])
+        self.assertEqual(left, [])
+
+    def test_a_list_that_holds_no_urls_takes_the_same_way_out(self):
+        j = copy.deepcopy(fx.JUDGMENT)
+        j["rulings"][1]["verified_urls"] = ["已核對"]
+        fixed, left = self.fallback(j)
+        self.assertEqual(fixed["rulings_unverified"], ["B-1"])
         self.assertEqual(left, [])
 
     def test_no_fallback_when_anything_else_is_wrong(self):
@@ -316,6 +376,81 @@ class TraceTest(unittest.TestCase):
         def m(t):
             t["publisher"]["kind"] = "網軍"
         self.assertTrue(errors_for("trace.json", m))
+
+
+RECHECKED = fx.PROPONENT["prior_factchecks_rechecked"][0]
+
+
+class FieldsTheReportReadsTest(unittest.TestCase):
+    """Audit: render indexes these fields directly. Each shape below passed validation and then stopped the last
+    step with a KeyError, TypeError or AttributeError, after every model call had been paid for."""
+
+    def trace(self, where=None, **change):
+        def m(t):
+            (t["publisher"] if where == "publisher" else t).update(change)
+        return errors_for("trace.json", m)
+
+    def proponent(self, rechecked):
+        def m(p):
+            p["prior_factchecks_rechecked"] = rechecked
+        return errors_for("proponent.json", m)
+
+    def named(self, errs, field):
+        self.assertTrue(any(e.startswith(field) for e in errs), (field, errs))
+        self.assertFalse(any("結構不對" in e for e in errs), errs)
+
+    def test_a_spread_signal_needs_its_signal(self):
+        self.named(self.trace(spread_signals=[{"evidence_url": "https://example.org/a", "excerpt": "同文案 30 則"}]),
+                   "spread_signals[0]")
+
+    def test_an_attribution_needs_its_statement(self):
+        self.named(self.trace(attribution=[{"report_url": "https://example.org/r", "report_org": "某研究機構"}]),
+                   "attribution[0]")
+
+    def test_a_wording_issue_needs_the_quote_and_the_issue(self):
+        self.named(self.trace("publisher", wording_issues=[{"quote": "無恥"}]), "publisher.wording_issues[0]")
+        self.named(self.trace("publisher", wording_issues=[{"issue": "情緒字眼"}]), "publisher.wording_issues[0]")
+
+    def test_lists_of_objects_must_be_lists_of_objects(self):
+        for where, key in ((None, "variants"), (None, "spread_signals"), (None, "attribution"),
+                           (None, "prior_factchecks"), ("publisher", "wording_issues"), ("publisher", "flagged")):
+            field = f"{where}.{key}" if where else key
+            for bad in ("沒有", ["一個字串"], {"url": "https://example.org/x"}):
+                self.named(self.trace(where, **{key: bad}), field + " 必須是物件的陣列")
+
+    def test_first_seen_is_an_object_or_null(self):
+        for bad in ("2026-11-10 LINE", ["2026-11-10"]):
+            self.named(self.trace(first_seen=bad), "first_seen")
+        self.assertEqual(self.trace(first_seen=None), [])
+
+    def test_limits_is_a_list(self):
+        self.named(self.trace(limits="查不到最早出處"), "limits 必須是陣列")
+
+    def test_byline_is_text(self):
+        self.named(self.trace("publisher", byline=["王小明"]), "publisher.byline")
+        self.assertEqual(self.trace("publisher", byline=None), [])
+
+    def test_null_in_place_of_a_list_reads_as_empty(self):
+        """Nothing is missing, so the tracer is not sent back for it; render reads these the same way."""
+        self.assertEqual(self.trace(variants=None, spread_signals=None, attribution=None, prior_factchecks=None,
+                                    limits=None), [])
+        self.assertEqual(self.trace("publisher", wording_issues=None, flagged=None), [])
+        self.assertEqual(self.proponent(None), [])
+        self.assertEqual(self.proponent([{**RECHECKED, "claim_ids": None}]), [])
+
+    def test_a_rechecked_fact_check_needs_its_org_and_url(self):
+        for key in ("org", "url"):
+            self.named(self.proponent([{k: v for k, v in RECHECKED.items() if k != key}]),
+                       "prior_factchecks_rechecked[0]")
+        self.named(self.proponent([{**RECHECKED, "url": "事實查核中心的報告"}]), "prior_factchecks_rechecked[0]")
+
+    def test_rechecked_fact_checks_are_a_list_of_objects(self):
+        for bad in (["台灣事實查核中心"], dict(RECHECKED), "沒有"):
+            self.named(self.proponent(bad), "prior_factchecks_rechecked 必須是物件的陣列")
+
+    def test_a_rechecked_fact_check_lists_claim_ids_as_text(self):
+        for bad in ("C1", [["C1"]], [1]):
+            self.named(self.proponent([{**RECHECKED, "claim_ids": bad}]), "prior_factchecks_rechecked[0].claim_ids")
 
 
 def _tag(tid="TW-T16", features=("a",), quote="快轉傳！", **extra):
@@ -489,6 +624,42 @@ class ReviewTest(unittest.TestCase):
         def m(r):
             r["reviews"][0]["label_ok"] = False
         self.assertTrue(any("label_ok" in e for e in errors_for("review-B.json", m)))
+
+    def test_every_claim_the_seat_must_review_needs_exactly_one_review(self):
+        """Audit: {"seat": "B", "reviews": []} passed, was never retried, and finalize then read the missing review
+        as a failed one: the judge's 誤導 became 無法證實 and the result 無法判定."""
+        def none(r):
+            r["reviews"] = []
+
+        def null(r):
+            r["reviews"] = None
+
+        def twice(r):
+            r["reviews"].append(dict(r["reviews"][0], **{"pass": False, "label_ok": False}))
+        for m in (none, null, twice):
+            errs = errors_for("review-B.json", m)
+            self.assertTrue(any("C1 需要剛好一筆覆核" in e for e in errs), (m.__name__, errs))
+
+    def test_null_reviews_are_an_error_even_for_a_seat_with_nothing_to_review(self):
+        """finalize iterates `reviews` of every review file, so null must never get past this check."""
+        for bad in (None, ["C1"], {"claim_id": "C1"}):
+            errs = errors_for("review-A.json", review__A_json={"seat": "A", "reviews": bad})
+            self.assertTrue(any(e.startswith("reviews 必須是物件的陣列") for e in errs), (bad, errs))
+
+    def test_the_list_covers_judge_only_changes_for_every_seat(self):
+        o = fx.judge_only_overrides()
+        o["review__A_json"] = {"seat": "A", "reviews": []}
+        self.assertTrue(any("C1 需要剛好一筆覆核" in e for e in errors_for("review-A.json", **o)))
+
+    def test_a_review_of_a_claim_that_was_not_asked_for_is_allowed(self):
+        """It is not used either (finalize only reads the claims the seat must review)."""
+        extra = {"seat": "A", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": False, "reason": "標籤錯了"}]}
+        self.assertEqual(errors_for("review-A.json", review__A_json=extra), [])
+
+    def test_the_list_is_not_checked_while_the_judgment_cannot_be_read(self):
+        empty = {"seat": "B", "reviews": []}
+        self.assertEqual(errors_for("review-B.json", review__B_json=empty, judgment_json=None), [])
+        self.assertEqual(errors_for("review-B.json", review__B_json=empty, judgment_json={"rulings": "壞掉"}), [])
 
 class InputTest(unittest.TestCase):
     GOOD = {"input_type": "text", "content": "某部長說：明年油價一定漲三成", "prompt": "幫我查核", "url": None}

@@ -143,10 +143,13 @@ def build_prompt(run, role, seat, lens=None, engine_label=None, data_dir=None):
         fixed["engine"] = engine_label or _seat_engine(run, seat)
     checked_on = str((io.read_json_or_none(run / "run.json") or {}).get("created_at", ""))[:10]
     judge_only = finalize.judge_only_changes(run) if role == "review" else {}
+    # The same list `fc.py reviewers` prints and validate checks the output against.
+    to_review = finalize.reviewers_needed(run).get(seat, []) if role == "review" else []
     parts.append("## 這一次的任務\n\n"
                  f"- 輸出檔名：`{out}`\n"
                  + (f"- 查核日期：{checked_on}（台灣時間）\n" if checked_on else "")
                  + (f"- 下列欄位必須照抄：`{json.dumps(fixed, ensure_ascii=False)}`\n" if fixed else "")
+                 + (f"- 你要覆核的命題（每條剛好寫一筆，其他命題不用寫）：{'、'.join(to_review)}\n" if to_review else "")
                  + (f"- 裁判自行改判、你也要覆核的命題：{'、'.join(judge_only)}（正方原本的判定在輸入資料最後）\n"
                     if judge_only else ""))
 
