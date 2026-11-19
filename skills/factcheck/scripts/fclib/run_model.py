@@ -346,7 +346,7 @@ def strip_tracking(url):
     return url if len(kept) == len(pairs) else urlunsplit(parts._replace(query="&".join(kept)))
 
 
-ASKED = ("提問", "使用者問", "使用者說", "使用者認為", "問法", "詢問")  # ways the split names the user's question
+ASKED = ("提問", "使用者問", "使用者說", "使用者認為", "問法")  # ways the split names the user's question
 CLAIM_FIELDS = ("id", "original", "neutral", "type", "importance", "core", "legal", "time_place", "entities",
                 "search_seeds")
 
@@ -355,7 +355,8 @@ def _quotes_question(text, prompt, message):
     """Whether the text names the user's question or copies a piece of it that the message does not have: a word
     for asking the message never uses, six characters of the question, or all of a question shorter than that."""
     prompt = prompt.strip()
-    pieces = [prompt[i:i + 6] for i in range(len(prompt) - 5)] or ([prompt] if len(prompt) >= 2 else [])
+    # A question under four characters ("真的") is everyday wording, not something that can be traced back to the user.
+    pieces = [prompt[i:i + 6] for i in range(len(prompt) - 5)] or ([prompt] if len(prompt) >= 4 else [])
     return any(w in text and w not in message for w in ASKED) or any(p in text and p not in message for p in pieces)
 
 
@@ -489,6 +490,10 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
         lens = "external" if seat.startswith("X") else {"A": "evidence", "B": "counter", "C": "stance"}[seat]
     name = output_name(role, seat)
     target = run / name
+    # A seat that had failed and fails again changes nothing the later steps read (failed seats are left out of
+    # every prompt), so what was built without it stays, and stays "not older than its inputs".
+    was = io.read_json_or_none(target) if role == "opponent" and target.exists() else None
+    failed_before = target.stat() if isinstance(was, dict) and was.get("status") == "failed" else None
     prompt = build_prompt(run, role, seat, lens=lens)
     errors, parsed = ["沒有執行"], []
     for attempt in range(2):
@@ -535,6 +540,9 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
         error = (error[:500 - len(kept)] + kept) if kept else error[:500]  # the path must survive the cut
         io.write_json(target, {"seat": seat, "engine": engine["engine"], "lens": lens,
                                "status": "failed", "error": error, "attacks": []})
-        drop_later(run, role)
+        if failed_before:
+            os.utime(target, ns=(failed_before.st_atime_ns, failed_before.st_mtime_ns))
+        else:
+            drop_later(run, role)
         return target
     raise RunModelError(f"{role} 在 {engine['engine']} 上失敗：" + "；".join(errors) + kept)

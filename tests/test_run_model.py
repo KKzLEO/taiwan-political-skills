@@ -753,6 +753,23 @@ class PrepRoleTest(unittest.TestCase):
         self.assertEqual((saved["notes"], saved["outlet"], saved["byline"]), ("沒有附來源；", None, "記者 王小明"))
         self.assertNotIn("asker_view", json.loads((run / "claims.json").read_text())["claims"][0])
 
+    def test_a_short_question_copied_whole_is_caught_without_any_word_for_asking(self):
+        run = self.run_dir({**INPUT, "prompt": "又在騙？"})
+        source = {**fx.SOURCE, "notes": "沒有附來源。對方寫「又在騙？」這幾個字。"}
+        run_model.run_role(run, "prep", None, CLAUDE, runner=FakeRunner([prep_reply(source)]), env={})
+        notes = json.loads((run / "source.json").read_text())["notes"]
+        self.assertTrue(notes.startswith("沒有附來源。"), notes)
+        self.assertNotIn("又在騙", notes)
+
+    def test_ordinary_words_are_not_taken_for_the_question(self):
+        """Delta review: 「詢問」 is an everyday word, and a two-character question matched half the notes."""
+        run = self.run_dir({**INPUT, "prompt": "真的"})
+        source = {**fx.SOURCE, "notes": "部分留言在詢問來源，沒有讀取。無法確認截圖是否真的來自官方帳號。", "outlet": "真的新聞網"}
+        run_model.run_role(run, "prep", None, CLAUDE, runner=FakeRunner([prep_reply(source)]), env={})
+        saved = json.loads((run / "source.json").read_text())
+        self.assertEqual(saved["notes"], "部分留言在詢問來源，沒有讀取。無法確認截圖是否真的來自官方帳號。")
+        self.assertEqual(saved["outlet"], "真的新聞網")
+
     def test_notes_about_the_message_stay_when_the_question_quotes_it(self):
         run = self.run_dir({**INPUT, "prompt": "「明年油價一定漲三成」是真的嗎"})
         source = {**fx.SOURCE, "notes": "訊息說明年油價一定漲三成，沒有附來源。"}

@@ -223,6 +223,43 @@ class RunModelCliTest(unittest.TestCase):
         for kept in ("opponent-A.json", "opponent-B.json", "opponent-X1.json", "proponent.json", "trace.json"):
             self.assertTrue((run / kept).exists(), kept)
 
+    def test_a_seat_that_fails_again_leaves_the_finished_report_alone(self):
+        """Delta review: the seat had failed, the report was made without it, the rerun failed too (quota still
+        out), and everything after the seat was deleted although nothing later steps read had changed."""
+        files = fx.run_files()
+        files["opponent-C.json"] = {**fx.OPP_C, "status": "failed", "error": "額度用完", "attacks": []}
+        run = with_fake_claude(files)
+        for step in ("finalize", "score", "render"):
+            self.assertEqual(fc(step, "--run", run).returncode, 0)
+        p, calls = fc_env(run, "run-model", "--run", run, "--role", "opponent", "--seat", "C", reply="不是 JSON")
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertEqual(json.loads((run / "opponent-C.json").read_text())["status"], "failed")
+        for kept in ("rebuttal.json", "judgment.json", "review-B.json", "verdicts.json", "score.json", "report.md"):
+            self.assertTrue((run / kept).exists(), kept)
+        status = fc("status", "--run", run).stdout
+        self.assertNotIn("rebuttal.json 缺少", status)
+        # and the later steps still count as done: the seat's file must not look newer than what was built on it
+        p, calls = fc_env(run, "run-model", "--run", run, "--role", "rebuttal")
+        self.assertEqual(calls, 0, p.stderr)
+
+    def test_a_seat_that_worked_and_now_fails_drops_what_was_built_on_it(self):
+        run = with_fake_claude(fx.run_files())
+        p, calls = fc_env(run, "run-model", "--run", run, "--role", "opponent", "--seat", "C", "--force", reply="不是 JSON")
+        self.assertEqual(json.loads((run / "opponent-C.json").read_text())["status"], "failed")
+        for gone in ("rebuttal.json", "judgment.json", "review-B.json"):
+            self.assertFalse((run / gone).exists(), gone)
+
+    def test_a_redone_split_leaves_nothing_built_on_the_old_claims(self):
+        files = fx.run_files()
+        files["input.json"] = {"input_type": "text", "content": fx.SOURCE["original_text"], "prompt": "幫我查核", "url": None}
+        run = with_fake_claude(files)
+        reply = json.dumps({"source": fx.SOURCE, "claims": fx.CLAIMS}, ensure_ascii=False)
+        p, calls = fc_env(run, "run-model", "--run", run, "--role", "prep", "--force", reply=reply)
+        self.assertEqual((p.returncode, calls), (0, 1), p.stderr)
+        for gone in ("trace.json", "proponent.json", "opponent-A.json", "rebuttal.json", "judgment.json", "review-B.json"):
+            self.assertFalse((run / gone).exists(), gone)
+        self.assertTrue((run / "claims.json").exists())
+
     def test_settling_again_leaves_no_score_or_report_of_the_old_verdicts(self):
         run = make_run(fx.run_files())
         for step in ("finalize", "score", "render"):

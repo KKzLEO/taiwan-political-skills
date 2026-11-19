@@ -47,15 +47,35 @@ class ClaimsTest(unittest.TestCase):
         self.assertTrue(errors_for("claims.json", m))
 
 
+class DeadlineEvidenceTest(unittest.TestCase):
+    """Whether a deadline has passed is a comparison of two dates; there may be no page to quote for it."""
+
+    def verdicts(self, kind, label, evidence):
+        o = fx.time_claim_overrides(kind, label)
+        for doc in (o["proponent_json"], o["judgment_json"]):
+            doc["verdicts"][-1]["evidence_ids"] = evidence
+        return o
+
+    def test_a_deadline_premise_needs_no_evidence(self):
+        for label in ("false", "true"):
+            o = self.verdicts("deadline", label, [])
+            for name in ("proponent.json", "judgment.json"):
+                self.assertEqual(errors_for(name, **o), [], (label, name))
+
+    def test_an_implied_time_and_every_other_claim_still_need_evidence(self):
+        o = self.verdicts("relative", "false", [])
+        self.assertTrue(any("C3" in e or "沒有引用任何證據" in e for e in errors_for("judgment.json", **o)))
+
+
 class PublishedAtTest(unittest.TestCase):
     """The publication time now decides whether the time rules apply, so it has to be a date or nothing."""
 
     def test_published_at_is_a_date_or_empty(self):
-        for ok in (None, "", "2026-10-20", "2026-10-20T14:15:00+08:00"):
+        for ok in (None, "", "2026-10-20", "2026-10-20T14:15:00+08:00", "2026-10-20 14:15"):
             self.assertEqual(errors_for("source.json", lambda d: d.update(published_at=ok)), [], ok)
-        for bad in ("14:15", "不明", "下午 2:15", "10/20", 20261020):
+        for bad in ("14:15", "不明", "下午 2:15", "10/20", 20261020, "2026-10", "2026-13-45", "２０２６-１０-２０"):
             errs = errors_for("source.json", lambda d: d.update(published_at=bad))
-            self.assertTrue(any("published_at" in e for e in errs), bad)
+            self.assertTrue(any("published_at" in e and "不要自己補" in e for e in errs), bad)
 
 
 class TimeClaimsTest(unittest.TestCase):
@@ -80,6 +100,11 @@ class TimeClaimsTest(unittest.TestCase):
         self.assertEqual(self.errs({"deadline": "C3", "relative": None}), [])
         for bad in ("C1", "C9", 3):  # C1 is a stated fact
             self.assertTrue(any("time_claims.deadline" in e for e in self.errs({"deadline": bad, "relative": None})), bad)
+
+    def test_a_mark_that_is_not_a_claim_id_gets_the_plain_message(self):
+        errs = self.errs({"deadline": ["C3"], "relative": None})
+        self.assertTrue(any("time_claims.deadline 必須是 null" in e for e in errs), errs)
+        self.assertFalse(any("TypeError" in e for e in errs), errs)
 
     def test_one_claim_cannot_be_both(self):
         self.assertTrue(any("同一條" in e for e in self.errs({"deadline": "C3", "relative": "C3"})))

@@ -64,9 +64,10 @@ def main():
         print("|---|---|---|---|---|---|---|---|---|---|")
     reasons = []
     for r in cases:
-        case = tomllib.load(open(repo / "evals/cases" / f"{r['name']}.toml", "rb"))
-        exp = case["expected_result"]
-        if r["status"] != "ok":
+        path = repo / "evals/cases" / f"{r['name']}.toml"
+        case = tomllib.load(open(path, "rb")) if path.exists() else {}  # a mistyped job leaves a record too
+        exp = case.get("expected_result", "（找不到案例檔）")
+        if r["status"] != "ok" or not case:
             tally["failed"] += 1
             print(f"| {r['name']} | {exp} | 沒有跑完（{r['status']}） | | | | | | | {r['minutes']} |")
             continue
@@ -97,10 +98,11 @@ def main():
 
     probes = defaultdict(list)
     for r in results:
-        if r.get("kind") == "probe" and "probe" in r:
-            probes[r["probe"]].append(r)
+        if r.get("kind") == "probe":  # a job that crashed has only its name: probes/<file stem>/<target>
+            parts = r["job"].split("/", 2)
+            probes[r.get("probe") or parts[1]].append({**r, "target": r.get("target") or parts[-1]})
     for stem, rows in sorted(probes.items()):
-        if not any(r["status"] == "ok" for r in rows):  # split only: listed in the table below
+        if all(r["status"] == "stopped after prep" for r in rows):  # split only: listed in the table below
             continue
         expect = tomllib.load(open(repo / "evals/probes" / f"{stem}.toml", "rb")).get("expect", {})
         print(f"\n| 探測 {stem} | 結果 | 可信度 | 不看時間的內容分數 | 信心度 | 可公開 | 留下的手法標記 | 計分命題的判定 | 時間標記 | 各類型的命題數 |"
@@ -123,6 +125,8 @@ def main():
             print(f"| {r['target']} | {sc['result']} | {cred} | {raw} | {sc['confidence']['score']} | "
                   f"{'是' if sc['publishable'] else '否'} | {'、'.join(tags) or '—'} | {'、'.join(labels) or '—'} | "
                   f"{'、'.join(marks) or '—'} | {'、'.join(f'{t}×{n}' for t, n in types)} |")
+        if len(seen) != len(rows):
+            print(f"{len(rows)} 版裡只有 {len(seen)} 版跑完，下面只比跑完的；沒跑完的不能當成一致。")
         if len(seen) > 1:
             same = lambda i: "是" if len({s[i] for s in seen}) == 1 else "否"  # noqa: E731
             creds = [s[2] for s in seen if s[2] is not None]

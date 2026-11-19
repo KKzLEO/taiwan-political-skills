@@ -1,4 +1,5 @@
 import importlib.util
+import sys
 import unittest
 
 from tests import fixtures as fx
@@ -45,6 +46,42 @@ class VariantSummaryTest(unittest.TestCase):
     def test_a_different_number_of_opinions_shows(self):
         self.assertEqual(self.summary()[0], self.summary(extra_opinion=True)[0])
         self.assertNotEqual(self.summary()[1], self.summary(extra_opinion=True)[1])
+
+
+class BrokenJobsTest(unittest.TestCase):
+    """Delta review: a job that crashed left a record the analysis either crashed on or silently dropped."""
+
+    def run_analyze(self, results):
+        import contextlib
+        import io
+        import json
+        import tempfile
+        from pathlib import Path
+        base = Path(tempfile.mkdtemp(prefix="fc-harness-"))
+        (base / "results.json").write_text(json.dumps(results, ensure_ascii=False))
+        out = io.StringIO()
+        argv = sys.argv
+        sys.argv = ["analyze.py", "--base", str(base), "--repo", str(ROOT)]
+        try:
+            with contextlib.redirect_stdout(out):
+                analyze.main()
+        finally:
+            sys.argv = argv
+        return out.getvalue()
+
+    def test_a_case_that_never_ran_is_listed_and_counted(self):
+        out = self.run_analyze([{"name": "case-99", "job": "case-99", "kind": "case", "run": "",
+                                 "status": "failed: FileNotFoundError", "minutes": 0}])
+        self.assertIn("case-99", out)
+        self.assertIn("沒跑完 1", out)
+
+    def test_a_probe_variant_that_crashed_is_listed_with_the_others(self):
+        job = "probes/symmetry-time/民眾黨"
+        out = self.run_analyze([{"name": job, "job": job, "kind": "probe", "run": "", "status": "failed: KeyError",
+                                 "minutes": 0}])
+        self.assertIn("探測 symmetry-time", out)
+        self.assertIn("民眾黨", out)
+        self.assertIn("沒有跑完", out)
 
 
 if __name__ == "__main__":

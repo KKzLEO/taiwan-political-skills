@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import copy
 import re
+from datetime import date
 from pathlib import Path
 
 from . import finalize, io, spans
@@ -76,7 +77,14 @@ def _check_ledger(err, ledger, where):
     return ids
 
 
-def _check_verdicts(err, verdicts, claim_ids, ledger_ids, where):
+def _deadline_claim(run: Path):
+    """The claim that says the deadline has not passed, if the split marked one. Judging it is a comparison of the
+    date in the message with the check date, so there may be no page to quote."""
+    marks = (io.read_json_or_none(run / "claims.json") or {}).get("time_claims")
+    return marks.get("deadline") if isinstance(marks, dict) and isinstance(marks.get("deadline"), str) else None
+
+
+def _check_verdicts(err, verdicts, claim_ids, ledger_ids, where, no_evidence_needed=None):
     seen = []
     for i, v in enumerate(verdicts or []):
         p = f"{where}.verdicts[{i}]"
@@ -90,7 +98,7 @@ def _check_verdicts(err, verdicts, claim_ids, ledger_ids, where):
             err.need(f in CONTEXT_FLAGS, f"{p}.context_flags 有未知的值 {f!r}")
         for eid in _items(err, v.get("evidence_ids", []), f"{p}.evidence_ids"):
             err.need(eid in ledger_ids, f"{p} 引用的證據 {eid} 不在證據表裡")
-        if label in FACTORS and label not in ("not_factual", "unverified"):
+        if label in FACTORS and label not in ("not_factual", "unverified") and cid != no_evidence_needed:
             err.need(bool(v.get("evidence_ids")), f"{p} 判定 {label} 但沒有引用任何證據")
         law = v.get("law_text_obtained")
         err.need(law in (None, True, False), f"{p}.law_text_obtained 必須是 true/false/null")
@@ -120,6 +128,16 @@ def input_errors(data) -> list:
     return list(_input(data, None, {}))
 
 
+def _starts_with_a_date(value) -> bool:
+    if not isinstance(value, str) or not re.match(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}", value):
+        return False
+    try:
+        date.fromisoformat(value[:10])
+    except ValueError:
+        return False
+    return True
+
+
 def _source(d, run, ctx):
     err = _Errors()
     err.need(d.get("input_type") in {"url", "text", "image", "video"}, "input_type 必須是 url/text/image/video")
@@ -127,8 +145,8 @@ def _source(d, run, ctx):
     err.need(_nonempty(d.get("retrieved_at")), "retrieved_at 不能是空的")
     # A publication time switches the time claims off (_check_time_claims), so "14:15" or 「不明」 must not count as one.
     published = d.get("published_at")
-    err.need(published in (None, "") or (isinstance(published, str) and re.match(r"^\d{4}-\d{2}-\d{2}", published)),
-             "published_at 必須是 YYYY-MM-DD 開頭的日期；內容本身看不出發布日期（只有時刻、或完全沒有）就填 null")
+    err.need(published in (None, "") or _starts_with_a_date(published),
+             "published_at 必須是 YYYY-MM-DD 開頭的日期；內容本身只看得到年月、只有時刻、或完全沒有，就填 null，不要自己補日子")
     return err
 
 
@@ -336,7 +354,7 @@ def _check_claim_spans(err, claims, run, time_claims=None):
         group = {c.get("id"): found[c.get("id")] for c in claims
                  if isinstance(c, dict) and c.get("type") in types and c.get("id") in found}
         ok, groups = spans.clash_groups(group)
-        timed = {v for v in (time_claims or {}).values() if v} if isinstance(time_claims, dict) else set()
+        timed = {v for v in time_claims.values() if isinstance(v, str)} if isinstance(time_claims, dict) else set()
         for g in [] if ok else groups:
             marked = [cid for cid in g if cid in timed]
             if marked:  # merging would put "when" and "what" in one claim, the opposite of rule 6
@@ -376,7 +394,7 @@ def _trace(d, run, ctx):
 def _proponent(d, run, ctx):
     err = _Errors()
     ledger_ids = _check_ledger(err, d.get("ledger"), "proponent")
-    _check_verdicts(err, d.get("verdicts"), _claim_ids(run), ledger_ids, "proponent")
+    _check_verdicts(err, d.get("verdicts"), _claim_ids(run), ledger_ids, "proponent", _deadline_claim(run))
     # Read by render for the comparison table, without checking (see _trace).
     rechecked = _items(err, d.get("prior_factchecks_rechecked") or [], "prior_factchecks_rechecked", dict)
     for i, p in enumerate(rechecked):
@@ -470,7 +488,7 @@ def _judgment(d, run, ctx):
             err.need(isinstance(urls, list) and bool(urls) and all(_is_url(u) for u in urls),
                      f"rulings[{i}] {_RULING_URL_MSG}")
     ledger_ids = _check_ledger(err, d.get("ledger"), "judgment")
-    _check_verdicts(err, d.get("verdicts"), _claim_ids(run), ledger_ids, "judgment")
+    _check_verdicts(err, d.get("verdicts"), _claim_ids(run), ledger_ids, "judgment", _deadline_claim(run))
     _check_tactic_checks(err, d, run, attacks, _library(ctx))
     return err
 

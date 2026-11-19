@@ -14,6 +14,9 @@ It never reads a case's expected answers. Output: <base>/results.json (one entry
 (code, model, effort), <base>/logs/<job>.log, and usage in <base>/usage.jsonl and usage-codex.jsonl (the claude and
 codex CLIs are wrapped by harness/bin/*-usage, which only log token counts).
 
+To run a fixed commit, export it and say which commit it is, then point --repo at the folder:
+    mkdir snap && git archive <commit> | tar -x -C snap && git rev-parse <commit> > snap/COMMIT
+
 Not covered: a host model following SKILL.md by itself, and the host's summary to the user (step 10).
 Each job starts several model CLIs at once (one per opponent seat); keep --workers low on a laptop.
 """
@@ -106,7 +109,7 @@ def main():
     head = stamp.read_text().strip() if stamp.exists() else subprocess.run(
         ["git", "-C", str(repo), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip() + "（工作目錄，可能有沒 commit 的修改）"
     (base / "batch.json").write_text(json.dumps(
-        {"repo": str(repo), "commit": head or "snapshot", "host": args.host, "host_model": args.host_model,
+        {"repo": str(repo), "commit": head, "host": args.host, "host_model": args.host_model,
          "host_effort": args.host_effort, "started": time.strftime("%Y-%m-%d %H:%M:%S"), "jobs": args.jobs,
          "models": json.loads((detect_run / "models.json").read_text())}, ensure_ascii=False, indent=1))
 
