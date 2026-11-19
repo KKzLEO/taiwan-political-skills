@@ -120,6 +120,9 @@ def _source(d, run, ctx):
     return err
 
 
+STATED, IMPLIED = {"F", "S"}, {"I"}
+
+
 def _claims(d, run, ctx):
     err = _Errors()
     claims = d.get("claims")
@@ -140,11 +143,34 @@ def _claims(d, run, ctx):
         err.need(isinstance(c.get("core"), bool), f"{p}.core 必須是 true/false")
         err.need(isinstance(c.get("legal", False), bool), f"{p}.legal 必須是 true/false")
     err.need(isinstance(d.get("prompt_was_leading", False), bool), "prompt_was_leading 必須是 true/false")
+    _check_time_claims(err, d.get("time_claims"), claims, run)
     _check_claim_spans(err, claims, run)
     return err
 
 
-STATED, IMPLIED = {"F", "S"}, {"I"}
+TIME_KINDS = ("deadline", "relative")
+
+
+def _check_time_claims(err, marks, claims, run):
+    """Which implied claim is the deadline premise and which the implied time (neutralize.md rule 6). Both keys
+    are required, so "none" is an answer the model wrote down rather than something it may have skipped."""
+    if not isinstance(marks, dict) or set(marks) != set(TIME_KINDS):
+        err.append('time_claims 必須是 {"deadline": 命題編號或 null, "relative": 命題編號或 null}，兩個鍵都要有；'
+                   "沒有這種時間命題就填 null")
+        return
+    implied = {c.get("id") for c in claims if isinstance(c, dict) and c.get("type") in IMPLIED}
+    for kind in TIME_KINDS:
+        err.need(marks[kind] is None or (isinstance(marks[kind], str) and marks[kind] in implied),
+                 f"time_claims.{kind} 必須是 null，或一條隱含命題（type 是 I）的編號")
+    marked = [v for v in marks.values() if v is not None]
+    err.need(len(marked) == len(set(map(str, marked))), "time_claims：同一條命題不能同時是期限前提和暗示的時間；"
+                                                        "同一句話兩種都符合時，只填 deadline")
+    published = (io.read_json_or_none(run / "source.json") or {}).get("published_at")
+    err.need(not marked or not str(published or "").strip(),
+             f"time_claims：內容有發布時間（{published}），讀者看得到日期，不用時間命題；兩個都填 null，"
+             "相對時間照發布時間換算成日期")
+
+
 
 
 def _library(ctx):

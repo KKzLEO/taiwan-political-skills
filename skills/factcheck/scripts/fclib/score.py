@@ -85,35 +85,59 @@ def _scored(claims):
 
 
 WRONG_LABELS = {"false", "misleading", "mixed"}
+RIGHT_LABELS = {"true", "mostly_true"}
 DETAIL_CAP = 79  # a true main point with a wrong detail is at most 大致符合
+
+
+def time_effect(c):
+    """What a time claim does to the result (verdicts' `time`, from claims.json's `time_claims`); None otherwise.
+    A time claim is a premise about when, not content: a right one earns nothing, and what a wrong one costs is
+    fixed here instead of hanging on an importance the model picked.
+      void: the deadline premise is wrong, so what the message asks the reader to do no longer stands
+      cap: the implied time is wrong (old news told as new); the content is judged on its own
+      unresolved: neither right nor wrong, so the report cannot say which of the above applies"""
+    if not c.get("time"):
+        return None
+    if c["label"] in WRONG_LABELS:
+        return "void" if c["time"] == "deadline" else "cap"
+    return None if c["label"] in RIGHT_LABELS else "unresolved"
+
+
+def _weighed(c) -> bool:
+    return _counts(c) and not c.get("time")
 
 
 def _credibility(claims):
     """How true the message is. The main claims (the highest importance among scored claims) decide; the other
-    claims can only pull the result down, and a wrong one keeps a true main point below 符合. Only the verdicts
-    count; how well we sourced them is confidence."""
-    scored = _scored(claims)
-    if not scored:
-        return None, "全部是意見、預測或口號，沒有可以查證的事實命題"
+    claims can only pull the result down, and a wrong one keeps a true main point below 符合. Time claims are
+    never weighed (time_effect). Only the verdicts count; how well we sourced them is confidence."""
+    scored = [c for c in claims if _weighed(c)]
+    void = [c for c in claims if time_effect(c) == "void"]
+    if not scored and not void:
+        return None, ("除了時間命題，沒有可以查證的事實命題" if any(c.get("time") for c in claims)
+                      else "全部是意見、預測或口號，沒有可以查證的事實命題")
 
-    top = max(c["importance"] for c in scored)
-    main = [c for c in scored if c["importance"] == top]
+    basis = scored or void  # a message that only asks the reader to act stands or falls with its deadline
+    top = max(c["importance"] for c in basis)
+    main = [c for c in basis if c["importance"] == top]
     main_accuracy = sum(FACTORS[c["label"]] for c in main) / len(main)
-    overall = _weighted(scored, lambda c: FACTORS[c["label"]])
-    accuracy = min(main_accuracy, overall)
-    raw = Decimal("100") * accuracy
-    score = round_half_up(raw)
-    capped = score > DETAIL_CAP and any(c["label"] in WRONG_LABELS for c in scored)  # 符合 = every claim holds
+    overall = _weighted(basis, lambda c: FACTORS[c["label"]])
+    content = min(main_accuracy, overall)
+    limit = min((FACTORS[c["label"]] for c in void), default=None)  # the message is no truer than its deadline
+    accuracy = content if limit is None else min(content, limit)
+    score = round_half_up(Decimal("100") * accuracy)
+    capped = score > DETAIL_CAP and any(  # 符合 = every claim holds, and the news is as new as the message says
+        c["label"] in WRONG_LABELS for c in claims if _weighed(c) or time_effect(c) == "cap")
     # A wrong main claim, or a proven-false key fact the main point cannot stand without (importance 4), is a
-    # finding even when the main claims cannot be checked.
+    # finding even when the main claims cannot be checked. So is a wrong deadline, when it is what sets the score.
     unverified_share = Decimal(sum(c["label"] == "unverified" for c in main)) / len(main)
     settled = any(c["label"] in WRONG_LABELS for c in main) or any(
-        c["label"] == "false" for c in scored if c["importance"] >= 4)
+        c["label"] == "false" for c in basis if c["importance"] >= 4) or (limit is not None and limit <= content)
     undetermined = unverified_share >= UNVERIFIED_SHARE_LIMIT and not settled
 
     cred = {
         "score": DETAIL_CAP if capped else score,
-        "raw": float(round(raw, 2)),
+        "raw": float(round(Decimal("100") * content, 2)),  # the content alone, before the deadline and the cap
         "main_claims": [c["claim_id"] for c in main],
         "main_accuracy": float(round(main_accuracy, 4)),
         "overall_accuracy": float(round(overall, 4)),
@@ -175,28 +199,55 @@ def _confidence(claims, ledger_by_id, run, seats):
             "evidence_quality": None if evidence is None else float(round(evidence, 4))}, bool(ok_cross)
 
 
-def _publish_blocks(verdicts, claims, run, seats) -> list:
+def _publish_blocks(verdicts, claims, run, seats, result) -> list:
     """Reasons a report cannot be publishable even though its scores stand. Each is shown under the result line."""
     blocks = []
+    if result not in ("符合", "不符"):
+        # Evals: wrong results cluster in the middle levels, where the answer keys themselves differ by a level.
+        blocks.append(f"結論是「{result}」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條")
     for u in verdicts.get("unverified_rulings") or []:
         about = u.get("claim_id") or ("手法標記" if u.get("target") == "tactic" else "溯源")
         blocks.append(f"反方 {u['seat']} 的攻擊（{u['attack_id']}，{about}）判成立，但裁判沒有列出實際核對過的網址，判決照用")
+
+    def result_with(labels, base=claims):
+        return _result_of([{**c, "label": labels[c["claim_id"]]} if c["claim_id"] in labels else c for c in base])[2]
+
+    # Labels the judge gave that a missing or disagreeing review turned into unverified (finalize).
+    judged = {d["claim_id"]: d["judge_label"] for d in verdicts.get("disputes") or []
+              if not d.get("label_kept") and d.get("judge_label") not in (None, "unverified")}
     # Red-team: typing a damaging fact as vague hides it from the score. If counting the claims the judge
-    # still labelled would change the result, the result hangs on that classification.
-    contested = [c["claim_id"] for c in claims if not_scored(c)]
-    if contested:
-        counted = _result_of([{**c, "type": None} if not_scored(c) else c for c in claims])[2]
-        if counted != _result_of(claims)[2]:
+    # still labelled would change the result, the result hangs on that classification. Checked on the content
+    # alone (a wrong deadline pushes both sides to 不符), and also as the judge labelled it (an unconfirmed
+    # review must not lift this block).
+    content = [c for c in claims if not c.get("time")]
+    effects = {c["claim_id"]: time_effect(c) for c in claims if c.get("time")}
+    acting = [cid for cid, e in effects.items() if e in ("void", "cap")]
+    for base in (content, [{**c, "label": judged.get(c["claim_id"], c["label"])} for c in content]):
+        counted = _result_of([{**c, "type": None} if not_scored(c) else c for c in base])[2]
+        if counted != _result_of(base)[2]:
             # Skeptic re-review: the label may come from a review that did not confirm a change, not from the judge.
-            named = "、".join(f"{c['claim_id']}（{ZH_LABELS[c['label']]}）" for c in claims if not_scored(c))
+            named = "、".join(f"{c['claim_id']}（{ZH_LABELS[c['label']]}）" for c in base if not_scored(c))
             blocks.append(f"{named}被分成意見、預測或模糊說法，所以不計分，但最後拿到的是會計分的判定；"
-                          f"算進去的話，結果會是「{counted}」")
-    # Red-team: a judge-only change (finalize.judge_only_changes) that the reviews did not confirm must not leave
-    # the report easier to publish than one every seat confirmed.
+                          f"算進去的話，{'不看時間命題的' if acting else ''}結果會是「{counted}」")
+            break
+    # Red-team: fewer completed reviews must never leave a report easier to publish than one every seat confirmed.
+    by_id = {c["claim_id"]: c for c in claims}
     for d in verdicts.get("disputes") or []:
-        if d.get("proponent_label") and not d.get("label_kept"):
+        if d.get("label_kept"):
+            continue
+        if d.get("proponent_label"):  # a judge-only change (finalize.judge_only_changes)
             blocks.append(f"{d['claim_id']} 沒有任何會改判的成立攻擊，裁判卻自己改了正方的判定，覆核也沒有全部確認，"
                           "所以改判「無法證實」")
+        elif d["claim_id"] in judged and by_id.get(d["claim_id"], {}).get("type") not in UNSCORED_TYPES:
+            blocks.append(f"{d['claim_id']} 的覆核沒有完成或沒有通過，裁判判的「{ZH_LABELS[d['judge_label']]}」改列「無法證實」；"
+                          f"照裁判原本的判定，結果會是「{result_with({d['claim_id']: d['judge_label']})}」")
+    # Time claims: say when the result rests on one, and when one was left unsettled that could change it.
+    if acting and _result_of(content)[2] != result:
+        blocks.append(f"結論受時間命題影響：不看 {'、'.join(acting)} 的話，結果是「{_result_of(content)[2]}」")
+    for cid, e in effects.items():
+        if e == "unresolved" and cid not in judged and result_with({cid: "false"}) != result:
+            blocks.append(f"時間命題 {cid} 判「{ZH_LABELS[by_id[cid]['label']]}」，沒有查清楚；"
+                          f"它判錯的話，結果會是「{result_with({cid: 'false'})}」")
     if run.get("mode") == "full":
         for s in seats:
             if not str(s.get("seat", "")).startswith("X") and s.get("status") != "ok":
@@ -223,7 +274,7 @@ def compute(verdicts: dict, run: dict, seats: list) -> dict:
     cred, reason, result = _result_of(claims)
 
     confidence, has_cross = _confidence(claims, ledger_by_id, run, seats)
-    blocks = _publish_blocks(verdicts, claims, run, seats)
+    blocks = _publish_blocks(verdicts, claims, run, seats, result)
     publishable = run.get("mode") == "full" and confidence["level"] == "高" and has_cross and not blocks
 
     without = None
@@ -250,7 +301,7 @@ def compute(verdicts: dict, run: dict, seats: list) -> dict:
         "without_importance_changes": without,
         "claims": [
             {"claim_id": c["claim_id"], "label": c["label"], "importance": c["importance"],
-             "factor": float(FACTORS[c["label"]]) if _counts(c) else None}
+             "factor": float(FACTORS[c["label"]]) if _weighed(c) else None}
             for c in claims
         ],
     }

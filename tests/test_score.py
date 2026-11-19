@@ -206,11 +206,10 @@ class ImportanceChangeTest(unittest.TestCase):
         return {**c, "importance_from": original}
 
     def test_result_without_the_change_is_reported_when_it_differs(self):
-        # adjusted: main claims {C2} true, overall (0.35*4 + 1*5)/9 = 71 大致符合;
-        # original: main claims {C1, C2}, half unverified -> 無法判定 (score min(67.5, 67.5) = 68)
-        r = compute([self.adjusted(claim("C1", "unverified", 4), 5), claim("C2", "true", 5)])
-        self.assertEqual(r["result"], "大致符合")
-        self.assertEqual(r["without_importance_changes"], {"result": "無法判定", "credibility": 68, "publishable": True})
+        # adjusted: main claims {C1 true, C2 false} -> 50 部分符合; original: main claim {C2 false} -> 0 不符
+        r = compute([self.adjusted(claim("C1", "true", 5), 4), claim("C2", "false", 5)])
+        self.assertEqual(r["result"], "部分符合")
+        self.assertEqual(r["without_importance_changes"], {"result": "不符", "credibility": 0, "publishable": True})
         self.assertFalse(r["publishable"])  # a conclusion that hangs on a contested weight is not publishable
 
     def test_nothing_extra_when_no_importance_changed(self):
@@ -410,10 +409,11 @@ class PublishBlockTest(unittest.TestCase):
 
     def test_importance_challenge_cannot_lift_a_publish_block(self):
         """Skeptic re-review: lowering a weight in the debate must not make a report publishable."""
-        # scored: (5*1 + 2*0)/7 = 71 大致符合. Counting C2 at 1: 5/8 = 63, same band; at its original 2: 5/9 = 56.
-        lowered = {**claim("C2", "false", importance=1, core=False), "type": "O", "importance_from": 2}
-        r = compute([claim("C1", "true", importance=5), claim("C3", "false", importance=2, core=False), lowered])
-        self.assertEqual(r["result"], "大致符合")
+        # Counting C2 at 4 leaves C1 the only main claim (不符 either way); at its original 5 it joins the main
+        # claims (部分符合), so the unadjusted report hangs on the classification and cannot be published.
+        lowered = {**claim("C2", "true", importance=4, core=False), "type": "O", "importance_from": 5}
+        r = compute([claim("C1", "false", importance=5), lowered])
+        self.assertEqual(r["result"], "不符")
         self.assertFalse(r["publishable"])
         self.assertTrue(any("重要性" in b for b in r["publish_blocks"]))
 
@@ -441,6 +441,163 @@ class PublishBlockTest(unittest.TestCase):
 
     def test_clean_run_has_no_blocks(self):
         self.assertEqual(compute([claim("C1", "true")])["publish_blocks"], [])
+
+
+def timed(cid, kind, label, importance=3, core=False, review="none"):
+    return {**claim(cid, label, importance=importance, core=core, review=review), "type": "I", "time": kind}
+
+
+class TimeClaimTest(unittest.TestCase):
+    """Time claims only ever pull the result down: a right one adds nothing, a wrong one has a fixed effect."""
+
+    def test_a_deadline_that_has_not_passed_does_not_lift_a_misleading_main_claim(self):
+        r = compute([claim("C1", "misleading", importance=5), timed("C2", "deadline", "true", importance=5, core=True)])
+        self.assertEqual(r["credibility"]["score"], 25)
+        self.assertEqual(r["result"], "不符")
+        self.assertEqual(r["credibility"]["main_claims"], ["C1"])
+        self.assertIsNone(next(c for c in r["claims"] if c["claim_id"] == "C2")["factor"])
+
+    def test_a_passed_deadline_voids_true_content_and_is_not_publishable(self):
+        for importance in (5, 4, 3):  # whatever the content's importance
+            r = compute([claim("C1", "true", importance=importance), timed("C2", "deadline", "false")])
+            self.assertEqual((r["credibility"]["score"], r["result"]), (0, "不符"), importance)
+            self.assertEqual(r["credibility"]["raw"], 100.0)  # the content alone
+            self.assertFalse(r["publishable"])
+            self.assertTrue(any("不看 C2" in b and "「符合」" in b for b in r["publish_blocks"]), r["publish_blocks"])
+
+    def test_a_passed_deadline_beside_wrong_content_stays_publishable(self):
+        r = compute([claim("C1", "false", importance=5), timed("C2", "deadline", "false")])
+        self.assertEqual(r["result"], "不符")
+        self.assertTrue(r["publishable"], r["publish_blocks"])
+
+    def test_a_deadline_judged_misleading_or_partly_wrong_limits_the_score_to_its_factor(self):
+        for label, expected in (("misleading", (25, "不符")), ("mixed", (50, "部分符合"))):
+            r = compute([claim("C1", "true", importance=5), timed("C2", "deadline", label)])
+            self.assertEqual((r["credibility"]["score"], r["result"]), expected, label)
+
+    def test_a_passed_deadline_settles_content_that_cannot_be_checked(self):
+        r = compute([claim("C1", "unverified", importance=5), timed("C2", "deadline", "false")])
+        self.assertEqual((r["credibility"]["score"], r["result"]), (0, "不符"))
+
+    def test_a_partly_wrong_deadline_does_not_turn_unverified_content_into_a_finding(self):
+        """Skeptic re-review: 35 comes from the unverified content, not from the deadline (50)."""
+        r = compute([claim("C1", "unverified", importance=5), timed("C2", "deadline", "mixed")])
+        self.assertEqual(r["result"], "無法判定")
+
+    def test_a_passed_deadline_alone_is_the_basis_of_the_score(self):
+        r = compute([{**claim("C1", "not_factual", core=False), "type": "O"}, timed("C2", "deadline", "false")])
+        self.assertEqual((r["credibility"]["score"], r["result"]), (0, "不符"))
+        self.assertEqual(r["credibility"]["main_claims"], ["C2"])
+        self.assertEqual((r["credibility"]["main_accuracy"], r["credibility"]["overall_accuracy"]), (0.0, 0.0))
+        self.assertTrue(any("不看 C2" in b and "「無法判定」" in b for b in r["publish_blocks"]), r["publish_blocks"])
+
+    def test_a_run_with_only_a_time_claim_does_not_crash(self):
+        self.assertEqual(compute([timed("C1", "deadline", "false")])["result"], "不符")
+        self.assertEqual(compute([timed("C1", "relative", "false")])["result"], "無法判定")
+
+    def test_an_unresolved_time_claim_blocks_only_when_a_wrong_one_would_change_the_result(self):
+        for kind, would_be in (("deadline", "不符"), ("relative", "大致符合")):
+            r = compute([claim("C1", "true", importance=5), timed("C2", kind, "unverified")])
+            self.assertEqual((r["credibility"]["score"], r["result"]), (100, "符合"), kind)  # the score does not move
+            self.assertFalse(r["publishable"])
+            self.assertTrue(any("C2" in b and "沒有查清楚" in b and f"「{would_be}」" in b for b in r["publish_blocks"]),
+                            r["publish_blocks"])
+            r = compute([claim("C1", "false", importance=5), timed("C2", kind, "unverified")])  # 不符 either way
+            self.assertTrue(r["publishable"], r["publish_blocks"])
+
+    def test_an_implied_time_that_is_wrong_caps_true_content_at_79(self):
+        for label in ("false", "misleading", "mixed"):
+            r = compute([claim("C1", "true", importance=5), claim("C2", "true", importance=3),
+                         timed("C3", "relative", label, importance=5, core=True)])
+            self.assertEqual((r["credibility"]["score"], r["result"], r["credibility"]["capped"]),
+                             (79, "大致符合", True), label)
+            self.assertEqual(r["credibility"]["main_claims"], ["C1"])
+
+    def test_the_cap_is_only_reported_when_it_lowers_the_score(self):
+        r = compute([claim("C1", "true", importance=5), claim("C2", "false", importance=4),
+                     timed("C3", "relative", "false")])
+        self.assertEqual((r["credibility"]["score"], r["credibility"]["capped"]), (56, False))
+
+    def test_an_implied_time_that_is_right_changes_nothing(self):
+        r = compute([claim("C1", "true", importance=4), timed("C2", "relative", "mostly_true", importance=5, core=True)])
+        self.assertEqual((r["credibility"]["score"], r["credibility"]["capped"], r["publish_blocks"]), (100, False, []))
+        self.assertTrue(r["publishable"])
+
+    def test_a_time_claim_is_not_a_main_claim_when_the_content_cannot_be_checked(self):
+        # as an ordinary claim at importance 5, C2 would be the only main claim and the result 大致符合
+        r = compute([claim("C1", "unverified", importance=4), timed("C2", "relative", "true", importance=5, core=True)])
+        self.assertEqual(r["result"], "無法判定")
+
+    def test_opinions_with_a_wrong_implied_time_have_no_score(self):
+        r = compute([{**claim("C1", "not_factual", core=False), "type": "O"}, timed("C2", "relative", "false")])
+        self.assertEqual(r["result"], "無法判定")
+        self.assertIsNone(r["credibility"])
+        self.assertIn("除了時間命題", r["result_reason"])
+
+    def test_a_failed_review_on_a_time_claim_still_costs_confidence(self):
+        r = compute([claim("C1", "true"), timed("C2", "relative", "true", review="failed")])
+        self.assertEqual(r["confidence"]["score"], 90)
+
+    def test_the_classification_check_looks_at_the_content_without_time_claims(self):
+        """Skeptic re-review: a passed deadline pushes both sides to 不符 and hid that the content hangs on a type."""
+        content = [claim("C1", "false", importance=5), {**claim("C2", "true", importance=5), "type": "O"}]
+        self.assertFalse(compute(content)["publishable"])
+        r = compute(content + [timed("C3", "deadline", "false")])
+        self.assertFalse(r["publishable"])
+        self.assertTrue(any("被分成意見" in b for b in r["publish_blocks"]), r["publish_blocks"])
+
+
+class PublishableResultTest(unittest.TestCase):
+    def test_only_the_two_ends_of_the_scale_can_be_publishable(self):
+        middle = {"大致符合": [claim("C1", "true", importance=5), claim("C2", "false", importance=2)],
+                  "部分符合": [claim("C1", "true", importance=5), claim("C2", "false", importance=5)],
+                  "無法判定": [claim("C1", "unverified", importance=5)]}
+        for result, claims in middle.items():
+            r = compute(claims)
+            self.assertEqual(r["result"], result)
+            self.assertFalse(r["publishable"], result)
+            self.assertTrue(any(f"結論是「{result}」" in b and "只有「符合」或「不符」才標可公開" in b
+                                for b in r["publish_blocks"]), r["publish_blocks"])
+        for claims in ([claim("C1", "true")], [claim("C1", "false")]):
+            self.assertTrue(compute(claims)["publishable"])
+
+    def dispute(self, claims, **d):
+        v = {"claims": claims, "ledger": FULL_LEDGER,
+             "disputes": [{"claim_id": "C2", "label_kept": False, "objections": [], "review_reasons": ["席位 B：覆核未完成"], **d}]}
+        return score.compute(v, FULL_RUN, OK_SEAT)
+
+    def test_a_label_the_reviews_did_not_confirm_blocks_publishing(self):
+        """Audit: with the review file missing, 大致符合 71 became 符合 81 and stayed publishable."""
+        r = self.dispute([claim("C1", "true", importance=5), claim("C2", "unverified", importance=2, review="failed")],
+                         judge_label="false")
+        self.assertEqual(r["result"], "符合")
+        self.assertFalse(r["publishable"])
+        self.assertTrue(any("C2" in b and "覆核" in b and "「錯誤」" in b and "結果會是「大致符合」" in b
+                            for b in r["publish_blocks"]), r["publish_blocks"])
+
+    def test_a_failed_review_of_an_unverified_ruling_does_not_block(self):
+        r = self.dispute([claim("C1", "false", importance=5), claim("C2", "unverified", importance=2, review="failed")],
+                         judge_label="unverified")
+        self.assertTrue(r["publishable"], r["publish_blocks"])
+
+    def test_a_failed_review_of_an_opinion_does_not_block(self):
+        r = self.dispute([claim("C1", "false", importance=5),
+                          {**claim("C2", "unverified", importance=2, review="failed"), "type": "O"}], judge_label="false")
+        self.assertTrue(r["publishable"], r["publish_blocks"])
+
+    def test_an_unconfirmed_review_cannot_lift_the_classification_block(self):
+        """Known limitation until 0.2.0: the opinion the judge called true became unverified, and counting it no
+        longer changed the result, so the report with the missing review was the publishable one."""
+        r = self.dispute([claim("C1", "false", importance=5),
+                          {**claim("C2", "unverified", importance=5, review="failed"), "type": "O"}], judge_label="true")
+        self.assertFalse(r["publishable"])
+        self.assertTrue(any("C2（正確）被分成意見" in b for b in r["publish_blocks"]), r["publish_blocks"])
+
+    def test_a_time_claim_the_reviews_did_not_confirm_is_reported_once(self):
+        r = self.dispute([claim("C1", "true", importance=5), timed("C2", "relative", "unverified", review="failed")],
+                         judge_label="false")
+        self.assertFalse(r["publishable"])
+        self.assertEqual(len([b for b in r["publish_blocks"] if "C2" in b]), 1, r["publish_blocks"])
 
 
 class DeterminismTest(unittest.TestCase):

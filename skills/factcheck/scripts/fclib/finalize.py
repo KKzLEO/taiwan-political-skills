@@ -97,7 +97,11 @@ def reviewers_needed(run) -> dict:
 
 def finalize(run) -> dict:
     run = Path(run)
-    claims_meta = {c["id"]: c for c in io.read_json(run / "claims.json")["claims"]}
+    claims_doc = io.read_json(run / "claims.json")
+    claims_meta = {c["id"]: c for c in claims_doc["claims"]}
+    # Which claim is the deadline premise or the implied time (validate._check_time_claims). score.time_effect
+    # decides what they do; their importance plays no part, so a challenge to it is recorded but not applied.
+    time_of = {cid: kind for kind, cid in (claims_doc.get("time_claims") or {}).items() if cid}
     judgment = io.read_json(run / "judgment.json")
     attacks = _successful_attacks(run)
     rulings = {r["attack_id"]: r for r in judgment.get("rulings", []) if r["attack_id"] in attacks}
@@ -161,7 +165,7 @@ def finalize(run) -> dict:
                     **({"proponent_label": judge_only[cid]["label"]} if cid in judge_only else {}),
                 })
         weight = sorted(weight_by_claim.get(cid, []))
-        importance = _importance(meta["importance"], weight, attacks)
+        importance = meta["importance"] if cid in time_of else _importance(meta["importance"], weight, attacks)
         claims_out.append({
             "claim_id": cid,
             "label": label,
@@ -171,6 +175,7 @@ def finalize(run) -> dict:
                                         "proposed": attacks[aid]["proposed_importance"],
                                         "ruling_reason": rulings[aid]["reason"]} for aid in weight]} if weight else {}),
             "type": meta.get("type"),
+            "time": time_of.get(cid),
             "core": meta["core"],
             "legal": meta.get("legal", False),
             "law_text_obtained": v.get("law_text_obtained"),

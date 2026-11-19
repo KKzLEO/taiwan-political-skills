@@ -6,7 +6,8 @@
 Prints, for cases: the result against expected_result, classified as exact / adjacent (one level apart) /
 severe / other, using the definitions in evals/results/2026-11-19-release-criteria.md; whether a wrong result was
 marked publishable; claim-level label matches (fc.py's evalcmp). For probes: whether the variants of one probe got
-the same result, the same surviving tactic tags, and how far apart their credibility is. Then the usage totals.
+the same result, the same surviving tactic tags, the same time marks and claim types, how far apart their
+credibility is, and whether they match the expectations written in the probe file. Then the usage totals.
 """
 import argparse
 import json
@@ -27,6 +28,15 @@ def classify(expected, got):
         definite = got if expected == UNDETERMINED else expected
         return "severe" if definite in ("符合", "不符") else "other"
     return "adjacent" if abs(LEVEL[expected] - LEVEL[got]) == 1 else "severe"
+
+
+def variant_summary(claims_doc, verdicts):
+    """How one probe variant was split: its time marks with their final labels, and how many claims of each type.
+    Party-swapped variants of one message should give the same summary."""
+    labels = {c["claim_id"]: c["label"] for c in verdicts["claims"]}
+    marks = tuple(sorted(f"{kind}:{labels.get(cid)}" for kind, cid in (claims_doc.get("time_claims") or {}).items() if cid))
+    types = tuple(sorted(Counter(c["type"] for c in claims_doc["claims"]).items()))
+    return marks, types
 
 
 def main():
@@ -76,11 +86,13 @@ def main():
         if r.get("kind") == "probe":
             probes[r["probe"]].append(r)
     for stem, rows in sorted(probes.items()):
-        print(f"\n| 探測 {stem} | 結果 | 可信度 | 信心度 | 可公開 | 留下的手法標記 | 計分命題的判定 |\n|---|---|---|---|---|---|---|")
+        expect = tomllib.load(open(repo / "evals/probes" / f"{stem}.toml", "rb")).get("expect", {})
+        print(f"\n| 探測 {stem} | 結果 | 可信度 | 信心度 | 可公開 | 留下的手法標記 | 計分命題的判定 | 時間標記 | 各類型的命題數 |"
+              "\n|---|---|---|---|---|---|---|---|---|")
         seen = []
         for r in sorted(rows, key=lambda r: r["target"]):
             if r["status"] != "ok":
-                print(f"| {r['target']} | 沒有跑完（{r['status']}） | | | | | |")
+                print(f"| {r['target']} | 沒有跑完（{r['status']}） | | | | | | | |")
                 continue
             run = Path(r["run"])
             sc, v = io.read_json(run / "score.json"), io.read_json(run / "verdicts.json")
@@ -89,14 +101,22 @@ def main():
             tags = tuple(sorted(t["tactic_id"] for t in trace.get("tactics", []) if t["tactic_id"] not in removed))
             labels = sorted(c["label"] for c in sc["claims"] if c.get("factor") is not None)
             cred = (sc["credibility"] or {}).get("score")
-            seen.append((sc["result"], tags, cred, sc["publishable"]))
+            marks, types = variant_summary(io.read_json(run / "claims.json"), v)
+            seen.append((sc["result"], tags, cred, sc["publishable"], marks, types))
             print(f"| {r['target']} | {sc['result']} | {cred} | {sc['confidence']['score']} | "
-                  f"{'是' if sc['publishable'] else '否'} | {'、'.join(tags) or '—'} | {'、'.join(labels) or '—'} |")
+                  f"{'是' if sc['publishable'] else '否'} | {'、'.join(tags) or '—'} | {'、'.join(labels) or '—'} | "
+                  f"{'、'.join(marks) or '—'} | {'、'.join(f'{t}×{n}' for t, n in types)} |")
         if len(seen) > 1:
-            creds = [c for _, _, c, _ in seen if c is not None]
-            print(f"三版結論相同：{'是' if len({s[0] for s in seen}) == 1 else '否'}；手法標記相同："
-                  f"{'是' if len({s[1] for s in seen}) == 1 else '否'}；可公開相同：{'是' if len({s[3] for s in seen}) == 1 else '否'}；"
-                  f"可信度差距：{max(creds) - min(creds) if creds else '—'}")
+            same = lambda i: "是" if len({s[i] for s in seen}) == 1 else "否"  # noqa: E731
+            creds = [s[2] for s in seen if s[2] is not None]
+            print(f"結論相同：{same(0)}；手法標記相同：{same(1)}；可公開相同：{same(3)}；時間標記相同：{same(4)}；"
+                  f"各類型的命題數相同：{same(5)}；可信度差距：{max(creds) - min(creds) if creds else '—'}")
+            if expect.get("expected_result"):
+                hit = sum(s[0] == expect["expected_result"] for s in seen)
+                print(f"預先寫好的預期結論「{expect['expected_result']}」：{hit}/{len(seen)} 版相同")
+            missing = [t for t in expect.get("required_tactics", []) if any(t not in s[1] for s in seen)]
+            if expect.get("required_tactics"):
+                print(f"預期要有的手法標記 {'、'.join(expect['required_tactics'])}：{'都有' if not missing else '缺 ' + '、'.join(missing)}")
 
     usage = defaultdict(Counter)
     for name, kind in (("usage.jsonl", "claude"), ("usage-codex.jsonl", "codex")):

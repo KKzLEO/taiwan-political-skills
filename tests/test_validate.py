@@ -47,6 +47,41 @@ class ClaimsTest(unittest.TestCase):
         self.assertTrue(errors_for("claims.json", m))
 
 
+class TimeClaimsTest(unittest.TestCase):
+    """claims.json must say which implied claim, if any, is the deadline premise and which the implied time."""
+
+    def errs(self, time_claims, source=None, extra=("C3",)):
+        def m(c):
+            for cid in extra:
+                c["claims"].append(_claim(cid, "快轉傳！" if cid == "C3" else "某部長說：明年油價一定漲三成", "I"))
+            if time_claims is None:
+                del c["time_claims"]
+            else:
+                c["time_claims"] = time_claims
+        return errors_for("claims.json", m, **({"source_json": source} if source else {}))
+
+    def test_both_keys_are_required_so_that_none_is_an_explicit_answer(self):
+        for bad in (None, {}, {"deadline": None}, "none", {"deadline": None, "relative": None, "other": "C3"}):
+            self.assertTrue(any("time_claims" in e for e in self.errs(bad)), bad)
+        self.assertEqual(self.errs({"deadline": None, "relative": None}), [])
+
+    def test_a_marked_claim_must_be_an_implied_claim_that_exists(self):
+        self.assertEqual(self.errs({"deadline": "C3", "relative": None}), [])
+        for bad in ("C1", "C9", 3):  # C1 is a stated fact
+            self.assertTrue(any("time_claims.deadline" in e for e in self.errs({"deadline": bad, "relative": None})), bad)
+
+    def test_one_claim_cannot_be_both(self):
+        self.assertTrue(any("同一條" in e for e in self.errs({"deadline": "C3", "relative": "C3"})))
+        self.assertEqual(self.errs({"deadline": "C3", "relative": "C4"}, extra=("C3", "C4")), [])
+
+    def test_content_with_a_publication_time_has_no_time_claims(self):
+        dated = {**fx.SOURCE, "published_at": "2026-10-20"}
+        for marks in ({"deadline": "C3", "relative": None}, {"deadline": None, "relative": "C3"}):
+            self.assertTrue(any("發布時間" in e for e in self.errs(marks, source=dated)), marks)
+        self.assertEqual(self.errs({"deadline": None, "relative": None}, source=dated), [])
+        self.assertEqual(self.errs({"deadline": None, "relative": "C3"}, source={**fx.SOURCE, "published_at": ""}), [])
+
+
 def _claim(cid, original, type_="F"):
     return {"id": cid, "original": original, "neutral": original, "type": type_, "importance": 3,
             "core": False, "legal": False, "time_place": "", "entities": [], "search_seeds": {"pro": [], "con": []}}

@@ -305,5 +305,112 @@ class BodyTest(unittest.TestCase):
         self.assertEqual(md(run), md(run))
 
 
+def section(out, title):
+    return out.split(f"## {title}")[1].split("\n## ")[0]
+
+
+class TimeClaimTest(unittest.TestCase):
+    def test_a_wrong_deadline_is_announced_under_the_result_in_the_programs_own_words(self):
+        out = md(build(**fx.time_claim_overrides("deadline", "false")))
+        head = out.split("## 結論")[0]
+        self.assertIn("結果：不符｜可信度 0", head)
+        self.assertIn("> 訊息要讀者趕在期限前做的事，前提不成立（C3 判「錯誤」，理由見逐項判定）。", head)
+        self.assertNotIn("活動在查核日期之前就結束了", head)  # the judge's words stay out of the banner
+
+    def test_a_partly_wrong_deadline_is_not_called_void(self):
+        head = md(build(**fx.time_claim_overrides("deadline", "mixed"))).split("## 結論")[0]
+        self.assertIn("前提有一部分不成立（C3 判「部分錯誤」", head)
+
+    def test_a_wrong_implied_time_is_announced_and_kept_apart_from_the_content(self):
+        head = md(build(**fx.time_claim_overrides("relative", "false"))).split("## 結論")[0]
+        self.assertIn("> 訊息暗示的時間不對（C3 判「錯誤」，理由見逐項判定）；內容本身另外判定。", head)
+
+    def test_a_right_time_claim_has_no_banner_and_stays_out_of_the_conclusion(self):
+        out = md(build(**fx.time_claim_overrides("deadline", "true", core=True, importance=5)))
+        self.assertNotIn("期限前做的事", out.split("## 結論")[0])
+        self.assertNotIn("C3", section(out, "結論"))
+
+    def test_a_wrong_or_unsettled_time_claim_is_listed_in_the_conclusion_and_marked(self):
+        for label, zh in (("false", "錯誤"), ("unverified", "無法證實")):
+            lines = [l for l in section(md(build(**fx.time_claim_overrides("relative", label))), "結論").splitlines()
+                     if l.startswith("- **C3")]
+            self.assertEqual(len(lines), 1, label)
+            self.assertIn(f"：{zh}（時間命題）。**活動在查核日期之前就結束了。", lines[0])
+
+    def test_scope_lists_the_time_claims_and_what_they_do(self):
+        scope = section(md(build(**fx.time_claim_overrides("relative", "true"))), "查核範圍和限制")
+        self.assertIn("- 時間命題：C3（暗示的時間）。判對不加分；判錯時，期限前提讓可信度不高於它的正確度，"
+                      "暗示的時間讓可信度最高 79。", scope)
+        self.assertIn("C3（期限前提）", section(md(build(**fx.time_claim_overrides("deadline", "true"))), "查核範圍和限制"))
+
+    def test_scope_says_so_when_there_are_none(self):
+        self.assertIn("- 時間命題：沒有（拆題沒有標出期限前提或暗示的時間）。", section(md(build()), "查核範圍和限制"))
+
+    def test_scope_warns_when_an_undated_message_says_just_now_and_no_implied_time_was_marked(self):
+        undated = {**fx.SOURCE, "original_text": "某部長剛剛說：明年油價一定漲三成，快轉傳！"}
+        self.assertIn("訊息裡有「剛剛」，如果這其實是舊消息，結論沒有反映這一點。",
+                      section(md(build(source_json=undated)), "查核範圍和限制"))
+        for source, overrides in (({**undated, "published_at": "2026-11-16"}, {}),  # the reader can see the date
+                                  (undated, fx.time_claim_overrides("relative", "true"))):  # it was marked
+            self.assertNotIn("如果這其實是舊消息", md(build(**{**overrides, "source_json": source})))
+
+    def test_the_table_shows_no_importance_for_a_time_claim(self):
+        out = md(build(**fx.time_claim_overrides("deadline", "false", importance=5)))
+        row = next(l for l in out.splitlines() if l.startswith("| C3 |"))
+        self.assertIn("| — | 錯誤（時間命題） |", row)
+        self.assertNotIn("C3 是意見", out)
+
+    def test_an_upheld_importance_challenge_on_a_time_claim_is_reported_as_not_applied(self):
+        o = fx.time_claim_overrides("deadline", "false")
+        opp_c = copy.deepcopy(fx.OPP_C)
+        opp_c["attacks"] = [{"id": "C-1", "claim_id": "C3", "target": "neutral_rewrite", "argument": "這是主旨",
+                             "proposed_label": None, "evidence": [], "proposed_importance": 4}]
+        o["judgment_json"]["rulings"].append({"attack_id": "C-1", "upheld": True, "reason": "依量表是關鍵前提",
+                                              "verified_urls": []})
+        out = md(build(**o, opponent__C_json=opp_c))
+        self.assertIn("- C3 是時間命題，重要性不影響計分；反方 C 的重要性挑戰（成立）沒有套用。", section(out, "逐項判定"))
+
+    def test_breakdown_explains_the_deadline_limit(self):
+        out = md(build(**fx.time_claim_overrides("deadline", "misleading")))
+        self.assertIn("- 期限前提 C3 判「誤導」：可信度不高於 100 × 0.25 = 25。", section(out, "評分拆解"))
+
+    def test_a_message_that_is_only_a_call_to_act_past_its_deadline_still_gets_a_report(self):
+        """Second review: the report step crashed on exactly the case the rule was written for."""
+        o = fx.time_claim_overrides("deadline", "false")
+        o["claims_json"]["claims"][0]["type"] = "O"  # nothing else is scored
+        for doc in (o["proponent_json"], o["judgment_json"]):
+            doc["verdicts"][0]["label"] = "not_factual"
+        out = md(build(**o))
+        self.assertIn("結果：不符｜可信度 0", out)
+        self.assertIn("期限前提 C3 判「錯誤」", section(out, "評分拆解"))
+
+
+class ScopeNoteTest(unittest.TestCase):
+    NOTE = "> 結論只涵蓋可以查證的說法。"
+
+    def test_claims_left_out_as_opinion_are_named_under_the_result(self):
+        head = md(build()).split("## 結論")[0]
+        self.assertIn(self.NOTE + "C2 被分成意見、預測或模糊的說法，或被判成非事實陳述，不在結論內。", head)
+
+    def test_no_note_when_every_claim_is_in_the_result(self):
+        claims, proponent, judgment = (copy.deepcopy(x) for x in (fx.CLAIMS, fx.PROPONENT, fx.JUDGMENT))
+        claims["claims"].pop()
+        proponent["verdicts"].pop()
+        judgment["verdicts"].pop()
+        self.assertNotIn(self.NOTE, md(build(claims_json=claims, proponent_json=proponent, judgment_json=judgment)))
+
+    def test_no_note_when_the_result_line_already_says_nothing_could_be_checked(self):
+        claims, proponent, judgment = (copy.deepcopy(x) for x in (fx.CLAIMS, fx.PROPONENT, fx.JUDGMENT))
+        claims["claims"][0]["type"] = "O"
+        proponent["verdicts"][0]["label"] = judgment["verdicts"][0]["label"] = "not_factual"
+        out = md(build(claims_json=claims, proponent_json=proponent, judgment_json=judgment))
+        self.assertIn("沒有可以查證的事實命題", out)
+        self.assertNotIn(self.NOTE, out)
+
+    def test_a_time_claim_is_never_called_an_opinion(self):
+        head = md(build(**fx.time_claim_overrides("relative", "not_factual"))).split("## 結論")[0]
+        self.assertIn(self.NOTE + "C2 被分成", head)
+
+
 if __name__ == "__main__":
     unittest.main()

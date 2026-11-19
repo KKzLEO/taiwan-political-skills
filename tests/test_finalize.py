@@ -326,5 +326,32 @@ class JudgeOnlyChangeTest(unittest.TestCase):
         self.assertEqual(finalize.judge_only_changes(run), {})
 
 
+class TimeClaimTest(unittest.TestCase):
+    def test_each_verdict_carries_its_time_mark(self):
+        r = run_finalize(**fx.time_claim_overrides("deadline"))
+        self.assertEqual({c["claim_id"]: c["time"] for c in r["claims"]}, {"C1": None, "C2": None, "C3": "deadline"})
+        self.assertEqual(claim(run_finalize(**fx.time_claim_overrides("relative")), "C3")["time"], "relative")
+
+    def test_runs_from_before_time_claims_still_finalize(self):
+        claims = copy.deepcopy(fx.CLAIMS)
+        del claims["time_claims"]
+        self.assertIsNone(claim(run_finalize(claims_json=claims), "C1")["time"])
+
+    def test_an_upheld_importance_challenge_does_not_move_a_time_claim(self):
+        """Its importance plays no part in the score; the ruling is kept so the report can say it was not applied."""
+        o = fx.time_claim_overrides("deadline", importance=3)
+        opp_c = copy.deepcopy(fx.OPP_C)
+        opp_c["attacks"] = [{"id": "C-1", "claim_id": "C3", "target": "neutral_rewrite", "argument": "這是主旨",
+                             "proposed_label": None, "evidence": [], "proposed_importance": 4}]
+        o["judgment_json"]["rulings"].append({"attack_id": "C-1", "upheld": True, "reason": "依量表是關鍵前提",
+                                              "verified_urls": []})
+        rebuttal = copy.deepcopy(fx.REBUTTAL)
+        rebuttal["responses"].append({"attack_id": "C-1", "accept": True, "response": "同意", "evidence": []})
+        c3 = claim(run_finalize(**o, opponent__C_json=opp_c, rebuttal_json=rebuttal), "C3")
+        self.assertEqual(c3["importance"], 3)
+        self.assertNotIn("importance_from", c3)
+        self.assertEqual([a["attack_id"] for a in c3["importance_attacks"]], ["C-1"])
+
+
 if __name__ == "__main__":
     unittest.main()

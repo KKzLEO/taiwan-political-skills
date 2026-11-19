@@ -20,6 +20,7 @@ SOURCE = {"input_type": "text", "original_text": "某部長說：明年油價一
 
 CLAIMS = {
     "prompt_was_leading": True,
+    "time_claims": {"deadline": None, "relative": None},
     "claims": [
         {"id": "C1", "original": "某部長說明年油價一定漲三成", "neutral": "某部長曾公開表示明年油價會上漲三成",
          "type": "F", "importance": 5, "core": True, "legal": False,
@@ -145,6 +146,21 @@ def importance_attack_overrides(proposals=(("C-1", 4, True),), importance=5, rev
         review["label_ok"] = True
     return {"claims_json": claims, "opponent__C_json": opp_c, "rebuttal_json": rebuttal,
             "judgment_json": judgment, "review__C_json": {"seat": "C", "reviews": [review]}}
+
+
+def time_claim_overrides(kind="deadline", label="false", importance=3, core=False):
+    """C3 is an implied time claim of the given kind; the proponent and the judge give it the same label."""
+    claims = copy.deepcopy(CLAIMS)
+    claims["claims"].append({"id": "C3", "original": "快轉傳！", "neutral": "轉傳的期限還沒到", "type": "I",
+                             "importance": importance, "core": core, "legal": False, "time_place": "查核日期",
+                             "entities": [], "search_seeds": {"pro": [], "con": []}})
+    claims["time_claims"][kind] = "C3"
+    verdict = {"claim_id": "C3", "label": label, "reasoning": "活動在查核日期之前就結束了。細節另見證據",
+               "evidence_ids": ["S1"], "context_flags": [], "law_text_obtained": None}
+    proponent, judgment = copy.deepcopy(PROPONENT), copy.deepcopy(JUDGMENT)
+    proponent["verdicts"].append(copy.deepcopy(verdict))
+    judgment["verdicts"].append(copy.deepcopy(verdict))
+    return {"claims_json": claims, "proponent_json": proponent, "judgment_json": judgment}
 
 
 def judge_only_overrides():
