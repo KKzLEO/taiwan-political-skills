@@ -39,6 +39,7 @@ def main():
     ap.add_argument("--host", default="claude", choices=["claude", "codex"])
     ap.add_argument("--host-model", help="model id for the host's roles, recorded by detect")
     ap.add_argument("--host-effort", default="xhigh")
+    ap.add_argument("--prep-only", action="store_true", help="stop after the ingest-and-split step (to look at claims.json)")
     ap.add_argument("jobs", nargs="+")
     args = ap.parse_args()
 
@@ -107,9 +108,11 @@ def main():
             (run / "message.txt").write_text(spec["input"].strip(), encoding="utf-8")
             p = fc(name, "input", "--run", run, "--type", "text", "--file", run / "message.txt", "--prompt-file", run / "prompt.txt")
         status = "failed at input" if p.returncode else None
-        for role in ("prep", "tracer", "proponent"):
+        for role in ("prep",) if args.prep_only else ("prep", "tracer", "proponent"):
             if status is None and fc(name, "run-model", "--run", run, "--role", role).returncode != 0:
                 status = f"failed at {role}"
+        if args.prep_only:
+            status = status or "stopped after prep"
         if status is None:
             seats = [s["seat"] for s in json.loads((run / "models.json").read_text())["seats"]]
             together(name, [["run-model", "--run", run, "--role", "opponent", "--seat", s] for s in seats])
