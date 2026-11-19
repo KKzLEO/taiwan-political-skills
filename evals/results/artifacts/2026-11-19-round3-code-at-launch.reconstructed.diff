@@ -1,0 +1,971 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index fa7dd96..a6bc601 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -47,6 +47,27 @@
+ - `fc.py detect --probe` 探測失敗時，會印出原因（例如舊版 CLI 不認得 `--safe-mode`）。
+ - 已知限制：Codex 一定會讀到 `~/.codex/AGENTS.md`；用 Claude Code 當主體時，Agent 子代理看得到 CLAUDE.md 和專案記憶。第一輪評測的所有角色，都是用加 `--safe-mode` 之前的參數跑的。
+ 
++以下是 2026-11-19 使用者核准的四件事（看第二輪結果後決定）。
++
++- **意見、預測、模糊說法一律不計分：**
++  - 類型是 `O`、`P`、`U` 的命題，不論裁判判什麼都不算進可信度和信心度。報告的判定後面標「不計分」，表格下方說明。
++  - 原本只看標籤，第二輪 case-013 有一條意見被判「無法證實」、一條模糊說法被判「誤導」，兩條都進了計分。
++  - 這幾類可以和計分命題共用原文，拆題檢查不管它們，計分就會讓同一句話算兩次。
++  - `verdicts.json` 的命題多了 `type` 欄位。舊的 `verdicts.json` 沒有這個欄位，照舊只看標籤，重跑 `finalize` 就會套用。
++- **裁判漏列核對網址時的退路：**
++  - 裁判判附證據的攻擊成立，就要列出實際打開核對過的網址（第一輪就有的規則）。第二輪 case-011 的裁判兩次都在同一條攻擊漏列，整次查核停在最貴的一步。
++  - 現在重做一次還是漏列時，`run-model` 會把那幾條記在 `judgment.json` 的 `rulings_unverified`，流程繼續。判決照用，命題維持裁判的判定。報告的結果行下方和「爭議點」會揭露，信心度扣 10 分（和覆核沒通過算同一筆），整份報告不能標「可公開」。
++  - 溯源和手法攻擊沒有命題可扣，只在「辯論後的修正」那一條後面註明。
++  - 程式裡的退路函式改名為 `validate.fallback`，同時處理手法標記和核對網址。`fc.py set-aside-tactics` 的指令名稱不變。
++- **Claude Code 主體的角色改用獨立程序：**
++  - 溯源員、正方、反方 A/B/C、答辯、裁判、覆核都用 `fc.py run-model` 跑 `claude -p --safe-mode`，和 Codex 主體、兩輪評測的跑法一樣，看不到使用者的 CLAUDE.md 和專案記憶。
++  - 每個指令用背景執行，並用 `FC_CLAUDE_MODEL` 指定和主體相同的模型。
++  - 終端機裡沒有 `claude` 指令時才退回 Agent 子代理，並先告訴使用者。代價是 Claude Code 畫面上看不到角色的進度。
++  - 已知限制：第 1、2 步（讀入、拆題）仍由主體自己做，看得到記憶和對話；評測是用乾淨的 `claude -p` 做的。
++- **case-013 的答案以收到訊息的那一天為準：**
++  - 預期結果從「大致符合」改為「不符」。公投在 2025-08-23 已經投完，「8/23 要去投同意」在今天做不到。
++  - 第二輪的結果（不符）因此判對，舊案例加新案例共 13 則對 10 則。
++
+ ## 0.1.0 — 2026-11-17
+ 
+ - 第一版：訊息查核 skill（Claude Code 與 Codex）、一個正方對三個反方加跨模型抗辯、固定規則評分、操弄手法辨識模組。
+diff --git a/README.md b/README.md
+index f5f1277..22b5d4e 100644
+--- a/README.md
++++ b/README.md
+@@ -80,7 +80,7 @@ ln -s "$PWD/taiwan-political-skills/skills/factcheck" ~/.codex/skills/factcheck
+ 
+ **跑評測前先看額度：** 2026-11-18 第二輪評測 29 個工作同時跑 5 個，2 小時 22 分鐘就用完一個 Claude 帳號的每週額度。要分批跑，或改用 API key。
+ 
+-**很花時間和額度：** 完整模式實測（2026-11-18，18 則）：一兩句的短訊息約 20–35 分鐘，新聞或長訊息約 50–90 分鐘，sub-agent 每則用掉上百萬 token。想快一點就說「快速查核」，大約 20 到 40 分鐘，但快速模式的報告不能標「可公開」。
++**很花時間和額度：** 完整模式實測（2026-11-18，18 則）：一兩句的短訊息約 20–35 分鐘，新聞或長訊息約 50–90 分鐘，角色每則用掉上百萬 token。想快一點就說「快速查核」，大約 20 到 40 分鐘，但快速模式的報告不能標「可公開」。
+ 
+ 每次查核都會在目前的資料夾底下產生 `factcheck-runs/<日期>-<主題>/`，裡面有完整的中間紀錄，任何人都可以檢查一份報告是怎麼得出來的。
+ 
+@@ -91,7 +91,8 @@ ln -s "$PWD/taiwan-political-skills/skills/factcheck" ~/.codex/skills/factcheck
+     - 需要支援這個參數的 Claude Code 版本。舊版會在偵測或第一次執行時失敗，`fc.py detect --probe` 會印出原因。
+     - 企業管理的設定和受管外掛的 hooks，在這個模式下仍然有效。
+   - `codex exec` 一定會讀到 `~/.codex/AGENTS.md`，目前沒有參數關得掉，報告的席位表會標「部分隔離」。要完整隔離，另外準備一個乾淨的 Codex 設定，自己登入一次，再用 `FC_CODEX_CMD="env CODEX_HOME=$HOME/.codex-factcheck codex"` 指定。
+-  - 在 Claude Code 裡執行時，辯論角色是 Agent 工具派出的子代理，看得到你的 CLAUDE.md 和專案記憶，只能靠指示要求它們忽略。
++  - 在 Claude Code 裡執行時，辯論角色也用 `claude -p --safe-mode` 跑，看不到你的 CLAUDE.md 和專案記憶。終端機裡沒有 `claude` 指令時（例如只裝了桌面版），才會改用 Agent 子代理；它們看得到這些設定，執行前會先告訴你。
++  - 讀入和拆題（第 1、2 步）是主體自己做的，看得到你的記憶和這段對話。
+   - 席位表的「隔離」欄是模型自己回報的，不是金絲雀實測。
+ - **不判斷圖片或影片是不是偽造的，** 只查內容說了什麼。
+ - **社群平台常常抓不到原始貼文，** 這時會請你貼上連結或截圖。
+diff --git a/docs/superpowers/specs/2026-11-17-taiwan-factcheck-design.md b/docs/superpowers/specs/2026-11-17-taiwan-factcheck-design.md
+index f2a6cb6..eb875f3 100644
+--- a/docs/superpowers/specs/2026-11-17-taiwan-factcheck-design.md
++++ b/docs/superpowers/specs/2026-11-17-taiwan-factcheck-design.md
+@@ -62,7 +62,7 @@ evals/                             發版前手動跑的評測案例和探測
+ | `models.json` | `fc.py detect` | 偵測到的模型、是否跨模型、能不能上網、隔離程度 |
+ | `source.json` | 主 agent | 原文、媒體、署名、時間、取得方式 |
+ | `claims.json` | 主 agent | 拆好的命題 |
+-| `trace.json` | 溯源員（乾淨的 sub-agent） | 傳播溯源、既有查核、發布者背景、傳播跡象、操弄手法 |
++| `trace.json` | 溯源員（獨立的子程序） | 傳播溯源、既有查核、發布者背景、傳播跡象、操弄手法 |
+ | `proponent.json` | 正方 | 證據表和每個命題的判定 |
+ | `opponent-<席位>.json` | 各反方 | 攻擊清單 |
+ | `rebuttal.json` | 正方 | 對每條攻擊的回應 |
+@@ -86,7 +86,7 @@ evals/                             發版前手動跑的評測案例和探測
+ | 3 溯源和背景 | 溯源員 | 每種輸入都做，媒體用 `fc.py media` 查表 |
+ | 4 正方提出論點 | 正方 | 證據表和判定 |
+ | 5 反方攻擊 | 反方 A、B、C 和外部反方 | 同時跑，彼此看不到對方 |
+-| 6 正方答辯 | 正方（新的 sub-agent） | 逐條接受或反駁 |
++| 6 正方答辯 | 正方（新的子程序） | 逐條接受或反駁 |
+ | 7 裁判 | 裁判 | 判定每條攻擊成不成立，修改判定 |
+ | 8 覆核 | 提出成立攻擊的反方（`fc.py reviewers` 列出） | 只審被改過的命題 |
+ | 9 結算 | `fc.py finalize`、`score`、`render` | 套規則、算分、產報告 |
+@@ -99,8 +99,8 @@ evals/                             發版前手動跑的評測案例和探測
+ | 完整 | 1 | A、B、C 三席，加上每個可用的外部模型各一席 |
+ 
+ - **主模型的角色：** 溯源員、正方、反方 A/B/C、裁判。
+-  - Claude Code 當主體時用 Agent 工具開 sub-agent。
+-  - Codex 當主體時用 `fc.py run-model --engine codex` 開子程序。
++  - 兩個平台都用 `fc.py run-model` 開子程序：Claude Code 當主體時是 `claude -p --safe-mode`，Codex 當主體時是 `codex exec`。
++  - 2026-11-19 起 Claude Code 不再用 Agent 工具，因為金絲雀實測顯示 Agent 子代理看得到使用者的 CLAUDE.md 和專案記憶（5.3）。終端機沒有 `claude` 指令時才退回 Agent 工具，並先告訴使用者。
+ - **外部反方：** 一律用 `fc.py run-model` 呼叫另一家的 CLI。
+ 
+ ## 5. 中立化和記憶隔離
+@@ -121,7 +121,8 @@ evals/                             發版前手動跑的評測案例和探測
+    - **2026-11-18 金絲雀實測**（在全域設定放隨機暗號，見 `evals/results/2026-11-18-isolation.md`）：
+      - `claude -p` 加了 `--safe-mode` 之後，看不到 CLAUDE.md 和 hook 的輸出，搜尋照常可用。
+      - Codex 加 `-c user_instructions=""` 也關不掉 AGENTS.md。
+-     - 用 Claude Code 當主體時，Agent 工具派出的子代理看得到 CLAUDE.md 和專案記憶，只能靠 prompt 的指示要求它們忽略。
++     - 用 Claude Code 當主體時，Agent 工具派出的子代理看得到 CLAUDE.md 和專案記憶，只能靠 prompt 的指示要求它們忽略。所以 2026-11-19 起主模型的角色也改用 `claude -p --safe-mode`（4.1）。
++     - 第 1、2 步（讀入、中立化）仍由主 agent 自己做，看得到使用者的記憶和這段對話。評測是用乾淨的 `claude -p` 做這兩步的，所以這一段和評測不一致。
+    - **不採用的做法：** 把 `CODEX_HOME` 指到暫存資料夾、再連結使用者的 `auth.json`。token 輪替時可能讓使用者被登出。要完整隔離，請使用者自己準備一個乾淨的 Codex 設定，用 `FC_CODEX_CMD` 指定。
+ 4. **提問帶立場時：** 報告只寫一行「提問已改寫為中立命題」。
+ 
+@@ -164,6 +165,7 @@ evals/                             發版前手動跑的評測案例和探測
+ ```
+ 
+ - **命題正確度：** 計分命題的係數，依重要性（1–5）加權平均。
++- **不計分：** `not_factual`，以及類型是意見、預測、模糊說法（`O`、`P`、`U`）的命題，不論判定是什麼（2026-11-19）。這幾類可以和計分命題共用原文，計分的話同一句話會算兩次。
+ - **重要性可以挑戰（2026-11-18 第二輪）：**
+   - 反方用 `neutral_rewrite` 加 `proposed_importance` 提相鄰的一級。
+   - 裁判判成立，由程式調整，不進覆核；方向相反的挑戰都成立就不調。
+@@ -195,13 +197,14 @@ evals/                             發版前手動跑的評測案例和探測
+ | 沒有任何執行成功的跨模型席位 | −20 |
+ | 有跨模型席位，但都不能上網 | −10 |
+ | 每個覆核沒通過的命題 | −10 |
++| 每個有「成立攻擊卻沒列出核對網址」的命題（第 11 節） | −10（和覆核沒通過算同一筆） |
+ | 核心命題的直接證據全都存取受限（沒有任何一筆 `access_note` 是 `full`） | 每個命題 −10，最多 −30 |
+ | 有法條命題，但沒有取得條文原文 | −15（只扣一次） |
+ | 快速模式 | 扣完後上限 60 |
+ 
+ - **證據品質（0–1）：** 每個核心命題從最終證據表算出：有第一層或第二層的直接證據（`stance` 是 `supports` 或 `refutes`）得 0.5；直接證據來自兩條以上不同的 `chain`，再加 0.5。最後依重要性加權平均。沒有核心命題的話，就用全部計分命題算。
+ - **等級：** 高（≥ 75）、中（50–74）、低（< 50）。
+-- **可公開：** 完整模式、等級為高、至少一個跨模型席位執行成功。三項都達到才會標「可公開」。
++- **可公開：** 完整模式、等級為高、至少一個跨模型席位執行成功，而且沒有「成立攻擊卻沒列出核對網址」的命題。全部達到才會標「可公開」。
+ - 所有門檻都是第一版的數字，用 `evals/` 的標準案例校正之後再調整。
+ 
+ ### 7.5 不放進可信度的指標
+@@ -261,7 +264,7 @@ evals/                             發版前手動跑的評測案例和探測
+ |---|---|
+ | 完全無法上網 | 停止，不產生判定 |
+ | 外部 CLI 逾時或失敗 | 逾時上限 3600 秒（`FC_TIMEOUT` 可調；2026-11-18 實測正方要 9–33 分鐘，拆成 40 個命題的新聞要 33 分鐘；1200 秒時 9 次有 1 次逾時）。逾時不重試，因為用同樣的上限重跑通常還是逾時；程式當掉或結束碼不是 0 才重試 1 次。還是失敗就把該席位標為 `failed`，照信心度規則扣分 |
+-| 模型輸出格式不對 | 提示正確格式後重試 1 次。還是不對就停止，並回報是哪一步 |
++| 模型輸出格式不對 | 提示正確格式後重試 1 次。還是不對就停止，並回報是哪一步。兩個例外會走退路，流程繼續：只剩手法標記不合格，就移出不列（2026-11-18）；裁判判附證據的攻擊成立卻沒列出核對過的網址，就照用判決、在爭議點揭露、扣信心度 10 分、不能標可公開（2026-11-19，第二輪 case-011 因此整次停掉） |
+ | 付費牆、被擋、被刪 | 改找存檔或轉載，在證據表標 `access_note` |
+ | 截圖看不清楚 | 標「辨識不清」，不補字 |
+ | 影片沒有字幕，也沒裝 whisper | 請使用者提供逐字稿。沒有的話，影片命題的 `access_note` 標 `no_transcript` |
+diff --git a/evals/cases/case-013.toml b/evals/cases/case-013.toml
+index 8ff91cc..ff957f2 100644
+--- a/evals/cases/case-013.toml
++++ b/evals/cases/case-013.toml
+@@ -1,26 +1,27 @@
+ id = "case-013"
+-title = "「核三公投一定要過488萬7133票」：8/23公投是真的，門檻數字用錯了選舉人數"
++title = "「核三公投一定要過488萬7133票」：8/23公投已經投完，門檻數字也用錯了選舉人數"
+ input_type = "text"
+ input = """8/23日公投核能發電，一定要出去投同意，因為一定要達到488萬7133票以上，才能啟動，執政者不願宣傳，是怕通過，有很多人不知道8/23要出去投票，請轉傳給親朋好友們，鼓勵大家去投同意票"""
+ target = "民進黨"
+-expected_result = "大致符合"
++expected_result = "不符"
+ found_via = "https://cofacts.tw/article/2d3khzvhzr5a8"
+-notes = """主旨真、細節錯：門檻數字錯。訊息原文取自 Cofacts（文章 2d3khzvhzr5a8，2025-08-22 收錄，9人回報，公投前一天），逐字照抄。同樣的「488萬7133票」2026年8月又被轉傳（Cofacts ew0zvhs12f0b，文字略有不同），本案只用2025年版本。沒有找到針對這則訊息的查核報告，答案全部來自中選會和全國法規資料庫。
++notes = """答案以使用者收到訊息的那一天為準（2026-11-19 決定）：使用者是今天收到這則訊息、今天問它對不對，所以「8/23要去投同意」要用今天的時間判斷。公投在2025-08-23已經投完，也沒有通過，訊息要讀者做的事已經不可能做到。第一版答案以訊息收錄當時（公投前一天）為準，預期是「大致符合」，理由保留在下方第4點。
++訊息原文取自 Cofacts（文章 2d3khzvhzr5a8，2025-08-22 收錄，9人回報，公投前一天），逐字照抄。同樣的「488萬7133票」2026年8月又被轉傳（Cofacts ew0zvhs12f0b，文字略有不同），本案只用2025年版本。沒有找到針對這則訊息的查核報告，答案全部來自中選會和全國法規資料庫。
+ 判定關鍵：
+ 1. 8/23確實有核電公投：中選會「114年全國性公民投票案第21案投開票結果表」，投票日期114年08月23日，主文是第三核能發電廠經主管機關同意確認無安全疑慮後繼續運轉。訊息說「公投核能發電」是簡化說法，主體正確，判 true。
+ 2. 門檻數字錯：公投法第29條要求有效同意票多於不同意票，且達投票權人總額四分之一。第21案投票權人數20,002,091人，四分之一是5,000,522.75，同意票至少要5,000,523票，比訊息的4,887,133多113,390票。訊息的數字正好是2024年總統選舉選舉人數19,548,531的四分之一（4,887,132.75）：總統選舉依總統副總統選舉罷免法第11條要年滿20歲，公投依公投法第7條年滿18歲就有投票權，所以用錯了母數。數字有直接反證，判 false。
+ 3.「才能啟動」也說過頭：公投通過後依公投法第30條第1項第3款，是由總統或權責機關為實現公投內容做必要處置；主文本身也以主管機關確認無安全疑慮為前提，不是一過門檻就啟動。這點併入第2條命題的理由，不另外拆。
+-為什麼是大致符合：訊息要讀者做的事（8/23去投同意）和它根據的事實（有核電公投、同意票要過四分之一門檻才通過）都對；錯的是門檻的具體數字，差約2.3%。實際同意票4,341,432票，比兩個數字都低，這個錯不影響結論，所以是細節錯，不是「部分符合」。
++4. 為什麼是不符：訊息的主旨是「8/23要出去投同意」，它要讀者相信這場公投還沒舉行、還可以去投，這在今天是錯的（中選會結果表：投票日期114年08月23日，同意票4,341,432，未達門檻，不通過）。真的部分只剩「有過這場核電公投」，門檻數字也錯。如果以訊息收錄當時為準，主旨（去投同意）和根據的事實（有核電公投、要過四分之一門檻）都對，錯的只是門檻的具體數字（差約2.3%），會是「大致符合」。
+ 「一定要出去投同意」「有很多人不知道8/23要出去投票，請轉傳給親朋好友們，鼓勵大家去投同意票」是呼籲，「執政者不願宣傳，是怕通過」是動機揣測，都屬 not_factual。中選會公投專區另有「114年意見發表會」和公報頁面，本案沒有逐場查證，所以不把「不願宣傳」當成事實命題計分。
+ target：訊息攻擊「執政者」，也就是當時執政的民進黨政府，target 取民進黨。
+ 摘錄說明：中選會結果表的表格列照 pdftotext 的欄位順序抄錄，欄位依序是投票權人數、同意票數、同意百分比、不同意票數、不同意百分比、有效票數、無效票數、投票人數、投票率、有效同意票數對投票權人數百分比，最後的 V 打在「不通過」欄。2024年總統選舉的選舉人數取自中選會選舉資料庫「第16任總統副總統選舉」（2024/01/13）的原始資料（votable_population）。
+-公式估算：(5×1＋3×0)/8 ≈ 63，大致符合，與人工判定一致。"""
++公式估算：(4×1＋3×0＋5×0)/12 ≈ 33，不符，與人工判定一致。"""
+ 
+ [[claim]]
+ original = "8/23日公投核能發電"
+ expected_label = "true"
+ core = true
+-importance = 5
++importance = 4
+ 
+ [[claim.ground_truth]]
+ url = "https://web.cec.gov.tw/api/file/ee7ce76f-068d-474e-af88-99c485d77511.pdf"
+@@ -76,8 +77,17 @@ expected_label = "not_factual"
+ core = false
+ importance = 2
+ 
++# 隱含命題：這場公投還沒舉行，讀者還可以去投。
+ [[claim]]
+ original = "有很多人不知道8/23要出去投票，請轉傳給親朋好友們，鼓勵大家去投同意票"
+-expected_label = "not_factual"
+-core = false
+-importance = 1
++expected_label = "false"
++core = true
++importance = 5
++
++[[claim.ground_truth]]
++url = "https://web.cec.gov.tw/api/file/ee7ce76f-068d-474e-af88-99c485d77511.pdf"
++excerpt = "114年全國性公民投票案第21案投開票結果表 投票日期 : 114年08月23日"
++
++[[claim.ground_truth]]
++url = "https://web.cec.gov.tw/api/file/ee7ce76f-068d-474e-af88-99c485d77511.pdf"
++excerpt = "第21案 20,002,091 4,341,432 74.17 1,511,693 25.83 5,853,125 53,245 5,906,370 29.53 21.70 V"
+diff --git a/skills/factcheck/SKILL.md b/skills/factcheck/SKILL.md
+index f9d51d9..fa78509 100644
+--- a/skills/factcheck/SKILL.md
++++ b/skills/factcheck/SKILL.md
+@@ -5,21 +5,27 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方
+ 
+ # 訊息查核
+ 
+-把一則訊息拆成命題，由乾淨的 sub-agent 擔任溯源員、正方、三個反方、裁判，再找另一家模型當外部反方，最後由腳本套固定規則算分、產報告。
++把一則訊息拆成命題，由獨立的子程序擔任溯源員、正方、三個反方、裁判，再找另一家模型當外部反方，最後由腳本套固定規則算分、產報告。
+ 
+-**你（主 agent）只負責安排流程和執行腳本。** 你看得到使用者的記憶和原始提問，所以不參與判定、不當任何辯論角色，也不把自己的看法寫進任何 sub-agent 的指令。
++**你（主 agent）只負責安排流程和執行腳本。** 你看得到使用者的記憶和原始提問，所以不參與判定、不當任何辯論角色，也不把自己的看法寫進任何角色的指令。
+ 
+ ## 準備
+ 
+ 下面的指令裡，`$SKILL` 是這個 skill 的資料夾，`$RUN` 是第 0 步建立的查核資料夾。**每次執行指令都要把兩個都寫成完整路徑**（例如開頭寫 `SKILL=/完整/路徑; RUN=/完整/路徑;`），因為每個指令可能在新的 shell 裡執行，變數不會保留。
+ 
+-需要 Python 3.11 以上。每一步產出的 JSON 都要先通過 `python3 "$SKILL/scripts/fc.py" validate`，沒通過就把錯誤訊息交回給產出它的角色重做一次；第二次還不過就停止，告訴使用者是哪一步出錯。
++需要 Python 3.11 以上。
+ 
+-例外：`trace.json` 或 `judgment.json` 重做一次之後，錯誤**只剩**手法標記（`tactics…`、`tactic_checks…` 開頭的錯誤），就執行 `python3 "$SKILL/scripts/fc.py" set-aside-tactics --run "$RUN" <檔名>`。它會把不合格的標記移出（原內容保留在檔案裡），報告不列出它們，流程繼續。手法標記不影響分數，不值得因此停掉整次查核。
++**第 1、2 步**（你自己做的）產出的 JSON 要先通過 `python3 "$SKILL/scripts/fc.py" validate`。沒通過就照錯誤訊息重做一次，第二次還不過就停止，告訴使用者是哪一步出錯。
++
++**第 3 步以後的角色都用 `fc.py run-model` 執行，** 它會自己檢查格式、重試一次。重試後只剩下面兩種錯誤時，它會自動走退路，流程繼續；原內容都保留在檔案裡：
++- **手法標記不合格：** 移出，報告不列出。手法標記不影響分數，不值得因此停掉整次查核。
++- **裁判判攻擊成立，卻沒列出實際核對過的網址：** 判決照用，但報告會揭露，信心度扣分，而且整份報告不能標「可公開」。
++
++Claude Code 的備用做法（見 host-claude.md）用 Agent 子代理跑角色，這時要自己執行 `python3 "$SKILL/scripts/fc.py" set-aside-tactics --run "$RUN" <檔名>` 走同樣的退路。
+ 
+ ### 0. 建立資料夾、偵測模型
+ 
+-1. **模式：** 預設完整模式。使用者說「快速」「簡單查一下」才用快速模式。先告訴使用者：完整模式實測短訊息約 20–35 分鐘、新聞或長訊息約 50–90 分鐘，sub-agent 會用掉上百萬 token；快速模式也要 20 到 40 分鐘，而且報告不能標「可公開」。
++1. **模式：** 預設完整模式。使用者說「快速」「簡單查一下」才用快速模式。先告訴使用者：完整模式實測短訊息約 20–35 分鐘、新聞或長訊息約 50–90 分鐘，角色的子程序會用掉上百萬 token；快速模式也要 20 到 40 分鐘，而且報告不能標「可公開」。
+ 2. 建立資料夾：
+    ```bash
+    RUN=$(python3 "$SKILL/scripts/fc.py" init --mode full --host <claude 或 codex> --slug <幾個字的主題>)
+@@ -58,7 +64,7 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方
+ | 8 | 覆核：`python3 "$SKILL/scripts/fc.py" reviewers --run "$RUN"` 列出的每個席位 | `--role review --seat <席位>` | `review-<席位>.json` |
+ 
+ - 第 5 步的席位以 `models.json` 的 `seats` 為準：完整模式是 A、B、C 加每個外部模型；快速模式只有一席。
+-- 外部席位（X 開頭）一律用 `python3 "$SKILL/scripts/fc.py" run-model` 執行，它會自己處理逾時、重試、失敗。失敗的席位會被記成 `failed`，照規則扣信心度，流程繼續。
++- 每個席位都用 `python3 "$SKILL/scripts/fc.py" run-model` 執行，它會自己處理逾時、重試、失敗。外部席位（X 開頭）失敗時會被記成 `failed`，照規則扣信心度，流程繼續。
+ - 第 8 步沒有列出任何席位時直接跳過。
+ 
+ ### 9. 結算
+diff --git a/skills/factcheck/references/host-claude.md b/skills/factcheck/references/host-claude.md
+index 4dabfb9..2d6ba26 100644
+--- a/skills/factcheck/references/host-claude.md
++++ b/skills/factcheck/references/host-claude.md
+@@ -1,37 +1,66 @@
+ # 在 Claude Code 上派出角色
+ 
+-## 主模型的角色（溯源員、正方、反方 A/B/C、答辯、裁判、主模型席位的覆核）
++Claude Code 當主體時，所有角色都用 `fc.py run-model` 開一個獨立的子程序執行。這些角色包括溯源員、正方、反方 A/B/C、外部反方、答辯、裁判和覆核。
+ 
+-用 **Agent 工具**（`general-purpose`）派出。**prompt 只能是下面這段，填上路徑和角色**，不要加入使用者的原始提問、你的看法、你對結果的預期，也不要摘要前面的對話：
++- 主模型的席位跑 `claude -p --safe-mode`，外部席位跑另一家的 CLI，例如 `codex exec`。
++- 子程序在空的暫存資料夾裡跑，只拿到該角色的指令和輸入資料，看不到這段對話。
+ 
+-```
+-你是事實查核流程中的一個角色。先執行這個指令，取得你的完整任務說明和輸入資料：
++**為什麼不用 Agent 工具：**
++- 2026-11-18 的金絲雀實測顯示，Agent 子代理看得到使用者的 CLAUDE.md 和專案記憶；`claude -p --safe-mode` 看不到，網路搜尋照常。
++- 評測也是這樣跑的，所以產品和測過的跑法一樣。
++- 代價是 Claude Code 的畫面上看不到角色的進度。
+ 
+-python3 <skill 資料夾的完整路徑>/scripts/fc.py prompt --run <RUN 路徑> --role <角色> [--seat <席位>]
++## 每一步怎麼跑
+ 
+-完全依照輸出的指示工作，需要時上網搜尋、打開網頁核對。最後用 Write 工具把 JSON 寫到：
++**一律用 `run_in_background` 執行，等完成通知再進下一步，不要輪詢。** 每個角色要跑幾分鐘到半小時以上，超過 Bash 工具 10 分鐘的上限。
+ 
+-<RUN 路徑>/<輸出檔名>
++**每個指令前面都加上 `FC_CLAUDE_MODEL=<你自己的模型 ID>`**，例如 `claude-opus-5-5`，讓角色和你用同一個模型。`--safe-mode` 不一定會套用使用者 settings.json 裡選的模型。評測另外加了 `FC_CLAUDE_EFFORT=xhigh`。
+ 
+-寫完只回覆「完成」兩個字。除了那個指令的輸出，不要參考任何其他資訊，包括你可能看到的使用者偏好或記憶。
++```bash
++FC_CLAUDE_MODEL=<模型 ID> python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role tracer
+ ```
+ 
+-輸出檔名：`trace.json`、`proponent.json`、`opponent-A.json`、`rebuttal.json`、`judgment.json`、`review-B.json`…（和 `fc.py prompt` 輸出裡寫的一致）。
++第 5 步所有反方同時跑，放在同一個背景指令裡：
+ 
+-**隔離程度：** 2026-11-18 的金絲雀實測顯示，Agent 子代理看得到使用者的 CLAUDE.md 和專案記憶，只能靠這段 prompt 和共同規則要求它們忽略。外部席位用的 `claude -p --safe-mode` 看不到。
++```bash
++for s in $(python3 -c "import json,sys;print(' '.join(x['seat'] for x in json.load(open(sys.argv[1]))['seats']))" "$RUN/models.json"); do
++  FC_CLAUDE_MODEL=<模型 ID> python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role opponent --seat "$s" &
++done
++wait
++```
+ 
+-Sub-agent 回覆「完成」之後，執行 `python3 "$SKILL/scripts/fc.py" validate --run "$RUN" <檔名>`。沒通過就再派一次同一個角色，並在 prompt 最後加上「上一次的輸出有以下問題：」和錯誤清單。
++第 8 步的做法相同：`fc.py reviewers` 列出的每個席位，各跑一次 `--role review --seat <席位>`，可以同時跑。
+ 
+-## 外部反方（X 開頭的席位）
++- `run-model` 會自己檢查輸出格式、重試一次，不需要另外 validate。
++- 重試後只剩手法標記，或裁判的核對網址有錯時，它會自動走退路，流程繼續。
++- 主模型的角色重試後還是失敗，指令會以非零結束碼停止。這些角色是溯源員、正方、答辯和裁判。這時告訴使用者是哪一步出錯。
++- 外部席位失敗時，會記成 `failed` 席位，照規則扣信心度，流程繼續。
++- 想知道跑到哪裡，執行 `python3 "$SKILL/scripts/fc.py" status --run "$RUN"`。
+ 
+-用 Bash 執行，**和 A、B、C 的 Agent 呼叫放在同一則訊息裡**，讓它們同時跑：
++## 備用做法：沒有 `claude` 指令時
++
++只裝了桌面版或 IDE 外掛、終端機裡沒有 `claude` 指令時，`run-model` 會回報找不到 claude 引擎。這時先告訴使用者兩件事：
++
++- 這次主模型的角色看得到他的 CLAUDE.md 和專案記憶，只能靠指示要求它們忽略。
++- 要完整隔離，可以安裝 Claude Code 的命令列版本。
++
++然後改用 **Agent 工具**（`general-purpose`）派出主模型的角色。外部席位照樣用 `run-model`，和 A、B、C 的 Agent 呼叫放在同一則訊息裡同時跑。
++
++**prompt 只能是下面這段，填上路徑和角色。** 不要加入使用者的原始提問、你的看法、你對結果的預期，也不要摘要前面的對話：
+ 
+-```bash
+-python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role opponent --seat X1
+ ```
++你是事實查核流程中的一個角色。先執行這個指令，取得你的完整任務說明和輸入資料：
+ 
+-外部模型可能要跑好幾分鐘，用 `run_in_background` 執行，等完成通知再繼續。覆核時，X 席位一樣用 `python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role review --seat X1`。
++python3 <skill 資料夾的完整路徑>/scripts/fc.py prompt --run <RUN 路徑> --role <角色> [--seat <席位>]
+ 
+-## 第 5 步範例（完整模式、偵測到 Codex）
++完全依照輸出的指示工作，需要時上網搜尋、打開網頁核對。最後用 Write 工具把 JSON 寫到：
++
++<RUN 路徑>/<輸出檔名>
++
++寫完只回覆「完成」兩個字。除了那個指令的輸出，不要參考任何其他資訊，包括你可能看到的使用者偏好或記憶。
++```
+ 
+-同一則訊息裡送出四個工具呼叫：三個 Agent（`--role opponent --seat A`、`B`、`C`）和一個背景 Bash（`python3 "$SKILL/scripts/fc.py" run-model … --seat X1`）。四個都完成後，再一起跑 validate。
++- **輸出檔名：** `trace.json`、`proponent.json`、`opponent-A.json`、`rebuttal.json`、`judgment.json`、`review-B.json`…，和 `fc.py prompt` 輸出裡寫的一致。
++- **檢查格式：** sub-agent 回覆「完成」之後，執行 `python3 "$SKILL/scripts/fc.py" validate --run "$RUN" <檔名>`。
++- **沒通過：** 再派一次同一個角色，並在 prompt 最後加上「上一次的輸出有以下問題：」和錯誤清單。
++- **第二次還是沒通過：** 先執行 `python3 "$SKILL/scripts/fc.py" set-aside-tactics --run "$RUN" <檔名>` 試退路；退路也不行，就停止。
+diff --git a/skills/factcheck/references/host-codex.md b/skills/factcheck/references/host-codex.md
+index 1c8ff37..66dbc25 100644
+--- a/skills/factcheck/references/host-codex.md
++++ b/skills/factcheck/references/host-codex.md
+@@ -19,7 +19,7 @@ wait
+ ```
+ 
+ - A、B、C 席位跑在 Codex 上，X 席位會自動用 `models.json` 裡對應的外部 CLI（例如 `claude -p`）。
+-- `run-model` 會自己檢查輸出格式、重試一次，所以不需要另外 validate。溯源員和裁判重試後只剩手法標記的錯誤時，它會自動把不合格的標記移出（同 `set-aside-tactics`）。主模型的角色（溯源員、正方、答辯、裁判）重試後還是失敗，指令會以非零結束碼停止，這時告訴使用者是哪一步出錯。
++- `run-model` 會自己檢查輸出格式、重試一次，所以不需要另外 validate。重試後只剩手法標記，或裁判的核對網址有錯時，它會自動走退路，流程繼續（見 SKILL.md 的「準備」）。主模型的角色（溯源員、正方、答辯、裁判）重試後還是失敗，指令會以非零結束碼停止，這時告訴使用者是哪一步出錯。
+ 
+ ## 接下來
+ 
+diff --git a/skills/factcheck/references/scoring.md b/skills/factcheck/references/scoring.md
+index ff9a4eb..d669860 100644
+--- a/skills/factcheck/references/scoring.md
++++ b/skills/factcheck/references/scoring.md
+@@ -8,7 +8,13 @@
+ 可信度 = 100 × 命題正確度
+ ```
+ 
+-**命題正確度：** 計分命題（排除 `not_factual`）的係數，依重要性加權平均。
++**命題正確度：** 計分命題的係數，依重要性加權平均。
++
++**不計分的命題：**
++- 判定是 `not_factual` 的命題。
++- 類型是意見、預測、模糊說法（`O`、`P`、`U`）的命題，不論裁判判什麼都不計分，報告的判定後面標「不計分」。
++  - 原因：這幾類可以和計分命題共用原文，拆題檢查不管它們。計分的話，同一句話會算兩次。
++  - 第二輪（2026-11-18）case-013 有一條意見被判「無法證實」、一條模糊說法被判「誤導」，兩條都進了計分。
+ 
+ | 判定 | 係數 |
+ |---|---:|
+@@ -43,6 +49,7 @@
+ | 沒有任何執行成功的跨模型席位 | −20 |
+ | 有跨模型席位，但都不能上網 | −10 |
+ | 每個覆核沒通過的命題 | −10 |
++| 每個有「成立攻擊卻沒列出核對網址」的命題（見下方） | −10（和覆核沒通過算同一筆，一個命題只扣一次） |
+ | 核心命題的直接證據全都存取受限（沒有任何一筆 `access_note` 是 `full`） | 每個命題 −10，最多 −30 |
+ | 有法條命題沒有取得條文原文 | −15（一次） |
+ | 快速模式 | 上限 60 |
+@@ -53,7 +60,13 @@
+ 
+ 高 ≥ 75、中 50–74、低 < 50。
+ 
+-**可公開：** 完整模式、信心度高、至少一個跨模型席位成功。
++**可公開：** 完整模式、信心度高、至少一個跨模型席位成功，而且沒有任何「成立攻擊卻沒列出核對網址」的命題。
++
++**成立攻擊卻沒列出核對網址：**
++- 裁判判一條附了證據的攻擊成立，就要列出實際打開核對過的網址。
++- 重做一次還是沒列，判決照用，命題維持裁判的判定，但報告的「爭議點」會揭露。
++- 這項判定依據的證據沒有經過確認，所以整份報告不能標可公開。
++- 第二輪（2026-11-18）case-011 的裁判兩次都漏列，原本整次查核因此停掉。
+ 
+ ## 不影響可信度的指標
+ 
+diff --git a/skills/factcheck/scripts/fc.py b/skills/factcheck/scripts/fc.py
+index 3615861..920bd9e 100644
+--- a/skills/factcheck/scripts/fc.py
++++ b/skills/factcheck/scripts/fc.py
+@@ -196,8 +196,8 @@ def cmd_eval_compare(args):
+ 
+ 
+ def cmd_set_aside_tactics(args):
+-    """After a role has redone its output once and only the tags (trace.json) or tag checks
+-    (judgment.json) are still wrong: move those out, keep them in the file, and carry on."""
++    """After a role has redone its output once and only the tags (trace.json), the tag checks or the
++    checked-URL lists of upheld rulings (judgment.json) are still wrong: take the fallback and carry on."""
+     run = _run_dir(args)
+     known = io.tactic_library()
+     for name in args.files:
+@@ -205,9 +205,9 @@ def cmd_set_aside_tactics(args):
+         if not errors:
+             print(f"✓ {name}：沒有問題，不需要移出")
+             continue
+-        fixed = validate.set_aside_tactics(io.read_json(run / name), run, name, known, errors)
++        fixed = validate.fallback(io.read_json(run / name), run, name, known, errors)
+         if fixed is None:
+-            print(f"✗ {name}：錯誤不只在手法標記，不能移出，請照錯誤訊息重做")
++            print(f"✗ {name}：錯誤不只在手法標記或核對網址，不能用退路，請照錯誤訊息重做")
+             for e in errors:
+                 print(f"  - {e}")
+             sys.exit(1)
+@@ -218,7 +218,8 @@ def cmd_set_aside_tactics(args):
+             for e in left:
+                 print(f"  - {e}")
+             sys.exit(1)
+-        print(f"✓ {name}：已移出不合格的手法標記（原內容保留在檔案裡），報告不會列出它們")
++        print(f"✓ {name}：已用退路處理（原內容保留在檔案裡）：不合格的手法標記報告不列出；"
++              "沒列核對網址的成立裁決會在報告裡揭露，報告不能標可公開")
+ 
+ 
+ def main(argv=None):
+diff --git a/skills/factcheck/scripts/fclib/finalize.py b/skills/factcheck/scripts/fclib/finalize.py
+index 3e377b4..3195f69 100644
+--- a/skills/factcheck/scripts/fclib/finalize.py
++++ b/skills/factcheck/scripts/fclib/finalize.py
+@@ -77,7 +77,9 @@ def finalize(run) -> dict:
+     attacks = _successful_attacks(run)
+     rulings = {r["attack_id"]: r for r in judgment.get("rulings", []) if r["attack_id"] in attacks}
+ 
+-    upheld_by_claim, rejected_by_claim, weight_by_claim = {}, {}, {}
++    # Upheld rulings whose checked URLs the judge left out even after a retry (validate.fallback).
++    unverified = set(judgment.get("rulings_unverified") or [])
++    upheld_by_claim, rejected_by_claim, weight_by_claim, unverified_by_claim = {}, {}, {}, {}
+     checked, trace_upheld = [], []
+     for aid, ruling in rulings.items():
+         a = attacks[aid]
+@@ -87,9 +89,12 @@ def finalize(run) -> dict:
+         elif _claim_of(a) is None:
+             if ruling["upheld"]:
+                 trace_upheld.append({"attack_id": aid, "seat": a["seat"], "argument": a["argument"],
+-                                     "ruling_reason": ruling["reason"]})
++                                     "ruling_reason": ruling["reason"],
++                                     **({"unverified": True} if aid in unverified else {})})
+         else:
+             bucket.setdefault(_claim_of(a), []).append(aid)
++        if ruling["upheld"] and aid in unverified and _claim_of(a) is not None:
++            unverified_by_claim.setdefault(_claim_of(a), []).append(aid)
+         if not ruling["upheld"]:
+             checked.append({"attack_id": aid, "seat": a["seat"], "claim_id": _claim_of(a),
+                             "target": a["target"], "argument": a["argument"],
+@@ -105,7 +110,8 @@ def finalize(run) -> dict:
+         cid = v["claim_id"]
+         meta = claims_meta[cid]
+         upheld = sorted(upheld_by_claim.get(cid, []))
+-        status, label, reasons = "none", v["label"], []
++        unchecked = sorted(unverified_by_claim.get(cid, []))
++        status, label, reasons, label_kept = "none", v["label"], [], True
+         if upheld:
+             status, label_kept = "passed", True
+             for seat in sorted({attacks[aid]["seat"] for aid in upheld}):
+@@ -117,18 +123,19 @@ def finalize(run) -> dict:
+                     status = "failed"
+                     label_kept = label_kept and r.get("label_ok") is True
+                     reasons.append(f"席位 {seat}：{r['reason']}")
+-            if status == "failed":
+-                if not label_kept:
+-                    label = "unverified"
+-                disputes.append({
+-                    "claim_id": cid,
+-                    "judge_label": v["label"],
+-                    "label_kept": label_kept,
+-                    "judge_reasoning": v["reasoning"],
+-                    "objections": [{"attack_id": aid, "seat": attacks[aid]["seat"],
+-                                    "argument": attacks[aid]["argument"]} for aid in upheld],
+-                    "review_reasons": reasons,
+-                })
++            if status == "failed" and not label_kept:
++                label = "unverified"
++        if status == "failed" or unchecked:
++            disputes.append({
++                "claim_id": cid,
++                "judge_label": v["label"],
++                "label_kept": label_kept,
++                "judge_reasoning": v["reasoning"],
++                "objections": [{"attack_id": aid, "seat": attacks[aid]["seat"],
++                                "argument": attacks[aid]["argument"]} for aid in sorted(set(upheld) | set(unchecked))],
++                "review_reasons": reasons,
++                **({"unverified_rulings": unchecked} if unchecked else {}),
++            })
+         weight = sorted(weight_by_claim.get(cid, []))
+         importance = _importance(meta["importance"], weight, attacks)
+         claims_out.append({
+@@ -139,6 +146,7 @@ def finalize(run) -> dict:
+             **({"importance_attacks": [{"attack_id": aid, "seat": attacks[aid]["seat"],
+                                         "proposed": attacks[aid]["proposed_importance"],
+                                         "ruling_reason": rulings[aid]["reason"]} for aid in weight]} if weight else {}),
++            "type": meta.get("type"),
+             "core": meta["core"],
+             "legal": meta.get("legal", False),
+             "law_text_obtained": v.get("law_text_obtained"),
+@@ -146,6 +154,7 @@ def finalize(run) -> dict:
+             "evidence_ids": v.get("evidence_ids", []),
+             "reasoning": v["reasoning"],
+             "review_status": status,
++            **({"unverified_rulings": unchecked} if unchecked else {}),
+             "upheld_attacks": upheld,
+             "rejected_attacks": sorted(rejected_by_claim.get(cid, [])),
+         })
+diff --git a/skills/factcheck/scripts/fclib/labels.py b/skills/factcheck/scripts/fclib/labels.py
+index d29ea43..b59bc5f 100644
+--- a/skills/factcheck/scripts/fclib/labels.py
++++ b/skills/factcheck/scripts/fclib/labels.py
+@@ -41,6 +41,10 @@ CLAIM_TYPES = {
+     "U": "無法查證",
+ }
+ 
++# Opinion, prediction and vague claims never count, whatever label the judge gives them: they may share
++# text with scored claims (spans only checks F/S and I), so scoring them would count one sentence twice.
++UNSCORED_TYPES = {"O", "P", "U"}
++
+ STANCES = {"supports", "refutes", "context"}
+ DIRECT_STANCES = {"supports", "refutes"}
+ ACCESS_NOTES = {"full", "paywall", "blocked", "archived", "snippet", "not_original", "no_transcript"}
+diff --git a/skills/factcheck/scripts/fclib/render.py b/skills/factcheck/scripts/fclib/render.py
+index 8f78839..232ecfb 100644
+--- a/skills/factcheck/scripts/fclib/render.py
++++ b/skills/factcheck/scripts/fclib/render.py
+@@ -5,7 +5,7 @@ from __future__ import annotations
+ from pathlib import Path
+ 
+ from . import detect, io, media
+-from .labels import CONTEXT_FLAGS, TIER_NAMES, ZH_LABELS
++from .labels import CONTEXT_FLAGS, FACTORS, TIER_NAMES, UNSCORED_TYPES, ZH_LABELS
+ from .score import round_half_up
+ 
+ WIDTH = 30
+@@ -76,6 +76,10 @@ def render(run, outlets=None, tactics=None) -> str:
+         alt_cred = f"可信度 {alt['credibility']}" if alt.get("credibility") is not None else "可信度 —"
+         out += [f"> 辯論中調整了命題的重要性。不調整的話，結果是「{alt['result']}」"
+                 f"（{alt_cred}，{'可公開' if alt['publishable'] else '不可公開'}）。", ""]
++    unchecked = [c["claim_id"] for c in verdicts["claims"] if c.get("unverified_rulings")]
++    if unchecked:
++        out += [f"> 有判成立的攻擊，裁判沒有列出實際核對過的網址（{'、'.join(unchecked)}），"
++                "這份報告不能標可公開，見「爭議點」。", ""]
+     if claims_doc.get("prompt_was_leading"):
+         out += ["> 提問已改寫為中立命題。", ""]
+ 
+@@ -109,12 +113,18 @@ def render(run, outlets=None, tactics=None) -> str:
+ 
+     # 逐項判定
+     out += ["## 逐項判定", "", "| 命題 | 原文說法 | 重要性 | 判定 | 理由 | 證據 |", "|---|---|---|---|---|---|"]
++    not_scored = []
+     for c in verdicts["claims"]:
+         meta = claims[c["claim_id"]]
+         status = {"passed": "（覆核通過）", "failed": "（覆核未通過）"}.get(c["review_status"], "")
++        if c.get("type") in UNSCORED_TYPES and FACTORS[c["label"]] is not None:  # same test as score.py
++            status += "（不計分）"
++            not_scored.append(c["claim_id"])
+         weight = str(c["importance"]) + (f"（辯論後由 {c['importance_from']} 調整）" if "importance_from" in c else "")
+         out.append(f"| {c['claim_id']} | {_cell(meta['original'])} | {weight} | {ZH_LABELS[c['label']]}{status} | "
+                    f"{_cell(c['reasoning'])} | {', '.join(c.get('evidence_ids', [])) or '—'} |")
++    if not_scored:
++        out += ["", f"- {'、'.join(not_scored)} 是意見、預測或模糊到無法查證的說法，判定只供參考，不算進可信度。"]
+     adjusted = [c for c in verdicts["claims"] if "importance_from" in c]
+     if adjusted:
+         out.append("")
+@@ -210,19 +220,25 @@ def render(run, outlets=None, tactics=None) -> str:
+                 "前面的溯源、報導品質、操弄手法、和既有查核的比對，以及查核範圍裡關於溯源的說明，都是辯論前寫的。"
+                 "以下是裁判判定成立的修正，和前文不同時以這裡為準。", ""]
+         for a in verdicts["trace_attacks_upheld"]:
+-            out.append(f"- 反方 {a['seat']} 的質疑成立（{a['attack_id']}）：{_cell(a['ruling_reason'])}")
++            out.append(f"- 反方 {a['seat']} 的質疑成立（{a['attack_id']}）：{_cell(a['ruling_reason'])}"
++                       + ("（裁判沒有列出實際核對過的網址）" if a.get("unverified") else ""))
+         out.append("")
+ 
+     # 爭議點
+     if verdicts.get("disputes"):
+         out += ["## 爭議點", ""]
+         for d in verdicts["disputes"]:
+-            if d.get("label_kept"):
++            unchecked = d.get("unverified_rulings") or []
++            note = (f"裁判判定成立的攻擊（{'、'.join(unchecked)}）沒有列出實際核對過的網址，"
++                    "這項判定依據的證據沒有經過確認。") if unchecked else ""
++            if not d.get("label_kept"):
++                out.append(f"- **{d['claim_id']}**：裁判原本判「{ZH_LABELS[d['judge_label']]}」（{_cell(d['judge_reasoning'])}），"
++                           f"覆核沒有通過，所以改判「無法證實」。{note}")
++            elif d["review_reasons"]:
+                 out.append(f"- **{d['claim_id']}**：判定維持「{ZH_LABELS[d['judge_label']]}」（{_cell(d['judge_reasoning'])}）。"
+-                           "覆核同意這個判定，但認為理由或證據還有缺漏。")
++                           f"覆核同意這個判定，但認為理由或證據還有缺漏。{note}")
+             else:
+-                out.append(f"- **{d['claim_id']}**：裁判原本判「{ZH_LABELS[d['judge_label']]}」（{_cell(d['judge_reasoning'])}），"
+-                           "覆核沒有通過，所以改判「無法證實」。")
++                out.append(f"- **{d['claim_id']}**：判定維持「{ZH_LABELS[d['judge_label']]}」（{_cell(d['judge_reasoning'])}）。{note}")
+             for o in d["objections"]:
+                 out.append(f"  - 反方 {o['seat']}：{_cell(o['argument'])}")
+             for r in d["review_reasons"]:
+diff --git a/skills/factcheck/scripts/fclib/run_model.py b/skills/factcheck/scripts/fclib/run_model.py
+index 32eb648..4905bd9 100644
+--- a/skills/factcheck/scripts/fclib/run_model.py
++++ b/skills/factcheck/scripts/fclib/run_model.py
+@@ -276,9 +276,9 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
+             target.unlink()
+         prompt = prompt + "\n\n## 上一次的輸出有以下問題，請修正後重新輸出完整 JSON\n\n" + "\n".join(f"- {e}" for e in errors)
+ 
+-    # Tags never affect the score: if only they still break the rules after the retry, set them aside
+-    # (kept in the file, listed as not identified) instead of stopping the whole check.
+-    fixed = validate.set_aside_tactics(last, run, name, known_tactics, errors) if last is not None else None
++    # If only tags or the judge's checked-URL lists still break the rules after the retry, take the
++    # fallback (validate.fallback) instead of stopping the whole check.
++    fixed = validate.fallback(last, run, name, known_tactics, errors) if last is not None else None
+     if fixed is not None:
+         io.write_json(target, fixed)
+         if not validate.validate_file(run, name, known_tactics=known_tactics):
+diff --git a/skills/factcheck/scripts/fclib/score.py b/skills/factcheck/scripts/fclib/score.py
+index c4e88b9..0a03a5e 100644
+--- a/skills/factcheck/scripts/fclib/score.py
++++ b/skills/factcheck/scripts/fclib/score.py
+@@ -8,7 +8,7 @@ from __future__ import annotations
+ 
+ from decimal import Decimal, ROUND_HALF_UP
+ 
+-from .labels import ACCESS_NOTES, CONTEXT_FLAGS, DIRECT_STANCES, FACTORS, PRIMARY_TIERS
++from .labels import ACCESS_NOTES, CONTEXT_FLAGS, DIRECT_STANCES, FACTORS, PRIMARY_TIERS, UNSCORED_TYPES
+ 
+ UNVERIFIED_SHARE_LIMIT = Decimal("0.5")
+ QUICK_CAP = 60
+@@ -70,8 +70,12 @@ def _weighted(items, value):
+     return sum(Decimal(c["importance"]) * value(c) for c in items) / total
+ 
+ 
++def _counts(c) -> bool:
++    return FACTORS[c["label"]] is not None and c.get("type") not in UNSCORED_TYPES
++
++
+ def _scored(claims):
+-    return [c for c in claims if FACTORS[c["label"]] is not None]
++    return [c for c in claims if _counts(c)]
+ 
+ 
+ def _credibility(claims):
+@@ -120,12 +124,17 @@ def _confidence(claims, ledger_by_id, run, seats):
+         deduct(10, "跨模型反方都不能上網，只能當審稿人")
+ 
+     for c in claims:
+-        if c.get("review_status") == "failed":
++        failed, unchecked = c.get("review_status") == "failed", bool(c.get("unverified_rulings"))
++        if failed and unchecked:
++            deduct(10, f"{c['claim_id']} 覆核沒有通過，而且有判成立的攻擊沒有列出實際核對過的網址")
++        elif failed:
+             deduct(10, f"{c['claim_id']} 覆核沒有通過")
++        elif unchecked:
++            deduct(10, f"{c['claim_id']} 有判成立的攻擊，裁判沒有列出實際核對過的網址")
+ 
+     limited = []
+     for c in claims:
+-        if not c.get("core") or FACTORS[c["label"]] is None:
++        if not c.get("core") or not _counts(c):
+             continue
+         direct = [ledger_by_id[e] for e in c.get("evidence_ids", [])
+                   if ledger_by_id[e]["stance"] in DIRECT_STANCES]
+@@ -164,7 +173,9 @@ def compute(verdicts: dict, run: dict, seats: list) -> dict:
+         result = result_label(cred["score"])
+ 
+     confidence, has_cross = _confidence(claims, ledger_by_id, run, seats)
+-    publishable = run.get("mode") == "full" and confidence["level"] == "高" and has_cross
++    # A verdict changed on evidence the judge never confirmed checking is disclosed, never published.
++    unchecked = any(c.get("unverified_rulings") for c in claims)
++    publishable = run.get("mode") == "full" and confidence["level"] == "高" and has_cross and not unchecked
+ 
+     without = None
+     if any("importance_from" in c for c in claims):
+@@ -186,7 +197,7 @@ def compute(verdicts: dict, run: dict, seats: list) -> dict:
+         "without_importance_changes": without,
+         "claims": [
+             {"claim_id": c["claim_id"], "label": c["label"], "importance": c["importance"],
+-             "factor": None if FACTORS[c["label"]] is None else float(FACTORS[c["label"]])}
++             "factor": float(FACTORS[c["label"]]) if _counts(c) else None}
+             for c in claims
+         ],
+     }
+diff --git a/skills/factcheck/scripts/fclib/validate.py b/skills/factcheck/scripts/fclib/validate.py
+index faf4f38..b3021cf 100644
+--- a/skills/factcheck/scripts/fclib/validate.py
++++ b/skills/factcheck/scripts/fclib/validate.py
+@@ -155,6 +155,8 @@ def tactic_errors(trace, run, lib, only=None):
+ 
+ 
+ _TAG_INDEX = re.compile(r"^tactics\[(\d+)\]")
++_RULING_URL_MSG = "判定攻擊成立，但沒有列出實際打開核對過的 verified_urls"
++_RULING_URL = re.compile(r"^rulings\[(\d+)\] " + _RULING_URL_MSG + "$")
+ 
+ 
+ def set_aside_tactics(obj, run, name, lib, errors):
+@@ -182,6 +184,31 @@ def set_aside_tactics(obj, run, name, lib, errors):
+     return None
+ 
+ 
++def fallback(obj, run, name, lib, errors):
++    """Last resort once a role has retried; returns the new object, or None when anything else is wrong.
++
++    - Tags (trace.json) or tag checks (judgment.json) that still break the rules are set aside: tags
++      never affect the score.
++    - Upheld rulings whose checked URLs the judge still leaves out stay upheld but are listed in
++      `rulings_unverified`: finalize discloses them and score blocks publishing. Regression (round 2,
++      case-011): one missing URL list stopped the whole check at its most expensive step.
++    """
++    if not errors or not isinstance(obj, dict):
++        return None
++    if name != "judgment.json":
++        return set_aside_tactics(obj, run, name, lib, errors)
++    tags = [e for e in errors if e.startswith("tactic_checks")]
++    urls = [_RULING_URL.match(e) for e in errors if not e.startswith("tactic_checks")]
++    if not all(urls):
++        return None
++    new = set_aside_tactics(obj, run, name, lib, tags) if tags else copy.deepcopy(obj)
++    if urls:
++        rulings = obj.get("rulings") or []
++        before = new.get("rulings_unverified") if isinstance(new.get("rulings_unverified"), list) else []
++        new["rulings_unverified"] = sorted(set(before) | {rulings[int(m.group(1))].get("attack_id") for m in urls})
++    return new
++
++
+ def _tag_errors(i, t, lib, hay, has_report):
+     p = f"tactics[{i}]"
+     if not isinstance(t, dict) or not _nonempty(t.get("tactic_id")):
+@@ -345,6 +372,7 @@ def _judgment(d, run, ctx):
+     err = _Errors()
+     attacks = _attacks(run)
+     ruled = [r.get("attack_id") for r in d.get("rulings", [])]
++    excused = d.get("rulings_unverified") if isinstance(d.get("rulings_unverified"), list) else []
+     for aid in attacks:
+         err.need(ruled.count(aid) == 1, f"攻擊 {aid} 需要剛好一個裁決")
+     for i, r in enumerate(d.get("rulings", [])):
+@@ -352,9 +380,8 @@ def _judgment(d, run, ctx):
+         err.need(aid in attacks, f"rulings[{i}].attack_id {aid} 不存在")
+         err.need(isinstance(r.get("upheld"), bool), f"rulings[{i}].upheld 必須是 true/false")
+         err.need(_nonempty(r.get("reason")), f"rulings[{i}].reason 不能是空的")
+-        if r.get("upheld") is True and aid in attacks and attacks[aid][1].get("evidence"):
+-            err.need(bool(r.get("verified_urls")),
+-                     f"rulings[{i}] 判定攻擊成立，但沒有列出實際打開核對過的 verified_urls")
++        if r.get("upheld") is True and aid in attacks and attacks[aid][1].get("evidence") and aid not in excused:
++            err.need(bool(r.get("verified_urls")), f"rulings[{i}] {_RULING_URL_MSG}")
+     ledger_ids = _check_ledger(err, d.get("ledger"), "judgment")
+     _check_verdicts(err, d.get("verdicts"), _claim_ids(run), ledger_ids, "judgment")
+     _check_tactic_checks(err, d, run, attacks, _library(ctx))
+diff --git a/tests/test_finalize.py b/tests/test_finalize.py
+index f79de90..d22bcf3 100644
+--- a/tests/test_finalize.py
++++ b/tests/test_finalize.py
+@@ -85,6 +85,10 @@ class FinalizeTest(unittest.TestCase):
+         r = run_finalize(judgment_json=judgment)  # review-A.json is missing
+         self.assertEqual(claim(r, "C1")["review_status"], "failed")
+ 
++    def test_claim_type_comes_from_claims_json(self):
++        r = run_finalize()
++        self.assertEqual([claim(r, c)["type"] for c in ("C1", "C2")], ["F", "O"])
++
+     def test_claim_metadata_comes_from_claims_json(self):
+         c1 = claim(run_finalize(), "C1")
+         self.assertEqual((c1["importance"], c1["core"], c1["legal"]), (5, True, False))
+@@ -144,6 +148,40 @@ class ImportanceChallengeTest(unittest.TestCase):
+         self.assertEqual([a["attack_id"] for a in c1["importance_attacks"]], ["C-1"])
+ 
+ 
++def unverified_judgment():
++    j = copy.deepcopy(fx.JUDGMENT)
++    j["rulings"][1]["verified_urls"] = []
++    j["rulings_unverified"] = ["B-1"]
++    return j
++
++
++class UnverifiedRulingTest(unittest.TestCase):
++    def test_claim_keeps_the_judge_label_and_is_disclosed(self):
++        r = run_finalize(judgment_json=unverified_judgment())
++        c1 = claim(r, "C1")
++        self.assertEqual(c1["label"], "misleading")
++        self.assertEqual(c1["unverified_rulings"], ["B-1"])
++        d = r["disputes"][0]
++        self.assertEqual((d["claim_id"], d["label_kept"], d["unverified_rulings"]), ("C1", True, ["B-1"]))
++
++    def test_failed_review_and_unverified_ruling_share_one_dispute(self):
++        review = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": False, "reason": "還是低估了"}]}
++        r = run_finalize(judgment_json=unverified_judgment(), review__B_json=review)
++        self.assertEqual(len(r["disputes"]), 1)
++        self.assertEqual(claim(r, "C1")["label"], "unverified")
++        self.assertEqual(r["disputes"][0]["unverified_rulings"], ["B-1"])
++
++    def test_claims_without_unverified_rulings_are_not_flagged(self):
++        self.assertNotIn("unverified_rulings", claim(run_finalize(), "C1"))
++
++    def test_unverified_trace_correction_is_marked(self):
++        o = fx.tactic_attack_overrides(upheld=True, keep=False)
++        o["opponent__C_json"]["attacks"][0]["evidence"] = [{"url": "https://example.org/t", "excerpt": "原文"}]
++        o["judgment_json"]["rulings_unverified"] = ["C-1"]
++        r = run_finalize(**o)
++        self.assertTrue(r["trace_attacks_upheld"][0]["unverified"])
++
++
+ class RemovedTacticsFinalizeTest(unittest.TestCase):
+     def test_withdrawn_tags_come_from_the_judges_checks(self):
+         r = run_finalize(**fx.tactic_attack_overrides())
+diff --git a/tests/test_render.py b/tests/test_render.py
+index 35485f3..ca3bb90 100644
+--- a/tests/test_render.py
++++ b/tests/test_render.py
+@@ -65,6 +65,29 @@ class BodyTest(unittest.TestCase):
+         self.assertIn("非事實陳述", out)
+         self.assertIn("某部長說明年油價一定漲三成", out)
+ 
++    def test_opinion_with_a_factual_label_is_marked_not_scored(self):
++        judgment = copy.deepcopy(fx.JUDGMENT)
++        judgment["verdicts"][1]["label"] = "unverified"
++        out = md(build(judgment_json=judgment))
++        row = next(l for l in out.splitlines() if l.startswith("| C2 |"))
++        self.assertIn("無法證實（不計分）", row)
++        self.assertIn("意見、預測或模糊到無法查證的說法", out)
++
++    def test_no_not_scored_note_when_every_opinion_is_labelled_not_factual(self):
++        self.assertNotIn("不計分", md(build()))
++
++    def test_unverified_ruling_is_disclosed(self):
++        j = copy.deepcopy(fx.JUDGMENT)
++        j["rulings"][1]["verified_urls"] = []
++        j["rulings_unverified"] = ["B-1"]
++        out = md(build(judgment_json=j))
++        self.assertIn("不可公開", out)
++        head = out.split("## 結論")[0]
++        self.assertIn("沒有列出實際核對過的網址", head)
++        disputes = out.split("## 爭議點")[1]
++        self.assertIn("判定維持「誤導」", disputes)
++        self.assertIn("沒有列出實際核對過的網址", disputes)
++
+     def test_conclusion_uses_first_sentence_only(self):
+         judgment = copy.deepcopy(fx.JUDGMENT)
+         judgment["verdicts"][0]["reasoning"] = "第一句結論。第二句很長的細節" + "細" * 200
+diff --git a/tests/test_run_model.py b/tests/test_run_model.py
+index bd37f0f..f40d04e 100644
+--- a/tests/test_run_model.py
++++ b/tests/test_run_model.py
+@@ -179,6 +179,15 @@ class RunRoleTest(unittest.TestCase):
+         self.assertNotIn("tactic_checks", data)
+         self.assertTrue(data["tactic_checks_set_aside"])
+ 
++    def test_judge_that_keeps_leaving_out_checked_urls_still_finishes(self):
++        """Regression (round 2, case-011)."""
++        run = make_run(fx.run_files(judgment_json=None, review__B_json=None))
++        bad = copy.deepcopy(fx.JUDGMENT)
++        bad["rulings"][1]["verified_urls"] = []
++        r = FakeRunner([json.dumps(bad), json.dumps(bad)])
++        run_model.run_role(run, "judge", None, CLAUDE, runner=r, env={}, known_tactics=fx.TACTIC_LIB)
++        self.assertEqual(json.loads((run / "judgment.json").read_text())["rulings_unverified"], ["B-1"])
++
+     def test_other_tracer_errors_still_fail(self):
+         run = make_run(fx.run_files(trace_json=None))
+         bad = copy.deepcopy(fx.TRACE)
+diff --git a/tests/test_score.py b/tests/test_score.py
+index 9d4a7e4..5f22ec8 100644
+--- a/tests/test_score.py
++++ b/tests/test_score.py
+@@ -69,6 +69,22 @@ class CredibilityTest(unittest.TestCase):
+         self.assertEqual(r["result"], "無法判定")
+         self.assertIn("意見", r["result_reason"])
+ 
++    def test_opinion_prediction_and_vague_claims_never_count_whatever_their_label(self):
++        """They may share text with scored claims, so scoring them would count one sentence twice.
++        Regression (round 2, case-013): an opinion judged unverified and a vague claim judged misleading were scored."""
++        for t in ("O", "P", "U"):
++            r = compute([claim("C1", "true"), {**claim("C2", "misleading", importance=5, core=False), "type": t}])
++            self.assertEqual(r["credibility"]["score"], 100, t)
++            self.assertIsNone(next(c for c in r["claims"] if c["claim_id"] == "C2")["factor"], t)
++
++    def test_unscored_types_do_not_count_toward_the_unverified_share(self):
++        r = compute([claim("C1", "true", importance=3), {**claim("C2", "unverified", importance=5, core=False), "type": "O"}])
++        self.assertEqual(r["result"], "符合")
++
++    def test_message_with_only_unscored_types_is_undetermined(self):
++        r = compute([{**claim("C1", "false"), "type": "P"}])
++        self.assertEqual(r["result"], "無法判定")
++
+     def test_context_flags_are_listed_but_not_double_counted(self):
+         r = compute([claim("C1", "true", flags=["out_of_context"]),
+                      claim("C2", "true", flags=["out_of_context", "time_shift"])])
+@@ -161,6 +177,16 @@ class ConfidenceTest(unittest.TestCase):
+                      claim("C3", "true", importance=5)])
+         self.assertEqual(self.conf(r), 80)
+ 
++    def test_unverified_ruling_deducts_10_and_blocks_publishing(self):
++        r = compute([{**claim("C1", "false"), "unverified_rulings": ["B-1"]}])
++        self.assertEqual(self.conf(r), 90)
++        self.assertFalse(r["publishable"])
++        self.assertTrue(any("核對過的網址" in d["reason"] for d in r["confidence"]["deductions"]))
++
++    def test_failed_review_and_unverified_ruling_deduct_once(self):
++        r = compute([{**claim("C1", "false", review="failed"), "unverified_rulings": ["B-1"]}])
++        self.assertEqual(self.conf(r), 90)
++
+     def test_core_claim_relying_only_on_limited_sources_deducts_10_each_capped_at_30(self):
+         ledger = [ev("S1", tier=1, chain="a", access="paywall"), ev("S2", tier=1, chain="b", access="blocked")]
+         claims = [claim(f"C{i}", "true", evidence=["S1", "S2"]) for i in range(1, 5)]
+@@ -223,6 +249,12 @@ class ConfidenceTest(unittest.TestCase):
+         self.assertEqual(r["confidence"]["evidence_quality"], 1)
+         self.assertEqual(self.conf(r), 100)
+ 
++    def test_unscored_types_are_ignored_for_evidence_quality_and_access_limits(self):
++        ledger = FULL_LEDGER + [ev("S3", tier=6, chain="c", access="blocked")]
++        r = compute([claim("C1", "true"), {**claim("C2", "misleading", evidence=["S3"]), "type": "U"}], ledger=ledger)
++        self.assertEqual(r["confidence"]["evidence_quality"], 1)
++        self.assertEqual(self.conf(r), 100)
++
+     def test_deductions_are_itemised(self):
+         r = compute([claim("C1", "true")], seats=[])
+         reasons = [d["reason"] for d in r["confidence"]["deductions"]]
+diff --git a/tests/test_validate.py b/tests/test_validate.py
+index 171feab..696b356 100644
+--- a/tests/test_validate.py
++++ b/tests/test_validate.py
+@@ -1,4 +1,5 @@
+ import copy
++import json
+ import unittest
+ 
+ from tests import fixtures as fx
+@@ -202,6 +203,51 @@ class RebuttalJudgmentTest(unittest.TestCase):
+         self.assertTrue(any("S4" in e for e in errors_for("judgment.json", m)))
+ 
+ 
++def judgment_missing_url():
++    """B-1 carries evidence and is upheld, but the judge listed no URL it checked."""
++    j = copy.deepcopy(fx.JUDGMENT)
++    j["rulings"][1]["verified_urls"] = []
++    return j
++
++
++class UnverifiedRulingFallbackTest(unittest.TestCase):
++    """Regression (round 2, case-011): the judge twice left out the URLs it had checked for one upheld
++    attack, and the whole check stopped at its most expensive step."""
++
++    def fallback(self, judgment):
++        run = make_run(fx.run_files(judgment_json=judgment))
++        errors = validate.validate_file(run, "judgment.json", known_tactics=fx.TACTIC_LIB)
++        fixed = validate.fallback(judgment, run, "judgment.json", fx.TACTIC_LIB, errors)
++        if fixed is not None:
++            (run / "judgment.json").write_text(json.dumps(fixed, ensure_ascii=False), encoding="utf-8")
++        return fixed, validate.validate_file(run, "judgment.json", known_tactics=fx.TACTIC_LIB)
++
++    def test_only_missing_urls_are_accepted_as_unverified_rulings(self):
++        fixed, left = self.fallback(judgment_missing_url())
++        self.assertEqual(fixed["rulings_unverified"], ["B-1"])
++        self.assertTrue(fixed["rulings"][1]["upheld"])
++        self.assertEqual(left, [])
++
++    def test_no_fallback_when_anything_else_is_wrong(self):
++        j = judgment_missing_url()
++        j["rulings"].pop(0)
++        fixed, _ = self.fallback(j)
++        self.assertIsNone(fixed)
++
++    def test_missing_urls_and_bad_tag_checks_are_both_handled(self):
++        j = judgment_missing_url()
++        j["tactic_checks"] = []
++        fixed, left = self.fallback(j)
++        self.assertEqual(fixed["rulings_unverified"], ["B-1"])
++        self.assertTrue(fixed["tactic_checks_set_aside"])
++        self.assertEqual(left, [])
++
++    def test_the_list_only_excuses_the_rulings_it_names(self):
++        j = judgment_missing_url()
++        j["rulings_unverified"] = ["A-1"]
++        self.assertTrue(any("verified_urls" in e for e in errors_for("judgment.json", judgment_json=j)))
++
++
+ class TraceTest(unittest.TestCase):
+     def test_unknown_tactic_id(self):
+         def m(t):

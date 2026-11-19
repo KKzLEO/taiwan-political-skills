@@ -339,7 +339,8 @@ def cmd_set_aside_tactics(args):
             for e in left:
                 print(f"  - {e}")
             sys.exit(1)
-        print(f"✓ {name}：已移出不合格的手法標記（原內容保留在檔案裡），報告不會列出它們")
+        kept = "原內容保留在檔案裡" if name == "trace.json" else "裁判的逐項檢查不保留，檔案裡只留錯誤訊息"
+        print(f"✓ {name}：已移出不合格的手法標記（{kept}），報告不會列出它們")
 
 
 def main(argv=None):

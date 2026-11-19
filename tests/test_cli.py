@@ -76,6 +76,18 @@ class PipelineCliTest(unittest.TestCase):
         self.assertEqual([t["tactic_id"] for t in trace["tactics"]], ["TW-T16"])
         self.assertEqual(trace["set_aside_tactics"][0]["entry"]["tactic_id"], "TW-T01")
 
+    def test_set_aside_says_what_is_kept_for_each_file(self):
+        """The trace keeps the tags it moves out; the judge's rejected checks are dropped, only the errors stay."""
+        files = fx.run_files()
+        files["trace.json"]["tactics"].append({"tactic_id": "TW-T01", "features": ["a"], "quote": "快轉傳！"})
+        files["judgment.json"]["tactic_checks"][0]["features"] = {"z": True}  # not a feature of TW-T16
+        run = make_run(files)
+        self.assertIn("原內容保留在檔案裡", fc("set-aside-tactics", "--run", run, "trace.json").stdout)
+        p = fc("set-aside-tactics", "--run", run, "judgment.json")
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertIn("裁判的逐項檢查不保留", p.stdout)
+        self.assertNotIn("原內容保留在檔案裡", p.stdout)
+
     def test_set_aside_refuses_when_more_than_tags_is_wrong(self):
         files = fx.run_files()
         files["trace.json"]["publisher"]["kind"] = "網軍"

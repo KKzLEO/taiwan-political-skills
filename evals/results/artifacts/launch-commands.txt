@@ -1,0 +1,18 @@
+2026-11-17T15:24:18Z（對話紀錄第 1890 行）
+    python3 $S/drivers/evalrun.py "$(cat $S/template_path.txt)" 4
+
+2026-11-18T12:56:15Z（對話紀錄第 4747 行）
+    cd ~/Documents/taiwan-political-skills && date '+launched %Y-%m-%d %H:%M:%S' | tee $S/evals2/launch-time.txt && FC_CLAUDE_MODEL=claude-opus-5-5 FC_CLAUDE_EFFORT=xhigh python3 $S/drivers/evalrun2.py $S/evals2/models_template.json 5
+
+2026-11-18T19:31:26Z（對話紀錄第 5684 行）
+    cd $S && python3 drivers/evalrun3.py $S/snap3 $S/evals3/models_template.json 1 nonexistent 2
+
+2026-11-18T19:31:34Z（對話紀錄第 5695 行）
+    cd $S && date '+launched %Y-%m-%d %H:%M:%S' | tee $S/evals3/launch-time.txt && FC_CLAUDE_MODEL=claude-opus-5-5 FC_CLAUDE_EFFORT=xhigh python3 $S/drivers/evalrun3.py $S/snap3 $S/evals3/models_template.json 5 "holdout-國民黨,holdout-民進黨,holdout-民眾黨,symmetry-民眾黨-r3" "case-011"
+
+2026-11-19T05:13:22Z（對話紀錄第 6776 行）
+    } | tee $S/evals4/launch-time.txt && FC_CLAUDE_MODEL=claude-opus-5-5 FC_CLAUDE_EFFORT=xhigh python3 $S/drivers/evalrun4.py $S/snap4 $S/evals4/models_template.json 6 "case-015,case-016,case-017,case-018,case-019,case-020"
+
+2026-11-19T08:25:41Z（對話紀錄第 9400 行）
+    } | tee $S/evals5/launch-time.txt && FC_CLAUDE_MODEL=claude-opus-5-5 FC_CLAUDE_EFFORT=xhigh python3 $S/drivers/evalrun5.py $S/snap5 $S/evals5/models_template.json $S/evals5 8 "case-021,case-022,case-023,case-024,case-025,case-026,case-017,holdout-民進黨,holdout-國民黨,holdout-民眾黨"
+
