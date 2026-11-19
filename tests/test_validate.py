@@ -47,6 +47,17 @@ class ClaimsTest(unittest.TestCase):
         self.assertTrue(errors_for("claims.json", m))
 
 
+class PublishedAtTest(unittest.TestCase):
+    """The publication time now decides whether the time rules apply, so it has to be a date or nothing."""
+
+    def test_published_at_is_a_date_or_empty(self):
+        for ok in (None, "", "2026-10-20", "2026-10-20T14:15:00+08:00"):
+            self.assertEqual(errors_for("source.json", lambda d: d.update(published_at=ok)), [], ok)
+        for bad in ("14:15", "不明", "下午 2:15", "10/20", 20261020):
+            errs = errors_for("source.json", lambda d: d.update(published_at=bad))
+            self.assertTrue(any("published_at" in e for e in errs), bad)
+
+
 class TimeClaimsTest(unittest.TestCase):
     """claims.json must say which implied claim, if any, is the deadline premise and which the implied time."""
 
@@ -77,7 +88,7 @@ class TimeClaimsTest(unittest.TestCase):
     def test_content_with_a_publication_time_has_no_time_claims(self):
         dated = {**fx.SOURCE, "published_at": "2026-10-20"}
         for marks in ({"deadline": "C3", "relative": None}, {"deadline": None, "relative": "C3"}):
-            self.assertTrue(any("發布時間" in e for e in self.errs(marks, source=dated)), marks)
+            self.assertTrue(any("發布時間" in e and "一起刪掉" in e for e in self.errs(marks, source=dated)), marks)
         self.assertEqual(self.errs({"deadline": None, "relative": None}, source=dated), [])
         self.assertEqual(self.errs({"deadline": None, "relative": "C3"}, source={**fx.SOURCE, "published_at": ""}), [])
 

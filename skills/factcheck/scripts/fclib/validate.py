@@ -125,6 +125,10 @@ def _source(d, run, ctx):
     err.need(d.get("input_type") in {"url", "text", "image", "video"}, "input_type 必須是 url/text/image/video")
     err.need(_nonempty(d.get("original_text")) or _is_url(d.get("url")), "original_text 和 url 至少要有一個")
     err.need(_nonempty(d.get("retrieved_at")), "retrieved_at 不能是空的")
+    # A publication time switches the time claims off (_check_time_claims), so "14:15" or 「不明」 must not count as one.
+    published = d.get("published_at")
+    err.need(published in (None, "") or (isinstance(published, str) and re.match(r"^\d{4}-\d{2}-\d{2}", published)),
+             "published_at 必須是 YYYY-MM-DD 開頭的日期；內容本身看不出發布日期（只有時刻、或完全沒有）就填 null")
     return err
 
 
@@ -176,7 +180,7 @@ def _check_time_claims(err, marks, claims, run):
     published = (io.read_json_or_none(run / "source.json") or {}).get("published_at")
     err.need(not marked or not str(published or "").strip(),
              f"time_claims：內容有發布時間（{published}），讀者看得到日期，不用時間命題；兩個都填 null，"
-             "相對時間照發布時間換算成日期")
+             "那兩條隱含命題也一起刪掉，相對時間照發布時間換算成日期")
 
 
 
