@@ -147,9 +147,10 @@ def cmd_video(args):
 
 def cmd_finalize(args):
     run = _run_dir(args)
-    errors = validate.validate_file(run, "judgment.json", known_tactics=io.tactic_library())
-    if errors:
-        sys.exit("錯誤：judgment.json 沒有通過檢查：\n" + "\n".join(errors))
+    for name in ("proponent.json", "judgment.json"):  # finalize compares the two (judge-only changes)
+        errors = validate.validate_file(run, name, known_tactics=io.tactic_library())
+        if errors:
+            sys.exit(f"錯誤：{name} 沒有通過檢查：\n" + "\n".join(errors))
     io.write_json(run / "verdicts.json", finalize.finalize(run))
     print(run / "verdicts.json")
 
@@ -158,7 +159,7 @@ def cmd_reviewers(args):
     run = _run_dir(args)
     needed = finalize.reviewers_needed(run)
     if not needed:
-        print("不需要覆核：沒有成立的命題攻擊")
+        print("不需要派覆核")
     for seat, ids in needed.items():
         print(f"{seat}\t{','.join(ids)}")
 

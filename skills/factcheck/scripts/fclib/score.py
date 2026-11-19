@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from decimal import Decimal, ROUND_HALF_UP
 
-from .labels import ACCESS_NOTES, CONTEXT_FLAGS, DIRECT_STANCES, FACTORS, PRIMARY_TIERS, UNSCORED_TYPES
+from .labels import ACCESS_NOTES, CONTEXT_FLAGS, DIRECT_STANCES, FACTORS, PRIMARY_TIERS, UNSCORED_TYPES, ZH_LABELS
 
 UNVERIFIED_SHARE_LIMIT = Decimal("0.5")
 QUICK_CAP = 60
@@ -170,8 +170,16 @@ def _publish_blocks(verdicts, claims, run, seats) -> list:
     if contested:
         counted = _result_of([{**c, "type": None} if not_scored(c) else c for c in claims])[2]
         if counted != _result_of(claims)[2]:
-            blocks.append(f"{'、'.join(contested)} 被分成意見、預測或模糊說法，所以不計分，但裁判照事實判了；"
+            # Skeptic re-review: the label may come from a review that did not confirm a change, not from the judge.
+            named = "、".join(f"{c['claim_id']}（{ZH_LABELS[c['label']]}）" for c in claims if not_scored(c))
+            blocks.append(f"{named}被分成意見、預測或模糊說法，所以不計分，但最後拿到的是會計分的判定；"
                           f"算進去的話，結果會是「{counted}」")
+    # Red-team: a judge-only change (finalize.judge_only_changes) that the reviews did not confirm must not leave
+    # the report easier to publish than one every seat confirmed.
+    for d in verdicts.get("disputes") or []:
+        if d.get("proponent_label") and not d.get("label_kept"):
+            blocks.append(f"{d['claim_id']} 沒有任何會改判的成立攻擊，裁判卻自己改了正方的判定，覆核也沒有全部確認，"
+                          "所以改判「無法證實」")
     if run.get("mode") == "full":
         for s in seats:
             if not str(s.get("seat", "")).startswith("X") and s.get("status") != "ok":

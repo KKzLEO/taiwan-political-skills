@@ -25,6 +25,16 @@ class PipelineCliTest(unittest.TestCase):
         self.assertEqual(json.loads((run / "score.json").read_text())["result"], "不符")
         self.assertIn("結果：不符", (run / "report.md").read_text())
 
+    def test_finalize_refuses_an_invalid_proponent_file(self):
+        """Skeptic re-review: finalize compares the judge with the proponent (judge-only changes), so it checks both."""
+        files = fx.run_files()
+        files["proponent.json"]["verdicts"].append(dict(files["proponent.json"]["verdicts"][0]))
+        run = make_run(files)
+        p = fc("finalize", "--run", run)
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn("proponent.json", p.stderr)
+        self.assertFalse((run / "verdicts.json").exists())
+
     def test_validate_reports_errors_with_exit_1(self):
         files = fx.run_files()
         files["proponent.json"]["ledger"][0]["excerpt"] = ""

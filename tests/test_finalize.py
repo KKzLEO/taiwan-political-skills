@@ -3,7 +3,7 @@ import unittest
 
 from tests import fixtures as fx
 from tests.helpers import make_run
-from fclib import finalize
+from fclib import finalize, io
 
 
 def run_finalize(**overrides):
@@ -108,6 +108,7 @@ class FinalizeTest(unittest.TestCase):
                   "error": "timeout", "attacks": []}
         judgment = copy.deepcopy(fx.JUDGMENT)
         judgment["rulings"] = judgment["rulings"][:1]
+        judgment["verdicts"][0]["label"] = "false"  # no upheld attack left, so the proponent's label stays
         r = run_finalize(opponent__B_json=failed, judgment_json=judgment)
         self.assertEqual(claim(r, "C1")["review_status"], "none")
 
@@ -232,8 +233,97 @@ class ReviewersTest(unittest.TestCase):
     def test_no_upheld_attacks(self):
         judgment = copy.deepcopy(fx.JUDGMENT)
         judgment["rulings"][1]["upheld"] = False
+        judgment["verdicts"][0]["label"] = "false"  # keeps the proponent's label, as judge.md says
         run = make_run(fx.run_files(judgment_json=judgment))
         self.assertEqual(finalize.reviewers_needed(run), {})
+
+
+FAILED = {"engine": "claude", "lens": "evidence", "status": "failed", "error": "逾時"}
+
+
+class JudgeOnlyChangeTest(unittest.TestCase):
+    """A label the judge changed although no attack on that claim was upheld. judge.md tells the judge to
+    keep the proponent's label then, but nothing checked it (0 of 294 claims in rounds 1-3 did this).
+    Every seat that ran now reviews such a change."""
+
+    @staticmethod
+    def reviews(passed=True, label_ok=None, seats=("A", "B", "C", "X1")):
+        out = {}
+        for s in seats:
+            r = {"claim_id": "C1", "pass": passed, "reason": "改判有證據支持" if passed else "證據撐不起誤導"}
+            if label_ok is not None:
+                r["label_ok"] = label_ok
+            out[f"review__{s}_json"] = {"seat": s, "reviews": [r]}
+        return out
+
+    def test_every_seat_that_ran_reviews_the_change(self):
+        run = make_run(fx.run_files(**fx.judge_only_overrides()))
+        self.assertEqual(finalize.reviewers_needed(run), {"A": ["C1"], "B": ["C1"], "C": ["C1"], "X1": ["C1"]})
+
+    def test_failed_seat_does_not_review(self):
+        run = make_run(fx.run_files(**fx.judge_only_overrides(), opponent__C_json={"seat": "C", **FAILED}))
+        self.assertEqual(sorted(finalize.reviewers_needed(run)), ["A", "B", "X1"])
+
+    def test_change_stands_when_every_review_passes(self):
+        r = run_finalize(**{**fx.judge_only_overrides(), **self.reviews()})
+        c1 = claim(r, "C1")
+        self.assertEqual(c1["label"], "misleading")
+        self.assertEqual(c1["review_status"], "passed")
+        self.assertEqual(r["disputes"], [])
+
+    def test_missing_review_turns_the_change_unverified(self):
+        """Same rule as any re-review: an unconfirmed change becomes `unverified`. Going back to the proponent's
+        verdict was refuted in review: its evidence ids may point at other sources in the judge's ledger, and it
+        undid corrections the rules require of the judge (a legal claim without the law text)."""
+        r = run_finalize(**{**fx.judge_only_overrides(), **self.reviews(seats=("A", "B", "C"))})
+        c1 = claim(r, "C1")
+        self.assertEqual(c1["label"], "unverified")
+        self.assertEqual(c1["review_status"], "failed")
+        d = r["disputes"][0]
+        self.assertEqual(d["proponent_label"], "false")
+        self.assertEqual(d["objections"], [])
+        self.assertIn("席位 X1：覆核未完成", d["review_reasons"])
+
+    def test_rejected_change_turns_unverified(self):
+        r = run_finalize(**{**fx.judge_only_overrides(), **self.reviews(passed=False, label_ok=False)})
+        self.assertEqual(claim(r, "C1")["label"], "unverified")
+        self.assertFalse(r["disputes"][0]["label_kept"])
+
+    def test_review_that_accepts_the_label_keeps_it(self):
+        r = run_finalize(**{**fx.judge_only_overrides(), **self.reviews(passed=False, label_ok=True)})
+        self.assertEqual(claim(r, "C1")["label"], "misleading")
+        self.assertTrue(r["disputes"][0]["label_kept"])
+
+    def test_no_seat_left_to_review_turns_the_change_unverified(self):
+        o = fx.judge_only_overrides()
+        o.update({f"opponent__{s}_json": {"seat": s, **FAILED} for s in ("A", "B", "C", "X1")})
+        r = run_finalize(**o)
+        self.assertEqual(claim(r, "C1")["label"], "unverified")
+        self.assertEqual(r["disputes"][0]["review_reasons"], ["沒有可以覆核的反方席位"])
+
+    def test_missing_proponent_file_stops_instead_of_skipping_the_check(self):
+        """Red-team: reading a missing proponent.json as empty silently switched the check off."""
+        run = make_run(fx.run_files(**fx.judge_only_overrides(), proponent_json=None))
+        with self.assertRaises(io.ReadError):
+            finalize.reviewers_needed(run)
+
+    def test_change_with_only_an_importance_challenge_upheld_is_reviewed(self):
+        o = fx.importance_attack_overrides()
+        o["judgment_json"]["rulings"][1]["upheld"] = False  # B-1 rejected; only the importance challenge stands
+        run = make_run(fx.run_files(**o))
+        self.assertEqual(finalize.reviewers_needed(run), {"A": ["C1"], "B": ["C1"], "C": ["C1"], "X1": ["C1"]})
+
+    def test_change_with_only_a_tactic_attack_upheld_is_reviewed(self):
+        o = fx.tactic_attack_overrides()
+        o["opponent__C_json"]["attacks"][0]["claim_id"] = "C2"
+        o["judgment_json"]["verdicts"][1]["label"] = "unverified"  # proponent said not_factual
+        run = make_run(fx.run_files(**o))
+        self.assertEqual(finalize.reviewers_needed(run),
+                         {"A": ["C2"], "B": ["C1", "C2"], "C": ["C2"], "X1": ["C2"]})
+
+    def test_unchanged_label_needs_no_extra_review(self):
+        run = make_run(fx.run_files())
+        self.assertEqual(finalize.judge_only_changes(run), {})
 
 
 if __name__ == "__main__":

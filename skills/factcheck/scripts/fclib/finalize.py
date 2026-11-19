@@ -1,10 +1,13 @@
 """Apply the re-review rule and produce verdicts.json.
 
 Rule: a claim with at least one upheld attack is re-reviewed by every seat that
-raised an upheld attack (review-<seat>.json). If any review is missing or fails,
-the claim is listed as a dispute. It becomes `unverified` unless every failing
-reviewer explicitly accepted the label (`label_ok: true`) and only objected to
-the reasoning or sourcing; then the judge's label stays.
+raised an upheld attack (review-<seat>.json). A claim whose label the judge
+changed although no attack that revises a label was upheld on it (importance,
+trace and tactic attacks do not) is re-reviewed by every seat that ran. If any
+review is missing or fails, the claim is listed as a dispute. It becomes
+`unverified` unless every failing reviewer explicitly accepted the label
+(`label_ok: true`) and only objected to the reasoning or sourcing; then the
+judge's label stays.
 """
 
 from __future__ import annotations
@@ -57,9 +60,27 @@ def _importance(orig, weight_attacks, attacks):
     return orig + directions.pop() if len(directions) == 1 else orig
 
 
+def _ok_seats(run: Path) -> list:
+    return [d["seat"] for d in map(io.read_json, sorted(run.glob("opponent-*.json"))) if d.get("status", "ok") == "ok"]
+
+
+def judge_only_changes(run) -> dict:
+    """claim id -> the proponent's verdict, for claims whose label the judge changed although no attack that
+    revises a label was upheld on them. judge.md says to keep the proponent's label then; nothing else checks it."""
+    run = Path(run)
+    judgment = io.read_json(run / "judgment.json")
+    attacks = _successful_attacks(run)
+    revised = {_claim_of(attacks[r["attack_id"]]) for r in judgment.get("rulings", [])
+               if r["upheld"] and r["attack_id"] in attacks and not _weight_only(attacks[r["attack_id"]])}
+    # Red-team: a missing proponent.json must stop the run, not switch this check off.
+    proponent = {v["claim_id"]: v for v in io.read_json(run / "proponent.json")["verdicts"]}
+    return {v["claim_id"]: proponent[v["claim_id"]] for v in judgment["verdicts"]
+            if v["claim_id"] not in revised and proponent[v["claim_id"]]["label"] != v["label"]}
+
+
 def reviewers_needed(run) -> dict:
-    """seat -> claim ids that seat must re-review (claims where its attack was upheld). Importance
-    challenges never question the label, so they open no review that could fail."""
+    """seat -> claim ids that seat must re-review: claims where its attack was upheld, and every judge-only
+    change. Importance challenges never question the label, so they open no review that could fail."""
     run = Path(run)
     attacks = _successful_attacks(run)
     out = {}
@@ -67,6 +88,10 @@ def reviewers_needed(run) -> dict:
         a = attacks.get(r["attack_id"])
         if r["upheld"] and a and _claim_of(a) and not _weight_only(a):
             out.setdefault(a["seat"], set()).add(_claim_of(a))
+    seats = _ok_seats(run)
+    for cid in judge_only_changes(run):
+        for seat in seats:
+            out.setdefault(seat, set()).add(cid)
     return {seat: sorted(ids) for seat, ids in sorted(out.items())}
 
 
@@ -100,15 +125,20 @@ def finalize(run) -> dict:
         data = io.read_json(path)
         reviews[data["seat"]] = {r["claim_id"]: r for r in data.get("reviews", [])}
 
+    judge_only, ok_seats = judge_only_changes(run), set(_ok_seats(run))
     claims_out, disputes = [], []
     for v in judgment["verdicts"]:
         cid = v["claim_id"]
         meta = claims_meta[cid]
         upheld = sorted(upheld_by_claim.get(cid, []))
         status, label, reasons = "none", v["label"], []
-        if upheld:
+        if upheld or cid in judge_only:
             status, label_kept = "passed", True
-            for seat in sorted({attacks[aid]["seat"] for aid in upheld}):
+            seats = ok_seats if cid in judge_only else {attacks[aid]["seat"] for aid in upheld}
+            if not seats:
+                status, label_kept = "failed", False
+                reasons.append("沒有可以覆核的反方席位")
+            for seat in sorted(seats):
                 r = reviews.get(seat, {}).get(cid)
                 if r is None:
                     status, label_kept = "failed", False
@@ -128,6 +158,7 @@ def finalize(run) -> dict:
                     "objections": [{"attack_id": aid, "seat": attacks[aid]["seat"],
                                     "argument": attacks[aid]["argument"]} for aid in upheld],
                     "review_reasons": reasons,
+                    **({"proponent_label": judge_only[cid]["label"]} if cid in judge_only else {}),
                 })
         weight = sorted(weight_by_claim.get(cid, []))
         importance = _importance(meta["importance"], weight, attacks)

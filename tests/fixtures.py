@@ -147,6 +147,13 @@ def importance_attack_overrides(proposals=(("C-1", 4, True),), importance=5, rev
             "judgment_json": judgment, "review__C_json": {"seat": "C", "reviews": [review]}}
 
 
+def judge_only_overrides():
+    """The judge rejects every attack on C1 but still changes the proponent's `false` to `misleading`."""
+    judgment = copy.deepcopy(JUDGMENT)
+    judgment["rulings"][1]["upheld"] = False
+    return {"judgment_json": judgment, "review__B_json": None}
+
+
 def run_files(**overrides):
     files = {
         "run.json": RUN, "models.json": MODELS, "source.json": SOURCE, "claims.json": CLAIMS,

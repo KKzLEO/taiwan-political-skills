@@ -232,6 +232,10 @@ def render(run, outlets=None, tactics=None) -> str:
             else:
                 out.append(f"- **{d['claim_id']}**：裁判原本判「{ZH_LABELS[d['judge_label']]}」（{_cell(d['judge_reasoning'])}），"
                            "覆核沒有通過，所以改判「無法證實」。")
+            if d.get("proponent_label"):
+                out.append(f"  - 這個命題沒有任何會改判的成立攻擊（重要性挑戰、溯源和手法攻擊不算），"
+                           f"是裁判自己把正方判「{ZH_LABELS[d['proponent_label']]}」改成「{ZH_LABELS[d['judge_label']]}」，"
+                           "所以每個反方席位都要覆核。")
             for o in d["objections"]:
                 out.append(f"  - 反方 {o['seat']}：{_cell(o['argument'])}")
             for r in d["review_reasons"]:

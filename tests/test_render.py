@@ -66,9 +66,9 @@ class BodyTest(unittest.TestCase):
         self.assertIn("某部長說明年油價一定漲三成", out)
 
     def test_opinion_with_a_factual_label_is_marked_not_scored(self):
-        judgment = copy.deepcopy(fx.JUDGMENT)
-        judgment["verdicts"][1]["label"] = "unverified"
-        out = md(build(judgment_json=judgment))
+        judgment, proponent = copy.deepcopy(fx.JUDGMENT), copy.deepcopy(fx.PROPONENT)
+        judgment["verdicts"][1]["label"] = proponent["verdicts"][1]["label"] = "unverified"
+        out = md(build(judgment_json=judgment, proponent_json=proponent))
         row = next(l for l in out.splitlines() if l.startswith("| C2 |"))
         self.assertIn("無法證實（不計分）", row)
         self.assertIn("意見、預測或模糊到無法查證的說法", out)
@@ -87,9 +87,9 @@ class BodyTest(unittest.TestCase):
     def test_conclusion_marks_a_key_unscored_claim(self):
         claims = copy.deepcopy(fx.CLAIMS)
         claims["claims"][1]["core"] = True
-        judgment = copy.deepcopy(fx.JUDGMENT)
-        judgment["verdicts"][1]["label"] = "false"
-        out = md(build(claims_json=claims, judgment_json=judgment))
+        judgment, proponent = copy.deepcopy(fx.JUDGMENT), copy.deepcopy(fx.PROPONENT)
+        judgment["verdicts"][1]["label"] = proponent["verdicts"][1]["label"] = "false"
+        out = md(build(claims_json=claims, judgment_json=judgment, proponent_json=proponent))
         self.assertIn("錯誤（不計分）", out.split("## 結論")[1].split("## 查核範圍")[0])
 
     def test_seat_that_never_ran_is_shown_as_not_run(self):
@@ -141,6 +141,13 @@ class BodyTest(unittest.TestCase):
         self.assertIn("判定維持「誤導」", out)
         self.assertIn("只引了一半", out)
         self.assertNotIn("改判「無法證實」", out)
+
+    def test_dispute_over_a_judge_only_change_names_both_labels(self):
+        out = md(build(**fx.judge_only_overrides()))
+        section = out.split("## 爭議點")[1].split("\n## ")[0]
+        self.assertIn("沒有任何會改判的成立攻擊", section)
+        self.assertIn("正方判「錯誤」", section)
+        self.assertIn("改判「無法證實」", section)
 
     def test_withdrawn_tag_is_not_shown_as_identified(self):
         out = md(build(**fx.tactic_attack_overrides()))

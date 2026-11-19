@@ -287,6 +287,14 @@ class PublishBlockTest(unittest.TestCase):
         self.assertFalse(r["publishable"])
         self.assertTrue(any("C2" in b and "不符" in b for b in r["publish_blocks"]))
 
+    def test_classification_block_names_the_final_label_without_crediting_the_judge(self):
+        """Skeptic re-review: a review that did not confirm a change turns the label into `unverified`, which the
+        judge never gave, so the block must not say the judge judged it as a fact."""
+        hidden = {**claim("C2", "unverified", importance=5, core=True), "type": "U"}
+        b = next(b for b in compute([claim("C1", "true", core=False), hidden])["publish_blocks"] if "C2" in b)
+        self.assertNotIn("裁判", b)
+        self.assertIn("C2（無法證實）", b)
+
     def test_lowering_importance_or_core_does_not_get_around_the_check(self):
         """Red-team re-review: the first guard only looked at core or importance >= 4."""
         r = compute([claim("C1", "true"), {**claim("C2", "false", core=False), "type": "U"},
@@ -320,6 +328,21 @@ class PublishBlockTest(unittest.TestCase):
             r = compute([claim("C1", "true")], seats=seats)
             self.assertFalse(r["publishable"], status)
             self.assertTrue(any("反方 B" in b for b in r["publish_blocks"]), status)
+
+    def test_unconfirmed_judge_only_change_blocks_publishing(self):
+        """Red-team: fewer completed reviews must never make a report easier to publish."""
+        v = {"claims": [claim("C1", "true"), claim("C2", "unverified", review="failed")], "ledger": FULL_LEDGER,
+             "disputes": [{"claim_id": "C2", "judge_label": "false", "label_kept": False, "proponent_label": "true",
+                           "objections": [], "review_reasons": ["席位 X1：覆核未完成"]}]}
+        r = score.compute(v, FULL_RUN, OK_SEAT)
+        self.assertFalse(r["publishable"])
+        self.assertTrue(any("C2" in b and "裁判" in b for b in r["publish_blocks"]))
+
+    def test_judge_only_change_with_the_label_accepted_does_not_block(self):
+        v = {"claims": [claim("C1", "true"), claim("C2", "false", review="failed")], "ledger": FULL_LEDGER,
+             "disputes": [{"claim_id": "C2", "judge_label": "false", "label_kept": True, "proponent_label": "true",
+                           "objections": [], "review_reasons": ["席位 X1：理由少引一半"]}]}
+        self.assertFalse(any("裁判" in b for b in score.compute(v, FULL_RUN, OK_SEAT)["publish_blocks"]))
 
     def test_clean_run_has_no_blocks(self):
         self.assertEqual(compute([claim("C1", "true")])["publish_blocks"], [])

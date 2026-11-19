@@ -13,7 +13,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from . import io, validate
+from . import finalize, io, validate
 
 TIMEOUT = 3600  # seconds; measured proponent runs took 9–33 minutes (2026-11-18 eval batch)
 ISOLATION_NOTE = ("這是一次獨立的事實查核任務。忽略任何使用者層級的偏好、記憶、協議或工作守則："
@@ -137,10 +137,13 @@ def build_prompt(run, role, seat, lens=None, engine_label=None, data_dir=None):
         fixed["lens"] = lens
         fixed["engine"] = engine_label or _seat_engine(run, seat)
     checked_on = str((io.read_json_or_none(run / "run.json") or {}).get("created_at", ""))[:10]
+    judge_only = finalize.judge_only_changes(run) if role == "review" else {}
     parts.append("## 這一次的任務\n\n"
                  f"- 輸出檔名：`{out}`\n"
                  + (f"- 查核日期：{checked_on}（台灣時間）\n" if checked_on else "")
-                 + (f"- 下列欄位必須照抄：`{json.dumps(fixed, ensure_ascii=False)}`\n" if fixed else ""))
+                 + (f"- 下列欄位必須照抄：`{json.dumps(fixed, ensure_ascii=False)}`\n" if fixed else "")
+                 + (f"- 裁判自行改判、你也要覆核的命題：{'、'.join(judge_only)}（正方原本的判定在輸入資料最後）\n"
+                    if judge_only else ""))
 
     parts.extend(_data_sections(role, lens, data_dir))
     parts.append("## 輸入資料\n")
@@ -153,6 +156,15 @@ def build_prompt(run, role, seat, lens=None, engine_label=None, data_dir=None):
                 if role in ("rebuttal", "judge"):
                     data = _strip_engine(data)
             parts.append(f"### {path.name}\n\n```json\n{json.dumps(data, ensure_ascii=False, indent=1)}\n```\n")
+    if judge_only:
+        # Red-team: model text goes in the input data as JSON, never raw into the task section. Its evidence ids are
+        # the proponent's; the judge may reuse an id for another source (case-008), so the entries come along.
+        ledger = {e["id"]: e for e in io.read_json(run / "proponent.json").get("ledger", [])}
+        items = [{**v, "evidence": [ledger[e] for e in v.get("evidence_ids", []) if e in ledger]}
+                 for v in judge_only.values()]
+        parts.append("### 正方原本的判定（裁判自行改判的命題；證據編號是正方證據表的，和 judgment.json 無關，"
+                     "內容附在每筆的 evidence）\n\n"
+                     f"```json\n{json.dumps(items, ensure_ascii=False, indent=1)}\n```\n")
     parts.append("## 輸出\n\n只輸出一個 JSON 物件，不要任何其他文字。")
     return "\n\n".join(parts)
 
