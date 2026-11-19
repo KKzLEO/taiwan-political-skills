@@ -55,8 +55,12 @@ def main():
             fh.write(f"{time.strftime('%H:%M:%S')} {msg}\n")
 
     def fc(name, *a):
-        p = subprocess.run(fc_cmd + list(map(str, a)), capture_output=True, text=True, timeout=3900,
-                           env={**env, "FC_USAGE_TAG": name})
+        # One step may call its model twice (a retry after a rejected answer), each up to FC_TIMEOUT (3600 s).
+        cmd = fc_cmd + list(map(str, a))
+        try:
+            p = subprocess.run(cmd, capture_output=True, text=True, timeout=7500, env={**env, "FC_USAGE_TAG": name})
+        except subprocess.TimeoutExpired:  # one stuck step must not stop the bookkeeping of the whole batch
+            p = subprocess.CompletedProcess(cmd, 124, "", "評測工具等了 7500 秒，這一步沒有結束")
         log(name, f"fc {' '.join(map(str, a[:6]))} -> {p.returncode} {(p.stdout + p.stderr)[-400:].strip()}")
         return p
 
@@ -67,7 +71,7 @@ def main():
         for c, p in zip(cmds, procs):
             out, _ = p.communicate()
             codes.append(p.returncode)
-            log(name, f"fc {' '.join(map(str, c[:6]))} -> {p.returncode} {out[-300:].strip()}")
+            log(name, f"fc {' '.join(map(str, c))} -> {p.returncode} {out[-300:].strip()}")
         return codes
 
     def load(job):

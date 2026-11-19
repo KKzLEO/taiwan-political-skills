@@ -56,8 +56,9 @@ def main():
                    key=lambda r: r["name"])  # split-only runs are listed in their own table
     tally = Counter()
     if cases:
-        print("| 案例 | 預期 | 結果 | 比對 | 可信度 | 信心度 | 可公開 | 不能公開的原因 | 命題判對 | 分鐘 |")
+        print("| 案例 | 預期 | 結果 | 比對 | 可信度 | 信心度 | 可公開 | 沒成功的席位、沒交的覆核 | 命題判對 | 分鐘 |")
         print("|---|---|---|---|---|---|---|---|---|---|")
+    reasons = []
     for r in cases:
         case = tomllib.load(open(repo / "evals/cases" / f"{r['name']}.toml", "rb"))
         exp = case["expected_result"]
@@ -71,16 +72,24 @@ def main():
         tally[kind] += 1
         tally["wrong_publishable_" + kind] += bool(sc["publishable"] and kind != "exact")
         cmp = evalcmp.compare(case, io.read_json(run / "claims.json"), v, sc)
-        why = "；".join(sc.get("publish_blocks") or []) or ("—" if sc["publishable"] else "信心度或模式")
+        # A run with a seat that failed is not the full delivered flow, even when it produced a report.
+        seats = [f"反方 {p.name[9:-5]} 失敗" for p in sorted(run.glob("opponent-*.json")) if io.read_json(p).get("status", "ok") != "ok"]
+        seats += [f"覆核 {s} 沒交" for s in r.get("unreviewed_seats") or []]
+        tally["incomplete_seats"] += bool(seats)
+        reasons.append((r["name"], sc.get("publish_blocks") or []))
         print(f"| {r['name']} | {exp} | {sc['result']} | {kind} | {(sc['credibility'] or {}).get('score')} | "
-              f"{sc['confidence']['score']} | {'是' if sc['publishable'] else '否'} | {why[:50]} | "
+              f"{sc['confidence']['score']} | {'是' if sc['publishable'] else '否'} | {'、'.join(seats) or '—'} | "
               f"{cmp['label_correct']}/{cmp['total']} | {r['minutes']} |")
     n = sum(tally[k] for k in ("exact", "adjacent", "severe", "other"))
-    if n:
-        print(f"\n跑完 {n} 則：完全相同 {tally['exact']}（{tally['exact'] / n:.0%}）、差一級 {tally['adjacent']}、"
-              f"嚴重錯誤 {tally['severe']}、其他錯誤 {tally['other']}；沒跑完 {tally['failed']}")
+    if cases:  # the share is of every case asked for, so a run that did not finish counts against it
+        print(f"\n要跑 {len(cases)} 則，跑完 {n} 則：完全相同 {tally['exact']}（占全部的 {tally['exact'] / len(cases):.0%}）、"
+              f"差一級 {tally['adjacent']}、嚴重錯誤 {tally['severe']}、其他錯誤 {tally['other']}；沒跑完 {tally['failed']}；"
+              f"有席位失敗或覆核沒交的 {tally['incomplete_seats']} 則")
         print(f"結論錯卻標可公開：嚴重 {tally['wrong_publishable_severe']}、差一級 {tally['wrong_publishable_adjacent']}、"
               f"其他 {tally['wrong_publishable_other']}")
+        print("\n不能公開的原因（每則全文）：")
+        for name, blocks in reasons:
+            print(f"- {name}：" + ("；".join(blocks) if blocks else "可公開"))
 
     probes = defaultdict(list)
     for r in results:
@@ -90,12 +99,12 @@ def main():
         if not any(r["status"] == "ok" for r in rows):  # split only: listed in the table below
             continue
         expect = tomllib.load(open(repo / "evals/probes" / f"{stem}.toml", "rb")).get("expect", {})
-        print(f"\n| 探測 {stem} | 結果 | 可信度 | 信心度 | 可公開 | 留下的手法標記 | 計分命題的判定 | 時間標記 | 各類型的命題數 |"
-              "\n|---|---|---|---|---|---|---|---|---|")
+        print(f"\n| 探測 {stem} | 結果 | 可信度 | 不看時間的內容分數 | 信心度 | 可公開 | 留下的手法標記 | 計分命題的判定 | 時間標記 | 各類型的命題數 |"
+              "\n|---|---|---|---|---|---|---|---|---|---|")
         seen = []
         for r in sorted(rows, key=lambda r: r["target"]):
             if r["status"] != "ok":
-                print(f"| {r['target']} | 沒有跑完（{r['status']}） | | | | | | | |")
+                print(f"| {r['target']} | 沒有跑完（{r['status']}） | | | | | | | | |")
                 continue
             run = Path(r["run"])
             sc, v = io.read_json(run / "score.json"), io.read_json(run / "verdicts.json")
@@ -105,15 +114,19 @@ def main():
             labels = sorted(c["label"] for c in sc["claims"] if c.get("factor") is not None)
             cred = (sc["credibility"] or {}).get("score")
             marks, types = variant_summary(io.read_json(run / "claims.json"), v)
-            seen.append((sc["result"], tags, cred, sc["publishable"], marks, types))
-            print(f"| {r['target']} | {sc['result']} | {cred} | {sc['confidence']['score']} | "
+            raw = (sc["credibility"] or {}).get("raw")  # the content alone: a wrong deadline sets every variant to 0
+            seen.append((sc["result"], tags, cred, sc["publishable"], marks, types, raw, tuple(labels)))
+            print(f"| {r['target']} | {sc['result']} | {cred} | {raw} | {sc['confidence']['score']} | "
                   f"{'是' if sc['publishable'] else '否'} | {'、'.join(tags) or '—'} | {'、'.join(labels) or '—'} | "
                   f"{'、'.join(marks) or '—'} | {'、'.join(f'{t}×{n}' for t, n in types)} |")
         if len(seen) > 1:
             same = lambda i: "是" if len({s[i] for s in seen}) == 1 else "否"  # noqa: E731
             creds = [s[2] for s in seen if s[2] is not None]
+            raws = [s[6] for s in seen if s[6] is not None]
             print(f"結論相同：{same(0)}；手法標記相同：{same(1)}；可公開相同：{same(3)}；時間標記相同：{same(4)}；"
-                  f"各類型的命題數相同：{same(5)}；可信度差距：{max(creds) - min(creds) if creds else '—'}")
+                  f"各類型的命題數相同：{same(5)}；計分命題的判定相同：{same(7)}；"
+                  f"可信度差距：{max(creds) - min(creds) if creds else '—'}；"
+                  f"不看時間的內容分數差距：{round(max(raws) - min(raws), 1) if raws else '—'}")
             if expect.get("expected_result"):
                 hit = sum(s[0] == expect["expected_result"] for s in seen)
                 print(f"預先寫好的預期結論「{expect['expected_result']}」：{hit}/{len(seen)} 版相同")
