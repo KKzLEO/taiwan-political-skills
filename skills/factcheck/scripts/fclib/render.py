@@ -25,12 +25,16 @@ ACCESS = {"full": "全文", "paywall": "付費牆", "blocked": "被擋", "archiv
 _UNSAFE = r"\x00-\x1f\x7f-\x9f\u2028\u2029\u202a-\u202e\u2066-\u2069"
 _BREAKS = re.compile(f"[{_UNSAFE}]+")
 _LINK_UNSAFE = re.compile(rf'[()\[\]<>"|\\\s{_UNSAFE}]')
+# A "<" that can open raw HTML (tag, closing tag, comment, declaration); "<5%" and "x < 2" cannot, so they stay.
+_TAG_OPEN = re.compile(r"<(?=[A-Za-z/!?])")
 
 
 def _cell(text) -> str:
     """Text a model wrote, kept inside the line it is printed on: no line break of any kind (a bare "\\r" ends a
-    line in CommonMark too), no table bar, and no "](" that would turn it into a link hiding its address."""
-    return _BREAKS.sub(" ", str(text or "")).replace("|", "／").replace("](", "] (").strip()
+    line in CommonMark too), no table bar, no "](" that would turn it into a link hiding its address, and no raw
+    HTML (viewers such as GitHub render <a href>, <img> and <h2>)."""
+    text = _BREAKS.sub(" ", str(text or "")).replace("|", "／").replace("](", "] (")
+    return _TAG_OPEN.sub("＜", text).strip()
 
 
 def _link(url) -> str:
@@ -188,7 +192,7 @@ def render(run, outlets=None, tactics=None) -> str:
     unscored_ids = []
     for c in verdicts["claims"]:
         meta = claims[c["claim_id"]]
-        status = {"passed": "（覆核通過）", "failed": "（覆核未通過）"}.get(c["review_status"], "")
+        status = {"passed": "（覆核通過）", "failed": "（覆核未完成或未通過）"}.get(c["review_status"], "")
         if c.get("time"):
             status += "（時間命題）"
         elif not_scored(c):
@@ -314,8 +318,9 @@ def render(run, outlets=None, tactics=None) -> str:
                            "覆核同意這個判定，但認為理由或證據還有缺漏。")
             else:
                 out.append(f"- **{d['claim_id']}**：裁判原本判「{ZH_LABELS[d['judge_label']]}」（{_cell(d['judge_reasoning'])}），"
-                           + ("覆核沒有通過，維持「無法證實」。" if d["judge_label"] == "unverified"  # nothing changed
-                              else "覆核沒有通過，所以改判「無法證實」。"))
+                           # "完成或": a seat with no review file is in this branch too (its reason is listed below)
+                           + ("覆核沒有完成或沒有通過，維持「無法證實」。" if d["judge_label"] == "unverified"  # nothing changed
+                              else "覆核沒有完成或沒有通過，所以改判「無法證實」。"))
             if d.get("proponent_label"):
                 out.append(f"  - 這個命題沒有任何會改判的成立攻擊（重要性挑戰、溯源和手法攻擊不算），"
                            f"是裁判自己把正方判「{ZH_LABELS[d['proponent_label']]}」改成「{ZH_LABELS[d['judge_label']]}」，"

@@ -155,7 +155,9 @@ def finalize(run) -> dict:
             if status == "failed":
                 if not label_kept:
                     if label != "unverified":  # the judge's reasoning argues for a label the claim no longer has
-                        reasoning = f"覆核沒有通過，改列「無法證實」；裁判原本判「{ZH_LABELS[label]}」，理由是：{reasoning}"
+                        # "完成或" because a missing review file lands here too: no reviewer may have said anything
+                        reasoning = (f"覆核沒有完成或沒有通過，改列「無法證實」；裁判原本判「{ZH_LABELS[label]}」，"
+                                     f"理由是：{reasoning}")
                     label = "unverified"
                 disputes.append({
                     "claim_id": cid,

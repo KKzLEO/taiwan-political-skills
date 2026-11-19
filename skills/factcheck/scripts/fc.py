@@ -184,7 +184,7 @@ def cmd_finalize(args):
     missing = {s: ids for s, ids in finalize.reviewers_needed(run).items() if not (run / f"review-{s}.json").exists()}
     if missing:
         claims = sorted({c for ids in missing.values() for c in ids}, key=lambda c: (len(c), c))
-        print(f"# 注意：席位 {'、'.join(missing)} 沒有覆核檔，{'、'.join(claims)} 記成「覆核未完成」，改列「無法證實」。"
+        print(f"注意：席位 {'、'.join(missing)} 沒有覆核檔，{'、'.join(claims)} 記成「覆核未完成」，改列「無法證實」。"
               "回報時要告訴使用者是哪一席沒有覆核。", file=sys.stderr)
     print(run / "verdicts.json")
 

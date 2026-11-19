@@ -60,13 +60,14 @@ class FinalizeTest(unittest.TestCase):
 
     def test_reasoning_of_an_overturned_label_says_whose_reasoning_it_is(self):
         """Audit: the label became 無法證實 but the reasoning was still the judge's case for 誤導, so the report's
-        conclusion read "無法證實。部長說的是…，訊息改成…"."""
+        conclusion read "無法證實。部長說的是…，訊息改成…". Second review: the words must not say the reviewer
+        overruled the judge when the review never ran (no review file, e.g. the quota ran out)."""
         judged = fx.JUDGMENT["verdicts"][0]["reasoning"]
         for review in ({"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": False, "reason": "改過頭"}]},
                        None):  # a missing review overturns the label the same way
             r = run_finalize(review__B_json=review)
             self.assertEqual(claim(r, "C1")["reasoning"],
-                             "覆核沒有通過，改列「無法證實」；裁判原本判「誤導」，理由是：" + judged)
+                             "覆核沒有完成或沒有通過，改列「無法證實」；裁判原本判「誤導」，理由是：" + judged)
             self.assertEqual(r["disputes"][0]["judge_reasoning"], judged)
 
     def test_reasoning_is_the_judges_own_when_the_label_did_not_change(self):

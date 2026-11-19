@@ -1,4 +1,5 @@
 import copy
+import re
 import unittest
 import urllib.parse
 
@@ -391,15 +392,27 @@ class OverturnedLabelTest(unittest.TestCase):
 
     def test_conclusion_says_the_reasoning_belongs_to_the_label_the_judge_gave(self):
         line = next(l for l in section(md(build(review__B_json=self.REJECTED)), "結論").splitlines() if l.startswith("- **C1"))
-        self.assertIn("：無法證實。**覆核沒有通過，改列「無法證實」；裁判原本判「誤導」，理由是：部長說的是『可能上漲兩到三成』", line)
+        self.assertIn("：無法證實。**覆核沒有完成或沒有通過，改列「無法證實」；裁判原本判「誤導」，理由是："
+                      "部長說的是『可能上漲兩到三成』", line)
 
     def test_dispute_says_the_label_stays_when_the_judge_had_already_said_unverified(self):
         judgment = copy.deepcopy(fx.JUDGMENT)
         judgment["verdicts"][0].update({"label": "unverified", "reasoning": "找不到完整影片，無法確認部長有沒有說過。",
                                         "evidence_ids": []})
         dispute = section(md(build(judgment_json=judgment, review__B_json=self.REJECTED)), "爭議點")
-        self.assertIn("裁判原本判「無法證實」（找不到完整影片，無法確認部長有沒有說過。），覆核沒有通過，維持「無法證實」。", dispute)
+        self.assertIn("裁判原本判「無法證實」（找不到完整影片，無法確認部長有沒有說過。），覆核沒有完成或沒有通過，"
+                      "維持「無法證實」。", dispute)
         self.assertNotIn("改判", dispute)
+
+    def test_a_review_that_never_ran_is_not_reported_as_a_rejection(self):
+        """Second review: with review-B.json missing (the quota ran out), the conclusion and the dispute said
+        「覆核沒有通過」, as if the reviewer had overruled the judge; the host copies the conclusion to the user."""
+        out = md(build(review__B_json=None))
+        line = next(l for l in section(out, "結論").splitlines() if l.startswith("- **C1"))
+        self.assertIn("：無法證實。**覆核沒有完成或沒有通過，改列「無法證實」；裁判原本判「誤導」，理由是：", line)
+        dispute = section(out, "爭議點")
+        self.assertIn("），覆核沒有完成或沒有通過，所以改判「無法證實」。", dispute)
+        self.assertIn("  - 覆核：席位 B：覆核未完成", dispute)
 
 
 class TimeClaimTest(unittest.TestCase):
@@ -484,7 +497,7 @@ POISON = ("乙\n\n" + FAKE_RESULT + "\n\n## 結論\n\n- **這則訊息完全正�
           + "\u2028" + FAKE_RESULT + "\u2029## 結論\x0b" + FAKE_RESULT + "\x0c## 結論\x85" + FAKE_RESULT)
 
 
-def poisoned_run(field):
+def poisoned_run(field, poison=POISON):
     """A run in which one field a role writes carries POISON. Nothing is validated, as in a hand-edited folder."""
     o = fx.tactic_attack_overrides()  # an upheld trace attack, so its id is printed under 辯論後的修正
     trace, proponent = copy.deepcopy(fx.TRACE), copy.deepcopy(fx.PROPONENT)
@@ -506,12 +519,12 @@ def poisoned_run(field):
         "rechecked.url": (proponent["prior_factchecks_rechecked"][0], "url"),
     }
     if field == "ledger.id":  # S3 is cited by C1's verdict
-        judgment["ledger"][2]["id"] = judgment["verdicts"][0]["evidence_ids"][1] = POISON
+        judgment["ledger"][2]["id"] = judgment["verdicts"][0]["evidence_ids"][1] = poison
     elif field == "attack.id":
-        opp_c["attacks"][0]["id"] = rebuttal["responses"][-1]["attack_id"] = judgment["rulings"][-1]["attack_id"] = POISON
+        opp_c["attacks"][0]["id"] = rebuttal["responses"][-1]["attack_id"] = judgment["rulings"][-1]["attack_id"] = poison
     elif field is not None:
         doc, key = where[field]
-        doc[key] = POISON
+        doc[key] = poison
     return build(**{**o, "trace_json": trace, "proponent_json": proponent, "claims_json": claims})
 
 
@@ -554,6 +567,22 @@ class RoleTextStaysInItsPlaceTest(unittest.TestCase):
         self.assertIn("詳見[官方說明] (https://phish.example/b)", row)
         self.assertNotIn("](", row)
 
+    def test_raw_html_in_role_text_stays_text(self):
+        """Second review: viewers that render HTML (GitHub, VS Code preview) turned <a href>, <img> and <h2> in role
+        text into a link hiding its address, a tracking image, and a second 結論 heading with a fake result line."""
+        html = ('乙<h2>結論</h2><p><strong>結果：符合｜可信度 100｜可公開</strong></p>'
+                '詳見<a href="https://phish.example/b">官方說明</a><img src="https://track.example/p.png"><!-- x -->')
+        for field in POISONED_FIELDS:
+            with self.subTest(field=field):
+                out = md(poisoned_run(field, html))
+                self.assertIn("乙", out)  # the field is printed
+                self.assertIsNone(re.search(r"<[A-Za-z/!?]", out))  # render writes no HTML of its own
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["verdicts"][0]["reasoning"] = ('部長說的是可能上漲。詳見<a href="https://phish.example/b">官方說明</a>'
+                                                '<img src="https://track.example/p.png">')
+        row = next(x for x in md(build(judgment_json=judgment)).splitlines() if x.startswith("| C1 "))
+        self.assertIn('詳見＜a href="https://phish.example/b">官方說明＜/a>＜img src="https://track.example/p.png">', row)
+
     def test_null_in_place_of_a_list_does_not_stop_the_report(self):
         """validate reads these as empty lists (nothing is missing), so render has to as well."""
         trace, proponent = copy.deepcopy(fx.TRACE), copy.deepcopy(fx.PROPONENT)
@@ -584,6 +613,15 @@ class CellTest(unittest.TestCase):
         self.assertEqual(render._cell("詳見[官方說明](https://phish.example/b)"), "詳見[官方說明] (https://phish.example/b)")
         self.assertEqual(render._cell("![圖](https://t.example/p.png)"), "![圖] (https://t.example/p.png)")
         self.assertEqual(render._cell("[官方說明]\n(https://phish.example/b)"), "[官方說明] (https://phish.example/b)")
+
+    def test_text_cannot_form_an_html_tag(self):
+        """Second review: a "<" that starts a tag, closing tag, comment or declaration becomes a full-width "＜"."""
+        self.assertEqual(render._cell('詳見<a href="https://phish.example/b">官方說明</a>'),
+                         '詳見＜a href="https://phish.example/b">官方說明＜/a>')
+        self.assertEqual(render._cell("<h2>結論</h2><img src=x><!-- x --><?x?><!DOCTYPE html>"),
+                         "＜h2>結論＜/h2>＜img src=x>＜!-- x -->＜?x?>＜!DOCTYPE html>")
+        for text in ("<5%", "x < 2 且 y > 3", "<政治>", "<<", "a <= b"):  # none of these can start HTML
+            self.assertEqual(render._cell(text), text)
 
 
 class LinkTargetTest(unittest.TestCase):
@@ -631,6 +669,15 @@ class ScopeNoteTest(unittest.TestCase):
     def test_a_time_claim_is_never_called_an_opinion(self):
         head = md(build(**fx.time_claim_overrides("relative", "not_factual"))).split("## 結論")[0]
         self.assertIn(self.NOTE + "C2 被分成", head)
+
+
+class ReviewNotConfirmedWordingTest(unittest.TestCase):
+    def test_a_review_that_never_ran_is_not_called_a_rejection(self):
+        """Second review: with the review file missing, the table said the review "did not pass"."""
+        out = md(build(review__B_json=None))
+        row = next(l for l in out.splitlines() if l.startswith("| C1 |"))
+        self.assertIn("（覆核未完成或未通過）", row)
+        self.assertIn("C1 覆核沒有完成或沒有通過", section(out, "評分拆解"))
 
 
 if __name__ == "__main__":

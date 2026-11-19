@@ -172,7 +172,7 @@ def _confidence(claims, ledger_by_id, run, seats):
 
     for c in claims:
         if c.get("review_status") == "failed" and c.get("type") not in UNSCORED_TYPES:
-            deduct(10, f"{c['claim_id']} 覆核沒有通過")
+            deduct(10, f"{c['claim_id']} 覆核沒有完成或沒有通過")
 
     limited = []
     for c in claims:

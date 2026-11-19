@@ -63,9 +63,12 @@ def main():
     def together(name, cmds):
         procs = [subprocess.Popen(fc_cmd + list(map(str, c)), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
                                   env={**env, "FC_USAGE_TAG": name}) for c in cmds]
+        codes = []
         for c, p in zip(cmds, procs):
             out, _ = p.communicate()
+            codes.append(p.returncode)
             log(name, f"fc {' '.join(map(str, c[:6]))} -> {p.returncode} {out[-300:].strip()}")
+        return codes
 
     def load(job):
         if job.startswith("probes/"):
@@ -107,7 +110,7 @@ def main():
         else:
             (run / "message.txt").write_text(spec["input"].strip(), encoding="utf-8")
             p = fc(name, "input", "--run", run, "--type", "text", "--file", run / "message.txt", "--prompt-file", run / "prompt.txt")
-        status = "failed at input" if p.returncode else None
+        status, unreviewed = ("failed at input" if p.returncode else None), []
         for role in ("prep",) if args.prep_only else ("prep", "tracer", "proponent"):
             if status is None and fc(name, "run-model", "--run", run, "--role", role).returncode != 0:
                 status = f"failed at {role}"
@@ -123,14 +126,19 @@ def main():
             listed = fc(name, "reviewers", "--run", run).stdout
             review_seats = [line.split("\t")[0] for line in listed.splitlines() if "\t" in line]
             if review_seats:
-                together(name, [["run-model", "--run", run, "--role", "review", "--seat", s] for s in review_seats])
+                cmds = [["run-model", "--run", run, "--role", "review", "--seat", s] for s in review_seats]
+                # SKILL.md step 8: a review that fails is rerun once; if it fails again the run settles without it.
+                for c in [c for c, code in zip(cmds, together(name, cmds)) if code != 0]:
+                    if fc(name, *c).returncode != 0:
+                        unreviewed.append(c[-1])
             for step in ("finalize", "score", "render"):
                 if status is None and fc(name, step, "--run", run).returncode != 0:
                     status = f"failed at {step}"
         status = status or "ok"
         log(name, f"done: {status}")
         return {**{k: spec[k] for k in ("kind", "probe", "target") if k in spec}, "name": name, "job": job_id,
-                "run": str(run), "status": status, "minutes": round((time.time() - t0) / 60, 1)}
+                "run": str(run), "status": status, "unreviewed_seats": unreviewed,
+                "minutes": round((time.time() - t0) / 60, 1)}
 
     results_path = base / "results.json"
     results = json.loads(results_path.read_text()) if results_path.exists() else []
