@@ -172,5 +172,16 @@ class EvalCasesTest(unittest.TestCase):
             self.assertIn(needed, labels)
 
 
+class VersionTest(unittest.TestCase):
+    def test_the_script_and_the_plugin_manifest_carry_the_same_version(self):
+        """The report prints fc.py's version; the plugin manifest is what an installer sees."""
+        import json
+        import re
+        script = (ROOT / "skills" / "factcheck" / "scripts" / "fc.py").read_text(encoding="utf-8")
+        version = re.search(r'^VERSION = "([^"]+)"', script, re.M).group(1)
+        self.assertEqual(json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text())["version"], version)
+        self.assertRegex(version, r"^\d+\.\d+\.\d+$")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,6 +1,6 @@
 {
   "name": "taiwan-factcheck",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "台灣訊息查核：一個正方對三個反方加跨模型抗辯，查核新聞、轉傳、截圖、影片，產出附出處、可以重現的報告。",
   "author": { "name": "taiwan-political-skills contributors" },
   "license": "MIT",

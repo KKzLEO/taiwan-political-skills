@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from fclib import detect, evalcmp, finalize, io, media, render, run_model, score, validate, video  # noqa: E402
 from fclib.labels import HOSTS, MODES  # noqa: E402
 
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 TZ = dt.timezone(dt.timedelta(hours=8))
 STAGES = ["run.json", "models.json", "input.json", "source.json", "claims.json", "trace.json", "proponent.json",
           "opponent-*.json", "rebuttal.json", "judgment.json", "review-*.json", "verdicts.json",
