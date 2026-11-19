@@ -52,7 +52,8 @@ def main():
     batch = json.loads((base / "batch.json").read_text()) if (base / "batch.json").exists() else {}
     print(f"程式：{batch.get('commit', '?')}；主模型：{batch.get('host_model', '?')}，推理強度 {batch.get('host_effort', '?')}\n")
 
-    cases = sorted((r for r in results if r.get("kind") == "case"), key=lambda r: r["name"])
+    cases = sorted((r for r in results if r.get("kind") == "case" and r["status"] != "stopped after prep"),
+                   key=lambda r: r["name"])  # split-only runs are listed in their own table
     tally = Counter()
     if cases:
         print("| 案例 | 預期 | 結果 | 比對 | 可信度 | 信心度 | 可公開 | 不能公開的原因 | 命題判對 | 分鐘 |")
@@ -86,6 +87,8 @@ def main():
         if r.get("kind") == "probe":
             probes[r["probe"]].append(r)
     for stem, rows in sorted(probes.items()):
+        if not any(r["status"] == "ok" for r in rows):  # split only: listed in the table below
+            continue
         expect = tomllib.load(open(repo / "evals/probes" / f"{stem}.toml", "rb")).get("expect", {})
         print(f"\n| 探測 {stem} | 結果 | 可信度 | 信心度 | 可公開 | 留下的手法標記 | 計分命題的判定 | 時間標記 | 各類型的命題數 |"
               "\n|---|---|---|---|---|---|---|---|---|")
@@ -117,6 +120,16 @@ def main():
             missing = [t for t in expect.get("required_tactics", []) if any(t not in s[1] for s in seen)]
             if expect.get("required_tactics"):
                 print(f"預期要有的手法標記 {'、'.join(expect['required_tactics'])}：{'都有' if not missing else '缺 ' + '、'.join(missing)}")
+
+    split_only = sorted((r for r in results if r["status"] == "stopped after prep"), key=lambda r: r["name"])
+    if split_only:
+        print("\n| 只跑到拆題 | 提問有預設立場 | 時間標記 | 各類型的命題數 | 命題（類型、重要性、中立改寫的開頭） |\n|---|---|---|---|---|")
+        for r in split_only:
+            doc = io.read_json(Path(r["run"]) / "claims.json")
+            marks = "、".join(f"{k}:{v}" for k, v in (doc.get("time_claims") or {}).items() if v) or "—"
+            types = "、".join(f"{t}×{n}" for t, n in sorted(Counter(c["type"] for c in doc["claims"]).items()))
+            listed = "；".join(f"{c['id']} {c['type']}{c['importance']} {c['neutral'][:18]}" for c in doc["claims"])
+            print(f"| {r['name']} | {'是' if doc.get('prompt_was_leading') else '否'} | {marks} | {types} | {listed} |")
 
     usage = defaultdict(Counter)
     for name, kind in (("usage.jsonl", "claude"), ("usage-codex.jsonl", "codex")):

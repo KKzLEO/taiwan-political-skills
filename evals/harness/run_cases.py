@@ -3,8 +3,8 @@
 
     python3 evals/harness/run_cases.py --base <output folder> --host-model <model id> [--workers 2] JOB...
 
-JOB is a case id (case-027) or a probe variant written as probes/<file stem>/<target>
-(probes/symmetry-time/國民黨).
+JOB is a case id (case-027) or a probe variant written as probes/<file stem>/<target>:
+probes/symmetry-time/國民黨 (a party), probes/leading/pan-blue (a way of asking), probes/injection/injected.
 
 For each job, in a fresh run folder under <base>/factcheck-runs/:
   init -> models.json (one real `detect --probe` per batch, copied in) -> input -> prep -> tracer -> proponent
@@ -74,9 +74,14 @@ def main():
         if job.startswith("probes/"):
             _, stem, target = job.split("/", 2)
             probe = tomllib.load(open(repo / "evals/probes" / f"{stem}.toml", "rb"))
-            v = next(v for v in probe["variant"] if v["target"] == target)
+            if "variant" in probe:  # the same message with the party swapped
+                text, prompt = next(v for v in probe["variant"] if v["target"] == target)["text"], None
+            elif "prompt" in probe:  # leading.toml: one message asked three ways; the target is the stance
+                text, prompt = probe["message"], next(p for p in probe["prompt"] if p["stance"] == target)["text"]
+            else:  # injection.toml: the target is the key that holds the text (clean, injected)
+                text, prompt = probe[target], None
             return {"id": f"{stem}-{target}", "kind": "probe", "probe": stem, "target": target,
-                    "input_type": "text", "input": v["text"]}
+                    "input_type": "text", "input": text, "prompt": prompt}
         case = tomllib.load(open(repo / "evals/cases" / f"{job}.toml", "rb"))
         return {"id": case["id"], "kind": "case", "input_type": case["input_type"], "input": case["input"]}
 
@@ -103,7 +108,8 @@ def main():
         run = new_run(name)
         shutil.copy(detect_run / "models.json", run / "models.json")
         log(name, f"run dir {run}")
-        (run / "prompt.txt").write_text("幫我查核這篇報導" if spec["input_type"] == "url" else "幫我查核這則訊息", encoding="utf-8")
+        (run / "prompt.txt").write_text(
+            spec.get("prompt") or ("幫我查核這篇報導" if spec["input_type"] == "url" else "幫我查核這則訊息"), encoding="utf-8")
         if spec["input_type"] == "url":
             (run / "url.txt").write_text(spec["input"].strip(), encoding="utf-8")
             p = fc(name, "input", "--run", run, "--type", "url", "--url-file", run / "url.txt", "--prompt-file", run / "prompt.txt")
