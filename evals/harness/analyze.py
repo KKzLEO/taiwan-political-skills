@@ -48,9 +48,13 @@ def main():
     sys.path.insert(0, str(repo / "skills/factcheck/scripts"))
     from fclib import evalcmp, io  # the snapshot's own comparison code
 
-    results = json.loads((base / "results.json").read_text())
+    listed = json.loads((base / "results.json").read_text())
+    results = list({r["name"]: r for r in listed}.values())  # a job run again counts once, by its last run
+    again = sorted({r["name"] for r in listed if sum(x["name"] == r["name"] for x in listed) > 1})
     batch = json.loads((base / "batch.json").read_text()) if (base / "batch.json").exists() else {}
     print(f"程式：{batch.get('commit', '?')}；主模型：{batch.get('host_model', '?')}，推理強度 {batch.get('host_effort', '?')}\n")
+    if again:
+        print(f"重跑過、只算最後一次的：{'、'.join(again)}\n")
 
     cases = sorted((r for r in results if r.get("kind") == "case" and r["status"] != "stopped after prep"),
                    key=lambda r: r["name"])  # split-only runs are listed in their own table
@@ -93,7 +97,7 @@ def main():
 
     probes = defaultdict(list)
     for r in results:
-        if r.get("kind") == "probe":
+        if r.get("kind") == "probe" and "probe" in r:
             probes[r["probe"]].append(r)
     for stem, rows in sorted(probes.items()):
         if not any(r["status"] == "ok" for r in rows):  # split only: listed in the table below

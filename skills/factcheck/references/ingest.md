@@ -7,7 +7,7 @@
   "url": "原始網址或 null",
   "outlet": "媒體名稱或 null",
   "byline": "記者署名原文或 null",
-  "published_at": "發布時間（ISO 8601，例如 2025-09-26T10:00:00+08:00）或 null",
+  "published_at": "發布時間（ISO 8601，例如 2025-09-26T10:00:00+08:00）；內容本身看不到完整的年月日就填 null",
   "retrieved_at": "取得時間（ISO 8601，台灣時間）",
   "notes": "取得方式、限制"
 }

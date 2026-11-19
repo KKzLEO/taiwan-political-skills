@@ -35,8 +35,8 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方�
    ```bash
    python3 "$SKILL/scripts/fc.py" detect --run "$RUN" --probe
    ```
-   Claude Code 上要另外加 `--host-model` 和 `--host-effort`，見 host-claude.md；Codex 的角色用哪個模型和推理強度，見 host-codex.md。把列出的席位告訴使用者。沒有任何外部席位時，提醒他報告的信心度會扣 20 分，可以裝 Codex、Claude Code 或 Gemini CLI 補上。
-4. **中斷後重跑：** 先確認沒有還在跑的 `fc.py` 指令，再執行 `python3 "$SKILL/scripts/fc.py" status --run "$RUN"`。標「完成」的步驟跳過。`rebuttal.json` 還是「缺少」時，反方標「失敗」或「缺少」的席位先重跑那一席；覆核標「缺少（要覆核…）」的席位重跑那一席；其餘照順序往下做。用 `--force` 重跑過某一步之後，它後面的步驟都要照順序重跑（`status` 只看格式，看不出後面的檔案已經過期）。
+   Claude Code 上要另外加 `--host-model` 和 `--host-effort`，見 host-claude.md；Codex 的角色用哪個模型和推理強度，見 host-codex.md。把列出的席位告訴使用者。沒有任何外部席位時，提醒他報告的信心度會扣 20 分，可以裝 Codex 或 Claude Code 補上（Gemini CLI 還沒有實測，不會入席）。
+4. **中斷後重跑：** 先確認沒有還在跑的 `fc.py` 指令，再執行 `python3 "$SKILL/scripts/fc.py" status --run "$RUN"`。標「完成」的步驟跳過。`rebuttal.json` 還是「缺少」時，反方標「失敗」或「缺少」的席位先重跑那一席；覆核標「缺少（要覆核…）」的席位重跑那一席；其餘照順序往下做。某一步重做成功之後，程式會刪掉它後面各步驟的舊輸出（那些是照舊內容做的，包括覆核、分數和報告），`status` 會把它們列成「缺少」，照順序重跑就好。
 
 ### 1. 收集輸入 → `input.json`
 

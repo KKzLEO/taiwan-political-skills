@@ -191,6 +191,50 @@ class RunModelCliTest(unittest.TestCase):
                           reply=json.dumps(fx.JUDGMENT, ensure_ascii=False))
         self.assertEqual((p.returncode, calls), (0, 1), p.stderr)
 
+    def test_a_redone_judge_leaves_no_review_of_the_old_judgment(self):
+        """Final review: after the judge was redone the old review file still validated, status called it done,
+        and the report said the new verdict had passed review and could be published."""
+        run = with_fake_claude(fx.run_files())
+        for step in ("finalize", "score", "render"):
+            self.assertEqual(fc(step, "--run", run).returncode, 0)
+        redone = copy.deepcopy(fx.JUDGMENT)
+        redone["verdicts"][0]["label"] = "false"  # was: misleading, reviewed by seat B
+        p, calls = fc_env(run, "run-model", "--run", run, "--role", "judge", "--force",
+                          reply=json.dumps(redone, ensure_ascii=False))
+        self.assertEqual((p.returncode, calls), (0, 1), p.stderr)
+        for gone in ("review-B.json", "verdicts.json", "score.json", "report.md"):
+            self.assertFalse((run / gone).exists(), gone)
+        for kept in ("opponent-B.json", "rebuttal.json", "proponent.json"):
+            self.assertTrue((run / kept).exists(), kept)
+        self.assertIn("缺少（要覆核 C1）", fc("status", "--run", run).stdout)
+        p = fc("finalize", "--run", run)
+        self.assertIn("席位 B 沒有覆核檔", p.stderr)
+        self.assertIn('"publishable": false', fc("score", "--run", run).stdout)
+
+    def test_a_rerun_seat_leaves_nothing_built_on_the_old_seat(self):
+        run = with_fake_claude(fx.run_files())
+        failed = {**fx.OPP_C, "status": "failed", "error": "額度用完", "attacks": []}
+        (run / "opponent-C.json").write_text(json.dumps(failed, ensure_ascii=False))
+        p, calls = fc_env(run, "run-model", "--run", run, "--role", "opponent", "--seat", "C",
+                          reply=json.dumps({"searches_run": 2, "attacks": []}, ensure_ascii=False))
+        self.assertEqual((p.returncode, calls), (0, 1), p.stderr)
+        for gone in ("rebuttal.json", "judgment.json", "review-B.json"):
+            self.assertFalse((run / gone).exists(), gone)
+        for kept in ("opponent-A.json", "opponent-B.json", "opponent-X1.json", "proponent.json", "trace.json"):
+            self.assertTrue((run / kept).exists(), kept)
+
+    def test_settling_again_leaves_no_score_or_report_of_the_old_verdicts(self):
+        run = make_run(fx.run_files())
+        for step in ("finalize", "score", "render"):
+            self.assertEqual(fc(step, "--run", run).returncode, 0)
+        fc("finalize", "--run", run)
+        self.assertFalse((run / "score.json").exists())
+        self.assertFalse((run / "report.md").exists())
+        fc("score", "--run", run)
+        fc("render", "--run", run)
+        fc("score", "--run", run)
+        self.assertFalse((run / "report.md").exists())
+
     def test_a_missing_review_is_still_run(self):
         run = with_fake_claude(fx.run_files(review__B_json=None))
         p, calls = fc_env(run, "run-model", "--run", run, "--role", "review", "--seat", "B",

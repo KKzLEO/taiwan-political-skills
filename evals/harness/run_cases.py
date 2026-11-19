@@ -100,13 +100,24 @@ def main():
     if d.returncode != 0 or not (detect_run / "models.json").exists():
         sys.exit(f"detect failed: {d.stderr[-500:]}")
     print(d.stdout.strip(), d.stderr.strip(), sep="\n", flush=True)
-    head = subprocess.run(["git", "-C", str(repo), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+    # A snapshot has no .git of its own; asked there, git answers for whatever repo the folder sits in. The export
+    # writes the commit it was made from into a COMMIT file, and that is what gets recorded.
+    stamp = repo / "COMMIT"
+    head = stamp.read_text().strip() if stamp.exists() else subprocess.run(
+        ["git", "-C", str(repo), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip() + "（工作目錄，可能有沒 commit 的修改）"
     (base / "batch.json").write_text(json.dumps(
         {"repo": str(repo), "commit": head or "snapshot", "host": args.host, "host_model": args.host_model,
          "host_effort": args.host_effort, "started": time.strftime("%Y-%m-%d %H:%M:%S"), "jobs": args.jobs,
          "models": json.loads((detect_run / "models.json").read_text())}, ensure_ascii=False, indent=1))
 
     def job(job_id):
+        try:
+            return run_job(job_id)
+        except Exception as exc:  # one broken job (a wrong name, a crash) must not lose the record of the others
+            return {"name": job_id, "job": job_id, "kind": "probe" if job_id.startswith("probes/") else "case",
+                    "run": "", "status": f"failed: {type(exc).__name__}: {exc}", "unreviewed_seats": [], "minutes": 0}
+
+    def run_job(job_id):
         spec = load(job_id)
         name, t0 = spec["id"], time.time()
         run = new_run(name)

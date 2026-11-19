@@ -740,6 +740,19 @@ class PrepRoleTest(unittest.TestCase):
             self.assertNotIn("騙人", p, role)
             self.assertNotIn("反民進黨", p, role)
 
+    def test_a_short_question_and_other_ways_of_naming_it_are_caught_too(self):
+        """Final review: a question under six characters had no six-character piece to match, only 「提問」 counted
+        as naming it, and only the notes were filtered."""
+        run = self.run_dir({**INPUT, "prompt": "又在騙？"})
+        source = {**fx.SOURCE, "notes": "沒有附來源；使用者問「又在騙？」，問法帶有立場。", "outlet": "使用者問：又在騙？",
+                  "byline": "記者 王小明"}
+        claims = copy.deepcopy(fx.CLAIMS)
+        claims["claims"][0]["asker_view"] = "使用者認為又在騙"
+        run_model.run_role(run, "prep", None, CLAUDE, runner=FakeRunner([prep_reply(source, claims)]), env={})
+        saved = json.loads((run / "source.json").read_text())
+        self.assertEqual((saved["notes"], saved["outlet"], saved["byline"]), ("沒有附來源；", None, "記者 王小明"))
+        self.assertNotIn("asker_view", json.loads((run / "claims.json").read_text())["claims"][0])
+
     def test_notes_about_the_message_stay_when_the_question_quotes_it(self):
         run = self.run_dir({**INPUT, "prompt": "「明年油價一定漲三成」是真的嗎"})
         source = {**fx.SOURCE, "notes": "訊息說明年油價一定漲三成，沒有附來源。"}

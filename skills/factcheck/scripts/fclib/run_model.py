@@ -346,13 +346,24 @@ def strip_tracking(url):
     return url if len(kept) == len(pairs) else urlunsplit(parts._replace(query="&".join(kept)))
 
 
+ASKED = ("提問", "使用者問", "使用者說", "使用者認為", "問法", "詢問")  # ways the split names the user's question
+CLAIM_FIELDS = ("id", "original", "neutral", "type", "importance", "core", "legal", "time_place", "entities",
+                "search_seeds")
+
+
+def _quotes_question(text, prompt, message):
+    """Whether the text names the user's question or copies a piece of it that the message does not have: a word
+    for asking the message never uses, six characters of the question, or all of a question shorter than that."""
+    prompt = prompt.strip()
+    pieces = [prompt[i:i + 6] for i in range(len(prompt) - 5)] or ([prompt] if len(prompt) >= 2 else [])
+    return any(w in text and w not in message for w in ASKED) or any(p in text and p not in message for p in pieces)
+
+
 def _without_question(notes, prompt, message):
-    """The notes minus each sentence that names the question or copies six characters of it that the message does
-    not have: source.json goes to every later role, and none of them may see how the user asked (_common.md)."""
-    def quotes(sentence):  # 「提問」 names the question only when the message itself does not talk of one
-        return ("提問" in sentence and "提問" not in message) or any(
-            prompt[i:i + 6] in sentence and prompt[i:i + 6] not in message for i in range(len(prompt) - 5))
-    return "".join(s for s in re.split(r"(?<=[。！？!?\n])", notes) if not quotes(s)).strip()
+    """The notes minus each sentence that quotes the question: source.json goes to every later role, and none of
+    them may see how the user asked (_common.md)."""
+    sentences = re.split(r"(?<=[。！？!?；;\n])|(?<=\.)(?=\s)", notes)
+    return "".join(s for s in sentences if s and not _quotes_question(s, prompt, message)).strip()
 
 
 def _run_prep(run, engine, runner, env):
@@ -386,18 +397,26 @@ def _run_prep(run, engine, runner, env):
                 source["url"] = strip_tracking(url) if url else None
             if inp["input_type"] == "text":  # a forwarded text has no publication time of its own (neutralize.md rule 6)
                 source["published_at"] = None
+            asked = str(inp.get("prompt") or "")  # the link and the pasted text are the message, not the question
+            message = " ".join(str(x or "") for x in (source.get("original_text"), inp.get("content"), inp.get("url")))
             if isinstance(source.get("notes"), str):
-                source["notes"] = _without_question(  # the link and the pasted text are the message, not the question
-                    source["notes"], str(inp.get("prompt") or ""),
-                    " ".join(str(x or "") for x in (source.get("original_text"), inp.get("content"), inp.get("url"))))
+                source["notes"] = _without_question(source["notes"], asked, message)
+            for field in ("outlet", "byline"):  # short fields: one that quotes the question is not an outlet or a byline
+                if isinstance(source.get(field), str) and _quotes_question(source[field], asked, message):
+                    source[field] = None
+            doc = {k: v for k, v in obj["claims"].items() if k in CLAIMS_FIELDS}
+            if isinstance(doc.get("claims"), list):  # a claim keeps only the fields the rules list
+                doc["claims"] = [{k: v for k, v in c.items() if k in CLAIM_FIELDS} if isinstance(c, dict) else c
+                                 for c in doc["claims"]]
             io.write_json(outputs[0], source)
-            io.write_json(outputs[1], {k: v for k, v in obj["claims"].items() if k in CLAIMS_FIELDS})
+            io.write_json(outputs[1], doc)
             wrote = True
             errors = [f"{p.name}：{e}" for p in outputs for e in validate.validate_file(run, p.name)]
             # Skeptic review: with no text the quote check is skipped, so claims could be invented.
             if not str(source.get("original_text") or "").strip():
                 errors.append(NO_TEXT)
             if not errors:
+                drop_later(run, "prep")
                 return outputs[1]
         if wrote:  # second review: a retry cut short must not leave the rejected files looking finished
             for p in outputs:
@@ -406,6 +425,24 @@ def _run_prep(run, engine, runner, env):
     raise RunModelError(f"prep 在 {engine['engine']} 上失敗：" + "；".join(errors)
                         + _keep_rejected(run / "prep.json.rejected", rejected)
                         + (NO_TEXT_FOR_HOST if NO_TEXT in errors else ""))  # the retry hint above is the model's
+
+
+# What each step leaves behind, in the order the steps run. A step's output must not outlive the files it was made
+# from: a judgment redone after the reviews left reviews of the old judgment that still validated, and the report
+# said the new verdict had passed review (final review, 2026-11-20).
+STEP_OUTPUTS = [("prep", ["source.json", "claims.json"]), ("tracer", ["trace.json"]), ("proponent", ["proponent.json"]),
+                ("opponent", ["opponent-*.json"]), ("rebuttal", ["rebuttal.json"]), ("judge", ["judgment.json"]),
+                ("review", ["review-*.json"]), ("finalize", ["verdicts.json"]), ("score", ["score.json"]),
+                ("render", ["report.md"])]
+
+
+def drop_later(run, step):
+    """Delete what the steps after `step` wrote, now that `step` has written a new output."""
+    order = [name for name, _ in STEP_OUTPUTS]
+    for _, patterns in STEP_OUTPUTS[order.index(step) + 1:]:
+        for pattern in patterns:
+            for path in Path(run).glob(pattern):
+                path.unlink()
 
 
 def finished(run, role, seat, known_tactics=None):
@@ -472,6 +509,7 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
             io.write_json(target, obj)
             errors = validate.validate_file(run, name, known_tactics=known_tactics)
             if not errors:
+                drop_later(run, role)
                 return target
             parsed.append((obj, errors))
             target.unlink()
@@ -486,6 +524,7 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
             continue
         io.write_json(target, fixed)
         if not validate.validate_file(run, name, known_tactics=known_tactics):
+            drop_later(run, role)
             return target
         target.unlink()
 
@@ -496,5 +535,6 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
         error = (error[:500 - len(kept)] + kept) if kept else error[:500]  # the path must survive the cut
         io.write_json(target, {"seat": seat, "engine": engine["engine"], "lens": lens,
                                "status": "failed", "error": error, "attacks": []})
+        drop_later(run, role)
         return target
     raise RunModelError(f"{role} 在 {engine['engine']} 上失敗：" + "；".join(errors) + kept)

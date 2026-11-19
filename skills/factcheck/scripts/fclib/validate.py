@@ -156,7 +156,7 @@ def _claims(d, run, ctx):
         err.need(isinstance(c.get("legal", False), bool), f"{p}.legal 必須是 true/false")
     err.need(isinstance(d.get("prompt_was_leading", False), bool), "prompt_was_leading 必須是 true/false")
     _check_time_claims(err, d.get("time_claims"), claims, run)
-    _check_claim_spans(err, claims, run)
+    _check_claim_spans(err, claims, run, d.get("time_claims"))
     return err
 
 
@@ -311,7 +311,7 @@ def _tag_errors(i, t, lib, hay, has_report):
     return errs
 
 
-def _check_claim_spans(err, claims, run):
+def _check_claim_spans(err, claims, run, time_claims=None):
     """Every claim quotes the message, and two stated (or two implied) claims never share words,
     so one sentence cannot be scored both whole and in fragments. Skipped when only a URL was given."""
     source = io.read_json_or_none(run / "source.json") or {}
@@ -336,10 +336,15 @@ def _check_claim_spans(err, claims, run):
         group = {c.get("id"): found[c.get("id")] for c in claims
                  if isinstance(c, dict) and c.get("type") in types and c.get("id") in found}
         ok, groups = spans.clash_groups(group)
-        if not ok:
-            err.append(f"{'；'.join('、'.join(g) for g in groups)} 的原文在訊息裡重疊（分號隔開的是不同組）："
-                       f"同一段話只能有一個{kind}的命題。請合併成一條；只有那句話真的有幾個能各自成立的主張時，"
-                       "才切成不重疊的幾段（見中立化的拆題規則）")
+        timed = {v for v in (time_claims or {}).values() if v} if isinstance(time_claims, dict) else set()
+        for g in [] if ok else groups:
+            marked = [cid for cid in g if cid in timed]
+            if marked:  # merging would put "when" and "what" in one claim, the opposite of rule 6
+                err.append(f"{'、'.join(g)} 的原文在訊息裡重疊。{'、'.join(marked)} 是時間命題：請讓它只抄講時間的那幾個字"
+                           "（例如只抄「昨天」「剛剛」，或只抄講期限的那一小段），不要和另一條隱含命題合併")
+            else:
+                err.append(f"{'、'.join(g)} 的原文在訊息裡重疊：同一段話只能有一個{kind}的命題。請合併成一條；"
+                           "只有那句話真的有幾個能各自成立的主張時，才切成不重疊的幾段（見中立化的拆題規則）")
 
 
 def _trace(d, run, ctx):

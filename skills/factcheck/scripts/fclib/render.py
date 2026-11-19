@@ -222,18 +222,29 @@ def render(run, outlets=None, tactics=None) -> str:
             f"- 查核時間：{rj.get('created_at', '')}；{mode}；主體：{models['host']}",
             f"- 輸入類型：{INPUT.get(source.get('input_type'), source.get('input_type'))}"
             + (f"；網址：{_cell(source['url'])}" if source.get("url") else ""),
-            "", "| 席位 | 角色 | 模型 | 狀態 | 跨模型 | 能上網 | 隔離 |", "|---|---|---|---|---|---|---|"]
+            "", "| 席位 | 角色 | 模型 | 狀態 | 搜尋次數 | 攻擊數 | 跨模型 | 能上網 | 隔離 |", "|---|---|---|---|---|---|---|---|---|"]
     for s in seats:
+        # What the seat says it did: "succeeded" alone cannot tell a seat that found nothing from one that did not look.
+        work = io.read_json_or_none(run / f"opponent-{s['seat']}.json") or {}
+        searched = work.get("searches_run") if isinstance(work.get("searches_run"), int) else "沒有回報"
+        attacks = len(work["attacks"]) if isinstance(work.get("attacks"), list) else "—"
         out.append(f"| {s['seat']} | {LENS.get(s['lens'], s['lens'])} | {_model_cell(models, s)} | "
-                   f"{ {'ok': '成功', 'missing': '沒有執行'}.get(s['status'], '失敗')} | {'是' if s['cross_model'] else '否'} | "
+                   f"{ {'ok': '成功', 'missing': '沒有執行'}.get(s['status'], '失敗')} | "
+                   f"{searched if s['status'] == 'ok' else '—'} | {attacks if s['status'] == 'ok' else '—'} | "
+                   f"{'是' if s['cross_model'] else '否'} | "
                    f"{'是' if s['can_search'] else '否'} | {ISOLATION.get(s['isolation'], s['isolation'])} |")
     out.append("")  # a list item right under a table row is read as part of the table by some viewers
+    dated = str(source.get("published_at") or "").strip()
+    if dated:  # the two time claims are for undated content only; say so, and show the date they are judged from
+        out.append(f"- 內容的發布時間：{_cell(dated)}。裡面的期限和相對時間照發布當時判，沒有檢查現在是否已經過期。")
     if timed:
         out.append(f"- 時間命題：{'、'.join(c['claim_id'] + '（' + TIME_KINDS[c['time']] + '）' for c in timed)}。"
                    "判對不加分；判錯時，期限前提讓可信度不高於它的正確度，暗示的時間讓可信度最高 79。")
+    elif dated:
+        out.append("- 時間命題：不適用（內容有發布時間）。")
     else:
         out.append("- 時間命題：沒有（拆題沒有標出期限前提或暗示的時間）。")
-    if not any(c["time"] == "relative" for c in timed) and not str(source.get("published_at") or "").strip():
+    if not any(c["time"] == "relative" for c in timed) and not dated:
         said = next((w for w in JUST_NOW if w in (source.get("original_text") or "")), None)
         if said:
             out.append(f"  - 訊息裡有「{said}」，如果這其實是舊消息，結論沒有反映這一點。")

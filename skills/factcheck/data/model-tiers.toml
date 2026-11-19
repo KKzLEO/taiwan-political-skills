@@ -1,5 +1,5 @@
 schema_version = 1
-updated = "2026-11-19"
+updated = "2026-11-20"
 
 # 主體平台對應的廠商。同一家的模型不算跨模型。
 [hosts]
@@ -27,8 +27,8 @@ id = "gemini"
 vendor = "google"
 cli = "gemini"
 can_search = true
-same_tier = true
-note = "gemini -p。本專案尚未實測，歡迎回報。"
+same_tier = false
+note = "gemini -p。這條指令沒有實測過，也沒有隔離和鎖工具的參數，所以預設不入席；實測過再改成 true。"
 
 [[engine]]
 id = "ollama"

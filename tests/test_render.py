@@ -448,6 +448,24 @@ class TimeClaimTest(unittest.TestCase):
                       "暗示的時間讓可信度最高 79。", scope)
         self.assertIn("C3（期限前提）", section(md(build(**fx.time_claim_overrides("deadline", "true"))), "查核範圍和限制"))
 
+    def test_dated_content_says_its_date_and_that_time_claims_do_not_apply(self):
+        """Final review: the same sentence was 不符 as pasted text and 符合 as a dated screenshot, and the report
+        showed neither the date nor why."""
+        scope = section(md(build(source_json={**fx.SOURCE, "input_type": "image", "published_at": "2026-10-01"})),
+                        "查核範圍和限制")
+        self.assertIn("- 內容的發布時間：2026-10-01。裡面的期限和相對時間照發布當時判，沒有檢查現在是否已經過期。", scope)
+        self.assertIn("- 時間命題：不適用（內容有發布時間）。", scope)
+        self.assertNotIn("拆題沒有標出", scope)
+
+    def test_the_seat_table_shows_how_much_each_seat_searched_and_attacked(self):
+        """Final review: an external seat that searched nothing and attacked nothing read the same as one that did."""
+        out = md(build())
+        self.assertIn("| 席位 | 角色 | 模型 | 狀態 | 搜尋次數 | 攻擊數 | 跨模型 | 能上網 | 隔離 |", out)
+        x1 = next(l for l in out.splitlines() if l.startswith("| X1 |"))
+        self.assertIn("| 成功 | 4 | 0 |", x1)
+        b = next(l for l in out.splitlines() if l.startswith("| B |"))
+        self.assertIn("| 成功 | 5 | 1 |", b)
+
     def test_the_time_line_is_not_glued_to_the_seat_table(self):
         """A list item on the line right after a table row is read as part of the table by some viewers."""
         lines = section(md(build()), "查核範圍和限制").splitlines()

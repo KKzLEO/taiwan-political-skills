@@ -174,6 +174,16 @@ class EvalCasesTest(unittest.TestCase):
             self.assertIn(needed, labels)
 
 
+class TiersTest(unittest.TestCase):
+    def test_an_engine_whose_command_was_never_run_is_not_seated_by_default(self):
+        """Final review: a Gemini CLI on the machine was seated as a cross-model opponent with a bare `gemini -p -`:
+        no isolation flag, no tool lock, never run once."""
+        tiers = load(SKILL / "data" / "model-tiers.toml")
+        gemini = next(e for e in tiers["engine"] if e["id"] == "gemini")
+        self.assertFalse(gemini["same_tier"])
+        self.assertIn("沒有實測", gemini["note"])
+
+
 class VersionTest(unittest.TestCase):
     def test_the_script_and_the_plugin_manifest_carry_the_same_version(self):
         """The report prints fc.py's version; the plugin manifest is what an installer sees."""

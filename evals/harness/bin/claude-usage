@@ -11,7 +11,7 @@ sys.stdout.buffer.write(p.stdout)
 sys.stderr.buffer.write(p.stderr)
 rec = {"t": time.strftime("%Y-%m-%d %H:%M:%S"), "tag": os.environ.get("FC_USAGE_TAG", "?"), "code": p.returncode,
        "secs": round(time.time() - t0)}
-m = re.search("輸出檔名：`([^`]+)`", data.decode("utf-8", "ignore"))
+m = re.search("你的輸出會由程式存成 `([^`]+)`", data.decode("utf-8", "ignore"))
 rec["out"] = m.group(1) if m else None
 try:
     j = json.loads(p.stdout)

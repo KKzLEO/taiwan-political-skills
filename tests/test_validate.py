@@ -85,6 +85,16 @@ class TimeClaimsTest(unittest.TestCase):
         self.assertTrue(any("同一條" in e for e in self.errs({"deadline": "C3", "relative": "C3"})))
         self.assertEqual(self.errs({"deadline": "C3", "relative": "C4"}, extra=("C3", "C4")), [])
 
+    def test_a_time_claim_that_overlaps_another_implied_claim_is_told_to_quote_less(self):
+        """Final review: the message said "merge them", which puts "when" and "is it in force" in one claim."""
+        def m(c):
+            c["claims"].append(_claim("C3", "某部長說：明年油價一定漲三成", "I"))  # what the sentence implies
+            c["claims"].append(_claim("C4", "明年", "I"))                            # when
+            c["time_claims"] = {"deadline": None, "relative": "C4"}
+        errs = errors_for("claims.json", m)
+        self.assertTrue(any("C4" in e and "時間命題" in e and "只抄" in e for e in errs), errs)
+        self.assertFalse(any("請合併成一條" in e for e in errs), errs)
+
     def test_content_with_a_publication_time_has_no_time_claims(self):
         dated = {**fx.SOURCE, "published_at": "2026-10-20"}
         for marks in ({"deadline": "C3", "relative": None}, {"deadline": None, "relative": "C3"}):

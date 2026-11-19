@@ -216,6 +216,7 @@ def cmd_finalize(args):
         if errors:
             sys.exit(f"錯誤：{name} 沒有通過檢查：" + ("\n" if len(errors) > 1 else "") + "\n".join(errors))
     io.write_json(run / "verdicts.json", finalize.finalize(run))
+    run_model.drop_later(run, "finalize")  # a score or report of the previous verdicts must not be read as this one's
     # A review that never arrived overturns the judge's label; this is the one place the host is told which seat.
     missing = {s: ids for s, ids in finalize.reviewers_needed(run).items() if not (run / f"review-{s}.json").exists()}
     if missing:
@@ -243,6 +244,7 @@ def cmd_score(args):
         print(f"錯誤：{exc}", file=sys.stderr)
         sys.exit(2)
     io.write_json(run / "score.json", result)
+    run_model.drop_later(run, "score")
     cred = result["credibility"] or {}  # the host reads this line: no number where the report shows none (無法判定)
     print(json.dumps({"result": result["result"], "credibility": cred.get("score") if cred.get("show_on_spectrum") else None,
                       "confidence": result["confidence"]["score"], "publishable": result["publishable"]},
