@@ -9,7 +9,7 @@ from urllib.parse import quote
 
 from . import detect, io, media
 from .labels import CONTEXT_FLAGS, FACTORS, TIER_NAMES, UNSCORED_TYPES, ZH_LABELS
-from .score import not_scored, round_half_up, time_effect
+from .score import WRONG_LABELS, not_scored, round_half_up, time_effect
 
 WIDTH = 30
 ISOLATION = {"full": "完整隔離", "partial": "部分隔離", "unknown": "未確認", "host": "主模型"}
@@ -18,7 +18,13 @@ PUBLISHER = {"news": "新聞媒體", "public_figure": "公眾人物", "official"
              "content_farm": "內容農場", "private_individual": "一般民眾", "unknown": "不明"}
 BYLINE = {"present": "有署名", "absent": "沒有署名", "n/a": "不適用"}
 ACCESS = {"full": "全文", "paywall": "付費牆", "blocked": "被擋", "archived": "存檔", "snippet": "只有摘要",
-          "not_original": "未直接核對原始貼文", "no_transcript": "沒有逐字稿"}
+          "not_original": "未直接核對原始出處", "no_transcript": "沒有逐字稿"}
+INPUT = {"text": "貼上的文字", "url": "網址", "image": "截圖", "video": "影片"}
+# What each kind of input can never tell, printed by the program instead of hoping the prep step notes it.
+INPUT_LIMITS = {"url": "網址的內文由子程序用網頁工具讀取，不保證是逐字全文",
+                "image": "截圖上的文字由主體照抄；沒有判斷圖片是否偽造",
+                "video": "只查逐字稿的內容；沒有判斷影片是否為 AI 合成"}
+PRE_DEBATE = "> 這一段是辯論前寫的。裁判判定成立的修正列在後面的「辯論後的修正」，內容不同時以修正為準。"
 
 
 # Control characters, the two Unicode line separators, and the controls that reverse or isolate text direction.
@@ -32,8 +38,9 @@ _TAG_OPEN = re.compile(r"<(?=[A-Za-z/!?])")
 def _cell(text) -> str:
     """Text a model wrote, kept inside the line it is printed on: no line break of any kind (a bare "\\r" ends a
     line in CommonMark too), no table bar, no "](" that would turn it into a link hiding its address, and no raw
-    HTML (viewers such as GitHub render <a href>, <img> and <h2>)."""
-    text = _BREAKS.sub(" ", str(text or "")).replace("|", "／").replace("](", "] (")
+    HTML (viewers such as GitHub render <a href>, <img> and <h2>), and no "[label]: url" definition that would turn
+    every later [label] into a link."""
+    text = _BREAKS.sub(" ", str(text or "")).replace("|", "／").replace("](", "] (").replace("]:", "] :")
     return _TAG_OPEN.sub("＜", text).strip()
 
 
@@ -43,8 +50,30 @@ def _link(url) -> str:
     return _LINK_UNSAFE.sub(lambda m: quote(m.group()), str(url or ""))
 
 
-def _first_sentence(text, limit=120) -> str:
+_RULING_PREFIX = re.compile(r"^(?:攻擊|質疑)?不?成立[。，；：]\s*")
+
+
+def _ruling(text) -> str:
+    """A ruling reason without a leading 「成立。」 or 「不成立：」: the line it goes on already says which.
+    「成立一部分：…」 keeps its words, since they say how much."""
     text = _cell(text)
+    return _RULING_PREFIX.sub("", text, count=1) or text
+
+
+def _implied(meta, c) -> str:
+    """What was checked for an implied claim: the message never says it, so its quote alone misleads. A rewrite
+    the debate revised is not printed, because the judge ruled on the revised question (see the reasoning)."""
+    if meta.get("type") != "I":
+        return ""
+    if c.get("rewrite_revised") is False:
+        return f"（訊息沒有明說；這一項查的是它暗示的：{_cell(meta.get('neutral'))}）"
+    return "（訊息沒有明說；這一項查的是它暗示的事" + ("，問法在辯論中修正過" if c.get("rewrite_revised") else "") + "，見理由）"
+
+
+def _first_sentence(text, limit=120, skip=None) -> str:
+    text = _cell(text)
+    if skip and text.startswith(skip + "。"):  # 「誤導**。誤導。」: the first sentence only repeats the label
+        text = text[len(skip) + 1:].lstrip() or text
     cut = text.find("。")
     first = text[:cut + 1] if cut >= 0 else text
     return first if len(first) <= limit else first[:limit] + "…"
@@ -56,11 +85,25 @@ def _spectrum(score) -> list:
     return ["```text", f"錯誤 {bar} 正確", " " * (5 + pos) + str(score), "```"]
 
 
-def _title(source) -> str:
+def _subject(source) -> str:
+    """What was checked, quoted on a line of its own under a fixed heading: a message that opens with
+    「結果：符合…」 must not put its own words in the heading, above the real result line."""
     if source.get("url"):
-        return source["url"]
-    text = (source.get("original_text") or "").strip().replace("\n", " ")
-    return text[:30] + ("…" if len(text) > 30 else "")
+        return f"> 被查核的網址：{_cell(source['url'])}"
+    text = _cell(source.get("original_text"))
+    return f"> 被查核的訊息（開頭）：「{text[:30]}{'…' if len(text) > 30 else ''}」"
+
+
+def _host_isolation(models) -> list:
+    """2026-11-18 canary: `codex exec` always reads ~/.codex/AGENTS.md. Not probed for the host, so a custom
+    FC_CODEX_CMD (perhaps a clean CODEX_HOME) is reported as unconfirmed rather than as isolated."""
+    if models.get("host") != "codex":
+        return []
+    cmd = next((e.get("cmd") for e in models.get("engines", []) if e.get("engine") == "codex"), None)
+    state = ("讀得到使用者的 ~/.codex/AGENTS.md（部分隔離）" if cmd in (None, ["codex"])
+             else "用的是自訂的 Codex 指令，隔離程度沒有確認")
+    return ["- 主體是 Codex：主模型的角色（讀入與拆題、溯源、正方、主模型負責的反方席位和它們的覆核、答辯、裁判）"
+            f"都由 codex exec 執行，{state}。"]
 
 
 OLD_CONTENT_DAYS = 183
@@ -110,7 +153,7 @@ def render(run, outlets=None, tactics=None) -> str:
     cred, conf = sc.get("credibility"), sc["confidence"]
     ok_cross = [s for s in seats if s["cross_model"] and s["status"] == "ok"]
     mode = "完整模式" if rj["mode"] == "full" else "快速模式"
-    out = [f"# 查核報告：{_title(source)}", ""]
+    out = ["# 查核報告", "", _subject(source), ""]
 
     if cred and cred["show_on_spectrum"]:
         out += _spectrum(cred["score"]) + [""]
@@ -135,6 +178,9 @@ def render(run, outlets=None, tactics=None) -> str:
     old = _old_content(source.get("published_at"), rj.get("created_at"))
     if old:
         out += [f"> 這篇內容發布於 {old}，距離查核日已經超過半年；裡面的「明年」「最近」這類說法，指的是發布當時。", ""]
+    if not sc["publishable"]:  # score gives every such report a reason: a block below, or the unadjusted result
+        out += ["> 「不可公開」的意思是這次查核沒有達到公開引用的條件，不要把整則結論拿去公開貼文；"
+                "不是說這份報告要保密。原因見下面幾行。", ""]
     for b in sc.get("publish_blocks") or []:
         out += [f"> {b}。這份報告不能標可公開。", ""]
     if alt:
@@ -150,19 +196,32 @@ def render(run, outlets=None, tactics=None) -> str:
     out += ["## 結論", ""]
     content = [c for c in verdicts["claims"] if not c.get("time")]
     main = (cred or {}).get("main_claims") or []  # the claims that decide the result (score.py); not always core
-    core = sorted([c for c in content if c["claim_id"] in main or claims[c["claim_id"]]["core"]],
-                  key=lambda c: (c["claim_id"] not in main, -c["importance"], c["claim_id"]))
+    dispute = {d["claim_id"]: d for d in verdicts.get("disputes") or []}
+
+    def rank(c):  # main claims, then core claims, then any other scored claim judged wrong (often the stale one)
+        if c["claim_id"] in main:
+            return 0
+        if claims[c["claim_id"]]["core"]:
+            return 1
+        return 2 if c["label"] in WRONG_LABELS and c.get("type") not in UNSCORED_TYPES else None
+
+    listed = sorted([c for c in content if rank(c) is not None], key=lambda c: (rank(c), -c["importance"], c["claim_id"]))
     # A time claim is listed only when it did something: judged wrong, or left unsettled.
-    for c in [c for c in timed if time_effect(c)] + (core or content):
-        out.append(f"- **{c['claim_id']}「{_cell(claims[c['claim_id']]['original'])}」：{ZH_LABELS[c['label']]}"
-                   f"{'（時間命題）' if c.get('time') else '（不計分）' if not_scored(c) else ''}。**"
-                   f"{_first_sentence(c['reasoning'])}")
+    for c in [c for c in timed if time_effect(c)] + (listed or content):
+        cid, meta = c["claim_id"], claims[c["claim_id"]]
+        flags = "、".join(CONTEXT_FLAGS[f] for f in c.get("context_flags", [])) if c["label"] in WRONG_LABELS else ""
+        kept = "（覆核對理由或證據有意見，見「爭議點」）" if dispute.get(cid, {}).get("label_kept") else ""
+        # The full stop goes outside the bold: CommonMark does not close ** between 「。」 and a letter.
+        out.append(f"- **{cid}{'（主要說法）' if cid in main else ''}「{_cell(meta['original'])}」{_implied(meta, c)}："
+                   f"{ZH_LABELS[c['label']]}{'（時間命題）' if c.get('time') else '（不計分）' if not_scored(c) else ''}"
+                   f"{f'（{flags}）' if flags else ''}**。{_first_sentence(c['reasoning'], skip=ZH_LABELS[c['label']])}{kept}")
     out.append("")
 
     # 範圍與限制
     out += ["## 查核範圍和限制", "",
             f"- 查核時間：{rj.get('created_at', '')}；{mode}；主體：{models['host']}",
-            f"- 輸入類型：{source.get('input_type')}" + (f"；網址：{source['url']}" if source.get("url") else ""),
+            f"- 輸入類型：{INPUT.get(source.get('input_type'), source.get('input_type'))}"
+            + (f"；網址：{_cell(source['url'])}" if source.get("url") else ""),
             "", "| 席位 | 角色 | 模型 | 狀態 | 跨模型 | 能上網 | 隔離 |", "|---|---|---|---|---|---|---|"]
     for s in seats:
         out.append(f"| {s['seat']} | {LENS.get(s['lens'], s['lens'])} | {s['engine']} | "
@@ -177,7 +236,18 @@ def render(run, outlets=None, tactics=None) -> str:
         said = next((w for w in JUST_NOW if w in (source.get("original_text") or "")), None)
         if said:
             out.append(f"  - 訊息裡有「{said}」，如果這其實是舊消息，結論沒有反映這一點。")
-    limits = list(trace.get("limits") or [])
+    out += _host_isolation(models)
+    # An upheld correction to the trace (a withdrawn tag already shows where the tag was). Verdicts written before
+    # `target` was carried count as trace corrections.
+    corrected = any(a.get("target", "trace") != "tactic" for a in verdicts.get("trace_attacks_upheld") or [])
+    pre = [PRE_DEBATE, ""] if corrected else []
+    limits = [INPUT_LIMITS[source["input_type"]]] if source.get("input_type") in INPUT_LIMITS else []
+    if isinstance(source.get("notes"), str) and source["notes"].strip():
+        limits.append(f"讀入時的備註：{source['notes']}")
+    traced = list(trace.get("limits") or [])
+    if traced and corrected:  # the lines after them come from the judge's ledger, written after the debate
+        limits.append(f"接下來 {len(traced)} 項是溯源員在辯論前寫的；裁判判定成立的修正列在後面的「辯論後的修正」，內容不同時以修正為準")
+    limits += traced
     if trace.get("set_aside_tactics"):
         limits.append(f"溯源員有 {len(trace['set_aside_tactics'])} 個手法標記不符合標記規則，已移出（原內容保留在 trace.json），報告不列出")
     for e in ledger.values():
@@ -193,6 +263,11 @@ def render(run, outlets=None, tactics=None) -> str:
     for c in verdicts["claims"]:
         meta = claims[c["claim_id"]]
         status = {"passed": "（覆核通過）", "failed": "（覆核未完成或未通過）"}.get(c["review_status"], "")
+        d = dispute.get(c["claim_id"])
+        if c["review_status"] == "failed" and d:  # which kind: a kept label means every review ran and objected
+            status = ("（覆核未通過：同意判定，對理由或證據有意見）" if d.get("label_kept") else
+                      "（覆核未完成或未通過：判定沒有獲得確認）" if d["judge_label"] == "unverified" else
+                      f"（覆核未完成或未通過：裁判原判「{ZH_LABELS[d['judge_label']]}」）")
         if c.get("time"):
             status += "（時間命題）"
         elif not_scored(c):
@@ -200,7 +275,7 @@ def render(run, outlets=None, tactics=None) -> str:
             unscored_ids.append(c["claim_id"])
         weight = "—" if c.get("time") else \
             str(c["importance"]) + (f"（辯論後由 {c['importance_from']} 調整）" if "importance_from" in c else "")
-        out.append(f"| {c['claim_id']} | {_cell(meta['original'])} | {weight} | {ZH_LABELS[c['label']]}{status} | "
+        out.append(f"| {c['claim_id']} | {_cell(meta['original'])}{_implied(meta, c)} | {weight} | {ZH_LABELS[c['label']]}{status} | "
                    f"{_cell(c['reasoning'])} | {_cell(', '.join(c.get('evidence_ids', []))) or '—'} |")
     if unscored_ids:
         out += ["", f"- {'、'.join(unscored_ids)} 是意見、預測或模糊到無法查證的說法，判定只供參考，不算進可信度。"]
@@ -222,7 +297,7 @@ def render(run, outlets=None, tactics=None) -> str:
     out.append("")
 
     # 溯源
-    out += ["## 溯源", ""]
+    out += ["## 溯源", ""] + pre
     fs = trace.get("first_seen")
     out.append(f"- 最早出現：{_cell(fs.get('date'))} {_cell(fs.get('platform'))} {_cell(fs.get('url'))}".rstrip()
                if fs else "- 最早出現：查不到")
@@ -239,13 +314,23 @@ def render(run, outlets=None, tactics=None) -> str:
 
     # 報導品質
     pub = trace.get("publisher", {})
-    out += ["## 報導品質（不影響可信度）", "",
-            f"- 發布者：{PUBLISHER.get(pub.get('kind'), pub.get('kind', '不明'))}"
-            + (f"・{_cell(pub['name'])}" if pub.get("name") else "")]
+    kind, name = str(PUBLISHER.get(pub.get("kind"), pub.get("kind", "不明"))), _cell(pub.get("name"))
+    out += ["## 報導品質（不影響可信度）", ""] + pre + [
+        # 「不明・不明（LINE 轉傳…）」: the name often starts with the kind already
+        f"- 發布者：{name if name.startswith(kind) else kind + ('・' + name if name else '')}"]
     if pub.get("byline"):
         out.append(f"- 署名：{BYLINE.get(pub['byline']) or _cell(pub['byline'])}")
-    outlet = next((o for o in outlets if o.get("id") == pub.get("outlet_id")), None) if pub.get("outlet_id") else None
+    # The checked URL decides the outlet when the table knows its domain: a wrong id from the tracer would label one
+    # outlet with another's lean. The tracer's id is used only when the URL cannot tell.
+    try:
+        by_url = media.lookup(source["url"], outlets) if source.get("url") else None
+    except ValueError:  # 「https://[某網址]/」 passes the input check but not urlparse: a URL that cannot tell
+        by_url = None
+    outlet = by_url or (next((o for o in outlets if o.get("id") == pub.get("outlet_id")), None)
+                        if pub.get("outlet_id") else None)
     if outlet:
+        out.append(f"- 媒體背景：以下是對照表裡「{_cell(outlet.get('name'))}」的資料"
+                   + ("（依查核的網址）" if by_url else "（溯源員比對出來的，不是從網址認出來的）"))
         t = outlet.get("trust")
         out.append(f"- 信任度：{t['score']}%（{t['source']}，{t['year']}）" if t else "- 信任度：沒有調查資料")
         if outlet.get("lean"):
@@ -255,8 +340,8 @@ def render(run, outlets=None, tactics=None) -> str:
             out.append("- 立場研究：目前沒有可引用的研究")
         if outlet.get("ownership"):
             out.append(f"- 所有權：{_cell(outlet['ownership'])}")
-        for r in outlet.get("record", []):
-            out.append(f"- 紀錄：{r.get('date', '')} {_cell(r.get('summary'))}（{r.get('url', '')}）")
+        # media.toml's `record` is not printed until there is a written standard and every outlet has been checked
+        # against it: only one outlet has one today, so printing it would single that outlet out.
     issues = pub.get("wording_issues", [])
     out.append("- 用詞：" + ("；".join(f"「{_cell(w['quote'])}」{_cell(w['issue'])}" for w in issues) if issues else "沒有發現明顯不中立的用詞"))
     for f in pub.get("flagged") or []:
@@ -266,7 +351,8 @@ def render(run, outlets=None, tactics=None) -> str:
     # 操弄手法（裁判逐項檢查後撤回的標記不列為已辨識）
     if trace.get("tactics"):
         removed = {w["tactic_id"]: w.get("reason", "") for w in verdicts.get("removed_tactics", [])}
-        out += ["## 操弄手法（不影響可信度）", "", "> 這一段還沒通過跨陣營一致性驗證，不要引用在公開貼文。", ""]
+        unchecked = [w for w in verdicts.get("removed_tactics", []) if w.get("not_checked")]
+        out += ["## 操弄手法（不影響可信度）", "", "> 這一段還沒通過跨陣營一致性驗證，不要引用在公開貼文。", ""] + pre
         for t in trace["tactics"]:
             if t["tactic_id"] in removed:
                 continue
@@ -278,10 +364,17 @@ def render(run, outlets=None, tactics=None) -> str:
             out.append(line)
             if info.get("how_to_spot"):
                 out.append(f"  - 怎麼辨認：{info['how_to_spot']}")
-        if removed and all(t["tactic_id"] in removed for t in trace["tactics"]):
-            out.append("- 辯論後沒有留下任何手法標記。")
-        for tid in sorted(removed):
-            out.append(f"- 辯論後撤回：{tactics.get(tid, {}).get('name', tid)}（{tid}）。裁判：{_cell(removed[tid])}")
+            # The section is called 操弄; this says what a tag does not prove. Attribution entries speak to the tagger.
+            if info.get("cannot_infer") and info.get("layer") != "attribution":
+                out.append(f"  - 不代表什麼：{info['cannot_infer']}")
+        if unchecked:  # a format failure, not a debate outcome: counted, never named (as for the tracer's set-aside tags)
+            out.append(f"- 溯源員標了 {len(unchecked)} 個手法，但裁判逐項檢查的結果格式不合規定，程式無法採用，"
+                       "所以這次都不列出（溯源員原本的標記保留在 trace.json）。這是格式問題，不是辯論的結論。")
+        else:
+            if removed and all(t["tactic_id"] in removed for t in trace["tactics"]):
+                out.append("- 辯論後沒有留下任何手法標記。")
+            for tid in sorted(removed):
+                out.append(f"- 辯論後撤回：{tactics.get(tid, {}).get('name', tid)}（{tid}）。裁判：{_cell(removed[tid])}")
         out.append("")
 
     # 既有查核
@@ -289,13 +382,15 @@ def render(run, outlets=None, tactics=None) -> str:
     if rechecked:
         final = {c["claim_id"]: c["label"] for c in verdicts["claims"]}
         initial = {v["claim_id"]: v["label"] for v in proponent.get("verdicts", [])}
-        out += ["## 和既有查核的比對", "",
+        out += ["## 和既有查核的比對", ""] + pre + [
                 "| 機構 | 對方的結論 | 我們的最終判定 | 正方重驗 | 說明 |", "|---|---|---|---|---|"]
         for p in rechecked:
             ids = [i for i in p.get("claim_ids") or [] if i in final]
             ours = "、".join(f"{i} {ZH_LABELS[final[i]]}" for i in ids) or "—"
             changed = any(initial.get(i) != final[i] for i in ids)
-            check = ("一致" if p.get("agree") else "不一致") + ("（辯論後改判）" if changed else "")
+            agree = p.get("agree")  # null when the other side's page could not be read
+            check = ("無法比對" if not isinstance(agree, bool)
+                     else ("一致" if agree else "不一致") + ("（辯論後改判）" if changed else ""))
             out.append(f"| [{_cell(p['org'])}]({_link(p['url'])}) | {_cell(p.get('their_label'))} | {ours} | "
                        f"{check} | {_cell(p.get('note'))} |")
         out.append("")
@@ -306,27 +401,32 @@ def render(run, outlets=None, tactics=None) -> str:
                 "前面的溯源、報導品質、操弄手法、和既有查核的比對，以及查核範圍裡關於溯源的說明，都是辯論前寫的。"
                 "以下是裁判判定成立的修正，和前文不同時以這裡為準。", ""]
         for a in verdicts["trace_attacks_upheld"]:
-            out.append(f"- 反方 {a['seat']} 的質疑成立（{_cell(a['attack_id'])}）：{_cell(a['ruling_reason'])}")
+            out.append(f"- 反方 {a['seat']} 的質疑成立：{_ruling(a['ruling_reason'])}")
         out.append("")
 
     # 爭議點
     if verdicts.get("disputes"):
         out += ["## 爭議點", ""]
         for d in verdicts["disputes"]:
+            judged = ZH_LABELS[d["judge_label"]]
+            # The judge's reasoning is in the table; pasting it here again buried the point of the line.
+            # "完成或": a seat with no review file is in the last two branches too (its reason is listed below).
             if d.get("label_kept"):
-                out.append(f"- **{d['claim_id']}**：判定維持「{ZH_LABELS[d['judge_label']]}」（{_cell(d['judge_reasoning'])}）。"
-                           "覆核同意這個判定，但認為理由或證據還有缺漏。")
+                first = f"判定維持「{judged}」。覆核同意這個判定，但認為理由或證據還有缺漏。"
+            elif d["judge_label"] == "unverified":  # nothing changed, so 「改判」 would be wrong
+                first = "裁判判「無法證實」，覆核沒有完成或沒有通過；判定沒有變，但沒有獲得確認。"
             else:
-                out.append(f"- **{d['claim_id']}**：裁判原本判「{ZH_LABELS[d['judge_label']]}」（{_cell(d['judge_reasoning'])}），"
-                           # "完成或": a seat with no review file is in this branch too (its reason is listed below)
-                           + ("覆核沒有完成或沒有通過，維持「無法證實」。" if d["judge_label"] == "unverified"  # nothing changed
-                              else "覆核沒有完成或沒有通過，所以改判「無法證實」。"))
+                first = f"裁判原本判「{judged}」，覆核沒有完成或沒有通過，所以改判「無法證實」。"
+            out.append(f"- **{d['claim_id']}**：{first}裁判的理由見「逐項判定」。")
             if d.get("proponent_label"):
                 out.append(f"  - 這個命題沒有任何會改判的成立攻擊（重要性挑戰、溯源和手法攻擊不算），"
                            f"是裁判自己把正方判「{ZH_LABELS[d['proponent_label']]}」改成「{ZH_LABELS[d['judge_label']]}」，"
                            "所以每個反方席位都要覆核。")
             for o in d["objections"]:
-                out.append(f"  - 反方 {o['seat']}：{_cell(o['argument'])}")
+                # The ruling, not the opponent's words: they were aimed at the proponent's verdict and can hold parts
+                # the judge rejected, as in 辯論後的修正.
+                ruling = _ruling(o.get("ruling_reason"))
+                out.append(f"  - 辯論時反方 {o['seat']} 的質疑成立" + (f"。裁判：{ruling}" if ruling else "。"))
             for r in d["review_reasons"]:
                 out.append(f"  - 覆核：{_cell(r)}")
         out.append("")
@@ -335,32 +435,42 @@ def render(run, outlets=None, tactics=None) -> str:
     if verdicts.get("checked_objections"):
         out += ["## 已檢驗的質疑", ""]
         for o in verdicts["checked_objections"]:
-            where = o["claim_id"] or "溯源"
-            out.append(f"- （{where}）{_cell(o['argument'])} → 不成立：{_cell(o['ruling_reason'])}")
+            where = o["claim_id"] or ("手法標記" if o.get("target") == "tactic" else "溯源")
+            out.append(f"- （{where}）{_cell(o['argument'])} → 不成立：{_ruling(o['ruling_reason'])}")
         out.append("")
 
     # 法條
     legal = [c for c in verdicts["claims"] if c.get("legal")]
     if legal:
         out += ["## 法條（非法律意見）", "",
-                "以下只整理條文原文。超出條文字面的解讀有爭議時，建議諮詢律師。", ""]
+                "以下是法條命題引用的第一手資料摘錄，每筆標明出處；不一定是條文，也可能是草案、議事紀錄、判決或官方統計。"
+                "超出條文字面的解讀有爭議時，建議諮詢律師。", ""]
         for c in legal:
             # Only whether the law text was obtained: the verdict is in the table, and nothing forces it to be 無法證實.
             status = "已取得條文原文" if c.get("law_text_obtained") else "沒有取得條文原文"
             out.append(f"- {c['claim_id']}：{status}")
             for eid in c.get("evidence_ids", []):
                 e = ledger[eid]
-                if e["tier"] == 1:
-                    out.append(f"  - 「{_cell(e['excerpt'])}」（{_cell(e['url'])}）")
+                if e["tier"] == 1:  # the title says which article or draft it is; tier 1 is not only law text
+                    out.append(f"  - {_cell(eid)}（{_cell(e.get('title') or e.get('publisher'))}）："
+                               f"「{_cell(e['excerpt'])}」（{_cell(e['url'])}）")
         out.append("")
 
     # 評分拆解
-    out += ["## 評分拆解", ""]
+    out += ["## 評分拆解", "",
+            "- 可信度是訊息本身有多正確，只看每個命題的判定；信心度是這次查得多扎實（證據、跨模型反方、覆核）。兩者分開算。"]
     if cred:
-        flags = "、".join(CONTEXT_FLAGS[f] for f in cred["context_flags"]) or "無"
-        out += [f"- 主要說法（計分命題裡重要性最高的一層）：{'、'.join(cred['main_claims'])}",
-                f"- 可信度 = 100 × 兩者中較低的（主要說法的平均正確度 {cred['main_accuracy']:.4f}、"
-                f"全部計分命題依重要性加權的正確度 {cred['overall_accuracy']:.4f}）= {cred['raw']} → {cred['score']}"]
+        by_flag = {}  # only claims still judged wrong: a flag on one a failed review made unverified reflects nothing
+        for c in verdicts["claims"]:
+            for f in c.get("context_flags", []) if c["label"] in WRONG_LABELS else []:
+                by_flag.setdefault(f, []).append(c["claim_id"])
+        flags = "、".join(f"{CONTEXT_FLAGS[f]}（{'、'.join(by_flag[f])}）" for f in cred["context_flags"] if f in by_flag)
+        out.append(f"- 主要說法（計分命題裡重要性最高的一層）：{'、'.join(cred['main_claims'])}")
+        if cred["show_on_spectrum"]:
+            out.append(f"- 可信度 = 100 × 兩者中較低的（主要說法的平均正確度 {cred['main_accuracy']:.4f}、"
+                       f"全部計分命題依重要性加權的正確度 {cred['overall_accuracy']:.4f}）= {cred['raw']} → {cred['score']}")
+        else:  # the result line says 可信度 —; a number here reads as a result (35 is 不符)
+            out.append(f"- 可信度：不給分數。{sc.get('result_reason') or ''}")
         for c in timed:
             if time_effect(c) == "void":
                 factor = FACTORS[c["label"]]
@@ -368,7 +478,7 @@ def render(run, outlets=None, tactics=None) -> str:
                            f"100 × {float(factor):g} = {round_half_up(100 * factor)}。")
         if cred.get("capped"):
             out.append("- 有命題判錯誤、誤導或部分錯誤，所以可信度上限 79，最高是「大致符合」。")
-        out.append(f"- 脈絡問題：{flags}（已反映在「誤導」等判定裡，不另外扣分）")
+        out.append("- 脈絡問題：" + (f"{flags}。已經反映在這些命題的判定裡，不另外扣分" if flags else "無"))
     else:
         out.append("- 沒有可以計分的事實命題。")
     out.append(f"- 信心度：{conf['score']}（{conf['level']}）")
@@ -377,7 +487,7 @@ def render(run, outlets=None, tactics=None) -> str:
     out.append("")
 
     # 來源
-    out += ["## 來源", "", "| 編號 | 來源 | 層級 | 存取 | 日期 |", "|---|---|---|---|---|"]
+    out += ["## 來源", "", "| 編號 | 來源 | 層級 | 存取 | 查閱日期 |", "|---|---|---|---|---|"]
     for e in ledger.values():
         out.append(f"| {_cell(e['id'])} | [{_cell(e.get('title') or e.get('publisher'))}]({_link(e['url'])}) | "
                    f"{TIER_NAMES.get(e['tier'], e['tier'])} | {ACCESS.get(e.get('access_note', 'full'))} | {_cell(e.get('accessed'))} |")

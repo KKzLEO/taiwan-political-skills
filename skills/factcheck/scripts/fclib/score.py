@@ -32,8 +32,11 @@ def result_label(score: int) -> str:
     return "不符"
 
 
+HIGH_CONFIDENCE = 75
+
+
 def confidence_level(score: int) -> str:
-    if score >= 75:
+    if score >= HIGH_CONFIDENCE:
         return "高"
     if score >= 50:
         return "中"
@@ -199,6 +202,19 @@ def _confidence(claims, ledger_by_id, run, seats):
             "evidence_quality": None if evidence is None else float(round(evidence, 4))}, bool(ok_cross)
 
 
+def _base_blocks(run, confidence, has_cross) -> list:
+    """The basic conditions of 可公開 (compute) as reasons, so no report says 不可公開 without saying why."""
+    blocks = []
+    if run.get("mode") != "full":
+        blocks.append("這次是快速模式，沒有跑完整的「一個正方對三個反方」")
+    elif confidence["level"] != "高":  # quick mode caps confidence at 60, so the mode is already the reason
+        blocks.append(f"信心度 {confidence['score']}（{confidence['level']}），要到 {HIGH_CONFIDENCE} 以上才是「高」；"
+                      "扣了哪些分，見後面的「評分拆解」")
+    if not has_cross:
+        blocks.append("沒有另一家公司的模型當反方跑成功，少了跨模型抗辯")
+    return blocks
+
+
 def _publish_blocks(verdicts, claims, run, seats, result) -> list:
     """Reasons a report cannot be publishable even though its scores stand. Each is shown under the result line."""
     blocks = []
@@ -207,7 +223,7 @@ def _publish_blocks(verdicts, claims, run, seats, result) -> list:
         blocks.append(f"結論是「{result}」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條")
     for u in verdicts.get("unverified_rulings") or []:
         about = u.get("claim_id") or ("手法標記" if u.get("target") == "tactic" else "溯源")
-        blocks.append(f"反方 {u['seat']} 的攻擊（{u['attack_id']}，{about}）判成立，但裁判沒有列出實際核對過的網址，判決照用")
+        blocks.append(f"反方 {u['seat']} 對 {about} 的一項攻擊判成立，但裁判沒有列出實際核對過的網址，判決照用")
 
     def result_with(labels, base=claims):
         return _result_of([{**c, "label": labels[c["claim_id"]]} if c["claim_id"] in labels else c for c in base])[2]
@@ -274,7 +290,7 @@ def compute(verdicts: dict, run: dict, seats: list) -> dict:
     cred, reason, result = _result_of(claims)
 
     confidence, has_cross = _confidence(claims, ledger_by_id, run, seats)
-    blocks = _publish_blocks(verdicts, claims, run, seats, result)
+    blocks = _base_blocks(run, confidence, has_cross) + _publish_blocks(verdicts, claims, run, seats, result)
     publishable = run.get("mode") == "full" and confidence["level"] == "高" and has_cross and not blocks
 
     without = None

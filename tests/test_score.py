@@ -442,6 +442,44 @@ class PublishBlockTest(unittest.TestCase):
     def test_clean_run_has_no_blocks(self):
         self.assertEqual(compute([claim("C1", "true")])["publish_blocks"], [])
 
+    def test_quick_mode_names_itself_as_the_reason(self):
+        """Audit: a quick run said 不可公開 and nothing else; its confidence is capped at 60, so the cap is the
+        reason and a second line about confidence would read as if checking harder could lift it."""
+        r = compute([claim("C1", "true")], run={"mode": "quick", "host": "claude"})
+        self.assertFalse(r["publishable"])
+        self.assertEqual(r["publish_blocks"], ["這次是快速模式，沒有跑完整的「一個正方對三個反方」"])
+
+    def test_confidence_below_high_is_named_as_the_reason(self):
+        ledger = [ev("S1", tier=3, chain="a"), ev("S2", tier=3, chain="a")]  # evidence quality 0: −20
+        r = compute([claim("C1", "true", legal=True, law=False)], ledger=ledger)  # −15 more: 65
+        self.assertEqual((r["confidence"]["score"], r["publishable"]), (65, False))
+        self.assertEqual(r["publish_blocks"], ["信心度 65（中），要到 75 以上才是「高」；扣了哪些分，見後面的「評分拆解」"])
+
+    def test_no_cross_model_seat_is_named_as_the_reason(self):
+        for seats in ([], [dict(OK_SEAT[0], status="failed")]):
+            r = compute([claim("C1", "true")], seats=seats)
+            self.assertEqual(r["confidence"]["level"], "高")  # 80: the seat is the only reason
+            self.assertEqual(r["publish_blocks"], ["沒有另一家公司的模型當反方跑成功，少了跨模型抗辯"])
+
+    def test_every_report_that_is_not_publishable_says_why(self):
+        """Audit: 7 of 8 reports that could not be published gave no reason. The publishing rule is unchanged."""
+        ledgers = (FULL_LEDGER, [ev("S1", tier=3, chain="a"), ev("S2", tier=3, chain="a")])
+        for mode in ("full", "quick"):
+            for seats in (OK_SEAT, []):
+                for ledger in ledgers:
+                    for label in ("true", "false", "mostly_true", "unverified"):
+                        r = compute([claim("C1", label, legal=True, law=False)], ledger=ledger,
+                                    run={"mode": mode, "host": "claude"}, seats=seats)
+                        base = mode == "full" and r["confidence"]["level"] == "高" and bool(seats)
+                        self.assertEqual(r["publishable"], base and r["result"] in ("符合", "不符"))
+                        self.assertEqual(r["publishable"], not r["publish_blocks"], (mode, seats, label))
+
+    def test_unverified_ruling_block_has_no_attack_number(self):
+        """Audit: 「B-1」 is an internal number the reader cannot look up, one hyphen away from the claim C1."""
+        u = [{"attack_id": "B-1", "seat": "B", "claim_id": "C1", "target": "label"}]
+        b = score.compute(verdicts_with([claim("C1", "false")], u), FULL_RUN, OK_SEAT)["publish_blocks"]
+        self.assertEqual(b, ["反方 B 對 C1 的一項攻擊判成立，但裁判沒有列出實際核對過的網址，判決照用"])
+
 
 def timed(cid, kind, label, importance=3, core=False, review="none"):
     return {**claim(cid, label, importance=importance, core=core, review=review), "type": "I", "time": kind}

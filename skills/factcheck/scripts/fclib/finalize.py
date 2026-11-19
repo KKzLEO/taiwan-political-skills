@@ -42,7 +42,8 @@ def _removed(judgment, trace):
     """Tags that do not appear as identified: the judge's checks with keep false, or every tag when the
     judge's checks had to be set aside."""
     if "tactic_checks_set_aside" in judgment:
-        return [{"tactic_id": t.get("tactic_id"), "reason": NOT_CHECKED}
+        # A format failure, not a debate outcome: the report counts these tags without naming them.
+        return [{"tactic_id": t.get("tactic_id"), "reason": NOT_CHECKED, "not_checked": True}
                 for t in trace.get("tactics", []) if isinstance(t, dict)]
     return [{"tactic_id": c["tactic_id"], "reason": c["reason"]}
             for c in judgment.get("tactic_checks", []) if c.get("keep") is False]
@@ -116,8 +117,8 @@ def finalize(run) -> dict:
             weight_by_claim.setdefault(a.get("claim_id"), []).append(aid)
         elif _claim_of(a) is None:
             if ruling["upheld"]:
-                trace_upheld.append({"attack_id": aid, "seat": a["seat"], "argument": a["argument"],
-                                     "ruling_reason": ruling["reason"]})
+                trace_upheld.append({"attack_id": aid, "seat": a["seat"], "target": a["target"],
+                                     "argument": a["argument"], "ruling_reason": ruling["reason"]})
         else:
             bucket.setdefault(_claim_of(a), []).append(aid)
         if not ruling["upheld"]:
@@ -164,8 +165,10 @@ def finalize(run) -> dict:
                     "judge_label": v["label"],
                     "label_kept": label_kept,
                     "judge_reasoning": v["reasoning"],
+                    # The report prints the ruling: an argument can hold parts the judge rejected.
                     "objections": [{"attack_id": aid, "seat": attacks[aid]["seat"],
-                                    "argument": attacks[aid]["argument"]} for aid in upheld],
+                                    "argument": attacks[aid]["argument"],
+                                    "ruling_reason": rulings[aid]["reason"]} for aid in upheld],
                     "review_reasons": reasons,
                     **({"proponent_label": judge_only[cid]["label"]} if cid in judge_only else {}),
                 })
@@ -187,6 +190,8 @@ def finalize(run) -> dict:
             "context_flags": v.get("context_flags", []),
             "evidence_ids": v.get("evidence_ids", []),
             "reasoning": reasoning,
+            # The judge ruled on a revised question, so claims.json's rewrite is not what was checked.
+            "rewrite_revised": any(attacks[aid]["target"] == "neutral_rewrite" for aid in upheld),
             "review_status": status,
             "upheld_attacks": upheld,
             "rejected_attacks": sorted(rejected_by_claim.get(cid, [])),

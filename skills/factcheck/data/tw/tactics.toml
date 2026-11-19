@@ -698,7 +698,7 @@ observable = [
   {id = "b", kind = "clue", text = "說「沒得選」，卻沒說明為什麼其他做法不行"},
   {id = "c", kind = "verified", text = "把複雜的規定簡化成二選一"},
 ]
-cannot_infer = "看出假兩難只表示選項被刻意縮小，不代表那兩個選項本身是錯的。"
+cannot_infer = "看出假兩難只表示訊息列出的選項比實際少，不代表那兩個選項本身是錯的，也不代表對方是故意的。"
 how_to_spot = "問自己：真的只有這兩條路嗎？查一下官方規定有沒有第三種做法。"
 
 [[tactic.example]]

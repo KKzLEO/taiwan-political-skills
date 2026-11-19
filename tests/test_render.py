@@ -363,7 +363,7 @@ class ConclusionOrderTest(unittest.TestCase):
         self.assertEqual(io.read_json(run / "score.json")["credibility"]["main_claims"], ["C4"])
         out = md(run)
         self.assertEqual(conclusion_ids(out), ["C4", "C1"])
-        self.assertIn("- **C4「政府已經決定調漲」：錯誤。**政府沒有做出調漲的決定。", section(out, "結論"))
+        self.assertIn("- **C4（主要說法）「政府已經決定調漲」：錯誤**。政府沒有做出調漲的決定。", section(out, "結論"))
 
     def test_a_time_claim_that_did_something_still_leads_the_list(self):
         out = md(build(**with_a_main_claim_that_is_not_core(**fx.time_claim_overrides("relative", "false"))))
@@ -392,7 +392,7 @@ class OverturnedLabelTest(unittest.TestCase):
 
     def test_conclusion_says_the_reasoning_belongs_to_the_label_the_judge_gave(self):
         line = next(l for l in section(md(build(review__B_json=self.REJECTED)), "結論").splitlines() if l.startswith("- **C1"))
-        self.assertIn("：無法證實。**覆核沒有完成或沒有通過，改列「無法證實」；裁判原本判「誤導」，理由是："
+        self.assertIn("：無法證實**。覆核沒有完成或沒有通過，改列「無法證實」；裁判原本判「誤導」，理由是："
                       "部長說的是『可能上漲兩到三成』", line)
 
     def test_dispute_says_the_label_stays_when_the_judge_had_already_said_unverified(self):
@@ -400,8 +400,7 @@ class OverturnedLabelTest(unittest.TestCase):
         judgment["verdicts"][0].update({"label": "unverified", "reasoning": "找不到完整影片，無法確認部長有沒有說過。",
                                         "evidence_ids": []})
         dispute = section(md(build(judgment_json=judgment, review__B_json=self.REJECTED)), "爭議點")
-        self.assertIn("裁判原本判「無法證實」（找不到完整影片，無法確認部長有沒有說過。），覆核沒有完成或沒有通過，"
-                      "維持「無法證實」。", dispute)
+        self.assertIn("裁判判「無法證實」，覆核沒有完成或沒有通過；判定沒有變，但沒有獲得確認。", dispute)
         self.assertNotIn("改判", dispute)
 
     def test_a_review_that_never_ran_is_not_reported_as_a_rejection(self):
@@ -409,9 +408,9 @@ class OverturnedLabelTest(unittest.TestCase):
         「覆核沒有通過」, as if the reviewer had overruled the judge; the host copies the conclusion to the user."""
         out = md(build(review__B_json=None))
         line = next(l for l in section(out, "結論").splitlines() if l.startswith("- **C1"))
-        self.assertIn("：無法證實。**覆核沒有完成或沒有通過，改列「無法證實」；裁判原本判「誤導」，理由是：", line)
+        self.assertIn("：無法證實**。覆核沒有完成或沒有通過，改列「無法證實」；裁判原本判「誤導」，理由是：", line)
         dispute = section(out, "爭議點")
-        self.assertIn("），覆核沒有完成或沒有通過，所以改判「無法證實」。", dispute)
+        self.assertIn("裁判原本判「誤導」，覆核沒有完成或沒有通過，所以改判「無法證實」。", dispute)
         self.assertIn("  - 覆核：席位 B：覆核未完成", dispute)
 
 
@@ -441,7 +440,7 @@ class TimeClaimTest(unittest.TestCase):
             lines = [l for l in section(md(build(**fx.time_claim_overrides("relative", label))), "結論").splitlines()
                      if l.startswith("- **C3")]
             self.assertEqual(len(lines), 1, label)
-            self.assertIn(f"：{zh}（時間命題）。**活動在查核日期之前就結束了。", lines[0])
+            self.assertIn(f"：{zh}（時間命題）**。活動在查核日期之前就結束了。", lines[0])
 
     def test_scope_lists_the_time_claims_and_what_they_do(self):
         scope = section(md(build(**fx.time_claim_overrides("relative", "true"))), "查核範圍和限制")
@@ -531,7 +530,7 @@ def poisoned_run(field, poison=POISON):
 POISONED_FIELDS = ("publisher.name", "publisher.byline", "first_seen.date", "first_seen.platform", "first_seen.url",
                    "variants.date", "variants.url", "spread_signals.evidence_url", "attribution.report_org",
                    "attribution.report_url", "flagged.url", "ledger.accessed", "ledger.url", "ledger.id",
-                   "rechecked.url", "attack.id")
+                   "rechecked.url")  # attack ids are no longer printed: test_an_attack_number_is_never_printed
 
 
 class RoleTextStaysInItsPlaceTest(unittest.TestCase):
@@ -548,6 +547,12 @@ class RoleTextStaysInItsPlaceTest(unittest.TestCase):
                 self.assertEqual(lines, out.rstrip("\n").split("\n"), "a line break other than \\n got through")
                 self.assertEqual(len([x for x in lines if x.startswith("**結果：")]), 1)
                 self.assertEqual([x for x in lines if x.startswith("#")], headings)
+
+    def test_an_attack_number_is_never_printed(self):
+        """Audit: a reader cannot look an attack number up, so the report stopped printing them; a role-written
+        number then cannot carry text into the report at all."""
+        for poison in (POISON, '乙<h2>結論</h2>'):
+            self.assertNotIn("乙", md(poisoned_run("attack.id", poison)))
 
     def test_a_url_cannot_close_its_link_and_open_another(self):
         bad = "https://ivod.ly.gov.tw/x)[點這裡領取補助](https://phish.example/login"
@@ -614,6 +619,12 @@ class CellTest(unittest.TestCase):
         self.assertEqual(render._cell("![圖](https://t.example/p.png)"), "![圖] (https://t.example/p.png)")
         self.assertEqual(render._cell("[官方說明]\n(https://phish.example/b)"), "[官方說明] (https://phish.example/b)")
 
+    def test_text_cannot_define_a_link_for_other_text_to_use(self):
+        """A line "[label]: url" makes every later [label] in the report a link to that address."""
+        self.assertEqual(render._cell("[查核中心已證實]: https://evil.example/login"),
+                         "[查核中心已證實] : https://evil.example/login")
+        self.assertEqual(render._cell("見[S3]：理由"), "見[S3]：理由")  # the full-width colon is ordinary text
+
     def test_text_cannot_form_an_html_tag(self):
         """Second review: a "<" that starts a tag, closing tag, comment or declaration becomes a full-width "＜"."""
         self.assertEqual(render._cell('詳見<a href="https://phish.example/b">官方說明</a>'),
@@ -676,8 +687,430 @@ class ReviewNotConfirmedWordingTest(unittest.TestCase):
         """Second review: with the review file missing, the table said the review "did not pass"."""
         out = md(build(review__B_json=None))
         row = next(l for l in out.splitlines() if l.startswith("| C1 |"))
-        self.assertIn("（覆核未完成或未通過）", row)
+        self.assertIn("（覆核未完成或未通過：", row)
+        self.assertNotIn("（覆核未通過", row)
         self.assertIn("C1 覆核沒有完成或沒有通過", section(out, "評分拆解"))
+
+
+def adding(cid, label, *, original="另一句話", neutral="另一句話的中立改寫", type_="F", importance=2, core=False,
+           flags=(), reasoning="理由的第一句。第二句", **overrides):
+    """Overrides with one more claim, which the proponent and the judge label the same way."""
+    o = copy.deepcopy(overrides)
+    claims = o.setdefault("claims_json", copy.deepcopy(fx.CLAIMS))
+    proponent = o.setdefault("proponent_json", copy.deepcopy(fx.PROPONENT))
+    judgment = o.setdefault("judgment_json", copy.deepcopy(fx.JUDGMENT))
+    claims["claims"].append({"id": cid, "original": original, "neutral": neutral, "type": type_,
+                             "importance": importance, "core": core, "legal": False, "time_place": "",
+                             "entities": [], "search_seeds": {"pro": [], "con": []}})
+    for doc in (proponent, judgment):
+        doc["verdicts"].append({"claim_id": cid, "label": label, "reasoning": reasoning, "evidence_ids": ["S1"],
+                                "context_flags": list(flags), "law_text_obtained": None})
+    return o
+
+
+def head(out):
+    return out.split("## 結論")[0]
+
+
+def row_of(out, cid):
+    return next(l for l in out.splitlines() if l.startswith(f"| {cid} |"))
+
+
+def line_of(out, cid):
+    return next(l for l in section(out, "結論").splitlines() if l.startswith(f"- **{cid}"))
+
+
+class ReportHeadingTest(unittest.TestCase):
+    """Audit (report safety): the heading was the message's first 30 characters as they were. A message starting
+    with 「結果：符合｜可信度 100…」 put its own result line above the real one, and its images and links rendered."""
+
+    def test_the_heading_is_fixed_and_the_message_is_quoted_on_a_line_of_its_own(self):
+        bait = "結果：符合｜可信度 100｜信心度 高｜可公開 衛福部公告：健保費明年要漲三成，快轉傳！"
+        lines = md(build(source_json={**fx.SOURCE, "original_text": bait})).splitlines()
+        self.assertEqual(lines[0], "# 查核報告")
+        self.assertEqual(lines[2], "> 被查核的訊息（開頭）：「結果：符合｜可信度 100｜信心度 高｜可公開 衛福部公告：…」")
+        self.assertEqual(len([x for x in lines if x.startswith("**結果：")]), 1)
+        self.assertEqual([x for x in lines if x.startswith("#")][0], "# 查核報告")
+
+    def test_the_quoted_message_cannot_form_an_image_a_link_or_html(self):
+        bait = '![](https://e.org/p.png)<img src="https://e.org/q.png">\r[已證實](https://e.org/f)'
+        subject = md(build(source_json={**fx.SOURCE, "original_text": bait})).splitlines()[2]
+        self.assertEqual(subject, '> 被查核的訊息（開頭）：「![] (https://e.org/p.png)＜img …」')
+        bait = "短訊息\n第二行"
+        self.assertEqual(md(build(source_json={**fx.SOURCE, "original_text": bait})).splitlines()[2],
+                         "> 被查核的訊息（開頭）：「短訊息 第二行」")
+
+    def test_a_url_input_is_quoted_and_cannot_form_a_link(self):
+        url = "https://e.org/a)[官方說明](https://phish.example/b"
+        source = {**fx.SOURCE, "input_type": "url", "url": url}
+        out = md(build(source_json=source))
+        self.assertEqual(out.splitlines()[2], "> 被查核的網址：https://e.org/a)[官方說明] (https://phish.example/b")
+        scope = next(l for l in out.splitlines() if l.startswith("- 輸入類型："))
+        self.assertEqual(scope, "- 輸入類型：網址；網址：https://e.org/a)[官方說明] (https://phish.example/b")
+
+
+class ConclusionListTest(unittest.TestCase):
+    """Audit: the conclusion listed only the main and core claims, so a wrong claim that was neither (often the
+    stale-news one) showed up only in the table, and the bold never rendered on GitHub."""
+
+    def test_a_wrong_scored_claim_outside_the_main_and_core_claims_is_listed_with_its_context_problem(self):
+        out = md(build(**adding("C3", "false", original="判七年四個月", flags=("old_news",),
+                                reasoning="高院已改判六個月。細節見證據")))
+        self.assertEqual(conclusion_ids(out), ["C1", "C3"])
+        self.assertEqual(line_of(out, "C3"), "- **C3「判七年四個月」：錯誤（舊聞新炒）**。高院已改判六個月。")
+
+    def test_the_main_claims_come_first_then_the_core_claims_then_the_wrong_ones(self):
+        o = adding("C3", "true", core=True, importance=1)
+        out = md(build(**adding("C4", "mixed", importance=3, **o)))
+        self.assertEqual(conclusion_ids(out), ["C1", "C3", "C4"])
+
+    def test_claims_that_are_not_wrong_or_not_scored_are_not_added(self):
+        for label, type_ in (("true", "F"), ("unverified", "F"), ("false", "O"), ("false", "P"), ("misleading", "U")):
+            self.assertNotIn("C3", conclusion_ids(md(build(**adding("C3", label, type_=type_)))), (label, type_))
+
+    def test_the_main_claim_is_marked_and_a_wrong_claim_names_its_context_problem(self):
+        self.assertEqual(line_of(md(build()), "C1"),
+                         "- **C1（主要說法）「某部長說明年油價一定漲三成」：誤導（斷章取義）**。"
+                         "部長說的是『可能上漲兩到三成』，訊息改成『一定漲三成』")
+
+    def test_a_label_the_review_did_not_confirm_carries_no_context_problem(self):
+        review = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": False, "reason": "不夠"}]}
+        self.assertNotIn("斷章取義", line_of(md(build(review__B_json=review)), "C1"))
+
+    def test_bold_closes_before_the_full_stop_on_every_line(self):
+        """CommonMark: a closing ** after 「。」 and before a letter is not a closing delimiter."""
+        runs = (build(), build(**fx.time_claim_overrides("relative", "false")),
+                build(review__B_json=None), build(**adding("C3", "false", flags=("old_news",))))
+        for run in runs:
+            for line in section(md(run), "結論").splitlines():
+                if line.startswith("- "):
+                    self.assertRegex(line, r"^- \*\*[^*]+\*\*。", line)
+                    self.assertNotIn("。**", line)
+
+    def test_a_first_sentence_that_only_repeats_the_label_is_skipped(self):
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["verdicts"][0]["reasoning"] = "誤導。部長說的是『可能上漲兩到三成』。其他細節"
+        line = line_of(md(build(judgment_json=judgment)), "C1")
+        self.assertTrue(line.endswith("**。部長說的是『可能上漲兩到三成』。"), line)
+
+    def test_a_kept_label_points_to_the_dispute(self):
+        review = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": True, "reason": "只引一半"}]}
+        self.assertTrue(line_of(md(build(review__B_json=review)), "C1").endswith("（覆核對理由或證據有意見，見「爭議點」）"))
+
+
+class UndeterminedBreakdownTest(unittest.TestCase):
+    def test_an_undetermined_result_has_no_number_in_the_breakdown_either(self):
+        """Audit: the result line said 可信度 —, while the breakdown said 「= 35.0 → 35」 (35 reads as 不符)."""
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["verdicts"][0]["label"] = "unverified"
+        out = md(build(judgment_json=judgment))
+        self.assertIn("可信度 —", head(out))
+        breakdown = section(out, "評分拆解")
+        self.assertIn("- 可信度：不給分數。主要說法有一半以上無法證實，查不到不等於假的", breakdown)
+        self.assertNotIn("→", breakdown)
+        self.assertIn("- 主要說法（計分命題裡重要性最高的一層）：C1", breakdown)
+
+
+class NotPublishableReasonTest(unittest.TestCase):
+    INTRO = "> 「不可公開」的意思是這次查核沒有達到公開引用的條件，不要把整則結論拿去公開貼文；不是說這份報告要保密。原因見下面幾行。"
+
+    def test_a_quick_run_says_why_it_cannot_be_published(self):
+        """Audit: 「快速模式・跨模型 1 席｜不可公開」 with nothing under it."""
+        h = head(md(build(run_json=dict(fx.RUN, mode="quick"))))
+        self.assertIn(self.INTRO, h)
+        self.assertIn("> 這次是快速模式，沒有跑完整的「一個正方對三個反方」。這份報告不能標可公開。", h)
+        self.assertLess(h.index(self.INTRO), h.index("> 這次是快速模式"))
+
+    def test_a_publishable_report_has_no_such_line(self):
+        self.assertNotIn("「不可公開」的意思", md(build()))
+
+
+class ImpliedClaimTest(unittest.TestCase):
+    """Audit: an implied claim was printed as the message sentence it came from, so 「這個星期五要一讀了。」 stood
+    next to 錯誤 while what was checked (that the first reading had not been held) appeared nowhere."""
+
+    def test_an_implied_claim_shows_what_was_actually_checked(self):
+        out = md(build(**adding("C3", "false", type_="I", original="快轉傳！", neutral="這則訊息是最近才發出的")))
+        note = "快轉傳！（訊息沒有明說；這一項查的是它暗示的：這則訊息是最近才發出的）"
+        self.assertIn(f"| C3 | {note} |", row_of(out, "C3"))
+        self.assertEqual(line_of(out, "C3"), "- **C3「快轉傳！」（訊息沒有明說；這一項查的是它暗示的：這則訊息是最近才發出的）"
+                                             "：錯誤**。理由的第一句。")
+
+    def test_a_rewrite_the_debate_revised_is_not_printed_as_what_was_checked(self):
+        o = adding("C3", "false", type_="I", original="快轉傳！", neutral="這則訊息是最近才發出的")
+        o["opponent__C_json"] = dict(copy.deepcopy(fx.OPP_C), attacks=[
+            {"id": "C-1", "claim_id": "C3", "target": "neutral_rewrite", "argument": "問法太寬",
+             "proposed_label": None, "evidence": []}])
+        o["judgment_json"]["rulings"].append({"attack_id": "C-1", "upheld": True, "reason": "應限於本週",
+                                              "verified_urls": []})
+        o["review__C_json"] = {"seat": "C", "reviews": [{"claim_id": "C3", "pass": True, "reason": "可以"}]}
+        out = md(build(**o))
+        self.assertIn("快轉傳！（訊息沒有明說；這一項查的是它暗示的事，問法在辯論中修正過，見理由）", row_of(out, "C3"))
+        self.assertNotIn("這則訊息是最近才發出的", out)
+
+    def test_a_claim_the_message_states_has_no_note(self):
+        self.assertNotIn("訊息沒有明說", md(build()))
+
+
+class ReviewWordingTest(unittest.TestCase):
+    """Audit: the table always said 覆核未通過, the dispute repeated the judge's whole reasoning in brackets, and
+    under it stood the opponent's debate words, which read as an objection to the final label."""
+    REJECTED = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": False, "reason": "證據不夠"}]}
+    KEPT = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "label_ok": True, "reason": "只引一半"}]}
+
+    def test_the_table_says_which_kind_of_unconfirmed_review_it_was(self):
+        self.assertIn("| 誤導（覆核未通過：同意判定，對理由或證據有意見） |", row_of(md(build(review__B_json=self.KEPT)), "C1"))
+        self.assertIn("| 無法證實（覆核未完成或未通過：裁判原判「誤導」） |",
+                      row_of(md(build(review__B_json=self.REJECTED)), "C1"))
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["verdicts"][0]["label"] = "unverified"
+        self.assertIn("| 無法證實（覆核未完成或未通過：判定沒有獲得確認） |",
+                      row_of(md(build(judgment_json=judgment, review__B_json=self.REJECTED)), "C1"))
+
+    def test_the_dispute_does_not_repeat_the_judges_reasoning(self):
+        dispute = section(md(build(review__B_json=self.REJECTED)), "爭議點")
+        self.assertEqual(dispute.strip().splitlines()[0],
+                         "- **C1**：裁判原本判「誤導」，覆核沒有完成或沒有通過，所以改判「無法證實」。裁判的理由見「逐項判定」。")
+        self.assertNotIn("部長說的是", dispute)
+        kept = section(md(build(review__B_json=self.KEPT)), "爭議點")
+        self.assertEqual(kept.strip().splitlines()[0], "- **C1**：判定維持「誤導」。覆核同意這個判定，但認為理由或證據還有缺漏。"
+                                                       "裁判的理由見「逐項判定」。")
+
+    def test_the_dispute_prints_the_judges_ruling_not_the_opponents_words(self):
+        dispute = section(md(build(review__B_json=self.REJECTED)), "爭議點")
+        self.assertIn("  - 辯論時反方 B 的質疑成立。裁判：已打開記者會逐字稿，確有『可能上漲兩到三成』", dispute)
+        self.assertNotIn("部長在另一場記者會說過類似的話", dispute)
+
+
+def trace_correction_overrides(limits=("搜尋不到最早的版本",)):
+    """Seat C's upheld attack on the trace itself (not on a tag)."""
+    trace, opp_c = copy.deepcopy(fx.TRACE), copy.deepcopy(fx.OPP_C)
+    trace["limits"] = list(limits)
+    opp_c["attacks"] = [{"id": "C-1", "claim_id": None, "target": "trace", "argument": "11/9 就有人貼過",
+                         "proposed_label": None, "evidence": []}]
+    rebuttal, judgment = copy.deepcopy(fx.REBUTTAL), copy.deepcopy(fx.JUDGMENT)
+    rebuttal["responses"].append({"attack_id": "C-1", "accept": True, "response": "同意", "evidence": []})
+    judgment["rulings"].append({"attack_id": "C-1", "upheld": True, "reason": "成立。11/9 的貼文才是目前找到最早的版本",
+                                "verified_urls": []})
+    return {"trace_json": trace, "opponent__C_json": opp_c, "rebuttal_json": rebuttal, "judgment_json": judgment}
+
+
+class PreDebateNoteTest(unittest.TestCase):
+    NOTE = "> 這一段是辯論前寫的。裁判判定成立的修正列在後面的「辯論後的修正」，內容不同時以修正為準。"
+
+    def test_sections_written_before_the_debate_point_to_an_upheld_trace_correction(self):
+        """Audit: 「搜尋都沒有結果」 stood in the trace section; the judge's correction came 40 lines later."""
+        out = md(build(**trace_correction_overrides()))
+        for title in ("溯源", "報導品質（不影響可信度）", "操弄手法（不影響可信度）", "和既有查核的比對"):
+            self.assertIn(self.NOTE, section(out, title), title)
+        self.assertIn("- 接下來 1 項是溯源員在辯論前寫的；裁判判定成立的修正列在後面的「辯論後的修正」，內容不同時以修正為準",
+                      section(out, "查核範圍和限制"))
+        self.assertIn("- 反方 C 的質疑成立：11/9 的貼文才是目前找到最早的版本", section(out, "辯論後的修正"))
+
+    def test_no_note_without_a_trace_correction_or_when_the_tracer_wrote_no_limits(self):
+        for out in (md(build()), md(build(**fx.tactic_attack_overrides()))):  # a withdrawn tag shows where it was
+            self.assertNotIn(self.NOTE, out)
+        self.assertNotIn("在辯論前寫的", md(build(**trace_correction_overrides(limits=()))))
+
+
+class SetAsideChecksTest(unittest.TestCase):
+    def test_tags_the_judge_could_not_check_are_counted_not_named_and_not_called_withdrawn(self):
+        """Audit: the judge's checks failed the format and every tag was printed as 「辯論後撤回」 with its name."""
+        j = copy.deepcopy(fx.JUDGMENT)
+        j.pop("tactic_checks")
+        j["tactic_checks_set_aside"] = ["tactic_checks：缺少 TW-T16"]
+        tactics = section(md(build(judgment_json=j)), "操弄手法（不影響可信度）")
+        self.assertIn("- 溯源員標了 1 個手法，但裁判逐項檢查的結果格式不合規定，程式無法採用，所以這次都不列出"
+                      "（溯源員原本的標記保留在 trace.json）。這是格式問題，不是辯論的結論。", tactics)
+        for text in ("辯論後撤回", "辯論後沒有留下", "TW-T16", "急迫轉傳", "裁判："):
+            self.assertNotIn(text, tactics)
+
+
+class PriorFactcheckTest(unittest.TestCase):
+    def test_an_unread_conclusion_is_not_called_a_disagreement(self):
+        """Audit: Cofacts returned 403, the proponent filled null, and the report said 「不一致（辯論後改判）」."""
+        for value in (None, "missing", "false"):
+            proponent = copy.deepcopy(fx.PROPONENT)
+            if value == "missing":
+                proponent["prior_factchecks_rechecked"][0].pop("agree")
+            else:
+                proponent["prior_factchecks_rechecked"][0]["agree"] = value
+            row = next(l for l in md(build(proponent_json=proponent)).splitlines() if "tfc-taiwan.org.tw/x" in l)
+            self.assertIn("| 無法比對 |", row, value)
+            self.assertNotIn("辯論後改判", row, value)
+
+
+class ProgramWordsTest(unittest.TestCase):
+    def test_the_input_type_is_in_plain_words(self):
+        for kind, zh in (("text", "貼上的文字"), ("image", "截圖"), ("video", "影片")):
+            out = md(build(source_json={**fx.SOURCE, "input_type": kind}))
+            self.assertIn(f"- 輸入類型：{zh}", out)
+
+    def test_attack_numbers_are_not_printed(self):
+        """C-1 is one hyphen away from the claim C1, and the reader has nothing to look it up in."""
+        out = md(build(**fx.tactic_attack_overrides()))
+        self.assertNotIn("C-1", out)
+        self.assertIn("- 反方 C 的質疑成立：裁判核對後認為特徵對不上，撤下", section(out, "辯論後的修正"))
+
+    def test_a_ruling_that_starts_by_saying_upheld_or_rejected_is_not_said_twice(self):
+        self.assertEqual(render._ruling("不成立。日期先後不影響來源獨立性"), "日期先後不影響來源獨立性")
+        self.assertEqual(render._ruling("攻擊成立，特徵對不上"), "特徵對不上")
+        self.assertEqual(render._ruling("成立：已核對"), "已核對")
+        for text in ("成立一部分：只有日期對", "日期先後不影響", "不成立"):
+            self.assertEqual(render._ruling(text), text)
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["rulings"][0]["reason"] = "不成立。日期先後不影響來源獨立性"
+        self.assertIn("→ 不成立：日期先後不影響來源獨立性", md(build(judgment_json=judgment)))
+
+    def test_a_rejected_tactic_attack_is_labelled_as_one(self):
+        out = section(md(build(**fx.tactic_attack_overrides(upheld=False, keep=True))), "已檢驗的質疑")
+        self.assertIn("- （手法標記）TW-T16 只對得上一項特徵，不該標 → 不成立：", out)
+
+    def test_a_publisher_name_that_starts_with_its_kind_is_not_doubled(self):
+        trace = copy.deepcopy(fx.TRACE)
+        trace["publisher"].update(kind="unknown", name="不明（LINE 轉傳，查不到最初的發文者）")
+        self.assertIn("- 發布者：不明（LINE 轉傳，查不到最初的發文者）", md(build(trace_json=trace)))
+        trace["publisher"].update(kind="news", name="中央社")
+        self.assertIn("- 發布者：新聞媒體・中央社", md(build(trace_json=trace)))
+
+    def test_an_unchecked_original_is_not_called_a_post(self):
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["ledger"][1]["access_note"] = "not_original"
+        self.assertIn("- S2（中央社）：未直接核對原始出處", section(md(build(judgment_json=judgment)), "查核範圍和限制"))
+
+
+class BreakdownWordingTest(unittest.TestCase):
+    def test_context_problems_name_their_claims(self):
+        bd = section(md(build()), "評分拆解")
+        self.assertIn("- 脈絡問題：斷章取義（C1）。已經反映在這些命題的判定裡，不另外扣分", bd)
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["verdicts"][0]["context_flags"] = []
+        self.assertIn("- 脈絡問題：無\n", section(md(build(judgment_json=judgment)), "評分拆解"))
+
+    def test_a_flag_on_a_claim_the_reviews_did_not_confirm_is_not_called_reflected(self):
+        """The judge flagged C1 as out of context, then a missing review turned C1 into unverified."""
+        bd = section(md(build(review__B_json=None)), "評分拆解")
+        self.assertIn("- 脈絡問題：無\n", bd)
+
+    def test_reading_notes_are_printed_only_when_they_are_text(self):
+        for notes, shown in (("網頁只讀到前半段", True), (["a", "b"], False), ("  ", False), (None, False)):
+            out = md(build(source_json={**fx.SOURCE, "notes": notes}))
+            self.assertEqual("讀入時的備註" in out, shown, notes)
+
+    def test_the_breakdown_says_credibility_and_confidence_are_separate(self):
+        self.assertIn("- 可信度是訊息本身有多正確，只看每個命題的判定；信心度是這次查得多扎實（證據、跨模型反方、覆核）。"
+                      "兩者分開算。", section(md(build()), "評分拆解"))
+
+    def test_the_source_date_column_is_the_date_it_was_read(self):
+        self.assertIn("| 編號 | 來源 | 層級 | 存取 | 查閱日期 |", section(md(build()), "來源"))
+
+
+class LegalBlockTest(unittest.TestCase):
+    def test_excerpts_name_their_source_and_the_intro_does_not_say_they_are_all_law_text(self):
+        claims = copy.deepcopy(fx.CLAIMS)
+        claims["claims"][0]["legal"] = True
+        block = section(md(build(claims_json=claims)), "法條（非法律意見）")
+        self.assertNotIn("只整理條文原文", block)
+        self.assertIn("不一定是條文，也可能是草案、議事紀錄、判決或官方統計", block)
+        self.assertIn("  - S1（質詢影片）：「部長：油價會視國際情勢調整，沒有說三成」（https://ivod.ly.gov.tw/x）", block)
+        self.assertIn("  - S3（記者會逐字稿）：「油價可能上漲兩到三成」（https://example.org/presser）", block)
+
+
+class TacticLimitTest(unittest.TestCase):
+    LIB = [{"id": "TW-T16", "name": "急迫轉傳", "layer": "content", "how_to_spot": "先停下來查",
+            "cannot_infer": "催人轉傳不能證明內容是假的"},
+           {"id": "TW-T29", "name": "境外協同", "layer": "attribution", "cannot_infer": "寫給標記的人看的規則"}]
+
+    def test_each_tag_says_what_it_does_not_show(self):
+        """Audit: the section is called 操弄 and never said a tag does not prove the sender meant to deceive."""
+        trace = copy.deepcopy(fx.TRACE)
+        trace["tactics"].append({"tactic_id": "TW-T29", "features": ["a"], "explanation": "大量相同文案"})
+        out = render.render(build(trace_json=trace), outlets=OUTLETS, tactics=self.LIB)
+        tactics = section(out, "操弄手法（不影響可信度）")
+        self.assertIn("  - 不代表什麼：催人轉傳不能證明內容是假的", tactics)
+        self.assertNotIn("寫給標記的人看的規則", tactics)  # attribution entries speak to the tagger, not the reader
+        self.assertNotIn("不代表什麼", md(build()))  # the test library has no such entry
+
+
+class CodexHostTest(unittest.TestCase):
+    def models(self, cmd=("codex",)):
+        return {"host": "codex", "host_vendor": "openai", "engines": [
+            {"engine": "codex", "vendor": "openai", "available": True, "cmd": list(cmd), "cross_model": False,
+             "can_search": True, "same_tier": True, "probe": "skipped", "isolation": "unknown"},
+            {"engine": "claude", "vendor": "anthropic", "available": True, "cmd": ["claude"], "cross_model": True,
+             "can_search": True, "same_tier": True, "probe": "ok", "isolation": "full"}]}
+
+    def test_a_codex_host_says_its_roles_read_the_users_agents_file(self):
+        """Audit: with Codex as host every main-model role reads ~/.codex/AGENTS.md; the report never said so."""
+        scope = section(md(build(models_json=self.models())), "查核範圍和限制")
+        self.assertIn("- 主體是 Codex：主模型的角色（讀入與拆題、溯源、正方、主模型負責的反方席位和它們的覆核、答辯、裁判）"
+                      "都由 codex exec 執行，讀得到使用者的 ~/.codex/AGENTS.md（部分隔離）。", scope)  # quick mode has one seat
+
+    def test_a_custom_codex_command_is_reported_as_unconfirmed(self):
+        scope = section(md(build(models_json=self.models(("env", "CODEX_HOME=~/.codex-fc", "codex")))), "查核範圍和限制")
+        self.assertIn("用的是自訂的 Codex 指令，隔離程度沒有確認。", scope)
+        self.assertNotIn("AGENTS.md", scope)
+
+    def test_a_claude_host_has_no_such_line(self):
+        self.assertNotIn("主體是 Codex", md(build()))
+
+
+class OutletFromUrlTest(unittest.TestCase):
+    def test_the_outlet_comes_from_the_checked_url_when_the_table_knows_it(self):
+        """Audit: a CNA link with the tracer's outlet id set to another paper printed that paper's lean research."""
+        trace = copy.deepcopy(fx.TRACE)
+        trace["publisher"].update({"kind": "news", "name": "中央社", "outlet_id": "lean", "byline": "present"})
+        source = {**fx.SOURCE, "input_type": "url", "url": "https://www.cna.com.tw/news/1.aspx"}
+        quality = section(md(build(trace_json=trace, source_json=source)), "報導品質（不影響可信度）")
+        self.assertIn("- 媒體背景：以下是對照表裡「中央社」的資料（依查核的網址）", quality)
+        self.assertIn("- 信任度：50%", quality)
+        self.assertNotIn("研究將其歸為泛藍", quality)
+
+    def test_otherwise_the_report_says_the_tracer_matched_it(self):
+        trace = copy.deepcopy(fx.TRACE)
+        trace["publisher"].update({"kind": "news", "name": "某報", "outlet_id": "lean"})
+        self.assertIn("- 媒體背景：以下是對照表裡「某報」的資料（溯源員比對出來的，不是從網址認出來的）",
+                      md(build(trace_json=trace)))
+
+    def test_a_url_whose_host_cannot_be_parsed_still_gets_a_report(self):
+        """Review: 「https://[某網址]/…」 passes the input check, and reading its host raised in the very last step."""
+        trace = copy.deepcopy(fx.TRACE)
+        trace["publisher"].update({"kind": "news", "name": "某報", "outlet_id": "lean"})
+        for kind, url in (("video", "https://[某網址]/watch?v=1"), ("url", "https://[x/")):
+            source = {**fx.SOURCE, "input_type": kind, "url": url}
+            quality = section(md(build(trace_json=trace, source_json=source)), "報導品質（不影響可信度）")
+            self.assertIn("- 媒體背景：以下是對照表裡「某報」的資料（溯源員比對出來的，不是從網址認出來的）",
+                          quality, url)
+
+    def test_outlet_records_are_not_printed_yet(self):
+        """Only one of 31 outlets has a record, so printing it would single that outlet out."""
+        outlets = copy.deepcopy(OUTLETS)
+        outlets[0]["record"] = [{"date": "2020-11-18", "summary": "某處分", "url": "https://example.org/r"}]
+        trace = copy.deepcopy(fx.TRACE)
+        trace["publisher"].update({"kind": "news", "name": "中央社", "outlet_id": "cna"})
+        out = render.render(build(trace_json=trace), outlets=outlets, tactics=TACTICS)
+        self.assertNotIn("- 紀錄：", out)
+        self.assertNotIn("某處分", out)
+
+
+class InputLimitsTest(unittest.TestCase):
+    def test_what_each_input_cannot_tell_is_listed_and_so_are_the_reading_notes(self):
+        """Audit: a paywalled article read three paragraphs, the notes said so, and the report said nothing."""
+        cases = (("url", "網址的內文由子程序用網頁工具讀取，不保證是逐字全文"),
+                 ("image", "截圖上的文字由主體照抄；沒有判斷圖片是否偽造"),
+                 ("video", "只查逐字稿的內容；沒有判斷影片是否為 AI 合成"))
+        for kind, line in cases:
+            source = {**fx.SOURCE, "input_type": kind, "notes": "付費牆：只讀到前三段\n其餘看不到"}
+            if kind != "image":
+                source["url"] = "https://example.org/a"
+            scope = section(md(build(source_json=source)), "查核範圍和限制")
+            self.assertIn(f"- {line}", scope, kind)
+            self.assertIn("- 讀入時的備註：付費牆：只讀到前三段 其餘看不到", scope, kind)
+
+    def test_a_pasted_text_without_notes_adds_nothing(self):
+        scope = section(md(build()), "查核範圍和限制")
+        self.assertNotIn("讀入時的備註", scope)
+        self.assertNotIn("限制：", scope)
 
 
 if __name__ == "__main__":

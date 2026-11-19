@@ -14,6 +14,7 @@
 - `target` 是 `label` 或 `evidence` 時，**一定要附證據**：網址加逐字摘錄。
 - `target` 是 `reasoning`、`neutral_rewrite`、`trace`、`tactic` 時，可以只說明理由。
 - 都沒問題就回傳空的 `attacks`，並誠實填 `searches_run`。
+- **`argument` 會原樣印在公開報告。** 用一般讀者看得懂、能單獨看懂的完整句子。命題編號（C1）和證據編號（S3）可以寫；不要寫欄位名（neutral、stance、time_place）、英文代碼（寫「無法證實」不寫 unverified，寫「只提供背景」不寫 context）、攻擊編號（不寫「同 B-2」，把理由再寫一次）。
 
 ## 輸出格式
 

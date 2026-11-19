@@ -375,5 +375,38 @@ class TimeClaimTest(unittest.TestCase):
         self.assertEqual([a["attack_id"] for a in c3["importance_attacks"]], ["C-1"])
 
 
+class ReportFieldsTest(unittest.TestCase):
+    """Fields the report needs so it can print the program's account instead of a role's raw words."""
+
+    def test_an_objection_under_a_dispute_carries_the_judges_ruling(self):
+        review = {"seat": "B", "reviews": [{"claim_id": "C1", "pass": False, "reason": "還是低估了"}]}
+        objection = run_finalize(review__B_json=review)["disputes"][0]["objections"][0]
+        self.assertEqual(objection["ruling_reason"], "已打開記者會逐字稿，確有『可能上漲兩到三成』")
+
+    def test_an_upheld_trace_correction_says_what_it_corrected(self):
+        self.assertEqual([a["target"] for a in run_finalize(**fx.tactic_attack_overrides())["trace_attacks_upheld"]],
+                         ["tactic"])
+
+    def test_tags_set_aside_for_format_are_marked_as_never_checked(self):
+        j = copy.deepcopy(fx.JUDGMENT)
+        j.pop("tactic_checks")
+        j["tactic_checks_set_aside"] = ["tactic_checks：缺少 TW-T16"]
+        self.assertIs(run_finalize(judgment_json=j)["removed_tactics"][0]["not_checked"], True)
+
+    def test_each_claim_says_whether_an_upheld_attack_revised_its_rewrite(self):
+        opp_c = copy.deepcopy(fx.OPP_C)
+        opp_c["attacks"] = [{"id": "C-1", "claim_id": "C1", "target": "neutral_rewrite", "argument": "問法太寬",
+                             "proposed_label": None, "evidence": []}]
+        judgment = copy.deepcopy(fx.JUDGMENT)
+        judgment["rulings"].append({"attack_id": "C-1", "upheld": True, "reason": "問法應限於明年", "verified_urls": []})
+        r = run_finalize(opponent__C_json=opp_c, judgment_json=judgment,
+                         review__C_json={"seat": "C", "reviews": [{"claim_id": "C1", "pass": True, "reason": "可以"}]})
+        self.assertIs(claim(r, "C1")["rewrite_revised"], True)
+        self.assertIs(claim(r, "C2")["rewrite_revised"], False)
+        self.assertIs(claim(run_finalize(), "C1")["rewrite_revised"], False)  # B-1 is on the label
+        weight = run_finalize(**fx.importance_attack_overrides((("C-1", 4, True),)))  # an importance challenge
+        self.assertIs(claim(weight, "C1")["rewrite_revised"], False)
+
+
 if __name__ == "__main__":
     unittest.main()

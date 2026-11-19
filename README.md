@@ -130,7 +130,7 @@ python3 -m unittest discover -s tests -t .
 - 發版前的評測：[evals/README.md](evals/README.md)
 
 **資料可以提 PR 修正，但要附出處：**
-- `skills/factcheck/data/tw/media.toml` 每一筆都要有網址和年份。
+- `skills/factcheck/data/tw/media.toml` 每一筆都要有出處網址；信任度和立場研究另外要有年份，紀錄要有日期。紀錄（例如 NCC 處分）這一版先不印在報告上：目前只有一家媒體有紀錄，等收錄標準訂好、每一家都照標準查過之後才顯示。
 - `tactics.toml` 每種手法的案例，至少要涵蓋兩個不同的被攻擊方。
 
 這兩條規則都由測試強制檢查。
