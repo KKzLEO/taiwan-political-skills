@@ -1,0 +1,102 @@
+id = "case-024"
+title = "「藍委修國籍法，讓中國人免棄籍挑戰立委、總統」：提案內容是真的，立委說得通，但總統另有選罷法擋住，條號和「近日」也不對"
+input_type = "text"
+input = """國民黨立法委員傅崐萁等16人近日在立法院提出《國籍法》第20條修正草案，內容為中國人民在取得台灣戶籍後，其公職參選及任職資格不適用《國籍法》放棄外國國籍規定，形同讓中國人能在未放棄中國籍的情況下挑戰立委、總統等要職。民進黨台北市議員許淑華今（5日）在臉書發文砲轟：「國民黨到底要瘋成什麼程度，竟然想開放中國人選台灣總統？！」"""
+target = "國民黨"
+expected_result = "部分符合"
+notes = """主旨只對一半：提案內容真實，但推論的效果有一半錯。訊息原文取自 Cofacts（文章 uuk2t5iokkh0，2026-06-14 收錄，2人回報），逐字照抄。內容和 ETtoday 2026-06-06 報導〈藍擬修國籍法「免棄中國籍也能選總統」　許淑華：要瘋到什麼程度〉的導言幾乎相同。沒有找到針對這則訊息的查核報告，答案來自立法院議案關係文書、全國法規資料庫和中選會資料；許淑華的臉書貼文沒有取得，以 ETtoday 報導為證據。
+判定關鍵：
+1. 提案內容判 true：立法院第11屆第4會期第11次會議議案關係文書（114年11月26日印發，議案編號202110176000000），傅崐萁等16人提案在國籍法第1條增列第3項：「大陸地區人民依法取得臺灣地區戶籍者，其公職參選及任職資格，均依前開特別法規定，不適用本法第二十條之放棄外國國籍規定。」訊息說的「取得台灣戶籍後…不適用放棄外國國籍規定」正確。
+2.「挑戰立委、總統」判 mixed：提案把參選資格交回兩岸人民關係條例，該條例第21條規定大陸地區人民在台設籍滿十年就可以登記為公職候選人，所以提案通過後，設籍滿十年、未放棄原籍的人可以參選立委等公職，「挑戰立委」說得通。但總統副總統選舉罷免法第20條第2項明定「大陸地區人民…經許可進入臺灣地區者，不得登記為總統、副總統候選人」，提案只動國籍法，沒有改這一條，所以「挑戰總統」是錯的。一半對、一半錯。
+3. 許淑華的話判 misleading：ETtoday 報導她確實在臉書這樣寫，引述本身是真的；但「開放中國人選台灣總統」這個指控，依上一點是錯的，引述會讓讀者以為提案真的開放總統參選。2022年她以民進黨籍參選台北市議員（中選會資料庫），「民進黨台北市議員」成立；「今（5日）」依 ETtoday 6月6日凌晨的報導是2026年6月5日，判 true。
+4.「第20條修正草案」判 mostly_true：提案人、連署人數、主旨都對，但提案修的是國籍法第1條，第20條是被排除適用的條文，沒有被修改。條號錯，不影響對提案內容的理解。
+5.「近日」判 false（隱含命題）：提案是2025年11月26日印發、11月28日排入院會，之後進入復議程序（立法院議案資料），距查核日期將近一年；即使以報導時的2026年6月計算，也已經過了半年多。
+為什麼是部分符合：訊息有兩個同樣重要的說法：「國民黨提案讓陸籍人士取得戶籍後參政免放棄原籍」是真的，而且確實會影響立委等公職的參選資格；「這等於開放中國人選總統」是錯的，總統參選資格另有法律排除，提案沒有碰到。標題和引述都把重點放在總統，但不能因此把真的那一半也判錯，所以不是「不符」。
+時間處理：訊息沒有寫年月，Cofacts 收錄時間是背景資料，使用者手上沒有。「今（5日）」是沒寫年月的日期，指的是許淑華發文的實際日期，年份不明，照事件內容判。「近日」是相對時間、查不到發布時間，另寫一條隱含命題「提案是查核日期前不久提出的」，依查核日期（2026-11-19）判 false。訊息沒有用「剛剛」「最新」強調新消息，「近日」也不是主旨，重要性2。提案到今天仍未通過（議案狀態為復議），所以「提出草案」這件事的判定不受時間影響。
+「國民黨到底要瘋成什麼程度」是評價，不另列。
+摘錄說明：議案關係文書 PDF 摘錄只去掉排版造成的換行和空白。這個網址直接開啟可能被轉回議事網首頁，要帶瀏覽器標頭和 referer 下載。"""
+
+[[claim]]
+original = "國民黨立法委員傅崐萁等16人近日在立法院提出《國籍法》第20條修正草案"
+expected_label = "mostly_true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/04/11/LCEWA01_110411_00064.pdf"
+excerpt = "案由：本院委員傅崐萁等 16 人"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/04/11/LCEWA01_110411_00064.pdf"
+excerpt = "並明確大陸地區人民取得臺灣地區戶籍後之參政資格適用規範，爰擬具「國籍法第一條條文修正草案」。是否有當？敬請公決。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0030001&flno=20"
+excerpt = "中華民國國民取得外國國籍者，不得擔任中華民國公職"
+
+# 隱含命題：這項提案是查核日期前不久才提出的。
+[[claim]]
+original = "近日"
+expected_label = "false"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/04/11/LCEWA01_110411_00064.pdf"
+excerpt = "立法院議案關係文書 中華民國114年11月26日印發"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/04/11/LCEWA01_110411_00064.pdf"
+excerpt = "立法院第 11 屆第 4 會期第 11 次會議議案關係文書"
+
+[[claim]]
+original = "內容為中國人民在取得台灣戶籍後，其公職參選及任職資格不適用《國籍法》放棄外國國籍規定"
+expected_label = "true"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/04/11/LCEWA01_110411_00064.pdf"
+excerpt = "(二)大陸地區人民取得臺灣地區戶籍後，其公職參選及任職資格，仍以兩岸條例為依據，不適用本法第二十條之放棄外國國籍規定。"
+
+[[claim]]
+original = "形同讓中國人能在未放棄中國籍的情況下挑戰立委、總統等要職"
+expected_label = "mixed"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=Q0010001&flno=21"
+excerpt = "大陸地區人民經許可進入臺灣地區者，除法律另有規定外，非在臺灣地區設有戶籍滿十年，不得登記為公職候選人、擔任公教或公營事業機關（構）人員及組織政黨"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0020053&flno=20"
+excerpt = "回復中華民國國籍、因歸化取得中華民國國籍、大陸地區人民或香港、澳門居民經許可進入臺灣地區者，不得登記為總統、副總統候選人。"
+
+[[claim]]
+original = "民進黨台北市議員許淑華今（5日）在臉書發文砲轟"
+expected_label = "true"
+core = false
+importance = 1
+
+[[claim.ground_truth]]
+url = "https://www.ettoday.net/news/20260606/3178542.htm"
+excerpt = "民進黨台北市議員許淑華在臉書砲轟，「國民黨到底要瘋成什麼程度，竟然想開放中國人選台灣總統？」"
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/T1/T1/25e12c45f9f5641aab4193598d5aff6e/A/63_000_00_000_0000.json"
+excerpt = '''"cand_id": 162902, "cand_name": "許淑華", "cand_sex": "2", "cand_birthyear": "1973", "cand_edu": "博士", "party_code": 16, "party_name": "民主進步黨"'''
+
+[[claim]]
+original = "「國民黨到底要瘋成什麼程度，竟然想開放中國人選台灣總統？！」"
+expected_label = "misleading"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://www.ettoday.net/news/20260606/3178542.htm"
+excerpt = "「國民黨到底要瘋成什麼程度，竟然想開放中國人選台灣總統？」許淑華說，由傅崐萁等16人提出的《國籍法》第20條修正草案，企圖放寬現行規定，讓取得我國戶籍的中國人民，在未完成放棄中國國籍的情況下，仍有機會參與我國公職選舉，未來可能甚至挑戰立法委員、總統等重要職務。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0020053&flno=20"
+excerpt = "回復中華民國國籍、因歸化取得中華民國國籍、大陸地區人民或香港、澳門居民經許可進入臺灣地區者，不得登記為總統、副總統候選人。"

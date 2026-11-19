@@ -1,0 +1,106 @@
+id = "case-022"
+title = "「柯P只想贏錢，6億9000萬落入口袋」：每票30元、50元領4年都對，但補貼依法由政黨領取、政黨補助看的是不分區政黨票"
+input_type = "text"
+input = """柯P只想贏錢,若得票
+20%約300萬票:
+1.個人補助款:
+$30x300 萬票
+=$9000萬元一次領完
+2.政黨補助款:
+$50x300萬票=1億
+5000元領4年=6億
+賺翻了,有夠爽!
+而且選舉經費由無心贏
+負擔!太了不起了,完
+全自私自利!
+總共至少6億9000萬
+元落入口袋!"""
+target = "民眾黨"
+expected_result = "不符"
+notes = """細節真、主旨假：補助費率和算術都對，但錢不會進參選人的口袋。訊息原文取自 Cofacts（文章 qvcjCI0BAjOeMOkltFoy，2024-01-14 收錄，總統大選隔天，1人回報），是圖片文字辨識的結果，逐字照抄，換行、半形標點和斷在兩行的「1億」「5000元」（應是1億5000萬元的筆誤）都保留；「無心贏」是對副總統參選人吳欣盈的諧音稱呼。沒有找到針對這則訊息的查核報告，答案來自全國法規資料庫和中選會資料庫。
+判定關鍵：
+1.「個人補助款：$30x300萬票=$9000萬元一次領完」判 misleading：總統副總統選舉罷免法第41條規定，得票數達當選票數三分之一以上者，每票補貼30元，是一次性的競選費用補貼，算術也對。但同條第2項規定「政黨推薦之候選人其補貼費用，應由該推薦之政黨領取」；柯文哲是台灣民眾黨推薦的候選人（中選會資料庫），這筆錢由民眾黨領取，不是「個人」補助款。材料是真的，「個人」兩字引導出錯誤印象。
+2.「政黨補助款：$50x300萬票…領4年=6億」判 mostly_true：政黨法第22條規定每年每票50元、領到該屆立委任期屆滿（4年），算術正確。但計算基礎是「全國不分區立法委員選舉各該政黨得票數」，不是柯文哲的總統票。實際結果是柯文哲得3,690,466票（26.46%），民眾黨不分區政黨票3,040,615票（22.07%），兩者不同；只是剛好都在300萬上下，算出來的金額量級沒有錯。
+3.「總共至少6億9000萬元落入口袋」判 false，這是整則訊息的主旨：上面兩筆錢依法都由政黨領取，政黨補助還限定「應用於競選費用、人事費用、辦公費用、業務費用、政策研究費用及人才培育費用」（政黨法第22條第4項），法律上沒有任何一筆是給參選人個人的。0.9億加6億等於6.9億的算術是對的，錯在「落入口袋」。
+4.「選舉經費由無心贏負擔」判 unverified：沒有查監察院政治獻金資料，無法確認柯吳競選經費的來源比例。
+陷阱：柯文哲後來因京華城和政治獻金相關案件被起訴，一審除收賄外也判了公益侵占、背信（見 case-006），查核時容易把「柯文哲把錢放進自己口袋」的印象套到這則訊息上。但那些案件涉及的是政治獻金和基金會款項，不是本訊息講的選舉補貼和政黨補助款，兩者不能混用；本案只判這則訊息講的補助款流向。
+為什麼是不符：訊息最想讓讀者相信的是「柯文哲參選是為了賺補助款，6.9億會落入他的口袋」，這有法條直接反證；真的只有每票補助的費率、年限和算術，正好被拿來包裝錯誤的結論。
+時間處理：訊息沒有相對時間，「若得票20%」是假設情境（2024年總統選舉投票數14,048,311，20%約281萬票，「約300萬票」是概略數），不另外查證；判定依現行條文，第41條和政黨法第22條在訊息發出後沒有修改這幾項內容，今天（2026-11-19）讀的判定和當時相同。
+「柯P只想贏錢」「賺翻了,有夠爽!」「太了不起了,完全自私自利!」是揣測和評價，屬 not_factual。
+摘錄說明：中選會資料庫摘錄取自前端讀取的原始 JSON。
+整理說明（2026-11-19）：寫手把「而且選舉經費由無心贏負擔!」判為 unverified（重要性 2），但沒有附可以引用的公開紀錄。評測格式要求每條事實命題都附來源，所以這條沒有列成命題；它不影響預期結果。
+"""
+
+[[claim]]
+original = "柯P只想贏錢"
+expected_label = "not_factual"
+core = false
+importance = 2
+
+[[claim]]
+original = """1.個人補助款:
+$30x300 萬票
+=$9000萬元一次領完"""
+expected_label = "misleading"
+core = false
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0020053&flno=41"
+excerpt = "各組候選人選舉得票數達當選票數三分之一以上者，應補貼其競選費用，每票補貼新臺幣三十元。但其最高額，不得超過候選人競選經費最高金額。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0020053&flno=41"
+excerpt = "政黨推薦之候選人其補貼費用，應由該推薦之政黨領取；二個以上政黨共同推薦一組候選人時，應共同具名領取。"
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/P0/00/4d83db17c1707e3defae5dc4d4e9c800/N/00_000_00_000_0000.json"
+excerpt = '''"ticket_num": 3690466, "ticket_percent": 26.46, "is_victor": " ", "ris_prv_code": "00", "ris_city_code": "000", "ris_area_code": "00", "ris_dept_code": "000", "area_name": "全國", "cand_id": 203249, "cand_name": "柯文哲", "cand_sex": "1", "cand_birthyear": "1959", "cand_edu": "博士", "party_code": 350, "party_name": "台灣民眾黨"'''
+
+[[claim]]
+original = """2.政黨補助款:
+$50x300萬票=1億
+5000元領4年=6億"""
+expected_label = "mostly_true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0020078&flno=22"
+excerpt = "前項補助，依最近一次全國不分區及僑居國外國民立法委員選舉各該政黨得票數計算之，每年每票補助新臺幣五十元，並按會計年度由主管機關核算補助金額，通知政黨於二個月內掣據向主管機關領取，至該屆立法委員任期屆滿為止。"
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/L0/L4/e753a8e7a7bcc09fa51d1aea0024a843/N/00_000_00_000_0000.json"
+excerpt = '''"ticket_num": 3040615, "ticket_percent": 22.07, "ris_prv_code": "00", "ris_city_code": "000", "ris_area_code": "00", "ris_dept_code": "000", "area_name": "全國", "party_code": 350, "party_name": "台灣民眾黨"'''
+
+[[claim]]
+original = "賺翻了,有夠爽!"
+expected_label = "not_factual"
+core = false
+importance = 1
+
+[[claim]]
+original = """太了不起了,完
+全自私自利!"""
+expected_label = "not_factual"
+core = false
+importance = 1
+
+[[claim]]
+original = """總共至少6億9000萬
+元落入口袋!"""
+expected_label = "false"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0020053&flno=41"
+excerpt = "政黨推薦之候選人其補貼費用，應由該推薦之政黨領取"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0020078&flno=22"
+excerpt = "政黨依第二項規定領取之補助，應用於競選費用、人事費用、辦公費用、業務費用、政策研究費用及人才培育費用。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=D0020078&flno=22"
+excerpt = "主管機關對於最近一次全國不分區及僑居國外國民立法委員選舉得票率達百分之三以上之政黨，應編列年度預算補助之。"

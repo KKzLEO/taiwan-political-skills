@@ -7,7 +7,7 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方�
 
 把一則訊息拆成命題，由獨立的子程序擔任溯源員、正方、三個反方、裁判，再找另一家模型當外部反方，最後由腳本套固定規則算分、產報告。
 
-**你（主 agent）只負責安排流程和執行腳本。** 你看得到使用者的記憶和原始提問，所以不參與判定、不當任何辯論角色，也不把自己的看法寫進任何角色的指令。
+**你（主 agent）只負責收集輸入、安排流程和執行腳本。** 你看得到使用者的記憶和原始提問，所以不拆題、不參與判定、不當任何辯論角色，也不把自己的看法寫進任何角色的指令。
 
 ## 準備
 
@@ -15,13 +15,11 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方�
 
 需要 Python 3.11 以上。
 
-**第 1、2 步**（你自己做的）產出的 JSON 要先通過 `python3 "$SKILL/scripts/fc.py" validate`。沒通過就照錯誤訊息重做一次，第二次還不過就停止，告訴使用者是哪一步出錯。
-
-**第 3 步以後的角色都用 `fc.py run-model` 執行，** 它會自己檢查格式、重試一次。重試後只剩下面兩種錯誤時，它會自動走退路，流程繼續；原內容都保留在檔案裡：
+**第 2 步以後的角色都用 `fc.py run-model` 執行，** 它會自己檢查格式、重試一次。重試後只剩下面兩種錯誤時，它會自動走退路，流程繼續；原內容都保留在檔案裡：
 - **手法標記不合格：** 移出，報告不列出。手法標記不影響分數，不值得因此停掉整次查核。
 - **裁判判附證據的攻擊成立，卻沒列出實際核對過的網址：** 判決照用，報告開頭會註明，這份報告不能標「可公開」。
 
-其他錯誤時，溯源員、正方、答辯、裁判會以非零結束碼停止。這時停下來，告訴使用者是哪一步出錯，**不要自己重跑或補檔**。
+其他錯誤時，讀入與拆題、溯源員、正方、答辯、裁判會以非零結束碼停止。這時停下來，告訴使用者是哪一步出錯，**不要自己重跑或補檔**。
 
 ### 0. 建立資料夾、偵測模型
 
@@ -37,13 +35,29 @@ description: 查核使用者收到的訊息是否正確，並用「一個正方�
    Claude Code 上要另外加 `--host-model` 和 `--host-effort`，見 host-claude.md。把列出的席位告訴使用者。沒有任何外部席位時，提醒他報告的信心度會扣 20 分，可以裝 Codex、Claude Code 或 Gemini CLI 補上。
 4. **中斷後重跑：** 先執行 `python3 "$SKILL/scripts/fc.py" status --run "$RUN"`，標「完成」的步驟直接跳過。
 
-### 1. 讀入 → `source.json`
+### 1. 收集輸入 → `input.json`
 
-依照 [references/ingest.md](references/ingest.md) 處理網址、文字、截圖、影片，寫出 `source.json`。完全無法上網就停止，告訴使用者這次沒辦法查核，不要只靠記憶回答。
+把使用者給的內容原封不動交給程式，不摘要、不改寫。使用者給的文字和網址一律先用檔案工具存成檔案，**不要放進指令列**，因為 shell 會吃掉或執行裡面的 `$`、反引號、引號：
+- `$RUN/prompt.txt`：使用者這次怎麼問，照抄（例如「這是不是又在騙人？」）。裡面的立場由下一步判斷。
+- `$RUN/message.txt`：要查的內容，見下表。
+- `$RUN/url.txt`：網址，見下表。
 
-### 2. 中立化 → `claims.json`
+| 輸入 | 怎麼做 |
+|---|---|
+| 貼上的文字 | 訊息原文存成 `$RUN/message.txt`，執行 `fc.py input --run "$RUN" --type text --file "$RUN/message.txt" --prompt-file "$RUN/prompt.txt"` |
+| 新聞網址 | 網址存成 `$RUN/url.txt`，執行 `fc.py input --run "$RUN" --type url --url-file "$RUN/url.txt" --prompt-file "$RUN/prompt.txt"`，全文由下一步的子程序自己讀 |
+| 截圖 | 逐字抄下畫面上的所有文字，連同帳號名稱、時間、平台，存成 `$RUN/message.txt`。看不清楚的字寫 `[辨識不清]`，不要猜，也不要判斷圖片真假。再用 `--type image --file` 執行 |
+| 影片 | 網址存成 `$RUN/url.txt`，執行 `fc.py video --url-file "$RUN/url.txt" --out "$RUN/transcript.txt"`，成功的話用 `--type video --file "$RUN/transcript.txt" --url-file "$RUN/url.txt"`。沒有字幕時，有裝 whisper 可以轉文字，或請使用者提供逐字稿；都沒有就停止 |
 
-依照 [references/neutralize.md](references/neutralize.md) 把內容拆成命題、分類、改寫成中立說法。使用者提問裡的立場和語氣不是命題，不要帶進去。
+完全無法上網就停止，告訴使用者這次沒辦法查核，不要只靠記憶回答。
+
+### 2. 讀入與拆題 → `source.json`、`claims.json`
+
+```bash
+python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role prep
+```
+
+由獨立的子程序照 [references/ingest.md](references/ingest.md) 和 [references/neutralize.md](references/neutralize.md) 做，它看不到你的記憶和這段對話。文字、截圖、影片的原文由程式照 `input.json` 填寫，子程序改不了；網址輸入的全文由子程序自己讀取。
 
 ### 3–8. 辯論
 
@@ -93,8 +107,9 @@ python3 "$SKILL/scripts/fc.py" finalize --run "$RUN" && python3 "$SKILL/scripts/
 
 - 第一行是 `report.md` 裡的結果行（結果、可信度、信心度、模式、可公開與否），接著是光譜量表。
 - 再用三到五行說明核心命題的判定和最關鍵的證據，最後附上 `report.md` 的路徑。
-- **不要改寫或「潤飾」判定。** 報告怎麼寫就怎麼轉述。分數由腳本決定，你不能調整。
+- **不要改寫或「潤飾」判定。** 報告怎麼寫就怎麼轉述。分數由腳本決定，你不能調整。結果行寫了「不調整重要性的話是…」時，兩個結果都要轉述。
 - 報告沒有標「可公開」時，提醒使用者不要拿去公開貼文。
+- 標了「可公開」也提醒使用者：這不保證結論正確，公開貼文前先看過證據。
 
 ## 特殊狀況
 

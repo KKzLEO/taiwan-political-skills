@@ -33,10 +33,10 @@ class CredibilityTest(unittest.TestCase):
         self.assertEqual(r["credibility"]["score"], 100)
         self.assertEqual(r["result"], "符合")
 
-    def test_accuracy_is_importance_weighted(self):
+    def test_overall_accuracy_is_importance_weighted(self):
         r = compute([claim("C1", "false", importance=5), claim("C2", "true", importance=1)])
-        self.assertAlmostEqual(r["credibility"]["accuracy"], 1 / 6, places=4)
-        self.assertEqual(r["credibility"]["score"], 17)
+        self.assertAlmostEqual(r["credibility"]["overall_accuracy"], 1 / 6, places=4)
+        self.assertEqual(r["credibility"]["score"], 0)  # the main claim is false
         self.assertEqual(r["result"], "不符")
 
     def test_well_refuted_false_message_scores_zero(self):
@@ -108,15 +108,109 @@ class CredibilityTest(unittest.TestCase):
             compute([claim("C1", "true", evidence=["S99"])])
 
 
+class MainClaimsFirstTest(unittest.TestCase):
+    """2026-11-19: the result follows the main claims (the highest importance among scored claims); the other
+    claims can only pull it down. Holdout and calibration cases where true details diluted a false or misleading
+    main point (001, 009, 011, 012, 015) or a wrong detail did not stop 符合 (018)."""
+
+    def test_true_details_cannot_rescue_a_false_main_claim(self):
+        r = compute([claim("C1", "false", importance=5)] + [claim(f"C{i}", "true", importance=3) for i in range(2, 6)])
+        self.assertEqual(r["credibility"]["score"], 0)
+        self.assertEqual(r["result"], "不符")
+        self.assertEqual(r["credibility"]["main_claims"], ["C1"])
+
+    def test_misleading_main_claim_with_true_details_does_not_match(self):
+        r = compute([claim("C1", "misleading", importance=5), claim("C2", "true", importance=4), claim("C3", "true", importance=3)])
+        self.assertEqual(r["result"], "不符")
+
+    def test_highest_importance_present_is_the_main_tier(self):
+        """case-015: no scored claim at 5, two misleading claims at 4 and true details at 3."""
+        r = compute([claim("C1", "misleading", importance=4), claim("C2", "misleading", importance=4),
+                     claim("C3", "true", importance=3), claim("C4", "true", importance=3)])
+        self.assertEqual(r["credibility"]["main_claims"], ["C1", "C2"])
+        self.assertEqual(r["result"], "不符")
+
+    def test_wrong_details_still_pull_a_true_main_claim_down(self):
+        """case-006: the main claim is true but two details are false."""
+        r = compute([claim("C1", "true", importance=5), claim("C2", "false", importance=3), claim("C3", "false", importance=3)])
+        self.assertEqual(r["credibility"]["score"], 45)
+        self.assertEqual(r["result"], "部分符合")
+
+    def test_a_wrong_detail_caps_a_true_main_claim_at_mostly(self):
+        """case-018: both main claims true, one detail false among many true ones."""
+        claims = [claim("C1", "true", importance=5), claim("C2", "true", importance=5), claim("C3", "false", importance=2)]
+        claims += [claim(f"C{i}", "true", importance=2) for i in range(4, 14)]
+        r = compute(claims)
+        self.assertEqual(r["credibility"]["score"], 79)
+        self.assertTrue(r["credibility"]["capped"])
+        self.assertEqual(r["result"], "大致符合")
+
+    def test_a_mixed_or_misleading_detail_caps_too(self):
+        for label in ("mixed", "misleading"):
+            r = compute([claim("C1", "true", importance=5), claim("C2", label, importance=1)] +
+                        [claim(f"C{i}", "true", importance=2) for i in range(3, 9)])
+            self.assertEqual(r["result"], "大致符合", label)
+
+    def test_an_unverified_detail_does_not_cap(self):
+        r = compute([claim("C1", "true", importance=5), claim("C2", "unverified", importance=1)])
+        self.assertFalse(r["credibility"]["capped"])
+        self.assertEqual(r["result"], "符合")
+
+    def test_a_false_main_claim_is_determined_even_when_details_are_unverified(self):
+        """case-009: the details were mostly unverified, which used to make the whole message 無法判定."""
+        r = compute([claim("C1", "false", importance=5), claim("C2", "unverified", importance=4),
+                     claim("C3", "unverified", importance=3)])
+        self.assertEqual(r["result"], "不符")
+        self.assertTrue(r["credibility"]["show_on_spectrum"])
+
+    def test_a_wrong_claim_among_many_main_claims_still_caps_at_mostly(self):
+        """Skeptic review: round-1 case-005 had six claims at 5; one of them false still scored 83 符合, while the
+        same false claim at 4 was capped. Raising a false claim's importance must never improve the result."""
+        claims = [claim(f"C{i}", "true", importance=5) for i in range(1, 6)] + [claim("C6", "false", importance=5)]
+        r = compute(claims)
+        self.assertEqual(r["result"], "大致符合")
+        self.assertTrue(r["credibility"]["capped"])
+
+    def test_a_proven_false_key_fact_is_determined_even_if_the_main_claim_is_unverified(self):
+        """Skeptic review: the holdout case-020 with its main claim unverified turned 無法判定 although two key facts
+        at importance 4 were proven false; at 4 a claim is one the main point cannot stand without."""
+        r = compute([claim("C1", "unverified", importance=5), claim("C2", "false", importance=4),
+                     claim("C3", "false", importance=4), claim("C4", "true", importance=3)])
+        self.assertEqual(r["result"], "不符")
+
+    def test_a_partly_wrong_key_fact_does_not_turn_an_unverified_main_claim_into_a_mismatch(self):
+        """Second review: a mixed or misleading claim at 4 made an unverified main point a publishable 不符 at 35.
+        Below the main claims only a proven-false key fact settles it."""
+        for label in ("mixed", "misleading"):
+            r = compute([claim("C1", "unverified", importance=5), claim("C2", label, importance=4),
+                         claim("C3", "true", importance=4)])
+            self.assertEqual(r["result"], "無法判定", label)
+
+    def test_without_claims_at_4_the_main_tier_alone_decides(self):
+        """Simplifier review: nothing tested a top tier below 4."""
+        r = compute([claim("C1", "unverified", importance=3), claim("C2", "false", importance=3)])
+        self.assertEqual(r["result"], "不符")
+
+    def test_mostly_unverified_main_claims_are_undetermined(self):
+        r = compute([claim("C1", "unverified", importance=5), claim("C2", "unverified", importance=5),
+                     claim("C3", "true", importance=5), claim("C4", "false", importance=2)])
+        self.assertEqual(r["result"], "無法判定")
+
+    def test_a_wrong_main_claim_beside_unverified_ones_is_determined(self):
+        r = compute([claim("C1", "unverified", importance=5), claim("C2", "false", importance=5)])
+        self.assertEqual(r["result"], "不符")
+
+
 class ImportanceChangeTest(unittest.TestCase):
     def adjusted(self, c, original):
         return {**c, "importance_from": original}
 
     def test_result_without_the_change_is_reported_when_it_differs(self):
-        # adjusted: (0*4 + 1*3)/7 = 43 部分符合; original: (0*5 + 1*3)/8 = 38 不符
-        r = compute([self.adjusted(claim("C1", "false", 4), 5), claim("C2", "true", 3)])
-        self.assertEqual(r["result"], "部分符合")
-        self.assertEqual(r["without_importance_changes"], {"result": "不符", "credibility": 38, "publishable": True})
+        # adjusted: main claims {C2} true, overall (0.35*4 + 1*5)/9 = 71 大致符合;
+        # original: main claims {C1, C2}, half unverified -> 無法判定 (score min(67.5, 67.5) = 68)
+        r = compute([self.adjusted(claim("C1", "unverified", 4), 5), claim("C2", "true", 5)])
+        self.assertEqual(r["result"], "大致符合")
+        self.assertEqual(r["without_importance_changes"], {"result": "無法判定", "credibility": 68, "publishable": True})
         self.assertFalse(r["publishable"])  # a conclusion that hangs on a contested weight is not publishable
 
     def test_nothing_extra_when_no_importance_changed(self):
@@ -316,9 +410,10 @@ class PublishBlockTest(unittest.TestCase):
 
     def test_importance_challenge_cannot_lift_a_publish_block(self):
         """Skeptic re-review: lowering a weight in the debate must not make a report publishable."""
+        # scored: (5*1 + 2*0)/7 = 71 大致符合. Counting C2 at 1: 5/8 = 63, same band; at its original 2: 5/9 = 56.
         lowered = {**claim("C2", "false", importance=1, core=False), "type": "O", "importance_from": 2}
-        r = compute([claim("C1", "true", importance=5), lowered])
-        self.assertEqual(r["result"], "符合")
+        r = compute([claim("C1", "true", importance=5), claim("C3", "false", importance=2, core=False), lowered])
+        self.assertEqual(r["result"], "大致符合")
         self.assertFalse(r["publishable"])
         self.assertTrue(any("重要性" in b for b in r["publish_blocks"]))
 

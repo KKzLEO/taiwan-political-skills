@@ -84,27 +84,44 @@ def _scored(claims):
     return [c for c in claims if _counts(c)]
 
 
+WRONG_LABELS = {"false", "misleading", "mixed"}
+DETAIL_CAP = 79  # a true main point with a wrong detail is at most 大致符合
+
+
 def _credibility(claims):
-    """How true the message is. Only the verdicts count; how well we sourced them is confidence."""
+    """How true the message is. The main claims (the highest importance among scored claims) decide; the other
+    claims can only pull the result down, and a wrong one keeps a true main point below 符合. Only the verdicts
+    count; how well we sourced them is confidence."""
     scored = _scored(claims)
     if not scored:
         return None, "全部是意見、預測或口號，沒有可以查證的事實命題"
 
-    accuracy = _weighted(scored, lambda c: FACTORS[c["label"]])
-    flags = sorted({f for c in claims for f in c.get("context_flags", [])})
+    top = max(c["importance"] for c in scored)
+    main = [c for c in scored if c["importance"] == top]
+    main_accuracy = sum(FACTORS[c["label"]] for c in main) / len(main)
+    overall = _weighted(scored, lambda c: FACTORS[c["label"]])
+    accuracy = min(main_accuracy, overall)
     raw = Decimal("100") * accuracy
-    total_w = sum(Decimal(c["importance"]) for c in scored)
-    unverified_w = sum(Decimal(c["importance"]) for c in scored if c["label"] == "unverified")
-    undetermined = total_w > 0 and unverified_w / total_w >= UNVERIFIED_SHARE_LIMIT
+    score = round_half_up(raw)
+    capped = score > DETAIL_CAP and any(c["label"] in WRONG_LABELS for c in scored)  # 符合 = every claim holds
+    # A wrong main claim, or a proven-false key fact the main point cannot stand without (importance 4), is a
+    # finding even when the main claims cannot be checked.
+    unverified_share = Decimal(sum(c["label"] == "unverified" for c in main)) / len(main)
+    settled = any(c["label"] in WRONG_LABELS for c in main) or any(
+        c["label"] == "false" for c in scored if c["importance"] >= 4)
+    undetermined = unverified_share >= UNVERIFIED_SHARE_LIMIT and not settled
 
     cred = {
-        "score": round_half_up(raw),
+        "score": DETAIL_CAP if capped else score,
         "raw": float(round(raw, 2)),
-        "accuracy": float(round(accuracy, 4)),
-        "context_flags": flags,
+        "main_claims": [c["claim_id"] for c in main],
+        "main_accuracy": float(round(main_accuracy, 4)),
+        "overall_accuracy": float(round(overall, 4)),
+        "capped": capped,
+        "context_flags": sorted({f for c in claims for f in c.get("context_flags", [])}),
         "show_on_spectrum": not undetermined,
     }
-    reason = "一半以上的重要性落在「無法證實」，查不到不等於假的" if undetermined else None
+    reason = "主要說法有一半以上無法證實，查不到不等於假的" if undetermined else None
     return cred, reason
 
 

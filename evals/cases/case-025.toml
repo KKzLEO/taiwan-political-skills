@@ -1,0 +1,160 @@
+id = "case-025"
+title = "「最新修訂的交通規則」：內容是2023年那次修法、當時都對，但之後又修了兩次，無照駕駛罰款早已不是2.4萬"
+input_type = "text"
+input = """最新修訂的交通規則重點包括
+提高罰則(例如未禮讓行人罰
+款提高至$6,000元,無照駕駛
+罰款上限提高至$24,000元)、嚴
+格管制危險駕駛(例如嚴重超
+速40公里以上會吊扣牌照6個
+月)、延長記點期限(從半年延
+長至1年,累計12點吊扣駕照2
+個月),以及增加民眾檢舉項目
+等措施,以加強行車安全。。"""
+target = "政府機關"
+expected_result = "大致符合"
+notes = """舊聞新傳：沒有日期的轉傳文字，用「最新修訂」把兩年多前的修法說成新消息，內容本身都對。訊息原文取自 Cofacts（文章 xhmGq5oBElZarx-VfZAC，2025-11-22 收錄，UTC 12:25，即台灣時間當天20:25，1人回報），是圖片文字辨識的結果，逐字照抄，換行、全形半形標點和結尾的「。。」都保留。同一秒另有一則（yBmGq5oBElZarx-VfZA0）像是同一張圖的下半段，沒有「最新」二字，本案只用這一則。沒有找到針對這則訊息的查核報告，答案全部來自全國法規資料庫的沿革和新舊版本條文。訊息介紹立法院通過、交通部主管的罰則，沒有攻擊或稱讚特定政黨，target 取政府機關。
+和 case-018 的關係：兩案都是道路交通管理處罰條例的懶人包，但描述的是不同次修法（本案是112年5月3日公布、112年6月30日施行那一次；case-018 是114年11月19日那一次），命題只有「無照駕駛罰款」一項有交集，而且本案正是用 case-018 那次修法來證明「最新」是錯的。
+判定關鍵（全國法規資料庫道交條例沿革第44、45、48、50筆，以及111年5月4日版、112年5月3日版與現行條文）：
+1. 內容都對得上112年5月3日那次修法（沿革第45筆，修正第7-1、21、43、44、63條等，112年6月30日施行），每一點都用修法前後兩個版本比對：
+   - 未禮讓行人：第44條從1,200至3,600元提高為1,200至6,000元，判 true。
+   - 無照駕駛：第21條從6,000至12,000元提高為6,000至24,000元，判 true。
+   - 超速40公里：第43條第1項第2款門檻從「超過最高時速六十公里」降為「四十公里」，同條並吊扣汽車牌照六個月，判 true。
+   - 記點：第63條從「六個月內…共達六點以上者，吊扣駕駛執照一個月」改為「一年內記違規點數每達十二點者，吊扣駕駛執照二個月」，判 true。
+   - 民眾檢舉：第7-1條可檢舉項目從16款增為18款，並新增第五十條等條款，判 true。
+2.「最新修訂」判 false（隱含命題，重要性與主旨相同）：這次修法之後，道交條例又在114年11月19日（沿革第48筆）和115年8月17日（沿革第50筆）修正公布。其中114年那次把第21條無照駕駛改為機車1萬8千至3萬6千元、汽車3萬6千至6萬元，所以照今天的法律，「無照駕駛罰款上限24,000元」已經過時。未禮讓行人、超速40公里吊扣牌照、記點12點的規定到今天仍然有效。
+時間處理：訊息沒有寫日期，Cofacts 收錄時間是背景資料，使用者手上沒有。「最新修訂」是相對時間、查不到發布時間，依規則：事件本身（那次修法的內容）照內容拆，不寫日期，五條都判 true；另寫一條隱含命題「這是查核日期前不久、目前最新的一次修法」，依查核日期（2026-11-19）判斷，那次修法是2023年5月公布，之後還有兩次修正，判 false。訊息用「最新」強調是新消息，這條的重要性和主旨相同，設為5。附帶一提：即使以 Cofacts 收錄時間（2025-11-22）來看，三天前（11月19日）才剛公布更新的修正，「最新」當時也已經不對。
+為什麼是部分符合：訊息有兩個同樣重要的說法：「修法內容是這些」是對的，「這是最新的修法」是錯的。讀者如果照著當成現在的規定，大部分仍然適用，但會把無照駕駛的罰款低估一半以上。內容大致正確、時間錯，屬於主旨只對了一半；不是「不符」，因為描述的修法內容全部屬實，而且多數至今有效。
+「以加強行車安全」是修法目的的說法，屬 not_factual。
+摘錄說明：舊版條文取自全國法規資料庫「歷史法規」頁面，網址中的 lnndate 是該版本的修正日期；摘錄只去掉網頁排版造成的換行。
+整理說明（2026-11-19）：寫手拿到的是前一版時間規則，裡面有「強調新消息時和主旨同等重要」，所以把「這是最新的修法」設成重要性 5、核心，判部分符合。這句已經刪掉，改由一個看不到工具結果的獨立程序照最終規則重判：事件本身（這些是 112 年 5 月 3 日那次修法的重點）判 true、重要性 5；「訊息暗示的時間」命題「這是查核日期前不久、目前最新的一次修法」判 false、重要性 3（之後又在 114-11-19、115-08-17 修正）；時間的錯只記在這條。預期結果改為大致符合。重判者提醒：讀者如果照著當成現行規定，會把無照駕駛的罰款低估一半以上；如果認為這類懶人包把舊修法說成最新是主旨層級的錯，要改的是規則。
+"""
+
+# 隱含命題：這是查核日期前不久、目前最新的一次修法。
+[[claim]]
+original = "最新修訂的交通規則重點包括"
+expected_label = "false"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=K0040012"
+excerpt = "45. 中華民國一百十二年五月三日總統華總一義字第 11200036351 號令修正公布第 7-1、15、16、21～24、29、29-2、30、31、33、35、43～45、47、48、56-1、60、61、63、63-1、66、67、74、82、85、85-3、86、92 條條文"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=K0040012"
+excerpt = "48. 中華民國一百十四年十一月十九日總統華總一義字第 11400117171 號令修正公布第 16、21、21-1、35、44、45、56、65、67、72、78、80、84、85-3、87 條條文"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=K0040012"
+excerpt = "50. 中華民國一百十五年八月十七日總統華總一義字第 11500076171 號令修正公布第 21、21-1、35、67、73、85-2、85-3 條條文"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=21"
+excerpt = "汽機車駕駛人有下列第一款至第五款情形之一者，機車駕駛人處新臺幣一萬八千元以上三萬六千元以下罰鍰，汽車駕駛人處新臺幣三萬六千元以上六萬元以下罰鍰"
+
+[[claim]]
+original = """提高罰則(例如未禮讓行人罰
+款提高至$6,000元"""
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20230503&lser=001"
+excerpt = "汽車駕駛人，駕駛汽車行近行人穿越道或其他依法可供行人穿越之交岔路口，有行人穿越時，不暫停讓行人先行通過者，處新臺幣一千二百元以上六千元以下罰鍰。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20220504&lser=001"
+excerpt = "汽車駕駛人，駕駛汽車行經行人穿越道有行人穿越時，不暫停讓行人先行通過者，處新臺幣一千二百元以上三千六百元以下罰鍰。"
+
+[[claim]]
+original = """無照駕駛
+罰款上限提高至$24,000元)"""
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20230503&lser=001"
+excerpt = "汽車駕駛人有下列情形之一者，處新臺幣六千元以上二萬四千元以下罰鍰，並當場禁止其駕駛： 一、未領有駕駛執照駕駛小型車或機車。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20220504&lser=001"
+excerpt = "汽車駕駛人，有下列情形之一者，處新臺幣六千元以上一萬二千元以下罰鍰，並當場禁止其駕駛： 一、未領有駕駛執照駕駛小型車或機車。"
+
+[[claim]]
+original = """嚴
+格管制危險駕駛(例如嚴重超
+速40公里以上會吊扣牌照6個
+月)"""
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20230503&lser=001"
+excerpt = "二、行車速度，超過規定之最高時速四十公里。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20230503&lser=001"
+excerpt = "汽車駕駛人有第一項或前項行為者，並吊扣該汽車牌照六個月"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20220504&lser=001"
+excerpt = "二、行車速度，超過規定之最高時速六十公里。"
+
+[[claim]]
+original = """延長記點期限(從半年延
+長至1年,累計12點吊扣駕照2
+個月)"""
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20230503&lser=001"
+excerpt = "汽車駕駛人於一年內記違規點數每達十二點者，吊扣駕駛執照二個月"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20220504&lser=001"
+excerpt = "汽車駕駛人在六個月內，違規記點共達六點以上者，吊扣駕駛執照一個月"
+
+[[claim]]
+original = """以及增加民眾檢舉項目
+等措施"""
+expected_label = "true"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20230503&lser=001"
+excerpt = "十八、第六十條第二項第三款。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20220504&lser=001"
+excerpt = "十六、第六十條第二項第三款。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20230503&lser=001"
+excerpt = "十二、第五十條第二款、第三款。"
+
+[[claim]]
+original = "以加強行車安全"
+expected_label = "not_factual"
+core = false
+importance = 1
+
+[[claim]]
+original = "最新修訂的交通規則重點包括"
+expected_label = "true"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20230503&lser=001"
+excerpt = "汽車駕駛人，駕駛汽車行近行人穿越道或其他依法可供行人穿越之交岔路口，有行人穿越時，不暫停讓行人先行通過者，處新臺幣一千二百元以上六千元以下罰鍰。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawOldVer.aspx?pcode=K0040012&lnndate=20220504&lser=001"
+excerpt = "汽車駕駛人，駕駛汽車行經行人穿越道有行人穿越時，不暫停讓行人先行通過者，處新臺幣一千二百元以上三千六百元以下罰鍰。"

@@ -455,6 +455,35 @@ class ReviewTest(unittest.TestCase):
             r["reviews"][0]["label_ok"] = False
         self.assertTrue(any("label_ok" in e for e in errors_for("review-B.json", m)))
 
+class InputTest(unittest.TestCase):
+    GOOD = {"input_type": "text", "content": "某部長說：明年油價一定漲三成", "prompt": "幫我查核", "url": None}
+
+    def errs(self, **change):
+        return validate.validate_file(make_run({**fx.run_files(), "input.json": {**self.GOOD, **change}}), "input.json")
+
+    def test_good_input(self):
+        self.assertEqual(self.errs(), [])
+
+    def test_bad_type_or_empty_content(self):
+        self.assertTrue(self.errs(input_type="pdf"))
+        self.assertTrue(self.errs(content="  "))
+
+    def test_no_other_fields(self):
+        """Red-team review: a host writing input.json itself could add free text the prep role would read."""
+        self.assertTrue(self.errs(notes="使用者覺得這是某黨網軍"))
+
+    def test_url_input_needs_a_url(self):
+        self.assertTrue(self.errs(input_type="url", content="不是網址"))
+        self.assertEqual(self.errs(input_type="url", content="https://example.org/a"), [])
+
+
+class MalformedStructureTest(unittest.TestCase):
+    def test_malformed_claims_give_errors_not_an_exception(self):
+        """Skeptic review: a list of strings made the validator raise, which crashed run-model and fc.py status."""
+        files = fx.run_files()
+        files["claims.json"] = {"prompt_was_leading": False, "claims": ["某部長說明年油價一定漲三成", 3]}
+        self.assertTrue(validate.validate_file(make_run(files), "claims.json"))
+
 
 if __name__ == "__main__":
     unittest.main()

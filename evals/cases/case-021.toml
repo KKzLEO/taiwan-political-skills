@@ -1,0 +1,157 @@
+id = "case-021"
+title = "「高虹安11萬判7年4月，綠議員詐領1388萬只判8個月」：刑期數字大致對，但罪名不同、1388萬是自付私聘助理的錢，高虹安二審也已改判6月"
+input_type = "text"
+input = """看民進黨的司法(pointing down)
+
+高虹安詐領助理費116,514元判七年四個月，民進黨新北市議員周雅玲詐領助理費1,388萬元，去年僅判8個月緩刑3年，今年初民進黨前台南市議長賴美惠，詐領助理費234萬元判兩年緩刑4年，綠白顏色不同刑期就不同!"""
+target = "民進黨"
+expected_result = "不符"
+notes = """細節大多對、主旨誤導：拿罪名不同、有無自白不同的案子比刑期，推論司法看政黨顏色。訊息原文取自 Cofacts（文章 1wdo5drcnp7fe，2024-07-29 收錄，UTC 15:47，即台灣時間當天23:47，1人回報，高虹安一審宣判後第3天），逐字照抄；「(pointing down)」是 Cofacts 把表情符號轉成的文字，照原樣保留。2025年8月另有兩則同題圖卡（Q7-N4ZgB6nor6FKtxgM0、pr-R75gB6nor6FKtDRoC），本案只用這一則。沒有找到針對這則訊息的查核報告，答案來自判決書、法院新聞稿、全國法規資料庫和中選會資料。
+判定關鍵：
+1.「高虹安詐領助理費116,514元判七年四個月」判 true：臺灣高等法院114年12月16日新聞稿引述的原判決主文（臺北地院112年度矚重訴字第1號，113年7月26日宣判），高虹安犯利用職務機會詐取財物罪，處有期徒刑7年4月，犯罪所得11萬6,514元沒收。這是一審判決，訊息發出時是事實；但高院二審已撤銷這部分，改依使公務員登載不實罪判6月、得易科罰金（同一份新聞稿，檢察官得上訴）。今天讀到這句的人如果以為7年4月仍然有效，就會被誤導，查核時應補上二審結果；這一點併入第5條命題的理由。
+2.「周雅玲詐領助理費1,388萬元」判 misleading：新北地院110年度訴字第1451號判決（112年10月5日）認定，周雅玲以人頭登載公費助理、領取助理補助款共1,362萬460元，但這筆錢全數用來支付她實際私聘的助理，私聘助理薪資合計1,388萬元，比領到的還多，「並非挪為己用」，所以不構成貪污治罪條例的利用職務上機會詐取財物罪，只成立刑法第214條使公務員登載不實罪，也沒有犯罪所得。1,388萬是她付出去的錢，不是詐領進口袋的錢；用人頭登載確有其事，所以判 misleading 而不是 false。她是2018年以民進黨籍當選的新北市議員（中選會資料庫），「民進黨新北市議員」成立。
+3.「僅判8個月緩刑3年」判 true：同一份判決主文，處有期徒刑8月，緩刑3年，並向公庫支付60萬元。
+4.「賴美惠詐領助理費234萬元判兩年緩刑4年」判 mostly_true：中央社報導臺南地檢署起訴書，101年至103年以人頭不實請領助理費232萬5,200元，賴美惠偵查中自白並繳回全部所得；中央社英文版報導臺南地院113年1月17日判處2年、緩刑4年。刑期正確，金額差約1.5萬元，不影響結論。她2014年以民進黨籍當選台南市議員（中選會資料庫）。判決書因司法院裁判書系統擋自動抓取而沒有取得，這兩點以中央社為證據。
+5.「綠白顏色不同刑期就不同」判 misleading，這是整則訊息的主旨：三案刑期差異來自罪名和自白，不是政黨。高虹安一審被認定犯貪污治罪條例第5條第1項第2款，法定刑是7年以上有期徒刑，7年4月接近下限，她全程否認；周雅玲被認定只成立刑法第214條，法定刑是3年以下；賴美惠在偵查中自白並繳回全部所得，適用貪污治罪條例第8條第2項必須減輕其刑。而且高虹安二審被改判同樣是使公務員登載不實罪後，刑度是6月，和周雅玲的8月相當。材料（三個人、刑期）是真的，但比較的前提錯了，引導出司法看顏色的錯誤印象。
+時間處理：訊息沒有寫日期，Cofacts 收錄時間是背景資料，使用者手上沒有。「去年」「今年初」是相對時間、查不到發布時間，依規則事件本身照內容判（第3、4點），另外各列一條隱含命題依查核日期（2026-11-19）判斷：「去年」指2025年，周雅玲判決其實是2023年10月5日；「今年初」指2026年初，賴美惠判決其實是2024年1月17日，兩條都判 false。訊息沒有用「剛剛」「最新」強調新消息，這兩條只是次要細節，重要性2。如果以收錄當時（2024年7月）來讀，「去年」「今年初」都是對的，但不影響整體判定。「判七年四個月」沒有相對時間，是已經發生的一審判決，照事實判 true，二審改判在第1點和第5點說明。
+為什麼是不符：訊息最想讓讀者相信的是「民進黨的司法對綠營輕判、對白營重判」，這個推論靠拿罪名和自白情形都不同的案子硬比才成立；數字大多對，正好讓人相信這個比較。查核時如果只核對三個刑期和金額就判「大致符合」，會漏掉罪名不同這個關鍵。
+「看民進黨的司法」是評價，屬 not_factual。訊息稱高虹安為「白」，她判決當時是民眾黨籍，不另外查證。
+摘錄說明：判決書 PDF 每行行首有行號，跨行摘錄會被行號打斷，所以判決書摘錄都取自單一行內的文字（主文一句跨兩行，拆成兩條摘錄）；中選會資料庫摘錄取自前端讀取的原始 JSON。判決書網址需要帶瀏覽器標頭才下載得到。"""
+
+[[claim]]
+original = "看民進黨的司法(pointing down)"
+expected_label = "not_factual"
+core = false
+importance = 1
+
+[[claim]]
+original = "高虹安詐領助理費116,514元判七年四個月"
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://www.judicial.gov.tw/tw/cp-1888-1461199-b7e08-1.html"
+excerpt = "一、高虹安共同犯利用職務機會詐取財物罪，處有期徒刑柒年肆月，褫奪公權肆年。"
+
+[[claim.ground_truth]]
+url = "https://www.judicial.gov.tw/tw/cp-1888-1461199-b7e08-1.html"
+excerpt = "五、未扣案之高虹安犯罪所得新臺幣拾壹萬陸仟伍佰壹拾肆元沒收，於全部或一部不能沒收或不宜執行沒收時，追徵其價額。"
+
+[[claim.ground_truth]]
+url = "https://www.judicial.gov.tw/tw/cp-1888-1461199-b7e08-1.html"
+excerpt = "檢察官及被告高虹安等因貪污治罪條例等案件，不服臺灣臺北地方法院112年度矚重訴字第1號判決，提起上訴，本院於今(16)日宣判，簡要說明如下："
+
+[[claim]]
+original = "民進黨新北市議員周雅玲詐領助理費1,388萬元"
+expected_label = "misleading"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://judgment.judicial.gov.tw/FILES/PCDM/110%2c%e8%a8%b4%2c1451%2c20231005%2c1.pdf"
+excerpt = "聘助理支出如附表二所示費用共1,388萬元。"
+
+[[claim.ground_truth]]
+url = "https://judgment.judicial.gov.tw/FILES/PCDM/110%2c%e8%a8%b4%2c1451%2c20231005%2c1.pdf"
+excerpt = "出金額已大於所領得之助理補助款，足以證明被告2人已"
+
+[[claim.ground_truth]]
+url = "https://judgment.judicial.gov.tw/FILES/PCDM/110%2c%e8%a8%b4%2c1451%2c20231005%2c1.pdf"
+excerpt = "將前述所得1,362萬460元全數流向與議員職務有實質關聯"
+
+[[claim.ground_truth]]
+url = "https://judgment.judicial.gov.tw/FILES/PCDM/110%2c%e8%a8%b4%2c1451%2c20231005%2c1.pdf"
+excerpt = "之事項，並非挪為己用，自難認被告2人在主觀上具有不"
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/T1/T1/1250b1f46d13d83f30143138454d28cd/A/65_000_00_000_0000.json"
+excerpt = '''"cand_id": 19658, "cand_name": "周雅玲", "cand_sex": "2", "cand_birthyear": "1968", "cand_edu": "專科", "party_code": 16, "party_name": "民主進步黨"'''
+
+[[claim]]
+original = "僅判8個月緩刑3年"
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://judgment.judicial.gov.tw/FILES/PCDM/110%2c%e8%a8%b4%2c1451%2c20231005%2c1.pdf"
+excerpt = "周雅玲共同犯使公務員登載不實罪，處有期徒刑捌月。緩刑參"
+
+[[claim.ground_truth]]
+url = "https://judgment.judicial.gov.tw/FILES/PCDM/110%2c%e8%a8%b4%2c1451%2c20231005%2c1.pdf"
+excerpt = "年，並應於緩刑期內，向公庫支付新臺幣陸拾萬元。"
+
+# 隱含命題：周雅玲的判決是查核日期前一年（2025年）的事。
+[[claim]]
+original = "去年"
+expected_label = "false"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://judgment.judicial.gov.tw/FILES/PCDM/110%2c%e8%a8%b4%2c1451%2c20231005%2c1.pdf"
+excerpt = "中 華 民 國 112 年 10 月 5 日"
+
+[[claim]]
+original = "民進黨前台南市議長賴美惠，詐領助理費234萬元判兩年緩刑4年"
+expected_label = "mostly_true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://www.cna.com.tw/news/ahel/202308210070.aspx"
+excerpt = "南檢調查發現，賴美惠等3人明知吳、盧2人未實際擔任助理，仍以2人名義向市議會申領助理費，於101年至103年間共不實請領232萬5200元助理費，交由陳女用來支應服務處紅白帖等花費。"
+
+[[claim.ground_truth]]
+url = "https://focustaiwan.tw/society/202401170009"
+excerpt = "Former Tainan Council Speaker Lai Mei-hui (賴美惠) was handed down a two-year jail sentence, suspended for four years, after being found guilty of fraudulently claiming expenses, the Tainan District Court said Wednesday."
+
+[[claim.ground_truth]]
+url = "https://db.cec.gov.tw/static/elections/data/tickets/ELC/T1/T1/e3d1446824fd2af8ca06ea6b60fd7981/A/67_000_00_000_0000.json"
+excerpt = '''"cand_id": 19190, "cand_name": "賴美惠", "cand_sex": "2", "cand_birthyear": "1958", "cand_edu": "大學", "party_code": 16, "party_name": "民主進步黨"'''
+
+# 隱含命題：賴美惠的判決是查核日期當年（2026年）年初的事。
+[[claim]]
+original = "今年初"
+expected_label = "false"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://focustaiwan.tw/society/202401170009"
+excerpt = "Former Tainan Council speaker gets 2-year suspended sentence for corruption"
+
+[[claim]]
+original = "綠白顏色不同刑期就不同!"
+expected_label = "misleading"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://judgment.judicial.gov.tw/FILES/PCDM/110%2c%e8%a8%b4%2c1451%2c20231005%2c1.pdf"
+excerpt = "意旨參照）。是核被告2人所為，均係犯刑法第214條之使"
+
+[[claim.ground_truth]]
+url = "https://judgment.judicial.gov.tw/FILES/PCDM/110%2c%e8%a8%b4%2c1451%2c20231005%2c1.pdf"
+excerpt = "為被告2人不構成貪污治罪條例第5條第1項第2款之利用職"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000007&flno=5"
+excerpt = "有下列行為之一者，處七年以上有期徒刑，得併科新臺幣六千萬元以下罰金："
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=214"
+excerpt = "明知為不實之事項，而使公務員登載於職務上所掌之公文書，足以生損害於公眾或他人者，處三年以下有期徒刑、拘役或一萬五千元以下罰金。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000007&flno=8"
+excerpt = "犯第四條至第六條之罪，在偵查中自白，如有所得並自動繳交全部所得財物者，減輕其刑；因而查獲其他正犯或共犯者，減輕或免除其刑。"
+
+[[claim.ground_truth]]
+url = "https://www.cna.com.tw/news/ahel/202308210070.aspx"
+excerpt = "因賴美惠在檢方偵查期間自白犯行並繳回全部所得，檢察官建議法官依法減輕其刑。"
+
+[[claim.ground_truth]]
+url = "https://www.judicial.gov.tw/tw/cp-1888-1461199-b7e08-1.html"
+excerpt = "高虹安共同犯使公務員登載不實罪，處有期徒刑6月，如易科罰金，以新臺幣1仟元折算壹日。"

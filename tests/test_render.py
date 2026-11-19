@@ -142,6 +142,68 @@ class BodyTest(unittest.TestCase):
         self.assertIn("只引了一半", out)
         self.assertNotIn("改判「無法證實」", out)
 
+    def test_result_line_shows_both_results_when_an_importance_change_flips_it(self):
+        """Red-team review: one upheld importance challenge can move a claim in or out of the main claims; the host
+        copies only the result line, so the result without the change must be on that line too."""
+        run = build()
+        sc = io.read_json(run / "score.json")
+        sc["without_importance_changes"] = {"result": "符合", "credibility": 83, "publishable": False}
+        io.write_json(run / "score.json", sc)
+        line = next(l for l in md(run).splitlines() if l.startswith("**結果："))
+        self.assertIn("不調整重要性的話是「符合」", line)
+
+    def test_unadjusted_result_is_never_called_publishable_when_the_results_differ(self):
+        """Second review: the line under the result called the version the judge overruled 可公開."""
+        run = build()
+        sc = io.read_json(run / "score.json")
+        sc["without_importance_changes"] = {"result": "無法判定", "credibility": 35, "publishable": True}
+        io.write_json(run / "score.json", sc)
+        note = next(l for l in md(run).splitlines() if l.startswith("> 辯論中調整了命題的重要性"))
+        self.assertIn("兩個結果都不能公開", note)
+        self.assertNotIn("，可公開", note)
+        self.assertIn("可信度 —", note)
+
+    def test_breakdown_names_the_main_claims_and_takes_the_lower_accuracy(self):
+        section = md(build()).split("## 評分拆解")[1].split("\n## ")[0]
+        self.assertIn("主要說法", section)
+        self.assertIn("C1", section)
+        self.assertIn("較低", section)
+
+    def test_breakdown_explains_the_detail_cap(self):
+        run = build()
+        sc = io.read_json(run / "score.json")
+        sc["credibility"]["capped"] = True
+        io.write_json(run / "score.json", sc)
+        section = md(run).split("## 評分拆解")[1].split("\n## ")[0]
+        self.assertIn("上限 79", section)
+
+    def test_old_content_is_marked_under_the_result(self):
+        source = copy.deepcopy(fx.SOURCE)
+        source["published_at"] = "2025-09-26T10:00:00+08:00"  # run.json created_at is 2026-11-17
+        head = md(build(source_json=source)).split("## 結論")[0]
+        self.assertIn("發布於 2025-09-26", head)
+
+    def test_recent_or_undated_content_is_not_marked_old(self):
+        for published in (None, "2026-10-01", "不明"):
+            source = copy.deepcopy(fx.SOURCE)
+            source["published_at"] = published
+            self.assertNotIn("發布於", md(build(source_json=source)).split("## 結論")[0], published)
+
+    def test_publishable_report_says_it_does_not_guarantee_the_result(self):
+        run = build()
+        sc = io.read_json(run / "score.json")
+        sc["publishable"] = True
+        io.write_json(run / "score.json", sc)
+        head = md(run).split("## 結論")[0]
+        self.assertIn("不保證結論正確", head)
+
+    def test_unpublishable_report_has_no_such_note(self):
+        run = build()
+        sc = io.read_json(run / "score.json")
+        sc["publishable"] = False
+        io.write_json(run / "score.json", sc)
+        self.assertNotIn("不保證結論正確", md(run).split("## 結論")[0])
+
     def test_dispute_over_a_judge_only_change_names_both_labels(self):
         out = md(build(**fx.judge_only_overrides()))
         section = out.split("## 爭議點")[1].split("\n## ")[0]
@@ -203,7 +265,7 @@ class BodyTest(unittest.TestCase):
         s = io.read_json(run / "score.json")
         s["without_importance_changes"] = {"result": "部分符合", "credibility": 45, "publishable": False}
         io.write_json(run / "score.json", s)
-        self.assertIn("不調整的話，結果是「部分符合」（可信度 45，不可公開）", md(run))
+        self.assertIn("不調整的話，結果是「部分符合」（可信度 45，兩個結果都不能公開）", md(run))
 
     def test_media_without_lean_says_no_research(self):
         trace = copy.deepcopy(fx.TRACE)

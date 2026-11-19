@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import date
 from pathlib import Path
 
 from . import detect, io, media
@@ -42,6 +43,20 @@ def _title(source) -> str:
     return text[:30] + ("…" if len(text) > 30 else "")
 
 
+OLD_CONTENT_DAYS = 183
+
+
+def _old_content(published_at, checked_at):
+    """The publication date when it is more than half a year before the check date; relative times in the
+    content refer to that date (neutralize.md rule 6). None when either date is missing or not ISO."""
+    try:
+        published = date.fromisoformat(str(published_at)[:10])
+        checked = date.fromisoformat(str(checked_at)[:10])
+    except ValueError:
+        return None
+    return published.isoformat() if (checked - published).days > OLD_CONTENT_DAYS else None
+
+
 def render(run, outlets=None, tactics=None) -> str:
     run = Path(run)
     rj = io.read_json(run / "run.json")
@@ -66,18 +81,26 @@ def render(run, outlets=None, tactics=None) -> str:
     if cred and cred["show_on_spectrum"]:
         out += _spectrum(cred["score"]) + [""]
     cred_text = f"可信度 {cred['score']}" if cred and cred["show_on_spectrum"] else "可信度 —"
-    out.append(f"**結果：{sc['result']}｜{cred_text}｜信心度 {conf['level']}（{conf['score']}）｜"
+    alt = sc.get("without_importance_changes")
+    flip = f"（不調整重要性的話是「{alt['result']}」）" if alt and alt["result"] != sc["result"] else ""
+    out.append(f"**結果：{sc['result']}{flip}｜{cred_text}｜信心度 {conf['level']}（{conf['score']}）｜"
                f"{mode}・跨模型 {len(ok_cross)} 席｜{'可公開' if sc['publishable'] else '不可公開'}**")
     out.append("")
     if sc.get("result_reason"):
         out += [f"> {sc['result_reason']}", ""]
+    if sc["publishable"]:
+        out += ["> 「可公開」只代表查核流程完整、信心度高，不保證結論正確。公開貼文前，請先看過下面的證據。", ""]
+    old = _old_content(source.get("published_at"), rj.get("created_at"))
+    if old:
+        out += [f"> 這篇內容發布於 {old}，距離查核日已經超過半年；裡面的「明年」「最近」這類說法，指的是發布當時。", ""]
     for b in sc.get("publish_blocks") or []:
         out += [f"> {b}。這份報告不能標可公開。", ""]
-    alt = sc.get("without_importance_changes")
     if alt:
-        alt_cred = f"可信度 {alt['credibility']}" if alt.get("credibility") is not None else "可信度 —"
-        out += [f"> 辯論中調整了命題的重要性。不調整的話，結果是「{alt['result']}」"
-                f"（{alt_cred}，{'可公開' if alt['publishable'] else '不可公開'}）。", ""]
+        shown = alt.get("credibility") is not None and alt["result"] != "無法判定"
+        alt_cred = f"可信度 {alt['credibility']}" if shown else "可信度 —"
+        # Second review: when the results differ neither is publishable, whatever the unadjusted run alone would be.
+        status = "兩個結果都不能公開" if alt["result"] != sc["result"] else ("可公開" if alt["publishable"] else "不可公開")
+        out += [f"> 辯論中調整了命題的重要性。不調整的話，結果是「{alt['result']}」（{alt_cred}，{status}）。", ""]
     if claims_doc.get("prompt_was_leading"):
         out += ["> 提問已改寫為中立命題。", ""]
 
@@ -268,8 +291,12 @@ def render(run, outlets=None, tactics=None) -> str:
     out += ["## 評分拆解", ""]
     if cred:
         flags = "、".join(CONTEXT_FLAGS[f] for f in cred["context_flags"]) or "無"
-        out += [f"- 可信度 = 100 × 命題正確度 {cred['accuracy']:.4f} = {cred['raw']} → {cred['score']}",
-                f"- 脈絡問題：{flags}（已反映在「誤導」等判定裡，不另外扣分）"]
+        out += [f"- 主要說法（計分命題裡重要性最高的一層）：{'、'.join(cred['main_claims'])}",
+                f"- 可信度 = 100 × 兩者中較低的（主要說法的平均正確度 {cred['main_accuracy']:.4f}、"
+                f"全部計分命題依重要性加權的正確度 {cred['overall_accuracy']:.4f}）= {cred['raw']} → {cred['score']}"]
+        if cred.get("capped"):
+            out.append("- 有命題判錯誤、誤導或部分錯誤，所以可信度上限 79，最高是「大致符合」。")
+        out.append(f"- 脈絡問題：{flags}（已反映在「誤導」等判定裡，不另外扣分）")
     else:
         out.append("- 沒有可以計分的事實命題。")
     out.append(f"- 信心度：{conf['score']}（{conf['level']}）")

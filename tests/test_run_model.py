@@ -394,3 +394,120 @@ class PromptDataTest(unittest.TestCase):
         run = make_run(fx.run_files())
         p = run_model.build_prompt(run, "tracer", None, data_dir=Path(tempfile.mkdtemp()))
         self.assertIn("trace.json", p)
+
+
+INPUT = {"input_type": "text", "content": fx.SOURCE["original_text"], "prompt": "這是不是又在騙人？", "url": None}
+
+
+def prep_reply(source=None, claims=None):
+    return json.dumps({"source": source or {**fx.SOURCE, "original_text": "模型改寫過的原文"},
+                       "claims": claims or fx.CLAIMS}, ensure_ascii=False)
+
+
+class PrepRoleTest(unittest.TestCase):
+    """2026-11-19: steps 1-2 (ingest, neutralize) run as an isolated role instead of in the host session, which
+    sees the user's memory. The round-3 control probe showed the rewrite of one sentence changes the verdict."""
+
+    def run_dir(self, inp=INPUT):
+        return make_run(fx.run_files(source_json=None, claims_json=None, input_json=inp))
+
+    def test_prompt_has_both_rule_files_the_input_and_the_check_date(self):
+        p = run_model.build_prompt(self.run_dir(), "prep", None)
+        for text in ("# 讀入", "# 中立化", "這是不是又在騙人？", "明年油價一定漲三成", "查核日期："):
+            self.assertIn(text, p)
+
+    def test_writes_both_files_and_takes_the_original_text_from_the_input(self):
+        run = self.run_dir()
+        run_model.run_role(run, "prep", None, CLAUDE, runner=FakeRunner([prep_reply()]), env={})
+        source = json.loads((run / "source.json").read_text())
+        self.assertEqual(source["original_text"], INPUT["content"])
+        self.assertEqual(source["input_type"], "text")
+        self.assertEqual(json.loads((run / "claims.json").read_text())["claims"][0]["id"], "C1")
+
+    def test_invalid_output_is_retried_with_the_errors(self):
+        run = self.run_dir()
+        bad = copy.deepcopy(fx.CLAIMS)
+        bad["claims"][0]["original"] = "訊息裡沒有這句話"
+        r = FakeRunner([prep_reply(claims=bad), prep_reply()])
+        run_model.run_role(run, "prep", None, CLAUDE, runner=r, env={})
+        self.assertEqual(len(r.calls), 2)
+        self.assertIn("C1", r.calls[1]["stdin"].split("上一次的輸出有以下問題")[1])
+
+    def test_output_that_keeps_failing_stops_and_leaves_no_files(self):
+        """Skeptic review: both scripted replies used to fail before anything was written, so the cleanup was untested."""
+        run = self.run_dir()
+        bad = copy.deepcopy(fx.CLAIMS)
+        bad["claims"][0]["original"] = "訊息裡沒有這句話"
+        with self.assertRaises(run_model.RunModelError):
+            run_model.run_role(run, "prep", None, CLAUDE, runner=FakeRunner([prep_reply(claims=bad)] * 2), env={})
+        self.assertFalse((run / "source.json").exists())
+        self.assertFalse((run / "claims.json").exists())
+
+    def test_malformed_claims_are_retried_not_a_crash(self):
+        """Skeptic review: claims given as plain strings made the validator raise; no retry, files left behind."""
+        run = self.run_dir()
+        malformed = {"prompt_was_leading": False, "claims": ["某部長說明年油價一定漲三成"]}
+        r = FakeRunner([prep_reply(claims=malformed), prep_reply()])
+        run_model.run_role(run, "prep", None, CLAUDE, runner=r, env={})
+        self.assertEqual(len(r.calls), 2)
+
+    def test_url_input_needs_the_fetched_text(self):
+        """Skeptic review: an empty original_text skipped the quote check, so invented claims passed."""
+        url = "https://example.org/news/1"
+        run = self.run_dir({"input_type": "url", "content": url, "prompt": "幫我查核這篇報導", "url": url})
+        empty = {**fx.SOURCE, "original_text": "", "url": url}
+        with self.assertRaises(run_model.RunModelError) as ctx:
+            run_model.run_role(run, "prep", None, CLAUDE, runner=FakeRunner([prep_reply(source=empty)] * 2), env={})
+        self.assertIn("全文", str(ctx.exception))
+
+    def test_url_input_always_keeps_the_users_url(self):
+        url = "https://example.org/news/1"
+        run = self.run_dir({"input_type": "url", "content": url, "prompt": "幫我查核這篇報導", "url": url})
+        other = {**fx.SOURCE, "url": "https://elsewhere.example/other"}
+        run_model.run_role(run, "prep", None, CLAUDE, runner=FakeRunner([prep_reply(source=other)]), env={})
+        self.assertEqual(json.loads((run / "source.json").read_text())["url"], url)
+
+    def test_text_input_ignores_a_url_or_date_the_model_made_up(self):
+        """Red-team review: the model could set url and published_at for a forwarded text, which decides the
+        old-content note and whether a time claim is written."""
+        run = self.run_dir()
+        made_up = {**fx.SOURCE, "url": "https://example.org/x", "published_at": "2025-01-01"}
+        run_model.run_role(run, "prep", None, CLAUDE, runner=FakeRunner([prep_reply(source=made_up)]), env={})
+        source = json.loads((run / "source.json").read_text())
+        self.assertEqual((source["url"], source["published_at"]), (None, None))
+
+    def test_a_rejected_attempt_leaves_no_files_while_it_retries(self):
+        """Second review: an interrupted retry left the rejected files, which `status` showed as finished."""
+        run = self.run_dir()
+        bad = copy.deepcopy(fx.CLAIMS)
+        bad["claims"][0]["original"] = "訊息裡沒有這句話"
+        seen = []
+
+        def runner(argv, stdin, cwd, timeout, env):
+            seen.append((run / "source.json").exists() or (run / "claims.json").exists())
+            reply = prep_reply(claims=bad) if len(seen) == 1 else prep_reply()
+            return 0, json.dumps({"result": reply, "is_error": False}), ""
+        run_model.run_role(run, "prep", None, CLAUDE, runner=runner, env={})
+        self.assertEqual(seen, [False, False])
+
+    def test_a_failure_before_anything_was_written_keeps_existing_files(self):
+        run = make_run(fx.run_files(input_json=INPUT))
+        with self.assertRaises(run_model.RunModelError):
+            run_model.run_role(run, "prep", None, CLAUDE, runner=FakeRunner(["no json", "still no json"]), env={})
+        self.assertTrue((run / "source.json").exists())
+        self.assertTrue((run / "claims.json").exists())
+
+    def test_missing_input_file_is_a_clear_error(self):
+        run = make_run(fx.run_files(source_json=None, claims_json=None))
+        with self.assertRaises(run_model.RunModelError) as ctx:
+            run_model.run_role(run, "prep", None, CLAUDE, runner=FakeRunner([]), env={})
+        self.assertIn("fc.py input", str(ctx.exception))
+
+    def test_url_input_keeps_the_fetched_text_and_the_url(self):
+        url = "https://example.org/news/1"
+        run = self.run_dir({"input_type": "url", "content": url, "prompt": "幫我查核這篇報導", "url": url})
+        fetched = {**fx.SOURCE, "input_type": "text", "url": None, "original_text": fx.SOURCE["original_text"]}
+        run_model.run_role(run, "prep", None, CLAUDE, runner=FakeRunner([prep_reply(source=fetched)]), env={})
+        source = json.loads((run / "source.json").read_text())
+        self.assertEqual((source["input_type"], source["url"]), ("url", url))
+        self.assertEqual(source["original_text"], fx.SOURCE["original_text"])

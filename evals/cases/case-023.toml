@@ -1,0 +1,135 @@
+id = "case-023"
+title = "「黃國昌提案刪勾串羈押事由，這週五一讀」：提案和一讀都是真的，但「串供也不能押人」說過頭，逃亡、滅證和預防性羈押都還在"
+input_type = "text"
+input = """黃國昌為了救阿北，要提案修改刑事訴訟法第101條羈押規定（這條沒什麼問題喔！），刪掉「有事實足認為有勾串共犯或證人之虞者。」
+
+這個星期五要一讀了。
+
+修法之後，如果有共犯在逃、或證人沒到場，就算是可能跟被告串供，法院都不能押人喔！
+
+詐騙集團應該高興死了！
+
+詐騙集團應該幫阿北跟黃國昌立一個長生祠才對！
+
+與其這樣，黃國昌乾脆提案廢除貪污治罪條例，公務員收錢無罪，阿北馬上無罪釋放！這樣不是更徹底？
+
+#詐騙集團感謝您
+#惠我良多
+#個案式立法
+#為了救阿北立法來得速
+#這就是特權！"""
+target = "民眾黨"
+expected_result = "大致符合"
+notes = """主旨真、一個說法錯：提案和一讀時程都對，但把修法效果說成「法院都不能押人」。訊息原文取自 Cofacts（文章 669eq2hwngth，2025-08-20 收錄，1人回報，當週星期三），逐字照抄。沒有找到針對這則訊息的查核報告，答案來自立法院議案關係文書、議事錄和全國法規資料庫。
+判定關鍵：
+1. 提案判 true：立法院第11屆第3會期第26次會議議案關係文書（114年8月20日印發，議案編號202110155860000），提案人是「台灣民眾黨立法院黨團 黃國昌 張啓楷 陳昭姿」，擬具刑事訴訟法第93條及第101條修正草案，「刪除『勾串共犯或證人』之羈押事由」。現行第101條第1項第2款是「有事實足認為有湮滅、偽造、變造證據或勾串共犯或證人之虞者」，草案刪掉其中「勾串共犯或證人」，第3款也一併刪除。訊息引號內的文字是這一款的簡化，不是條文原文，但意思正確；提案由黨團提出、黃國昌列名，「黃國昌要提案」成立。
+2.「這個星期五要一讀了」判 true：同次會議議事錄，114年8月22日（星期五）開會，報告事項第22案「本院台灣民眾黨黨團擬具『刑事訴訟法第九十三條及第一百零一條條文修正草案』」，決定交司法及法制委員會審查，也就是完成一讀。
+3.「修法之後…就算是可能跟被告串供，法院都不能押人」判 misleading：草案確實讓「可能串供」不再能單獨作為羈押理由，這一半是對的；但草案保留「逃亡或有具體事實足認為有逃亡之虞」和「有具體事實足認為有湮滅、偽造、變造證據之虞」兩款，第101條之1的預防性羈押也沒有修改，所以共犯在逃、證人未到的案件，法院仍可能以逃亡或滅證之虞羈押，「法院都不能押人」說過頭。
+4.「詐騙集團應該高興死了」屬 not_factual，但查核時可以補充：第101條之1第1項第7款把詐欺、加重詐欺列為可預防性羈押的罪名，草案沒有動這一條。
+為什麼是大致符合：訊息要讀者知道的是「民眾黨（黃國昌）提案刪除勾串串證的羈押事由，這週就要一讀」，這件事和提案內容都正確；錯在誇大修法效果，屬於不影響這個主旨的推論錯誤。「為了救阿北」是動機揣測，不計入事實判定。查核時如果因為語氣嘲諷、充滿評價就判「不符」，或反過來只核對提案存在就判「符合」，都不準確。
+時間處理：訊息沒有寫日期，Cofacts 收錄時間是背景資料，使用者手上沒有。「這個星期五」是相對時間、查不到發布時間，依規則：事件本身（提案排入院會一讀）照內容判 true，不寫日期；另寫一條隱含命題「一讀是在查核日期這週的星期五（2026年11月20日）」，依查核日期判斷，一讀其實是2025年8月22日，判 false。訊息沒有叫讀者做事，也沒有用「剛剛」「最新」強調，這條是次要細節，重要性2。今天（2026-11-19）再讀：草案一讀後交付審查、下一次院會有復議，現行第101條仍保留「勾串共犯或證人」，修法沒有通過；訊息只說「要一讀」，沒有說已經通過，所以不影響判定，但查核報告應補充現況。
+「黃國昌為了救阿北」「（這條沒什麼問題喔！）」「詐騙集團應該幫阿北跟黃國昌立一個長生祠」「黃國昌乾脆提案廢除貪污治罪條例…」和結尾的標籤都是揣測、嘲諷或評價，屬 not_factual。
+摘錄說明：議案關係文書和議事錄 PDF 摘錄只去掉排版造成的換行和空白；議案的對照表是三欄排版，摘錄取自案由欄和修正條文欄。這兩個網址直接開啟可能被轉回議事網首頁，要帶瀏覽器標頭和 referer 下載。"""
+
+[[claim]]
+original = "黃國昌為了救阿北"
+expected_label = "not_factual"
+core = false
+importance = 2
+
+[[claim]]
+original = "要提案修改刑事訴訟法第101條羈押規定（這條沒什麼問題喔！），刪掉「有事實足認為有勾串共犯或證人之虞者。」"
+expected_label = "true"
+core = true
+importance = 5
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/03/26/LCEWA01_110326_00026.pdf"
+excerpt = "爰擬具「刑事訴訟法第九十三條及第一百零一條條文修正草案」，刪除「勾串共犯或證人」之羈押事由，明定「無其他替代手段」且有「具體」事實足認為有逃亡或滅證之虞，才得以羈押"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/03/26/LCEWA01_110326_00026.pdf"
+excerpt = "提案人：台灣民眾黨立法院黨團 黃國昌 張啓楷 陳昭姿"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0010001&flno=101"
+excerpt = "二、有事實足認為有湮滅、偽造、變造證據或勾串共犯或證人之虞者。"
+
+[[claim]]
+original = "這個星期五要一讀了。"
+expected_label = "true"
+core = false
+importance = 3
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/26LCEWC03_110326.pdf"
+excerpt = "二十二、本院台灣民眾黨黨團擬具「刑事訴訟法第九十三條及第一百零一條條文修正草案」，請審議案。 決定：交司法及法制委員會審查。"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/26LCEWC03_110326.pdf"
+excerpt = "時 間 中華民國 114 年 8 月 22 日（星期五）上午 9 時至 9 時 14 分、10 時至 10 時 18 分"
+
+# 隱含命題：一讀是在查核日期這週的星期五（2026年11月20日）。
+[[claim]]
+original = "這個星期五"
+expected_label = "false"
+core = false
+importance = 2
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/03/26/LCEWA01_110326_00026.pdf"
+excerpt = "立法院議案關係文書 中華民國114年8月20日印發"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/26LCEWC03_110326.pdf"
+excerpt = "時 間 中華民國 114 年 8 月 22 日（星期五）上午 9 時至 9 時 14 分、10 時至 10 時 18 分"
+
+[[claim]]
+original = "修法之後，如果有共犯在逃、或證人沒到場，就算是可能跟被告串供，法院都不能押人喔！"
+expected_label = "misleading"
+core = false
+importance = 4
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/03/26/LCEWA01_110326_00026.pdf"
+excerpt = "明定「無其他替代手段」且有「具體」事實足認為有逃亡或滅證之虞，才得以羈押"
+
+[[claim.ground_truth]]
+url = "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/03/26/LCEWA01_110326_00026.pdf"
+excerpt = "一、逃亡或有具體事實足認為有逃亡之虞者。"
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0010001&flno=101-1"
+excerpt = "被告經法官訊問後，認為犯下列各款之罪，其嫌疑重大，有事實足認為有反覆實行同一犯罪之虞，而有羈押之必要者，得羈押之："
+
+[[claim.ground_truth]]
+url = "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0010001&flno=101-1"
+excerpt = "七、刑法第三百三十九條、第三百三十九條之三之詐欺罪、第三百三十九條之四之加重詐欺罪、詐欺犯罪危害防制條例第四十三條、第四十四條之罪。"
+
+[[claim]]
+original = "詐騙集團應該高興死了！"
+expected_label = "not_factual"
+core = false
+importance = 2
+
+[[claim]]
+original = "詐騙集團應該幫阿北跟黃國昌立一個長生祠才對！"
+expected_label = "not_factual"
+core = false
+importance = 1
+
+[[claim]]
+original = "與其這樣，黃國昌乾脆提案廢除貪污治罪條例，公務員收錢無罪，阿北馬上無罪釋放！這樣不是更徹底？"
+expected_label = "not_factual"
+core = false
+importance = 1
+
+[[claim]]
+original = """#詐騙集團感謝您
+#惠我良多
+#個案式立法
+#為了救阿北立法來得速
+#這就是特權！"""
+expected_label = "not_factual"
+core = false
+importance = 1

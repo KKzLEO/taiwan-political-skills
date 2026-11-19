@@ -21,7 +21,7 @@ from fclib.labels import HOSTS, MODES  # noqa: E402
 
 VERSION = "0.1.0"
 TZ = dt.timezone(dt.timedelta(hours=8))
-STAGES = ["run.json", "models.json", "source.json", "claims.json", "trace.json", "proponent.json",
+STAGES = ["run.json", "models.json", "input.json", "source.json", "claims.json", "trace.json", "proponent.json",
           "opponent-*.json", "rebuttal.json", "judgment.json", "review-*.json", "verdicts.json",
           "score.json", "report.md"]
 
@@ -110,6 +110,31 @@ def cmd_run_model(args):
     print(path)
 
 
+def _read_text(path):
+    try:
+        return Path(path).read_text(encoding="utf-8-sig")
+    except UnicodeDecodeError:
+        sys.exit("錯誤：檔案不是 UTF-8 編碼，先轉成 UTF-8 再執行")
+    except OSError as exc:
+        sys.exit(f"錯誤：讀不到檔案：{exc}")
+
+
+def cmd_input(args):
+    """Step 1: store what the user gave, verbatim, for the isolated prep role (step 2). User text arrives only
+    through files: as shell arguments, $ and backticks were eaten, $(...) ran, and a URL could close quotes."""
+    run = _run_dir(args)
+    if (run / "source.json").exists():  # a new message would mix with the old debate files
+        sys.exit("錯誤：這個資料夾已經讀入過訊息；要查另一則，先用 fc.py init 開新的資料夾")
+    url = _read_text(args.url_file).strip() if args.url_file else None
+    content = url if args.type == "url" else (_read_text(args.file) if args.file else "")
+    data = {"input_type": args.type, "content": content or "", "prompt": _read_text(args.prompt_file).strip(), "url": url}
+    errors = validate.input_errors(data)
+    if errors:  # checked before writing, so a failed rerun keeps the previous input.json
+        sys.exit("錯誤：輸入沒有通過檢查：\n" + "\n".join(errors))
+    io.write_json(run / "input.json", data)
+    print(run / "input.json")
+
+
 def cmd_validate(args):
     run = _run_dir(args)
     known = io.tactic_library()
@@ -135,7 +160,10 @@ def cmd_media(args):
 
 
 def cmd_video(args):
-    text, note = video.fetch_transcript(args.url)
+    url = _read_text(args.url_file).strip() if args.url_file else args.url
+    if not url:
+        sys.exit("錯誤：需要影片網址（--url-file）")
+    text, note = video.fetch_transcript(url)
     print(note, file=sys.stderr)
     if text is None:
         sys.exit(1)
@@ -265,6 +293,12 @@ def main(argv=None):
         if name == "run-model":
             p.add_argument("--engine", help="預設用 models.json 裡該席位的引擎；其他角色用主體平台")
 
+    p = add("input", cmd_input)
+    p.add_argument("--type", required=True, choices=["text", "url", "image", "video"])
+    p.add_argument("--file", help="文字、截圖抄寫或影片逐字稿的檔案（UTF-8），原文照存")
+    p.add_argument("--url-file", help="存著網址的檔案：網址輸入必填，影片可以附上影片網址")
+    p.add_argument("--prompt-file", required=True, help="存著使用者這次怎麼問的檔案（UTF-8），原文照抄")
+
     p = add("validate", cmd_validate)
     p.add_argument("files", nargs="+")
 
@@ -276,7 +310,8 @@ def main(argv=None):
     p.add_argument("--region", default="tw")
 
     p = add("video", cmd_video, run=False)
-    p.add_argument("url")
+    p.add_argument("url", nargs="?", help="影片網址（在 shell 裡請用 --url-file）")
+    p.add_argument("--url-file", help="存著影片網址的檔案")
     p.add_argument("--out")
 
     add("reviewers", cmd_reviewers)

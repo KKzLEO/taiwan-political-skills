@@ -91,6 +91,27 @@ def _check_verdicts(err, verdicts, claim_ids, ledger_ids, where):
         err.need(n == 1, f"{where}：{cid} 需要剛好一個判定（目前 {n} 個）")
 
 
+INPUT_TYPES = {"url", "text", "image", "video"}
+
+
+def _input(d, run, ctx):
+    """What the host collected for step 1 (fc.py input); the isolated prep role turns it into source and claims."""
+    err = _Errors()
+    err.need(d.get("input_type") in INPUT_TYPES, "input_type 必須是 url/text/image/video")
+    err.need(_nonempty(d.get("content")), "content 不能是空的")
+    if d.get("input_type") == "url":
+        err.need(_is_url(d.get("content")), "網址輸入的 content 必須是 http(s) 網址")
+    err.need(d.get("url") is None or _is_url(d.get("url")), "url 必須是 http(s) 網址或 null")
+    err.need(isinstance(d.get("prompt"), str), "prompt 必須是字串（使用者這次怎麼問）")
+    extra = sorted(set(d) - {"input_type", "content", "prompt", "url"})
+    err.need(not extra, f"input.json 只能有 input_type、content、prompt、url，多了 {extra}")
+    return err
+
+
+def input_errors(data) -> list:
+    return list(_input(data, None, {}))
+
+
 def _source(d, run, ctx):
     err = _Errors()
     err.need(d.get("input_type") in {"url", "text", "image", "video"}, "input_type 必須是 url/text/image/video")
@@ -484,7 +505,7 @@ def _models(d, run, ctx):
 
 
 FIXED = {
-    "run.json": _run, "models.json": _models, "source.json": _source, "claims.json": _claims,
+    "run.json": _run, "models.json": _models, "input.json": _input, "source.json": _source, "claims.json": _claims,
     "trace.json": _trace, "proponent.json": _proponent, "rebuttal.json": _rebuttal,
     "judgment.json": _judgment, "verdicts.json": _verdicts,
 }
@@ -507,4 +528,8 @@ def validate_file(run: Path, name: str, known_tactics=None) -> list:
         return [str(exc)]
     if not isinstance(data, dict):
         return [f"{name} 最外層必須是 JSON 物件"]
-    return list(fn(data, run, ctx))
+    try:
+        return list(fn(data, run, ctx))
+    except (TypeError, AttributeError, KeyError, ValueError) as exc:
+        # Skeptic review: e.g. claims given as plain strings made the checks raise, crashing run-model and status.
+        return [f"{name} 的結構不對（{type(exc).__name__}：{exc}），照格式重寫"]

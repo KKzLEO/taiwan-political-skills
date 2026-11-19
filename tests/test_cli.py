@@ -76,6 +76,70 @@ class PipelineCliTest(unittest.TestCase):
         self.assertEqual(p.returncode, 2)
 
 
+class InputCliTest(unittest.TestCase):
+    """User text reaches fc.py only through files (reviews: the shell ate $ and backticks and ran $(...), and a
+    URL could close single quotes)."""
+
+    def run_dir(self):
+        return make_run(fx.run_files(source_json=None, claims_json=None))
+
+    def write(self, run, name, text):
+        (run / name).write_text(text, encoding="utf-8")
+        return run / name
+
+    def input(self, run, *args, prompt="查核"):
+        return fc("input", "--run", run, *args, "--prompt-file", self.write(run, "prompt.txt", prompt))
+
+    def test_text_and_prompt_are_copied_verbatim_including_shell_characters(self):
+        run = self.run_dir()
+        text = "第一行  有兩個空格\n第二行：明年油價一定漲三成！\n"
+        question = "油價真的會從 $100 漲到 $130 嗎？`剛剛` 是什麼時候？$(touch x)"
+        p = self.input(run, "--type", "text", "--file", self.write(run, "msg.txt", text), prompt=question)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        data = json.loads((run / "input.json").read_text())
+        self.assertEqual((data["content"], data["prompt"], data["input_type"]), (text, question, "text"))
+
+    def test_url_from_a_file_keeps_quotes_and_dollar_signs(self):
+        run = self.run_dir()
+        url = "https://news.example.tw/a'$(id)'b"
+        p = self.input(run, "--type", "url", "--url-file", self.write(run, "url.txt", url + "\n"))
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertEqual(json.loads((run / "input.json").read_text())["content"], url)
+
+    def test_video_keeps_its_url_and_there_is_no_free_text_field(self):
+        run = self.run_dir()
+        p = self.input(run, "--type", "video", "--file", self.write(run, "t.txt", "逐字稿內容"),
+                       "--url-file", self.write(run, "url.txt", "https://youtu.be/x"))
+        self.assertEqual(p.returncode, 0, p.stderr)
+        data = json.loads((run / "input.json").read_text())
+        self.assertEqual(data["url"], "https://youtu.be/x")
+        self.assertNotIn("notes", data)
+
+    def test_a_folder_that_was_already_read_refuses_a_new_message(self):
+        """Second review: after a new message, the old debate files still looked finished and mixed into the report."""
+        run = make_run(fx.run_files())
+        p = self.input(run, "--type", "text", "--file", self.write(run, "msg.txt", "另一則訊息"))
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn("fc.py init", p.stderr)
+        self.assertFalse((run / "input.json").exists())
+
+    def test_failed_rerun_keeps_the_previous_input(self):
+        run = self.run_dir()
+        self.input(run, "--type", "text", "--file", self.write(run, "msg.txt", "訊息"))
+        before = (run / "input.json").read_text()
+        p = self.input(run, "--type", "text", "--file", self.write(run, "empty.txt", " "))
+        self.assertNotEqual(p.returncode, 0)
+        self.assertEqual((run / "input.json").read_text(), before)
+
+    def test_file_that_is_not_utf8_is_a_clear_error(self):
+        run = self.run_dir()
+        (run / "big5.txt").write_bytes("油價".encode("big5"))
+        p = self.input(run, "--type", "text", "--file", run / "big5.txt")
+        self.assertNotEqual(p.returncode, 0)
+        self.assertIn("UTF-8", p.stderr)
+        self.assertNotIn("Traceback", p.stderr)
+
+
 class SetupCliTest(unittest.TestCase):
     def test_init_creates_run_dir_with_run_json(self):
         base = Path(tempfile.mkdtemp())

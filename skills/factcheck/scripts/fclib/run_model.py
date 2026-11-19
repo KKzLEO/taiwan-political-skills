@@ -30,6 +30,7 @@ LENS_FILES = {"evidence": "opponent-evidence.md", "counter": "opponent-counter.m
               "stance": "opponent-stance.md", "external": "opponent-external.md"}
 
 ROLE_INPUTS = {
+    "prep": ["input.json"],
     "tracer": ["source.json", "claims.json"],
     "proponent": ["source.json", "claims.json", "trace.json"],
     "opponent": ["source.json", "claims.json", "trace.json", "proponent.json"],
@@ -81,7 +82,8 @@ def _data_sections(role, lens, data_dir):
 
 
 def output_name(role, seat):
-    return {"tracer": "trace.json", "proponent": "proponent.json", "rebuttal": "rebuttal.json",
+    return {"prep": "source.json 和 claims.json（合在一個 JSON 物件裡）",
+            "tracer": "trace.json", "proponent": "proponent.json", "rebuttal": "rebuttal.json",
             "judge": "judgment.json", "opponent": f"opponent-{seat}.json",
             "review": f"review-{seat}.json"}[role]
 
@@ -112,7 +114,10 @@ def _strip_engine(obj):
 
 def _role_file(role, lens):
     name = LENS_FILES[lens] if role == "opponent" else f"{role}.md"
-    return (io.REFERENCES_DIR / "roles" / name).read_text(encoding="utf-8")
+    text = (io.REFERENCES_DIR / "roles" / name).read_text(encoding="utf-8")
+    if role == "prep":  # steps 1-2 follow the same rule files the host used to follow itself
+        text += "".join("\n\n" + (io.REFERENCES_DIR / f).read_text(encoding="utf-8") for f in ("ingest.md", "neutralize.md"))
+    return text
 
 
 def _seat_engine(run, seat):
@@ -262,9 +267,56 @@ def probe(engine, runner=_default_runner, env=None):
     return result
 
 
+RETRY_HEADER = "\n\n## 上一次的輸出有以下問題，請修正後重新輸出完整 JSON\n\n"
+
+
+def _run_prep(run, engine, runner, env):
+    """Steps 1-2 in an isolated process. The message text and the link come from input.json, never from the model,
+    so a rewrite cannot slip into what every later role checks against."""
+    if validate.validate_file(run, "input.json"):
+        raise RunModelError("缺少 input.json 或格式不對，先執行 fc.py input")
+    inp = io.read_json(run / "input.json")
+    prompt = build_prompt(run, "prep", None)
+    outputs = [run / "source.json", run / "claims.json"]
+    errors, wrote = ["沒有執行"], False
+    for _ in range(2):
+        ok, text, error = call(engine, prompt, runner=runner, env=env)
+        if not ok:
+            errors = [error]
+            break
+        obj = extract_json_object(text)
+        if not obj or not isinstance(obj.get("source"), dict) or not isinstance(obj.get("claims"), dict):
+            errors = ['輸出必須是 {"source": {…}, "claims": {…}}']
+        else:
+            source = {**obj["source"], "input_type": inp["input_type"]}
+            if inp["input_type"] == "url":
+                source["url"] = inp["content"]  # the user's link, whatever the model fetched
+            else:
+                source["original_text"] = inp["content"]
+                source["url"] = inp.get("url") if inp["input_type"] != "text" else None
+            if inp["input_type"] == "text":  # a forwarded text has no publication time of its own (neutralize.md rule 6)
+                source["published_at"] = None
+            io.write_json(outputs[0], source)
+            io.write_json(outputs[1], obj["claims"])
+            wrote = True
+            errors = [f"{p.name}：{e}" for p in outputs for e in validate.validate_file(run, p.name)]
+            # Skeptic review: with no text the quote check is skipped, so claims could be invented.
+            if not str(source.get("original_text") or "").strip():
+                errors.append("source.json：網址輸入要把讀到的全文放進 original_text；讀不到就照實寫在 notes，只放看得到的部分")
+            if not errors:
+                return outputs[1]
+        if wrote:  # second review: a retry cut short must not leave the rejected files looking finished
+            for p in outputs:
+                p.unlink(missing_ok=True)
+        prompt = prompt + RETRY_HEADER + "\n".join(f"- {e}" for e in errors)
+    raise RunModelError(f"prep 在 {engine['engine']} 上失敗：" + "；".join(errors))
+
+
 def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=None, known_tactics=None):
     """Run a role on an engine, validate, and write the output file. Retries once on invalid output."""
     run = Path(run)
+    if role == "prep":
+        return _run_prep(run, engine, runner, env)
     if role == "opponent" and lens is None:
         lens = "external" if seat.startswith("X") else {"A": "evidence", "B": "counter", "C": "stance"}[seat]
     name = output_name(role, seat)
@@ -292,7 +344,7 @@ def run_role(run, role, seat, engine, lens=None, runner=_default_runner, env=Non
                 return target
             parsed.append((obj, errors))
             target.unlink()
-        prompt = prompt + "\n\n## 上一次的輸出有以下問題，請修正後重新輸出完整 JSON\n\n" + "\n".join(f"- {e}" for e in errors)
+        prompt = prompt + RETRY_HEADER + "\n".join(f"- {e}" for e in errors)
 
     # If only tags or the judge's checked-URL lists still break the rules after the retry, take the
     # fallback (validate.fallback) instead of stopping the whole check.
