@@ -2,7 +2,12 @@
   "credibility": {
     "score": 0,
     "raw": 0.0,
-    "accuracy": 0.0,
+    "main_claims": [
+      "C2"
+    ],
+    "main_accuracy": 0.0,
+    "overall_accuracy": 0.0,
+    "capped": false,
     "context_flags": [],
     "show_on_spectrum": true
   },
@@ -15,6 +20,8 @@
     "evidence_quality": 1.0
   },
   "publishable": true,
+  "publish_blocks": [],
+  "without_importance_changes": null,
   "claims": [
     {
       "claim_id": "C1",
@@ -25,17 +32,29 @@
     {
       "claim_id": "C2",
       "label": "false",
-      "importance": 4,
+      "importance": 5,
       "factor": 0.0
     },
     {
       "claim_id": "C3",
       "label": "false",
-      "importance": 5,
+      "importance": 3,
       "factor": 0.0
     },
     {
       "claim_id": "C4",
+      "label": "false",
+      "importance": 3,
+      "factor": 0.0
+    },
+    {
+      "claim_id": "C5",
+      "label": "false",
+      "importance": 3,
+      "factor": null
+    },
+    {
+      "claim_id": "C6",
       "label": "not_factual",
       "importance": 1,
       "factor": null

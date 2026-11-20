@@ -1,0 +1,98 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 30,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C3",
+      "target": "evidence",
+      "argument": "裁罰基準表確實列有大型重型機車行駛快速公路未開頭燈、期限內繳納或到案時罰 3,000 元的情形，適用《道路交通管理處罰條例》第 33 條第 1 項第 6 款。正方引用的第 42 條和小客車判決無法排除這項特別規定。原訊息把 3,000 元說成所有機車都適用的罰鍰，這個概括仍然錯誤。",
+      "evidence": [
+        {
+          "url": "https://ou3.npa.gov.tw/law/Law/GetFile/1KWEDVT",
+          "excerpt": "大型重型機車行駛高速、快速公路，未開亮頭燈 | 第三十三條第一項第六款 | 三〇〇〇<br>｜<br>六〇〇〇 | 空白 | 三〇〇〇 | 三三〇〇 | 三九〇〇 | 四五〇〇"
+        },
+        {
+          "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?flno=33&pcode=K0040012",
+          "excerpt": "六、不依規定使用燈光。"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C2",
+      "target": "reasoning",
+      "argument": "正方說全天開頭燈的條文只適用於快速公路，漏了《高速公路及快速公路交通管制規則》第 20 條第 2 項。該項也將全天開頭燈義務適用於依公告得行駛高速公路的 550 c.c. 以上大型重型機車。這項有條件的規定無法支持原訊息所稱的「一律」。",
+      "evidence": [
+        {
+          "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?flno=20&pcode=K0040019",
+          "excerpt": "汽缸總排氣量五百五十立方公分以上之大型重型機車行駛於高速公路，除前項規定外，並應遵守下列規定：\n\n一、不得行駛未經公告允許之路段。"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C1",
+      "target": "neutral_rewrite",
+      "argument": "「內容與騎機車開大燈有關」把原訊息擴大成任何涉及機車頭燈的法案，連燈具設備或特定道路管制的修法也可能算進去。建議改成「立法院三讀通過一項要求騎機車一律開大燈的法案」。原文「昨天」所指的日期已由 C5 查核。"
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C4",
+      "target": "neutral_rewrite",
+      "argument": "原文寫「以後」，沒有交代哪一天開始適用。C4 加入「已經生效，現在就適用」，把可能的讀者解讀寫成原訊息的主張。建議刪除這條隱含命題，由 C2 查核原文所稱將來一律開燈的義務。"
+    },
+    {
+      "id": "X1-5",
+      "claim_id": "C5",
+      "target": "evidence",
+      "argument": "正方主要靠民間整理的會議資料推定 2026 年 11 月 19 日沒有院會。立法院的一手議程可直接核對，第 7 次院會排在 11 月 13 日、17 日，第 8 次從 11 月 20 日開始，11 月 19 日的交通委員會議程是處理預算等事項。這些紀錄支持原判定，應補為主要證據。",
+      "evidence": [
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/sittings/2026111104/details?meetingDate=115%2F11%2F13",
+          "excerpt": "115年11月13日 (五) 09:00-18:00\n\n115年11月17日 (二) 09:00-18:00"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/sittings/meetingLink?id=11-06-08%3B115%2F11%2F20%3B%E9%99%A2%E6%9C%83",
+          "excerpt": "115年11月20日 (五) 09:00-18:00\n\n115年12月01日 (二) 09:00-18:00"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/sittings/2026111218/details?meetingDate=115%2F11%2F19",
+          "excerpt": "立法院第11屆第6會期交通委員會第7次全體委員會議\n\n115年11月19日 (四) 09:00-17:30"
+        }
+      ]
+    },
+    {
+      "id": "X1-6",
+      "claim_id": null,
+      "target": "tactic",
+      "tactic_id": "TW-T04",
+      "argument": "建議移除「舊聞新炒」標記。特徵 a 成立，原文只寫「昨天」，但這只是線索。特徵 b 的資料查的是 2017 年元旦起汽機車白天開燈的傳言，與本次所稱的立法院三讀及 3,000 元罰鍰有別。現有資料只能確認過去流傳過相近說法，無法確認這一則曾被查核或是舊訊息重傳。",
+      "evidence": [
+        {
+          "url": "https://www.cna.com.tw/news/ahel/201612275014.aspx",
+          "excerpt": "網路傳言元旦新規定，106年1月1日後，白天不開亮頭燈要罰款。"
+        }
+      ]
+    },
+    {
+      "id": "X1-7",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "兩則 Cofacts 紀錄的繁體中文版可讀到回報內容、首次回報的相對時間、標籤及查核回應。溯源可以補上這些資料，並註明它們是相近訊息的回報紀錄，無法用來確定本次訊息的首發時間。",
+      "evidence": [
+        {
+          "url": "https://zh.cofacts.tw/article/5504439097559-rumor",
+          "excerpt": "相信大家最近一直看到如是訊息：2017年01月01日起，汽機車白天ㄧ律『強制』開頭燈！千萬要記得。"
+        },
+        {
+          "url": "https://zh.cofacts.tw/article/2wzjrlzmodtjz",
+          "excerpt": "現在新規定，機車白天、晚上都要開燈的。否則被抓了就要罰錢。"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

@@ -12,9 +12,10 @@
       "cross_model": false,
       "can_search": true,
       "same_tier": true,
-      "model": null,
+      "model": "claude-fable-5-2",
       "probe": "skipped",
-      "isolation": "unknown"
+      "isolation": "unknown",
+      "effort": "xhigh"
     },
     {
       "engine": "codex",
@@ -29,6 +30,7 @@
       "model": null,
       "probe": "ok",
       "isolation": "partial",
+      "effort": "high",
       "detail": ""
     },
     {
@@ -38,7 +40,7 @@
       "cmd": null,
       "cross_model": true,
       "can_search": true,
-      "same_tier": true,
+      "same_tier": false,
       "model": null,
       "probe": "skipped",
       "isolation": "unknown"

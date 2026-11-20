@@ -1,0 +1,455 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C2",
+        "C4"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=109",
+      "title": "道路交通安全規則 第109條（法規修正日期：民國115年11月06日）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "moj-道路交通安全規則",
+      "stance": "refutes",
+      "excerpt": "一、夜間應開亮頭燈。 二、行經隧道、調撥車道應開亮頭燈。 三、遇濃霧、雨、雪、天色昏暗或視線不清時，應開亮頭燈。",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C4"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=K0040013",
+      "title": "道路交通安全規則 沿革（最近一次修正為第134次，第109條最近一次修正為108年10月1日第114次）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "moj-道路交通安全規則",
+      "stance": "context",
+      "excerpt": "134.中華民國一百十五年十一月六日交通部交運字第 11550140761 號令 、內政部台內警字第 1150874538 號令會銜修正發布第 52-1、61-1 條條文；並自一百十五年十一月六日施行",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040012&flno=42",
+      "title": "道路交通管理處罰條例 第42條（法規修正日期：民國115年08月17日）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "moj-道路交通管理處罰條例",
+      "stance": "refutes",
+      "excerpt": "汽車駕駛人，不依規定使用燈光者，處新臺幣一千二百元以上三千六百元以下罰鍰。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=K0040012",
+      "title": "道路交通管理處罰條例 全文（修正日期：民國115年08月17日）第93條",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "moj-道路交通管理處罰條例",
+      "stance": "context",
+      "excerpt": "本條例施行日期，由行政院以命令定之。",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C4",
+        "C5"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=K0040012",
+      "title": "道路交通管理處罰條例 沿革（最近一次修正公布：民國115年8月17日，華總一義字第11500076171號令）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "moj-道路交通管理處罰條例",
+      "stance": "refutes",
+      "excerpt": "第 21、21-1、35、67、73、85-2、85-3 條條文",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1",
+        "C5"
+      ],
+      "url": "https://ppg.ly.gov.tw/ppg/bills/203110228270000/details",
+      "title": "議案詳情：報告併案審查行政院函請審議等多案「道路交通管理處罰條例」修正草案（議案編號203110228270000）",
+      "publisher": "立法院議事暨公報資訊網",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "ly-ppg-議案",
+      "stance": "context",
+      "excerpt": "三讀 (115/07/28通過)",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1",
+        "C5"
+      ],
+      "url": "https://ly.govapi.tw/v2/meets?屆=11&日期=2026-11-19",
+      "title": "立法院會議資料查詢：2026-11-19（回傳共8筆，7場委員會、1場黨團協商，沒有院會）",
+      "publisher": "ly.govapi.tw（民間整理的立法院開放資料 API，非立法院官方頁面）",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "ly-govapi-會議資料",
+      "stance": "refutes",
+      "excerpt": "第11屆第6會期交通委員會第7次全體委員會議 … 立法院朝野黨團協商",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1",
+        "C5"
+      ],
+      "url": "https://ly.govapi.tw/v2/meets?屆=11&會議種類=院會&會期=6&limit=100",
+      "title": "立法院會議資料查詢：第11屆第6會期院會列表",
+      "publisher": "ly.govapi.tw（民間整理的立法院開放資料 API，非立法院官方頁面）",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "ly-govapi-會議資料",
+      "stance": "refutes",
+      "excerpt": "第11屆第6會期第8次會議 … [\"2026-11-20\",\"2026-12-01\"] … 第11屆第6會期第7次會議 … [\"2026-11-13\",\"2026-11-17\"]",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1",
+        "C5"
+      ],
+      "url": "https://ppg.ly.gov.tw/ppg/bills/202110249380000/details",
+      "title": "議案詳情：「道路交通管理處罰條例部分條文修正草案」，請審議案（委員邱若華等21人，議案狀態：排入院會）",
+      "publisher": "立法院議事暨公報資訊網",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "ly-ppg-議案",
+      "stance": "context",
+      "excerpt": "院會 11-06-07 … 115年11月13日 … 115年11月17日",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://www.cna.com.tw/news/aipl/202611190142.aspx",
+      "title": "藍拚普發2萬20日三讀 政院：財政規劃不應受選舉左右（2026/11/19 13:32）",
+      "publisher": "中央社",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "cna-20261119-普發",
+      "stance": "context",
+      "excerpt": "國民黨團提案普發現金新台幣2萬元，力拚明天立法院會闖關三讀。",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://www.ly.gov.tw/Pages/List.aspx?nodeid=150",
+      "title": "立法院全球資訊網－國會知識家－會議",
+      "publisher": "立法院",
+      "accessed": "2026-11-20",
+      "tier": 2,
+      "chain": "ly-官網-會議說明",
+      "stance": "context",
+      "excerpt": "立法院會議簡稱院會，每週二、五舉行，必要時經院會決議，可以增減會次，或由黨團協商合併若干日為1次會議。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://taiwanpost.net/2026/meihua/179522",
+      "title": "立院黨團協商：11/20前完成追加預算案三讀、本會期延會至明年1/31（2026-10-30）",
+      "publisher": "臺灣郵報",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "黨團協商結論-20261030",
+      "stance": "context",
+      "excerpt": "另11月20日（周五）、12月1日（周二）合併為一次會議，該次會議不處理臨時提案。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://n.yam.com/Article/20261114136835",
+      "title": "立法院下週預告：院會再審國民年金法、處理追加預算（2026/11/14）",
+      "publisher": "蕃新聞（報新聞）",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "yam-20261114-立院預告",
+      "stance": "context",
+      "excerpt": "內政、經濟、財政、交通委員會：延續11月18日議程。",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1",
+        "C5"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=A0020058",
+      "title": "立法院職權行使法 第7條（修正日期：民國113年06月24日）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "moj-立法院職權行使法",
+      "stance": "context",
+      "excerpt": "立法院依憲法第六十三條規定所議決之議案，除法律案、預算案應經三讀會議決外，其餘均經二讀會議決之。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C2",
+        "C4"
+      ],
+      "url": "https://168.motc.gov.tw/theme/news/post/1906121101839",
+      "title": "交通部澄清說明汽機車自106年起分階段實施晝行燈規定（民國105年12月27日）",
+      "publisher": "交通部（168交通安全入口網）",
+      "accessed": "2026-11-20",
+      "tier": 2,
+      "chain": "motc-20161227-晝行燈澄清",
+      "stance": "context",
+      "excerpt": "交通部進一步說明，目前道路交通安全規則並未修正汽機車白天都要開亮頭燈的規定，所以白天行車除了依規定於隧道、調撥車道、設有標誌指示之山區或特殊路段、涵洞或車行地下道等路段應該開亮頭燈外，於其他道路不開亮頭燈並不會有處罰，併予澄明。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.storm.mg/article/206132",
+      "title": "元旦起汽機車白天強制開大燈？ 立委：網路謠言（2016-12-27）",
+      "publisher": "風傳媒",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "motc-20161227-晝行燈澄清",
+      "stance": "context",
+      "excerpt": "近期LINE上面有謠傳，明年元旦起，汽機車若未在白天開大燈，將會開罰，並且無勸導期、一次一罰，機車將被罰600元、汽車1200元，高速公路上將加倍罰2400元。",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=K0040019",
+      "title": "高速公路及快速公路交通管制規則 第20條（修正日期：民國115年01月02日）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "moj-高速公路及快速公路交通管制規則",
+      "stance": "context",
+      "excerpt": "大型重型機車行駛於快速公路，除本規則另有規定外，應比照小型車行駛規定，並應遵守下列規定： … 全天開亮頭燈。",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=2",
+      "title": "道路交通安全規則 第2條第1項第1款（法規修正日期：民國115年11月06日）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "moj-道路交通安全規則",
+      "stance": "context",
+      "excerpt": "汽車：指在道路上不依軌道或電力架線而以原動機行駛之車輛（包括機車）。",
+      "access_note": "full"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=KSTA%2c114%2c%e4%ba%a4%2c1384%2c20260526%2c1",
+      "title": "高雄高等行政法院地方庭114年度交字第1384號判決（裁判日期：民國115年5月26日；個案為自用小客車雨天未開頭燈）",
+      "publisher": "司法院裁判書系統",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "judicial-KSTA-114交1384",
+      "stance": "refutes",
+      "excerpt": "關於機車或小型車駕駛人違反第42條規定，期限內繳納或到案聽候裁決者，應處罰鍰1200元。",
+      "access_note": "full"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://tfc-taiwan.org.tw/fact-check-reports/migration-9273/",
+      "title": "【錯誤】網傳「台北市自6月20日起，下午5時至翌日上午7時未打開大燈，罰台幣600元…還有四項交通新規定」？（2023-06-20；查的是另一個版本）",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-20",
+      "tier": 4,
+      "chain": "tfc-9273",
+      "stance": "refutes",
+      "excerpt": "機車及小型車未依規定使用燈光處1200-1500元罰鍰，大型車則罰2800-3600元，並非網傳的600元",
+      "access_note": "full"
+    },
+    {
+      "id": "S21",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "url": "https://www.mygopen.com/2023/06/traffic.html",
+      "title": "【錯誤】網傳台北不開大燈罰600元新罰則？資深傳言！台北市並無相關規定（2023/6/22；查的是另一個版本）",
+      "publisher": "MyGoPen",
+      "accessed": "2026-11-20",
+      "tier": 4,
+      "chain": "mygopen-202306-traffic",
+      "stance": "context",
+      "excerpt": "車輛燈光的使用，還是依照現有的《道路交通安全規則》第 109 條規定",
+      "access_note": "full"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "false",
+      "reasoning": "錯誤：立法院議案紀錄和現行條文都沒有「機車開大燈」的三讀，查核日期前一天也沒有院會。道路交通管理處罰條例第42條（115年8月17日修正公布版）仍只規定「不依規定使用燈光」的罰鍰，沿革顯示最近一次修正公布改的是第21、21-1、35、67、73、85-2、85-3條，立法院議案系統顯示該條例最近一次三讀是115年7月28日。11月19日立法院只有委員會和黨團協商；何時應開頭燈規定在道路交通安全規則，由交通部、內政部會銜以命令修正，不經立法院三讀。另以「頭燈」「開亮頭燈」查第11屆議案資料沒有結果，查無結果本身不列為證據。",
+      "evidence_ids": [
+        "S3",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S14",
+        "S2"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C2",
+      "label": "false",
+      "reasoning": "錯誤：現行規定只在特定情形要求開頭燈，沒有「一律」，也沒有查到會改變這一點的修法。道路交通安全規則第109條（法規修正日期115年11月6日；本條最近一次修正是108年10月1日）規定夜間、行經隧道與調撥車道、遇濃霧雨雪天色昏暗或視線不清時應開亮頭燈，同規則第2條的汽車包括機車；最近一次修正只改第52-1、61-1條，道路交通管理處罰條例最近一次修正也沒有動到燈光條文。全天開頭燈的現行規定只適用大型重型機車行駛快速公路（高速公路及快速公路交通管制規則第20條）；交通部105年的澄清說白天在一般道路不開頭燈不處罰。沒有找到主管機關在2026年針對這一則訊息的說明，交叉來源是立法院紀錄、105年交通部澄清和2023年的查核報告。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S18",
+        "S5",
+        "S15",
+        "S17",
+        "S21"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C3",
+      "label": "false",
+      "reasoning": "錯誤：法條沒有「機車沒開大燈罰三千」這個金額，處罰也只限於依規定應開燈而沒開的情形。道路交通管理處罰條例第42條（115年8月17日修正公布版）規定不依規定使用燈光處1,200元以上3,600元以下罰鍰；115年5月法院判決引用的統一裁罰基準表，機車或小型車期限內繳納或到案是1,200元，台灣事實查核中心2023年引述台北市交通警察大隊的說法是機車及小型車1,200至1,500元。三千元落在法定上下限之間，但不是機車適用的金額，也沒有查到把金額改成三千元的修法。",
+      "evidence_ids": [
+        "S3",
+        "S19",
+        "S20",
+        "S1",
+        "S18"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C4",
+      "label": "false",
+      "reasoning": "錯誤：現在生效的規定沒有「機車一律開大燈、沒開就罰」。道路交通安全規則第109條（115年11月6日版）和道路交通管理處罰條例第42條（115年8月17日版）都沒有這項內容。訊息把「三讀通過」直接說成「以後一律要」，但依同條例第93條，施行日期由行政院以命令定之，三讀後還要經總統公布和訂定施行日；例如115年7月28日三讀的修正，8月17日公布，施行日另定為10月31日和12月31日。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S15"
+      ],
+      "context_flags": [
+        "legal_stage_confusion"
+      ],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C5",
+      "label": "false",
+      "reasoning": "錯誤：2026年11月19日（星期四）立法院沒有開院會，當天不可能完成三讀。當天的會議是7場委員會和1場朝野黨團協商；當週院會是11月17日（第7次會議）和11月20日（第8次會議，與12月1日合併）。法律案須經三讀會議決（立法院職權行使法第7條），三讀是院會的議程。這也不是舊事件被說成昨天：更早的日期同樣沒有查到機車開大燈的三讀，道路交通管理處罰條例（第42條，115年8月17日版）最近一次三讀是115年7月28日，改的是其他條文。會議日期主要來自民間整理的立法院開放資料 API，另以立法院議事暨公報資訊網的議案進度頁（院會 11-06-07：115年11月13日、17日）和中央社11月19日報導交叉核對。",
+      "evidence_ids": [
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S6",
+        "S3",
+        "S5"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C6",
+      "label": "not_factual",
+      "reasoning": "非事實陳述：這句是呼籲轉傳，不是可以查證的事實。",
+      "evidence_ids": [],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": [
+    {
+      "org": "台灣事實查核中心",
+      "url": "https://tfc-taiwan.org.tw/fact-check-reports/migration-9273/",
+      "their_label": "錯誤",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "agree": true,
+      "note": "這份報告查的是2023年「台北市未開大燈罰600元」版本，不是這一則，只當線索。已獨立核對其引用的2項原始資料（道路交通安全規則第109條、道路交通管理處罰條例第42條），現行條文和它的引述一致；它引述的台北市交通警察大隊說法（機車及小型車1,200至1,500元）沒有取得原始聲明，另以115年5月法院判決引用的裁罰基準（機車或小型車1,200元）核對，方向一致。"
+    },
+    {
+      "org": "MyGoPen",
+      "url": "https://www.mygopen.com/2023/06/traffic.html",
+      "their_label": "錯誤",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "agree": true,
+      "note": "這份報告查的是2023年「台北不開大燈罰600元」版本，不是這一則，只當線索。已獨立核對其引用的2項原始資料（道路交通安全規則第109條、道路交通管理處罰條例第42條），現行條文和它的引述一致；報告中其他交通罰則的查證（闖紅燈等）和本則無關，沒有重驗。"
+    }
+  ]
+}

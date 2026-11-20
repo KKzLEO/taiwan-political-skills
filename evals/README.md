@@ -107,7 +107,7 @@ python3 evals/harness/analyze.py --base <輸出資料夾>
 
 從 `cases/` 挑 3 個，分別用 Claude Code 和 Codex 當主體各跑一次，輸出都要通過 `fc.py status`，判定要一致。
 
-**狀態：** 沒有做過。Codex 當主體只在 2026-11-17 用 0.1.0 的流程跑過一次（CHANGELOG 0.1.0 那一段），細節沒有紀錄；Claude Code 當主體一步一步派角色，有紀錄的只有 2026-11-19 第三輪的 case-011 一則（`results/2026-11-19-round3.md`）。
+**狀態：** 「挑 3 個案例、兩邊各跑一次、比判定」沒有做過。2026-11-20 兩個主體各自從頭跑完一則（不同的訊息），每一步都通過 `fc.py status`，回報也照規定（`results/2026-11-20-hosts.md`）。更早的紀錄：Codex 當主體在 2026-11-17 用 0.1.0 的流程跑過一次（CHANGELOG 0.1.0 那一段），細節沒有紀錄；Claude Code 當主體在 2026-11-19 第三輪跑過 case-011 一則（`results/2026-11-19-round3.md`）。
 
 ## 7. 重現性
 

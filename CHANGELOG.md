@@ -402,6 +402,10 @@
   - `fc.py set-aside-tactics`（手動移出標記用的）改寫 `trace.json` 之後不會刪掉舊的報告。
 - **順手修的：** 加了參數產生報告時，`trace.json` 不在會當掉；兩個指令同時清舊檔時，其中一個會因為檔案已經不在而當掉。
 - **文件：** README、SKILL.md、設計規格、計分規則、`evals/README.md` 改成和上面一致；README 和 SKILL.md 的時間和用量換成這一批量到的數字（每則 26 到 62 分鐘）。
+- **真實主體實測**（`evals/results/2026-11-20-hosts.md`）：全新的 Claude Code 主體和 Codex 主體各自只照 SKILL.md 跑完一則，沒有人介入，每一步都通過檢查，回報照規定。Claude Code 48 分鐘，Codex 35 分鐘。
+  - **找到並修掉的：第 5 步和第 8 步的席位其實是一席一席輪流跑。** 說明書的迴圈在 bash 會同時跑，在 zsh（macOS 預設，兩個主體都用它）只有最後一段進背景。Codex 主體自己發現並繞過；Claude Code 主體照順序跑完，多花大約十分鐘，結果不受影響。現在每一席的指令外面加了括號，並由測試在兩種 shell 底下實際執行說明書裡那兩段指令。
+  - **寫進 README 的：** 用 `claude -p` 無人值守執行時，要設 `CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS=0`，不然跑超過 10 分鐘的背景指令會被停掉。
+- **範例換新：** `examples/` 換成上面 Claude Code 那一次的完整資料夾（現行格式）；0.1.0 的舊範例移除。
 - **抗辯紀錄：**
 
   第一輪，對象是「報告預設不列手法」的第一版（commit 6fb0639）和結果檔：

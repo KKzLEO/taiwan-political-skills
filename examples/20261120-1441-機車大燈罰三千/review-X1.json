@@ -1,0 +1,20 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C2",
+      "pass": true,
+      "reason": "維持「錯誤」合理。修正後已納入大型重型機車在快速公路的全天開燈義務，以及汽缸總排氣量達550立方公分者在高速公路適用同一義務。第20條寫明「全天開亮頭燈」及「除前項規定外」，《道路交通安全規則》第109條則列出「夜間應開亮頭燈」等特定情形。這些規定有車種、道路或行車情境的適用條件。[高速公路及快速公路交通管制規則第20條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040019&flno=20)、[道路交通安全規則第109條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040013&flno=109)"
+    },
+    {
+      "claim_id": "C3",
+      "pass": true,
+      "reason": "維持「錯誤」合理。修正後已說明，大型重型機車在高速公路或快速公路違規未開頭燈，法定罰鍰為3,000至6,000元。覆核時直接查到裁罰基準表，該項期限內繳納或到案欄列「三ＯＯＯ」，一般道路的「機車或小型車」違規使用燈光，同欄列「一二ＯＯ」。因此，3,000元確有適用情形，原訊息把它說成所有機車未開頭燈的固定罰鍰，與裁罰基準不符。[高速及快速公路裁罰基準](https://ou3.npa.gov.tw/law/Law/GetFile/1KWEDVT#page=57)、[一般道路裁罰基準](https://ou3.npa.gov.tw/law/Law/GetFile/1KWEDVT#page=82)"
+    },
+    {
+      "claim_id": "C5",
+      "pass": true,
+      "reason": "維持「錯誤」合理。裁判已將立法院第一手會議紀錄列為主要證據。第7次院會列有「115年11月17日 (二) 09:00-18:00」，第8次院會從「115年11月20日 (五) 09:00-18:00」開始。11月19日的紀錄是「立法院第11屆第6會期交通委員會第7次全體委員會議」。院會紀錄支持當天未召開院會、未完成所稱三讀的判定。[第7次院會](https://ppg.ly.gov.tw/ppg/sittings/2026111104/details?meetingDate=115%2F11%2F13)、[第8次院會](https://ppg.ly.gov.tw/ppg/sittings/meetingLink?id=11-06-08%3B115%2F11%2F20%3B%E9%99%A2%E6%9C%83)、[11月19日交通委員會](https://ppg.ly.gov.tw/ppg/sittings/2026111218/details?meetingDate=115%2F11%2F19)"
+    }
+  ]
+}

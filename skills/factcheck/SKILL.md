@@ -87,11 +87,11 @@ python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role prep
 python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role tracer     # 第 4、6、7 步換成 proponent、rebuttal、judge
 ```
 
-第 5 步所有反方同時跑，放在同一個指令裡：
+第 5 步所有反方同時跑，放在同一個指令裡（每一席外面的括號要留著：少了它，zsh 會變成一席跑完才跑下一席）：
 
 ```bash
 for s in $(python3 -c "import json,sys;print(' '.join(x['seat'] for x in json.load(open(sys.argv[1]))['seats']))" "$RUN/models.json"); do
-  python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role opponent --seat "$s" || echo "反方沒有跑起來：$s" &
+  (python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role opponent --seat "$s" || echo "反方沒有跑起來：$s") &
 done
 wait
 ```
@@ -102,7 +102,7 @@ wait
 
 ```bash
 for s in $(python3 "$SKILL/scripts/fc.py" reviewers --run "$RUN" | cut -f1); do
-  python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role review --seat "$s" || echo "覆核失敗：$s" &
+  (python3 "$SKILL/scripts/fc.py" run-model --run "$RUN" --role review --seat "$s" || echo "覆核失敗：$s") &
 done
 wait
 ```
