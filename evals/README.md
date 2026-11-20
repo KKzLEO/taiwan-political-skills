@@ -117,4 +117,4 @@ python3 evals/harness/analyze.py --base <輸出資料夾>
 
 ## 8. 快速模式
 
-**狀態：** 還沒有實測過，時間和結論都沒有量。README 和 SKILL.md 只寫「比較快」。
+**狀態：** 2026-11-20 由真的 Claude Code 主體跑過一則（一張聊天截圖，18 分鐘，每一步通過檢查；`results/2026-11-20-hosts.md`）。只有這一則，結論準不準沒有量。
