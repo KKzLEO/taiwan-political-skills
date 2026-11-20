@@ -1,0 +1,109 @@
+{
+  "first_seen": {
+    "date": "2026-10-31",
+    "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+    "platform": "電視辯論會直播（TVBS 與三立共同主辦的「2026台北市長候選人電視辯論會」，電視與 YouTube 同步播出）",
+    "note": "這句話出自 2026-10-31 中午 12 時至下午 2 時的辯論會，今周刊報導寫明是交叉詰問的都更議題、沈伯洋回答蔣萬安提問時說的。TVBS 賽前報導寫「TVBS與三立電視台將於明（31）日共同舉辦『2026台北市長候選人電視辯論會』」（https://news.tvbs.com.tw/politics/4043666）。查到最早的文字報導是三立新聞網 12:46 的轉述「目前動工數仍是零」（https://www.setn.com/news/1931242）。最早的直接引述是 TVBS 13:03 的報導：「你之前提出了這樣的政策，7599等的，現在連動工其實是零，它沒有辦法動工，那大家在等都更這個心情就會變得越來越焦躁。」（https://news.tvbs.com.tw/politics/4043872）。完整影片只確認了標題和頻道（三立新聞網SETN），沒有看影片內容；TVBS 的直播影片在 https://www.youtube.com/live/j4s2_44yHJE 。"
+  },
+  "variants": [
+    {
+      "url": "https://news.tvbs.com.tw/politics/4043872",
+      "date": "2026-10-31",
+      "difference": "TVBS 直接引述：「你之前提出了這樣的政策，7599等的，現在連動工其實是零，它沒有辦法動工，那大家在等都更這個心情就會變得越來越焦躁。」原話是「7599等的」「現在連動工其實是零」，沒有「都更7599專案」「動工的數量」這幾個字，後面還接了一句談民眾等都更的心情。"
+    },
+    {
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624785",
+      "date": "2026-10-31",
+      "difference": "自由時報 12:56 引述：「蔣萬安之前提出的7599等等的，現在連動工其實是零」。用字和 TVBS 版本接近，和訊息引號裡的字句不同。"
+    },
+    {
+      "url": "https://www.ettoday.net/news/20261031/3263904.htm",
+      "date": "2026-10-31",
+      "difference": "ETtoday 12:55 轉述：「蔣萬安之前提出的7599政策，現在零動工，所以都更最重要的其實是陪伴，不能把入口開得那麼寬，但是出口卻那麼窄。」同篇記有蔣萬安的回應：「康樂街第一個7599專案也已經完成公告招商、也已經簽約了」。"
+    },
+    {
+      "url": "https://udn.com/vote2026/story/124652/9848767",
+      "date": "2026-10-31",
+      "difference": "聯合報 13:06 轉述：「沈伯洋反擊蔣萬安之前提出的7599政策，現在動工是零，沒有辦法動工，會讓民眾等都市更新，就會愈來愈焦躁。」"
+    },
+    {
+      "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610310007/",
+      "date": "2026-10-31",
+      "difference": "今周刊 13:51 引述：「都更需要的是動工跟完工，7599政策到現在動工其實是零，大家等都更的心情會愈來愈焦躁。」沒有「沒有辦法動工」這一句，並寫明發言在交叉詰問階段。"
+    },
+    {
+      "url": "https://www.taisounds.com/news/content/133/297097",
+      "date": "2026-10-31",
+      "difference": "太報 12:58 轉述：「7599現在動工是零，所以都更最重要是陪伴，不能入口開這麼寬，出口這麼窄」。"
+    },
+    {
+      "url": "https://tfc-taiwan.org.tw/election2026/reports/taipei-urban-renewal-7599-zero-construction-claim",
+      "date": "2026-10-31",
+      "difference": "台灣事實查核中心查核報告的標題是：沈伯洋說：「都更7599專案，現在動工的數量是零，沒有辦法動工」？引號裡的字句和這則訊息完全相同。訊息多了「在 10 月 31 日台北市長辯論會上」，少了標題結尾的問號。"
+    },
+    {
+      "url": "https://news.nextapple.com/politics/20261101/DBAF0BAAB1180B457EC187CDDCDC9DBE",
+      "date": "2026-11-01",
+      "difference": "壹蘋新聞網轉述查核中心的結果，引號裡的字句和訊息相同，並附查核說明：「公辦都更7599專案目前沒有動工案件，今年8月、9月有兩個計畫完成7599程序，向建商簽約。」"
+    },
+    {
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5609883",
+      "date": "2026-10-17",
+      "difference": "辯論會兩週前的報導。沈伯洋談都更「入口寬、出口窄」，說「可能會卡在招商、審議、核定、動工環節」，沒有提到 7599 動工數是零。"
+    }
+  ],
+  "prior_factchecks": [
+    {
+      "org": "台灣事實查核中心",
+      "url": "https://tfc-taiwan.org.tw/election2026/reports/taipei-urban-renewal-7599-zero-construction-claim",
+      "label": "資料雖符合，但僅提供部分資訊，無法瞭解全貌",
+      "date": "2026-10-31"
+    }
+  ],
+  "publisher": {
+    "kind": "public_figure",
+    "name": "沈伯洋（民進黨台北市長候選人，報導中蔣萬安稱他「沈委員」）。發言管道是 TVBS 與三立共同主辦、公開直播的電視辯論會。這則訊息本身沒有發布者、網址或發布時間，引號裡的字句和台灣事實查核中心查核報告的標題相同。",
+    "outlet_id": null,
+    "byline": "n/a",
+    "wording_issues": [],
+    "flagged": [
+      {
+        "url": "https://tfc-taiwan.org.tw/election2026/reports/taipei-urban-renewal-7599-zero-construction-claim",
+        "note": "台灣事實查核中心把這句發言列入辯論會查核，結果標示為「資料雖符合，但僅提供部分資訊，無法瞭解全貌」。沒有查到沈伯洋或他的競選辦公室對這項查核結果的公開回應或更正。"
+      }
+    ]
+  },
+  "spread_signals": [
+    {
+      "signal": "辯論會進行中，多家媒體在 12:46 到 13:06 之間各自發稿報導這句話。各篇有不同記者署名，用字互不相同，不是同一份文案。",
+      "evidence_url": "https://www.setn.com/news/1931242",
+      "excerpt": "目前動工數仍是零"
+    },
+    {
+      "signal": "和訊息引號內一字不差的版本，查到的最早出處是台灣事實查核中心 2026-10-31 的查核報告標題。",
+      "evidence_url": "https://tfc-taiwan.org.tw/election2026/reports/taipei-urban-renewal-7599-zero-construction-claim",
+      "excerpt": "沈伯洋說：「都更7599專案，現在動工的數量是零，沒有辦法動工」？"
+    },
+    {
+      "signal": "2026-11-01 有多家媒體轉述查核中心的查核結果，這些報導都出自同一份查核報告，屬於同一個來源。",
+      "evidence_url": "https://www.storm.mg/lifestyle/11177458",
+      "excerpt": "查核中心確認，目前確實沒有動工案件；不過，截至10月31日，已有兩案完成專案程序並與建商簽約。"
+    },
+    {
+      "signal": "同日 TVBS 也轉述同一份查核結果。",
+      "evidence_url": "https://news.tvbs.com.tw/politics/4044184",
+      "excerpt": "不過沈伯洋批評7599都更專案沒有動工，台灣事實查核中心查核後指出，已經有2案完成程序和建商簽約，雖然沒有動工，但沈伯洋說法沒有呈現全貌。"
+    }
+  ],
+  "attribution": [],
+  "tactics": [],
+  "limits": [
+    "沒有看辯論會完整影片，也沒有找到官方或媒體公布的逐字稿。沈伯洋的原話是依 TVBS、自由時報、今周刊等媒體的引述，沒辦法確認影片裡的確切時間點和一字不差的用字。",
+    "訊息引號裡的字句和台灣事實查核中心查核報告的標題相同，和媒體記下的原話（「7599等的，現在連動工其實是零，它沒有辦法動工」）略有出入。查不到這段文字是誰、什麼時候整理成現在的樣子。",
+    "這則訊息沒有來源網址和發布者，沒辦法確認是從哪個平台、哪個帳號傳出來的。",
+    "Threads、臉書、LINE 群組上的貼文用公開搜尋查不到，沒辦法判斷這句話在社群上的轉傳量，也看不出有沒有大量相同文案。",
+    "Cofacts、MyGoPen、法新社事實查核，沒有查到針對這句話的查核。",
+    "台灣事實查核中心的報告沒有附辯論會影片連結或時間碼，沒辦法從報告回推發言的確切段落。",
+    "辯論會之後到查核日期（2026-11-21）之間，7599 專案的案件進度有沒有變化，這一步沒有查。"
+  ]
+}

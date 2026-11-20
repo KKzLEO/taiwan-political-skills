@@ -1,0 +1,51 @@
+{
+  "seat": "A",
+  "lens": "evidence",
+  "engine": "claude",
+  "searches_run": 6,
+  "attacks": [
+    {
+      "id": "A-1",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "溯源寫「查得到最早的報導是 FTNN 2026/11/7 23:02 刊出」，但至少有兩篇引述同一則貼文的報導更早刊出：ETtoday 頁面顯示的發布時間是 11 月 7 日 21:18，聯合新聞網（正方自己列的證據 S11）是 11 月 7 日 21:58。最早出現的日期仍是 11 月 7 日，但「最早引述該貼文的報導」不是 FTNN 23:02 那一篇，最早出處的網址和說明應該更正。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "url": "https://www.ettoday.net/news/20261107/3268226.htm",
+          "excerpt": "2026年11月07日 21:18"
+        },
+        {
+          "url": "https://www.ettoday.net/news/20261107/3268226.htm",
+          "excerpt": "事件起因於廖玉蕙7日在臉書發文，表示6日在大稻埕逛街時，聽見垃圾車沿街播放「市長選舉請支持蔣萬安」"
+        },
+        {
+          "url": "https://udn.com/news/story/124652/9864252",
+          "excerpt": "2026-11-07 21:58"
+        },
+        {
+          "url": "https://udn.com/news/story/124652/9864252",
+          "excerpt": "年底選戰倒數21天，作家廖玉蕙今稱聽到垃圾車沿街廣播「市長選舉請支持蔣萬安」，並質疑有無公器私用。"
+        }
+      ]
+    },
+    {
+      "id": "A-2",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "溯源把作者 11 月 8 日的第二篇貼文描述成「地點改為大安區」，並把「大稻埕那一段不是本人親耳聽到」歸在之後受訪的版本。但媒體引述的第二篇貼文仍然寫到大稻埕，而且已經寫明在大稻埕聽到的人是「外子」，聽到的是「蔣萬安的聲音」；大安區是另外加上的第二個地點。也就是說，「聽的人從作者本人變成先生」這個改變在第二篇貼文就出現了，不是到受訪才出現，這一筆變體的說明應該更正。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "url": "https://newtalk.tw/news/view/2026-11-08/1069923",
+          "excerpt": "昨日傍晚，外子在大稻埕聽到從垃圾車傳出蔣萬安的聲音，今晚8點多時，又在大安區聽到蔣萬安的聲音。"
+        },
+        {
+          "url": "https://news.ltn.com.tw/news/politics/breakingnews/5633338",
+          "excerpt": "讓垃圾車從東邊的大稻埕一路迤邐播放殷殷叮嚀聲到南邊的大安區？"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

@@ -1,0 +1,283 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.dep.gov.taipei/News_Content.aspx?n=CB6D5C560DE4D2DD&sms=72544237BBE4C5F6&s=DD8880E7E306DA7A",
+      "title": "駁斥垃圾車廣播「拉票」不實謠言 北市環保局嚴正闢謠：只宣傳「公費疫苗接種」",
+      "publisher": "臺北市政府環境保護局",
+      "accessed": "2026-11-20",
+      "tier": 2,
+      "chain": "dep-1107-release",
+      "stance": "refutes",
+      "excerpt": "針對今（7）日網路流傳民眾發文指稱本市垃圾車沿街廣播「市長選舉請支持蔣萬安」一事，臺北市政府環境保護局嚴正澄清，此為不實言論。",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.dep.gov.taipei/News_Content.aspx?n=CB6D5C560DE4D2DD&sms=72544237BBE4C5F6&s=DD8880E7E306DA7A",
+      "title": "駁斥垃圾車廣播「拉票」不實謠言 北市環保局嚴正闢謠：只宣傳「公費疫苗接種」",
+      "publisher": "臺北市政府環境保護局",
+      "accessed": "2026-11-20",
+      "tier": 2,
+      "chain": "dep-1107-release",
+      "stance": "refutes",
+      "excerpt": "近期配合本市公費疫苗於 11 月 2 日開打，本局依循往例協助播放由市長錄製之防疫宣導音檔，……全段錄音共1分18秒，前後20秒是熟悉的「少女的祈禱」旋律，",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.dep.gov.taipei/News_Content.aspx?n=CB6D5C560DE4D2DD&sms=72544237BBE4C5F6&s=DD8880E7E306DA7A",
+      "title": "駁斥垃圾車廣播「拉票」不實謠言 北市環保局嚴正闢謠：只宣傳「公費疫苗接種」",
+      "publisher": "臺北市政府環境保護局",
+      "accessed": "2026-11-20",
+      "tier": 2,
+      "chain": "dep-1107-release",
+      "stance": "context",
+      "excerpt": "環保局說明，垃圾車隨車廣播系統長期作為本府各項重要民生與市政宣導之公益平台，舉凡公費疫苗接種、登革熱防治、防詐騙宣導及防災資訊等，均會透過垃圾車清運時段向市民傳達。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www-ws.gov.taipei/Download.ashx?u=LzAwMS9VcGxvYWQvMzYzL3JlbGZpbGUvMTAxNjIvOTc0NDUwNi9mNDRlNDM0MS1kYmFhLTQ2YzktYWRiNS0yMTc1YjQ0NjIzNDQubXAz&n=dm9pY2VfMTY5Nzg4Lm1wMw%3d%3d&icon=..mp3",
+      "title": "voice_169788.mp3（環保局新聞稿所附的實際播放音檔）",
+      "publisher": "臺北市政府環境保護局",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "dep-1107-release",
+      "stance": "context",
+      "excerpt": "（音檔，沒有文字可摘錄；本次只確認檔案可以下載，類型 audio/mpeg、約 229.1KB，沒有聽取內容，也沒有逐字稿）",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.cts.com.tw/cts/politics/202611/202611083098798.html",
+      "title": "沈伯洋支持者清場展公德心　蔣萬安垃圾車廣播掀議",
+      "publisher": "華視新聞網",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "dep-1107-release",
+      "stance": "refutes",
+      "excerpt": "我是台北市長蔣萬安，流感及新冠疫苗從11月2日起，接種對象擴大至50歲以上民眾。",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.tvbs.com.tw/politics/4048188",
+      "title": "控「北市垃圾車助選蔣萬安」遭打臉！廖玉蕙道歉了：願意負起責任",
+      "publisher": "TVBS 新聞網",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "liao-1109-statement",
+      "stance": "refutes",
+      "excerpt": "事後，台北市環保局公布了疫苗接種宣導音檔，其中並無我所引述的選舉拉票語句。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.chinatimes.com/realtimenews/20261109004438-260407",
+      "title": "垃圾車廣播支持蔣萬安？ 作家廖玉蕙道歉：未經充分查證、願意負起責任",
+      "publisher": "中時新聞網",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "liao-1109-statement",
+      "stance": "refutes",
+      "excerpt": "我並未先取得完整的現場錄音，也沒有進一步確認實際播出的文字內容，就公開表達。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://art.ltn.com.tw/article/breakingnews/5633561",
+      "title": "蔣萬安「現聲」垃圾車 廖玉蕙還原過程，質疑「包裝親民」為選舉",
+      "publisher": "自由時報（自由藝文網）",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "liao-1108-interview",
+      "stance": "refutes",
+      "excerpt": "在大稻埕那日，由於街道人聲嘈雜，她是聽先生轉述，但來不及追問確認",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5634283",
+      "title": "垃圾車「助選」蔣萬安？廖玉蕙稱聽丈夫轉述 藍營告發違反選罷法",
+      "publisher": "自由時報",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "liao-1108-interview",
+      "stance": "refutes",
+      "excerpt": "她昨說明，拉票說法是聽先生轉述，當時街道人聲嘈雜，未及確認；但隔日在大安區確實聽見廣播強調「我是蔣萬安」，認為選戰白熱化之際，候選人藉垃圾車沿街宣導，仍有行政中立疑慮。",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=S0110036&flno=9",
+      "title": "公務人員行政中立法 第 9 條（修正日期：民國 103 年 11 月 26 日）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-20",
+      "tier": 1,
+      "chain": "law-S0110036",
+      "stance": "context",
+      "excerpt": "公務人員不得為支持或反對特定之政黨、其他政治團體或公職候選人，從事下列政治活動或行為：一、動用行政資源編印製、散發、張貼文書、圖畫、其他宣傳品或辦理相關活動。",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://udn.com/news/story/124652/9864252",
+      "title": "廖玉蕙質疑垃圾車幫蔣萬安拉票 北市環保局長闢謠「絕對聽錯了！」",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "liao-1107-post",
+      "stance": "context",
+      "excerpt": "昨日在大稻埕逛一下，竟然看到垃圾車沿街廣播『市長選舉請支持蔣萬安！』的呼籲聲！",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.mirrormedia.mg/story/20261109edi055",
+      "title": "稱垃圾車廣播為蔣萬安拉票！作家廖玉蕙致歉：未充分查證　願負起責任",
+      "publisher": "鏡週刊",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "liao-1107-post",
+      "stance": "context",
+      "excerpt": "這是可以的嗎？有沒有公器私用的疑慮？",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://newtalk.tw/news/view/2026-11-08/1069923",
+      "title": "從聽到垃圾車播「支持蔣萬安」改成「萬安聲」 廖玉蕙：這聲音該倒掉",
+      "publisher": "新頭殼 Newtalk",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "liao-1108-post",
+      "stance": "context",
+      "excerpt": "除非這聲音是該被倒掉的垃圾，否則高居垃圾車上一路放送，就是典型的公器私用，行政不中立。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://health.ltn.com.tw/article/paper/1776203",
+      "title": "第二階段公費流感、新冠疫苗 11/2起開放50歲以上成人接種",
+      "publisher": "自由時報（自由健康網）",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "cdc-phase2-vaccine",
+      "stance": "context",
+      "excerpt": "羅一鈞也提醒，公費流感、新冠肺炎疫苗第二階段也將在11月2日開放50歲以上成人接種，疾管署已增購流感疫苗30萬劑、新冠肺炎疫苗17.4萬劑，預計11月上旬可陸續提供民眾接種。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/article/834806",
+      "title": "遭質疑垃圾車廣播宣傳蔣萬安 北市環保局稱是疫苗施打宣導",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "pts-1108-report",
+      "stance": "context",
+      "excerpt": "作家廖玉蕙7日在臉書發文，在台北市大稻埕聽到垃圾車沿街廣播「市長選舉請支持蔣萬安」，質疑公器私用，環保局澄清是流感疫苗擴大施打的市政宣導。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.chinatimes.com/realtimenews/20261112001160-260402",
+      "title": "作家廖玉蕙慘了！PO文稱垃圾車廣播支持蔣萬安 北檢列被告查辦",
+      "publisher": "中時新聞網",
+      "accessed": "2026-11-20",
+      "tier": 3,
+      "chain": "tpc-1111-case",
+      "stance": "context",
+      "excerpt": "北檢已於11日分「選他」案，將廖玉蕙列為被告，指派「假訊息案件專責小組」檢察官依法偵查。",
+      "access_note": "full"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "false",
+      "reasoning": "查到的紀錄和這句話衝突，判錯誤。臺北市環保局公布實際播放的音檔並說明是市長錄製的公費疫苗宣導，華視引述的音檔內容是「我是台北市長蔣萬安，流感及新冠疫苗從11月2日起，接種對象擴大至50歲以上民眾」，沒有拉票語句；發文的作者 11 月 9 日也聲明公布的音檔「並無我所引述的選舉拉票語句」，承認沒有取得現場錄音、沒有確認播出內容，並已撤文。作者另向自由時報表示，大稻埕那一段是聽先生轉述、來不及確認，不是本人親耳聽到。限制：環保局是被指稱的一方；音檔本次只確認可以下載，沒有聽取內容，廣播文字是依華視的引述和環保局的描述；沒有查到第三方在大稻埕現場的錄音，也沒有查到任何錄到拉票廣播的錄音或影片。垃圾車在 11 月 2 日至 21 日播放蔣萬安錄製的疫苗宣導是查得到的；北檢 11 月 11 日分案偵查，沒有查到處分結果，這不影響判定。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S11",
+        "S14",
+        "S15",
+        "S16"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C2",
+      "label": "not_factual",
+      "reasoning": "這是評價，不是可以查證的事實陳述，判非事實陳述。它所指的拉票廣播查無其事（見 C1）；查得到的是垃圾車在 11 月 2 日至 21 日播放市長錄製的疫苗宣導，環保局稱這是依循往例的市政宣導，這樣做算不算「公器私用」屬於評價，沒有查到主管機關或法院的認定。媒體引述的原貼文在這一點是問句（「這是可以的嗎？有沒有公器私用的疑慮？」），待查訊息寫成肯定句；作者 11 月 8 日的第二篇貼文才用肯定句，指的是選舉期間播放市長聲音，不是拉票語句。公務人員行政中立法第 9 條條文列為背景，沒有用來判定。",
+      "evidence_ids": [
+        "S3",
+        "S10",
+        "S11",
+        "S12",
+        "S13"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": []
+}

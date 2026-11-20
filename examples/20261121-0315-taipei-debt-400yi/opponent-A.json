@@ -1,0 +1,34 @@
+{
+  "seat": "A",
+  "lens": "evidence",
+  "engine": "claude",
+  "searches_run": 8,
+  "attacks": [
+    {
+      "id": "A-1",
+      "claim_id": "C1",
+      "target": "label",
+      "argument": "正方判 C1「正確」，但「減債超過 400 億」只在不含自償性債務的公共債務法口徑下成立。同一份臺北市財政局資料（S1、S2）顯示，1 年以上公共債務由 111 年 12 月底的 898 億元降到 115 年 10 月底的 468 億元，減少 430 億元。同一期間，自償性公共債務（含非營業特種基金）由約 474 億元增為約 596 億元，增加約 121 億元。市府的債務訊息頁把這一項一併列在「本府公共債務情形」底下。兩項合計由約 1,372 億元降到約 1,064 億元，實際減少約 309 億元，沒有超過 400 億元。發言用的是「總共減債」，沒有說明只算非自償債務，一般讀者會理解成市府整體借款少了 400 億元以上。正方在理由裡已算出「加回後淨減少約 309 億元」，卻仍判「正確」，也沒有標示任何脈絡問題，判定和自己列出的數字不一致。依法定口徑主體成立、但含自償性債務後不到 400 億元，這一條應判「大致正確」。",
+      "proposed_label": "mostly_true",
+      "evidence": [
+        {
+          "url": "https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/",
+          "excerpt": "截至2022年12月底，「一年以上未償債務」為89,800,000,000元、短期債務為0元、自償性債務為47,423,094,408元；"
+        },
+        {
+          "url": "https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/",
+          "excerpt": "截至2026年9月底，「一年以上未償債務」為46,800,000,000元、短期債務為0元，自償性債務為59,550,315,123元。"
+        },
+        {
+          "url": "https://www.gov.taipei/cp.aspx?n=A55EF8E25C0DE850",
+          "excerpt": "(四)自償性公共債務未償餘額(含非營業特種基金)為596億元。"
+        },
+        {
+          "url": "https://data.taipei/api/frontstage/tpeod/dataset/resource.download?rid=b9058595-0cdc-4a28-b7cc-dfd48aa61eef",
+          "excerpt": "\"46,800,000,000\",0,\"19,348\",\"59,550,315,123\""
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

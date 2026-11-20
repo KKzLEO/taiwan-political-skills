@@ -1,0 +1,59 @@
+{
+  "seat": "A",
+  "lens": "evidence",
+  "engine": "claude",
+  "searches_run": 5,
+  "attacks": [
+    {
+      "id": "A-1",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "正方把「沒有辦法動工」解讀成「還沒進到動工階段」，這一步沒有證據支持。正方的證據表裡沒有任何一筆顯示 7599 案件卡關或無法動工。市府 114 年 5 月的新聞稿（S11）預告 115 年徵求出資者，虎林街60巷案和南港產專區單元2-25案也在 115 年 8 月、9 月簽約，和預告的期程相符。逐件打開都更處列出的 15 件 7599 案件頁後，另外 13 件是 114 年 10 月到 115 年 10 月之間才通過第一階段，還沒到可以動工的程序。這些資料撐得起「目前零動工」，撐不起「無法動工」。另外，正方不判「正確」的理由是「沒有提到已有兩案簽約」，這是缺少前後文，不是細節上的小差異。依判定標準，材料是真的但缺少前後文、讓人以為專案卡住，對應的是「誤導」；正方卻判「大致正確」，也沒有標記任何脈絡問題，理由和標籤對不上。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=B0C803C940F15AF4&sms=72544237BBE4C5F6",
+          "excerpt": "並預計於115年辦理徵求出資者，由實施者及出資者協助完成擬定事權計畫報核及重建等相關事宜"
+        },
+        {
+          "url": "https://udd.gov.taipei/events/fhqekzq-21372",
+          "excerpt": "南港產專區首件公辦都更7599招商今簽約"
+        },
+        {
+          "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=F35451CB8A277E83",
+          "excerpt": "115年10月通過「臺北市公辦都市更新7599專案計畫」第一階段。"
+        },
+        {
+          "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=8D44916999B028EA",
+          "excerpt": "114年10月通過「臺北市公辦都市更新7599專案計畫」第一階段。"
+        },
+        {
+          "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=A70F95555A969DC0",
+          "excerpt": "112年7月通過「臺北市公辦都市更新7599專案計畫」第一階段。"
+        }
+      ]
+    },
+    {
+      "id": "A-2",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S9 和 S10 被標成支持命題，但摘錄只寫市府在 114 年 5 月同意住都中心擔任實施者，沒有談到動工。兩個頁面的資料更新日是 115 年 3 月 23 日和 114 年 8 月 29 日，連 115 年 8 月、9 月的簽約都沒有記載，沒辦法證明辯論會當天（115 年 10 月 31 日）的動工狀況，只能算背景資料。正方只開了 15 件 7599 案件頁中的這 2 件，就寫「官方頁面都沒有動工紀錄」，涵蓋範圍不夠。補查其餘 13 件案件頁，都停在第一或第二階段，沒有實施者、簽約或動工的記載，所以零動工的結論沒有被推翻。不過撐起這個結論的是整份案件列表，不是 S9、S10 這兩段摘錄。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=A70F95555A969DC0",
+          "excerpt": "本府於114年5月8日同意臺北市住宅及都市更新中心擔任實施者。"
+        },
+        {
+          "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=F35451CB8A277E83",
+          "excerpt": "刻正辦理方案評估作業，將另案函知所有權人方案評估說明會時間及第二階段意願調查事宜。"
+        },
+        {
+          "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=8D44916999B028EA",
+          "excerpt": "(1)調查時間：即日起至115年10月31日止。"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

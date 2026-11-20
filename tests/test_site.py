@@ -1,6 +1,7 @@
 """The public pages. The results page is whatever the records produce, the front page agrees with it, and
 nothing on either page points at something that is not there."""
 import importlib.util
+import json
 import re
 import unittest
 from pathlib import Path
@@ -103,6 +104,21 @@ class Taipei(unittest.TestCase):
         for person in self.module.PEOPLE:
             for kind in ("about", "said"):
                 self.assertIn("「" + person[kind]["text"] + "」", registered)
+
+    def test_a_review_that_did_not_pass_is_told_as_what_it_was(self):
+        """Two different things end in "review did not pass": the reviewer would not confirm the label (the claim
+        becomes unverified), or agreed with the label and found the reasons incomplete (the label stays)."""
+        told = set()
+        for run in sorted((ROOT / "examples").iterdir()):
+            if not (run / "verdicts.json").exists():
+                continue
+            kept = {d["claim_id"]: d["label_kept"] for d in json.loads(read(run / "verdicts.json")).get("disputes", [])}
+            for claim, _label, lines in self.module.points(run, most=99):
+                text = " ".join(lines)
+                self.assertEqual("改列" in text, kept.get(claim) is False, f"{run.name} {claim}")
+                self.assertEqual("同意這個判定" in text, kept.get(claim) is True, f"{run.name} {claim}")
+                told.add(kept.get(claim))
+        self.assertEqual(told, {None, True, False})  # the examples hold all three, so each wording is exercised
 
 
 class Links(unittest.TestCase):

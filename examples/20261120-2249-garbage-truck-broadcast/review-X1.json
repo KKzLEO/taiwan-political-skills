@@ -1,0 +1,17 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C1",
+      "pass": false,
+      "label_ok": false,
+      "reason": "現有資料不足以判定大稻埕那次廣播播出拉票語句的說法為錯誤。環保局否認並附上標為「實際播放之音檔」的檔案，但公告未交代如何核對大稻埕那次播音。廖玉蕙致歉時說「其中並無我所引述的選舉拉票語句」，指的是環保局公布的音檔。她撤回貼文並承認未充分查證，聲明仍未確認現場實際播出的內容。[環保局公告](https://www.dep.gov.taipei/News_Content.aspx?n=CB6D5C560DE4D2DD&s=DD8880E7E306DA7A) [TVBS 刊載的致歉全文](https://news.tvbs.com.tw/politics/4048188)"
+    },
+    {
+      "claim_id": "C2",
+      "pass": false,
+      "label_ok": true,
+      "reason": "「這是公器私用」判為非事實陳述合理，理由也已區分對拉票廣播的評價和對選前疫苗宣導的質疑。但理由把大稻埕那次廣播的內容寫成已被推翻。廖玉蕙致歉時說「沒有進一步確認實際播出的文字內容」，因此這項評價所依據的拉票說法仍應寫為無法證實。[TVBS 刊載的致歉全文](https://news.tvbs.com.tw/politics/4048188)"
+    }
+  ]
+}

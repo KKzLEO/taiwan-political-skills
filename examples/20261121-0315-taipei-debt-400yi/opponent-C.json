@@ -1,0 +1,150 @@
+{
+  "seat": "C",
+  "lens": "stance",
+  "engine": "claude",
+  "searches_run": 4,
+  "attacks": [
+    {
+      "id": "C-1",
+      "claim_id": "C3",
+      "target": "trace",
+      "argument": "溯源把發布者記為蔣萬安，並把「引言缺主詞，看不出指哪一項原則」列在他名下的用詞問題。但缺主詞是待查訊息的截法造成的，這個截法和台灣事實查核中心報告的標題相同。風傳媒當天的直接引述是「柯前市長所提倡的財政紀律，也是我這4年當中非常重視的施政原則」，原話有主詞。這一項應改寫成「訊息截掉了前半句」，不要列成發言人的用詞問題。任何一位候選人的話被別人截短，都應該這樣處理。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE1",
+          "claim_ids": [
+            "C3"
+          ],
+          "url": "https://www.storm.mg/article/11177350",
+          "title": "台北市長電視辯論》蔣萬安向小草喊話示好：感謝柯文哲打下堅實基礎",
+          "publisher": "風傳媒",
+          "accessed": "2026-11-21",
+          "tier": 3,
+          "chain": "storm-debate-1031",
+          "stance": "context",
+          "excerpt": "柯前市長所提倡的財政紀律，也是我這4年當中非常重視的施政原則",
+          "access_note": "full"
+        },
+        {
+          "id": "CE2",
+          "claim_ids": [
+            "C3"
+          ],
+          "url": "https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/",
+          "title": "蔣萬安說：這四年當中，非常重視的施政原則，四年下來，臺北市總共減債超過了400億，是六都第一？",
+          "publisher": "台灣事實查核中心",
+          "accessed": "2026-11-21",
+          "tier": 4,
+          "chain": "tfc-debate-1031",
+          "stance": "context",
+          "excerpt": "蔣萬安說：這四年當中，非常重視的施政原則，四年下來，臺北市總共減債超過了400億，是六都第一？",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-2",
+      "claim_id": "C1",
+      "target": "trace",
+      "argument": "溯源列的用詞問題裡，和數字有關的只有「是六都第一」沒寫明比金額、比率還是人均。同一句的「總共減債超過了400億」也沒寫明債務口徑，卻沒有列。依臺北市公開的月資料，111 年 12 月到 115 年 10 月，1 年以上公共債務由 898 億元降到 468 億元，減少 430 億元；自償性公共債務由約 474 億元增到約 596 億元，增加約 121 億元。兩項合計淨減少約 309 億元。口徑不同，數字會落在 400 億的上下兩邊，這和「六都第一」的含糊是同一類問題，應該一併列出。不論發言的首長屬於哪個政黨，沒寫口徑的減債或負債數字都要用同樣方式列。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE3",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://data.taipei/api/frontstage/tpeod/dataset/resource.download?rid=b9058595-0cdc-4a28-b7cc-dfd48aa61eef",
+          "title": "公告臺北市政府自105年1月起公共債務訊息（CSV）",
+          "publisher": "臺北市政府財政局（臺北市資料大平臺）",
+          "accessed": "2026-11-21",
+          "tier": 1,
+          "chain": "taipei-dof-debt-data",
+          "stance": "context",
+          "excerpt": "83｜111｜12｜89,800,000,000｜0｜36,319｜47,423,094,408；129｜115｜10｜46,800,000,000｜0｜19,348｜59,550,315,123",
+          "access_note": "full"
+        },
+        {
+          "id": "CE4",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://www.gov.taipei/cp.aspx?n=A55EF8E25C0DE850",
+          "title": "臺北市政府全球資訊網-最新債務訊息",
+          "publisher": "臺北市政府財政局",
+          "accessed": "2026-11-21",
+          "tier": 1,
+          "chain": "taipei-dof-debt-data",
+          "stance": "context",
+          "excerpt": "(一)1年以上公共債務未償餘額為468億元。……(四)自償性公共債務未償餘額(含非營業特種基金)為596億元。",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-3",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "正方對 C2 的第一句結論寫明「以減債金額比較」，對 C1 的第一句卻只寫「數字和官方資料相符」，沒有寫是哪一種口徑。「不含自償性債務、加回後淨減少約 309 億元」放在理由後段的限制裡。只看標籤和第一句的讀者，會以為各類債務合計減少超過 400 億。自償性債務算不算政府債務，學者看法不一：台灣事實查核中心 2020 年一份查核高雄市負債的報告裡，一位學者說「自償性債務仍屬政府債務，只是不受《公共債務法》的規範」，另一位認為不屬於債務。口徑有爭議時，C1 的結論句應寫明「依公共債務法口徑（不含自償性債務）」。這個寫法要對所有政黨的首長一致，不能有的命題寫、有的不寫。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE5",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://tfc-taiwan.org.tw/fact-check-reports/migration-4051",
+          "title": "【錯誤】網傳圖片宣稱「韓國瑜擔任高雄市長530天任內唯一『政績』，負債多136億」？",
+          "publisher": "台灣事實查核中心",
+          "accessed": "2026-11-21",
+          "tier": 4,
+          "chain": "tfc-2020-kaohsiung-debt",
+          "stance": "context",
+          "excerpt": "自償性債務仍屬政府債務，只是不受《公共債務法》的規範",
+          "access_note": "full"
+        },
+        {
+          "id": "CE6",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://data.taipei/api/frontstage/tpeod/dataset/resource.download?rid=b9058595-0cdc-4a28-b7cc-dfd48aa61eef",
+          "title": "公告臺北市政府自105年1月起公共債務訊息（CSV）",
+          "publisher": "臺北市政府財政局（臺北市資料大平臺）",
+          "accessed": "2026-11-21",
+          "tier": 1,
+          "chain": "taipei-dof-debt-data",
+          "stance": "context",
+          "excerpt": "83｜111｜12｜89,800,000,000｜0｜36,319｜47,423,094,408；129｜115｜10｜46,800,000,000｜0｜19,348｜59,550,315,123",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-4",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "正方用 S22 支持「沒有查到對這個數字的反駁」，並把它的標題「抓包蔣萬安辯論68處瑕疵！ 張禹宣狠批：真的完全不懂市政」放進 C1 的證據表。我讀了這篇報導：內容是一位政治評論員在 Threads 的發文，批評的是公辦都更、校園食安和市民大道高架，沒有提到減債或債務。一位評論員的清單沒提，不能代表沒有人反駁。這篇報導和 C1 無關，卻讓證據表多了一句對發言人的負面評語；它的內容來自評論員個人貼文，也不適合當成獨立媒體報導。建議把 S22 移出 C1 的證據，理由改寫成實際搜尋了哪些來源、沒有找到反駁。我另外搜尋兩次，也沒有找到對手陣營直接反駁這個數字的公開說法。換成另一位候選人被評論員批評，同樣不該把無關的批評標題列進證據表。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE7",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://news.ltn.com.tw/news/politics/breakingnews/5625731",
+          "title": "抓包蔣萬安辯論68處瑕疵！ 張禹宣狠批：真的完全不懂市政",
+          "publisher": "自由時報",
+          "accessed": "2026-11-21",
+          "tier": 3,
+          "chain": "ltn-debate-critique",
+          "stance": "context",
+          "excerpt": "高達23項錯誤與45項不實資訊或缺乏資訊",
+          "access_note": "full"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

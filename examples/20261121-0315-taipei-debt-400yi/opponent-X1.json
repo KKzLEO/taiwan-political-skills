@@ -1,0 +1,125 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 45,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "430 億元的結論應在首句寫明期間與債務範圍。臺北市官方月報顯示，2022 年底至 2026 年 9 月底，一年以上非自償性債務減少 430 億元，短期債務兩期均為零。同期自償性債務增加約 121 億元，三項合計淨減約 309 億元。原文使用「總共」，這項口徑差異會影響「超過 400 億元」是否成立。",
+      "evidence": [
+        {
+          "url": "https://www-ws.gov.taipei/001/Upload/367/relfile/48693/9544649/7ecbb8b1-a331-4bda-8276-ab6e57ed4e58.pdf",
+          "excerpt": "| 111年度 | 89 800 000 000 | – | 36 319 | 47 423 094 408 |"
+        },
+        {
+          "url": "https://www-ws.gov.taipei/001/Upload/367/relfile/48693/9544649/7ecbb8b1-a331-4bda-8276-ab6e57ed4e58.pdf",
+          "excerpt": "| 9月底 | 46 800 000 000 | – | 19 324 | 59 550 315 123 |"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S21 的摘錄省略了《公共債務法》第 5 條排除自償性債務的適用範圍。該句規範前四項所定的公共債務未償餘額預算數，且同一項規定自償性財源喪失時應計入。查核應用國庫署實際數統計表的欄位解釋 430 億元的算法，並補全法條的適用條件。",
+      "evidence": [
+        {
+          "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0360033",
+          "excerpt": "前四項所定公共債務未償餘額預算數，不包括中央、直轄市、縣（市）及鄉（鎮、市）經公共債務管理委員會審議評估通過所舉借之自償性公共債務。但具自償性財源喪失時，所舉借之債務應計入。"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "「確實說過這段話」應改成「現場報導與民間轉錄均支持發言大意」。三立直播的民間轉錄在 3 小時 17 分 40 秒處保留了柯文哲提倡財政紀律的前文，減債句也多了「我們」。該轉錄的結論段缺少第二版轉錄可對照，原始影片的這段音訊也未能核對，逐字引文仍待確認。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "柯前市長所提倡的財政紀律，也是我這四年當中非常重視的施政原則。也因此四年下來，台北市我們總共減債超過了400億，是六都第一。"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "申論、媒體提問、結論三段沒有第二版轉錄可以對照"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "正方列出的「上限」混用了 2022 年 8 月實際數、年底審定決算數和 2026 年 10 月實際數。臺中市的原始資料可直接示範差異。2022 年底實際數約 1,019.7 億元，國庫署 2026 年 9 月底同口徑數字為 848 億元，相減約 172 億元。報告可採用辯論前已製表的 9 月底資料，對照各市 2022 年底實際數，讓讀者重算排名。",
+      "evidence": [
+        {
+          "url": "https://www.rdec.taichung.gov.tw/media/979642/%E8%87%BA%E4%B8%AD%E5%B8%82%E8%AD%B0%E6%9C%83%E7%AC%AC%E5%9B%9B%E5%B1%86%E7%AC%AC%E4%BA%8C%E6%AC%A1%E5%AE%9A%E6%9C%9F%E6%9C%83%E6%A5%AD%E5%8B%99%E5%A0%B1%E5%91%8A-%E4%B8%8B%E5%86%8A.pdf",
+          "excerpt": "本市111年度公共債務決算審定實際數1,019億6,774萬3千元。"
+        },
+        {
+          "url": "https://ws.tycg.gov.tw/Download.ashx?n=6LKh5pS%2F6YOo5ZyL5bqr572y5YWs5ZGK5oiq6IezMTE15bm0OeaciOW6leatouWQhOe0muaUv%2BW6nOWFrOWFseWCteWLmee1seioiOihqC5wZGY%3D&u=LzAwMS9VcGxvYWQvOTcvcmVsZmlsZS8xMTk3OC82MTIzLzdlNTdhNDc2LTE2MWMtNDJhOS1hZTVmLWIyMjNhZDM2YWJiMy5wZGY%3D",
+          "excerpt": "臺中市 1,242 0.48% 778 0.30% 70 3.48% 848 369"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": "C2",
+      "target": "reasoning",
+      "argument": "「六都第一」的判定應明寫比較的是減少金額。用 2022 年底至 2026 年 9 月底的長短期公共債務實際數重算，臺北從 898 億元降到 468 億元，減幅約 47.9%。臺南從 509 億元降到 236 億元，減幅約 53.6%。原文把「六都第一」接在金額後面，依金額解讀合理，但按減幅排名會得到不同結果。",
+      "evidence": [
+        {
+          "url": "https://www-ws.gov.taipei/001/Upload/367/relfile/48693/9544649/7ecbb8b1-a331-4bda-8276-ab6e57ed4e58.pdf",
+          "excerpt": "| 111年度 | 89 800 000 000 | – | 36 319 | 47 423 094 408 |"
+        },
+        {
+          "url": "https://auditreport.audit.gov.tw/ServerFile/Get/638257947358300337e47fdbbf8b7344f99d8fdc7d90d1ce71",
+          "excerpt": "加計未滿 1 年公共債務未償餘額 5 億元，合計 509 億元"
+        },
+        {
+          "url": "https://ws.tycg.gov.tw/Download.ashx?n=6LKh5pS%2F6YOo5ZyL5bqr572y5YWs5ZGK5oiq6IezMTE15bm0OeaciOW6leatouWQhOe0muaUv%2BW6nOWFrOWFseWCteWLmee1seioiOihqC5wZGY%3D&u=LzAwMS9VcGxvYWQvOTcvcmVsZmlsZS8xMTk3OC82MTIzLzdlNTdhNDc2LTE2MWMtNDJhOS1hZTVmLWIyMjNhZDM2YWJiMy5wZGY%3D",
+          "excerpt": "臺北市 1,033 0.40% 468 0.18% 0 0.00% 468 596"
+        },
+        {
+          "url": "https://ws.tycg.gov.tw/Download.ashx?n=6LKh5pS%2F6YOo5ZyL5bqr572y5YWs5ZGK5oiq6IezMTE15bm0OeaciOW6leatouWQhOe0muaUv%2BW6nOWFrOWFseWCteWLmee1seioiOihqC5wZGY%3D&u=LzAwMS9VcGxvYWQvOTcvcmVsZmlsZS8xMTk3OC82MTIzLzdlNTdhNDc2LTE2MWMtNDJhOS1hZTVmLWIyMjNhZDM2YWJiMy5wZGY%3D",
+          "excerpt": "臺南市 444 0.17% 236 0.09% 0 0.00% 236 114"
+        }
+      ]
+    },
+    {
+      "id": "X1-6",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "S20 的六都數字是查核中心依國庫署統計表及地方政府債務鐘計算的結果，終點以 9 月底為主。引用這份報告時，應註明它與國庫署統計共用資料來源，並交代與 S4 的 10 月底數字相差一個月。",
+      "evidence": [
+        {
+          "url": "https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/",
+          "excerpt": "依據財政部國庫署公布的「截至111年12月底止各級政府公共債務統計表」的六都公共債務（一年以上+短期）"
+        },
+        {
+          "url": "https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/",
+          "excerpt": "最新的公共債務對比（僅台南市統計至10月6日，其餘為9月底）"
+        }
+      ]
+    },
+    {
+      "id": "X1-7",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "蔣萬安可確認為辯論發言人，待查文字的發布者則應列為不明。貼上的文字沒有原始網址或署名，引言與台灣事實查核中心標題吻合，只能確認兩者用字相同。NOWnews 的 13:59:18 可列為已核對的報導時間，現有紀錄同時提到 Yahoo 在 13:57 的即時紀錄，因此「最早的文字報導」應改為「已核對刊出時間的早期報導」。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888137",
+          "excerpt": "2026-10-31 13:59:18"
+        },
+        {
+          "url": "https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/",
+          "excerpt": "蔣萬安說：這四年當中，非常重視的施政原則，四年下來，臺北市總共減債超過了400億，是六都第一？"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

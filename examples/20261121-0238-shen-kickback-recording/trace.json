@@ -1,0 +1,210 @@
+{
+  "first_seen": {
+    "date": "2026-10-29",
+    "url": "https://www.mygopen.com/2026/10/audio-puma.html",
+    "platform": "Facebook（專頁「周琛興」，MyGoPen 記為「黃琛興」）",
+    "note": "原始貼文已下架，沒有直接看到，最早時間只能靠間接記載。MyGoPen 記錄發布影片的臉書粉絲專頁在 2026-10-29 建立；鏡報寫「29日深夜，社群平台出現一段音檔，」；桃園地檢署 11/20 新聞稿記載被告 10/30 凌晨 0 時許在臉書看到這個專頁張貼的影片，0 時 29 分許轉到 Threads。另有一個 YouTube 頻道上傳同一支影片，和臉書專頁誰先誰後查不到。"
+  },
+  "variants": [
+    {
+      "url": "https://www.tyc.moj.gov.tw/294079/294166/294168/1462499/post",
+      "date": "2026-10-30",
+      "difference": "同一支影片被一名鄭姓男子從臉書下載後，10/30 凌晨 0 時 29 分許用個人帳號轉到 Threads 公開播送；這是檢方起訴的轉發版本。"
+    },
+    {
+      "url": "https://www.mygopen.com/2026/10/audio-puma.html",
+      "date": "2026-10-30",
+      "difference": "YouTube 版本（頻道 Rahesh Kumar，MyGoPen 列出的影片網址為 https://www.youtube.com/watch?v=7Fp3EFXcNik）。MyGoPen 10/30 13 時查看時因帳戶遭停權已無法播放，上傳時間查不到。MyGoPen 記錄的畫面是黑底動態字幕，標示「疑似沈伯洋私下錄音流出」。"
+    },
+    {
+      "url": "https://www.mirrormedia.mg/external/mirrordaily_94722",
+      "date": "2026-10-30",
+      "difference": "鏡報描述的版本字幕是「疑似沈伯洋私下錄音流出」，內容除了收軍購回扣，還有自稱吸毒，並混入背景雜音。使用者提供的文字沒有提到吸毒。"
+    },
+    {
+      "url": "https://www.tyc.moj.gov.tw/294079/294166/294168/1455035/post",
+      "date": "2026-10-30",
+      "difference": "桃園地檢署案發當日新聞稿把字幕寫成「疑似沈姓候選人私下錄音」（姓名已去識別），內容只寫「利用美國軍購案收受回扣」，沒有提到黑熊學院。"
+    },
+    {
+      "url": "https://www.tyc.moj.gov.tw/294079/294166/294168/1462499/post",
+      "date": "2026-11-20",
+      "difference": "桃園地檢署起訴新聞稿的寫法是「疑似沈姓候選人私下錄音之文字」「利用黑熊學院在美國軍購案收受回扣」。使用者提供的文字和這一版用詞最接近，和實際字幕「疑似沈伯洋私下錄音流出」不同。"
+    },
+    {
+      "url": "https://www.chinatimes.com/realtimenews/20261104004539-260402",
+      "date": "2026-11-04",
+      "difference": "中時報導音檔長約 64 秒，調查局鑑識後相關影音仍在網路流傳，沒有指明平台或帳號。"
+    }
+  ],
+  "prior_factchecks": [
+    {
+      "org": "MyGoPen",
+      "url": "https://www.mygopen.com/2026/10/audio-puma.html",
+      "label": "查證",
+      "date": "2026-10-30"
+    }
+  ],
+  "publisher": {
+    "kind": "anonymous",
+    "name": "臉書專頁「周琛興」（桃園地檢署稱是不詳人士設立的人頭帳號；MyGoPen 記為「黃琛興」）。使用者是從哪個平台、哪個帳號看到的，不明。",
+    "outlet_id": null,
+    "byline": "n/a",
+    "wording_issues": [
+      {
+        "quote": "字幕寫「疑似沈姓候選人私下錄音」",
+        "issue": "用「疑似」「私下錄音」把來源不明的音檔說成外流的本人談話，沒有交代錄製時間、地點和錄音者。"
+      },
+      {
+        "quote": "內容是沈伯洋自己承認利用黑熊學院在美國軍購案收回扣",
+        "issue": "把音檔裡的聲音直接寫成本人承認，沒有保留聲音來源還沒確認這一點。"
+      }
+    ],
+    "flagged": [
+      {
+        "url": "https://www.mygopen.com/2026/10/audio-puma.html",
+        "note": "MyGoPen 在 2026-10-30 發布查證報告，寫「經查證，目前並無可驗證的錄音來源。」"
+      },
+      {
+        "url": "https://www.tyc.moj.gov.tw/294079/294166/294168/1455035/post",
+        "note": "桃園地檢署案發當日的新聞稿稱這段影音是「深度偽造之影音檔」，內容為「自承利用美國軍購案收受回扣之不實影音短片」。"
+      },
+      {
+        "url": "https://www.mjib.gov.tw/news/Details/1/1224",
+        "note": "調查局 2026-11-02 新聞稿：「並同步進行鑑識確認影片內之音頻係深偽內容」。"
+      },
+      {
+        "url": "https://www.tyc.moj.gov.tw/294079/294166/294168/1462499/post",
+        "note": "桃園地檢署 2026-11-20 新聞稿：依公職人員選舉罷免法第104條第2項、第1項起訴轉發的鄭姓男子，求刑 1 年；案發當日已通知社群網站下架影片。尚未判決。"
+      }
+    ]
+  },
+  "spread_signals": [
+    {
+      "signal": "發布影片的臉書粉絲專頁在音檔出現當天才建立。",
+      "evidence_url": "https://www.mygopen.com/2026/10/audio-puma.html",
+      "excerpt": "「黃琛興」粉絲專頁於 2026 年 10 月 29 日建立"
+    },
+    {
+      "signal": "檢方認定張貼影片的臉書專頁是人頭帳號，設立者不詳。",
+      "evidence_url": "https://www.tyc.moj.gov.tw/294079/294166/294168/1462499/post",
+      "excerpt": "不詳人士設立之人頭帳號"
+    },
+    {
+      "signal": "媒體轉述粉專「台灣迷因」的觀察：源頭臉書帳號前一天才換大頭貼，只有一篇貼文。這是粉專的說法，不是官方認定。",
+      "evidence_url": "https://today.line.me/tw/v3/article/peprpr9",
+      "excerpt": "昨天才更換大頭貼，而且只有一篇貼文"
+    },
+    {
+      "signal": "上傳同一支影片的 YouTube 帳戶已被平台停權。",
+      "evidence_url": "https://www.mygopen.com/2026/10/audio-puma.html",
+      "excerpt": "由於與這部影片關聯的 YouTube 帳戶已遭停權，因此無法播放這部影片"
+    },
+    {
+      "signal": "同一支影片在同一天出現在臉書和 Threads 兩個平台。",
+      "evidence_url": "https://www.mjib.gov.tw/news/Details/1/1224",
+      "excerpt": "調查局新北市調查處（下稱：新北市處）於115年10月30日網路巡察截獲臉書及Threads社群軟體張貼疑似臺北市長沈姓候選人錄製其「利用美國軍購案收受回扣」之不實影音短片之檔案貼文"
+    },
+    {
+      "signal": "官方鑑識和通知下架之後，影音仍在流傳。",
+      "evidence_url": "https://www.chinatimes.com/realtimenews/20261104004539-260402",
+      "excerpt": "調查局雖已鑑識確認音檔為深偽內容，但相關假影音仍在網路流傳。"
+    }
+  ],
+  "attribution": [],
+  "tactics": [
+    {
+      "tactic_id": "TW-T14",
+      "features": [
+        "c",
+        "d"
+      ],
+      "quote": "網路流傳一段錄音",
+      "evidence": [
+        {
+          "url": "https://www.mjib.gov.tw/news/Details/1/1224",
+          "excerpt": "並同步進行鑑識確認影片內之音頻係深偽內容"
+        },
+        {
+          "url": "https://www.tyc.moj.gov.tw/294079/294166/294168/1455035/post",
+          "excerpt": "深度偽造之影音檔"
+        },
+        {
+          "url": "https://www.tyc.moj.gov.tw/294079/294166/294168/1462499/post",
+          "excerpt": "錄製其自承利用黑熊學院在美國軍購案收受回扣等不利沈姓候選人名譽之不實影音短片"
+        }
+      ],
+      "explanation": "調查局鑑識和桃園地檢署新聞稿都說這段影音的聲音是深度偽造，而且只有這一份音檔，沒有完整原始錄音。"
+    },
+    {
+      "tactic_id": "TW-T10",
+      "features": [
+        "d"
+      ],
+      "quote": "內容是沈伯洋自己承認利用黑熊學院在美國軍購案收回扣",
+      "evidence": [
+        {
+          "url": "https://news.nextapple.com/politics/20261030/9C575E60E129DB4A62C29ACC57AAF540",
+          "excerpt": "非常感謝搜集！最近一堆造謠都是半夜發出，我們會馬上來提告。"
+        },
+        {
+          "url": "https://www.mirrormedia.mg/external/mirrordaily_94722",
+          "excerpt": "沈伯洋本人得知後，出面駁斥並揚言提告，台北地檢署30日剪報分案，指派「全國深偽假訊息處理中心」專責檢察官偵辦。"
+        }
+      ],
+      "explanation": "音檔把承認收回扣的話掛在沈伯洋名下，本人公開稱是造謠並提告。"
+    },
+    {
+      "tactic_id": "TW-T11",
+      "features": [
+        "b",
+        "c"
+      ],
+      "quote": "網路流傳一段錄音",
+      "evidence": [
+        {
+          "url": "https://www.mygopen.com/2026/10/audio-puma.html",
+          "excerpt": "「黃琛興」粉絲專頁於 2026 年 10 月 29 日建立"
+        },
+        {
+          "url": "https://www.tyc.moj.gov.tw/294079/294166/294168/1462499/post",
+          "excerpt": "不詳人士設立之人頭帳號"
+        },
+        {
+          "url": "https://www.mygopen.com/2026/10/audio-puma.html",
+          "excerpt": "經查證，目前並無可驗證的錄音來源。"
+        }
+      ],
+      "explanation": "所謂私下錄音的源頭是當天才建立的臉書專頁，沒有錄音者、時間、地點，也沒有完整原始檔。"
+    },
+    {
+      "tactic_id": "TW-T25",
+      "features": [
+        "a",
+        "c"
+      ],
+      "quote": "字幕寫「疑似沈姓候選人私下錄音」",
+      "evidence": [],
+      "explanation": "字幕用「疑似」的揣測口吻，暗示來源不明的音檔就是候選人本人的私下談話。"
+    },
+    {
+      "tactic_id": "TW-T23",
+      "features": [
+        "a",
+        "b"
+      ],
+      "quote": "內容是沈伯洋自己承認利用黑熊學院在美國軍購案收回扣",
+      "evidence": [],
+      "explanation": "內容集中在收回扣這項個人弊案指控，依據只有一段來源不明的音檔。"
+    }
+  ],
+  "limits": [
+    "沒有拿到錄音檔和原始貼文。臉書原始貼文已下架，YouTube 影片因帳戶停權無法播放，最早出現的時間只能靠檢方新聞稿、媒體報導和查核報告的記載，無法自行確認是 10 月 29 日深夜還是 10 月 30 日凌晨。",
+    "源頭臉書專頁的名稱，桃園地檢署和多數媒體寫「周琛興」，MyGoPen 寫「黃琛興」，無法確認哪個寫法正確。臉書專頁和 YouTube 頻道誰先張貼也查不到。",
+    "使用者提供的字幕文字是「疑似沈姓候選人私下錄音」，這是桃園地檢署新聞稿去掉姓名後的寫法；MyGoPen 和多家媒體記載的實際字幕是「疑似沈伯洋私下錄音流出」。無法確定使用者看到的是原始影片、別人的轉述，還是新聞報導。",
+    "製作者是誰，檢方只寫「不詳人士」。粉專「台灣迷因」和部分媒體說源頭「疑為境外」，但調查局和桃園地檢署的新聞稿都沒有提到境外，也找不到政府、研究機構或平台的正式報告點名這個案例，所以沒有寫背後是誰。",
+    "台灣事實查核中心和 Cofacts 沒有找到針對這段錄音的查核報告，搜尋不一定完整；法新社事實查核網站這次連不上，沒有查到。",
+    "有沒有大量相同文案或多個帳號同時轉貼，沒有找到可以引用的公開資料。目前只知道檢方起訴一名轉發者，法院交保裁定認為沒有證據顯示他和製作者有聯絡。",
+    "轉發者的案件已起訴但還沒有判決。"
+  ]
+}

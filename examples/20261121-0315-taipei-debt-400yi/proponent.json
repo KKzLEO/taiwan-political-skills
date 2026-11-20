@@ -1,0 +1,428 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://data.taipei/api/frontstage/tpeod/dataset/resource.download?rid=b9058595-0cdc-4a28-b7cc-dfd48aa61eef",
+      "title": "公告臺北市政府自105年1月起公共債務訊息（CSV）",
+      "publisher": "臺北市政府財政局（臺北市資料大平臺）",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "taipei-dof-debt-data",
+      "stance": "supports",
+      "excerpt": "111年12月 89,800,000,000｜115年8月 46,800,000,000｜115年9月 46,800,000,000｜115年10月 46,800,000,000（1年以上公共債務未償餘額）",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/cp.aspx?n=A55EF8E25C0DE850",
+      "title": "臺北市政府全球資訊網-最新債務訊息",
+      "publisher": "臺北市政府財政局",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "taipei-dof-debt-data",
+      "stance": "supports",
+      "excerpt": "截至115年10月底止，本府公共債務情形如下……1年以上公共債務未償餘額為468億元……未滿1年公共債務未償餘額為0億元……自償性公共債務未償餘額(含非營業特種基金)為596億元",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://dof.gov.taipei/News_Content.aspx?n=133E08708C6AB0EA&s=0B9EA96AA4F01629&sms=72544237BBE4C5F6",
+      "title": "北市雙冠王! 營利事業銷售額連4年成長創新高 4年減債400億元達標",
+      "publisher": "臺北市政府財政局（115年5月22日新聞稿）",
+      "accessed": "2026-11-21",
+      "tier": 2,
+      "chain": "taipei-dof-debt-data",
+      "stance": "supports",
+      "excerpt": "債務未償餘額實際數由111年底之898億元下降至498億元……蔣市長上任迄今累計減債金額達400億元……全國地方政府之冠",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://lgd.nta.gov.tw:8081/openapi/restful/d3-10",
+      "title": "各級政府公共債務統計表（API，資料年度115、截止月份10）",
+      "publisher": "財政部國庫署",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "nta-monthly-debt",
+      "stance": "supports",
+      "excerpt": "臺北市 1033.257842070｜468.000000000｜0E-9｜468｜595.503151230；高雄市 2291.750065910｜2076.170485910｜0E-9｜2076｜944.197168000；新北市 1093｜959｜95｜1054；臺中市 1242.313974910｜778｜92.929241750｜870；臺南市 443.607460000｜236｜0E-9｜236；桃園市 387｜280｜70.471718420｜350",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://lgd.nta.gov.tw/newlgd/opendata/D3-09.csv",
+      "title": "歷年各級政府債務概況表（CSV，審定決算數，單位新臺幣百萬元）",
+      "publisher": "財政部國庫署（政府資料開放平臺資料集 25301）",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "nta-annual-debt",
+      "stance": "supports",
+      "excerpt": "111 臺北市 154355｜0｜154355｜56382；114 臺北市 116913｜0｜116913｜66598；111 高雄市 238728｜0｜238728；114 高雄市 224317｜0｜224317；111 新北市 103200｜22000｜125200；114 新北市 95900｜7500｜103400；111 臺中市 109068｜9968｜119036；114 臺中市 109658｜1839｜111497；111 臺南市 50400｜500｜50900；114 臺南市 39800｜0｜39800；111 桃園市 19500｜13258｜32758；114 桃園市 27000｜7669｜34669",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.ly.gov.tw/Pages/Detail.aspx?nodeid=45915&pid=224670",
+      "title": "六、縣(市)財政自主性仍屬偏低，且部分市縣債務餘額龐鉅……（表2 截至111年8月底止各市縣公共債務統計表）",
+      "publisher": "立法院預算中心（資料來源：財政部國庫署）",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "nta-monthly-debt",
+      "stance": "context",
+      "excerpt": "截至111年8月底止各市縣公共債務統計表（實際數，1年以上非自償債務／未滿1年債務，億元）：臺北市 898／0；新北市 1,040／203；桃園市 200／52；臺中市 900／36；臺南市 479／10；高雄市 2,424／0",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://finance.kcg.gov.tw/Content_List.aspx?n=B28A8608D7B32A3A",
+      "title": "高雄市政府最新債務訊息專區",
+      "publisher": "高雄市政府財政局",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "kcg-debt",
+      "stance": "supports",
+      "excerpt": "截至115年10月底止……1年以上公共債務未償餘額為2,076億元。未滿1年公共債務未償餘額為0億元。自償性公共債務未償餘額（含非營業特種基金）為944億元。",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.tainan.gov.tw/cp.aspx?n=4939",
+      "title": "臺南市最新債務訊息",
+      "publisher": "臺南市政府",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "tainan-debt",
+      "stance": "context",
+      "excerpt": "截至115年10月底止……1年以上公共債務未償餘額為236億元。未滿1年公共債務未償餘額為0億元。自償性公共債務未償餘額（含非營業特種基金）為114億元。",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.finance.ntpc.gov.tw/home.jsp?id=19985c6f908a8bb3",
+      "title": "資產及負債概況",
+      "publisher": "新北市政府財政局",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "ntpc-debt",
+      "stance": "supports",
+      "excerpt": "截至115年10月底止……1年以上債務未償餘額為959億元……短期債務未償餘額為95億元……自償性債務未償餘額（含非營業特種基金）為1,484億元",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.finance.taichung.gov.tw/29537/29694/29731/405947/post",
+      "title": "臺中市政府最新債務訊息",
+      "publisher": "臺中市政府財政局",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "taichung-debt",
+      "stance": "supports",
+      "excerpt": "截至115年10月底止……1年以上公共債務未償餘額為778億元……未滿1年公共債務未償餘額為93億元……自償性公共債務未償餘額（含非營業特種基金）為371億元",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://fb.tycg.gov.tw/cp.aspx?n=7980",
+      "title": "桃園市政府最新債務訊息",
+      "publisher": "桃園市政府財政局",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "taoyuan-debt",
+      "stance": "supports",
+      "excerpt": "截至115年10月底止……1年以上公共債務未償餘額為280億元……未滿1年公共債務未償餘額為70億元……自償性公共債務未償餘額（含非營業特種基金）為1,064億元",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202308210255.aspx",
+      "title": "審計處：新北公共債務逾千億元 應落實財政紀律",
+      "publisher": "中央社",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "cna-ntpc-audit-2023",
+      "stance": "context",
+      "excerpt": "截至民國111年底止，新北市公共債務未償餘額仍達1252億元，雖較110年減少68億元",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "url": "https://www.nownews.com/news/6888137",
+      "title": "北市辯論／蔣萬安搶小草票！結論狂讚柯文哲：我重視他的施政原則",
+      "publisher": "NOWnews 今日新聞",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "nownews-debate-1031",
+      "stance": "supports",
+      "excerpt": "柯前市長所提倡的財政紀律，也是他這四年當中非常重視的施政原則。也因此，四年下來，台北市總共減債超過 400 億，是六都第一。",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "url": "https://udn.com/vote2026/story/124652/9848882",
+      "title": "辯論會現藍白合！蔣萬安尊柯文哲「為台北市打下堅實基礎」",
+      "publisher": "聯合報",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "udn-debate-1031",
+      "stance": "supports",
+      "excerpt": "柯前市長所提倡的財政紀律，也是他這4年當中非常重視的市府原則，因此，4年下來，台北市總共減債超過400億，是六都第一。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "url": "https://www.chinatimes.com/realtimenews/20261031002223-260407",
+      "title": "北市長辯論》蔣萬安結辯猛攻沈5立場！談市政傳承特別點出柯文哲打下堅實基礎",
+      "publisher": "中時新聞網",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "chinatimes-debate-1031",
+      "stance": "supports",
+      "excerpt": "蔣萬安表示，柯文哲提倡的財政紀律，也是自己四年來重視的施政原則，台北市減債超過400億元，稱是六都第一。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/paper/1776728",
+      "title": "台北市長辯論》蔣萬安屢砲轟沈 不忘感謝柯文哲",
+      "publisher": "自由時報",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "ltn-debate-1031",
+      "stance": "supports",
+      "excerpt": "並讚揚柯提倡財政紀律，四年下來共減債超過四百億，是六都第一。",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "url": "https://www.epochtimes.com/b5/26/10/31/n14880549.htm",
+      "title": "台北市長首場辯論 蔣萬安：口號與行動的選擇",
+      "publisher": "大紀元",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "epochtimes-debate-1031",
+      "stance": "supports",
+      "excerpt": "柯文哲所提倡的財政紀律，也是他這4年當中非常重視的施政原則，4年下來，台北市總共減債超過新台幣400億元，名列六都第一。",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "北市長候選人辯論會登場 沈伯洋、蔣萬安交鋒政績與城市願景",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "pts-debate-1031",
+      "stance": "supports",
+      "excerpt": "蔣並提及自己延續柯文哲市府時期的財政紀律，過去4年為北市減債逾400億元。",
+      "access_note": "full"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "url": "https://www.youtube.com/watch?v=2TyskeNTQgc",
+      "title": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞LIVE",
+      "publisher": "三立新聞（YouTube）",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "debate-full-video",
+      "stance": "context",
+      "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞LIVE",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/",
+      "title": "蔣萬安說：這四年當中，非常重視的施政原則，四年下來，臺北市總共減債超過了400億，是六都第一？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-21",
+      "tier": 4,
+      "chain": "tfc-debate-1031",
+      "stance": "supports",
+      "excerpt": "台北市府於2022年12月底至今年9月底，公共債務減少近430億元，且減債金額確實是六都最多，與蔣萬安所述資料相符……高雄市減債約246億元、新北市約244億元、台中市約170億元、台南市約273億元",
+      "access_note": "full"
+    },
+    {
+      "id": "S21",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0360033",
+      "title": "公共債務法（民國 110 年 06 月 09 日修正）第 5 條",
+      "publisher": "全國法規資料庫",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "public-debt-act",
+      "stance": "context",
+      "excerpt": "不包括中央、直轄市、縣（市）及鄉（鎮、市）經公共債務管理委員會審議評估通過所舉借之自償性公共債務。……前項所稱自償性公共債務，指以未來營運所得資金或經指撥特定財源作為償債財源之債務。",
+      "access_note": "full"
+    },
+    {
+      "id": "S22",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5625731",
+      "title": "抓包蔣萬安辯論68處瑕疵！ 張禹宣狠批：真的完全不懂市政",
+      "publisher": "自由時報",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "ltn-debate-critique",
+      "stance": "context",
+      "excerpt": "抓包蔣萬安辯論68處瑕疵！ 張禹宣狠批：真的完全不懂市政",
+      "access_note": "full"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "true",
+      "reasoning": "蔣萬安確實在 2026-10-31 辯論會結論說過這段話，且數字和官方資料相符。臺北市財政局月資料顯示，1 年以上公共債務未償餘額（實際數）由 111 年 12 月的 898 億元降到 115 年 8 月起的 468 億元，減少 430 億元，未滿 1 年債務兩個時點都是 0（S1、S2）；國庫署 115 年 10 月底統計同為 468 億元（S4）。發言有 NOWnews、聯合報、中時、自由、大紀元、公視六家各自報導，「減債超過 400 億」用字一致（S13–S18）；完整直播影片存在但讀不到內容與字幕，沒有逐字核對（S19）。限制：這是公共債務法口徑，不含自償性債務（S21）；臺北市自償性債務同期由約 474 億元增至約 596 億元，加回後淨減少約 309 億元。若用含保留數的審定決算數，111 至 114 年底三年減少 374 億元（S5）。沒有查到對這個數字的反駁（S22 的批評清單未提減債）。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C2",
+      "label": "true",
+      "reasoning": "以減債金額比較，臺北市是六都第一，發言本身也有多家媒體報導（S13–S17）。臺北市實際數減少 430 億元（S1、S4）。其他五都即使取讀得到的最高基準（111 年 8 月底實際數或 111 年底審定決算數，含未滿 1 年債務）對比 115 年 10 月底實際數，上限約為：高雄 348 億、臺中 319 億、臺南 273 億、新北 198 億，桃園增加（S4–S12）。同口徑的審定決算數 111 至 114 年底，臺北減 374 億元，次高的新北（含短期）減 218 億元、高雄減 144 億元（S5）。限制：國庫署 111 年 12 月底各市實際數月報是 PDF／ODS，讀不到內容，五都的年底實際數基準沒有直接核對，只用上限估算，並參考查核中心的數字（S20）。引文沒寫明比的是金額；若改比減幅，臺南約 54%（509→236 億元）高於臺北約 48%，這是自行換算。",
+      "evidence_ids": [
+        "S1",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S20"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C3",
+      "label": "not_factual",
+      "reasoning": "這是發言人對自己施政重點的表述，屬於意見，不是可以查核的事實。待查訊息的引文缺主詞；多家報導的前一句是「柯前市長所提倡的財政紀律，也是他這四年當中非常重視的…」，指的是財政紀律（S13、S14、S15、S17）。各家用字有「施政原則」「市府原則」「市政原則」的出入，完整影片讀不到內容，原話用哪個詞沒有確認（S19）；這個截法不影響減債數字的判定。",
+      "evidence_ids": [
+        "S13",
+        "S14",
+        "S15",
+        "S17",
+        "S19"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": [
+    {
+      "org": "台灣事實查核中心",
+      "url": "https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/",
+      "their_label": "與所查資料相符",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "agree": true,
+      "note": "已獨立核對其引用的 3 項原始資料：臺北市財政局 115 年 5 月 22 日新聞稿（898→498 億元、累計減債 400 億元）；臺北市公共債務月資料（111 年 12 月 898 億元、115 年 9 月 468 億元；自償性 47,423,094,408→59,550,315,123 元，與報告數字相同，讀的是財政局同內容的 CSV，報告連結的主計處資料集下載連線失敗）；國庫署「最新地方政府債務鐘」連到的六都最新債務頁。趨勢圖 PDF 讀不到內容。報告只列其他五都的減債金額、沒列起訖餘額；五都 111 年 12 月底實際數我沒有讀到原表，改用國庫署審定決算數與 111 年 8 月底實際數估上限，結論同為臺北市金額最多。報告沒有比較減幅；依我換算，臺南的減幅高於臺北。"
+    }
+  ]
+}

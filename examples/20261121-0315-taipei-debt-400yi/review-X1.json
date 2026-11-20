@@ -1,0 +1,16 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C1",
+      "pass": true,
+      "reason": "「大致正確」合理。修正已寫明，2022 年底至 2026 年 9 月底，臺北市長短期公共債務不含自償性債務時減少 430 億元，加計後淨減約 309 億元。臺北市統計表的長債欄由「89 800 000 000」降為「46 800 000 000」，自償性債務欄由「47 423 094 408」增為「59 550 315 123」。[臺北市重要統計速報](https://www-ws.gov.taipei/Download.ashx?icon=..pdf&n=5Li76KiI6JmVLTExMjA4LTExMuW5tDfmnIjoh7rljJfluILph43opoHntbHoqIjpgJ%2FloLEo6Iux5paH54mIKS5wZGY%3D&u=LzAwMS9VcGxvYWQvMzY4L3JlbGZpbGUvMC82NDcyMy8xYTlmNWNkYS02MGVhLTRjZDUtYjIzOS02MzdjMzgyZDY3NTUucGRm) 修正也補明《公共債務法》第 5 條適用於「前四項所定公共債務未償餘額預算數」，且「但具自償性財源喪失時，所舉借之債務應計入」。[全國法規資料庫](https://law.moj.gov.tw/LawClass/LawSingle.aspx?flno=5&pcode=G0360033) 民間轉錄記載「台北市我們總共減債超過了400億，是六都第一」，修正已註明影片原音未經核對。[民間轉錄](https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/)"
+    },
+    {
+      "claim_id": "C2",
+      "pass": false,
+      "label_ok": true,
+      "reason": "按不含自償性債務的減債金額比較，臺北市排名第一的判定可維持。理由已交代查核中心與國庫署共用資料來源，仍以 2022 年底含保留數的審定決算數和 2026 年 10 月底實際數估算上限，缺少六都同期間的實際數供讀者重算。臺中市財政局報告已可直接核對起點，原文為「本市111年度公共債務決算審定實際數1,019億6,774萬3千元。」國庫署也列有「截至115年9月底止各級政府公共債務統計表」，本次覆核未能讀取該附件的數值。[臺中市政府業務報告](https://www.rdec.taichung.gov.tw/media/979642/臺中市議會第四屆第二次定期會業務報告-下冊.pdf) [財政部國庫署統計表](https://www.nta.gov.tw/singlehtml/67?cntId=9c456b35372a4d1aa40638f67ff5253e)"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 24,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S2 和 S5 可支持影片以疑似私下錄音為名流傳。逐字字幕仍應以畫面為準。《聯合報》引述桃園地檢署襄閱主任檢察官時保留了全名和「流出」兩字，與 MyGoPen 記載一致。應把「疑似沈姓候選人私下錄音」寫成檢方對字幕的描述，並將是否有版本逐字使用這個寫法列為未確認。",
+      "evidence": [
+        {
+          "url": "https://udn.com/news/story/7321/9847851",
+          "excerpt": "並在影片註記「疑似沈伯洋私下錄音流出」等文字"
+        },
+        {
+          "url": "https://www.mygopen.com/2026/10/audio-puma.html",
+          "excerpt": "網傳影片以黑底動態字幕呈現，標示「疑似沈伯洋私下錄音流出」"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "S12 引述沈伯洋對造謠的概括回應及提告意向。這段引文只提供當事人回應的背景，無法單獨證明他已提告或判定聲音真偽。直接反證是調查局對涉案影音公布的鑑識結果。",
+      "evidence": [
+        {
+          "url": "https://news.nextapple.com/politics/20261030/9C575E60E129DB4A62C29ACC57AAF540",
+          "excerpt": "非常感謝搜集！最近一堆造謠都是半夜發出，我們會馬上來提告。"
+        },
+        {
+          "url": "https://www.mjib.gov.tw/news/Details/1/1224",
+          "excerpt": "並同步進行鑑識確認影片內之音頻係深偽內容"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "可將 2026 年 10 月 29 日深夜寫為《鏡報》記載的最早流傳時間。該報只稱影片出現在社群平台。MyGoPen 記載的 10 月 29 日是臉書專頁的建立日，因此最早貼文的平台和帳號仍待確認。",
+      "evidence": [
+        {
+          "url": "https://www.mirrordaily.news/story/94722",
+          "excerpt": "29日深夜，社群平台出現一段音檔"
+        },
+        {
+          "url": "https://www.mygopen.com/2026/10/audio-puma.html",
+          "excerpt": "「黃琛興」粉絲專頁於 2026 年 10 月 29 日建立"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C1",
+      "target": "tactic",
+      "tactic_id": "TW-T11",
+      "argument": "建議移除「匿名爆料」標記。特徵 b 所指的來源資料缺漏只是一項線索。特徵 c 所需的源頭證據仍不足，因為臉書專頁的名稱記載不一致，最早上傳者也未確認。原文的「網路流傳」只描述傳播情形，沒有引用匿名人士的說法。",
+      "evidence": [
+        {
+          "url": "https://www.mygopen.com/2026/10/audio-puma.html",
+          "excerpt": "讀者提供的 Facebook 透明度截圖顯示，「黃琛興」粉絲專頁於 2026 年 10 月 29 日建立"
+        },
+        {
+          "url": "https://www.surroundnews.com/archives/799694",
+          "excerpt": "見暱稱「周琛興」（為不詳人士設立之人頭帳號）之專頁"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": "C2",
+      "target": "tactic",
+      "tactic_id": "TW-T25",
+      "argument": "建議移除「影射暗示」標記。特徵 a 要求以問句或揣測暗示一項未明說的指控。「疑似」修飾的是錄音的身分，原文下一句已直接指稱沈伯洋本人承認收回扣。特徵 c 所指的錄音來源不明只是一項線索。"
+    }
+  ],
+  "status": "ok"
+}

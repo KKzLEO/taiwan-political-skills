@@ -26,16 +26,16 @@ e = html.escape
 PEOPLE = [
     {"no": 3, "name": "沈伯洋", "party": "民進黨",
      "about": {"text": "網路流傳一段錄音，字幕寫「疑似沈姓候選人私下錄音」，內容是沈伯洋自己承認利用黑熊學院在美國軍購案收回扣。",
-               "run": None, "minutes": None},
+               "run": "20261121-0238-shen-kickback-recording", "minutes": 37},
      "said": {"text": "沈伯洋在 10 月 31 日台北市長辯論會上說：「都更7599專案，現在動工的數量是零，沒有辦法動工。」",
-              "run": None, "minutes": None,
+              "run": "20261121-0357-shen-7599-urban-renewal", "minutes": 35,
               "tfc": ("資料雖符合，但僅提供部分資訊，無法瞭解全貌", "https://tfc-taiwan.org.tw/taipei-urban-renewal-7599-zero-construction-claim/")}},
     {"no": 5, "name": "蔣萬安", "party": "國民黨",
      "about": {"text": "在大稻埕聽到垃圾車廣播「市長選舉請支持蔣萬安」，這是公器私用。",
-               "run": None, "minutes": None},
+               "run": "20261120-2249-garbage-truck-broadcast", "minutes": 34},
      "said": {"text": "蔣萬安在 10 月 31 日台北市長辯論會上說：「這四年當中，非常重視的施政原則，四年下來，臺北市總共減債超過了400億，是六都第一。」",
-              "run": None, "minutes": None,
-              "tfc": ("與蔣萬安所述資料相符", "https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/")}},
+              "run": "20261121-0315-taipei-debt-400yi", "minutes": 42,
+              "tfc": ("與所查資料相符", "https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/")}},
 ]
 KINDS = [("about", "針對他、在流傳的說法"), ("said", "他在辯論會上說的")]
 
@@ -52,8 +52,8 @@ def cut(text, limit):
     return head + "…"
 
 
-def first(text):
-    return re.split(r"(?<=。)", " ".join(text.split()), maxsplit=1)[0]
+def first(text, count=1):
+    return "".join(re.split(r"(?<=。)", " ".join(text.split()))[:count])
 
 
 def load(run, name):
@@ -61,8 +61,9 @@ def load(run, name):
 
 
 def points(run, most=2):
-    """How the heaviest claims came out: the label and the first sentence of the reason. A claim whose review
-    did not pass shows both sides instead: what the judge ruled, and why the reviewing seat would not confirm it."""
+    """How the heaviest claims came out: the claim, its label and the first sentence of the reason. A claim whose
+    review did not pass also shows the reviewing seat's side. That is one of two things: the seat would not confirm
+    the label, so the claim was relisted as unverified; or it agreed with the label and found the reasons incomplete."""
     from fclib.labels import UNSCORED_TYPES, ZH_LABELS
     from fclib.render import LENS
     judged = {v["claim_id"]: v for v in load(run, "judgment.json")["verdicts"]}
@@ -73,7 +74,9 @@ def points(run, most=2):
         for r in doc["reviews"]:
             if not r["pass"]:
                 refused.setdefault(r["claim_id"], (doc["seat"], r["reason"]))
-    claims = [c for c in load(run, "verdicts.json")["claims"]
+    verdicts = load(run, "verdicts.json")
+    kept = {d["claim_id"]: d["label_kept"] for d in verdicts.get("disputes", [])}
+    claims = [c for c in verdicts["claims"]
               if c["type"] not in UNSCORED_TYPES and c["label"] != "not_factual" and not c.get("time")]
     claims.sort(key=lambda c: (not c.get("core"), -c["importance"]))
     out = []
@@ -82,12 +85,16 @@ def points(run, most=2):
             seat, reason = refused[c["claim_id"]]
             who = "另一家公司的模型" if seats[seat]["kind"] == "external" else LENS[seats[seat]["lens"]]
             was = judged[c["claim_id"]]
-            lines = [f'裁判判「{ZH_LABELS[was["label"]]}」：{cut(first(was["reasoning"]), 84)}',
-                     f'{who}覆核時不同意：{cut(first(reason), 84)}',
-                     f'覆核沒有通過，所以這一條改列「{ZH_LABELS[c["label"]]}」。']
+            if kept.get(c["claim_id"]):
+                lines = [cut(first(c["reasoning"]), 170),
+                         f'{who}覆核時同意這個判定，但認為理由或證據還有缺漏：{cut(first(reason, 2), 130)}']
+            else:
+                lines = [f'裁判判「{ZH_LABELS[was["label"]]}」：{cut(first(was["reasoning"]), 170)}',
+                         f'{who}覆核時不同意：{cut(first(reason), 130)}',
+                         f'覆核沒有通過，所以這一條改列「{ZH_LABELS[c["label"]]}」。']
         else:
-            lines = [cut(first(c["reasoning"]), 84)]
-        out.append((ZH_LABELS[c["label"]], lines))
+            lines = [cut(first(c["reasoning"]), 170)]
+        out.append((c["claim_id"], ZH_LABELS[c["label"]], lines))
     return out
 
 
@@ -116,7 +123,7 @@ def case(person, item):
     found = points(run)
     if found:
         out.append('  <ul class="case-points">' + "".join(
-            f'<li><b>{e(label)}</b>' + "".join(f'<span>{e(line)}</span>' for line in lines) + '</li>' for label, lines in found) + '</ul>')
+            f'<li><b>{e(label)}</b>' + "".join(f'<span>{e(line)}</span>' for line in lines) + '</li>' for _, label, lines in found) + '</ul>')
     if blocks:
         out.append('  <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul>' + "".join(f'<li>{e(b)}</li>' for b in blocks) + '</ul></div>')
     if item.get("tfc"):
@@ -136,7 +143,7 @@ SECTION = """<section class="sec" id="taipei">
     <div class="duo">
 {rows}
     </div>
-    <p class="duo-note">候選人照號次排。這四則沒有我們自己寫的答案卷，所以不算評測，是工具實際跑出來的結果；工具標「不可公開」的，代表它自己認為還不能拿去引用。</p>
+    <p class="duo-note">候選人照號次排。這四則沒有我們自己寫的答案卷，所以不算評測，是工具實際跑出來的結果；工具標「不可公開」的，代表它自己認為還不能拿去引用。其中一則跑到一半因為額度用完中斷，整則重跑過。<a class="link" href="{gh}/blob/main/evals/results/2026-11-21-taipei.md">跑完後的紀錄<svg width="16" height="16"><use href="#i-out"/></svg></a></p>
   </div>
 </section>"""
 

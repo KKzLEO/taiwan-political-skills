@@ -1,0 +1,313 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.tvbs.com.tw/politics/4043872",
+      "title": "台北市長辯論／沈伯洋質疑缺席市政會議　蔣萬安嗆不懂市政運作「已讀亂回」",
+      "publisher": "TVBS新聞網",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "tvbs-debate-report",
+      "stance": "supports",
+      "excerpt": "你之前提出了這樣的政策，7599等的，現在連動工其實是零，它沒有辦法動工，那大家在等都更這個心情就會變得越來越焦躁。",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624785",
+      "title": "台北市長辯論》都更議題交鋒！蔣萬安秀案量政績 沈伯洋反擊「入口寬、出口窄」",
+      "publisher": "自由時報",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "ltn-debate-report",
+      "stance": "supports",
+      "excerpt": "蔣萬安之前提出的7599等等的，現在連動工其實是零，它沒有辦法動工，那大家在等都更這個心情就會變得越來越焦躁。",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/vote2026/story/124652/9848767",
+      "title": "直球對決！辯論攻勢拋「都市更新案例」問沈伯洋…蔣萬安轟：已讀亂回",
+      "publisher": "聯合報",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "udn-debate-report",
+      "stance": "supports",
+      "excerpt": "沈伯洋反擊蔣萬安之前提出的7599政策，現在動工是零，沒有辦法動工，會讓民眾等都市更新，就會愈來愈焦躁。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610310007/",
+      "title": "台北市長辯論／蔣萬安、沈伯洋交叉詰問互轟不熟市政，沈為何痛批「上樑不正下樑歪」？",
+      "publisher": "今周刊",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "businesstoday-debate-report",
+      "stance": "supports",
+      "excerpt": "都更需要的是動工跟完工，7599政策到現在動工其實是零，大家等都更的心情會愈來愈焦躁。",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.setn.com/news/1931242",
+      "title": "北市長辯論／蔣萬安首問都更轟不懂市政！沈伯洋反擊：不能只秀漂亮數據",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "setn-debate-report",
+      "stance": "supports",
+      "excerpt": "沈伯洋進一步質疑，蔣萬安先前提出的「7599」等政策，目前動工數仍是零，認為市民期待的不只是案件通過審議或核定，而是真正動工、完成。",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ettoday.net/news/20261031/3263904.htm",
+      "title": "第一題問都更就逮到沈伯洋已讀亂回　蔣萬安：你還真不了解市政",
+      "publisher": "ETtoday新聞雲",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "ettoday-debate-report",
+      "stance": "context",
+      "excerpt": "且康樂街第一個7599專案也已經完成公告招商、也已經簽約了，這些你都不清楚",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+      "title": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "publisher": "三立新聞網（YouTube）",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "debate-full-video",
+      "stance": "context",
+      "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://uro.gov.taipei/News.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924",
+      "title": "臺北市都市更新處－案件列表",
+      "publisher": "臺北市都市更新處",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "uro-case-list",
+      "stance": "context",
+      "excerpt": "南港產專區單元2-25案（公辦都市更新7599）",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=A70F95555A969DC0",
+      "title": "臺北市都市更新處－案件列表－虎林街60巷案（公辦都市更新7599）",
+      "publisher": "臺北市都市更新處",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "uro-case-hulin",
+      "stance": "supports",
+      "excerpt": "本府於114年5月8日同意臺北市住宅及都市更新中心擔任實施者。",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=33CA7835791EA123",
+      "title": "臺北市都市更新處－案件列表－南港產專區單元2-25案（公辦都市更新7599）",
+      "publisher": "臺北市都市更新處",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "uro-case-nangang",
+      "stance": "supports",
+      "excerpt": "本府於114年5月15日同意臺北市住宅及都市更新中心擔任實施者。",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=B0C803C940F15AF4&sms=72544237BBE4C5F6",
+      "title": "公辦都更好事成雙! 7599專案火速啟動招商",
+      "publisher": "臺北市政府",
+      "accessed": "2026-11-21",
+      "tier": 2,
+      "chain": "taipei-gov-20250527",
+      "stance": "supports",
+      "excerpt": "並預計於115年辦理徵求出資者，由實施者及出資者協助完成擬定事權計畫報核及重建等相關事宜",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=2044902FC839D045&s=7E0BB1CC1000D8D8",
+      "title": "信義虎林街60巷公辦都更案完成簽約　蔣萬安：7599專案首案展現公辦都更成果",
+      "publisher": "臺北市政府（市長新聞稿）",
+      "accessed": "2026-11-21",
+      "tier": 2,
+      "chain": "hulin-signing-20260811",
+      "stance": "context",
+      "excerpt": "信義虎林街60巷公辦都更案完成簽約　蔣萬安：7599專案首案展現公辦都更成果",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202608110170.aspx",
+      "title": "北市7599公辦都更首案簽約　蔣萬安：持續推進都更",
+      "publisher": "中央社",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "hulin-signing-20260811",
+      "stance": "context",
+      "excerpt": "北市信義虎林街60巷公辦都更案是「公辦都市更新7599專案計畫」首件完成招商簽約案件",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udd.gov.taipei/events/fhqekzq-21372",
+      "title": "北市「大都更時代」再下一城，南港產專區首件公辦都更7599招商今簽約 打造「豐饒共生」的南港新世代健康宅",
+      "publisher": "臺北市政府都市發展局",
+      "accessed": "2026-11-21",
+      "tier": 2,
+      "chain": "nangang-signing-20260921",
+      "stance": "context",
+      "excerpt": "北市「大都更時代」再下一城，南港產專區首件公辦都更7599招商今簽約",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://money.udn.com/money/story/5930/9768293",
+      "title": "55年老社區邁向更新重建 7599南港產專區首案正式簽約",
+      "publisher": "經濟日報",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "nangang-signing-20260921",
+      "stance": "context",
+      "excerpt": "位於南港產業生活特定專用區的「南港玉成段公辦都市更新案」21日完成招商簽約，成為7599專案在南港產專區首件完成招商簽約的案件。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tfc-taiwan.org.tw/election2026/reports/taipei-urban-renewal-7599-zero-construction-claim",
+      "title": "沈伯洋說：「都更7599專案，現在動工的數量是零，沒有辦法動工」？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-21",
+      "tier": 4,
+      "chain": "tfc-report-7599",
+      "stance": "supports",
+      "excerpt": "公辦都更7599專案目前沒有動工案件，今年8月、9月有兩個計畫完成7599程序，向建商簽約。",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=357F7413E3D353BE",
+      "title": "臺北市都市更新處－案件列表－內湖康樂街136巷案（575專案）",
+      "publisher": "臺北市都市更新處",
+      "accessed": "2026-11-21",
+      "tier": 1,
+      "chain": "uro-case-kangle",
+      "stance": "context",
+      "excerpt": "113年3月通過「臺北市高氯離子混凝土建築物575專案計畫」第一階段。",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://n.yam.com/Article/20230303919141",
+      "title": "北市「7599專案計畫」上路　降低公辦都更案第一階段同意戶門檻至75％",
+      "publisher": "台灣好新聞（蕃新聞轉載）",
+      "accessed": "2026-11-21",
+      "tier": 3,
+      "chain": "7599-launch-20230303",
+      "stance": "context",
+      "excerpt": "台北市府今（3）日公告實施「台北市公辦都市更新7599專案計畫」，公辦都更案受理意願門檻自90％降至75％",
+      "access_note": "not_original"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "沈伯洋確實在 2026 年 10 月 31 日的辯論會上說過這段話，而且 7599 專案當時沒有查到任何案件動工，主體正確。主辦方 TVBS 和自由時報各自記下的原話是「7599等的，現在連動工其實是零，它沒有辦法動工」，訊息引號裡的字句是濃縮版，意思相同；完整影片有找到，但讀不到逐字稿，沒能逐字核對。臺北市都市更新處案件列表有 15 件 7599 案件，進度最前面的虎林街60巷案和南港產專區單元2-25案分別在 2026 年 8 月 11 日、9 月 21 日才完成招商簽約。市府新聞稿寫明徵得出資者後才擬定事權計畫報核和重建；官方頁面和查到的報導都沒有動工紀錄，蔣萬安當場的回應也只提到招商、簽約。「沒有辦法動工」符合當時還沒進到動工階段的狀況，但這句話沒有提到已有兩案簽約，所以判大致正確而不是正確。限制：沒有找到直接寫明動工件數的官方統計，兩個案件頁的資料更新日（115-03-23、114-08-29）也早於簽約日，零動工是靠簽約新聞稿、辯論當天和之後的報導交叉確認。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": [
+    {
+      "org": "台灣事實查核中心",
+      "url": "https://tfc-taiwan.org.tw/election2026/reports/taipei-urban-renewal-7599-zero-construction-claim",
+      "their_label": "資料雖符合，但僅提供部分資訊，無法瞭解全貌",
+      "claim_ids": [
+        "C1"
+      ],
+      "agree": true,
+      "note": "事實認定一致：零動工、案件列表 15 件、兩案在 2026 年 8 月 11 日和 9 月 21 日簽約。已獨立核對它引用的 6 項原始資料中的 3 項（都更處案件列表、虎林街簽約的市長新聞稿、114 年 5 月的市府新聞稿）。南港案簽約改用都發局新聞稿和經濟日報核對；國土署「都市更新成果查詢」頁面讀不到內容；都更處政策說明頁開到的是另一個網址的版本。各階段件數（10、3、2）只開了兩個案件頁，沒有逐件核對。這份報告沒有附辯論會影片連結，也沒有訪問主管機關。標籤上，查核中心強調資訊不完整，本查核判大致正確；兩者都認定數字本身正確。"
+    }
+  ]
+}

@@ -29,7 +29,7 @@
   <div class="wrap nav-in">
     <a class="brand" href="./"><svg width="20" height="20"><use href="#i-mark"/></svg>台灣訊息查核</a>
     <nav class="nav-links" aria-label="頁面導覽">
-      <!-- taipei-nav:begin --><!-- taipei-nav:end -->
+      <!-- taipei-nav:begin --><a href="#taipei">台北市長選舉</a><!-- taipei-nav:end -->
       <a href="#how">怎麼查的</a>
       <a href="#proof">驗證結果</a>
       <a href="#limits">做不到的事</a>
@@ -96,6 +96,58 @@
 </section>
 
 <!-- taipei:begin (written by site/tools/build_cases.py) -->
+<section class="sec" id="taipei">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>台北市長選舉，選前查了四則</h2>
+      <p class="wide">兩位主要候選人各兩則：一則是針對他、正在流傳的說法，一則是他自己在 10 月 31 日辯論會上講的話。選哪四則、怎麼跑，都在開跑前寫好提交；結果不管好不好看，都原樣放在這裡。<a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-20-taipei-preregistration.md">開跑前的登記<svg width="16" height="16"><use href="#i-out"/></svg></a></p>
+    </div>
+    <div class="duo">
+      <h3 class="duo-kind">針對他、在流傳的說法</h3>
+      <div class="duo-row">
+        <article class="case">
+          <p class="case-who"><b>3</b>沈伯洋<small>民進黨</small></p>
+          <blockquote>網路流傳一段錄音，字幕寫「疑似沈姓候選人私下錄音」，內容是沈伯洋自己承認利用黑熊學院在美國軍購案收回扣。</blockquote>
+          <p class="case-result"><strong>不符</strong><span class="scale" style="--at:0"><span>錯誤</span><i></i><span>正確</span></span></p>
+          <dl><div><dt>可信度</dt><dd>0</dd></div><div><dt>信心度</dt><dd>100<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
+          <ul class="case-points"><li><b>錯誤</b><span>這段錄音的聲音經調查局鑑識是深偽內容，不是沈伯洋本人承認收回扣。</span></li><li><b>大致正確</b><span>確有一段影音在網路流傳，字幕把它標示為疑似沈伯洋的私下錄音；但多個來源記載的實際字幕是「疑似沈伯洋私下錄音流出」，「疑似沈姓候選人私下錄音」是桃園地檢署新聞稿去掉姓名後的描述。</span></li></ul>
+          <p class="case-links"><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261121-0238-shen-kickback-recording/report.md">完整報告<svg width="16" height="16"><use href="#i-out"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0238-shen-kickback-recording">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>37 分鐘</span></p>
+        </article>
+        <article class="case">
+          <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
+          <blockquote>在大稻埕聽到垃圾車廣播「市長選舉請支持蔣萬安」，這是公器私用。</blockquote>
+          <p class="case-result"><strong>無法判定</strong><span class="case-reason">主要說法有一半以上無法證實，查不到不等於假的</span></p>
+          <dl><div><dt>可信度</dt><dd>不顯示</dd></div><div><dt>信心度</dt><dd>90<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">不可公開</dd></div></dl>
+          <ul class="case-points"><li><b>無法證實</b><span>裁判判「錯誤」：查得到的紀錄顯示，垃圾車播放的是市長錄製的公費疫苗宣導，裡面沒有「市長選舉請支持蔣萬安」這句話，這個說法和紀錄衝突，判錯誤。</span><span>另一家公司的模型覆核時不同意：現有資料不足以判定大稻埕那次廣播播出拉票語句的說法為錯誤。</span><span>覆核沒有通過，所以這一條改列「無法證實」。</span></li></ul>
+          <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li><li>C1 的覆核沒有完成或沒有通過，裁判判的「錯誤」改列「無法證實」；照裁判原本的判定，結果會是「不符」</li></ul></div>
+          <p class="case-links"><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261120-2249-garbage-truck-broadcast/report.md">完整報告<svg width="16" height="16"><use href="#i-out"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261120-2249-garbage-truck-broadcast">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>34 分鐘</span></p>
+        </article>
+      </div>
+      <h3 class="duo-kind">他在辯論會上說的</h3>
+      <div class="duo-row">
+        <article class="case">
+          <p class="case-who"><b>3</b>沈伯洋<small>民進黨</small></p>
+          <blockquote>沈伯洋在 10 月 31 日台北市長辯論會上說：「都更7599專案，現在動工的數量是零，沒有辦法動工。」</blockquote>
+          <p class="case-result"><strong>符合</strong><span class="scale" style="--at:80"><span>錯誤</span><i></i><span>正確</span></span></p>
+          <dl><div><dt>可信度</dt><dd>80</dd></div><div><dt>信心度</dt><dd>90<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
+          <ul class="case-points"><li><b>大致正確</b><span>沈伯洋在 2026 年 10 月 31 日的辯論會上說過 7599 專案動工是零，當時動工件數是零屬實；「沒有辦法動工」是發言者的評價，沒有查證。</span><span>另一家公司的模型覆核時同意這個判定，但認為理由或證據還有缺漏：「大致正確」可以維持，但判定理由仍把公開案件列表的逐案核對寫成已確認整個專案的動工件數。都更處在辯論前三天更新的新聞稿寫明「7599專案共35案申請」，並指出虎林街與南港兩案已招商成功。</span></li></ul>
+          <p class="case-tfc">台灣事實查核中心的結論：<a href="https://tfc-taiwan.org.tw/taipei-urban-renewal-7599-zero-construction-claim/">資料雖符合，但僅提供部分資訊，無法瞭解全貌</a></p>
+          <p class="case-links"><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261121-0357-shen-7599-urban-renewal/report.md">完整報告<svg width="16" height="16"><use href="#i-out"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0357-shen-7599-urban-renewal">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>35 分鐘</span></p>
+        </article>
+        <article class="case">
+          <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
+          <blockquote>蔣萬安在 10 月 31 日台北市長辯論會上說：「這四年當中，非常重視的施政原則，四年下來，臺北市總共減債超過了400億，是六都第一。」</blockquote>
+          <p class="case-result"><strong>符合</strong><span class="scale" style="--at:90"><span>錯誤</span><i></i><span>正確</span></span></p>
+          <dl><div><dt>可信度</dt><dd>90</dd></div><div><dt>信心度</dt><dd>90<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
+          <ul class="case-points"><li><b>大致正確</b><span>依公共債務法口徑（1 年以上加未滿 1 年債務，不含自償性債務），臺北市債務實際數由 111 年 12 月底的 898 億元降到 115 年 9 月底的 468 億元，減少 430 億元，超過 400 億；加計同期增加約 121 億元的自償性債務後，淨減少約 309 億元，不到 400 億。</span></li><li><b>正確</b><span>依公共債務法口徑（不含自償性債務）以減債金額比較，臺北市減少 430 億元，是六都最多。</span><span>另一家公司的模型覆核時同意這個判定，但認為理由或證據還有缺漏：按不含自償性債務的減債金額比較，臺北市排名第一的判定可維持。理由已交代查核中心與國庫署共用資料來源，仍以 2022 年底含保留數的審定決算數和 2026 年 10 月底實際數估算上限，缺少六都同期間的實際數供讀者重算。</span></li></ul>
+          <p class="case-tfc">台灣事實查核中心的結論：<a href="https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/">與所查資料相符</a></p>
+          <p class="case-links"><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261121-0315-taipei-debt-400yi/report.md">完整報告<svg width="16" height="16"><use href="#i-out"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0315-taipei-debt-400yi">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>42 分鐘</span></p>
+        </article>
+      </div>
+    </div>
+    <p class="duo-note">候選人照號次排。這四則沒有我們自己寫的答案卷，所以不算評測，是工具實際跑出來的結果；工具標「不可公開」的，代表它自己認為還不能拿去引用。其中一則跑到一半因為額度用完中斷，整則重跑過。<a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-21-taipei.md">跑完後的紀錄<svg width="16" height="16"><use href="#i-out"/></svg></a></p>
+  </div>
+</section>
 <!-- taipei:end -->
 
 <section class="sec alt" id="how">

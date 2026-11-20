@@ -1,0 +1,15 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C1",
+      "pass": true,
+      "reason": "維持「大致正確」合理。調查局記載在臉書及 Threads 截獲相關貼文，《聯合報》和《鏡報》都記載字幕為「疑似沈伯洋私下錄音流出」。修正後已將「疑似沈姓候選人私下錄音」歸為檢方對字幕的描述，並註明尚未確認有任何版本逐字使用這個寫法。[調查局](https://www.mjib.gov.tw/news/Details/1/1224)、[聯合報](https://udn.com/news/story/7321/9847851)、[鏡報](https://www.mirrordaily.news/story/94722)"
+    },
+    {
+      "claim_id": "C2",
+      "pass": true,
+      "reason": "維持「錯誤」合理。調查局公布「並同步進行鑑識確認影片內之音頻係深偽內容」，足以反駁這段音檔是沈伯洋本人承認收回扣的說法。修正後已把沈伯洋「我們會馬上來提告」的回應列為背景，並把黑熊學院的細節歸於檢方對音檔內容的描述。原始音檔與完整鑑識報告仍未取得。[調查局](https://www.mjib.gov.tw/news/Details/1/1224)、[壹蘋新聞網](https://news.nextapple.com/politics/20261030/9C575E60E129DB4A62C29ACC57AAF540)、[中央社轉述桃園地檢署](https://www.cna.com.tw/news/asoc/202611200179.aspx)"
+    }
+  ]
+}

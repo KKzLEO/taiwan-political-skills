@@ -1,0 +1,92 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 27,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "label",
+      "argument": "建議將 C1 判為誤導。辯論全文記載沈伯洋談到「7599等等的」，傳文將範圍收窄為單一專案，再以直接引語呈現，容易讓讀者把「沒有辦法動工」理解為專案已卡住、無法走到施工。市府資料顯示，辯論前虎林街與南港兩案已先後簽約，原定後續還有事業及權利變換計畫報核。獨立搜尋未找到辯論前已有 7599 案件開工的紀錄，這項質疑針對引語範圍和專案進度的印象。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/amp/news/6888190",
+          "excerpt": "7599等等的，現在連動工其實是零，它沒有辦法動工"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=2044902FC839D045&s=7E0BB1CC1000D8D8",
+          "excerpt": "共同見證「7599專案」首件完成招商簽約的公辦都更案。"
+        },
+        {
+          "url": "https://udd.gov.taipei/events/fhqekzq-21372",
+          "excerpt": "本案為公辦都更7599專案計畫首件於南港產專區順利完成招商簽約的指標案件"
+        },
+        {
+          "url": "https://thurc.org.taipei/ThurcTaipeiAPI/api/Common/File/PubInfo/5387997b-cbe8-4778-92fc-5d89a9a9e801_%E8%87%BA%E5%8C%97%E5%B8%82%E4%BD%8F%E9%83%BD%E4%B8%AD%E5%BF%83_116%E5%B9%B4%E5%BA%A6%E6%A5%AD%E5%8B%99%E5%8F%8A%E7%87%9F%E9%81%8B%E8%A8%88%E7%95%AB%20%28%E5%82%99%E6%9F%A5%E7%89%88%29.pdf",
+          "excerpt": "116 年辦理擬訂事業計畫及權利變換計畫報核。"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C1",
+      "target": "neutral_rewrite",
+      "argument": "C1 的改寫把直接引語改成一般轉述，省略了引號內是否為逐字原話的查核問題。原文以引號呈現完整句子，辯論全文記載的用語包括「7599等等的」。改寫應保留傳文把整理後的文字當作直接引語這一點，並讓讀者看出辯論發言與專案實際進度是兩項可分別核對的事。"
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S9、S10 只記載 2025 年市府同意住都中心擔任實施者，兩頁的內容更新也早於辯論。S11 記載兩案當時的招商與報核規劃。三筆資料能交代兩案的程序背景，無法直接證明 2026 年 10 月 31 日整個專案的動工件數，應列為背景資料。",
+      "evidence": [
+        {
+          "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&s=A70F95555A969DC0&sms=28D96A39D4881924",
+          "excerpt": "資料更新：115-03-23 16:13"
+        },
+        {
+          "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&s=33CA7835791EA123&sms=28D96A39D4881924",
+          "excerpt": "資料更新：114-08-29 11:36"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=B0C803C940F15AF4&sms=72544237BBE4C5F6",
+          "excerpt": "並預計於115年辦理徵求出資者，由實施者及出資者協助完成擬定事權計畫報核及重建等相關事宜"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "正方把蔣萬安在辯論中只提到招商、簽約視為零動工的旁證，但他當場舉的是康樂街案，市府把該案列在 575 專案。他的回應無法交叉確認 7599 的動工件數，兩個 7599 案的進度可依市府各自發布的簽約資料及住都中心的工作計畫說明。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/amp/news/6888190",
+          "excerpt": "我們康樂街第一個7599專案也已經完成公告招商，也已經簽約了"
+        },
+        {
+          "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&s=357F7413E3D353BE&sms=28D96A39D4881924",
+          "excerpt": "內湖康樂街136巷案（575專案）"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "溯源把沈伯洋列為發布者，並將直播開始日列為傳文的最早出處。辯論直播可用來追查被引述的發言，傳文的發布者與首次流傳時間仍不明。查得用字相同的查核標題帶有問號，這項相似性不足以證明傳文取自該標題。另有民間轉錄把相關發言定位在三立直播的 1 小時 57 分 05 秒，轉錄者說明未逐句聽原音，本次也未能播放該段核對。",
+      "evidence": [
+        {
+          "url": "https://tfc-taiwan.org.tw/taipei-urban-renewal-7599-zero-construction-claim/",
+          "excerpt": "沈伯洋說：「都更7599專案，現在動工的數量是零，沒有辦法動工」？"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "二校對照來源（沒有逐句聽原音）："
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

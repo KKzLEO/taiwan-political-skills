@@ -1,0 +1,141 @@
+{
+  "seat": "C",
+  "lens": "stance",
+  "engine": "claude",
+  "searches_run": 4,
+  "attacks": [
+    {
+      "id": "C-1",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "正方的理由寫「『沒有辦法動工』符合當時還沒進到動工階段的狀況」，這是替發言者選了最有利的讀法；這句話也可以讀成「這項政策做不到動工」。正方引用的 S11（市府 2025 年 5 月 27 日新聞稿）寫兩案「預計於115年辦理徵求出資者」，而兩案實際在 2026 年（民國 115 年）8 月、9 月簽約，和市府公布的時程相符。這些資料只能支持「還沒到動工階段」，不能支持「做不到動工」。台灣事實查核中心的報告（S16）確認的是動工件數為零，並寫明「動工」並非評估此政策的唯一指標。不論發言的是哪一位候選人，理由都應寫成「動工件數是零屬實；『沒有辦法動工』是發言者的評價，沒有查證」，而不是寫「符合」。另外，正方把自己的結論記為與查核中心一致，但查核中心的結論是「資料雖符合，但僅提供部分資訊，無法瞭解全貌」，和「大致正確」不是同一類結論，應寫成「事實認定一致、結論不同」。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE1",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=B0C803C940F15AF4&sms=72544237BBE4C5F6",
+          "title": "公辦都更好事成雙! 7599專案火速啟動招商",
+          "publisher": "臺北市政府都市發展局（發稿單位：臺北市都市更新處）",
+          "accessed": "2026-11-21",
+          "tier": 2,
+          "chain": "taipei-gov-20250527",
+          "stance": "context",
+          "excerpt": "並預計於115年辦理徵求出資者，由實施者及出資者協助完成擬定事權計畫報核及重建等相關事宜",
+          "access_note": "full"
+        },
+        {
+          "id": "CE2",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://tfc-taiwan.org.tw/election2026/reports/taipei-urban-renewal-7599-zero-construction-claim",
+          "title": "沈伯洋說：「都更7599專案，現在動工的數量是零，沒有辦法動工」？",
+          "publisher": "台灣事實查核中心",
+          "accessed": "2026-11-21",
+          "tier": 4,
+          "chain": "tfc-report-7599",
+          "stance": "context",
+          "excerpt": "「動工」並非評估此政策的唯一指標",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-2",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "正方的理由寫沈伯洋「確實」說過這段話，又寫訊息引號裡的字句和原話「意思相同」，這兩個用詞都超過手上的證據。TVBS（S1）和自由時報（S2）記下的原話是「7599等的」「7599等等的」，指的是 7599 和其他政策；訊息寫成「都更7599專案」，範圍變窄了。正方只查了 7599 專案的 15 件案件，沒有查「等」所指的其他政策有沒有動工；那部分如果有動工案件，判定會不同。完整影片也沒有逐字核對。理由應寫明「依多家媒體引述，原話範圍較訊息寬；本次只查 7599 專案，其餘沒有查」，不宜寫「確實說過」「意思相同」。這個標準對任何一位候選人的引言都應該相同。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE3",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://news.tvbs.com.tw/politics/4043872",
+          "title": "台北市長辯論／沈伯洋質疑缺席市政會議　蔣萬安嗆不懂市政運作「已讀亂回」",
+          "publisher": "TVBS新聞網",
+          "accessed": "2026-11-21",
+          "tier": 3,
+          "chain": "tvbs-debate-report",
+          "stance": "context",
+          "excerpt": "你之前提出了這樣的政策，7599等的，現在連動工其實是零，它沒有辦法動工",
+          "access_note": "full"
+        },
+        {
+          "id": "CE4",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624785",
+          "title": "台北市長辯論》都更議題交鋒！蔣萬安秀案量政績 沈伯洋反擊「入口寬、出口窄」",
+          "publisher": "自由時報",
+          "accessed": "2026-11-21",
+          "tier": 3,
+          "chain": "ltn-debate-report",
+          "stance": "context",
+          "excerpt": "現在連動工其實是零，它沒有辦法動工",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-3",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "正方對兩位候選人的發言用了不同的引述門檻。沈伯洋的原話比對了多家媒體，也寫出沒有逐字核對影片的限制。蔣萬安的回應只引 ETtoday 一家（S6：「康樂街第一個7599專案也已經完成公告招商、也已經簽約了」），同時附上 S17，顯示內湖康樂街136巷案屬於 575 專案。但自由時報同一場辯論的報導記的是「虎林街是第一個7599專案，也已經完成公告招商，也已經簽約了」，聯合報和今周刊記的則是康樂街。各家記錄有出入，完整影片也沒有核對。讀者只看 S6 和 S17，會推出「蔣萬安講錯案名」這個沒有查證的結論。理由和證據表應寫明媒體對這句回應的記錄不一致、沒有核對影片，和處理沈伯洋引言時的做法一致。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE5",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624785",
+          "title": "台北市長辯論》都更議題交鋒！蔣萬安秀案量政績 沈伯洋反擊「入口寬、出口窄」",
+          "publisher": "自由時報",
+          "accessed": "2026-11-21",
+          "tier": 3,
+          "chain": "ltn-debate-report",
+          "stance": "context",
+          "excerpt": "虎林街是第一個7599專案，也已經完成公告招商，也已經簽約了",
+          "access_note": "full"
+        },
+        {
+          "id": "CE6",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://udn.com/vote2026/story/124652/9848767",
+          "title": "直球對決！辯論攻勢拋「都市更新案例」問沈伯洋…蔣萬安轟：已讀亂回",
+          "publisher": "聯合報",
+          "accessed": "2026-11-21",
+          "tier": 3,
+          "chain": "udn-debate-report",
+          "stance": "context",
+          "excerpt": "康樂街7599專案完成，簽約你都不清楚",
+          "access_note": "full"
+        },
+        {
+          "id": "CE7",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://uro.gov.taipei/News.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924",
+          "title": "臺北市都市更新處－案件列表",
+          "publisher": "臺北市都市更新處",
+          "accessed": "2026-11-21",
+          "tier": 1,
+          "chain": "uro-case-list",
+          "stance": "context",
+          "excerpt": "內湖康樂街136巷案（575專案）",
+          "access_note": "full"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}
