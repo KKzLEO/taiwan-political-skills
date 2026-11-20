@@ -31,12 +31,13 @@ def classify(expected, got):
 
 
 def variant_summary(claims_doc, verdicts):
-    """How one probe variant was split: its time marks with their final labels, and how many claims of each type.
-    Party-swapped variants of one message should give the same summary."""
+    """How one probe variant was split: its time marks with their final labels, how many claims of each type, and
+    the context flags printed beside its verdicts. Party-swapped variants of one message should give the same summary."""
     labels = {c["claim_id"]: c["label"] for c in verdicts["claims"]}
     marks = tuple(sorted(f"{kind}:{labels.get(cid)}" for kind, cid in (claims_doc.get("time_claims") or {}).items() if cid))
     types = tuple(sorted(Counter(c["type"] for c in claims_doc["claims"]).items()))
-    return marks, types
+    flags = tuple(sorted(f for c in verdicts["claims"] for f in c.get("context_flags") or []))
+    return marks, types, flags
 
 
 def main():
@@ -105,12 +106,12 @@ def main():
         if all(r["status"] == "stopped after prep" for r in rows):  # split only: listed in the table below
             continue
         expect = tomllib.load(open(repo / "evals/probes" / f"{stem}.toml", "rb")).get("expect", {})
-        print(f"\n| 探測 {stem} | 結果 | 可信度 | 不看時間的內容分數 | 信心度 | 可公開 | 留下的手法標記 | 計分命題的判定 | 時間標記 | 各類型的命題數 |"
-              "\n|---|---|---|---|---|---|---|---|---|---|")
+        print(f"\n| 探測 {stem} | 結果 | 可信度 | 不看時間的內容分數 | 信心度 | 可公開 | 留下的手法標記 | 計分命題的判定 | 時間標記 | 各類型的命題數 | 判定旁的脈絡標記 |"
+              "\n|---|---|---|---|---|---|---|---|---|---|---|")
         seen = []
         for r in sorted(rows, key=lambda r: r["target"]):
             if r["status"] != "ok":
-                print(f"| {r['target']} | 沒有跑完（{r['status']}） | | | | | | | | |")
+                print(f"| {r['target']} | 沒有跑完（{r['status']}） | | | | | | | | | |")
                 continue
             run = Path(r["run"])
             sc, v = io.read_json(run / "score.json"), io.read_json(run / "verdicts.json")
@@ -119,12 +120,12 @@ def main():
             tags = tuple(sorted(t["tactic_id"] for t in trace.get("tactics", []) if t["tactic_id"] not in removed))
             labels = sorted(c["label"] for c in sc["claims"] if c.get("factor") is not None)
             cred = (sc["credibility"] or {}).get("score")
-            marks, types = variant_summary(io.read_json(run / "claims.json"), v)
+            marks, types, flags = variant_summary(io.read_json(run / "claims.json"), v)
             raw = (sc["credibility"] or {}).get("raw")  # the content alone: a wrong deadline sets every variant to 0
-            seen.append((sc["result"], tags, cred, sc["publishable"], marks, types, raw, tuple(labels)))
+            seen.append((sc["result"], tags, cred, sc["publishable"], marks, types, raw, tuple(labels), flags))
             print(f"| {r['target']} | {sc['result']} | {cred} | {raw} | {sc['confidence']['score']} | "
                   f"{'是' if sc['publishable'] else '否'} | {'、'.join(tags) or '—'} | {'、'.join(labels) or '—'} | "
-                  f"{'、'.join(marks) or '—'} | {'、'.join(f'{t}×{n}' for t, n in types)} |")
+                  f"{'、'.join(marks) or '—'} | {'、'.join(f'{t}×{n}' for t, n in types)} | {'、'.join(flags) or '—'} |")
         if len(seen) != len(rows):
             print(f"{len(rows)} 版裡只有 {len(seen)} 版跑完，下面只比跑完的；沒跑完的不能當成一致。")
         if len(seen) > 1:
@@ -132,7 +133,7 @@ def main():
             creds = [s[2] for s in seen if s[2] is not None]
             raws = [s[6] for s in seen if s[6] is not None]
             print(f"結論相同：{same(0)}；手法標記相同：{same(1)}；可公開相同：{same(3)}；時間標記相同：{same(4)}；"
-                  f"各類型的命題數相同：{same(5)}；計分命題的判定相同：{same(7)}；"
+                  f"各類型的命題數相同：{same(5)}；計分命題的判定相同：{same(7)}；判定旁的脈絡標記相同：{same(8)}；"
                   f"可信度差距：{max(creds) - min(creds) if creds else '—'}；"
                   f"不看時間的內容分數差距：{round(max(raws) - min(raws), 1) if raws else '—'}")
             if expect.get("expected_result"):

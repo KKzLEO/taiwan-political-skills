@@ -136,18 +136,19 @@ def _time_banner(c):
 
 TACTICS_HIDDEN = [
     "## 操弄手法（實驗功能，這份報告沒有列出）", "",
-    "- 這一版預設不列出操弄手法。2026-11-20 實測：同一則訊息只換政黨、或原封不動重跑一次，標出來的手法就可能不同。"
-    "在它通過跨陣營一致性驗證之前，不把它當成查核結果。",
-    "- 想看的話，用 `fc.py render --with-tactics` 重新產生報告。看到的標記只當成提醒自己留意的線索，不要引用，"
-    "也不要拿來比較不同陣營的訊息。這份報告其他段落的說明文字如果提到手法名稱，也一樣。", ""]
+    "- 2026-11-20 實測：同一則訊息只換政黨、或原封不動重跑一次，標出來的手法就可能不同，所以不列。"
+    "要看的話，執行 `fc.py render --run <查核資料夾> --with-tactics`，會另外產生一份 `report-with-tactics.md`。",
+    "- 逐項判定括號裡的「斷章取義」「舊聞新炒」這類說明，是那一條命題判定的一部分，不是這裡說的手法標記。"
+    "其他段落的文字如果提到手法標記，只當成提醒自己留意的線索，不要引用在公開貼文，也不要拿來比較不同陣營的訊息。", ""]
 TACTICS_SHOWN = ("> 這一段是實驗功能，還沒通過跨陣營一致性驗證：同一則訊息只換政黨、或重跑一次，標出來的手法就可能不同"
                  "（2026-11-20 實測）。只當成提醒自己留意的線索，不要引用在公開貼文，也不要拿來比較不同陣營的訊息。")
 
 
 def render(run, outlets=None, tactics=None, with_tactics=False) -> str:
-    """with_tactics: list the tactic tags. Off by default: tags differed between party-swapped versions of one
-    message and between reruns, so nothing about them is printed unless asked for (not even that a tag was
-    withdrawn), and the note that replaces them is the same in every report."""
+    """with_tactics: also list the tracer's tactic tags. Off by default: the tags differed between party-swapped
+    versions of one message and between reruns, so the program prints nothing that depends on them (the tags, the
+    attacks on them, how many were set aside, their share of a seat's attack count) and puts one fixed note in
+    their place. What it cannot take out is the roles' own prose, which may still name a tactic in passing."""
     run = Path(run)
     rj = io.read_json(run / "run.json")
     models = io.read_json(run / "models.json")
@@ -240,7 +241,8 @@ def render(run, outlets=None, tactics=None, with_tactics=False) -> str:
         # What the seat says it did: "succeeded" alone cannot tell a seat that found nothing from one that did not look.
         work = io.read_json_or_none(run / f"opponent-{s['seat']}.json") or {}
         searched = work.get("searches_run") if isinstance(work.get("searches_run"), int) else "沒有回報"
-        attacks = len(work["attacks"]) if isinstance(work.get("attacks"), list) else "—"
+        attacks = (len([a for a in work["attacks"] if with_tactics or a.get("target") != "tactic"])
+                   if isinstance(work.get("attacks"), list) else "—")
         out.append(f"| {s['seat']} | {LENS.get(s['lens'], s['lens'])} | {_model_cell(models, s)} | "
                    f"{ {'ok': '成功', 'missing': '沒有執行'}.get(s['status'], '失敗')} | "
                    f"{searched if s['status'] == 'ok' else '—'} | {attacks if s['status'] == 'ok' else '—'} | "
@@ -376,11 +378,13 @@ def render(run, outlets=None, tactics=None, with_tactics=False) -> str:
     # 操弄手法（裁判逐項檢查後撤回的標記不列為已辨識）
     if not with_tactics:
         out += TACTICS_HIDDEN
-    elif trace.get("tactics"):
+    else:
         removed = {w["tactic_id"]: w.get("reason", "") for w in verdicts.get("removed_tactics", [])}
         unchecked = [w for w in verdicts.get("removed_tactics", []) if w.get("not_checked")]
         out += ["## 操弄手法（不影響可信度）", "", TACTICS_SHOWN, ""] + pre
-        for t in trace["tactics"]:
+        if not trace.get("tactics"):  # what the evals measured is tags being missed, so an empty list says so
+            out.append("- 這次沒有列出任何手法標記。沒有列不代表訊息沒有用這些手法：同一則訊息重跑，有時標、有時不標。")
+        for t in trace.get("tactics") or []:
             if t["tactic_id"] in removed:
                 continue
             info = tactics.get(t["tactic_id"], {})
@@ -402,6 +406,9 @@ def render(run, outlets=None, tactics=None, with_tactics=False) -> str:
                 out.append("- 辯論後沒有留下任何手法標記。")
             for tid in sorted(removed):
                 out.append(f"- 辯論後撤回：{tactics.get(tid, {}).get('name', tid)}（{tid}）。裁判：{_cell(removed[tid])}")
+        for u in verdicts.get("unverified_rulings") or []:
+            if u.get("target") == "tactic":  # score leaves these out of 可公開: tags are not part of the result
+                out.append(f"- 反方 {u['seat']} 對手法標記的一項攻擊判成立，但裁判沒有列出實際核對過的網址，判決照用。")
         out.append("")
 
     # 既有查核

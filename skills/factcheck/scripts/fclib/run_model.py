@@ -434,7 +434,7 @@ def _run_prep(run, engine, runner, env):
 STEP_OUTPUTS = [("prep", ["source.json", "claims.json"]), ("tracer", ["trace.json"]), ("proponent", ["proponent.json"]),
                 ("opponent", ["opponent-*.json"]), ("rebuttal", ["rebuttal.json"]), ("judge", ["judgment.json"]),
                 ("review", ["review-*.json"]), ("finalize", ["verdicts.json"]), ("score", ["score.json"]),
-                ("render", ["report.md"])]
+                ("render", ["report.md", "report-with-tactics.md"])]
 
 
 def drop_later(run, step):

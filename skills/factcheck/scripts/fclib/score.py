@@ -222,8 +222,9 @@ def _publish_blocks(verdicts, claims, run, seats, result) -> list:
         # Evals: wrong results cluster in the middle levels, where the answer keys themselves differ by a level.
         blocks.append(f"結論是「{result}」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條")
     for u in verdicts.get("unverified_rulings") or []:
-        about = u.get("claim_id") or ("手法標記" if u.get("target") == "tactic" else "溯源")
-        blocks.append(f"反方 {u['seat']} 對 {about} 的一項攻擊判成立，但裁判沒有列出實際核對過的網址，判決照用")
+        if u.get("target") == "tactic":
+            continue  # tactic tags never score and are not in the report (render says it where the tags are listed)
+        blocks.append(f"反方 {u['seat']} 對 {u.get('claim_id') or '溯源'} 的一項攻擊判成立，但裁判沒有列出實際核對過的網址，判決照用")
 
     def result_with(labels, base=claims):
         return _result_of([{**c, "label": labels[c["claim_id"]]} if c["claim_id"] in labels else c for c in base])[2]

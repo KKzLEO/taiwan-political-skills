@@ -371,6 +371,14 @@ class PublishBlockTest(unittest.TestCase):
         u = [{"attack_id": "C-1", "seat": "C", "claim_id": None, "target": "trace"}]
         self.assertFalse(score.compute(verdicts_with([claim("C1", "false")], u), FULL_RUN, OK_SEAT)["publishable"])
 
+    def test_an_unverified_ruling_on_a_tactic_tag_does_not_block_publishing(self):
+        """Final delta review: tags are not in the report and never score, yet an upheld attack on one, with the
+        judge's checked sources missing, printed 「手法標記」 under the result and turned 可公開 off."""
+        u = [{"attack_id": "C-1", "seat": "C", "claim_id": None, "target": "tactic"}]
+        r = score.compute(verdicts_with([claim("C1", "false")], u), FULL_RUN, OK_SEAT)
+        self.assertTrue(r["publishable"])
+        self.assertEqual(r["publish_blocks"], [])
+
     def test_unscored_claim_that_would_change_the_result_blocks_publishing(self):
         """Red-team: typing a damaging fact as vague hides it from the score. If counting the opinion,
         prediction or vague claims the judge still labelled would change the result, do not publish."""

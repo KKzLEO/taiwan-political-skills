@@ -224,7 +224,9 @@ class BodyTest(unittest.TestCase):
     def test_tactic_section_warns_against_quoting_it(self):
         section = md(build()).split("## 操弄手法")[1].split("\n## ")[0]
         self.assertIn("還沒通過跨陣營一致性驗證", section)
+        self.assertIn("同一則訊息只換政黨、或重跑一次，標出來的手法就可能不同", section)
         self.assertIn("不要引用在公開貼文", section)
+        self.assertIn("不要拿來比較不同陣營的訊息", section)
 
     def test_tags_set_aside_for_format_are_counted_but_not_named(self):
         trace = copy.deepcopy(fx.TRACE)
@@ -1141,40 +1143,71 @@ class InputLimitsTest(unittest.TestCase):
 
 class TacticsOnRequestTest(unittest.TestCase):
     """2026-11-20 final batch: the same message with only the party swapped, or simply run again, got different
-    tactic tags. Until tagging is made blind to the party, a report does not list tags unless asked."""
+    tactic tags. Until tagging is stable, the report does not list them, and nothing the program writes in it
+    may depend on them: two versions of one message must not differ because one of them was tagged."""
 
-    def test_a_report_does_not_list_tactics_by_default(self):
-        out = render.render(build(), outlets=OUTLETS, tactics=TACTICS)
-        self.assertNotIn("急迫轉傳", out)
-        self.assertNotIn("TW-T16", out)
-        note = section(out, "操弄手法（實驗功能，這份報告沒有列出）")
-        self.assertIn("同一則訊息只換政黨", note)
-        self.assertIn("--with-tactics", note)
+    NOTE = "操弄手法（實驗功能，這份報告沒有列出）"
 
-    def test_the_note_is_there_whether_or_not_anything_was_tagged(self):
-        """Its presence must not itself tell two party versions of a message apart."""
+    @staticmethod
+    def plain(**overrides):
+        run = build(**overrides)
+        return md(run, with_tactics=False).replace(run.name, "RUN")
+
+    def states(self):
+        """Every way the tags can come out of a run, by name."""
+        trace, judgment = copy.deepcopy(fx.TRACE), copy.deepcopy(fx.JUDGMENT)
+        set_aside = copy.deepcopy(fx.TRACE)
+        set_aside["set_aside_tactics"] = [{"entry": {"tactic_id": "TW-T29", "features": ["a"]}, "errors": ["x"]}] * 3
+        unchecked = copy.deepcopy(fx.JUDGMENT)
+        unchecked.pop("tactic_checks")
+        unchecked["tactic_checks_set_aside"] = ["tactic_checks：缺少 TW-T16"]
+        dropped = copy.deepcopy(fx.JUDGMENT)
+        dropped["tactic_checks"] = [{"tactic_id": "TW-T16", "features": {"a": False}, "keep": False, "reason": "對不上"}]
+        unverified = fx.tactic_attack_overrides(upheld=True, keep=False)
+        unverified["opponent__C_json"]["attacks"][0]["evidence"] = [{"url": "https://example.org/t", "excerpt": "原文"}]
+        unverified["judgment_json"]["rulings_unverified"] = ["C-1"]
+        return {"a tag that stayed": {},
+                "tags set aside for their format": {"trace_json": set_aside},
+                "checks the program could not use": {"judgment_json": unchecked},
+                "a tag the judge dropped": {"judgment_json": dropped},
+                "an attack on a tag, rejected": fx.tactic_attack_overrides(upheld=False, keep=True),
+                "an attack on a tag, upheld": fx.tactic_attack_overrides(upheld=True, keep=False),
+                "an upheld attack on a tag whose sources the judge did not list": unverified}
+
+    def test_the_report_is_the_same_whatever_was_tagged(self):
         trace, judgment = copy.deepcopy(fx.TRACE), copy.deepcopy(fx.JUDGMENT)
         trace["tactics"], judgment["tactic_checks"] = [], []
-        untagged = render.render(build(trace_json=trace, judgment_json=judgment), outlets=OUTLETS, tactics=TACTICS)
-        tagged = render.render(build(), outlets=OUTLETS, tactics=TACTICS)
-        title = "操弄手法（實驗功能，這份報告沒有列出）"
-        self.assertEqual(section(untagged, title), section(tagged, title))
+        untagged = self.plain(trace_json=trace, judgment_json=judgment)
+        self.assertIn(f"## {self.NOTE}", untagged)
+        for name, overrides in self.states().items():
+            self.assertEqual(self.plain(**overrides), untagged, name)
 
-    def test_nothing_else_in_the_default_report_names_a_tag(self):
-        o = fx.tactic_attack_overrides(upheld=False, keep=True)   # an attack on the tag, rejected
-        out = render.render(build(**o), outlets=OUTLETS, tactics=TACTICS)
-        self.assertNotIn("TW-T16", out)
-        self.assertNotIn("手法標記）", out)
-        o = fx.tactic_attack_overrides(upheld=True, keep=False)   # an attack on the tag, upheld: the tag is withdrawn
-        out = render.render(build(**o), outlets=OUTLETS, tactics=TACTICS)
-        self.assertNotIn("TW-T16", out)
-        self.assertNotIn("撤回", out)
+    def test_the_note_says_why_and_how_to_see_them(self):
+        note = section(self.plain(), self.NOTE)
+        self.assertIn("同一則訊息只換政黨", note)
+        self.assertIn("--with-tactics", note)
+        self.assertNotIn("TW-T16", note)
 
-    def test_on_request_the_section_says_what_was_measured(self):
-        tactics = section(md(build()), "操弄手法（不影響可信度）")
-        self.assertIn("急迫轉傳", tactics)
-        self.assertIn("同一則訊息只換政黨、或重跑一次，標出來的手法就可能不同", tactics)
-        self.assertIn("不要拿來比較不同陣營的訊息", tactics)
+    def test_on_request_an_untagged_message_still_gets_the_section_and_its_warning(self):
+        """Red-team: asked for tactics, a message with no tags got a report that said nothing at all, and what was
+        measured is exactly that tags get missed."""
+        trace, judgment = copy.deepcopy(fx.TRACE), copy.deepcopy(fx.JUDGMENT)
+        trace["tactics"], judgment["tactic_checks"] = [], []
+        tactics = section(md(build(trace_json=trace, judgment_json=judgment)), "操弄手法（不影響可信度）")
+        self.assertIn("不要引用在公開貼文", tactics)
+        self.assertIn("這次沒有列出任何手法標記", tactics)
+        self.assertIn("不代表訊息沒有用", tactics)
+
+    def test_on_request_an_unlisted_source_check_is_said_in_the_section_not_under_the_result(self):
+        overrides = self.states()["an upheld attack on a tag whose sources the judge did not list"]
+        out = md(build(**overrides))
+        self.assertNotIn("沒有列出實際核對過的網址", out.split("## 結論")[0])
+        self.assertIn("裁判沒有列出實際核對過的網址", section(out, "操弄手法（不影響可信度）"))
+
+    def test_on_request_the_seat_table_counts_attacks_on_tags(self):
+        out = md(build(**fx.tactic_attack_overrides(upheld=False, keep=True)))
+        row = next(line for line in out.splitlines() if line.startswith("| C |"))
+        self.assertEqual(row.split("|")[6].strip(), "1")
 
 
 if __name__ == "__main__":

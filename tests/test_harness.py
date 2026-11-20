@@ -47,6 +47,14 @@ class VariantSummaryTest(unittest.TestCase):
         self.assertEqual(self.summary()[0], self.summary(extra_opinion=True)[0])
         self.assertNotEqual(self.summary()[1], self.summary(extra_opinion=True)[1])
 
+    def test_a_context_flag_one_version_got_and_another_did_not_shows(self):
+        """Final delta review: 「斷章取義」「舊聞新炒」 are printed beside a verdict, share their names with tactic
+        tags, and were never compared between party versions."""
+        plain = {"claims": [{"claim_id": "C1", "label": "false", "context_flags": []}]}
+        flagged = {"claims": [{"claim_id": "C1", "label": "false", "context_flags": ["old_news"]}]}
+        self.assertEqual(analyze.variant_summary(fx.CLAIMS, plain)[2], ())
+        self.assertEqual(analyze.variant_summary(fx.CLAIMS, flagged)[2], ("old_news",))
+
 
 class BrokenJobsTest(unittest.TestCase):
     """Delta review: a job that crashed left a record the analysis either crashed on or silently dropped."""

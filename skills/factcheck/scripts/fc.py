@@ -253,8 +253,10 @@ def cmd_score(args):
 
 def cmd_render(args):
     run = _run_dir(args)
-    (run / "report.md").write_text(render.render(run, with_tactics=args.with_tactics), encoding="utf-8")
-    print(run / "report.md")
+    # report.md is the report people relay and never lists tactic tags; the one that does is a file of its own
+    path = run / ("report-with-tactics.md" if args.with_tactics else "report.md")
+    path.write_text(render.render(run, with_tactics=args.with_tactics), encoding="utf-8")
+    print(path)
 
 
 def _review_lines(run: Path, known):
@@ -408,7 +410,7 @@ def main(argv=None):
     add("score", cmd_score)
     p = add("render", cmd_render)
     p.add_argument("--with-tactics", action="store_true",
-                   help="報告也列出操弄手法（實驗功能：換政黨或重跑時標記可能不同，預設不列）")
+                   help="另外產生 report-with-tactics.md，多列操弄手法（實驗功能：換政黨或重跑時標記可能不同）")
     add("status", cmd_status)
 
     p = add("eval-compare", cmd_eval_compare)

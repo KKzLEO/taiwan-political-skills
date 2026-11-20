@@ -22,4 +22,6 @@
 | `analysis-split.txt` | 同一支程式對 11 個只跑讀入與拆題的探測印出的表 |
 | `scores/<名稱>.score.json` | 每一次完整流程的分數檔（結論、可信度、信心度的扣分、可公開與否和原因） |
 | `tracer-reruns.json` | `symmetry-time` 三個版本的溯源員標記：盲測那一次，加上只重跑溯源的 3 次（裁判檢查之前的標記） |
+| `claim-levels.txt`、`usage-stats.txt`、`extra-metrics.txt` | 結果檔裡次要數字的來源：逐條命題的比對、時間和用量、覆核的分布、開跑前登記要另外報告的數字 |
+| `scripts/` | 印出上面三個檔的腳本（讀批次工具的輸出資料夾，不呼叫模型） |
 

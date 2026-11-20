@@ -1,0 +1,22 @@
+| 案例 | 預期 | 結果 | 可信度 | 內容分數 | 時間標記（判定） | 可公開 | 主要說法 | 命題：類型 重要性 判定 |
+|---|---|---|---|---|---|---|---|---|
+| case-027 | 不符 | 不符 | 0 | 0.0 | relative:C9（false） | 是 | C5 | C1 F2 true；C2 U1 unverified；C3 F4 misleading；C4 F4 mostly_true；C5 F5 false；C6 O3 not_factual；C7 U1 unverified；C8 O1 not_factual；C9 I3 false；C10 O2 not_factual |
+| case-028 | 大致符合 | 大致符合 | 72 | 71.67 | — | 否 | C1、C2 | C1 F5 mostly_true；C2 F5 mostly_true；C3 O3 not_factual；C4 I3 misleading；C5 F2 true |
+| case-029 | 部分符合 | 部分符合 | 40 | 40.0 | — | 否 | C3、C4 | C1 F4 mostly_true；C2 F3 mostly_true；C3 F5 mostly_true；C4 F5 false；C5 O3 not_factual；C6 F2 mostly_true |
+| case-030 | 符合 | 大致符合 | 79 | 80.0 | — | 否 | C3 | C1 F4 mostly_true；C2 O4 not_factual；C3 I5 mostly_true；C4 F3 mostly_true；C5 F3 true；C6 F3 true；C7 F4 true；C8 F3 mostly_true；C9 F3 mostly_true；C10 F3 true；C11 F4 true；C12 F3 mostly_true；C13 F3 true；C14 F3 true；C15 F3 mostly_true；C16 F3 true；C17 U1 not_factual；C18 F3 true；C19 F4 true；C20 F4 true；C21 I3 false |
+| case-031 | 符合 | 符合 | 80 | 80.0 | — | 是 | C2 | C1 F4 mostly_true；C2 F5 mostly_true；C3 I4 mostly_true；C4 O3 not_factual |
+| case-032 | 無法判定 | 無法判定 | 35 | 35.0 | — | 否 | C1 | C1 F5 unverified；C2 F2 true；C3 F4 unverified；C4 S3 unverified |
+| case-033 | 不符 | 不符 | 0 | 0.0 | deadline:C5（false） | 是 | C1 | C1 F5 false；C2 F4 misleading；C3 F2 mostly_true；C4 O1 not_factual；C5 I3 false |
+| case-034 | 大致符合 | 部分符合 | 57 | 56.74 | — | 否 | C2、C4 | C1 F3 mostly_true；C2 F5 misleading；C3 S3 false；C4 F5 true；C5 S2 unverified；C6 F3 true；C7 O2 not_factual；C8 O1 not_factual；C9 F2 unverified |
+| case-035 | 不符 | 不符 | 0 | 0.0 | — | 是 | C2 | C1 F5 not_factual；C2 F5 false；C3 F4 misleading；C4 F3 mostly_true；C5 F3 true；C6 F2 true；C7 F1 mostly_true；C8 F4 unverified；C9 O2 not_factual；C10 O2 not_factual |
+| case-036 | 大致符合 | 大致符合 | 79 | 82.73 | relative:C10（false） ✓ | 否 | C2、C6 | C1 O4 not_factual；C2 F5 true；C3 P3 not_factual；C4 O2 not_factual；C5 F4 true；C6 F5 true；C7 F4 misleading；C8 F4 mostly_true；C9 O4 not_factual；C10 I3 false |
+| case-037 | 不符 | 不符 | 0 | 96.11 | deadline:C11（false） ✓ | 否 | C1、C5 | C1 F5 true；C2 S3 true；C3 S3 true；C4 F4 mostly_true；C5 F5 true；C6 F4 true；C7 F3 true；C8 F3 true；C9 F3 mostly_true；C10 F3 true；C11 I3 false |
+| case-038 | 符合 | 符合 | 82 | 82.25 | — | 是 | C1、C3 | C1 F5 true；C2 F4 true；C3 S5 true；C4 S3 true；C5 S3 true；C6 F3 true；C7 F2 true；C8 F3 unverified；C9 F3 unverified；C10 F2 unverified；C11 F1 true；C12 F2 mostly_true；C13 F1 unverified；C14 O1 not_factual；C15 F1 true；C16 F1 unverified；C17 F1 mostly_true；C18 O1 not_factual |
+
+完全相同 10/12；把開跑前複核員寫的「相鄰一級也講得通」算成對：12/12
+標可公開 5 則，其中結論和答案相同 5 則
+預期 → 結果：不符→不符 ×4；大致符合→大致符合 ×2；大致符合→部分符合 ×1；無法判定→無法判定 ×1；符合→大致符合 ×1；符合→符合 ×2；部分符合→部分符合 ×1
+
+結論是符合或不符、卻不可公開的原因：
+- case-037（不符，信心度 95）：結論受時間命題影響：不看 C11 的話，結果是「符合」
+    −5 證據品質 0.75：核心命題缺少第一手直接證據，或缺少第二條獨立證據鏈

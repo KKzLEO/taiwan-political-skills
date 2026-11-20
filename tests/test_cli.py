@@ -265,9 +265,19 @@ class RunModelCliTest(unittest.TestCase):
         for step in ("finalize", "score"):
             self.assertEqual(fc(step, "--run", run).returncode, 0)
         fc("render", "--run", run)
-        self.assertNotIn("TW-T16", (run / "report.md").read_text())
-        fc("render", "--run", run, "--with-tactics")
-        self.assertIn("TW-T16", (run / "report.md").read_text())
+        plain = (run / "report.md").read_text()
+        self.assertNotIn("TW-T16", plain)
+        p = fc("render", "--run", run, "--with-tactics")
+        self.assertIn("report-with-tactics.md", p.stdout)
+        self.assertIn("TW-T16", (run / "report-with-tactics.md").read_text())
+        self.assertEqual((run / "report.md").read_text(), plain)   # the report people relay never lists them
+
+    def test_the_report_with_tactics_goes_when_the_run_is_settled_again(self):
+        run = make_run(fx.run_files())
+        for args in (["finalize"], ["score"], ["render"], ["render", "--with-tactics"]):
+            self.assertEqual(fc(*args, "--run", run).returncode, 0)
+        fc("score", "--run", run)
+        self.assertFalse((run / "report-with-tactics.md").exists())
 
     def test_settling_again_leaves_no_score_or_report_of_the_old_verdicts(self):
         run = make_run(fx.run_files())
