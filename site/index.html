@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>台灣訊息查核</title>
 <meta name="description" content="裝在 Claude Code 和 Codex 裡的開源查核流程：一個 AI 查證，三個 AI 專門挑毛病，再請另一家公司的模型來抗辯。每一步都留下檔案，分數由程式照固定規則算。">
-<meta name="theme-color" content="#08090a">
+<meta name="theme-color" content="#fafafa">
 <meta property="og:type" content="website">
 <meta property="og:title" content="台灣訊息查核">
 <meta property="og:description" content="查核一則政治訊息，每一步都留下紀錄。裝在 Claude Code 和 Codex 裡的開源查核流程。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5' fill='%2308090a'/%3E%3Crect x='3.25' y='3.25' width='13.5' height='13.5' rx='3.5' fill='none' stroke='%23f7f8f8' stroke-width='1.5'/%3E%3Cpath d='M11.6 6.6 8.4 13.4' stroke='%23f7f8f8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5' fill='%236247d6'/%3E%3Cpath d='M12.2 5.4 7.8 14.6' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
@@ -73,6 +73,7 @@
             <div class="verdict">
               <p class="verdict-word">不符</p>
               <dl><div><dt>可信度</dt><dd>0</dd></div><div><dt>信心度</dt><dd>100<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
+              <p class="scale" style="--at:0"><span>錯誤</span><i></i><span>正確</span></p>
             </div>
             <ul class="rows">
               <li class="r-claim"><code>C1</code><p>立法院三讀通過一項法案，內容與騎機車開大燈有關。</p><span class="mark bad">錯誤</span><span class="num">不需覆核</span></li>
@@ -93,7 +94,10 @@
   </div>
 </section>
 
-<section class="sec" id="how">
+<!-- taipei:begin (written by site/tools/build_cases.py) -->
+<!-- taipei:end -->
+
+<section class="sec alt" id="how">
   <div class="wrap">
     <h2 class="statement">它不直接給你答案。<span>每一句說法都要過正方、<wbr>三個反方、<wbr>另一家公司的模型，<wbr>和一個沒參與辯論的裁判。</span></h2>
 
@@ -106,7 +110,7 @@
           <p><b>A</b><span>claude</span><i style="--n:1"></i><em>1</em></p>
           <p><b>B</b><span>claude</span><i style="--n:0"></i><em>0</em></p>
           <p><b>C</b><span>claude</span><i style="--n:3"></i><em>3</em></p>
-          <p><b>X1</b><span>codex</span><i style="--n:7"></i><em>7</em></p>
+          <p class="out"><b>X1</b><span>codex</span><i style="--n:7"></i><em>7</em></p>
         </div>
       </article>
       <article>
@@ -184,7 +188,7 @@
   </div>
 </section>
 
-<section class="sec" id="limits">
+<section class="sec alt" id="limits">
   <div class="wrap">
     <div class="sec-head">
       <h2>它做不到的事</h2>

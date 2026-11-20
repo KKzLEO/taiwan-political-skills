@@ -75,8 +75,34 @@ class Run(unittest.TestCase):
         total = sum(s["attacks"] for s in seats)
         outside = sum(s["attacks"] for s in seats if s["engine"] != seats[0]["engine"])
         self.assertIn(f"{total} 條質疑，有 {outside} 條是它提的", front)
-        drawn = re.findall(r'<p><b>(\w+)</b><span>(\w+)</span><i style="--n:(\d+)"></i><em>(\d+)</em></p>', front)
+        drawn = re.findall(r'<p(?: class="out")?><b>(\w+)</b><span>(\w+)</span><i style="--n:(\d+)"></i><em>(\d+)</em></p>', front)
         self.assertEqual(drawn, [(s["seat"], s["engine"], str(s["attacks"]), str(s["attacks"])) for s in seats])
+
+
+class Taipei(unittest.TestCase):
+    """The election block: what the script produces, the same two kinds for each candidate, the registered texts."""
+
+    def setUp(self):
+        spec = importlib.util.spec_from_file_location("build_cases", SITE / "tools/build_cases.py")
+        self.module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.module)
+
+    def test_committed_block_is_what_the_script_writes(self):
+        self.assertEqual(self.module.rewritten(read(FRONT)), read(FRONT))
+
+    def test_each_candidate_has_the_same_two_kinds_in_ballot_order(self):
+        people = self.module.PEOPLE
+        self.assertEqual([p["no"] for p in people], sorted(p["no"] for p in people))
+        for person in people:
+            self.assertEqual({"about", "said"} <= set(person), True)
+            self.assertIn("tfc", person["said"])
+        self.assertEqual(read(FRONT).count('<article class="case">'), 2 * len(people) if self.module.ready() else 0)
+
+    def test_the_texts_shown_are_the_ones_registered_before_the_runs(self):
+        registered = read(ROOT / "evals/results/2026-11-20-taipei-preregistration.md")
+        for person in self.module.PEOPLE:
+            for kind in ("about", "said"):
+                self.assertIn("「" + person[kind]["text"] + "」", registered)
 
 
 class Links(unittest.TestCase):

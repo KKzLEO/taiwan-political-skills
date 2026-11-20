@@ -62,7 +62,9 @@
       put(stats, put(el('div'), el('dt', '', '可信度'), el('dd', '', String(step.credibility))),
         put(el('div'), el('dt', '', '信心度'), put(el('dd', '', String(step.confidence)), el('small', '', step.level))),
         put(el('div'), el('dt', '', '公開引用'), el('dd', 'word', step.publishable ? '可公開' : '不可公開')));
-      put(body, put(el('div', 'verdict'), el('p', 'verdict-word', step.result), stats));
+      var scale = put(el('p', step.credibility === null ? 'scale none' : 'scale'), el('span', '', '錯誤'), el('i'), el('span', '', '正確'));
+      scale.style.setProperty('--at', step.credibility || 0);
+      put(body, put(el('div', 'verdict'), el('p', 'verdict-word', step.result), stats, scale));
     }
     var list = el('ul', 'rows');
     step.rows.forEach(function (r) { put(list, ROWS[step.kind](r)); });

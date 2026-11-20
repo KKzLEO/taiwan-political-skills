@@ -30,7 +30,7 @@ td { color: var(--soft); }
 .scroll td:not(:last-child) { white-space: nowrap; }
 td.num, th.num { text-align: right; white-space: nowrap; }
 td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--text); }
-tr:target { background: rgba(255, 255, 255, 0.06); }
+tr:target { background: var(--accent-wash); }
 
 /* three columns do not fit a phone: each row becomes a short stack instead */
 @media (max-width: 40rem) {

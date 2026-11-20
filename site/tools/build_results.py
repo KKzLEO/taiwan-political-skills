@@ -119,8 +119,8 @@ PAGE = f'''<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>驗證結果｜台灣訊息查核</title>
 <meta name="description" content="台灣訊息查核 skill 發版前的盲測結果：12 則新案例、換政黨的對照探測、兩個平台的實際執行，以及沒有過的那一項。">
-<meta name="theme-color" content="#08090a">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5' fill='%2308090a'/%3E%3Crect x='3.25' y='3.25' width='13.5' height='13.5' rx='3.5' fill='none' stroke='%23f7f8f8' stroke-width='1.5'/%3E%3Cpath d='M11.6 6.6 8.4 13.4' stroke='%23f7f8f8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#fafafa">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5' fill='%236247d6'/%3E%3Cpath d='M12.2 5.4 7.8 14.6' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
