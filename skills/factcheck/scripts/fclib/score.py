@@ -223,7 +223,12 @@ def _publish_blocks(verdicts, claims, run, seats, result) -> list:
         blocks.append(f"結論是「{result}」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條")
     for u in verdicts.get("unverified_rulings") or []:
         if u.get("target") == "tactic":
-            continue  # tactic tags never score and are not in the report (render says it where the tags are listed)
+            # Tags never score and are not in the report (render says it where the tags are listed). But a label
+            # the judge changed with no upheld attack on it may rest on this attack's unchecked sources.
+            if u.get("judge_changed"):
+                blocks.append(f"裁判在沒有成立的命題攻擊下改了 {'、'.join(u['judge_changed'])} 的判定，"
+                              f"而反方 {u['seat']} 有一項判成立的攻擊，裁判沒有列出實際核對過的網址")
+            continue
         blocks.append(f"反方 {u['seat']} 對 {u.get('claim_id') or '溯源'} 的一項攻擊判成立，但裁判沒有列出實際核對過的網址，判決照用")
 
     def result_with(labels, base=claims):

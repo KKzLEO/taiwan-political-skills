@@ -26,9 +26,14 @@ def build(**overrides):
     return run
 
 
-def md(run, with_tactics=True):
-    """The report with the tactics section, which most tests here look at; a user gets it only on request."""
+def md(run, with_tactics=False):
+    """report.md as a user gets it."""
     return render.render(run, outlets=OUTLETS, tactics=TACTICS, with_tactics=with_tactics)
+
+
+def tagged(run):
+    """report-with-tactics.md: the same report with the tactic tags listed, made only on request."""
+    return md(run, with_tactics=True)
 
 
 class HeaderTest(unittest.TestCase):
@@ -83,9 +88,12 @@ class BodyTest(unittest.TestCase):
         j = copy.deepcopy(fx.JUDGMENT)
         j["rulings"][1]["verified_urls"] = []
         j["rulings_unverified"] = ["B-1"]
-        head = md(build(judgment_json=j)).split("## 結論")[0]
+        run = build(judgment_json=j)
+        head = md(run).split("## 結論")[0]
         self.assertIn("不可公開", head)
         self.assertIn("沒有列出實際核對過的網址", head)
+        # the line in the tactics section is for attacks on tags only
+        self.assertNotIn("核對過的網址", section(tagged(run), "操弄手法（不影響可信度）"))
 
     def test_conclusion_marks_a_key_unscored_claim(self):
         claims = copy.deepcopy(fx.CLAIMS)
@@ -126,7 +134,7 @@ class BodyTest(unittest.TestCase):
         self.assertIn("辯論後改判", row)
 
     def test_tactics_have_name_and_tip(self):
-        out = md(build())
+        out = tagged(build())
         self.assertIn("急迫轉傳", out)
         self.assertIn("看到「快轉傳」先停下來查", out)
 
@@ -215,14 +223,14 @@ class BodyTest(unittest.TestCase):
         self.assertIn("改判「無法證實」", section)
 
     def test_withdrawn_tag_is_not_shown_as_identified(self):
-        out = md(build(**fx.tactic_attack_overrides()))
+        out = tagged(build(**fx.tactic_attack_overrides()))
         section = out.split("## 操弄手法")[1].split("\n## ")[0]
         self.assertNotIn("**急迫轉傳**（TW-T16）：", section)
         self.assertIn("辯論後撤回：急迫轉傳（TW-T16）", section)
         self.assertIn("裁判核對後認為特徵對不上，撤下", section)
 
     def test_tactic_section_warns_against_quoting_it(self):
-        section = md(build()).split("## 操弄手法")[1].split("\n## ")[0]
+        section = tagged(build()).split("## 操弄手法")[1].split("\n## ")[0]
         self.assertIn("還沒通過跨陣營一致性驗證", section)
         self.assertIn("同一則訊息只換政黨、或重跑一次，標出來的手法就可能不同", section)
         self.assertIn("不要引用在公開貼文", section)
@@ -231,8 +239,8 @@ class BodyTest(unittest.TestCase):
     def test_tags_set_aside_for_format_are_counted_but_not_named(self):
         trace = copy.deepcopy(fx.TRACE)
         trace["set_aside_tactics"] = [{"entry": {"tactic_id": "TW-T29", "features": ["a"]}, "errors": ["x"]}]
-        out = md(build(trace_json=trace))
-        self.assertIn("溯源員有 1 個手法標記不符合標記規則", out)
+        out = tagged(build(trace_json=trace))
+        self.assertIn("溯源員有 1 個手法標記不符合標記規則", section(out, "操弄手法（不影響可信度）"))  # where it is relayed from
         self.assertNotIn("TW-T29", out)
 
     def test_tag_without_quote_shows_its_explanation(self):
@@ -242,17 +250,17 @@ class BodyTest(unittest.TestCase):
         judgment = copy.deepcopy(fx.JUDGMENT)
         judgment["tactic_checks"] = [{"tactic_id": "TW-T01", "features": {"c": True}, "keep": True, "reason": "查到了",
                                       "verified_urls": ["https://example.org/fc"]}]
-        self.assertIn("**斷章取義**（TW-T01）：前後文被剪掉", md(build(trace_json=trace, judgment_json=judgment)))
+        self.assertIn("**斷章取義**（TW-T01）：前後文被剪掉", tagged(build(trace_json=trace, judgment_json=judgment)))
 
     def test_corrections_come_after_every_section_written_before_the_debate(self):
         """Re-review: the prior-fact-check table sat below the corrections and still said 一致."""
-        out = md(build(**fx.tactic_attack_overrides()))
+        out = tagged(build(**fx.tactic_attack_overrides()))
         self.assertGreater(out.index("## 辯論後的修正"), out.index("## 和既有查核的比對"))
         self.assertIn("和既有查核的比對", out.split("## 辯論後的修正")[1].split("\n## ")[0])
 
     def test_corrections_quote_the_judge_not_the_opponent(self):
         """Red-team: opponent arguments can contain parts the judge rejected; only the ruling is authoritative."""
-        out = md(build(**fx.tactic_attack_overrides()))
+        out = tagged(build(**fx.tactic_attack_overrides()))
         corrections = out.split("## 辯論後的修正")[1].split("\n## ")[0]
         self.assertIn("裁判核對後認為特徵對不上，撤下", corrections)
         self.assertNotIn("TW-T16 只對得上一項特徵，不該標", corrections)
@@ -566,20 +574,22 @@ class RoleTextStaysInItsPlaceTest(unittest.TestCase):
     add a second result line, a second 結論 section, or a link whose text hides where it leads."""
 
     def test_no_field_can_start_a_line_of_its_own(self):
-        headings = [x for x in md(poisoned_run(None)).splitlines() if x.startswith("#")]
-        for field in POISONED_FIELDS:
-            with self.subTest(field=field):
-                out = md(poisoned_run(field))
-                self.assertIn("乙", out)  # the field is printed, so the checks below mean something
-                lines = out.splitlines()  # splits on every kind of line break POISON uses
-                self.assertEqual(lines, out.rstrip("\n").split("\n"), "a line break other than \\n got through")
-                self.assertEqual(len([x for x in lines if x.startswith("**結果：")]), 1)
-                self.assertEqual([x for x in lines if x.startswith("#")], headings)
+        for report in (md, tagged):  # both files a run can produce
+            headings = [x for x in report(poisoned_run(None)).splitlines() if x.startswith("#")]
+            for field in POISONED_FIELDS:
+                with self.subTest(field=field, report=report.__name__):
+                    out = report(poisoned_run(field))
+                    self.assertIn("乙", out)  # the field is printed, so the checks below mean something
+                    lines = out.splitlines()  # splits on every kind of line break POISON uses
+                    self.assertEqual(lines, out.rstrip("\n").split("\n"), "a line break other than \\n got through")
+                    self.assertEqual(len([x for x in lines if x.startswith("**結果：")]), 1)
+                    self.assertEqual([x for x in lines if x.startswith("#")], headings)
 
     def test_an_attack_number_is_never_printed(self):
         """Audit: a reader cannot look an attack number up, so the report stopped printing them; a role-written
         number then cannot carry text into the report at all."""
         for poison in (POISON, '乙<h2>結論</h2>'):
+            self.assertNotIn("乙", tagged(poisoned_run("attack.id", poison)))  # the report that prints this attack
             self.assertNotIn("乙", md(poisoned_run("attack.id", poison)))
 
     def test_a_url_cannot_close_its_link_and_open_another(self):
@@ -605,11 +615,12 @@ class RoleTextStaysInItsPlaceTest(unittest.TestCase):
         text into a link hiding its address, a tracking image, and a second 結論 heading with a fake result line."""
         html = ('乙<h2>結論</h2><p><strong>結果：符合｜可信度 100｜可公開</strong></p>'
                 '詳見<a href="https://phish.example/b">官方說明</a><img src="https://track.example/p.png"><!-- x -->')
-        for field in POISONED_FIELDS:
-            with self.subTest(field=field):
-                out = md(poisoned_run(field, html))
-                self.assertIn("乙", out)  # the field is printed
-                self.assertIsNone(re.search(r"<[A-Za-z/!?]", out))  # render writes no HTML of its own
+        for report in (md, tagged):
+            for field in POISONED_FIELDS:
+                with self.subTest(field=field, report=report.__name__):
+                    out = report(poisoned_run(field, html))
+                    self.assertIn("乙", out)  # the field is printed
+                    self.assertIsNone(re.search(r"<[A-Za-z/!?]", out))  # render writes no HTML of its own
         judgment = copy.deepcopy(fx.JUDGMENT)
         judgment["verdicts"][0]["reasoning"] = ('部長說的是可能上漲。詳見<a href="https://phish.example/b">官方說明</a>'
                                                 '<img src="https://track.example/p.png">')
@@ -928,7 +939,7 @@ class PreDebateNoteTest(unittest.TestCase):
 
     def test_sections_written_before_the_debate_point_to_an_upheld_trace_correction(self):
         """Audit: 「搜尋都沒有結果」 stood in the trace section; the judge's correction came 40 lines later."""
-        out = md(build(**trace_correction_overrides()))
+        out = tagged(build(**trace_correction_overrides()))
         for title in ("溯源", "報導品質（不影響可信度）", "操弄手法（不影響可信度）", "和既有查核的比對"):
             self.assertIn(self.NOTE, section(out, title), title)
         self.assertIn("- 接下來 1 項是溯源員在辯論前寫的；裁判判定成立的修正列在後面的「辯論後的修正」，內容不同時以修正為準",
@@ -936,7 +947,7 @@ class PreDebateNoteTest(unittest.TestCase):
         self.assertIn("- 反方 C 的質疑成立：11/9 的貼文才是目前找到最早的版本", section(out, "辯論後的修正"))
 
     def test_no_note_without_a_trace_correction_or_when_the_tracer_wrote_no_limits(self):
-        for out in (md(build()), md(build(**fx.tactic_attack_overrides()))):  # a withdrawn tag shows where it was
+        for out in (md(build()), tagged(build(**fx.tactic_attack_overrides()))):  # a withdrawn tag shows where it was
             self.assertNotIn(self.NOTE, out)
         self.assertNotIn("在辯論前寫的", md(build(**trace_correction_overrides(limits=()))))
 
@@ -947,7 +958,7 @@ class SetAsideChecksTest(unittest.TestCase):
         j = copy.deepcopy(fx.JUDGMENT)
         j.pop("tactic_checks")
         j["tactic_checks_set_aside"] = ["tactic_checks：缺少 TW-T16"]
-        tactics = section(md(build(judgment_json=j)), "操弄手法（不影響可信度）")
+        tactics = section(tagged(build(judgment_json=j)), "操弄手法（不影響可信度）")
         self.assertIn("- 溯源員標了 1 個手法，但裁判逐項檢查的結果格式不合規定，程式無法採用，所以這次都不列出"
                       "（溯源員原本的標記保留在 trace.json）。這是格式問題，不是辯論的結論。", tactics)
         for text in ("辯論後撤回", "辯論後沒有留下", "TW-T16", "急迫轉傳", "裁判："):
@@ -976,7 +987,7 @@ class ProgramWordsTest(unittest.TestCase):
 
     def test_attack_numbers_are_not_printed(self):
         """C-1 is one hyphen away from the claim C1, and the reader has nothing to look it up in."""
-        out = md(build(**fx.tactic_attack_overrides()))
+        out = tagged(build(**fx.tactic_attack_overrides()))
         self.assertNotIn("C-1", out)
         self.assertIn("- 反方 C 的質疑成立：裁判核對後認為特徵對不上，撤下", section(out, "辯論後的修正"))
 
@@ -991,7 +1002,7 @@ class ProgramWordsTest(unittest.TestCase):
         self.assertIn("→ 不成立：日期先後不影響來源獨立性", md(build(judgment_json=judgment)))
 
     def test_a_rejected_tactic_attack_is_labelled_as_one(self):
-        out = section(md(build(**fx.tactic_attack_overrides(upheld=False, keep=True))), "已檢驗的質疑")
+        out = section(tagged(build(**fx.tactic_attack_overrides(upheld=False, keep=True))), "已檢驗的質疑")
         self.assertIn("- （手法標記）TW-T16 只對得上一項特徵，不該標 → 不成立：", out)
 
     def test_a_publisher_name_that_starts_with_its_kind_is_not_doubled(self):
@@ -1151,11 +1162,10 @@ class TacticsOnRequestTest(unittest.TestCase):
     @staticmethod
     def plain(**overrides):
         run = build(**overrides)
-        return md(run, with_tactics=False).replace(run.name, "RUN")
+        return md(run).replace(run.name, "RUN")
 
     def states(self):
         """Every way the tags can come out of a run, by name."""
-        trace, judgment = copy.deepcopy(fx.TRACE), copy.deepcopy(fx.JUDGMENT)
         set_aside = copy.deepcopy(fx.TRACE)
         set_aside["set_aside_tactics"] = [{"entry": {"tactic_id": "TW-T29", "features": ["a"]}, "errors": ["x"]}] * 3
         unchecked = copy.deepcopy(fx.JUDGMENT)
@@ -1193,19 +1203,34 @@ class TacticsOnRequestTest(unittest.TestCase):
         measured is exactly that tags get missed."""
         trace, judgment = copy.deepcopy(fx.TRACE), copy.deepcopy(fx.JUDGMENT)
         trace["tactics"], judgment["tactic_checks"] = [], []
-        tactics = section(md(build(trace_json=trace, judgment_json=judgment)), "操弄手法（不影響可信度）")
+        tactics = section(tagged(build(trace_json=trace, judgment_json=judgment)), "操弄手法（不影響可信度）")
         self.assertIn("不要引用在公開貼文", tactics)
         self.assertIn("這次沒有列出任何手法標記", tactics)
         self.assertIn("不代表訊息沒有用", tactics)
 
     def test_on_request_an_unlisted_source_check_is_said_in_the_section_not_under_the_result(self):
         overrides = self.states()["an upheld attack on a tag whose sources the judge did not list"]
-        out = md(build(**overrides))
+        out = tagged(build(**overrides))
         self.assertNotIn("沒有列出實際核對過的網址", out.split("## 結論")[0])
         self.assertIn("裁判沒有列出實際核對過的網址", section(out, "操弄手法（不影響可信度）"))
 
+    def test_the_report_says_what_its_attack_count_leaves_out(self):
+        self.assertIn("攻擊數不含針對手法標記的攻擊", section(md(build()), "查核範圍和限制"))
+        self.assertNotIn("攻擊數不含", tagged(build()))
+
+    def test_a_trace_correction_does_not_point_at_a_section_the_report_does_not_have(self):
+        run = build(**trace_correction_overrides())
+        self.assertIn("前面的溯源、報導品質、和既有查核的比對", section(md(run), "辯論後的修正"))
+        self.assertIn("前面的溯源、報導品質、操弄手法、和既有查核的比對", section(tagged(run), "辯論後的修正"))
+
+    def test_on_request_a_run_whose_trace_is_gone_still_gets_its_report(self):
+        """Re-review: a forced tracer rerun that fails removes trace.json; the withdrawn tags then crashed the render."""
+        run = build(**fx.tactic_attack_overrides(upheld=True, keep=False))
+        (run / "trace.json").unlink()
+        self.assertIn("## 操弄手法（不影響可信度）", tagged(run))
+
     def test_on_request_the_seat_table_counts_attacks_on_tags(self):
-        out = md(build(**fx.tactic_attack_overrides(upheld=False, keep=True)))
+        out = tagged(build(**fx.tactic_attack_overrides(upheld=False, keep=True)))
         row = next(line for line in out.splitlines() if line.startswith("| C |"))
         self.assertEqual(row.split("|")[6].strip(), "1")
 

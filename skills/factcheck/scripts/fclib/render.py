@@ -138,7 +138,7 @@ TACTICS_HIDDEN = [
     "## 操弄手法（實驗功能，這份報告沒有列出）", "",
     "- 2026-11-20 實測：同一則訊息只換政黨、或原封不動重跑一次，標出來的手法就可能不同，所以不列。"
     "要看的話，執行 `fc.py render --run <查核資料夾> --with-tactics`，會另外產生一份 `report-with-tactics.md`。",
-    "- 逐項判定括號裡的「斷章取義」「舊聞新炒」這類說明，是那一條命題判定的一部分，不是這裡說的手法標記。"
+    "- 「結論」裡判定後面括號的「斷章取義」「舊聞新炒」這類說明，是那一條命題判定的一部分，不是這裡說的手法標記。"
     "其他段落的文字如果提到手法標記，只當成提醒自己留意的線索，不要引用在公開貼文，也不要拿來比較不同陣營的訊息。", ""]
 TACTICS_SHOWN = ("> 這一段是實驗功能，還沒通過跨陣營一致性驗證：同一則訊息只換政黨、或重跑一次，標出來的手法就可能不同"
                  "（2026-11-20 實測）。只當成提醒自己留意的線索，不要引用在公開貼文，也不要拿來比較不同陣營的訊息。")
@@ -263,6 +263,8 @@ def render(run, outlets=None, tactics=None, with_tactics=False) -> str:
         said = next((w for w in JUST_NOW if w in (source.get("original_text") or "")), None)
         if said:
             out.append(f"  - 訊息裡有「{said}」，如果這其實是舊消息，結論沒有反映這一點。")
+    if not with_tactics:
+        out.append("- 席位表的攻擊數不含針對手法標記的攻擊（見「操弄手法」一段）。")
     out += _host_isolation(models)
     # An upheld correction to the trace (a withdrawn tag already shows where the tag was). Verdicts written before
     # `target` was carried count as trace corrections.
@@ -275,8 +277,6 @@ def render(run, outlets=None, tactics=None, with_tactics=False) -> str:
     if traced and corrected:  # the lines after them come from the judge's ledger, written after the debate
         limits.append(f"接下來 {len(traced)} 項是溯源員在辯論前寫的；裁判判定成立的修正列在後面的「辯論後的修正」，內容不同時以修正為準")
     limits += traced
-    if with_tactics and trace.get("set_aside_tactics"):
-        limits.append(f"溯源員有 {len(trace['set_aside_tactics'])} 個手法標記不符合標記規則，已移出（原內容保留在 trace.json），報告不列出")
     for e in ledger.values():
         if e.get("access_note", "full") != "full":
             limits.append(f"{e['id']}（{_cell(e.get('publisher'))}）：{ACCESS.get(e['access_note'], e['access_note'])}")
@@ -383,7 +383,10 @@ def render(run, outlets=None, tactics=None, with_tactics=False) -> str:
         unchecked = [w for w in verdicts.get("removed_tactics", []) if w.get("not_checked")]
         out += ["## 操弄手法（不影響可信度）", "", TACTICS_SHOWN, ""] + pre
         if not trace.get("tactics"):  # what the evals measured is tags being missed, so an empty list says so
-            out.append("- 這次沒有列出任何手法標記。沒有列不代表訊息沒有用這些手法：同一則訊息重跑，有時標、有時不標。")
+            out.append("- 這次沒有列出任何手法標記。沒有列不代表訊息沒有用這些手法。")
+        if trace.get("set_aside_tactics"):
+            out.append(f"- 溯源員有 {len(trace['set_aside_tactics'])} 個手法標記不符合標記規則，已移出"
+                       "（原內容保留在 trace.json），這裡不列出。")
         for t in trace.get("tactics") or []:
             if t["tactic_id"] in removed:
                 continue
@@ -402,7 +405,7 @@ def render(run, outlets=None, tactics=None, with_tactics=False) -> str:
             out.append(f"- 溯源員標了 {len(unchecked)} 個手法，但裁判逐項檢查的結果格式不合規定，程式無法採用，"
                        "所以這次都不列出（溯源員原本的標記保留在 trace.json）。這是格式問題，不是辯論的結論。")
         else:
-            if removed and all(t["tactic_id"] in removed for t in trace["tactics"]):
+            if removed and all(t["tactic_id"] in removed for t in trace.get("tactics") or []):
                 out.append("- 辯論後沒有留下任何手法標記。")
             for tid in sorted(removed):
                 out.append(f"- 辯論後撤回：{tactics.get(tid, {}).get('name', tid)}（{tid}）。裁判：{_cell(removed[tid])}")

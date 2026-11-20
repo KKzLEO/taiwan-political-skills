@@ -443,7 +443,7 @@ def drop_later(run, step):
     for _, patterns in STEP_OUTPUTS[order.index(step) + 1:]:
         for pattern in patterns:
             for path in Path(run).glob(pattern):
-                path.unlink()
+                path.unlink(missing_ok=True)  # two commands may clear the same files at once
 
 
 def finished(run, role, seat, known_tactics=None):

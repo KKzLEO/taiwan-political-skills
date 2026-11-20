@@ -200,7 +200,10 @@ def finalize(run) -> dict:
     # Upheld rulings whose checked URLs the judge still left out after a retry (validate.fallback):
     # the ruling stands; score blocks publishing and render says so under the result line.
     unverified = [{"attack_id": aid, "seat": attacks[aid]["seat"], "claim_id": _claim_of(attacks[aid]),
-                   "target": attacks[aid]["target"]}
+                   "target": attacks[aid]["target"],
+                   # A tag attack revises no claim, but the judge may have changed a label on the strength of it.
+                   **({"judge_changed": sorted(judge_only)}
+                      if attacks[aid]["target"] == "tactic" and judge_only else {})}
                   for aid in sorted(set(judgment.get("rulings_unverified") or []))
                   if aid in rulings and rulings[aid]["upheld"]]
 

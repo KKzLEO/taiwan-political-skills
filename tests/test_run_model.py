@@ -574,6 +574,16 @@ class ProbeTest(unittest.TestCase):
         self.assertNotIn("SECRET", json.dumps(run_model.probe(CODEX, runner=r, env={})))
 
 
+
+class DropLaterTest(unittest.TestCase):
+    def test_a_file_another_command_removed_first_is_not_an_error(self):
+        """Re-review: two reviews finishing together both clear the settled files; one of them crashed."""
+        from unittest import mock
+        run = make_run({})
+        with mock.patch.object(Path, "glob", return_value=[run / "report.md"]):   # listed, then gone
+            run_model.drop_later(run, "score")
+
+
 if __name__ == "__main__":
     unittest.main()
 

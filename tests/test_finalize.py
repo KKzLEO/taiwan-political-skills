@@ -198,6 +198,17 @@ class UnverifiedRulingTest(unittest.TestCase):
         r = run_finalize(**o)
         self.assertEqual(r["unverified_rulings"], [{"attack_id": "C-1", "seat": "C", "claim_id": None, "target": "tactic"}])
 
+    def test_an_unlisted_source_on_a_tag_attack_names_the_labels_the_judge_changed_alone(self):
+        """Re-review: an attack that argues about a claim can be filed as an attack on a tag. A tag attack revises
+        no claim, so the label the judge then changes counts as changed alone; score needs to know both happened."""
+        o = fx.tactic_attack_overrides(upheld=True, keep=False)
+        o["opponent__C_json"]["attacks"][0]["evidence"] = [{"url": "https://example.org/t", "excerpt": "原文"}]
+        o["judgment_json"]["rulings"][1]["upheld"] = False        # no attack on C1 stands, yet its label differs
+        o["judgment_json"]["rulings_unverified"] = ["C-1"]
+        r = run_finalize(**o, review__B_json=None)
+        self.assertEqual(r["unverified_rulings"], [{"attack_id": "C-1", "seat": "C", "claim_id": None, "target": "tactic",
+                                                    "judge_changed": ["C1"]}])
+
 
 class RemovedTacticsFinalizeTest(unittest.TestCase):
     def test_withdrawn_tags_come_from_the_judges_checks(self):

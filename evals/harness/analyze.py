@@ -36,7 +36,9 @@ def variant_summary(claims_doc, verdicts):
     labels = {c["claim_id"]: c["label"] for c in verdicts["claims"]}
     marks = tuple(sorted(f"{kind}:{labels.get(cid)}" for kind, cid in (claims_doc.get("time_claims") or {}).items() if cid))
     types = tuple(sorted(Counter(c["type"] for c in claims_doc["claims"]).items()))
-    flags = tuple(sorted(f for c in verdicts["claims"] for f in c.get("context_flags") or []))
+    # The report prints a flag only beside a claim judged wrong (render.py), so only those are compared.
+    flags = tuple(sorted(f for c in verdicts["claims"] if c["label"] in ("false", "misleading", "mixed")
+                         for f in c.get("context_flags") or []))
     return marks, types, flags
 
 

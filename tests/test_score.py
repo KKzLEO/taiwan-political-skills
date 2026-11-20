@@ -379,6 +379,16 @@ class PublishBlockTest(unittest.TestCase):
         self.assertTrue(r["publishable"])
         self.assertEqual(r["publish_blocks"], [])
 
+    def test_it_still_blocks_when_the_judge_also_changed_a_label_alone(self):
+        """Re-review: the attack may really have been about that claim; the reason does not speak of tags."""
+        u = [{"attack_id": "C-1", "seat": "C", "claim_id": None, "target": "tactic", "judge_changed": ["C1"]}]
+        r = score.compute(verdicts_with([claim("C1", "true")], u), FULL_RUN, OK_SEAT)
+        self.assertFalse(r["publishable"])
+        self.assertEqual(len(r["publish_blocks"]), 1)
+        self.assertIn("C1", r["publish_blocks"][0])
+        self.assertIn("沒有列出實際核對過的網址", r["publish_blocks"][0])
+        self.assertNotIn("手法", r["publish_blocks"][0])
+
     def test_unscored_claim_that_would_change_the_result_blocks_publishing(self):
         """Red-team: typing a damaging fact as vague hides it from the score. If counting the opinion,
         prediction or vague claims the judge still labelled would change the result, do not publish."""

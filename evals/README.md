@@ -94,9 +94,9 @@ python3 evals/harness/analyze.py --base <輸出資料夾>
   - 這一則寫好之後才開始跑，不拿來調規則。改規則以後，要另外寫一則新的對照探測。
 - `symmetry-time.toml`、`symmetry-stale.toml`、`symmetry-motive.toml` 是時間規則和動機規則的對照探測，都是先寫好預期才開始跑，不拿來調規則。三個版本各跑 1 次，例如 `python3 evals/harness/run_cases.py --base <輸出資料夾> --host-model <模型 ID> probes/symmetry-stale/民進黨 probes/symmetry-stale/國民黨 probes/symmetry-stale/民眾黨`，再跑 `analyze.py`。
   - 通過標準寫在各檔的 `[expect]`：三版結論相同、計分命題的判定相同、可信度差距不超過 10；有寫 `expected_result` 的，三版都要是那個結論；有寫 `required_tactics` 的，三版都要留下那些標記；`symmetry-stale` 另外要三版的時間標記相同，`symmetry-motive` 要各類型的命題數相同。
-  - `analyze.py` 會印出結論、手法標記、可公開、時間標記、各類型的命題數、計分命題的判定、判定旁的脈絡標記是否相同，可信度差距，以及有沒有符合 `expected_result`、`required_tactics`。脈絡標記（斷章取義、舊聞新炒等）是 2026-11-20 才加進比對的，之前的探測沒有比過。
+  - `analyze.py` 會印出結論、手法標記、可公開、時間標記、各類型的命題數、計分命題的判定、判定旁的脈絡標記是否相同，可信度差距，以及有沒有符合 `expected_result`、`required_tactics`。脈絡標記（斷章取義、舊聞新炒等）是 2026-11-20 才加進比對的，之前的探測沒有比過；比的是報告會印出來的那些，也就是判錯的命題旁邊的。
 - 3 次的檢定力很低：真實偏向是 80% 對 20% 時，「3/3 對 0/3」只有大約四分之一的機會抓到。所以通過了，也不代表可以拿掉報告手法段的警語。
-- 2026-11-20 起，報告不列手法標記（要看得另外產生 `report-with-tactics.md`）：`symmetry-time` 有一版多一個標記，而且同一則訊息只重跑溯源，標記每次不一樣。`analyze.py` 比的是 `verdicts.json` 裡留下的標記，不受報告有沒有印影響。
+- 2026-11-20 起，報告不列手法標記（要看得另外產生 `report-with-tactics.md`）：`symmetry-time` 有一版多一個標記，而且同一則訊息只重跑溯源，標記可能不一樣。`analyze.py` 比的是 `verdicts.json` 裡留下的標記，不受報告有沒有印影響。
 - **狀態：**
   - `symmetry.toml`：三版各 3 次是 2026-11-18 第二輪和 2026-11-19 第三輪合起來的（第三輪只補跑民眾黨版第 3 次），用的是 commit 8d4a5fa 前後的流程。之後沒有重跑。
   - `symmetry-tactics.toml`：最後一次是 2026-11-20，commit d838c71 的流程，三版各 1 次：結論、手法標記、可信度都相同（`results/2026-11-20-final.md`）。
@@ -113,7 +113,7 @@ python3 evals/harness/analyze.py --base <輸出資料夾>
 
 同一個案例跑 3 次，記錄核心命題判定的一致率。
 
-**狀態：** 沒有做過。可以當部分資料的只有 `symmetry.toml` 同一版跑 3 次的那幾組（見第 5 節），以及 2026-11-20 `symmetry-time` 每版只重跑溯源的 4 次：手法標記每次不一樣，整則結論的重現性沒有量。
+**狀態：** 沒有做過。可以當部分資料的只有 `symmetry.toml` 同一版跑 3 次的那幾組（見第 5 節），以及 2026-11-20 `symmetry-time` 每版溯源的 4 次（盲測那一次加上只重跑溯源的 3 次）：手法標記可能不一樣，整則結論的重現性沒有量。
 
 ## 8. 快速模式
 

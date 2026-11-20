@@ -55,6 +55,13 @@ class VariantSummaryTest(unittest.TestCase):
         self.assertEqual(analyze.variant_summary(fx.CLAIMS, plain)[2], ())
         self.assertEqual(analyze.variant_summary(fx.CLAIMS, flagged)[2], ("old_news",))
 
+    def test_only_the_flags_a_report_prints_are_compared(self):
+        """Re-review: the report prints a flag only beside a claim judged wrong; one on a claim judged right is
+        not there to be seen, and counting it hid a real difference and reported a false one."""
+        unseen = {"claims": [{"claim_id": "C1", "label": "false", "context_flags": []},
+                             {"claim_id": "C2", "label": "mostly_true", "context_flags": ["old_news"]}]}
+        self.assertEqual(analyze.variant_summary(fx.CLAIMS, unseen)[2], ())
+
 
 class BrokenJobsTest(unittest.TestCase):
     """Delta review: a job that crashed left a record the analysis either crashed on or silently dropped."""
