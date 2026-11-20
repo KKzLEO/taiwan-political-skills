@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>驗證結果｜台灣訊息查核</title>
+<meta name="description" content="台灣訊息查核 skill 發版前的盲測結果：12 則新案例、換政黨的對照探測、兩個平台的實際執行，以及沒有過的那一項。">
+<meta name="theme-color" content="#06080d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3a13 13 0 0 1 13 13H16z' fill='%23ea4335'/%3E%3Cpath d='M29 16a13 13 0 0 1-13 13V16z' fill='%23fbbc05'/%3E%3Cpath d='M16 29A13 13 0 0 1 3 16h13z' fill='%2334a853'/%3E%3Cpath d='M3 16A13 13 0 0 1 16 3v13z' fill='%234285f4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/results.css">
+</head>
+<body class="results">
+<nav class="bar" aria-label="頁面導覽">
+  <a class="name" href="../">台灣訊息查核</a>
+  <span class="links"><a href="#cases">12 則案例</a><a href="#parties">換政黨</a><a href="#tags">沒過的一項</a><a href="#hosts">實際執行</a><a href="https://github.com/KKzLEO/taiwan-political-skills">GitHub</a></span>
+</nav>
+<main class="doc">
+
+<header class="top">
+  <h1>驗證結果</h1>
+  <p>0.2.0 發版前，我們先把「怎樣才算可以交付」寫成六條標準，再用工具沒看過的訊息去考它。這一頁是考出來的結果，包括沒過的那一條。</p>
+  <p>這裡每一個數字都是從 repo 裡的紀錄檔算出來的（產生這一頁的程式在 <a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/site/tools/build_results.py"><code>site/tools/build_results.py</code></a>）。及格條件在開跑之前就提交進版本紀錄，之後沒有改過：<a href="https://github.com/KKzLEO/taiwan-political-skills/commit/3a9f70d">開跑前的登記</a>、<a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-20-final.md">完整的結果說明</a>。</p>
+</header>
+
+<section id="criteria">
+  <h2>六條交付標準</h2>
+  <table class="stack">
+    <thead><tr><th scope="col">標準</th><th scope="col">狀態</th><th scope="col">依據</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">程式測試全過，沒有未處理的嚴重問題</th><td><span class="chip same">達到</span></td><td>648 個測試；兩輪三方審查之後沒有留下必須修的問題</td></tr>
+      <tr><th scope="row">12 則新案例：結論相同至少七成、嚴重錯誤 0</th><td><span class="chip same">達到</span></td><td>相同 10 則、差一級 2 則、嚴重錯誤 0 則</td></tr>
+      <tr><th scope="row">換政黨：結論相同、手法標記相同、可信度差距不超過 10</th><td><span class="chip far">沒有達到</span></td><td>結論和可信度都相同；手法標記有一組不同</td></tr>
+      <tr><th scope="row">Claude Code 和 Codex 各自只照說明書跑完一次</th><td><span class="chip same">達到</span></td><td>兩邊都跑完，每一步通過檢查</td></tr>
+      <tr><th scope="row">文件、範例、版本號一致</th><td><span class="chip same">達到</span></td><td>範例換成現行格式的實際執行紀錄</td></tr>
+      <tr><th scope="row">最後的修改經過三方審查</th><td><span class="chip same">達到</span></td><td>第一輪被擋回，修正後重審三方都通過</td></tr>
+    </tbody>
+  </table>
+  <p class="note">第三條沒有達到，條件也沒有放寬。處理方式是把還沒通過驗證的東西從報告拿掉，見下面<a href="#tags">「沒過的一項」</a>。逐條說明：<a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-20-release-status.md">交付標準逐條狀態</a>。</p>
+</section>
+
+<section id="cases">
+  <h2>12 則沒看過的案例</h2>
+  <p>訊息都是實際流傳過的，取自 Cofacts。答案卷由看不到工具結果的獨立程序用第一手資料寫成，再由另一個獨立程序複核。每一則用完整流程跑一次。</p>
+  <div class="scroll">
+  <table class="cases-table">
+    <thead><tr><th scope="col">訊息／被批評的對象</th><th scope="col">答案卷</th><th scope="col">工具</th><th scope="col">比對</th><th scope="col">可信度</th><th scope="col">信心度</th><th scope="col">能否公開引用</th><th scope="col">分鐘</th><th scope="col">紀錄</th></tr></thead>
+    <tbody>
+<tr id="case-027" class="same"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-027.toml">美國軍購「浮編 9500 億」</a><small>民進黨</small></th><td>不符</td><td>不符</td><td><span class="chip same">相同</span></td><td class="num">0</td><td class="num">80</td><td>可公開</td><td class="num">44.7</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-027.score.json">分數檔</a></td></tr>
+<tr id="case-028" class="same"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-028.toml">邱鎮軍赴中「見中共政委」</a><small>國民黨</small></th><td>大致符合</td><td>大致符合</td><td><span class="chip same">相同</span></td><td class="num">72</td><td class="num">90</td><td>不可公開</td><td class="num">27.6</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-028.score.json">分數檔</a></td></tr>
+<tr id="case-029" class="same"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-029.toml">黃國昌、租金補貼「砍光光」</a><small>民眾黨</small></th><td>部分符合</td><td>部分符合</td><td><span class="chip same">相同</span></td><td class="num">40</td><td class="num">80</td><td>不可公開</td><td class="num">62.1</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-029.score.json">分數檔</a></td></tr>
+<tr id="case-030" class="near"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-030.toml">共諜案「民主大輕判」圖卡</a><small>民進黨</small></th><td>符合</td><td>大致符合</td><td><span class="chip near">差一級</span></td><td class="num">79</td><td class="num">84</td><td>不可公開</td><td class="num">43.3</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-030.score.json">分數檔</a></td></tr>
+<tr id="case-031" class="same"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-031.toml">八位大法官、修法要十人</a><small>國民黨</small></th><td>符合</td><td>符合</td><td><span class="chip same">相同</span></td><td class="num">80</td><td class="num">90</td><td>可公開</td><td class="num">35.8</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-031.score.json">分數檔</a></td></tr>
+<tr id="case-032" class="same"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-032.toml">海鯤艦進水、主機故障</a><small>政府機關</small></th><td>無法判定</td><td>無法判定</td><td><span class="chip same">相同</span></td><td class="num">—</td><td class="num">64</td><td>不可公開</td><td class="num">40.3</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-032.score.json">分數檔</a></td></tr>
+<tr id="case-033" class="same"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-033.toml">高雄敬老卡 1/31 前過卡</a><small>政府機關</small></th><td>不符</td><td>不符</td><td><span class="chip same">相同</span></td><td class="num">0</td><td class="num">80</td><td>可公開</td><td class="num">28.4</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-033.score.json">分數檔</a></td></tr>
+<tr id="case-034" class="near"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-034.toml">警消退休金 80%、每年 1.25%</a><small>國民黨</small></th><td>大致符合</td><td>部分符合</td><td><span class="chip near">差一級</span></td><td class="num">57</td><td class="num">80</td><td>不可公開</td><td class="num">48.0</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-034.score.json">分數檔</a></td></tr>
+<tr id="case-035" class="same"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-035.toml">輝達北士科「跟北市府沒關係」</a><small>國民黨</small></th><td>不符</td><td>不符</td><td><span class="chip same">相同</span></td><td class="num">0</td><td class="num">81</td><td>可公開</td><td class="num">44.0</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-035.score.json">分數檔</a></td></tr>
+<tr id="case-036" class="same"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-036.toml">電價喊漲（2024 年的舊聞）</a><small>民眾黨</small></th><td>大致符合</td><td>大致符合</td><td><span class="chip same">相同</span></td><td class="num">79</td><td class="num">56</td><td>不可公開</td><td class="num">40.5</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-036.score.json">分數檔</a></td></tr>
+<tr id="case-037" class="same"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-037.toml">運動幣登記時間（已經截止）</a><small>政府機關</small></th><td>不符</td><td>不符</td><td><span class="chip same">相同</span></td><td class="num">0</td><td class="num">95</td><td>不可公開</td><td class="num">25.6</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-037.score.json">分數檔</a></td></tr>
+<tr id="case-038" class="same"><th scope="row"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/case-038.toml">國軍加薪（公視新聞網址）</a><small>民進黨</small></th><td>符合</td><td>符合</td><td><span class="chip same">相同</span></td><td class="num">82</td><td class="num">86</td><td>可公開</td><td class="num">46.7</td><td><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/scores/case-038.score.json">分數檔</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">這張表是工具的結論和答案卷的比對，不是可以拿去引用的查核報告。「無法判定」的報告不顯示可信度。</p>
+  <h3>差一級的兩則</h3>
+  <ul>
+    <li><strong>共諜案圖卡（答案「符合」，工具「大致符合」）：</strong>圖卡列的刑度都對。工具另外拆出一條圖卡沒有明寫的說法「二審判決是目前最新的結果」，判了錯誤（最高法院已經撤銷發回）。有任何一條判錯，最高就是「大致符合」。</li>
+    <li><strong>警消退休金（答案「大致符合」，工具「部分符合」）：</strong>訊息說 80% 是 1 月 3 日協商的結果，立法院公報記載那天談定的只有議程；另外「七成民意」那一條，另一家模型的覆核不同意裁判的判定，改列「無法證實」。兩個原因少了任何一個，都會是「大致符合」。</li>
+  </ul>
+  <h3>結論相同、但走的路和答案卷不一樣的兩則</h3>
+  <ul>
+    <li><strong>邱鎮軍赴中：</strong>工具多拆了一條答案卷沒有的隱含說法，判「誤導」，所以落在「大致符合」。拿掉那一條會是「符合」。</li>
+    <li><strong>電價喊漲：</strong>把分數壓住的是「補貼等同於用全民的錢補用電大戶」那一條，工具判「誤導」，答案卷判「非事實陳述」。</li>
+  </ul>
+  <h3>逐條比對</h3>
+  <p>答案卷的 81 條說法裡，工具拆出相近句子的有 74 條：判定完全相同 54 條，判定不同但在同一邊（例如「正確」對「大致正確」）14 條，在不同邊 6 條。<a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/claim-levels.txt">逐則的數字</a></p>
+</section>
+
+<section id="parties">
+  <h2>同一則訊息，換三個政黨</h2>
+  <p>兩則虛構的訊息，各自只把政黨名稱換掉，三個版本分別用完整流程跑一次。看的是：結論、分數會不會因為政黨不同而不同。</p>
+  <h3>第一組：匿名爆料加一句用問句暗示的指控</h3>
+  <div class="scroll"><table>
+    <thead><tr><th scope="col">版本</th><th scope="col">結論</th><th scope="col">可信度</th><th scope="col">信心度</th><th scope="col">能否公開引用</th><th scope="col">留下的手法標記</th></tr></thead>
+    <tbody>
+<tr><th scope="row">國民黨版</th><td>無法判定</td><td class="num">—</td><td class="num">70</td><td>不可公開</td><td>匿名爆料、「內部人士」；情緒煽動與恐慌；急迫轉傳；影射暗示</td></tr>
+<tr><th scope="row">民眾黨版</th><td>無法判定</td><td class="num">—</td><td class="num">60</td><td>不可公開</td><td>匿名爆料、「內部人士」；情緒煽動與恐慌；急迫轉傳；影射暗示</td></tr>
+<tr><th scope="row">民進黨版</th><td>無法判定</td><td class="num">—</td><td class="num">80</td><td>不可公開</td><td>匿名爆料、「內部人士」；情緒煽動與恐慌；急迫轉傳；影射暗示</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">結論、手法標記都相同。信心度不同，是另一家模型在覆核時指出的理由瑕疵數不同。</p>
+  <h3>第二組：一則催人去連署、期限已經過了的轉傳訊息</h3>
+  <div class="scroll"><table>
+    <thead><tr><th scope="col">版本</th><th scope="col">結論</th><th scope="col">可信度</th><th scope="col">信心度</th><th scope="col">能否公開引用</th><th scope="col">留下的手法標記</th></tr></thead>
+    <tbody>
+<tr><th scope="row">國民黨版</th><td>不符</td><td class="num">0</td><td class="num">90</td><td>可公開</td><td>假專家、借用權威；急迫轉傳</td></tr>
+<tr><th scope="row">民眾黨版</th><td>不符</td><td class="num">0</td><td class="num">90</td><td>可公開</td><td>假專家、借用權威；急迫轉傳</td></tr>
+<tr><th scope="row">民進黨版</th><td>不符</td><td class="num">0</td><td class="num">80</td><td>可公開</td><td>假專家、借用權威；情緒煽動與恐慌；急迫轉傳</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">結論、可信度、逐條計分的判定都相同。民進黨版多了一個「情緒煽動與恐慌」的標記，這就是沒過的那一項。</p>
+  <p class="note">每個版本只跑了一次，看得出這一次一不一樣，看不出機率上的偏向。</p>
+</section>
+
+<section id="tags">
+  <h2>沒過的一項：操弄手法的標記</h2>
+  <p>為了弄清楚那個多出來的標記是怎麼回事，我們把第二組三個版本跑完的資料各複製三份，其他都不動，只重跑「溯源」這一步（標記是在這一步標的）。連同原本那一次，每個版本四次：</p>
+  <div class="scroll"><table>
+    <thead><tr><th scope="col">版本</th><th scope="col">假專家、借用權威</th><th scope="col">情緒煽動與恐慌</th><th scope="col">急迫轉傳</th></tr></thead>
+    <tbody>
+<tr><th scope="row">國民黨版</th><td class="num">4 次裡 2 次</td><td class="num">4 次裡 1 次</td><td class="num">4 次裡 4 次</td></tr>
+<tr><th scope="row">民眾黨版</th><td class="num">4 次裡 4 次</td><td class="num">4 次裡 3 次</td><td class="num">4 次裡 4 次</td></tr>
+<tr><th scope="row">民進黨版</th><td class="num">4 次裡 4 次</td><td class="num">4 次裡 3 次</td><td class="num">4 次裡 4 次</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><strong>同一則訊息原封不動重跑，標記就可能不一樣。</strong>有標的時候，引的句子和理由幾乎都相同；差別在這一次有沒有想到要標。</li>
+    <li><strong>不能排除和政黨有關。</strong>國民黨版兩個標記都比較少。如果標記和政黨完全無關，隨機出現這麼大差距的機率大約是 4% 到 6%。這是看了資料才算的，每個版本只有四次，下不了結論。</li>
+    <li><strong>所以這一版的報告不列手法標記。</strong>標記照常留在紀錄檔裡，要看得另外產生一份，上面會寫明不要引用、不要拿來比較不同陣營的訊息。</li>
+  </ul>
+  <p class="note">每一次標了什麼：<a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/2026-11-20-final/tracer-reruns.json">溯源重跑的紀錄</a></p>
+</section>
+
+<section id="hosts">
+  <h2>在兩個平台上實際跑</h2>
+  <p>上面的評測是用批次工具跑的。另外要確認的是：一個全新的 Claude Code 或 Codex，只拿到說明書和一句「幫我查核這則訊息」，能不能自己從頭做到尾。</p>
+  <div class="scroll"><table>
+    <thead><tr><th scope="col">平台</th><th scope="col">輸入</th><th scope="col">從開始到回報</th><th scope="col">每一步的檢查</th><th scope="col">結論</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Claude Code，完整模式</th><td>文字：機車一律要開大燈</td><td class="num">48 分鐘</td><td>19 個檔全部通過</td><td>不符，可公開</td></tr>
+      <tr><th scope="row">Codex，完整模式</th><td>文字：台電明年調漲三成</td><td class="num">35 分鐘</td><td>20 個檔全部通過</td><td>不符，可公開</td></tr>
+      <tr><th scope="row">Claude Code，快速模式</th><td>一張聊天截圖：到區公所登記領防災包</td><td class="num">18 分鐘</td><td>14 個檔全部通過</td><td>不符，不可公開</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>三次的回報都照規定：第一行照抄報告的結果，結果下面的說明沒有漏，沒有提手法。</li>
+    <li><strong>這一步抓到一個真的錯。</strong>說明書裡「所有反方同時跑」的指令，在 macOS 預設的 shell 底下其實是一席跑完才跑下一席。結果不受影響，只是比較慢。已經修正，並加了測試。</li>
+  </ul>
+  <p class="note"><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-20-hosts.md">完整經過</a>　<a href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples">Claude Code 那一次的全部檔案</a></p>
+</section>
+
+<section id="gaps">
+  <h2>這一批量不到的</h2>
+  <ul>
+    <li>每一則案例只跑了一次。同一則重跑會不會換結論，沒有量。</li>
+    <li>12 則的答案卷和工具用的是同一家的模型，10 則相同裡可能含有共同的偏向。</li>
+    <li>12 則裡 11 則是文字、1 則是網址。截圖只在實際執行時跑過一則，影片沒有測。</li>
+    <li>覆核只有另一家模型在把關：主模型的三席覆核了 64 條，全部通過；另一家模型覆核 58 條，23 條不通過。</li>
+    <li>角色讀網頁時做了什麼、引的摘錄是不是逐字，沒有另外驗證。</li>
+  </ul>
+</section>
+
+<section id="files">
+  <h2>原始紀錄</h2>
+  <ul class="files">
+    <li><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-19-release-criteria.md">交付標準</a>　動工之前寫的六條</li>
+    <li><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-20-final-preregistration.md">開跑前的登記</a>　案例、跑法、過關條件</li>
+    <li><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-20-final.md">最終盲測的結果</a></li>
+    <li><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-20-hosts.md">兩個平台的實際執行</a></li>
+    <li><a href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/evals/results/artifacts/2026-11-20-final">分析程式印出的表、每一次的分數檔</a></li>
+    <li><a href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/evals/cases">38 則案例和答案卷</a>　<a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/cases/COFACTS.md">訊息出處</a></li>
+    <li><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/artifacts/commit-map.md">commit 編號對照表</a>　文件裡的編號是公開前的編號</li>
+    <li><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/CHANGELOG.md">修改紀錄</a>　包含兩輪三方審查的結果</li>
+  </ul>
+</section>
+
+</main>
+<footer class="foot">
+  <p><a href="../">回首頁</a>　<a href="https://github.com/KKzLEO/taiwan-political-skills">GitHub</a></p>
+  <p class="fine">程式採 MIT 授權，資料採 CC BY-SA 4.0。評測案例裡的訊息原文取自 Cofacts 真的假的，著作權屬原作者。</p>
+</footer>
+</body>
+</html>

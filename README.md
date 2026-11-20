@@ -4,6 +4,8 @@
 
 可以在 **Claude Code** 和 **Codex** 裡使用。
 
+網站：<https://kkzleo.github.io/taiwan-political-skills/>（怎麼查的、發版前的驗證結果、怎麼用）
+
 ## 它會做什麼
 
 - **查核四種輸入：** 新聞網址、LINE 轉傳文字、截圖、影片連結（YouTube 等，需要 `yt-dlp`，只用上傳者自己放的字幕）
@@ -64,14 +66,14 @@
 **Claude Code：**
 
 ```
-/plugin marketplace add <GitHub 帳號>/taiwan-political-skills
+/plugin marketplace add KKzLEO/taiwan-political-skills
 /plugin install taiwan-factcheck@taiwan-political-skills
 ```
 
 **Codex：**
 
 ```bash
-git clone https://github.com/<GitHub 帳號>/taiwan-political-skills.git
+git clone https://github.com/KKzLEO/taiwan-political-skills.git
 mkdir -p ~/.codex/skills
 ln -sfn "$PWD/taiwan-political-skills/skills/factcheck" ~/.codex/skills/factcheck
 ```

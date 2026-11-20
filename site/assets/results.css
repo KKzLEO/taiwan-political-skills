@@ -1,0 +1,48 @@
+/* The results page: the same dark and the same four colours, set as a document to read. */
+.results .doc { width: var(--page); margin: 0 auto; padding: clamp(3.5rem, 8vw, 6.5rem) 0 5rem; display: grid; gap: clamp(3.5rem, 7vw, 6rem); }
+.top { display: grid; gap: 1.2rem; }
+.top h1 { font-size: clamp(2.4rem, 1.2rem + 4.4vw, 4.4rem); line-height: 1.15; font-weight: 700; letter-spacing: 0.01em; }
+.top p { color: var(--soft); max-width: 46rem; }
+.doc section { display: grid; gap: 1.3rem; scroll-margin-top: 5rem; }
+.doc section > p, .doc section > ul { max-width: 50rem; color: var(--soft); }
+.doc h2 { font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.3rem); }
+.doc h3 { margin-top: 1.4rem; font-size: 1.12rem; }
+.doc ul { padding-left: 1.25rem; display: grid; gap: 0.65rem; }
+.doc li::marker { color: #6b7381; }
+.doc li strong { color: var(--ink); font-weight: 500; }
+.doc .note { font-size: 0.92rem; }
+.doc code { font-size: 0.9em; }
+.files { list-style: none; padding: 0 !important; }
+.files li { padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
+
+.scroll { overflow-x: auto; scrollbar-color: #3a4150 transparent; }
+table { width: 100%; border-collapse: collapse; font-size: 0.93rem; line-height: 1.55; }
+th, td { text-align: left; padding: 0.85rem 1.1rem 0.85rem 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th:last-child, td:last-child { padding-right: 0; }
+thead th { font-weight: 400; color: var(--soft); font-size: 0.84rem; white-space: nowrap; }
+tbody th { font-weight: 500; color: var(--ink); }
+.scroll table { min-width: 44rem; }
+.scroll tbody th { min-width: 11rem; }
+.scroll th, .scroll td:not(:last-child) { white-space: nowrap; }
+tbody th a { color: var(--ink); text-decoration-color: rgba(255, 255, 255, 0.3); }
+tbody th a:hover { color: var(--blue); }
+tbody th small { display: block; margin-top: 0.15rem; font-weight: 400; color: var(--soft); font-size: 0.82rem; }
+td { color: #d5dae3; }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scroll .cases-table { min-width: 58rem; }
+tr:target { background: rgba(138, 180, 248, 0.1); }
+
+/* same as the answer, one step off, or further: a dot, and the word beside it */
+.chip { display: inline-flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
+.chip::before { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--green); }
+.chip.near::before { background: var(--yellow); }
+.chip.far::before { background: var(--red); }
+
+/* three columns do not fit a phone: each row becomes a short stack instead */
+@media (max-width: 40rem) {
+  .stack, .stack tbody, .stack tr, .stack th, .stack td { display: block; }
+  .stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .stack tr { padding: 0.95rem 0; border-bottom: 1px solid var(--line); }
+  .stack th, .stack td { border: 0; padding: 0.12rem 0; }
+  .stack td:last-child { color: var(--soft); }
+}
