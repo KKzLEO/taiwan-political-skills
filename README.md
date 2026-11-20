@@ -154,7 +154,7 @@ python3 -m unittest discover -s tests -t .
 
 詳見 [LICENSE](LICENSE)。報告引用查核機構與 Cofacts 的內容時，只附連結和簡短摘錄，著作權屬原機構。
 
-`evals/cases/` 和 `examples/` 引用的訊息原文和摘錄，著作權屬原作者，不在 MIT 授權範圍內。取自 Cofacts 的訊息原文依 Cofacts 資料的授權（CC BY-SA 4.0）提供：本編輯資料取自「Cofacts 真的假的」訊息回報機器人與查證協作社群，採 CC BY-SA 4.0 授權提供。若欲補充資訊請訪問 Cofacts LINE bot https://line.me/ti/p/@cofacts 。每則的 Cofacts 文章編號寫在各案例檔的說明裡。
+`evals/cases/` 和 `examples/` 引用的訊息原文和摘錄，著作權屬原作者，不在 MIT 授權範圍內。取自 Cofacts 的訊息原文依 Cofacts 資料的授權（CC BY-SA 4.0）提供：本編輯資料取自「Cofacts 真的假的」訊息回報機器人與查證協作社群，採 CC BY-SA 4.0 授權提供。若欲補充資訊請訪問 Cofacts LINE bot https://line.me/ti/p/@cofacts 。每一則對應的 Cofacts 文章網址列在 [evals/cases/COFACTS.md](evals/cases/COFACTS.md)。
 
 ---
 
