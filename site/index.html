@@ -4,171 +4,240 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>台灣訊息查核</title>
-<meta name="description" content="收到一則政治訊息，想知道是真是假？裝在 Claude Code 和 Codex 裡的開源查核流程：一個正方對三個反方，再找另一家公司的模型交叉抗辯，每一步都留下檔案。">
-<meta name="theme-color" content="#06080d">
+<meta name="description" content="裝在 Claude Code 和 Codex 裡的開源查核流程：一個 AI 查證，三個 AI 專門挑毛病，再請另一家公司的模型來抗辯。每一步都留下檔案，分數由程式照固定規則算。">
+<meta name="theme-color" content="#08090a">
 <meta property="og:type" content="website">
 <meta property="og:title" content="台灣訊息查核">
-<meta property="og:description" content="收到一則政治訊息，想知道是真是假？裝在 Claude Code 和 Codex 裡的開源查核流程：一個正方對三個反方，再找另一家公司的模型交叉抗辯，每一步都留下檔案。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3a13 13 0 0 1 13 13H16z' fill='%23ea4335'/%3E%3Cpath d='M29 16a13 13 0 0 1-13 13V16z' fill='%23fbbc05'/%3E%3Cpath d='M16 29A13 13 0 0 1 3 16h13z' fill='%2334a853'/%3E%3Cpath d='M3 16A13 13 0 0 1 16 3v13z' fill='%234285f4'/%3E%3C/svg%3E">
+<meta property="og:description" content="查核一則政治訊息，每一步都留下紀錄。裝在 Claude Code 和 Codex 裡的開源查核流程。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5' fill='%2308090a'/%3E%3Crect x='3.25' y='3.25' width='13.5' height='13.5' rx='3.5' fill='none' stroke='%23f7f8f8' stroke-width='1.5'/%3E%3Cpath d='M11.6 6.6 8.4 13.4' stroke='%23f7f8f8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
-<body id="top">
+<body>
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.25" y="2.25" width="15.5" height="15.5" rx="4.25"/><path d="M11.9 6 8.1 14"/></symbol>
+  <symbol id="i-out" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 10.5 10.5 5.5M6 5.5h4.5V10"/></symbol>
+  <symbol id="i-next" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9M9 4.5 12.5 8 9 11.5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1.75"/><path d="M10.5 3.5v-.25A1.25 1.25 0 0 0 9.25 2H3.75A1.75 1.75 0 0 0 2 3.75v5.5c0 .7.55 1.25 1.25 1.25h.25"/></symbol>
+  <symbol id="i-done" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5 6.5 11.5 12.5 5"/></symbol>
+  <symbol id="i-again" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a5 5 0 1 0 1.6-3.7M3 2.75V5h2.25"/></symbol>
+</svg>
 
-<header class="hero">
-  <canvas id="ink" aria-hidden="true"></canvas>
-  <p class="prompt"><span class="cmd">/factcheck</span><span class="sr"> 後面接你想查的訊息，例如：騎機車一律要開大燈，沒開罰三千？</span><span class="q" aria-hidden="true"></span><span class="caret" aria-hidden="true"></span><kbd class="esc" aria-hidden="true">esc</kbd></p>
-  <a class="down" href="#how" aria-label="往下看它怎麼查"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="./"><svg width="20" height="20"><use href="#i-mark"/></svg>台灣訊息查核</a>
+    <nav class="nav-links" aria-label="頁面導覽">
+      <a href="#how">怎麼查的</a>
+      <a href="#proof">驗證結果</a>
+      <a href="#limits">做不到的事</a>
+      <a href="#use">安裝</a>
+    </nav>
+    <div class="nav-end">
+      <a class="nav-out" href="https://github.com/KKzLEO/taiwan-political-skills">GitHub<svg width="16" height="16"><use href="#i-out"/></svg></a>
+      <a class="btn sm" href="#use">安裝</a>
+    </div>
+  </div>
 </header>
 
-<nav class="bar" aria-label="頁面導覽">
-  <a class="name" href="#top">台灣訊息查核</a>
-  <span class="links">
-    <a href="#how">怎麼查的</a>
-    <a href="#proof">驗證結果</a>
-    <a href="#use">怎麼用</a>
-    <a href="https://github.com/KKzLEO/taiwan-political-skills">GitHub</a>
-  </span>
-</nav>
-
 <main>
+<section class="hero">
+  <div class="wrap">
+    <h1>查核一則政治訊息，<br>每一步都留下紀錄</h1>
+    <p class="hero-sub">裝在 Claude Code 和 Codex 裡的開源查核流程。<br>一個 AI 查證，<wbr>三個 AI 專門挑毛病，<wbr>再請另一家公司的模型來抗辯；<wbr>分數由程式照固定規則算。</p>
+    <p class="hero-cta"><a class="btn" href="#use">安裝</a><a class="btn ghost" href="results/">看驗證結果<svg width="16" height="16"><use href="#i-next"/></svg></a></p>
 
-<section id="how" class="band">
-  <div class="lede">
-    <h2>一則訊息，是這樣被查的</h2>
-    <p>這是一個裝在 Claude Code 或 Codex 裡的查核流程。你貼上一則訊息，它不是直接給答案，而是讓幾個互相看不到對方的 AI 照下面的順序各做各的事，最後由程式照固定的規則算分。</p>
-    <p>每一步都會在你的電腦留下一個檔案，所以一份報告是怎麼得出來的，任何人都可以從頭檢查一遍。</p>
+    <div class="run" id="run">
+      <div class="run-bar">
+        <p class="run-path"><span>factcheck-runs</span><i>/</i><b>20261120-1441-機車大燈罰三千</b></p>
+        <p class="run-meta">完整模式<i>·</i>48 分鐘</p>
+        <button class="run-again" type="button" hidden><svg width="16" height="16"><use href="#i-again"/></svg>重播</button>
+      </div>
+      <p class="run-prompt"><code>/factcheck</code><span class="run-msg">立法院昨天三讀通過，以後騎機車一律要開大燈，沒開罰三千！快轉給家人。</span></p>
+      <div class="run-body">
+        <ol class="run-steps">
+          <li><button type="button" data-step="input" data-state="done"><i></i><span>讀入</span><code>input.json</code></button></li>
+          <li><button type="button" data-step="claims" data-state="done"><i></i><span>拆題</span><code>claims.json</code></button></li>
+          <li><button type="button" data-step="trace" data-state="done"><i></i><span>溯源</span><code>trace.json</code></button></li>
+          <li><button type="button" data-step="proponent" data-state="done"><i></i><span>正方查證</span><code>proponent.json</code></button></li>
+          <li><button type="button" data-step="opponents" data-state="done"><i></i><span>反方</span><code>opponent-*.json</code></button></li>
+          <li><button type="button" data-step="rebuttal" data-state="done"><i></i><span>正方答辯</span><code>rebuttal.json</code></button></li>
+          <li><button type="button" data-step="judgment" data-state="done"><i></i><span>裁判</span><code>judgment.json</code></button></li>
+          <li><button type="button" data-step="review" data-state="done"><i></i><span>覆核</span><code>review-*.json</code></button></li>
+          <li><button type="button" data-step="score" data-state="done" aria-current="true"><i></i><span>程式算分</span><code>report.md</code></button></li>
+        </ol>
+        <div class="run-pane" id="run-pane">
+          <div class="pane">
+            <header><h2>程式算分</h2><p>可信度、信心度、能不能公開引用，都由程式照固定規則算，不是 AI 給的。</p></header>
+            <div class="verdict">
+              <p class="verdict-word">不符</p>
+              <dl><div><dt>可信度</dt><dd>0</dd></div><div><dt>信心度</dt><dd>100<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
+            </div>
+            <ul class="rows">
+              <li class="r-claim"><code>C1</code><p>立法院三讀通過一項法案，內容與騎機車開大燈有關。</p><span class="mark bad">錯誤</span><span class="num">不需覆核</span></li>
+              <li class="r-claim"><code>C2</code><p>往後騎機車一律要開大燈。</p><span class="mark bad">錯誤</span><span class="num">覆核通過</span></li>
+              <li class="r-claim"><code>C3</code><p>騎機車沒開大燈會被罰三千元。</p><span class="mark bad">錯誤</span><span class="num">覆核通過</span></li>
+              <li class="r-claim"><code>C4</code><p>騎機車一律要開大燈、沒開要罰的規定已經生效，現在就適用。<small>問法在辯論中修正過</small></p><span class="mark bad">錯誤</span><span class="num">覆核通過</span></li>
+              <li class="r-claim"><code>C5</code><p>這次三讀是查核日期的前一天（2026 年 11 月 19 日）發生的。</p><span class="mark bad">錯誤</span><span class="num">覆核通過</span></li>
+              <li class="r-claim off"><code>C6</code><p>呼籲讀者把這則訊息轉傳給家人。</p><span class="mark no">非事實陳述</span><span class="num">不需覆核</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="run-note">
+      <p>2026 年 11 月 20 日，<wbr>一個全新的 Claude Code 只拿到說明書和一句請求，<wbr>自己從頭做到尾的一次查核，<wbr>中途沒有人插手。<wbr>訊息是我們為了測試寫的，<wbr>不是實際流傳的原文。<wbr>上面的內容都節錄自它留下的檔案，<wbr>檔案本身沒有改過。</p>
+      <p class="run-links"><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261120-1441-機車大燈罰三千/report.md">完整報告<svg width="16" height="16"><use href="#i-out"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261120-1441-機車大燈罰三千">這一次的全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a></p>
+    </div>
   </div>
-  <ol class="steps">
-    <li><h3>你貼上訊息</h3><p>新聞網址、LINE 轉傳的文字、截圖、影片連結都可以。收下來的時候一個字都不改。</p><code>input.json</code></li>
-    <li><h3>拆成一句一句</h3><p>由一個看不到你怎麼問的獨立程序，把訊息拆成可以查證的說法，改寫成不帶立場的句子。意見和預測另外標出來，不計分。</p><code>claims.json</code></li>
-    <li><h3>溯源</h3><p>這則訊息最早在哪裡出現、有沒有別的版本、有沒有人查過。查核機構的結論只當線索，會回到原始資料重新驗證。</p><code>trace.json</code></li>
-    <li><h3>正方查證</h3><p>一個 AI 逐句去找第一手資料：法條原文、立法院公報、官方新聞稿。</p><code>proponent.json</code></li>
-    <li><h3>三個反方，加一個外人</h3><p>三個 AI 分別檢查證據站不站得住、自己去找反證、看有沒有偏向哪一方。再請另一家公司的模型從頭挑一次毛病。</p><code>opponent-A.json … opponent-X1.json</code></li>
-    <li><h3>正方答辯</h3><p>每一條質疑都要回應：接受，或是拿出證據反駁。</p><code>rebuttal.json</code></li>
-    <li><h3>裁判</h3><p>一個沒有參與辯論的 AI 逐條裁決。判質疑成立時，要列出自己實際打開核對過的網址。</p><code>judgment.json</code></li>
-    <li><h3>覆核</h3><p>提出質疑的那幾方回頭檢查裁判改判的地方。沒有通過的，那一條改列「無法證實」。</p><code>review-*.json</code></li>
-    <li><h3>程式算分</h3><p>可信度、信心度、能不能公開引用，都由程式照固定規則算，AI 改不了。同一份判定，每次算出來都是同樣的分數。</p><code>verdicts.json　score.json　report.md</code></li>
-  </ol>
 </section>
 
-<section class="band tint" aria-labelledby="example-title">
-  <div class="lede">
-    <h2 id="example-title">一次真的查核</h2>
-    <p>2026 年 11 月 20 日，Claude Code 只拿到一句「幫我查核這則 LINE 轉傳的訊息」，從頭做到尾，花了 48 分鐘，中途沒有人插手。</p>
-  </div>
-  <div class="example">
-    <blockquote>立法院昨天三讀通過，以後騎機車一律要開大燈，沒開罰三千！快轉給家人。</blockquote>
-    <div class="scale" role="img" aria-label="可信度 0 分，在量表最左邊「錯誤」那一端">
-      <span>錯誤</span><i><b style="left:0"></b></i><span>正確</span>
+<section class="sec" id="how">
+  <div class="wrap">
+    <h2 class="statement">它不直接給你答案。<span>每一句說法都要過正方、<wbr>三個反方、<wbr>另一家公司的模型，<wbr>和一個沒參與辯論的裁判。</span></h2>
+
+    <div class="pair">
+      <article>
+        <h3>另一家公司的模型也來挑毛病</h3>
+        <p>自動找你電腦上的 Codex 或 Claude Code 當外部反方。上面那一次的 11 條質疑，有 7 條是它提的。沒有它，信心度固定扣 20 分，報告也不會標「可公開」。</p>
+        <div class="viz v-seats">
+          <p class="cap">上面那一次，每一席提了幾條質疑</p>
+          <p><b>A</b><span>claude</span><i style="--n:1"></i><em>1</em></p>
+          <p><b>B</b><span>claude</span><i style="--n:0"></i><em>0</em></p>
+          <p><b>C</b><span>claude</span><i style="--n:3"></i><em>3</em></p>
+          <p><b>X1</b><span>codex</span><i style="--n:7"></i><em>7</em></p>
+        </div>
+      </article>
+      <article>
+        <h3>查核機構查過的，也要重查</h3>
+        <p>事實查核中心、Cofacts、MyGoPen 的結論只當線索，會回到原始資料再查一次。上面那一次找到兩份舊報告，查的都是另一個版本。</p>
+        <div class="viz v-leads">
+          <p class="cap">上面那一次找到的既有查核</p>
+          <p><span>台灣事實查核中心</span><time>2023-06-20</time><em>只當線索</em></p>
+          <p><span>MyGoPen</span><time>2023-06-22</time><em>只當線索</em></p>
+          <p class="to"><span>全國法規資料庫的條文原文</span><em>重新查證</em></p>
+        </div>
+      </article>
     </div>
-    <p class="result"><strong>不符</strong><span>可信度 0</span><span>信心度 高（100）</span><span>完整模式・跨模型 1 席</span><span>可公開</span></p>
-    <ul class="found">
-      <li>立法院沒有三讀通過和機車開大燈有關的法案；訊息說的「昨天」那一天根本沒有開院會。</li>
-      <li>現行規定只要求夜間、隧道、濃霧這些情況開頭燈，沒有「一律要開」。</li>
-      <li>一般道路沒開燈的罰鍰是 1,200 到 3,600 元；三千元只出現在高速、快速公路。</li>
+
+    <div class="flow">
+      <h3>九個步驟，每一步都留下檔案</h3>
+      <ol>
+        <li><b>你貼上訊息</b><p>新聞網址、LINE 轉傳的文字、截圖、影片連結都可以。收下來的時候一個字都不改。</p><code>input.json</code></li>
+        <li><b>拆成一句一句</b><p>由一個看不到你怎麼問的獨立程序，把訊息拆成可以查證的說法，改寫成不帶立場的句子。意見和預測另外標出來，不計分。</p><code>claims.json</code></li>
+        <li><b>溯源</b><p>這則訊息最早在哪裡出現、有沒有別的版本、有沒有人查過。</p><code>trace.json</code></li>
+        <li><b>正方查證</b><p>一個 AI 逐句去找第一手資料：法條原文、立法院公報、官方新聞稿。</p><code>proponent.json</code></li>
+        <li><b>三個反方，加一個外人</b><p>三個 AI 分別檢查證據站不站得住、自己去找反證、看有沒有偏向哪一方。再請另一家公司的模型從頭挑一次毛病。</p><code>opponent-*.json</code></li>
+        <li><b>正方答辯</b><p>每一條質疑都要回應：接受，或是拿出證據反駁。</p><code>rebuttal.json</code></li>
+        <li><b>裁判</b><p>一個沒有參與辯論的 AI 逐條裁決。判質疑成立時，要列出自己實際打開核對過的網址。</p><code>judgment.json</code></li>
+        <li><b>覆核</b><p>提出質疑的那幾方回頭檢查裁判改判的地方。沒有通過的，那一條改列「無法證實」。</p><code>review-*.json</code></li>
+        <li><b>程式算分</b><p>可信度、信心度、能不能公開引用，都由程式照固定規則算，最後寫成報告。</p><code>report.md</code></li>
+      </ol>
+      <p class="flow-note">每個角色都是另外開的程序，只能上網搜尋和讀網頁，讀不到你電腦上的檔案。例外：用 Codex 跑的角色一定會讀到 <code>~/.codex/AGENTS.md</code>，報告會寫明。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="proof">
+  <div class="wrap split">
+    <div class="split-text">
+      <h2>先考試，才拿出來</h2>
+      <p>規則定下來之後，我們找了 12 則它沒看過、真的在流傳的政治訊息來考。答案卷由看不到工具結果的獨立程序先用第一手資料寫好，再由另一個程序複核；及格標準也在開跑之前寫好、提交，之後沒有改過。</p>
+      <ul class="facts">
+        <li><strong>12 則裡 10 則結論完全相同</strong>，2 則差一級。沒有差到兩級以上的，也沒有把真的說成假的、假的說成真的。</li>
+        <li><strong>工具標「可公開」的有 5 則</strong>，結論全部和答案相同。</li>
+        <li><strong>同一則訊息換成三個政黨各跑一次</strong>，做了兩組：結論、逐條計分的判定、可信度都一樣；信心度不一樣，最多差 20 分。</li>
+        <li><strong>兩個平台都實際跑過。</strong>Claude Code 和 Codex 各自只照說明書從頭做完一次，每一步都通過檢查。</li>
+      </ul>
+      <p><a class="btn ghost" href="results/">每一則的結果和原始紀錄<svg width="16" height="16"><use href="#i-next"/></svg></a></p>
+    </div>
+    <div class="split-main">
+      <div class="sheet">
+        <p class="sheet-bar"><b>最終盲測</b><span>12 則</span><time>2026-11-20</time></p>
+        <p class="sheet-head"><span>訊息</span><span>答案卷</span><span>工具</span><span>比對</span></p>
+        <ol class="cases">
+          <li class="same"><a href="results/#case-027"><span>美國軍購「浮編 9500 億」</span><span>不符</span><span>不符</span><em>相同</em></a></li>
+          <li class="same"><a href="results/#case-028"><span>邱鎮軍赴中「見中共政委」</span><span>大致符合</span><span>大致符合</span><em>相同</em></a></li>
+          <li class="same"><a href="results/#case-029"><span>黃國昌、租金補貼「砍光光」</span><span>部分符合</span><span>部分符合</span><em>相同</em></a></li>
+          <li class="near"><a href="results/#case-030"><span>共諜案「民主大輕判」圖卡</span><span>符合</span><span>大致符合</span><em>差一級</em></a></li>
+          <li class="same"><a href="results/#case-031"><span>八位大法官、修法要十人</span><span>符合</span><span>符合</span><em>相同</em></a></li>
+          <li class="same"><a href="results/#case-032"><span>海鯤艦進水、主機故障</span><span>無法判定</span><span>無法判定</span><em>相同</em></a></li>
+          <li class="same"><a href="results/#case-033"><span>高雄敬老卡 1/31 前過卡</span><span>不符</span><span>不符</span><em>相同</em></a></li>
+          <li class="near"><a href="results/#case-034"><span>警消退休金 80%、每年 1.25%</span><span>大致符合</span><span>部分符合</span><em>差一級</em></a></li>
+          <li class="same"><a href="results/#case-035"><span>輝達北士科「跟北市府沒關係」</span><span>不符</span><span>不符</span><em>相同</em></a></li>
+          <li class="same"><a href="results/#case-036"><span>電價喊漲（2024 年的舊聞）</span><span>大致符合</span><span>大致符合</span><em>相同</em></a></li>
+          <li class="same"><a href="results/#case-037"><span>運動幣登記時間（已經截止）</span><span>不符</span><span>不符</span><em>相同</em></a></li>
+          <li class="same"><a href="results/#case-038"><span>國軍加薪（公視新聞網址）</span><span>符合</span><span>符合</span><em>相同</em></a></li>
+        </ol>
+        <p class="sheet-foot">這是工具的結論和答案卷的比對，不是可以拿去引用的查核報告。</p>
+      </div>
+      <div class="sheet miss">
+        <p class="sheet-bar"><b>沒過的一項</b><em class="chip far">沒有達到</em></p>
+        <div class="sheet-body">
+          <h3>換了政黨，「操弄手法」的標記不一樣，所以我們把它拿掉了</h3>
+          <p>及格標準裡有一條：同一則訊息換政黨，「操弄手法」的標記也要一樣。兩組測試裡，有一組的其中一版多標了一個手法。再往下查，同一則訊息原封不動重跑，標記也會變。</p>
+          <p>標準沒有放寬。這一版的報告不列手法標記；等它穩定了、重新驗證過，才會放回來。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="limits">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>它做不到的事</h2>
+      <p>這些限制和上面的成績一樣重要。<a class="link" href="https://github.com/KKzLEO/taiwan-political-skills#已知限制">完整的已知限制寫在 README<svg width="16" height="16"><use href="#i-out"/></svg></a></p>
+    </div>
+    <ul class="limits">
+      <li><strong>不判斷圖片或影片是不是偽造的</strong><span>只查裡面說了什麼。</span></li>
+      <li><strong>「可公開」不保證結論正確</strong><span>它只代表流程跑完整了、信心度夠高。貼出去之前，請先看過報告裡的證據。</span></li>
+      <li><strong>很慢</strong><span>完整模式查一則要 26 到 62 分鐘，還會用掉不少 AI 額度。</span></li>
+      <li><strong>12 則不算多</strong><span>而且每一則只跑了一次。同一則重跑會不會換結論，還沒有量過。</span></li>
+      <li><strong>答案卷和工具用的是同一家的模型</strong><span>可能有一樣的盲點，這一批分不出來。</span></li>
+      <li><strong>現在還不是誰都裝得起來</strong><span>要會用 Claude Code 或 Codex 的命令列工具。</span></li>
     </ul>
-    <p class="count">6 條說法、30 筆來源、11 條質疑（8 條被裁判判成立）。</p>
-    <p class="actions">
-      <a class="btn" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261120-1441-%E6%A9%9F%E8%BB%8A%E5%A4%A7%E7%87%88%E7%BD%B0%E4%B8%89%E5%8D%83/report.md">看完整報告</a>
-      <a class="btn quiet" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261120-1441-%E6%A9%9F%E8%BB%8A%E5%A4%A7%E7%87%88%E7%BD%B0%E4%B8%89%E5%8D%83">打開這一次的全部檔案</a>
-    </p>
   </div>
 </section>
 
-<section id="proof" class="band">
-  <div class="lede">
-    <h2>先考過，才拿出來</h2>
-    <p>規則定下來之後，我們找了 12 則它沒看過、真的在流傳的政治訊息來考。答案卷由看不到工具結果的人先用第一手資料寫好；及格標準也在開跑之前寫好、提交，之後沒有改過。</p>
-  </div>
-  <div class="tested">
-    <ol class="cases" aria-label="12 則案例，工具的結論和答案卷比對">
-      <li class="same"><a href="results/#case-027"><span>美國軍購「浮編 9500 億」</span><em>不符</em></a></li>
-      <li class="same"><a href="results/#case-028"><span>邱鎮軍赴中「見中共政委」</span><em>大致符合</em></a></li>
-      <li class="same"><a href="results/#case-029"><span>黃國昌、租金補貼「砍光光」</span><em>部分符合</em></a></li>
-      <li class="near"><a href="results/#case-030"><span>共諜案「民主大輕判」圖卡</span><em>差一級</em></a></li>
-      <li class="same"><a href="results/#case-031"><span>八位大法官、修法要十人</span><em>符合</em></a></li>
-      <li class="same"><a href="results/#case-032"><span>海鯤艦進水、主機故障</span><em>無法判定</em></a></li>
-      <li class="same"><a href="results/#case-033"><span>高雄敬老卡 1/31 前過卡</span><em>不符</em></a></li>
-      <li class="near"><a href="results/#case-034"><span>警消退休金 80%、每年 1.25%</span><em>差一級</em></a></li>
-      <li class="same"><a href="results/#case-035"><span>輝達北士科「跟北市府沒關係」</span><em>不符</em></a></li>
-      <li class="same"><a href="results/#case-036"><span>電價喊漲（2024 年的舊聞）</span><em>大致符合</em></a></li>
-      <li class="same"><a href="results/#case-037"><span>運動幣登記時間（已經截止）</span><em>不符</em></a></li>
-      <li class="same"><a href="results/#case-038"><span>國軍加薪（公視新聞網址）</span><em>符合</em></a></li>
-    </ol>
-    <p class="key"><span class="same">結論和答案卷相同</span><span class="near">差一級</span>這是工具和答案卷的比對，不是可以拿去引用的查核報告。</p>
-    <ul class="facts">
-      <li><strong>12 則裡 10 則結論完全相同，</strong>2 則差一級，沒有差到兩級以上的，也沒有把真的說成假的、假的說成真的。</li>
-      <li><strong>工具標「可公開」的有 5 則，</strong>結論全部和答案相同。</li>
-      <li><strong>同一則訊息換成三個政黨各跑一次，</strong>做了兩組：結論、逐條計分的判定、可信度都一樣。</li>
-      <li><strong>兩個平台都實際跑過。</strong>Claude Code 和 Codex 各自只照說明書從頭做完一次，每一步都通過檢查。</li>
-    </ul>
-    <div class="failed">
-      <h3>沒過的一項，我們把它拿掉了</h3>
-      <p>及格標準裡有一條：同一則訊息換政黨，「操弄手法」的標記也要一樣。兩組測試裡，有一組的其中一版多標了一個手法。再往下查，同一則訊息原封不動重跑，標記也會變。</p>
-      <p>標準沒有放寬。這一版的報告不列手法標記；等它穩定了、重新驗證過，才會放回來。</p>
+<section class="sec" id="use">
+  <div class="wrap split">
+    <div class="split-text">
+      <h2>安裝</h2>
+      <p>需要 Python 3.11 以上，不用另外裝套件。建議兩家的命令列工具都裝：只有一家的話，少了另一家模型的交叉抗辯，報告不會標「可公開」。</p>
     </div>
-    <p class="actions"><a class="btn" href="results/">看每一則的結果和原始紀錄</a></p>
-  </div>
-</section>
-
-<section id="limits" class="band tint">
-  <div class="lede">
-    <h2>它做不到的事</h2>
-    <p>這些限制和上面的成績一樣重要。</p>
-  </div>
-  <ul class="limits">
-    <li><strong>不判斷圖片或影片是不是偽造的，</strong>只查裡面說了什麼。</li>
-    <li><strong>「可公開」不保證結論正確。</strong>它只代表流程跑完整了、信心度夠高。貼出去之前，請先看過報告裡的證據。</li>
-    <li><strong>很慢。</strong>完整模式查一則要 26 到 62 分鐘，還會用掉不少 AI 額度。</li>
-    <li><strong>12 則不算多，</strong>而且每一則只跑了一次。同一則重跑會不會換結論，還沒有量過。</li>
-    <li><strong>答案卷和工具用的是同一家的模型，</strong>可能有一樣的盲點，這一批分不出來。</li>
-    <li><strong>現在還不是誰都裝得起來。</strong>要會用 Claude Code 或 Codex 的命令列工具。</li>
-  </ul>
-  <p class="more"><a href="https://github.com/KKzLEO/taiwan-political-skills#已知限制">完整的已知限制寫在 README</a></p>
-</section>
-
-<section id="use" class="band">
-  <div class="lede">
-    <h2>怎麼用</h2>
-    <p>需要 Python 3.11 以上，不用另外裝套件。建議兩家的命令列工具都裝：只有一家的話，少了另一家模型的交叉抗辯，報告不會標「可公開」。</p>
-  </div>
-  <div class="install">
-    <div>
-      <h3>Claude Code</h3>
-      <pre><code>/plugin marketplace add KKzLEO/taiwan-political-skills
-/plugin install taiwan-factcheck@taiwan-political-skills</code></pre>
-    </div>
-    <div>
-      <h3>Codex</h3>
-      <pre><code>git clone https://github.com/KKzLEO/taiwan-political-skills.git
-mkdir -p ~/.codex/skills
-ln -sfn "$PWD/taiwan-political-skills/skills/factcheck" ~/.codex/skills/factcheck</code></pre>
-    </div>
-    <div class="ask">
-      <h3>然後</h3>
-      <pre><code>/factcheck 貼上你想查的訊息或網址</code></pre>
-      <p>也可以直接說「幫我查核這則訊息」。想快一點就說「快速查核」：只有一個反方，大約 18 分鐘，報告不會標「可公開」。</p>
+    <div class="split-main install">
+      <div class="tabs" role="tablist" aria-label="安裝方式">
+        <button type="button" role="tab" id="tab-claude" aria-controls="for-claude" aria-selected="true">Claude Code</button>
+        <button type="button" role="tab" id="tab-codex" aria-controls="for-codex" aria-selected="false" tabindex="-1">Codex</button>
+      </div>
+      <div class="code" id="for-claude" role="tabpanel" aria-labelledby="tab-claude">
+        <h3>Claude Code：在對話裡輸入</h3>
+        <pre><code><span>/plugin marketplace add KKzLEO/taiwan-political-skills</span><span>/plugin install taiwan-factcheck@taiwan-political-skills</span></code></pre>
+      </div>
+      <div class="code" id="for-codex" role="tabpanel" aria-labelledby="tab-codex">
+        <h3>Codex：在終端機執行</h3>
+        <pre><code><span>git clone https://github.com/KKzLEO/taiwan-political-skills.git</span><span>mkdir -p ~/.codex/skills</span><span>ln -sfn "$PWD/taiwan-political-skills/skills/factcheck" ~/.codex/skills/factcheck</span></code></pre>
+      </div>
+      <div class="code then">
+        <h3>然後，在 Claude Code 或 Codex 裡輸入</h3>
+        <pre><code><span>/factcheck 貼上你想查的訊息或網址</span></code></pre>
+      </div>
+      <p class="install-note">也可以直接說「幫我查核這則訊息」。想快一點就說「快速查核」：只有一個反方，實測一次是 18 分鐘，報告不會標「可公開」。</p>
     </div>
   </div>
 </section>
-
 </main>
 
 <footer class="foot">
-  <p><strong>台灣訊息查核</strong>　開源，任何人都可以檢查、修改、指出哪裡錯了。</p>
-  <p>
-    <a href="https://github.com/KKzLEO/taiwan-political-skills">GitHub</a>
-    <a href="results/">驗證結果</a>
-    <a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/CHANGELOG.md">修改紀錄</a>
-    <a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/LICENSE">授權</a>
-  </p>
-  <p class="fine">程式採 MIT 授權，資料採 CC BY-SA 4.0。評測案例裡的訊息原文取自 Cofacts 真的假的，著作權屬原作者。這個網站的原始檔在同一個 repo 的 <code>site/</code>。</p>
+  <div class="wrap foot-in">
+    <p class="brand"><svg width="20" height="20"><use href="#i-mark"/></svg>台灣訊息查核</p>
+    <p class="foot-links"><a href="https://github.com/KKzLEO/taiwan-political-skills">GitHub</a><a href="results/">驗證結果</a><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/CHANGELOG.md">修改紀錄</a><a href="https://github.com/KKzLEO/taiwan-political-skills/issues">回報問題</a></p>
+    <p class="fine">程式採 MIT 授權，資料採 CC BY-SA 4.0。評測案例裡的訊息原文取自 Cofacts 真的假的，著作權屬原作者。這個網站列的是工具和答案卷的比對，不是可以拿去引用的查核報告。</p>
+  </div>
 </footer>
-
-<script src="assets/ink.js"></script>
-<script src="assets/hero.js"></script>
+<script src="assets/run-data.js" defer></script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>

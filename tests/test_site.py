@@ -35,21 +35,48 @@ class ResultsPage(unittest.TestCase):
 
 
 class FrontPage(unittest.TestCase):
-    def test_its_twelve_tiles_say_what_the_results_page_says(self):
-        rows = dict(re.findall(r'<tr id="(case-\d+)" class="(\w+)">', read(RESULTS)))
-        tiles = re.findall(r'<li class="(\w+)"><a href="results/#(case-\d+)">', read(FRONT))
-        self.assertEqual(len(tiles), 12)
-        self.assertEqual({case: kind for kind, case in tiles}, rows)
+    def test_its_twelve_rows_say_what_the_results_page_says(self):
+        theirs = {name: (kind, expected, got) for name, kind, expected, got in re.findall(
+            r'<tr id="(case-\d+)" class="(\w+)"><th.*?</th><td>([^<]*)</td><td>([^<]*)</td>', read(RESULTS))}
+        ours = {name: (kind, expected, got) for kind, name, expected, got in re.findall(
+            r'<li class="(\w+)"><a href="results/#(case-\d+)"><span>[^<]*</span><span>([^<]*)</span><span>([^<]*)</span>', read(FRONT))}
+        self.assertEqual(len(ours), 12)
+        self.assertEqual(ours, theirs)
 
-    def test_the_typed_questions_fit_the_line_made_for_them(self):
-        # the line is sized for 21 full-width characters; digits and Latin letters take about half of one
-        script = read(SITE / "assets/hero.js")
-        questions = re.findall(r"^    '(.+)',?$", script, flags=re.M)
-        self.assertEqual(len(questions), 13)
-        for q in questions:
-            width = sum(0.5 if ord(ch) < 0x2000 else 1 for ch in q)
-            self.assertLessEqual(width, 21, q)
-            self.assertRegex(q, "[，、]", q)       # where a narrow screen turns the line
+
+class Run(unittest.TestCase):
+    """The run the front page plays is the worked example, and what the page says about it is counted from it."""
+
+    def setUp(self):
+        spec = importlib.util.spec_from_file_location("build_run", SITE / "tools/build_run.py")
+        self.module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.module)
+        self.steps = {s["id"]: s for s in self.module.build()["steps"]}
+
+    def test_committed_data_is_what_the_example_produces(self):
+        self.assertEqual(read(SITE / "assets/run-data.js"), self.module.TEXT)
+
+    def test_the_window_lists_the_steps_the_data_has(self):
+        self.assertEqual(re.findall(r'data-step="(\w+)"', read(FRONT)), list(self.steps))
+
+    def test_the_finished_state_written_into_the_page_matches_the_score(self):
+        front, score = read(FRONT), self.steps["score"]
+        self.assertIn(f'<p class="verdict-word">{score["result"]}</p>', front)
+        self.assertIn(f'<dt>可信度</dt><dd>{score["credibility"]}</dd>', front)
+        self.assertIn(f'<dt>信心度</dt><dd>{score["confidence"]}<small>{score["level"]}</small></dd>', front)
+        self.assertIn('<dd class="word">可公開</dd>' if score["publishable"] else '<dd class="word">不可公開</dd>', front)
+        rows = re.findall(r'<li class="r-claim(?: off)?"><code>(C\d+)</code><p>([^<]*)(<small>[^<]*</small>)?</p>'
+                          r'<span class="mark \w+">([^<]*)</span><span class="num">([^<]*)</span>', front)
+        self.assertEqual(rows, [(r["id"], r["text"], "<small>問法在辯論中修正過</small>" if r["revised"] else "", r["label"], r["reviewed"])
+                                for r in score["rows"]])
+
+    def test_what_the_page_says_about_the_seats_is_counted_from_the_run(self):
+        front, seats = read(FRONT), self.steps["opponents"]["seats"]
+        total = sum(s["attacks"] for s in seats)
+        outside = sum(s["attacks"] for s in seats if s["engine"] != seats[0]["engine"])
+        self.assertIn(f"{total} 條質疑，有 {outside} 條是它提的", front)
+        drawn = re.findall(r'<p><b>(\w+)</b><span>(\w+)</span><i style="--n:(\d+)"></i><em>(\d+)</em></p>', front)
+        self.assertEqual(drawn, [(s["seat"], s["engine"], str(s["attacks"]), str(s["attacks"])) for s in seats])
 
 
 class Links(unittest.TestCase):

@@ -51,13 +51,14 @@ def compare(expected, got):
 
 
 def cases_table():
-    mins, rows, tally = minutes(), [], {"same": 0, "near": 0, "far": 0}
+    mins, rows, tally, targets = minutes(), [], {"same": 0, "near": 0, "far": 0}, {}
     for path in sorted((ART / "scores").glob("case-*.score.json")):
         name = path.name.split(".")[0]
         sc = score(name)
         case = tomllib.loads((ROOT / "evals/cases" / f"{name}.toml").read_text())
         kind, word = compare(case["expected_result"], sc["result"])
         tally[kind] += 1
+        targets[case.get("target", "")] = targets.get(case.get("target", ""), 0) + 1
         cred = "—" if sc["result"] == "無法判定" else (sc["credibility"] or {}).get("score")
         rows.append(
             f'<tr id="{name}" class="{kind}"><th scope="row"><a href="{BLOB}evals/cases/{name}.toml">{e(SHORT[name])}</a>'
@@ -65,7 +66,7 @@ def cases_table():
             f'<td><span class="chip {kind}">{word}</span></td><td class="num">{cred}</td><td class="num">{sc["confidence"]["score"]}</td>'
             f'<td>{"可公開" if sc["publishable"] else "不可公開"}</td><td class="num">{mins.get(name, "")}</td>'
             f'<td><a href="{BLOB}evals/results/artifacts/2026-11-20-final/scores/{name}.score.json">分數檔</a></td></tr>')
-    return "\n".join(rows), tally
+    return "\n".join(rows), tally, targets
 
 
 def probe_table(stem):
@@ -104,12 +105,13 @@ def reruns_table():
         cells = []
         for tag in RERUN_TAGS:
             n = sum(any(t["tactic_id"] == tag for t in r["tactics"]) for r in mine)
-            cells.append(f'<td class="num">{len(mine)} 次裡 {n} 次</td>')
+            cells.append(f'<td>{len(mine)} 次裡 {n} 次</td>')
         rows.append(f'<tr><th scope="row">{target}版</th>{"".join(cells)}</tr>')
     return "\n".join(rows)
 
 
-case_rows, tally = cases_table()
+case_rows, tally, targets = cases_table()
+about = "、".join(f"{name} {n} 則" for name, n in sorted(targets.items(), key=lambda kv: (-kv[1], kv[0])))
 PAGE = f'''<!doctype html>
 <html lang="zh-Hant-TW">
 <head>
@@ -117,20 +119,26 @@ PAGE = f'''<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>驗證結果｜台灣訊息查核</title>
 <meta name="description" content="台灣訊息查核 skill 發版前的盲測結果：12 則新案例、換政黨的對照探測、兩個平台的實際執行，以及沒有過的那一項。">
-<meta name="theme-color" content="#06080d">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3a13 13 0 0 1 13 13H16z' fill='%23ea4335'/%3E%3Cpath d='M29 16a13 13 0 0 1-13 13V16z' fill='%23fbbc05'/%3E%3Cpath d='M16 29A13 13 0 0 1 3 16h13z' fill='%2334a853'/%3E%3Cpath d='M3 16A13 13 0 0 1 16 3v13z' fill='%234285f4'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#08090a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5' fill='%2308090a'/%3E%3Crect x='3.25' y='3.25' width='13.5' height='13.5' rx='3.5' fill='none' stroke='%23f7f8f8' stroke-width='1.5'/%3E%3Cpath d='M11.6 6.6 8.4 13.4' stroke='%23f7f8f8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/results.css">
 </head>
-<body class="results">
-<nav class="bar" aria-label="頁面導覽">
-  <a class="name" href="../">台灣訊息查核</a>
-  <span class="links"><a href="#cases">12 則案例</a><a href="#parties">換政黨</a><a href="#tags">沒過的一項</a><a href="#hosts">實際執行</a><a href="{GH}">GitHub</a></span>
-</nav>
-<main class="doc">
+<body>
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2.25" y="2.25" width="15.5" height="15.5" rx="4.25"/><path d="M11.9 6 8.1 14"/></symbol>
+  <symbol id="i-out" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 10.5 10.5 5.5M6 5.5h4.5V10"/></symbol>
+</svg>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="../"><svg width="20" height="20"><use href="#i-mark"/></svg>台灣訊息查核</a>
+    <nav class="nav-links" aria-label="頁面導覽"><a href="#cases">12 則案例</a><a href="#parties">換政黨</a><a href="#tags">沒過的一項</a><a href="#hosts">實際執行</a></nav>
+    <div class="nav-end"><a class="nav-out" href="{GH}">GitHub<svg width="16" height="16"><use href="#i-out"/></svg></a><a class="btn sm" href="../#use">安裝</a></div>
+  </div>
+</header>
+<main class="wrap doc">
 
 <header class="top">
   <h1>驗證結果</h1>
@@ -140,7 +148,7 @@ PAGE = f'''<!doctype html>
 
 <section id="criteria">
   <h2>六條交付標準</h2>
-  <table class="stack">
+  <div class="scroll"><table class="stack">
     <thead><tr><th scope="col">標準</th><th scope="col">狀態</th><th scope="col">依據</th></tr></thead>
     <tbody>
       <tr><th scope="row">程式測試全過，沒有未處理的嚴重問題</th><td><span class="chip same">達到</span></td><td>648 個測試；兩輪三方審查之後沒有留下必須修的問題</td></tr>
@@ -150,16 +158,17 @@ PAGE = f'''<!doctype html>
       <tr><th scope="row">文件、範例、版本號一致</th><td><span class="chip same">達到</span></td><td>範例換成現行格式的實際執行紀錄</td></tr>
       <tr><th scope="row">最後的修改經過三方審查</th><td><span class="chip same">達到</span></td><td>第一輪被擋回，修正後重審三方都通過</td></tr>
     </tbody>
-  </table>
+  </table></div>
   <p class="note">第三條沒有達到，條件也沒有放寬。處理方式是把還沒通過驗證的東西從報告拿掉，見下面<a href="#tags">「沒過的一項」</a>。逐條說明：<a href="{BLOB}evals/results/2026-11-20-release-status.md">交付標準逐條狀態</a>。</p>
 </section>
 
 <section id="cases">
   <h2>12 則沒看過的案例</h2>
   <p>訊息都是實際流傳過的，取自 Cofacts。答案卷由看不到工具結果的獨立程序用第一手資料寫成，再由另一個獨立程序複核。每一則用完整流程跑一次。</p>
+  <p>被批評的對象：{about}。這 12 則是寫答案卷的程序從 Cofacts 找來的，開跑前的登記沒有規定各個對象要幾則。</p>
   <div class="scroll">
   <table class="cases-table">
-    <thead><tr><th scope="col">訊息／被批評的對象</th><th scope="col">答案卷</th><th scope="col">工具</th><th scope="col">比對</th><th scope="col">可信度</th><th scope="col">信心度</th><th scope="col">能否公開引用</th><th scope="col">分鐘</th><th scope="col">紀錄</th></tr></thead>
+    <thead><tr><th scope="col">訊息／被批評的對象</th><th scope="col">答案卷</th><th scope="col">工具</th><th scope="col">比對</th><th scope="col" class="num">可信度</th><th scope="col" class="num">信心度</th><th scope="col">能否公開引用</th><th scope="col" class="num">分鐘</th><th scope="col">紀錄</th></tr></thead>
     <tbody>
 {case_rows}
     </tbody>
@@ -185,7 +194,7 @@ PAGE = f'''<!doctype html>
   <p>兩則虛構的訊息，各自只把政黨名稱換掉，三個版本分別用完整流程跑一次。看的是：結論、分數會不會因為政黨不同而不同。</p>
   <h3>第一組：匿名爆料加一句用問句暗示的指控</h3>
   <div class="scroll"><table>
-    <thead><tr><th scope="col">版本</th><th scope="col">結論</th><th scope="col">可信度</th><th scope="col">信心度</th><th scope="col">能否公開引用</th><th scope="col">留下的手法標記</th></tr></thead>
+    <thead><tr><th scope="col">版本</th><th scope="col">結論</th><th scope="col" class="num">可信度</th><th scope="col" class="num">信心度</th><th scope="col">能否公開引用</th><th scope="col">留下的手法標記</th></tr></thead>
     <tbody>
 {probe_table("symmetry-tactics")}
     </tbody>
@@ -193,7 +202,7 @@ PAGE = f'''<!doctype html>
   <p class="note">結論、手法標記都相同。信心度不同，是另一家模型在覆核時指出的理由瑕疵數不同。</p>
   <h3>第二組：一則催人去連署、期限已經過了的轉傳訊息</h3>
   <div class="scroll"><table>
-    <thead><tr><th scope="col">版本</th><th scope="col">結論</th><th scope="col">可信度</th><th scope="col">信心度</th><th scope="col">能否公開引用</th><th scope="col">留下的手法標記</th></tr></thead>
+    <thead><tr><th scope="col">版本</th><th scope="col">結論</th><th scope="col" class="num">可信度</th><th scope="col" class="num">信心度</th><th scope="col">能否公開引用</th><th scope="col">留下的手法標記</th></tr></thead>
     <tbody>
 {probe_table("symmetry-time")}
     </tbody>
@@ -221,7 +230,7 @@ PAGE = f'''<!doctype html>
 
 <section id="hosts">
   <h2>在兩個平台上實際跑</h2>
-  <p>上面的評測是用批次工具跑的。另外要確認的是：一個全新的 Claude Code 或 Codex，只拿到說明書和一句「幫我查核這則訊息」，能不能自己從頭做到尾。</p>
+  <p>上面的評測是用批次工具跑的。另外要確認的是：一個全新的 Claude Code 或 Codex，只拿到說明書和一句請求，能不能自己從頭做到尾。這三次用的訊息是我們為了測試寫的，不是實際流傳的原文。</p>
   <div class="scroll"><table>
     <thead><tr><th scope="col">平台</th><th scope="col">輸入</th><th scope="col">從開始到回報</th><th scope="col">每一步的檢查</th><th scope="col">結論</th></tr></thead>
     <tbody>
@@ -264,8 +273,11 @@ PAGE = f'''<!doctype html>
 
 </main>
 <footer class="foot">
-  <p><a href="../">回首頁</a>　<a href="{GH}">GitHub</a></p>
-  <p class="fine">程式採 MIT 授權，資料採 CC BY-SA 4.0。評測案例裡的訊息原文取自 Cofacts 真的假的，著作權屬原作者。</p>
+  <div class="wrap foot-in">
+    <p class="brand"><svg width="20" height="20"><use href="#i-mark"/></svg>台灣訊息查核</p>
+    <p class="foot-links"><a href="../">首頁</a><a href="{GH}">GitHub</a><a href="{BLOB}CHANGELOG.md">修改紀錄</a></p>
+    <p class="fine">程式採 MIT 授權，資料採 CC BY-SA 4.0。評測案例裡的訊息原文取自 Cofacts 真的假的，著作權屬原作者。</p>
+  </div>
 </footer>
 </body>
 </html>
