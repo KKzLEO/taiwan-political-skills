@@ -1,0 +1,52 @@
+{
+  "credibility": {
+    "score": 35,
+    "raw": 35.0,
+    "main_claims": [
+      "C1"
+    ],
+    "main_accuracy": 0.35,
+    "overall_accuracy": 0.35,
+    "capped": false,
+    "context_flags": [],
+    "show_on_spectrum": false
+  },
+  "result": "無法判定",
+  "result_reason": "主要說法有一半以上無法證實，查不到不等於假的",
+  "confidence": {
+    "score": 80,
+    "level": "高",
+    "deductions": [
+      {
+        "points": 20,
+        "reason": "證據品質 0.0：核心命題缺少第一手直接證據，或缺少第二條獨立證據鏈"
+      }
+    ],
+    "evidence_quality": 0.0
+  },
+  "publishable": false,
+  "publish_blocks": [
+    "結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條"
+  ],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "unverified",
+      "importance": 5,
+      "factor": 0.35
+    },
+    {
+      "claim_id": "C2",
+      "label": "unverified",
+      "importance": 4,
+      "factor": 0.35
+    },
+    {
+      "claim_id": "C3",
+      "label": "not_factual",
+      "importance": 1,
+      "factor": null
+    }
+  ]
+}

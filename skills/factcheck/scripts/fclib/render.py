@@ -134,7 +134,20 @@ def _time_banner(c):
     return f"> 訊息暗示的時間不對{where}；內容本身另外判定。"
 
 
-def render(run, outlets=None, tactics=None) -> str:
+TACTICS_HIDDEN = [
+    "## 操弄手法（實驗功能，這份報告沒有列出）", "",
+    "- 這一版預設不列出操弄手法。2026-11-20 實測：同一則訊息只換政黨、或原封不動重跑一次，標出來的手法就可能不同。"
+    "在它通過跨陣營一致性驗證之前，不把它當成查核結果。",
+    "- 想看的話，用 `fc.py render --with-tactics` 重新產生報告。看到的標記只當成提醒自己留意的線索，不要引用，"
+    "也不要拿來比較不同陣營的訊息。這份報告其他段落的說明文字如果提到手法名稱，也一樣。", ""]
+TACTICS_SHOWN = ("> 這一段是實驗功能，還沒通過跨陣營一致性驗證：同一則訊息只換政黨、或重跑一次，標出來的手法就可能不同"
+                 "（2026-11-20 實測）。只當成提醒自己留意的線索，不要引用在公開貼文，也不要拿來比較不同陣營的訊息。")
+
+
+def render(run, outlets=None, tactics=None, with_tactics=False) -> str:
+    """with_tactics: list the tactic tags. Off by default: tags differed between party-swapped versions of one
+    message and between reruns, so nothing about them is printed unless asked for (not even that a tag was
+    withdrawn), and the note that replaces them is the same in every report."""
     run = Path(run)
     rj = io.read_json(run / "run.json")
     models = io.read_json(run / "models.json")
@@ -260,7 +273,7 @@ def render(run, outlets=None, tactics=None) -> str:
     if traced and corrected:  # the lines after them come from the judge's ledger, written after the debate
         limits.append(f"接下來 {len(traced)} 項是溯源員在辯論前寫的；裁判判定成立的修正列在後面的「辯論後的修正」，內容不同時以修正為準")
     limits += traced
-    if trace.get("set_aside_tactics"):
+    if with_tactics and trace.get("set_aside_tactics"):
         limits.append(f"溯源員有 {len(trace['set_aside_tactics'])} 個手法標記不符合標記規則，已移出（原內容保留在 trace.json），報告不列出")
     for e in ledger.values():
         if e.get("access_note", "full") != "full":
@@ -361,10 +374,12 @@ def render(run, outlets=None, tactics=None) -> str:
     out.append("")
 
     # 操弄手法（裁判逐項檢查後撤回的標記不列為已辨識）
-    if trace.get("tactics"):
+    if not with_tactics:
+        out += TACTICS_HIDDEN
+    elif trace.get("tactics"):
         removed = {w["tactic_id"]: w.get("reason", "") for w in verdicts.get("removed_tactics", [])}
         unchecked = [w for w in verdicts.get("removed_tactics", []) if w.get("not_checked")]
-        out += ["## 操弄手法（不影響可信度）", "", "> 這一段還沒通過跨陣營一致性驗證，不要引用在公開貼文。", ""] + pre
+        out += ["## 操弄手法（不影響可信度）", "", TACTICS_SHOWN, ""] + pre
         for t in trace["tactics"]:
             if t["tactic_id"] in removed:
                 continue
@@ -408,11 +423,12 @@ def render(run, outlets=None, tactics=None) -> str:
         out.append("")
 
     # 辯論後的修正（成立的溯源和手法攻擊；上面的溯源內容是辯論前寫的）
-    if verdicts.get("trace_attacks_upheld"):
+    upheld = [a for a in verdicts.get("trace_attacks_upheld") or [] if with_tactics or a.get("target", "trace") != "tactic"]
+    if upheld:
         out += ["## 辯論後的修正", "",
-                "前面的溯源、報導品質、操弄手法、和既有查核的比對，以及查核範圍裡關於溯源的說明，都是辯論前寫的。"
+                f"前面的溯源、報導品質、{'操弄手法、' if with_tactics else ''}和既有查核的比對，以及查核範圍裡關於溯源的說明，都是辯論前寫的。"
                 "以下是裁判判定成立的修正，和前文不同時以這裡為準。", ""]
-        for a in verdicts["trace_attacks_upheld"]:
+        for a in upheld:
             out.append(f"- 反方 {a['seat']} 的質疑成立：{_ruling(a['ruling_reason'])}")
         out.append("")
 
@@ -444,9 +460,10 @@ def render(run, outlets=None, tactics=None) -> str:
         out.append("")
 
     # 已檢驗的質疑
-    if verdicts.get("checked_objections"):
+    checked = [o for o in verdicts.get("checked_objections") or [] if with_tactics or o.get("target") != "tactic"]
+    if checked:
         out += ["## 已檢驗的質疑", ""]
-        for o in verdicts["checked_objections"]:
+        for o in checked:
             where = o["claim_id"] or ("手法標記" if o.get("target") == "tactic" else "溯源")
             out.append(f"- （{where}）{_cell(o['argument'])} → 不成立：{_ruling(o['ruling_reason'])}")
         out.append("")

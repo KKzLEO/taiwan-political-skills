@@ -1,0 +1,166 @@
+{
+  "credibility": {
+    "score": 79,
+    "raw": 80.0,
+    "main_claims": [
+      "C3"
+    ],
+    "main_accuracy": 0.8,
+    "overall_accuracy": 0.8781,
+    "capped": true,
+    "context_flags": [
+      "old_news"
+    ],
+    "show_on_spectrum": true
+  },
+  "result": "大致符合",
+  "result_reason": null,
+  "confidence": {
+    "score": 84,
+    "level": "高",
+    "deductions": [
+      {
+        "points": 6,
+        "reason": "證據品質 0.68：核心命題缺少第一手直接證據，或缺少第二條獨立證據鏈"
+      },
+      {
+        "points": 10,
+        "reason": "C12 覆核沒有完成或沒有通過"
+      }
+    ],
+    "evidence_quality": 0.68
+  },
+  "publishable": false,
+  "publish_blocks": [
+    "結論是「大致符合」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條"
+  ],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "importance": 4,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C2",
+      "label": "not_factual",
+      "importance": 4,
+      "factor": null
+    },
+    {
+      "claim_id": "C3",
+      "label": "mostly_true",
+      "importance": 5,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C4",
+      "label": "mostly_true",
+      "importance": 3,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C5",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C6",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C7",
+      "label": "true",
+      "importance": 4,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C8",
+      "label": "mostly_true",
+      "importance": 3,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C9",
+      "label": "mostly_true",
+      "importance": 3,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C10",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C11",
+      "label": "true",
+      "importance": 4,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C12",
+      "label": "mostly_true",
+      "importance": 3,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C13",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C14",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C15",
+      "label": "mostly_true",
+      "importance": 3,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C16",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C17",
+      "label": "not_factual",
+      "importance": 1,
+      "factor": null
+    },
+    {
+      "claim_id": "C18",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C19",
+      "label": "true",
+      "importance": 4,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C20",
+      "label": "true",
+      "importance": 4,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C21",
+      "label": "false",
+      "importance": 3,
+      "factor": 0.0
+    }
+  ]
+}

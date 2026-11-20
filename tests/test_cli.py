@@ -260,6 +260,15 @@ class RunModelCliTest(unittest.TestCase):
             self.assertFalse((run / gone).exists(), gone)
         self.assertTrue((run / "claims.json").exists())
 
+    def test_render_lists_tactics_only_when_asked(self):
+        run = make_run(fx.run_files())
+        for step in ("finalize", "score"):
+            self.assertEqual(fc(step, "--run", run).returncode, 0)
+        fc("render", "--run", run)
+        self.assertNotIn("TW-T16", (run / "report.md").read_text())
+        fc("render", "--run", run, "--with-tactics")
+        self.assertIn("TW-T16", (run / "report.md").read_text())
+
     def test_settling_again_leaves_no_score_or_report_of_the_old_verdicts(self):
         run = make_run(fx.run_files())
         for step in ("finalize", "score", "render"):

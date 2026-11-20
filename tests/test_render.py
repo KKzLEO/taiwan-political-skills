@@ -26,8 +26,9 @@ def build(**overrides):
     return run
 
 
-def md(run):
-    return render.render(run, outlets=OUTLETS, tactics=TACTICS)
+def md(run, with_tactics=True):
+    """The report with the tactics section, which most tests here look at; a user gets it only on request."""
+    return render.render(run, outlets=OUTLETS, tactics=TACTICS, with_tactics=with_tactics)
 
 
 class HeaderTest(unittest.TestCase):
@@ -222,7 +223,8 @@ class BodyTest(unittest.TestCase):
 
     def test_tactic_section_warns_against_quoting_it(self):
         section = md(build()).split("## 操弄手法")[1].split("\n## ")[0]
-        self.assertIn("這一段還沒通過跨陣營一致性驗證，不要引用在公開貼文", section)
+        self.assertIn("還沒通過跨陣營一致性驗證", section)
+        self.assertIn("不要引用在公開貼文", section)
 
     def test_tags_set_aside_for_format_are_counted_but_not_named(self):
         trace = copy.deepcopy(fx.TRACE)
@@ -1049,7 +1051,7 @@ class TacticLimitTest(unittest.TestCase):
         """Audit: the section is called 操弄 and never said a tag does not prove the sender meant to deceive."""
         trace = copy.deepcopy(fx.TRACE)
         trace["tactics"].append({"tactic_id": "TW-T29", "features": ["a"], "explanation": "大量相同文案"})
-        out = render.render(build(trace_json=trace), outlets=OUTLETS, tactics=self.LIB)
+        out = render.render(build(trace_json=trace), outlets=OUTLETS, tactics=self.LIB, with_tactics=True)
         tactics = section(out, "操弄手法（不影響可信度）")
         self.assertIn("  - 不代表什麼：催人轉傳不能證明內容是假的", tactics)
         self.assertNotIn("寫給標記的人看的規則", tactics)  # attribution entries speak to the tagger, not the reader
@@ -1135,6 +1137,44 @@ class InputLimitsTest(unittest.TestCase):
         scope = section(md(build()), "查核範圍和限制")
         self.assertNotIn("讀入時的備註", scope)
         self.assertNotIn("限制：", scope)
+
+
+class TacticsOnRequestTest(unittest.TestCase):
+    """2026-11-20 final batch: the same message with only the party swapped, or simply run again, got different
+    tactic tags. Until tagging is made blind to the party, a report does not list tags unless asked."""
+
+    def test_a_report_does_not_list_tactics_by_default(self):
+        out = render.render(build(), outlets=OUTLETS, tactics=TACTICS)
+        self.assertNotIn("急迫轉傳", out)
+        self.assertNotIn("TW-T16", out)
+        note = section(out, "操弄手法（實驗功能，這份報告沒有列出）")
+        self.assertIn("同一則訊息只換政黨", note)
+        self.assertIn("--with-tactics", note)
+
+    def test_the_note_is_there_whether_or_not_anything_was_tagged(self):
+        """Its presence must not itself tell two party versions of a message apart."""
+        trace, judgment = copy.deepcopy(fx.TRACE), copy.deepcopy(fx.JUDGMENT)
+        trace["tactics"], judgment["tactic_checks"] = [], []
+        untagged = render.render(build(trace_json=trace, judgment_json=judgment), outlets=OUTLETS, tactics=TACTICS)
+        tagged = render.render(build(), outlets=OUTLETS, tactics=TACTICS)
+        title = "操弄手法（實驗功能，這份報告沒有列出）"
+        self.assertEqual(section(untagged, title), section(tagged, title))
+
+    def test_nothing_else_in_the_default_report_names_a_tag(self):
+        o = fx.tactic_attack_overrides(upheld=False, keep=True)   # an attack on the tag, rejected
+        out = render.render(build(**o), outlets=OUTLETS, tactics=TACTICS)
+        self.assertNotIn("TW-T16", out)
+        self.assertNotIn("手法標記）", out)
+        o = fx.tactic_attack_overrides(upheld=True, keep=False)   # an attack on the tag, upheld: the tag is withdrawn
+        out = render.render(build(**o), outlets=OUTLETS, tactics=TACTICS)
+        self.assertNotIn("TW-T16", out)
+        self.assertNotIn("撤回", out)
+
+    def test_on_request_the_section_says_what_was_measured(self):
+        tactics = section(md(build()), "操弄手法（不影響可信度）")
+        self.assertIn("急迫轉傳", tactics)
+        self.assertIn("同一則訊息只換政黨、或重跑一次，標出來的手法就可能不同", tactics)
+        self.assertIn("不要拿來比較不同陣營的訊息", tactics)
 
 
 if __name__ == "__main__":

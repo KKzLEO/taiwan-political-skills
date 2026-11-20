@@ -1,0 +1,145 @@
+{
+  "credibility": {
+    "score": 82,
+    "raw": 82.25,
+    "main_claims": [
+      "C1",
+      "C3"
+    ],
+    "main_accuracy": 1.0,
+    "overall_accuracy": 0.8225,
+    "capped": false,
+    "context_flags": [],
+    "show_on_spectrum": true
+  },
+  "result": "符合",
+  "result_reason": null,
+  "confidence": {
+    "score": 86,
+    "level": "高",
+    "deductions": [
+      {
+        "points": 4,
+        "reason": "證據品質 0.82：核心命題缺少第一手直接證據，或缺少第二條獨立證據鏈"
+      },
+      {
+        "points": 10,
+        "reason": "C8 覆核沒有完成或沒有通過"
+      }
+    ],
+    "evidence_quality": 0.8214
+  },
+  "publishable": true,
+  "publish_blocks": [],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "true",
+      "importance": 5,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C2",
+      "label": "true",
+      "importance": 4,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C3",
+      "label": "true",
+      "importance": 5,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C4",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C5",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C6",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C7",
+      "label": "true",
+      "importance": 2,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C8",
+      "label": "unverified",
+      "importance": 3,
+      "factor": 0.35
+    },
+    {
+      "claim_id": "C9",
+      "label": "unverified",
+      "importance": 3,
+      "factor": 0.35
+    },
+    {
+      "claim_id": "C10",
+      "label": "unverified",
+      "importance": 2,
+      "factor": 0.35
+    },
+    {
+      "claim_id": "C11",
+      "label": "true",
+      "importance": 1,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C12",
+      "label": "mostly_true",
+      "importance": 2,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C13",
+      "label": "unverified",
+      "importance": 1,
+      "factor": 0.35
+    },
+    {
+      "claim_id": "C14",
+      "label": "not_factual",
+      "importance": 1,
+      "factor": null
+    },
+    {
+      "claim_id": "C15",
+      "label": "true",
+      "importance": 1,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C16",
+      "label": "unverified",
+      "importance": 1,
+      "factor": 0.35
+    },
+    {
+      "claim_id": "C17",
+      "label": "mostly_true",
+      "importance": 1,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C18",
+      "label": "not_factual",
+      "importance": 1,
+      "factor": null
+    }
+  ]
+}

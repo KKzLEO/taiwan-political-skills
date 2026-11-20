@@ -1,0 +1,114 @@
+{
+  "credibility": {
+    "score": 79,
+    "raw": 82.73,
+    "main_claims": [
+      "C2",
+      "C6"
+    ],
+    "main_accuracy": 1.0,
+    "overall_accuracy": 0.8273,
+    "capped": true,
+    "context_flags": [
+      "time_shift"
+    ],
+    "show_on_spectrum": true
+  },
+  "result": "大致符合",
+  "result_reason": null,
+  "confidence": {
+    "score": 56,
+    "level": "中",
+    "deductions": [
+      {
+        "points": 4,
+        "reason": "證據品質 0.82：核心命題缺少第一手直接證據，或缺少第二條獨立證據鏈"
+      },
+      {
+        "points": 10,
+        "reason": "C5 覆核沒有完成或沒有通過"
+      },
+      {
+        "points": 10,
+        "reason": "C6 覆核沒有完成或沒有通過"
+      },
+      {
+        "points": 10,
+        "reason": "C7 覆核沒有完成或沒有通過"
+      },
+      {
+        "points": 10,
+        "reason": "C10 覆核沒有完成或沒有通過"
+      }
+    ],
+    "evidence_quality": 0.8214
+  },
+  "publishable": false,
+  "publish_blocks": [
+    "信心度 56（中），要到 75 以上才是「高」；扣了哪些分，見後面的「評分拆解」",
+    "結論是「大致符合」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條"
+  ],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "not_factual",
+      "importance": 4,
+      "factor": null
+    },
+    {
+      "claim_id": "C2",
+      "label": "true",
+      "importance": 5,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C3",
+      "label": "not_factual",
+      "importance": 3,
+      "factor": null
+    },
+    {
+      "claim_id": "C4",
+      "label": "not_factual",
+      "importance": 2,
+      "factor": null
+    },
+    {
+      "claim_id": "C5",
+      "label": "true",
+      "importance": 4,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C6",
+      "label": "true",
+      "importance": 5,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C7",
+      "label": "misleading",
+      "importance": 4,
+      "factor": 0.25
+    },
+    {
+      "claim_id": "C8",
+      "label": "mostly_true",
+      "importance": 4,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C9",
+      "label": "not_factual",
+      "importance": 4,
+      "factor": null
+    },
+    {
+      "claim_id": "C10",
+      "label": "false",
+      "importance": 3,
+      "factor": null
+    }
+  ]
+}

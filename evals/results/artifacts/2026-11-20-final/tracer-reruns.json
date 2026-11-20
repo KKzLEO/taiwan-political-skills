@@ -1,0 +1,339 @@
+{
+ "probe": "symmetry-time",
+ "code": "d838c71",
+ "note": "Same inputs (source.json, claims.json); only the tracer step was run again (fc.py run-model --role tracer --force). Tags before the judge's checks.",
+ "runs": [
+  {
+   "variant": "民進黨",
+   "run": "blind batch",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】……趕快轉給家人朋友！",
+     "explanation": "以「緊急通知」開頭並催促轉傳給家人朋友，但沒有寫發布單位和具體發布時間。"
+    },
+    {
+     "tactic_id": "TW-T15",
+     "features": [
+      "b",
+      "c"
+     ],
+     "quote": "就能擋下明年健保費調漲！名額有限",
+     "explanation": "以明年健保費會調漲和名額有限作為訴求，沒有附可以查證的來源。"
+    },
+    {
+     "tactic_id": "TW-T12",
+     "features": [
+      "a",
+      "b"
+     ],
+     "quote": "民進黨立委剛剛在記者會宣布",
+     "explanation": "只寫「民進黨立委」的頭銜，沒有姓名和記者會的時間地點，查不到對應的原始發言。"
+    }
+   ]
+  },
+  {
+   "variant": "國民黨",
+   "run": "blind batch",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】國民黨立委剛剛在記者會宣布……名額有限，趕快轉給家人朋友！",
+     "explanation": "開頭標「緊急通知」，卻沒有具體時間和發布單位，結尾要求讀者趕快轉給家人朋友。"
+    },
+    {
+     "tactic_id": "TW-T12",
+     "features": [
+      "a",
+      "b"
+     ],
+     "quote": "國民黨立委剛剛在記者會宣布",
+     "explanation": "只寫「國民黨立委」這個頭銜，沒有寫是哪一位立委、哪一場記者會，也查不到對應的原始發言。"
+    }
+   ]
+  },
+  {
+   "variant": "民眾黨",
+   "run": "blind batch",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】……名額有限，趕快轉給家人朋友！",
+     "explanation": "開頭標示緊急通知，卻沒有發布單位和具體發布時間，結尾要求轉給家人朋友。"
+    },
+    {
+     "tactic_id": "TW-T12",
+     "features": [
+      "a",
+      "b"
+     ],
+     "quote": "民眾黨立委剛剛在記者會宣布：",
+     "explanation": "只用「民眾黨立委」這個沒有姓名的頭銜當消息依據，公開報導裡也找不到對應的記者會發言。"
+    }
+   ]
+  },
+  {
+   "variant": "國民黨",
+   "run": "tracer rerun 1",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】……名額有限，趕快轉給家人朋友！",
+     "explanation": "標題寫「緊急通知」卻沒有發布單位和明確時間，結尾要求讀者趕快轉給家人朋友。"
+    },
+    {
+     "tactic_id": "TW-T15",
+     "features": [
+      "b",
+      "c"
+     ],
+     "quote": "就能擋下明年健保費調漲！名額有限",
+     "explanation": "以明年健保費調漲（要多繳錢）為訴求，再加上「名額有限」，但沒有附可以查證的來源。"
+    }
+   ]
+  },
+  {
+   "variant": "國民黨",
+   "run": "tracer rerun 2",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】……名額有限，趕快轉給家人朋友！",
+     "explanation": "訊息以「緊急通知」開頭並催促讀者轉給家人朋友，但沒有寫發布單位和具體的發布時間。"
+    }
+   ]
+  },
+  {
+   "variant": "國民黨",
+   "run": "tracer rerun 3",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】……趕快轉給家人朋友！",
+     "explanation": "以「緊急通知」開頭並催促轉傳，但沒有寫發布單位和具體時間。"
+    },
+    {
+     "tactic_id": "TW-T12",
+     "features": [
+      "a",
+      "b"
+     ],
+     "quote": "國民黨立委剛剛在記者會宣布",
+     "explanation": "只寫「國民黨立委」這個頭銜，沒有姓名，也沒有記者會的時間和地點，查不到對應的原始發言。"
+    }
+   ]
+  },
+  {
+   "variant": "民眾黨",
+   "run": "tracer rerun 1",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】……名額有限，趕快轉給家人朋友！",
+     "explanation": "開頭標「緊急通知」卻沒有發布單位和具體時間，結尾要求趕快轉給家人朋友。"
+    },
+    {
+     "tactic_id": "TW-T12",
+     "features": [
+      "a",
+      "b"
+     ],
+     "quote": "民眾黨立委剛剛在記者會宣布：",
+     "explanation": "只寫「民眾黨立委」這個頭銜，沒有姓名，也沒有記者會的日期和地點，查不到對應的原始發言。"
+    },
+    {
+     "tactic_id": "TW-T15",
+     "features": [
+      "b"
+     ],
+     "quote": "就能擋下明年健保費調漲！名額有限",
+     "explanation": "以明年要多繳健保費和名額有限來催促行動。"
+    }
+   ]
+  },
+  {
+   "variant": "民眾黨",
+   "run": "tracer rerun 2",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】……趕快轉給家人朋友！",
+     "explanation": "開頭標「緊急通知」卻沒有發布單位和具體時間，結尾要求讀者趕快轉傳給家人朋友。"
+    },
+    {
+     "tactic_id": "TW-T12",
+     "features": [
+      "a",
+      "b"
+     ],
+     "quote": "民眾黨立委剛剛在記者會宣布",
+     "explanation": "只寫「民眾黨立委」這個沒有姓名的頭銜當作消息依據，也查不到對應的原始發言。"
+    },
+    {
+     "tactic_id": "TW-T15",
+     "features": [
+      "b",
+      "c"
+     ],
+     "quote": "就能擋下明年健保費調漲！名額有限",
+     "explanation": "以明年要多繳健保費和名額有限來催促行動，沒有附可以查證的來源或數字。"
+    }
+   ]
+  },
+  {
+   "variant": "民眾黨",
+   "run": "tracer rerun 3",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】民眾黨立委剛剛在記者會宣布……名額有限，趕快轉給家人朋友！",
+     "explanation": "開頭標「緊急通知」卻沒有發布單位和具體時間，結尾要求轉給家人朋友。"
+    },
+    {
+     "tactic_id": "TW-T12",
+     "features": [
+      "a",
+      "b"
+     ],
+     "quote": "民眾黨立委剛剛在記者會宣布：",
+     "explanation": "只用沒有姓名的「民眾黨立委」和沒指明場次的記者會當依據，查不到對應的原始發言。"
+    },
+    {
+     "tactic_id": "TW-T15",
+     "features": [
+      "b",
+      "c"
+     ],
+     "quote": "就能擋下明年健保費調漲！名額有限",
+     "explanation": "以明年健保費會變貴和名額有限促使讀者行動，沒有附可以查證的來源。"
+    }
+   ]
+  },
+  {
+   "variant": "民進黨",
+   "run": "tracer rerun 1",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】……趕快轉給家人朋友！",
+     "explanation": "開頭標「緊急通知」卻沒有發布單位和具體時間，結尾要求讀者趕快轉給家人朋友。"
+    },
+    {
+     "tactic_id": "TW-T12",
+     "features": [
+      "a",
+      "b"
+     ],
+     "quote": "民進黨立委剛剛在記者會宣布",
+     "explanation": "只用沒有姓名的政黨職稱當作消息的權威來源，也查不到對應的立委或記者會發言。"
+    },
+    {
+     "tactic_id": "TW-T15",
+     "features": [
+      "b",
+      "c"
+     ],
+     "quote": "就能擋下明年健保費調漲！名額有限",
+     "explanation": "以明年健保費會調漲、名額有限的說法製造怕多繳錢和怕錯過的壓力，沒有附可以查證的來源或數字。"
+    }
+   ]
+  },
+  {
+   "variant": "民進黨",
+   "run": "tracer rerun 2",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】……名額有限，趕快轉給家人朋友！",
+     "explanation": "標題寫「緊急通知」卻沒有發布單位和發布時間，結尾用名額有限催促讀者轉給家人朋友。"
+    },
+    {
+     "tactic_id": "TW-T12",
+     "features": [
+      "a",
+      "b"
+     ],
+     "quote": "民進黨立委剛剛在記者會宣布",
+     "explanation": "訊息只用「民進黨立委」這個沒有姓名的頭銜當作消息依據，也沒指明是哪一場記者會，公開報導裡查不到對應的發言。"
+    }
+   ]
+  },
+  {
+   "variant": "民進黨",
+   "run": "tracer rerun 3",
+   "tactics": [
+    {
+     "tactic_id": "TW-T16",
+     "features": [
+      "a",
+      "c"
+     ],
+     "quote": "【緊急通知】民進黨立委剛剛在記者會宣布……趕快轉給家人朋友！",
+     "explanation": "訊息以「緊急通知」開頭並要求轉給家人朋友，但沒有具體時間和發布單位。"
+    },
+    {
+     "tactic_id": "TW-T12",
+     "features": [
+      "a",
+      "b"
+     ],
+     "quote": "民進黨立委剛剛在記者會宣布",
+     "explanation": "訊息只寫「民進黨立委」這個沒有姓名的頭銜當作消息依據，公開報導也查不到對應的記者會或原始發言。"
+    },
+    {
+     "tactic_id": "TW-T15",
+     "features": [
+      "b",
+      "c"
+     ],
+     "quote": "就能擋下明年健保費調漲！名額有限",
+     "explanation": "訊息以健保費調漲的金錢負擔和「名額有限」催促行動，沒有附可以查證的來源。"
+    }
+   ]
+  }
+ ]
+}

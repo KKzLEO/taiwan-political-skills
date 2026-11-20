@@ -1,0 +1,98 @@
+{
+  "credibility": {
+    "score": 0,
+    "raw": 0.0,
+    "main_claims": [
+      "C5"
+    ],
+    "main_accuracy": 0.0,
+    "overall_accuracy": 0.4133,
+    "capped": false,
+    "context_flags": [
+      "out_of_context"
+    ],
+    "show_on_spectrum": true
+  },
+  "result": "不符",
+  "result_reason": null,
+  "confidence": {
+    "score": 80,
+    "level": "高",
+    "deductions": [
+      {
+        "points": 10,
+        "reason": "C3 覆核沒有完成或沒有通過"
+      },
+      {
+        "points": 10,
+        "reason": "C5 覆核沒有完成或沒有通過"
+      }
+    ],
+    "evidence_quality": 1.0
+  },
+  "publishable": true,
+  "publish_blocks": [],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "true",
+      "importance": 2,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C2",
+      "label": "unverified",
+      "importance": 1,
+      "factor": null
+    },
+    {
+      "claim_id": "C3",
+      "label": "misleading",
+      "importance": 4,
+      "factor": 0.25
+    },
+    {
+      "claim_id": "C4",
+      "label": "mostly_true",
+      "importance": 4,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C5",
+      "label": "false",
+      "importance": 5,
+      "factor": 0.0
+    },
+    {
+      "claim_id": "C6",
+      "label": "not_factual",
+      "importance": 3,
+      "factor": null
+    },
+    {
+      "claim_id": "C7",
+      "label": "unverified",
+      "importance": 1,
+      "factor": null
+    },
+    {
+      "claim_id": "C8",
+      "label": "not_factual",
+      "importance": 1,
+      "factor": null
+    },
+    {
+      "claim_id": "C9",
+      "label": "false",
+      "importance": 3,
+      "factor": null
+    },
+    {
+      "claim_id": "C10",
+      "label": "not_factual",
+      "importance": 2,
+      "factor": null
+    }
+  ]
+}

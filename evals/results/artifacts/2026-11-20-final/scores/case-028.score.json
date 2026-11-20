@@ -1,0 +1,65 @@
+{
+  "credibility": {
+    "score": 72,
+    "raw": 71.67,
+    "main_claims": [
+      "C1",
+      "C2"
+    ],
+    "main_accuracy": 0.8,
+    "overall_accuracy": 0.7167,
+    "capped": false,
+    "context_flags": [],
+    "show_on_spectrum": true
+  },
+  "result": "大致符合",
+  "result_reason": null,
+  "confidence": {
+    "score": 90,
+    "level": "高",
+    "deductions": [
+      {
+        "points": 10,
+        "reason": "C5 覆核沒有完成或沒有通過"
+      }
+    ],
+    "evidence_quality": 1.0
+  },
+  "publishable": false,
+  "publish_blocks": [
+    "結論是「大致符合」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條"
+  ],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "importance": 5,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C2",
+      "label": "mostly_true",
+      "importance": 5,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C3",
+      "label": "not_factual",
+      "importance": 3,
+      "factor": null
+    },
+    {
+      "claim_id": "C4",
+      "label": "misleading",
+      "importance": 3,
+      "factor": 0.25
+    },
+    {
+      "claim_id": "C5",
+      "label": "true",
+      "importance": 2,
+      "factor": 1.0
+    }
+  ]
+}

@@ -253,7 +253,7 @@ def cmd_score(args):
 
 def cmd_render(args):
     run = _run_dir(args)
-    (run / "report.md").write_text(render.render(run), encoding="utf-8")
+    (run / "report.md").write_text(render.render(run, with_tactics=args.with_tactics), encoding="utf-8")
     print(run / "report.md")
 
 
@@ -406,7 +406,9 @@ def main(argv=None):
     add("reviewers", cmd_reviewers)
     add("finalize", cmd_finalize)
     add("score", cmd_score)
-    add("render", cmd_render)
+    p = add("render", cmd_render)
+    p.add_argument("--with-tactics", action="store_true",
+                   help="報告也列出操弄手法（實驗功能：換政黨或重跑時標記可能不同，預設不列）")
     add("status", cmd_status)
 
     p = add("eval-compare", cmd_eval_compare)
