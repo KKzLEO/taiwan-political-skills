@@ -1,0 +1,618 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96-%E8%94%A3%E8%90%AC%E5%AE%89%E5%97%86%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%AA%AA%E9%A3%9F%E7%89%A9%E4%B8%AD%E6%AF%92%E4%B8%8D%E9%81%93%E6%AD%89-%E5%BD%B1%E5%B0%84%E4%BA%82%E7%A0%8D%E6%A8%B9-%E7%82%BA%E9%81%B8%E8%88%89%E6%95%A3%E5%B8%83%E4%B8%8D%E5%AF%A6%E8%AC%A0%E8%A8%80-052842494.html",
+      "title": "【北市長辯論】蔣萬安嗆沈伯洋說食物中毒不道歉、影射亂砍樹：為選舉散布不實謠言",
+      "publisher": "太報（Yahoo 新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "taisounds-1031",
+      "stance": "supports",
+      "excerpt": "但是今天你卻為了選舉反對這項政策，而且刻意地散播不實的言論，說金華國中在內很多學校是大規模的食物中毒；但是事實證明，事後的檢查都完全合格。",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "url": "https://www.taisounds.com/news/content/71/297102",
+      "title": "【北市長辯論】蔣萬安嗆沈伯洋說食物中毒不道歉、影射亂砍樹：為選舉散布不實謠言",
+      "publisher": "太報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "taisounds-1031",
+      "stance": "refutes",
+      "excerpt": "沒有人在否定免費的營養午餐，他是在講說，要用怎樣一個好的制度，執行得更好，品質可以維持",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://www.taisounds.com/news/content/71/297102",
+      "title": "【北市長辯論】蔣萬安嗆沈伯洋說食物中毒不道歉、影射亂砍樹：為選舉散布不實謠言",
+      "publisher": "太報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "taisounds-1031",
+      "stance": "refutes",
+      "excerpt": "他也沒有講說「食物中毒」，他那時候第一時間講的是：「希望能夠趕快檢驗。」",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pchome.com.tw/politics/nownews/20261031/index-79344124679914207001.html",
+      "title": "從營養午餐吵到寶林！蔣萬安沈伯洋砲火四射",
+      "publisher": "今日新聞 NOWnews（PChome Online 新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "nownews-1031",
+      "stance": "supports",
+      "excerpt": "但現在你卻為了選舉反對這項政策，刻意散播不實謠言，說金華國中在內很多學校是大規模的食物中毒，但是事實證明，事後的檢查都完全合格",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/124652/9848871",
+      "title": "沈伯洋猛攻營養午餐 蔣萬安嗆：傷害多少家長學生一句道歉都沒有",
+      "publisher": "聯合報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn-1031",
+      "stance": "supports",
+      "excerpt": "稱金華國中案是大規模食物中毒，但事實證明檢查都完全合格",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+      "title": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "publisher": "三立新聞網（YouTube）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "debate-video",
+      "stance": "context",
+      "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tfc-taiwan.org.tw/taipei-school-lunch-food-poisoning-and-safety-inspection-claims/",
+      "title": "蔣萬安說：「你（沈伯洋）剛提到很多問題…其實我們推動營養午餐，免費不是等於品質打折…金華國中在內很多學校，是大規模的食物中毒，但是事實證明，事後的檢查都完全合格」？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc-1031",
+      "stance": "supports",
+      "excerpt": "金華國中在內很多學校，是大規模的食物中毒，但是事實證明，事後的檢查都完全合格",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://tfc-taiwan.org.tw/taipei-school-lunch-food-poisoning-and-safety-inspection-claims/",
+      "title": "蔣萬安說：「你（沈伯洋）剛提到很多問題…其實我們推動營養午餐，免費不是等於品質打折…金華國中在內很多學校，是大規模的食物中毒，但是事實證明，事後的檢查都完全合格」？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc-1031",
+      "stance": "refutes",
+      "excerpt": "經市府採檢，成淵高中（國中部）熱食部便當檢出金黃色葡萄球菌腸毒素B，其餘5校餐點或食材檢驗結果皆為合格，但金華國中採檢有爭議。",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C4",
+        "C5"
+      ],
+      "url": "https://health.gov.taipei/News_Content.aspx?n=4F01EBDF8F61F315&sms=72544237BBE4C5F6&s=27105732CFA2BEAA",
+      "title": "成淵高中熱食部留樣便當檢驗出爐 衛生局重罰18萬元 校設專責服務窗口求償",
+      "publisher": "臺北市政府衛生局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-health-0918",
+      "stance": "refutes",
+      "excerpt": "檢驗結果1件學校午餐食餘檢體（留樣便當）檢出食品中金黃色葡萄球菌腸毒素B。",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202609180285.aspx",
+      "title": "成淵高中食物中毒案　北市開罰供餐廠商18萬元",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "taipei-health-0918",
+      "stance": "refutes",
+      "excerpt": "國中部87名學生於9月7日中午食用學校熱食部餐食後，陸續發生腹瀉等疑似食品中毒症狀。",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=2044902FC839D045&sms=72544237BBE4C5F6&s=21B58B89B1A80DB7",
+      "title": "蔣萬安赴議會專案報告　強化校園食安、疫病防治及長者財物管理　加速推動臺北AI發展",
+      "publisher": "臺北市政府",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-gov-1021",
+      "stance": "refutes",
+      "excerpt": "除成淵高中檢出金黃色葡萄球菌腸毒素B，市府第一時間採取停餐、啟動備援供餐、重罰及終止契約等措施外，其餘學校的餐食留樣檢驗結果均合格。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&sms=72544237BBE4C5F6&s=6C8E42D2A96900DB",
+      "title": "北市校園餐點抽驗出爐 金華國中、景興國小、民族國小等校檢驗均合格",
+      "publisher": "臺北市政府衛生局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-health-1007",
+      "stance": "supports",
+      "excerpt": "抽驗其6校午餐餐食留樣，檢驗結果均符合規定。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&sms=72544237BBE4C5F6&s=6C8E42D2A96900DB",
+      "title": "北市校園餐點抽驗出爐 金華國中、景興國小、民族國小等校檢驗均合格",
+      "publisher": "臺北市政府衛生局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-health-1007",
+      "stance": "refutes",
+      "excerpt": "針對衛生局前次查核發現之衛生管理缺失，均已要求相關業者限期改善，後續複查結果亦均符合規定。",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C4",
+        "C5"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202610070164.aspx",
+      "title": "北市延平中學餐食採樣送驗　民族與景興國小案排除校餐所致",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-1007",
+      "stance": "refutes",
+      "excerpt": "至於金華國中案的採樣也合格，但非檢驗發生事件的留樣食材，因為是9月23日接獲有學生腸胃不適的輿情，當時已超過餐食法定留樣48小時時間，食材已銷毀，隔天24日啟動調查，所以是採樣當天的餐食送驗，結果也是合格。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=455033C0CA729464",
+      "title": "北市教育局公布結果 小卷檢驗結果出爐「均正常」 景興國小第一時間啟動應變",
+      "publisher": "臺北市政府教育局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-doe-1002",
+      "stance": "supports",
+      "excerpt": "日前送驗的同批號小卷食材檢驗報告已出爐，結果『均屬正常』。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://tw.news.yahoo.com/%E5%8C%97%E5%B8%82%E6%99%AF%E8%88%88%E5%9C%8B%E5%B0%8F%E7%88%8612%E5%B8%AB%E7%94%9F%E4%B8%8D%E9%81%A9-%E5%B0%8F%E5%8D%B7%E6%AA%A2%E9%A9%97%E7%B5%90%E6%9E%9C%E5%87%BA%E7%88%90-%E8%A1%9B%E7%94%9F%E5%B1%80%E7%A8%BD%E6%9F%A5%E9%A9%9A%E8%A6%8B%E9%80%99%E7%BC%BA%E5%A4%B1-104100570.html",
+      "title": "北市景興國小爆12師生不適！小卷檢驗結果出爐　衛生局稽查驚見這缺失",
+      "publisher": "三立新聞網（Yahoo 新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "taipei-doe-1002",
+      "stance": "refutes",
+      "excerpt": "衛生局9月24日上午約11時30分派員前往景興國小廚房稽查，發現「撈菜網生鏽」等缺失，當場開立限期改善單",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=C58BC8FB95F1C735",
+      "title": "北市府說明天母國中午餐檢驗結果　推動六大精進作為強化校園食安",
+      "publisher": "臺北市政府教育局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-doe-1030",
+      "stance": "supports",
+      "excerpt": "衛生局說明，天母國中當日用餐人數為1,394人，8人出現不適，其中5人就醫，主要症狀為口腔麻癢，學校午餐留樣檢驗結果合格",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=BEF8280DE6D9A2AF",
+      "title": "金華國中並無集體食物中毒 教育局駁斥不實指控已翻車",
+      "publisher": "臺北市政府教育局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-doe-0923",
+      "stance": "supports",
+      "excerpt": "該校沒有出現集體食物中毒",
+      "access_note": "full"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202609240284.aspx",
+      "title": "北市金華國中食安事件　教育局重申依流程確認非食品中毒",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-0924",
+      "stance": "supports",
+      "excerpt": "雖未達「疑似食品中毒通報流程」標準，校方仍進行校安通報，並要求學生至醫院或健康中心檢查",
+      "access_note": "full"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202609240284.aspx",
+      "title": "北市金華國中食安事件　教育局重申依流程確認非食品中毒",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-0924",
+      "stance": "refutes",
+      "excerpt": "北市府未說清楚檢驗報告等內容，如果不先講清楚這些事，當外界把事實攤開討論時，卻被提到是造謠，不敢苟同這樣處理事情的態度。",
+      "access_note": "full"
+    },
+    {
+      "id": "S21",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202609250109.aspx",
+      "title": "北市金華國中食安事件　沈伯洋籲檢體應送驗",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-0925",
+      "stance": "refutes",
+      "excerpt": "學生拉肚子對外反映，這是事實，市府只要送驗檢體且告知外界結果而非指責學生，回應事情的方式應改進。",
+      "access_note": "full"
+    },
+    {
+      "id": "S22",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5588915",
+      "title": "金華國中營養午餐風波校長致歉 沈伯洋嘆反映人民聲音被說造謠",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-0929",
+      "stance": "refutes",
+      "excerpt": "先前自己第一時間回應也很簡單，就是趕快釐清，如有檢體盡快送驗，了解到底是單一事件還是涉及廠商因素，是否需要進行預防性措施，從頭到尾只有這樣講，結果被罵造謠、認知作戰。",
+      "access_note": "full"
+    },
+    {
+      "id": "S23",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5588915",
+      "title": "金華國中營養午餐風波校長致歉 沈伯洋嘆反映人民聲音被說造謠",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-0929",
+      "stance": "context",
+      "excerpt": "學生食用含小卷的營養午餐後，陸續收到3名學生告知身體不適",
+      "access_note": "full"
+    },
+    {
+      "id": "S24",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202609290140.aspx",
+      "title": "金華國中營養午餐爭議　蔣萬安：渲染成食物中毒是製造恐慌",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-0929",
+      "stance": "supports",
+      "excerpt": "共掌握3人身體不適",
+      "access_note": "full"
+    },
+    {
+      "id": "S25",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://tw.news.yahoo.com/%E5%85%8D%E8%B2%BB%E7%87%9F%E9%A4%8A%E5%8D%88%E9%A4%90%E9%80%A3%E7%92%B0%E5%87%BA%E5%8C%85-%E6%B2%88%E4%BC%AF%E6%B4%8B-%E5%A4%A7%E5%AE%B6-%E7%9B%B4%E6%8F%90%E9%86%92%E5%8D%BB%E4%BB%80%E9%BA%BC%E9%83%BD%E4%B8%8D%E5%81%9A-085700907.html",
+      "title": "免費營養午餐連環出包　沈伯洋：大家一直提醒卻什麼都不做",
+      "publisher": "三立新聞網（Yahoo 新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn-0923-shen",
+      "stance": "context",
+      "excerpt": "食安問題不是突然爆發，而是大家一直提醒，到最後什麼都不做，它就是會發生。",
+      "access_note": "full"
+    },
+    {
+      "id": "S26",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://news.ttv.com.tw/news/11509240001300W",
+      "title": "簡舒培、沈伯洋控金華國中集體食物中毒　教育局駁斥：應道歉",
+      "publisher": "台視新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ttv-0924",
+      "stance": "supports",
+      "excerpt": "簡舒培、沈伯洋控金華國中集體食物中毒　教育局駁斥：應道歉",
+      "access_note": "full"
+    },
+    {
+      "id": "S27",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://www.setn.com/ampnews/1911846",
+      "title": "翻車了？金華國中營養午餐爆食安　北市教育局怒駁斥壓案　校方委屈喊冤",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn-0923-chien",
+      "stance": "context",
+      "excerpt": "簡舒培說，接獲金華國中家長陳情，反映9月4日，學生與老師食用含有「小卷」的營養午餐後，多個班級甚至導師室，都有人出現腹瀉、嘔吐等症狀！",
+      "access_note": "full"
+    },
+    {
+      "id": "S28",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5593681",
+      "title": "營養午餐又出包！景興國小師生腹瀉 沈伯洋：讓人民安心最重要",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-1002",
+      "stance": "context",
+      "excerpt": "最近這些事情發生的確稍微比較頻繁一些，大家要多加注意，一定要有保存好檢體，然後送驗，讓大家趕快知道是什麼樣的問題，人民能夠安心，這是最重要的。",
+      "access_note": "full"
+    },
+    {
+      "id": "S29",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://today.line.me/tw/v3/article/3NPKlRP",
+      "title": "蔣萬安「免費營養午餐」連環出包！爆多校集體腹瀉　沈伯洋籲儘速追查",
+      "publisher": "民視新聞網（LINE TODAY 轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ftv-0911",
+      "stance": "context",
+      "excerpt": "確實有追查的必要",
+      "access_note": "full"
+    },
+    {
+      "id": "S30",
+      "claim_ids": [
+        "C3",
+        "C5"
+      ],
+      "url": "https://www.chinatimes.com/realtimenews/20261011002599-260407",
+      "title": "蔣萬安嗆沈伯洋造謠罄竹難書 蔣辦再列3爭議：別再裝糊塗",
+      "publisher": "中時新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chinatimes-1011",
+      "stance": "context",
+      "excerpt": "大規模集體食物中毒",
+      "access_note": "full"
+    },
+    {
+      "id": "S31",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.rti.org.tw/news?uid=3&pid=235301",
+      "title": "台北市長選戰／ 沈伯洋主張營養午餐增自費 蔣萬安指立場反覆",
+      "publisher": "中央廣播電臺",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "rti-1002",
+      "stance": "refutes",
+      "excerpt": "家長自費就是本來是免費還是在，但是免費之上，家長能不能夠去自費，這個機制和彈性要把它加回去",
+      "access_note": "full"
+    },
+    {
+      "id": "S32",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.rti.org.tw/news?uid=3&pid=235301",
+      "title": "台北市長選戰／ 沈伯洋主張營養午餐增自費 蔣萬安指立場反覆",
+      "publisher": "中央廣播電臺",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "rti-1002",
+      "stance": "refutes",
+      "excerpt": "他一開始說要讓自費回來，現在又說要讓免費繼續",
+      "access_note": "full"
+    },
+    {
+      "id": "S33",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5599086",
+      "title": "趙少康問營養午餐政策 沈伯洋：免費為基礎 恢復家長自費加價彈性",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-1007",
+      "stance": "refutes",
+      "excerpt": "宣布免費午餐後，這個彈性就拿掉了，希望能把它找回來，讓全校受益。",
+      "access_note": "full"
+    },
+    {
+      "id": "S34",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://tw.news.yahoo.com/%E5%8C%97%E5%B8%82%E5%8F%88%E6%9C%89%E5%AD%A9%E7%AB%A5%E5%90%83%E7%87%9F%E9%A4%8A%E5%8D%88%E9%A4%90%E5%BE%8C%E8%BA%AB%E9%AB%94%E4%B8%8D%E9%81%A9-%E6%B2%88%E4%BC%AF%E6%B4%8B-%E7%9B%BC%E9%87%90%E6%B8%85%E7%9C%9F%E7%9B%B8%E4%B8%A6%E9%A0%90%E9%98%B2-032823412.html",
+      "title": "北市又有孩童吃營養午餐後身體不適 沈伯洋：盼釐清真相並預防",
+      "publisher": "Newtalk 新聞（Yahoo 新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "newtalk-1001",
+      "stance": "context",
+      "excerpt": "家長自費應該要回來",
+      "access_note": "full"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "大致正確：蔣萬安確實在 2026 年 10 月 31 日 TVBS、三立合辦的台北市長辯論會上對沈伯洋說了這段話。太報、今日新聞各自的逐字引文和查核中心引用的版本內容一致，只有「這項政策／這樣的政策」「不實的言論／不實謠言」幾個字不同。找到三立的完整直播影片頁，但讀不到字幕，沒有逐字核對原話，所以不判「正確」。這一條只判他有沒有說過，內容對錯在 C2 到 C5 判。",
+      "evidence_ids": [
+        "S1",
+        "S4",
+        "S5",
+        "S6",
+        "S7"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C2",
+      "label": "false",
+      "reasoning": "錯誤：查到的紀錄裡沈伯洋沒有反對免費營養午餐；「為了選舉」是對動機的推測，沒有查證。沈伯洋 10 月 2 日說「免費還是在」、要在免費之上加回家長自費的彈性，10 月 7 日受訪的報導寫他以免費午餐當基礎，辯論當場也說沒有人否定免費營養午餐；蔣萬安 10 月 2 日自己也說沈「又說要讓免費繼續」。沈伯洋批評的是配套和品質，10 月 1 日說過「家長自費應該要回來」，沒有查到他主張取消免費。",
+      "evidence_ids": [
+        "S2",
+        "S31",
+        "S32",
+        "S33",
+        "S34"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C3",
+      "label": "false",
+      "reasoning": "錯誤：沒有查到沈伯洋說過「金華國中在內很多學校是大規模的食物中毒」，他本人在辯論當場否認。他 9 月 23 日至 10 月 2 日的受訪紀錄講的是學生拉肚子屬實、檢體送驗並公布結果、近期事件「比較頻繁」，沒有用「食物中毒」「集體」「大規模」；「多個班級甚至導師室」腹瀉嘔吐的說法出自議員簡舒培，蔣萬安辦公室 10 月 11 日的聲明也沒有附沈伯洋的原話。限制：台視 9 月 24 日的標題把沈伯洋和簡舒培並列為指控者，但內文沒有他的引語；沒有取得他社群貼文的全文。",
+      "evidence_ids": [
+        "S3",
+        "S20",
+        "S21",
+        "S22",
+        "S25",
+        "S26",
+        "S27",
+        "S28",
+        "S29",
+        "S30"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C4",
+      "label": "misleading",
+      "reasoning": "誤導；「刻意」是對動機的推測，沒有查證。依教育局和校方資料，金華國中只掌握 3 名學生不適、未達疑似食品中毒通報標準，「大規模食物中毒」確實沒有依據。但查到的沈伯洋發言是學生拉肚子屬實、要求送驗，和校長公開信寫的 3 名學生不適相符，沒有查到他散播這項說法（見 C3）。另外，同學期成淵高中國中部 87 名學生不適、留樣便當檢出腸毒素 B，是衛生局確認的案件；金華國中事發當日的餐食已過留樣期限，沒有檢驗。",
+      "evidence_ids": [
+        "S9",
+        "S10",
+        "S14",
+        "S18",
+        "S19",
+        "S21",
+        "S23",
+        "S24"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C5",
+      "label": "misleading",
+      "reasoning": "誤導：金華、景興、民族等校事後送驗的餐食和同批號小卷確實合格，但「都完全合格」漏掉三件事。一、金華國中事發的餐食已過留樣期限銷毀，送驗的是 9 月 24 日當天的餐食和同批號小卷，不是事發餐點。二、衛生局查核發現衛生管理缺失（景興國小撈菜網生鏽），限期改善後複查才符合規定。三、同學期成淵高中國中部留樣便當檢出金黃色葡萄球菌腸毒素 B，市府 10 月 21 日新聞稿自己也寫「除成淵高中」以外其餘學校合格。",
+      "evidence_ids": [
+        "S8",
+        "S9",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S30"
+      ],
+      "context_flags": [
+        "out_of_context"
+      ],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": [
+    {
+      "org": "台灣事實查核中心",
+      "url": "https://tfc-taiwan.org.tw/taipei-school-lunch-food-poisoning-and-safety-inspection-claims/",
+      "their_label": "部分與所查資料不符",
+      "claim_ids": [
+        "C5"
+      ],
+      "agree": true,
+      "note": "已獨立核對其引用的 9 項原始資料（衛生局 9 月 18 日、10 月 7 日新聞稿，教育局 9 月 23 日、10 月 2 日、10 月 30 日新聞稿，市府 10 月 21 日新聞稿，中央社 9 月 24 日、9 月 29 日、10 月 7 日報導），成淵高中檢出腸毒素 B、其餘學校檢驗合格、金華國中沒有事發當日檢體，都和原始資料相符；市長專案報告的連結沒有打開。該報告只查檢驗結果，沒有查沈伯洋是否說過這項說法，也沒有處理 C2、C4。本次另外查到衛生局查核有缺失、限期改善的紀錄。"
+    }
+  ]
+}

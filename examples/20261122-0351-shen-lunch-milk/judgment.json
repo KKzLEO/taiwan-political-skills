@@ -1,0 +1,954 @@
+{
+  "rulings": [
+    {
+      "attack_id": "A-1",
+      "upheld": true,
+      "reason": "成立。核對後，能確認的只有招標進度：教育局稱 8 月 21 日仍有 4 校未決標，排定 8 月 24 日、26 日決標，都早於 8 月 31 日開學；教育局 9 月 7 日新聞稿稱開學前營養午餐全數到位。實驗教育機構廠商預告不供餐是開學後的事，報導寫廠商當時仍可供餐到 9 月 15 日，原因是虧損，不是招標流標。台灣事實查核中心只寫「險些斷炊」的說法出自 7 月底議員質詢，沒有查證是否有學校差點中斷供餐。查不到任何學校差點無法供餐的報導或逐校資料，也沒有能直接推翻的資料，「有些學校險些斷炊」改判無法證實。",
+      "verified_urls": [
+        "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+        "https://news.ltn.com.tw/news/life/breakingnews/5391172",
+        "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=C67B30BC9E03D8CD",
+        "https://www.ettoday.net/news/20260902/3230342.htm"
+      ]
+    },
+    {
+      "attack_id": "A-2",
+      "upheld": true,
+      "reason": "成立。核對後，公開的兌換率數字全部停在 2025 年 12 月，轉述審計報告的來源寫的是第二階段第 12 週起（最後 6 週）逐週下降。2026 年沒有公開的逐週或逐月數字；教育局 10 月稱兌換率維持在六成五至七成之間，是沒有附數據的區間，不能證實也不能推翻。這句話是 2026 年 10 月 31 日說的，「一直往下」到當時沒有資料可以核對，改判無法證實。",
+      "verified_urls": [
+        "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+        "https://newpowerparty.tw/archives/30973",
+        "https://news.ltn.com.tw/news/life/paper/1774723"
+      ]
+    },
+    {
+      "attack_id": "A-3",
+      "upheld": true,
+      "reason": "成立。台灣事實查核中心、時代力量、立委陳培瑜和 ETtoday 的數字都標明出自審計報告，是同一份報告的轉述，算同一條證據鏈，不能寫成多方互相印證。低收入戶 59.61% 加 9.63、中低收入戶 61.40% 加 7.84 都等於 69.24，時代力量的差距是用同期間整體兌換率算的，不是全年平均 69.14%，判定理由改用這組數字。立委所說一般孩童兌換率「逐步下滑來到5成7」和其他轉述對不上，不採用。審計報告原文連結多次讀取都是空白，數字仍然只有轉述。弱勢兌換率低於整體的方向各版本一致，標籤不因此改變。",
+      "verified_urls": [
+        "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+        "https://newpowerparty.tw/archives/30973",
+        "https://tw.news.yahoo.com/%E8%94%A3%E8%90%AC%E5%AE%89%E8%B8%B9%E5%85%B1-%E9%99%B3%E5%9F%B9%E7%91%9C%E6%8F%AA%E5%8C%97%E5%B8%82%E7%94%9F%E7%94%9F%E5%96%9D%E9%AE%AE%E5%A5%B6%E6%94%BF%E7%AD%962%E5%95%8F%E9%A1%8C-%E5%B9%B3%E5%9D%87%E5%85%8C%E6%8F%9B%E7%8E%87%E6%9C%AA%E9%81%947%E6%88%90-044400137.html",
+        "https://www.ettoday.net/news/20260901/3229218.htm"
+      ]
+    },
+    {
+      "attack_id": "B-1",
+      "upheld": false,
+      "reason": "不成立。攻擊指出的事實核對後成立，已寫進修正後的理由：7 月 30 日的 152 所是尚未決標的校數，不是流標校數；今年 7 月第 1 週才公告招標；8 月 21 日已有 315 校決標（98.7%）。但開學前有學校流標，有教育局自己的說法：教育局長湯志民 8 月 4 日在議會說明「會流標是第一次開標需要三家業者投標」，教育局 9 月 7 日新聞稿寫極少數學校流標需重新辦理，團膳公會理事長也稱部分學校流標。孫文昌「不是流標」的說法談的是成因，出自一篇標題寫「多校流標」的報導，不足以否定有流標。「頻頻」是程度用語，原句沒有說多數學校或同一校反覆流標；公開資料沒有流標校數，教育局只用「極少數學校」形容，沒有數字，無法證明這個說法造成錯誤印象。主體（追加預算後、開學前有學校流標重辦）有官方說法支持，維持大致正確。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "B-2",
+      "upheld": true,
+      "reason": "成立。「斷炊」最早是 7 月底議員質詢時的預警用語，當時是推測。之後的進度是 8 月 21 日 315 校已決標（98.7%），剩 4 校排定 8 月 24 日、26 日決標，都在 8 月 31 日開學前；教育局 9 月 7 日稱開學前全數到位。蔣萬安 8 月 12 日說的 85% 只說明進度；實驗教育機構是廠商疑似虧損而預告不供餐，和開學前招標是不同的事。沒有逐校簽約和開學首日供餐的資料，少數學校在開學前約一週才決標算不算「險些斷炊」，公開資料不能證實也不能否定，改判無法證實。",
+      "verified_urls": [
+        "https://udn.com/news/story/6898/9708794",
+        "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=C67B30BC9E03D8CD",
+        "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+        "https://www.cna.com.tw/news/aloc/202607300251.aspx",
+        "https://www.knews.com.tw/news/6BCEA151E78F8F69281FFC5F3603FBCA"
+      ]
+    },
+    {
+      "attack_id": "B-3",
+      "upheld": false,
+      "reason": "不成立。攻擊列的事實核對後成立，也已採納：連續逐週下降只見於 2025 年最後 6 週，2026 年沒有公開數字，8 月 31 日起對象新增約 6.6 萬名國中生。但判誤導要有資料顯示讀者得到的印象是錯的。教育局「六成五至七成之間」是當事機關給的區間，沒有逐週數字，下限和 2025 年底的 64.29% 差不到 1 個百分點，不能當成直接反證；母數改變也只說明無法接續比較。證據不足、沒有直接反證，這一條改判無法證實，不判誤導。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "B-4",
+      "upheld": true,
+      "reason": "成立。兌換率下降的數字，不論出自台灣事實查核中心、時代力量、ETtoday 或立委，都標明來自同一份審計報告，併成同一條證據鏈；判定理由不再寫「各方引用的審計資料一致」，改寫為數字都是同一份審計報告的轉述。審計報告原文連結多次讀取都是空白，沒有第一手核對。",
+      "verified_urls": [
+        "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+        "https://newpowerparty.tw/archives/30973",
+        "https://www.ettoday.net/news/20260901/3229218.htm"
+      ]
+    },
+    {
+      "attack_id": "B-5",
+      "upheld": true,
+      "reason": "成立。弱勢兌換率的數字都轉述同一份審計報告，併成同一條證據鏈，不當成三個來源互相印證。兩種轉述之間 0.1 個百分點的差距來自比較基準不同：59.61 加 9.63、61.40 加 7.84 都等於 69.24，時代力量用的是同期間整體兌換率，不是全年平均 69.14%。理由改寫為低 9.63 和 7.84 個百分點，並寫明資料只涵蓋 2025 年、審計報告原文沒有讀到。",
+      "verified_urls": [
+        "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+        "https://newpowerparty.tw/archives/30973"
+      ]
+    },
+    {
+      "attack_id": "C-1",
+      "upheld": true,
+      "reason": "成立。中央社原文是市議員柳采葳說「根據教育局掌握資訊」提出決標校數，教育局在同一篇報導只回應依法辦理、8 月 21 日前完成，沒有證實這組數字；這筆證據改標為轉述議員說法，和另一位議員的質詢報導用同一個層級。8 月 21 日仍有 4 校未決標，有教育局自己的說法（8 月 19 日新聞稿寫剩餘 16 校，8 月 23 日回應寫剩餘 4 校），理由改引教育局，不再寫成政黨說法。標籤不變。",
+      "verified_urls": [
+        "https://www.cna.com.tw/news/aloc/202607300251.aspx",
+        "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=927DE603022024ED",
+        "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+        "https://udn.com/news/story/6898/9708794"
+      ]
+    },
+    {
+      "attack_id": "C-2",
+      "upheld": true,
+      "reason": "成立。「招標順暢」只見於報導者沒有引號的記者轉述；公視直接引述的蔣萬安回應是「刻意的散播不實言論」。理由不能拿記者轉述的用詞認定蔣萬安和教育局說法不一致，這句評價刪除，改寫為蔣萬安在辯論中稱對方散播不實言論（媒體引述，沒有逐字核對影片），沒有就流標提出數字。教育局新聞稿的原文是「極少數學校因不可抗力因素導致流標需重新辦理」，理由改用「表示」並保留原文。標籤不變。",
+      "verified_urls": [
+        "https://news.pts.org.tw/article/833715",
+        "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+        "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=C67B30BC9E03D8CD"
+      ]
+    },
+    {
+      "attack_id": "C-3",
+      "upheld": true,
+      "reason": "成立。台灣事實查核中心的報告本文已讀到：16 校、4 校的時間表引的是教育局 8 月 19 日和 23 日的說法；對「險些斷炊」，報告只寫這個說法出自 7 月 31 日議員質詢，沒有查證是否有學校差點中斷供餐。查核中心的結論涵蓋的是招標時程，不能算成「險些斷炊」的佐證，相關證據改列背景。有出處的只有少數學校到 8 月下旬才決標；「險些」的程度沒有查核機構或官方資料支持。",
+      "verified_urls": [
+        "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+        "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=927DE603022024ED"
+      ]
+    },
+    {
+      "attack_id": "X1-1",
+      "upheld": true,
+      "reason": "成立。7 月 30 日的 94 校是已決標校數，其餘 152 校是當時尚未決標，只能說明招標進度，不直接顯示流標，這筆證據改列背景。教育局 8 月 19 日新聞稿寫部分學校因「尚處等標期間或廠商投標文件缺漏等因素」需重新上標；8 月 23 日的回應寫 8 月 21 日 315 校已決標、剩 4 校。8 月 21 日仍有 4 校未完成，改用教育局的說法。",
+      "verified_urls": [
+        "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=927DE603022024ED",
+        "https://udn.com/news/story/6898/9708794",
+        "https://www.cna.com.tw/news/aloc/202607300251.aspx"
+      ]
+    },
+    {
+      "attack_id": "X1-2",
+      "upheld": true,
+      "reason": "成立。公視和壹蘋新聞網的直接引述都有「追加了預算之後」，待查訊息省略了這幾個字，脈絡說明應補上。115 學年度開學日是 2026 年 8 月 31 日，「開學前」以這一天界定，不是 9 月；開學日是用自由時報 4 月 2 日報導的教育局記者會內容核對的，行事曆 PDF 讀不出文字，沒有用它核對。這項修正不涉及重要性，也不改變標籤。",
+      "verified_urls": [
+        "https://news.nextapple.com/politics/20261031/6B260386E4F6EF2765A6FEA10D22FC60",
+        "https://news.pts.org.tw/article/833715",
+        "https://news.ltn.com.tw/news/life/breakingnews/5391172"
+      ]
+    },
+    {
+      "attack_id": "X1-3",
+      "upheld": true,
+      "reason": "成立。8 月 21 日未完成招標的 4 校，教育局當時已說明預計 8 月 24 日、26 日決標。教育局 9 月 7 日新聞稿記載的實驗教育機構供餐銜接，是現有資料唯一具體指出的供餐事件，發生在開學後，無法確認和那 4 校有關，也無法確認另有學校面臨同樣風險。教育局稱全數到位，不能排除曾有風險，也不能證明有。改判無法證實。",
+      "verified_urls": [
+        "https://udn.com/news/story/6898/9708794",
+        "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&s=C67B30BC9E03D8CD&sms=72544237BBE4C5F6"
+      ]
+    },
+    {
+      "attack_id": "X1-4",
+      "upheld": false,
+      "reason": "不成立。攻擊的主要依據是審計報告表 5 的逐週數字，但這個連結多次讀取都是空白，無法核對，不能採為證據。能核對的部分是：沈伯洋競選網站把這件事寫成「近來兌換率一直往下」，教育局自 115 學年度起把補助擴大到國中生。這兩點說明 2026 年的走勢沒有資料可以核對，屬於證據不足，不是反證。這一條已改判無法證實，不判誤導。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "X1-5",
+      "upheld": false,
+      "reason": "不成立。攻擊自己也認為 2025 年弱勢學生兌換率偏低有審計報告為據，這正是這句話的主體。審計報告原文連結讀取空白，但低收入戶 59.61%、中低收入戶 61.40% 出自台灣事實查核中心的轉述，差距 9.63、7.84 個百分點出自時代力量的轉述，兩組數字相加都是 69.24%，可以互相對上。這是目前唯一公開的官方統計，市府沒有提出不同數字，也沒有反證。和兌換率走勢那一條的差別是：那一條的最新統計只顯示 2025 年後期下降，撐不起「一直」；這一條的最新統計直接支持「偏低」。競選字卡的「遲未改善」不在待查訊息裡。2026 年有沒有改善查不到，理由照實寫明，維持大致正確，比較基準改為同期間整體兌換率 69.24%。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "X1-6",
+      "upheld": true,
+      "reason": "成立。這幾筆弱勢兌換率的數字都標明出自審計報告，併成同一條證據鏈。同源的認定依據的是各篇轉述自己寫的出處；審計報告原文連結多次讀取都是空白，沒有列入證據表。",
+      "verified_urls": [
+        "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+        "https://newpowerparty.tw/archives/30973",
+        "https://www.ettoday.net/news/20260901/3229218.htm",
+        "https://tw.news.yahoo.com/%E8%94%A3%E8%90%AC%E5%AE%89%E8%B8%B9%E5%85%B1-%E9%99%B3%E5%9F%B9%E7%91%9C%E6%8F%AA%E5%8C%97%E5%B8%82%E7%94%9F%E7%94%9F%E5%96%9D%E9%AE%AE%E5%A5%B6%E6%94%BF%E7%AD%962%E5%95%8F%E9%A1%8C-%E5%B9%B3%E5%9D%87%E5%85%8C%E6%8F%9B%E7%8E%87%E6%9C%AA%E9%81%947%E6%88%90-044400137.html"
+      ]
+    },
+    {
+      "attack_id": "X1-7",
+      "upheld": true,
+      "reason": "成立。聯合報同一篇報導裡，蔣萬安的「不實說法」是概括回應，談鮮奶時講的是政策緣由和通路，沒有提出兌換率或弱勢領取率的數字；這筆證據對各命題都改列背景。同篇關於午餐供應商的摘錄只用在午餐命題。",
+      "verified_urls": [
+        "https://udn.com/news/story/124652/9848871"
+      ]
+    },
+    {
+      "attack_id": "X1-8",
+      "upheld": true,
+      "reason": "成立。公視即時紀錄在 13:27 已有這輪詰問的條目，壹蘋新聞網 13:35 的報導引述較完整，多了「這些都沒有改善」，而且顯示「建立這個所謂SOP的時候，是哪裡出了問題」是接在東門市場茄苳樹被誤砍之後問的，不是直接針對鮮乳。三立的報導附了完整直播連結。第三方逐字稿在 2:12:42 有這一段，但頁面自述是機器轉錄加校稿、沒有逐句對原音，只能當線索。直播影音沒有逐字核聽，貼上版本最早出自哪裡仍無法確認。",
+      "verified_urls": [
+        "https://news.pts.org.tw/live/105",
+        "https://news.nextapple.com/politics/20261031/6B260386E4F6EF2765A6FEA10D22FC60",
+        "https://rwdnews.sanlih.com.tw/news/1931289",
+        "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/"
+      ]
+    }
+  ],
+  "tactic_checks": [],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "大致正確：2026 年 8 月 31 日開學前確實有學校的營養午餐招標流標、重新招標，但「頻頻」的程度沒有公開校數可以核對。這段話有公視和壹蘋新聞網當天的直接引述，兩者一致，主辦媒體的完整直播影片沒有逐字核聽；原句在「喊了口號」之後還有「追加了預算之後」，待查訊息省略了。教育局長湯志民 8 月 4 日在議會說明「會流標是第一次開標需要三家業者投標」；團膳公會理事長 7 月 31 日稱部分學校流標；教育局 8 月 19 日新聞稿稱招標完成 95.0%、剩餘 16 校，部分學校需重新上標；教育局稱 8 月 21 日 315 校已決標（98.7%），剩 4 校排定 8 月 24 日、26 日決標；9 月 7 日新聞稿表示「極少數學校因不可抗力因素導致流標需重新辦理」。市議員柳采葳 7 月 30 日引教育局掌握的資料稱 246 所國中小只有 94 所決標，其餘 152 所是當時尚未決標的校數，不是流標校數；業者稱往年 4 月開始招標，今年 7 月第 1 週才公告。家長團體代表孫文昌稱今年的狀況不是流標，而是標案要重寫、行政流程來不及。沒有公開的流標校數或逐校流標次數。蔣萬安在辯論中稱對方散播不實言論（媒體引述，沒有逐字核對影片），沒有就流標提出數字。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S13",
+        "S15",
+        "S17",
+        "S24",
+        "S27",
+        "S29",
+        "S30",
+        "S31",
+        "S32",
+        "S33",
+        "S34",
+        "S35",
+        "S37",
+        "S40"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C2",
+      "label": "unverified",
+      "reasoning": "無法證實：查不到任何學校在開學前差點無法供餐的報導、校方說法或逐校資料，也沒有直接反證。能確認的是招標進度：教育局稱 8 月 21 日仍有 4 校未決標，排定 8 月 24 日、26 日決標，距 8 月 31 日開學 5 到 7 天；台灣事實查核中心稱 8 月底才全數完成招標。「斷炊」最早是 7 月底議員質詢時的預警用語，查核中心也只寫這個說法出自議員質詢，沒有查證是否有學校差點中斷供餐。教育局 9 月 7 日新聞稿稱開學前營養午餐「全數到位，未有延宕」，但它是當事機關，沒有逐校資料。開學第一週萬華一間實驗教育機構的廠商預告不供餐，是開學後的事，原因是廠商虧損，不是招標流標，報導寫廠商當時仍可供餐到 9 月 15 日，教育局稱已協調銜接。少數學校在開學前約一週才決標算不算「險些斷炊」，公開資料不能證實也不能否定。這段話有公視和壹蘋新聞網的直接引述，沒有逐字核對完整影片。",
+      "evidence_ids": [
+        "S1",
+        "S3",
+        "S9",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S17",
+        "S23",
+        "S27",
+        "S28",
+        "S29",
+        "S31",
+        "S35",
+        "S36",
+        "S37",
+        "S42"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C3",
+      "label": "unverified",
+      "reasoning": "無法證實：公開的兌換率數字只到 2025 年 12 月，「一直往下」到 2026 年 10 月發言當時沒有資料可以核對，也沒有直接反證。轉述審計報告的來源顯示，2025 年上路首週兌換率 73.81%，12 月最後一週 64.29%，第二階段第 12 週起（最後 6 週）逐週下降；這些數字都是同一份審計報告的轉述，算同一條證據鏈，審計報告原文連結多次讀取都是空白，沒有第一手核對。2026 年沒有公開的逐週或逐月數字；教育局 2026 年 10 月稱整體兌換率「維持在六成五至七成之間」，是當事機關給的區間，沒有附數據，不能證實也不能推翻。2026 年 8 月 31 日起補助對象新增國中生（預估約 6.6 萬人），母數不同，無法和 2025 年接續比較。沈伯洋競選網站把這件事寫成「近來兌換率一直往下」。政策名稱是「生生喝鮮奶」，訊息寫成「生生有鮮乳」。這段話有公視和壹蘋新聞網的直接引述，沒有逐字核對完整影片。",
+      "evidence_ids": [
+        "S1",
+        "S3",
+        "S16",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S25",
+        "S37",
+        "S38",
+        "S39"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C4",
+      "label": "mostly_true",
+      "reasoning": "大致正確：目前唯一公開的官方統計（審計報告的 2025 年資料）顯示，低收入戶、中低收入戶學生的兌換率比同期整體低約 8 到 10 個百分點，但 2026 年有沒有改善查不到。台灣事實查核中心引審計報告稱低收入戶 59.61%、中低收入戶 61.40%；時代力量引同一份報告稱比整體低 9.63 和 7.84 個百分點，兩組數字相加都是 69.24%，比較基準是同期間的整體兌換率，不是全年平均 69.14%。立委陳培瑜引用時稱這是第一階段的數字。這些數字都轉述同一份審計報告，算同一條證據鏈；審計報告原文連結多次讀取都是空白，沒有第一手核對。「偏低」沒有說比較基準，這裡以整體兌換率為基準。市府沒有提出不同數字；時代力量 2026 年 8 月 31 日仍要求市府公布弱勢身分別的兌換率，補助對象同日起擴大到國中生，之後沒有公開的弱勢兌換率。這段話有公視和壹蘋新聞網的直接引述，沒有逐字核對完整影片。",
+      "evidence_ids": [
+        "S1",
+        "S3",
+        "S16",
+        "S18",
+        "S19",
+        "S22",
+        "S25",
+        "S26",
+        "S37",
+        "S38",
+        "S39",
+        "S41"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C5",
+      "label": "not_factual",
+      "reasoning": "非事實陳述：「喊了口號」是發言者對政策的評價用語，沒有可以查證的事實內容。公視和壹蘋新聞網的引述顯示他確實用了這個說法，原句後面還有「追加了預算之後」。",
+      "evidence_ids": [
+        "S1",
+        "S37"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "url": "https://news.pts.org.tw/article/833715",
+      "title": "蔣萬安與沈伯洋辯論市政議題 毒駕、都更、路樹列攻防",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pts-辯論報導-1031",
+      "stance": "supports",
+      "excerpt": "免費的營養午餐喊了口號、追加了預算之後，開學前那時候還是頻頻的流標，有些學校險些斷炊，生生有鮮乳其實兌換率一直往下，弱勢的領取率還偏低，你在建立這個所謂SOP的時候，是哪裡出了問題？",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/124652/9848871",
+      "title": "沈伯洋猛攻營養午餐 蔣萬安嗆：傷害多少家長學生一句道歉都沒有",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn-辯論報導-1031",
+      "stance": "supports",
+      "excerpt": "營養午餐喊了口號追加預算開學前還有學校找不到供應商",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://udn.com/news/story/124652/9848871",
+      "title": "沈伯洋猛攻營養午餐 蔣萬安嗆：傷害多少家長學生一句道歉都沒有",
+      "publisher": "聯合新聞網（轉述蔣萬安辯論發言）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "udn-辯論報導-1031",
+      "stance": "context",
+      "excerpt": "沈伯洋這些質疑很遺憾都是不實說法",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+      "title": "2026台北市長候選人電視辯論：蔣萬安、沈伯洋互批雙重標準、迴避問題，學者評蔣表現穩健、沈打正面選戰",
+      "publisher": "報導者（記者轉述蔣萬安辯論發言，沒有引號）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "twreporter-辯論報導-1031",
+      "stance": "context",
+      "excerpt": "免費營養午餐招標順暢，安全和品質都有專業委員會進行把關",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202607300251.aspx",
+      "title": "議員指6成學校營養午餐流標 北市：8/21前完成招標",
+      "publisher": "中央社（轉述市議員柳采葳引用的教育局資料）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "柳采葳-教育局統計-0730",
+      "stance": "context",
+      "excerpt": "全市154所國小僅55所決標、92所國中僅39所決標",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6885/9661263",
+      "title": "議員曝逾10萬人開學恐沒飯吃 北市6成學校營養午餐找不到廠商",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "柳采葳-教育局統計-0730",
+      "stance": "context",
+      "excerpt": "往年營養午餐招標皆有進度不一狀況，會密切追蹤招標狀況，並舉辦專案說明會，確保8月21日前完成午餐招標。",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6898/9662711",
+      "title": "北市10萬多名學童恐無免費營養午餐可吃 團膳業者曝原因",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn-業者說法-0731",
+      "stance": "supports",
+      "excerpt": "廠商和學校今年於招標前在規格、條件、價格方面沒共識，才會有部分學校流標情況",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/article/820457",
+      "title": "北市6成學校午餐找不到廠商 教育局承諾8/21前完成招標",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pts-招標報導-0802",
+      "stance": "context",
+      "excerpt": "所以目前我們其實掌握的數字，就將近有5成的學校已經標出去",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.setn.com/news/1888299",
+      "title": "北市營養午餐有著落了　蔣萬安承諾：「這天」前一定讓它招標出去",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn-議會答詢-0812",
+      "stance": "context",
+      "excerpt": "到這周85％是沒有問題",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=C67B30BC9E03D8CD",
+      "title": "臺北市教育局嚴正澄清營養午餐不實指控：品質把關不打折，全力確保學童用餐權益與食安",
+      "publisher": "臺北市政府教育局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "教育局新聞稿-0907",
+      "stance": "context",
+      "excerpt": "極少數學校因不可抗力因素導致流標需重新辦理",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=C67B30BC9E03D8CD",
+      "title": "臺北市教育局嚴正澄清營養午餐不實指控：品質把關不打折，全力確保學童用餐權益與食安",
+      "publisher": "臺北市政府教育局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "教育局新聞稿-0907",
+      "stance": "refutes",
+      "excerpt": "並已共同確保所有學生於開學前營養午餐全數到位，未有延宕。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=C67B30BC9E03D8CD",
+      "title": "臺北市教育局嚴正澄清營養午餐不實指控：品質把關不打折，全力確保學童用餐權益與食安",
+      "publisher": "臺北市政府教育局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "教育局新聞稿-0907",
+      "stance": "context",
+      "excerpt": "針對實驗教育機構反映廠商未供餐一事，本局絕無置之不理，本局在接獲反映後即刻主動介入協調，於第一時間妥善處置，協助相關機構與供餐廠商完成供餐銜接",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202609070259.aspx",
+      "title": "民進黨疑北市免費營養午餐跳票 教育局駁：未延宕",
+      "publisher": "中央社（轉述民進黨臉書貼文）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "民進黨貼文-0907",
+      "stance": "context",
+      "excerpt": "蔣萬安原先保證，8月21日前要全面完成營養午餐招標，結果截至期限，仍有4校未完成決標。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.knews.com.tw/news/6BCEA151E78F8F69281FFC5F3603FBCA",
+      "title": "北市營養午餐免費！廠商虧錢拒供餐　蔣萬安：會要求學校跟家長溝通",
+      "publisher": "知新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "knews-實驗教育機構-0902",
+      "stance": "context",
+      "excerpt": "萬華區一間實驗教育機構，有家長爆料廠商疑似因虧損，已預告不供餐。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://news.tvbs.com.tw/politics/4044184",
+      "title": "事實查核中心公布北市辯論查核結果：蔣萬安、沈伯洋皆說法不精準",
+      "publisher": "TVBS新聞網（轉述台灣事實查核中心）",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc-辯論查核-1031",
+      "stance": "context",
+      "excerpt": "今年營養午餐招標時程確實較慢，8月底才全數完成招標作業",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.setn.com/news/1931755",
+      "title": "蔣萬安辯論哪些說錯？沈伯洋質疑內容有問題？事實查核中心揪出10真相",
+      "publisher": "三立新聞網（轉述台灣事實查核中心引用的審計報告）",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "審計報告-生生喝鮮奶兌換率",
+      "stance": "supports",
+      "excerpt": "2025年推動後的整體平均兌換率為69.14%，但政策第二階段的12週起，兌換率呈現每週下降的趨勢；再對照低收、中低收身份學生的兌換率分別為：59.61%、61.40%，低於上述平均。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+      "title": "沈伯洋說：「免費的營養午餐喊了口號，開學前還頻頻流標，有些學校險些斷炊；生生有鮮乳的兌換率一直往下，弱勢的領取率還偏低」？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc-辯論查核-1031",
+      "stance": "context",
+      "excerpt": "8月19日，教育局曾發布新聞稿指出，營養午餐招標已經完成95%，尚有16個學校未完成",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.ettoday.net/news/20260901/3229218.htm",
+      "title": "「生生喝鮮奶」斥資7千萬　領取率直直落、北市低收學童也未響應",
+      "publisher": "ETtoday新聞雲（轉述時代力量黨主席引用的審計資料）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "審計報告-生生喝鮮奶兌換率",
+      "stance": "supports",
+      "excerpt": "根據審計部報告，去年「生生喝鮮奶」上路第一週時73.81%，到了去年12月的最後一週只剩64.29%，而且趨勢不斷往下。……且低收入戶的兌換率，比整體低了9.63%。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://newpowerparty.tw/archives/30973",
+      "title": "鮮奶週報今擴大到國中，國小以下的兌換率卻已從 73% 掉到 64%。台灣前進六位台北市議員參選人：請蔣市府先找回五萬個沒去領的孩子，補齊午餐裡零零落落的水果和牛奶",
+      "publisher": "時代力量",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "審計報告-生生喝鮮奶兌換率",
+      "stance": "supports",
+      "excerpt": "審計部的逐週表寫得很清楚：鮮奶週報上路第一週兌換率 73.81%，去年 12 月最後一週只剩 64.29%，最後 6 週一週比一週低……低收入戶和中低收入戶又比整體低了 9.63 和 7.84 個百分點",
+      "access_note": "full"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/5559287",
+      "title": "台北「生生喝鮮奶」領取率不滿7成 蔣萬安：持續優化兌換過程",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "蔣萬安回應-0901",
+      "stance": "context",
+      "excerpt": "市府也會持續優化兌換的過程，讓領取率可以再提高。",
+      "access_note": "full"
+    },
+    {
+      "id": "S21",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://news.ltn.com.tw/news/life/paper/1774723",
+      "title": "「生生喝鮮奶」政策受質疑 教局︰兌換率約7成 沒定KPI",
+      "publisher": "自由時報（轉述臺北市教育局回應）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "教育局回應-1016",
+      "stance": "context",
+      "excerpt": "目前整體兌換率維持在六成五至七成之間",
+      "access_note": "full"
+    },
+    {
+      "id": "S22",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://tw.news.yahoo.com/%E8%94%A3%E8%90%AC%E5%AE%89%E8%B8%B9%E5%85%B1-%E9%99%B3%E5%9F%B9%E7%91%9C%E6%8F%AA%E5%8C%97%E5%B8%82%E7%94%9F%E7%94%9F%E5%96%9D%E9%AE%AE%E5%A5%B6%E6%94%BF%E7%AD%962%E5%95%8F%E9%A1%8C-%E5%B9%B3%E5%9D%87%E5%85%8C%E6%8F%9B%E7%8E%87%E6%9C%AA%E9%81%947%E6%88%90-044400137.html",
+      "title": "蔣萬安踹共！陳培瑜揪北市生生喝鮮奶政策2問題　平均兌換率未達7成",
+      "publisher": "鏡報（Yahoo新聞轉載，轉述民進黨立委引用的審計處報告）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "審計報告-生生喝鮮奶兌換率",
+      "stance": "supports",
+      "excerpt": "第一階段發現北市弱勢兒童的兌換率遠低於整體平均水準……低收入戶的小孩兌換率只有5成9，中低收入戶小孩兌換率只有6成1，但整體平均是6成9",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S23",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=025684E5789CCB9D",
+      "title": "北市國中小免費午餐全面實施！蔣萬安化身廣播員暖心問候，陪學童享用「精選餐」",
+      "publisher": "臺北市政府教育局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "教育局新聞稿-0902",
+      "stance": "context",
+      "excerpt": "於115學年度全面實施公私立國中小免費營養午餐政策",
+      "access_note": "full"
+    },
+    {
+      "id": "S24",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.chinatimes.com/realtimenews/20260731004111-260421",
+      "title": "北市152所學校免費營養午餐流標 闕枚莎籲檢討制度設計並提四項改革方案",
+      "publisher": "中時新聞網（轉述市議員闕枚莎質詢）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "闕枚莎質詢-0731",
+      "stance": "context",
+      "excerpt": "盤點152所流標學校的最新招標進度，公開流標原因及改善方案",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S25",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+      "title": "沈伯洋說：「免費的營養午餐喊了口號，開學前還頻頻流標，有些學校險些斷炊；生生有鮮乳的兌換率一直往下，弱勢的領取率還偏低」？",
+      "publisher": "台灣事實查核中心（轉述審計報告）",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "審計報告-生生喝鮮奶兌換率",
+      "stance": "supports",
+      "excerpt": "審計部的報告中指出，2025年推動後的整體平均兌換率為69.14%，但政策第二階段的12週起，兌換率確實呈現每週下降的趨勢，前後對照約下降8個百分點",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S26",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+      "title": "沈伯洋說：「免費的營養午餐喊了口號，開學前還頻頻流標，有些學校險些斷炊；生生有鮮乳的兌換率一直往下，弱勢的領取率還偏低」？",
+      "publisher": "台灣事實查核中心（轉述審計報告）",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "審計報告-生生喝鮮奶兌換率",
+      "stance": "supports",
+      "excerpt": "若再對照具低收、中低收身份學生的兌換率，則分別為59.61%跟61.40%，皆低於整體平均兌換率",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S27",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+      "title": "沈伯洋說：「免費的營養午餐喊了口號，開學前還頻頻流標，有些學校險些斷炊；生生有鮮乳的兌換率一直往下，弱勢的領取率還偏低」？",
+      "publisher": "台灣事實查核中心（轉述教育局說法）",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc-辯論查核-1031",
+      "stance": "context",
+      "excerpt": "目前還有4個學校尚未完成，預計會在8月24日、8月26日決標",
+      "access_note": "full"
+    },
+    {
+      "id": "S28",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+      "title": "沈伯洋說：「免費的營養午餐喊了口號，開學前還頻頻流標，有些學校險些斷炊；生生有鮮乳的兌換率一直往下，弱勢的領取率還偏低」？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc-辯論查核-1031",
+      "stance": "context",
+      "excerpt": "沈伯洋提到的「營養午餐頻頻流標、險些斷炊」，是出自於今年7月31日台北市議員闕枚莎的質詢內容",
+      "access_note": "full"
+    },
+    {
+      "id": "S29",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=927DE603022024ED",
+      "title": "北市115學年度營養午餐標案95%完成 教育局持續追蹤輔導各校保障開學供餐無虞",
+      "publisher": "臺北市政府教育局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "教育局新聞稿-0819",
+      "stance": "context",
+      "excerpt": "至於剩餘16校，教育局將持續密切追蹤進行專案輔導",
+      "access_note": "full"
+    },
+    {
+      "id": "S30",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=927DE603022024ED",
+      "title": "北市115學年度營養午餐標案95%完成 教育局持續追蹤輔導各校保障開學供餐無虞",
+      "publisher": "臺北市政府教育局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "教育局新聞稿-0819",
+      "stance": "context",
+      "excerpt": "部分學校基於尚處等標期間或廠商投標文件缺漏等因素，需遵守相關招標法令重新上標。",
+      "access_note": "full"
+    },
+    {
+      "id": "S31",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://udn.com/news/story/6898/9708794",
+      "title": "蔣萬安喊出免費營養午餐8月21日完成招標 教育局曝各校進度",
+      "publisher": "聯合新聞網（轉述臺北市教育局回應）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "教育局回應-0823",
+      "stance": "context",
+      "excerpt": "北市115年度營養午餐招標進度至8月21日共計228案315校已決標，決標比例98.7%，剩餘2案4校因等標期間或廠商投標文件缺漏等法定原因未完成，分別將於8月24日、26日決標",
+      "access_note": "full"
+    },
+    {
+      "id": "S32",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6898/9669777",
+      "title": "北市國中小免費午餐9月上路 議員聚焦流標、實驗教育、午餐指導費配套",
+      "publisher": "聯合新聞網（引述教育局長湯志民議會答詢）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "湯志民議會答詢-0804",
+      "stance": "supports",
+      "excerpt": "會流標是第一次開標需要三家業者投標，流標後第二次開標僅需要一家廠商投標即可，預計在8月21日完成所有標案。",
+      "access_note": "full"
+    },
+    {
+      "id": "S33",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/5525197",
+      "title": "北市營養午餐多校流標 家長團體：行政期程錯估、標案來不及寫",
+      "publisher": "自由時報（引述全國家長會聯盟食安小組主委孫文昌）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-家長團體-0801",
+      "stance": "refutes",
+      "excerpt": "今年的狀況不是流標，而是標案需要全部重新寫，因此導致廠商、教育局的行政流程來不及做完",
+      "access_note": "full"
+    },
+    {
+      "id": "S34",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/article/820457",
+      "title": "北市6成學校午餐找不到廠商 教育局承諾8/21前完成招標",
+      "publisher": "公視新聞網（轉述團膳業者分析）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pts-招標報導-0802",
+      "stance": "context",
+      "excerpt": "學校往年4月開始招標，但新政策直到6月底、7月初才確定，校方7月第1週開始公告",
+      "access_note": "full"
+    },
+    {
+      "id": "S35",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/5391172",
+      "title": "北市營養午餐免費8月底上路 補助最高92元 每週一次「精選餐」",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "教育局記者會-0402",
+      "stance": "context",
+      "excerpt": "宣布自115學年度8月31日開學起，全市公私立國中小將全面推動免費營養午餐計畫",
+      "access_note": "full"
+    },
+    {
+      "id": "S36",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.ettoday.net/news/20260902/3230342.htm",
+      "title": "廠商虧錢拒供餐　許淑華：蔣市府連一頓營養午餐都做不好",
+      "publisher": "ETtoday新聞雲",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ettoday-實驗教育機構-0902",
+      "stance": "context",
+      "excerpt": "目前廠商只能供餐到9月15日，9月15日至9月30日由廠商自行吸收。",
+      "access_note": "full"
+    },
+    {
+      "id": "S37",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "url": "https://news.nextapple.com/politics/20261031/6B260386E4F6EF2765A6FEA10D22FC60",
+      "title": "台北辯論｜沈伯洋指砍樹、營養午餐SOP出問題　蔣萬安提數據反嗆：持續製造不實說法",
+      "publisher": "壹蘋新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "nextapple-辯論報導-1031",
+      "stance": "supports",
+      "excerpt": "免費的營養午餐喊了口號，追加了預算之後呢，開學前那時候還是頻頻的流標，有些學校險些斷炊",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S38",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://puma.taipei/live/debate/list",
+      "title": "沈伯洋競選網站辯論說明頁（第 11 項）",
+      "publisher": "沈伯洋競選網站",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "沈伯洋競選網站-1031",
+      "stance": "context",
+      "excerpt": "議員曾要求檢討「生生有鮮乳」2025 年的 7 成兌領率，近來兌換率一直往下",
+      "access_note": "full"
+    },
+    {
+      "id": "S39",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&s=7479719386316902",
+      "title": "北市鮮奶週報再升級！8月31日補助擴大至國中生，打造2至15歲完整營養照護",
+      "publisher": "臺北市政府教育局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "教育局新聞稿-0803",
+      "stance": "context",
+      "excerpt": "預估將新增約6.6萬名學生受惠",
+      "access_note": "full"
+    },
+    {
+      "id": "S40",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/article/833715",
+      "title": "蔣萬安與沈伯洋辯論市政議題 毒駕、都更、路樹列攻防",
+      "publisher": "公視新聞網（引述蔣萬安辯論發言）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "pts-辯論報導-1031",
+      "stance": "context",
+      "excerpt": "但是今天你卻為了選舉反對這項政策，而且刻意的散播不實言論",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S41",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://newpowerparty.tw/archives/30973",
+      "title": "鮮奶週報今擴大到國中，國小以下的兌換率卻已從 73% 掉到 64%。台灣前進六位台北市議員參選人：請蔣市府先找回五萬個沒去領的孩子，補齊午餐裡零零落落的水果和牛奶",
+      "publisher": "時代力量",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "時代力量-訴求-0831",
+      "stance": "context",
+      "excerpt": "請蔣市府在擴大到國中的同時，先公布逐週、逐校與弱勢身分別的兌換率",
+      "access_note": "full"
+    },
+    {
+      "id": "S42",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202607300251.aspx",
+      "title": "議員指6成學校營養午餐流標 北市：8/21前完成招標",
+      "publisher": "中央社（轉述市議員說法）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "柳采葳-教育局統計-0730",
+      "stance": "context",
+      "excerpt": "逾11萬名學童開學恐面臨斷炊",
+      "access_note": "full"
+    }
+  ]
+}

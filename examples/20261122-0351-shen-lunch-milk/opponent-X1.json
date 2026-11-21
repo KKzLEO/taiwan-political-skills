@@ -1,0 +1,152 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 40,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S5 的 94 校是已決標校數。其餘 152 校當時尚未決標，應列為招標進度。教育局 8 月 19 日的原始公告和 8 月 23 日具名回應都提到，未完成的原因包括仍在等標。8 月 21 日仍有 4 校未完成，也有教育局確認，可更新正方目前只引用民進黨說法的判定理由。",
+      "evidence": [
+        {
+          "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&s=927DE603022024ED&sms=72544237BBE4C5F6",
+          "excerpt": "部分學校基於尚處等標期間或廠商投標文件缺漏等因素"
+        },
+        {
+          "url": "https://udn.com/news/story/6898/9708794",
+          "excerpt": "決標比例98.7%，剩餘2案4校因等標期間或廠商投標文件缺漏等法定原因未完成"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C1",
+      "target": "neutral_rewrite",
+      "argument": "辯論報導與帶時間戳的轉錄都保留了「追加了預算之後」，應在說明發言脈絡時交代這個時間起點，並註明轉貼文字省略了它。北市教育局行事曆把該學期正式開學日訂在 2026 年 8 月 31 日，應以該日界定「開學前」。",
+      "evidence": [
+        {
+          "url": "https://news.nextapple.com/politics/20261031/6B260386E4F6EF2765A6FEA10D22FC60",
+          "excerpt": "追加了預算之後呢，開學前那時候還是頻頻的流標"
+        },
+        {
+          "url": "https://www-ws.gov.taipei/Download.ashx?icon=..pdf&n=6Ie65YyX5biC5pS%2F5bqc5pWZ6IKy5bGA5omA5bGs5ZCE57Sa5a245qCh44CQMTE15a245bm05bqm44CR5a245pyf5YGH5pyf6KGM5LqL57Ch5puGLnBkZg%3D%3D&u=LzAwMS9VcGxvYWQvNTc4L3JlbGZpbGUvMjc2NjQvOTY2MDMzMi80YjQ0OTczNC00OWJiLTQ3ZTktYTIwNy04MGEyMzUyZTUyMWYucGRm",
+          "excerpt": "順延至115年8月31日（星期一）"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C2",
+      "target": "label",
+      "argument": "有些學校是否一度面臨午餐即將中斷，無法證實。8 月 21 日有 4 校未完成招標，教育局當時已說明預計決標日期。9 月 7 日公告則記載有實驗教育機構反映廠商未供餐，教育局介入協調。現有資料只具體指出這一件供餐銜接事件，無法確認它與那 4 校有關，或另有學校面臨相同風險。全數如期供餐也無法排除曾有中斷風險。",
+      "proposed_label": "unverified",
+      "evidence": [
+        {
+          "url": "https://udn.com/news/story/6898/9708794",
+          "excerpt": "分別將於8月24日、26日決標，確保全市學校開學營養午餐供應無虞。"
+        },
+        {
+          "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&s=C67B30BC9E03D8CD&sms=72544237BBE4C5F6",
+          "excerpt": "協助相關機構與供餐廠商完成供餐銜接"
+        },
+        {
+          "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&s=C67B30BC9E03D8CD&sms=72544237BBE4C5F6",
+          "excerpt": "所有學生於開學前營養午餐全數到位，未有延宕。"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C3",
+      "target": "label",
+      "argument": "「一直往下」應判為誤導。審計部表 5 顯示，2025 年第二階段頭四週由 61.28% 升到 77.00%，最後六週才逐週下降，從 68.57% 降到 64.29%。沈伯洋競選網站在辯論當天也把 2025 年數字和「近來」區分開來。教育局於 2026 年 8 月底已把補助擴大至國中生，查到的逐週數字無法證明新階段在辯論前仍持續下降。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://auditreport.audit.gov.tw/ServerFile/Get/639210167369817995ce068dc3347c4343a49142f61b355421#page=1",
+          "excerpt": "第 1 週（9/1-9/7） 61.28\n第 2 週（9/8-9/14） 69.88\n第 3 週（9/15-9/21） 72.65\n第 4 週（9/22-9/28） 77.00"
+        },
+        {
+          "url": "https://puma.taipei/live/debate/list",
+          "excerpt": "2025 年的 7 成兌領率，近來兌換率一直往下"
+        },
+        {
+          "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&s=7479719386316902",
+          "excerpt": "自115學年度起正式進入3.0階段，補助對象擴大納入國中學生"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": "C4",
+      "target": "label",
+      "argument": "2025 年第一階段的弱勢學生領取率偏低有第一手證據，但截至 2026 年 10 月 31 日是否仍偏低，無法證實。審計部原文列出低收入戶 59.61%、中低收入戶 61.40%，排除六年級畢業生，並以同期間的 69.24% 為比較基準，分別低 9.63 和 7.84 個百分點。69.14% 是 2025 年 30 週的平均，兩個平均值的統計期間不同。競選字卡寫的是「遲未改善」，查到的資料無法比較政策擴大後的弱勢領取率。",
+      "proposed_label": "unverified",
+      "evidence": [
+        {
+          "url": "https://auditreport.audit.gov.tw/ServerFile/Get/639210167369817995ce068dc3347c4343a49142f61b355421#page=1",
+          "excerpt": "別為59.61％及61.40％，均低於同期間整體兌換率 69.24\n％，差距分別達 9.63 個百分點及 7.84 個百分點"
+        },
+        {
+          "url": "https://puma.taipei/live/debate/list",
+          "excerpt": "弱勢領取率偏低遲未改善！"
+        },
+        {
+          "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&s=7479719386316902",
+          "excerpt": "補助對象擴大納入國中學生"
+        }
+      ]
+    },
+    {
+      "id": "X1-6",
+      "claim_id": "C4",
+      "target": "evidence",
+      "argument": "S16、S18、S19、S22 引用的弱勢兌換率可追到同一份臺北市審計報告，應視為同一條證據鏈。原始報告已可讀取，其表 5 和同節的弱勢比較可供核對 C3 與 C4。",
+      "evidence": [
+        {
+          "url": "https://auditreport.audit.gov.tw/ServerFile/Get/639210167369817995ce068dc3347c4343a49142f61b355421#page=1",
+          "excerpt": "資料來源：整理自教育局提供資料。"
+        }
+      ]
+    },
+    {
+      "id": "X1-7",
+      "claim_id": "C3",
+      "target": "evidence",
+      "argument": "S3 的概括性批評應列為辯論背景。聯合報同一篇報導記載，蔣萬安談鮮奶時說明推動緣由和通路，沒有提出兌換率或弱勢領取率來反駁 C3、C4。S2 的摘錄談午餐供應商，只能用於午餐命題。",
+      "evidence": [
+        {
+          "url": "https://udn.com/news/story/124652/9848871",
+          "excerpt": "而鮮奶政策當時是中央做不到甚至不願把經費留下，他親自來做拜訪4大超商、賣場業者盤點各項困難一一解決"
+        }
+      ]
+    },
+    {
+      "id": "X1-8",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "公視的 19:04 報導可列為發言版本，但同站即時紀錄在 13:27 已記載這輪詰問，壹蘋新聞網 13:35 的報導也有較完整的引述。這兩個時間是頁面標示時間，貼上版本的首發仍無法確認。三立公布了完整直播連結，第三方轉錄把該段定位在影片 2:12:42 起；直播影音未能逐字核聽。較長的轉錄和壹蘋引述都顯示，後續關於標準作業流程的提問明確指向東門市場茄苳樹遭誤砍，溯源摘要應保留這個提問對象。",
+      "evidence": [
+        {
+          "url": "https://news.pts.org.tw/live/105",
+          "excerpt": "2026-10-31 13:27 第二輪〖交互詰問2〗市府SOP如何制定"
+        },
+        {
+          "url": "https://news.nextapple.com/politics/20261031/6B260386E4F6EF2765A6FEA10D22FC60",
+          "excerpt": "東門市場的茄苳樹被誤砍，市長你可以告訴大家"
+        },
+        {
+          "url": "https://rwdnews.sanlih.com.tw/news/1931289",
+          "excerpt": "台北市長電視辯論會，可透過直播觀看："
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "[2:12:42] 沈伯洋：剛剛這個市長提到就是所謂的標準"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

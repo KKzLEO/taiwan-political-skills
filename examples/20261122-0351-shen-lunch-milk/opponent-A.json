@@ -1,0 +1,84 @@
+{
+  "seat": "A",
+  "lens": "evidence",
+  "engine": "claude",
+  "searches_run": 16,
+  "attacks": [
+    {
+      "id": "A-1",
+      "claim_id": "C2",
+      "target": "label",
+      "argument": "正方把 C2「有些學校險些斷炊」判為大致正確，但他列的證據只能證明招標進度落後，撐不起「險些斷炊」。第一，台灣事實查核中心引教育局 8 月 23 日的說明，最後 4 所學校預計在 8 月 24 日、26 日決標，都早於 8 月 31 日開學日；教育局 9 月 7 日新聞稿（S11）也說開學前午餐全數到位、未有延宕。第二，正方拿來補強的實驗教育機構個案（S14）是開學後廠商因虧損預告不再供餐，ETtoday 9 月 2 日報導廠商當時仍可供餐到 9 月 15 日；這不是學校招標流標，也不是開學前的事，不能算在這句話上。第三，查核中心追到「險些斷炊」的出處是 7 月 31 日的議員質詢，那是開學前一個月的示警，不是事後確認的結果。查不到任何一所學校、任何一天差點無法供餐的報導或校方說法，正方的理由自己也寫「不能確認更嚴重的情況」。主體沒有證據、官方又有相反說法，但也沒有逐校資料可以直接推翻，應判無法證實，不是大致正確。",
+      "proposed_label": "unverified",
+      "evidence": [
+        {
+          "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+          "excerpt": "8月19日，教育局曾發布新聞稿指出，營養午餐招標已經完成95%，尚有16個學校未完成；23日又指出，目前還有4個學校尚未完成，預計會在8月24日、8月26日決標。"
+        },
+        {
+          "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+          "excerpt": "沈伯洋提到的「營養午餐頻頻流標、險些斷炊」，是出自於今年7月31日台北市議員闕枚莎的質詢內容"
+        },
+        {
+          "url": "https://news.ltn.com.tw/news/life/breakingnews/5391172",
+          "excerpt": "宣布自115學年度8月31日開學起，全市公私立國中小將全面推動免費營養午餐計畫"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=C67B30BC9E03D8CD",
+          "excerpt": "並已共同確保所有學生於開學前營養午餐全數到位，未有延宕。"
+        },
+        {
+          "url": "https://www.ettoday.net/news/20260902/3230342.htm",
+          "excerpt": "目前廠商只能供餐到9月15日，9月15日至9月30日由廠商自行吸收。"
+        }
+      ]
+    },
+    {
+      "id": "A-2",
+      "claim_id": "C3",
+      "target": "label",
+      "argument": "正方把 C3「兌換率一直往下」判為大致正確，但他的數字全部停在 2025 年 12 月，發言是在 2026 年 10 月 31 日，中間十個月沒有任何資料。即使只看 2025 年，台灣事實查核中心引審計報告的說法是「第二階段的12週起」才逐週下降，時代力量的轉述是「最後 6 週一週比一週低」，都只是年底那一段；正方用首週 73.81% 減年底 64.29%，看不出中間的走勢。2026 年唯一查得到的說法是教育局 10 月稱兌換率維持在六成五至七成之間（S21），這個區間沒有低於 2025 年底的 64.29%，無法支持「到現在還在往下」，但範圍太寬，也不足以推翻。查核中心的報告同樣沒有 2026 年的數字，而且這些數字都是同一份審計報告的轉述，沒有人讀到原文。能確認的只有「2025 年後期下降」，「一直往下」到發言當時這個主體沒有證據，應判無法證實。",
+      "proposed_label": "unverified",
+      "evidence": [
+        {
+          "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+          "excerpt": "審計部的報告中指出，2025年推動後的整體平均兌換率為69.14%，但政策第二階段的12週起，兌換率確實呈現每週下降的趨勢，前後對照約下降8個百分點。"
+        },
+        {
+          "url": "https://newpowerparty.tw/archives/30973",
+          "excerpt": "鮮奶週報上路第一週兌換率 73.81%，去年 12 月最後一週只剩 64.29%，最後 6 週一週比一週低"
+        },
+        {
+          "url": "https://news.ltn.com.tw/news/life/paper/1774723",
+          "excerpt": "目前整體兌換率維持在六成五至七成之間"
+        }
+      ]
+    },
+    {
+      "id": "A-3",
+      "claim_id": "C4",
+      "target": "evidence",
+      "argument": "正方在 C4（C3 也一樣）把台灣事實查核中心（S16）、時代力量（S18、S19）、民進黨立委（S22）的數字分成三條證據鏈，並以立委引用的數字「也相符」當作互相印證。這四筆都在轉述同一份審計部 114 年度臺北市總決算審核報告，沒有一筆讀到原文，只能算一條證據鏈；立委說的「5成9、6成1、6成9」就是 59.61%、61.40%、69.14% 取概數，不是另一個獨立來源。轉述之間也不一致：查核中心的數字算出來低收入戶比整體低 9.53 個百分點，時代力量寫 9.63；S22 同一篇報導另寫一般孩童兌換率「逐步下滑來到5成7」，和其他轉述的年底 64.29% 對不上。哪個版本正確，要看審計報告原文才能確定。弱勢兌換率低於整體的方向各版本相同，判定不必因此改變，但證據表應併成一條鏈，理由不應寫成多方印證。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+          "excerpt": "若再對照具低收、中低收身份學生的兌換率，則分別為59.61%跟61.40%，皆低於整體平均兌換率。"
+        },
+        {
+          "url": "https://newpowerparty.tw/archives/30973",
+          "excerpt": "低收入戶和中低收入戶又比整體低了 9.63 和 7.84 個百分點"
+        },
+        {
+          "url": "https://tw.news.yahoo.com/%E8%94%A3%E8%90%AC%E5%AE%89%E8%B8%B9%E5%85%B1-%E9%99%B3%E5%9F%B9%E7%91%9C%E6%8F%AA%E5%8C%97%E5%B8%82%E7%94%9F%E7%94%9F%E5%96%9D%E9%AE%AE%E5%A5%B6%E6%94%BF%E7%AD%962%E5%95%8F%E9%A1%8C-%E5%B9%B3%E5%9D%87%E5%85%8C%E6%8F%9B%E7%8E%87%E6%9C%AA%E9%81%947%E6%88%90-044400137.html",
+          "excerpt": "陳培瑜接著拿出台北市審計處針對生生喝鮮奶提出的報告"
+        },
+        {
+          "url": "https://tw.news.yahoo.com/%E8%94%A3%E8%90%AC%E5%AE%89%E8%B8%B9%E5%85%B1-%E9%99%B3%E5%9F%B9%E7%91%9C%E6%8F%AA%E5%8C%97%E5%B8%82%E7%94%9F%E7%94%9F%E5%96%9D%E9%AE%AE%E5%A5%B6%E6%94%BF%E7%AD%962%E5%95%8F%E9%A1%8C-%E5%B9%B3%E5%9D%87%E5%85%8C%E6%8F%9B%E7%8E%87%E6%9C%AA%E9%81%947%E6%88%90-044400137.html",
+          "excerpt": "後來逐步下滑來到5成7"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

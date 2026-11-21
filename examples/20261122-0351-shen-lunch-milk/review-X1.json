@@ -1,0 +1,28 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C1",
+      "pass": true,
+      "reason": "維持「大致正確」合理。修正後已把 7 月底的 152 校列為尚未決標，補回發言中的「追加了預算之後」，並以 8 月 31 日為開學日。教育局證實「極少數學校因不可抗力因素導致流標需重新辦理」，可確認開學前有流標重招，至於全市流標的頻率，仍缺乏完整統計。[公視辯論報導](https://news.pts.org.tw/article/833715)｜[臺北市教育局公告](https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&s=C67B30BC9E03D8CD&sms=72544237BBE4C5F6)"
+    },
+    {
+      "claim_id": "C2",
+      "pass": false,
+      "label_ok": true,
+      "reason": "「無法證實」合理，但證據 S11 應只提供背景。教育局稱營養午餐「全數到位，未有延宕」，說明的是開學時的供餐結果，無法排除先前曾有中斷風險。8 月 21 日仍有四校等待決標，也不足以確認這些學校一度即將無法供餐。[臺北市教育局公告](https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&s=C67B30BC9E03D8CD&sms=72544237BBE4C5F6)｜[聯合報引述教育局](https://udn.com/news/story/6885/9708794)"
+    },
+    {
+      "claim_id": "C3",
+      "pass": false,
+      "label_ok": true,
+      "reason": "「無法證實」合理，但理由應納入已可讀取的審計報告原文。表 5 顯示 2025 年第二階段前四週從 61.28% 升至 77.00%，最後六週才逐週降至 64.29%。悠遊卡公司另公布涵蓋至 2026 年 1 月底的整體「平均兌換率約 70%」，因此「公開數字只到 2025 年 12 月」也應修正。這項累計平均仍無法判斷兌換率是否持續下降至 10 月 31 日。[審計報告表 5](https://auditreport.audit.gov.tw/ServerFile/Get/639210167369817995ce068dc3347c4343a49142f61b355421#page=1)｜[悠遊卡公司永續報告](https://www.easycard.com.tw/_upload/files/2025%20CSR_under5MB_final.pdf)"
+    },
+    {
+      "claim_id": "C4",
+      "pass": false,
+      "label_ok": false,
+      "reason": "「大致正確」的證據不足。審計報告原文可讀，確認 2025 年第一階段低收入戶及中低收入戶學生的兌換率分別為 59.61% 和 61.40%，兩者「均低於同期間整體兌換率 69.24％」，且統計排除六年級畢業生。2026 年 8 月底起「補助對象擴大納入國中學生」，目前查到的分組資料只涵蓋 2025 年第一階段，無法證實 2026 年 10 月 31 日發言時弱勢學生的領取率「還偏低」。[審計報告原文](https://auditreport.audit.gov.tw/ServerFile/Get/639210167369817995ce068dc3347c4343a49142f61b355421#page=1)｜[臺北市教育局擴大補助公告](https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&s=7479719386316902)"
+    }
+  ]
+}

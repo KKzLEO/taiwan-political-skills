@@ -1,0 +1,118 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 27,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "neutral_rewrite",
+      "proposed_importance": 4,
+      "argument": "C1 核對辯論發言的出處，直接關係到這段話能否歸給蔣萬安。訊息要讀者相信的主要內容，是沈伯洋曾宣稱多校大規模食物中毒，以及事後檢查全數合格。發言出處的權重建議降為 4，避免單靠引言出處決定整則訊息的主結論。"
+    },
+    {
+      "id": "X1-2",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "已有一份附三立完整直播時間戳的民間轉錄，可把蔣萬安的回答定位到影片約 2 小時 13 分 44 秒起、沈伯洋的回應定位到約 2 小時 15 分 51 秒起。轉錄中的「這樣的政策」和「刻意的散播不實言論」都與待查文字一致。轉錄由語音辨識產出，整理者說明沒有逐句聽原音，本次也未能直接核對原音。溯源宜補入這個可重查的線索，並保留待查文字來源不明的結論。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "但是今天你卻為了選舉反對這樣的政策，而且刻意的散播不實言論"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "二校對照來源（沒有逐句聽原音）"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C2",
+      "target": "neutral_rewrite",
+      "argument": "原訊息單看確實沒有寫出政策名稱，但辯論的相鄰發言已指出蔣萬安談的是台北市免費營養午餐。建議把查核命題寫成「蔣萬安稱沈伯洋反對台北市免費營養午餐政策，並將其動機歸於選舉」，讓讀者知道查的是沈伯洋對哪項政策的立場。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "其實我們推動營養午餐這件事情，免費不是等於品質打折。"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C3",
+      "target": "evidence",
+      "argument": "S26 的台視標題把兩人並列，內文卻把多個班級集體腹瀉、嘔吐的說法具體歸給簡舒培，並記載沈伯洋質疑市府把討論事實的人說成造謠。台北市教育局當天的原始聲明也分別描述兩人的發言。這則標題可用來交代指控如何出現，但不足以支持沈伯洋曾說多所學校大規模食物中毒。",
+      "evidence": [
+        {
+          "url": "https://news.ttv.com.tw/news/11509240001300W",
+          "excerpt": "教育局表示，簡舒培最初指稱「多個班級、甚至導師室集體腹瀉、嘔吐」"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=B0F0829597953669",
+          "excerpt": "簡舒培議員今（24）日再次指控金華國中營養午餐事件，以及沈伯洋委員指控市府「把攤開事實討論的人說成造謠」"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": "C4",
+      "target": "neutral_rewrite",
+      "argument": "C4 用「沈伯洋散播的這項說法」開頭，已把他曾散播該說法當成既定事實。建議改成「蔣萬安指控沈伯洋曾散布多所學校包括金華國中發生大規模食物中毒的不實說法，並稱這是刻意為之」，讓讀者看得出散布行為、說法內容和動機都是蔣萬安的指控。"
+    },
+    {
+      "id": "X1-6",
+      "claim_id": "C4",
+      "target": "evidence",
+      "argument": "S9 和 S10 只證明成淵高中國中部這一案的檢驗結果和群體不適情形。成淵一校的結果無法推翻「多校、包括金華國中」的說法不符事實，也不能證明沈伯洋曾散布這項說法。市長提交議會的專案報告還把成淵列為例外，並記載延平中學送驗的四名學生檢體均為諾羅病毒陽性。成淵的兩筆資料在 C4 應列為背景。",
+      "evidence": [
+        {
+          "url": "https://health.gov.taipei/News_Content.aspx?n=4F01EBDF8F61F315&sms=72544237BBE4C5F6&s=27105732CFA2BEAA",
+          "excerpt": "檢驗結果1件學校午餐食餘檢體（留樣便當）檢出食品中金黃色葡萄球菌腸毒素B。"
+        },
+        {
+          "url": "https://www-ws.gov.taipei/001/Upload/332/relfile/10198/9726265/c0f15b4b-9dc4-4195-9981-37857f1ca220.pdf",
+          "excerpt": "除成淵高中外，其餘各校學生有就醫之診斷結果包括：腸胃型感冒、流感、諾羅等，均非屬食物中毒事件；另延平中學有送檢4名學生檢體，皆為諾羅病毒陽性。"
+        }
+      ]
+    },
+    {
+      "id": "X1-7",
+      "claim_id": "C5",
+      "target": "reasoning",
+      "argument": "成淵能否直接反駁「都完全合格」，取決於這句話涵蓋哪些學校。把範圍理解為同一時期的全市校園午餐案件時，市長的議會專案報告已明列成淵的留樣檢體不合格。如果只指金華及同批小卷供應的學校，現有餐食與食材抽驗結果為合格，但金華送驗的是 9 月 24 日的蒲燒鯛魚便當，無法用它證明 9 月 4 日那餐合格。理由應說明兩種範圍各自能得出什麼結論。",
+      "evidence": [
+        {
+          "url": "https://www-ws.gov.taipei/001/Upload/332/relfile/10198/9726265/c0f15b4b-9dc4-4195-9981-37857f1ca220.pdf",
+          "excerpt": "成淵高中國中部營養午餐留樣檢驗出金黃色葡萄球菌腸毒素B。"
+        },
+        {
+          "url": "https://www.cna.com.tw/news/aloc/202610070164.aspx",
+          "excerpt": "隔天24日啟動調查，所以是採樣當天的餐食送驗，結果也是合格。"
+        },
+        {
+          "url": "https://www-ws.gov.taipei/Download.ashx?icon=..pdf&n=6Ie65YyX5biC6KGb55Sf5bGA5YyX5biC5qCh5ZyS6aSQ6bue5oq96amX57WQ5p6cLnBkZg%3D%3D&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvMTAxNjIvOTcxNzE1NS82NjU1M2UyYS00NmE4LTQxNjUtYjk5ZC0wODU5NTRjZmZlY2YucGRm",
+          "excerpt": "9/24餐食留樣\n蒲燒鯛魚便當"
+        }
+      ]
+    },
+    {
+      "id": "X1-8",
+      "claim_id": "C5",
+      "target": "evidence",
+      "argument": "S13 的衛生局新聞稿同時記載初次現場查核有衛生缺失、改善後複查符合規定，以及餐點抽驗合格。S16 所述撈菜網生鏽也屬現場查核。這兩筆資料只有在「檢查」涵蓋現場衛生查核時才構成反證。如果查核的是餐食或食材檢驗結果，現場衛生缺失應列為背景。",
+      "evidence": [
+        {
+          "url": "https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&sms=72544237BBE4C5F6&s=6C8E42D2A96900DB",
+          "excerpt": "針對衛生局前次查核發現之衛生管理缺失，均已要求相關業者限期改善，後續複查結果亦均符合規定。"
+        },
+        {
+          "url": "https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&sms=72544237BBE4C5F6&s=6C8E42D2A96900DB",
+          "excerpt": "抽驗其6校午餐餐食留樣，檢驗結果均符合規定。"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

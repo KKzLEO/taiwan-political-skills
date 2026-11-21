@@ -1,0 +1,75 @@
+{
+  "credibility": {
+    "score": 45,
+    "raw": 44.75,
+    "main_claims": [
+      "C1"
+    ],
+    "main_accuracy": 0.8,
+    "overall_accuracy": 0.4475,
+    "capped": false,
+    "context_flags": [
+      "out_of_context"
+    ],
+    "show_on_spectrum": true
+  },
+  "result": "部分符合",
+  "result_reason": null,
+  "confidence": {
+    "score": 73,
+    "level": "中",
+    "deductions": [
+      {
+        "points": 7,
+        "reason": "證據品質 0.65：核心命題缺少第一手直接證據，或缺少第二條獨立證據鏈"
+      },
+      {
+        "points": 10,
+        "reason": "C3 覆核沒有完成或沒有通過"
+      },
+      {
+        "points": 10,
+        "reason": "C4 覆核沒有完成或沒有通過"
+      }
+    ],
+    "evidence_quality": 0.6538
+  },
+  "publishable": false,
+  "publish_blocks": [
+    "信心度 73（中），要到 75 以上才是「高」；扣了哪些分，見後面的「評分拆解」",
+    "結論是「部分符合」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條"
+  ],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "importance": 5,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C2",
+      "label": "misleading",
+      "importance": 3,
+      "factor": 0.25
+    },
+    {
+      "claim_id": "C3",
+      "label": "false",
+      "importance": 4,
+      "factor": 0.0
+    },
+    {
+      "claim_id": "C4",
+      "label": "mostly_true",
+      "importance": 4,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C5",
+      "label": "misleading",
+      "importance": 4,
+      "factor": 0.25
+    }
+  ]
+}

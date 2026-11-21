@@ -1,0 +1,27 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C2",
+      "pass": true,
+      "reason": "改判「誤導」合理。辯論前後文指向台北市免費營養午餐政策。沈伯洋同場說「一定要讓自費回來」，也說「營養午餐的重點是配套措施，其實立意是良好的」。把這段話概括成反對免費政策，省略了他談配套的脈絡。「為了選舉」的動機沒有查證。[9 月 17 日活動報導](https://newtalk.tw/news/view/2026-09-17/1060453) [辯論全文](https://www.nownews.com/news/6888190)"
+    },
+    {
+      "claim_id": "C3",
+      "pass": false,
+      "label_ok": true,
+      "reason": "「錯誤」可維持，沈伯洋在辯論中明確說「我也沒有講說食物中毒」。裁判已將台視標題列為背景，但判定理由仍把教育局新聞稿和直接指控沈伯洋的來源並列。教育局將金華國中的具體指控歸於簡舒培，記載沈伯洋指控市府「把攤開事實討論的人說成造謠」，並批評他跟進。這些說法應分開交代。[辯論全文](https://www.nownews.com/news/6888190) [教育局新聞稿](https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=B0F0829597953669)"
+    },
+    {
+      "claim_id": "C4",
+      "pass": false,
+      "label_ok": true,
+      "reason": "「大致正確」可維持。裁判已把成淵高中當作一校的確認案例，並交代金華國中事發當天的餐食未送驗。不過，「同學期確認的食品中毒只有成淵高中國中部一校」超出了所引資料的範圍。市府專案報告列的是「近期歷次案件檢驗及處置」，理由應把這項結論限於報告涵蓋的案件。[市府議會專案報告](https://www-ws.gov.taipei/001/Upload/332/relfile/10198/9726265/c0f15b4b-9dc4-4195-9981-37857f1ca220.pdf)"
+    },
+    {
+      "claim_id": "C5",
+      "pass": true,
+      "reason": "維持「誤導」合理。衛生局原始抽驗表記載金華國中的攝食日期是 9 月 4 日，合格的抽驗品項是「9/24餐食留樣」的「蒲燒鯛魚便當」。若範圍納入成淵高中，市府專案報告將該校留樣檢驗列為「不合格」。現場衛生查核缺失列為背景，沒有用來推翻餐食抽驗結果。[衛生局抽驗結果](https://www-ws.gov.taipei/Download.ashx?icon=..pdf&n=6Ie65YyX5biC6KGb55Sf5bGA5YyX5biC5qCh5ZyS6aSQ6bue5oq96amX57WQ5p6cLnBkZg%3D%3D&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvMTAxNjIvOTcxNzE1NS82NjU1M2UyYS00NmE4LTQxNjUtYjk5ZC0wODU5NTRjZmZlY2YucGRm) [市府議會專案報告](https://www-ws.gov.taipei/001/Upload/332/relfile/10198/9726265/c0f15b4b-9dc4-4195-9981-37857f1ca220.pdf)"
+    }
+  ]
+}

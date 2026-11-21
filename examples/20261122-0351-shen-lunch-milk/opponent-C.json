@@ -1,0 +1,175 @@
+{
+  "seat": "C",
+  "lens": "stance",
+  "engine": "claude",
+  "searches_run": 6,
+  "attacks": [
+    {
+      "id": "C-1",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "C1 的判定理由對兩個關鍵數字的來源標示方向相反，標準不一致。第一，理由寫「教育局統計顯示 7 月 30 日 246 所國中小只有 94 所決標」，但 S5 中央社原文是市議員柳采葳說「根據教育局掌握資訊」提出這組數字，教育局在同一篇報導的回應沒有證實也沒有否認。同樣是媒體轉述市議員的說法，S24（議員闕枚莎）列為利害關係人自述，S5 卻列為獨立媒體，理由還寫成教育局的統計。第二，理由把「4 校未決標」寫成「民進黨說法，教育局沒有否認」，但教育局 8 月 19 日新聞稿自己寫了剩餘 16 校，台灣事實查核中心的報告也引教育局 8 月 23 日的說法是還有 4 校未完成（教育局這份原稿沒有找到）。一處把議員轉述寫成官方統計，一處把官方說過的事寫成政黨說法。兩處都應照實際出處寫；這不改變標籤，但關係到理由是否對各方來源用同一套標示。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CS1",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://www.cna.com.tw/news/aloc/202607300251.aspx",
+          "title": "議員指6成學校營養午餐流標 北市：8/21前完成招標",
+          "publisher": "中央社（轉述市議員柳采葳引用的教育局資料）",
+          "accessed": "2026-11-22",
+          "tier": 5,
+          "chain": "柳采葳-教育局統計-0730",
+          "stance": "context",
+          "excerpt": "柳采葳說，根據教育局掌握資訊，全市154所國小僅55所決標、92所國中僅39所決標",
+          "access_note": "full"
+        },
+        {
+          "id": "CS2",
+          "claim_ids": [
+            "C1",
+            "C2"
+          ],
+          "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=927DE603022024ED",
+          "title": "北市115學年度營養午餐標案95%完成 教育局持續追蹤輔導各校保障開學供餐無虞",
+          "publisher": "臺北市政府教育局",
+          "accessed": "2026-11-22",
+          "tier": 2,
+          "chain": "教育局新聞稿-0819",
+          "stance": "context",
+          "excerpt": "至於剩餘16校，教育局將持續密切追蹤進行專案輔導。",
+          "access_note": "full"
+        },
+        {
+          "id": "CS3",
+          "claim_ids": [
+            "C1",
+            "C2"
+          ],
+          "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+          "title": "沈伯洋說：「免費的營養午餐喊了口號，開學前還頻頻流標，有些學校險些斷炊；生生有鮮乳的兌換率一直往下，弱勢的領取率還偏低」？",
+          "publisher": "台灣事實查核中心",
+          "accessed": "2026-11-22",
+          "tier": 4,
+          "chain": "tfc-辯論查核-1031",
+          "stance": "context",
+          "excerpt": "23日又指出，目前還有4個學校尚未完成，預計會在8月24日、8月26日決標",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-2",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "C1 判定理由最後一句寫蔣萬安「稱質疑不實、招標順暢，但沒有提出數字，且和教育局自己承認流標的說法不一致」，對兩位候選人的引述用了不同的查證門檻。「招標順暢」只見於報導者的記者轉述，沒有引號；公視引述的蔣萬安回應是「刻意的散播不實言論」，裡面沒有這四個字。同一段理由對沈伯洋的引述註明「沒有逐字核對完整影片」，對蔣萬安卻直接拿記者轉述的用詞，認定他和教育局的說法不一致，沒有加同樣的但書。另外，教育局新聞稿的原文是「極少數學校因不可抗力因素導致流標需重新辦理」，理由兩次寫成「承認」，帶有認錯的意思，應改成「表示」並保留「極少數」。蔣萬安的回應不是這次要查的命題；理由若要評它是否前後一致，應該用和查沈伯洋引述相同的標準。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CS4",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://news.pts.org.tw/article/833715",
+          "title": "蔣萬安與沈伯洋辯論市政議題 毒駕、都更、路樹列攻防",
+          "publisher": "公視新聞網",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "pts-辯論報導-1031",
+          "stance": "context",
+          "excerpt": "但是今天你卻為了選舉反對這項政策，而且刻意的散播不實言論",
+          "access_note": "no_transcript"
+        },
+        {
+          "id": "CS5",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+          "title": "2026台北市長候選人電視辯論：蔣萬安、沈伯洋互批雙重標準、迴避問題，學者評蔣表現穩健、沈打正面選戰",
+          "publisher": "報導者",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "twreporter-辯論報導-1031",
+          "stance": "context",
+          "excerpt": "蔣萬安反批沈伯洋抹黑，其實免費營養午餐招標順暢，安全和品質都有專業委員會進行把關",
+          "access_note": "no_transcript"
+        },
+        {
+          "id": "CS6",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=C67B30BC9E03D8CD",
+          "title": "臺北市教育局嚴正澄清營養午餐不實指控：品質把關不打折，全力確保學童用餐權益與食安",
+          "publisher": "臺北市政府教育局",
+          "accessed": "2026-11-22",
+          "tier": 2,
+          "chain": "教育局新聞稿-0907",
+          "stance": "context",
+          "excerpt": "極少數學校因不可抗力因素導致流標需重新辦理",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-3",
+      "claim_id": "C2",
+      "target": "reasoning",
+      "argument": "C2 的判定理由把台灣事實查核中心的結論（S15、S17）列為支持證據，同時註明沒有讀到報告本文；又把「期限時仍有 4 校未決標」寫成民進黨說法。這次讀到了報告本文，有兩點和理由的寫法不同。第一，報告引的是教育局 8 月 19 日和 23 日自己的說法（尚有 16 校、4 校未完成），這個時間表有官方出處，不必靠發言者所屬政黨的貼文。第二，對「險些斷炊」，報告只寫這個說法出自 7 月 31 日市議員闕枚莎的質詢，沒有查證是否有學校差點中斷供餐。所以查核中心的「相符」結論涵蓋的是招標時程，不能算成「險些斷炊」的佐證。理由應寫明：支持這一條的只有少數學校到 8 月下旬才完成招標，以及實驗教育機構廠商預告不供餐的個案；「險些」的程度是正方自己從這兩件事推論的，不是查核機構或官方資料的結論。不論發言者是哪一方，這個區分都應該寫清楚。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CS3",
+          "claim_ids": [
+            "C1",
+            "C2"
+          ],
+          "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+          "title": "沈伯洋說：「免費的營養午餐喊了口號，開學前還頻頻流標，有些學校險些斷炊；生生有鮮乳的兌換率一直往下，弱勢的領取率還偏低」？",
+          "publisher": "台灣事實查核中心",
+          "accessed": "2026-11-22",
+          "tier": 4,
+          "chain": "tfc-辯論查核-1031",
+          "stance": "context",
+          "excerpt": "23日又指出，目前還有4個學校尚未完成，預計會在8月24日、8月26日決標",
+          "access_note": "full"
+        },
+        {
+          "id": "CS7",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://tfc-taiwan.org.tw/taipei-free-school-lunch-bidding-failures-and-fresh-milk-redemption-rates-claim/",
+          "title": "沈伯洋說：「免費的營養午餐喊了口號，開學前還頻頻流標，有些學校險些斷炊；生生有鮮乳的兌換率一直往下，弱勢的領取率還偏低」？",
+          "publisher": "台灣事實查核中心",
+          "accessed": "2026-11-22",
+          "tier": 4,
+          "chain": "tfc-辯論查核-1031",
+          "stance": "context",
+          "excerpt": "是出自於今年7月31日台北市議員闕枚莎的質詢內容",
+          "access_note": "full"
+        },
+        {
+          "id": "CS2",
+          "claim_ids": [
+            "C1",
+            "C2"
+          ],
+          "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=927DE603022024ED",
+          "title": "北市115學年度營養午餐標案95%完成 教育局持續追蹤輔導各校保障開學供餐無虞",
+          "publisher": "臺北市政府教育局",
+          "accessed": "2026-11-22",
+          "tier": 2,
+          "chain": "教育局新聞稿-0819",
+          "stance": "context",
+          "excerpt": "至於剩餘16校，教育局將持續密切追蹤進行專案輔導。",
+          "access_note": "full"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}
