@@ -1,4 +1,4 @@
-// The front page's working parts: the window that replays a real run, the install tabs, and the copy buttons.
+// The front page's working parts: the session that replays a real run, the install tabs, and the copy buttons.
 (function () {
   'use strict';
   var query = new URLSearchParams(location.search);
@@ -77,7 +77,7 @@
     return put(el('div', 'raw'), el('pre', '', step.raw.lines.join('\n')),
       put(el('p'), el('span', '', step.raw.file + ' 的前 ' + step.raw.lines.length + ' 行，全部 ' + step.raw.total + ' 行'), link));
   }
-  function view(step) {
+  function view(step) {                        // what a step left, under its line
     var pane = el('div', 'pane'), body = tidy(step), toggle = el('button', 'pane-raw', '看原始檔');
     toggle.type = 'button';
     toggle.setAttribute('aria-pressed', 'false');
@@ -89,39 +89,46 @@
       pane.replaceChild(next, body);
       body = next;
     });
-    return put(pane, put(el('header'), el('h2', '', step.name), toggle, el('p', '', step.does), el('p', 'sum', step.summary)), body);
+    return put(pane, put(el('header'), el('p', '', step.does), toggle), body);
   }
 
-  // ---- the window: it plays the run once, then every step can be opened ------------------------------
+  // ---- the window: a session in the host. It plays once, then any line opens the file that step left ----
   function run(root, data) {
-    var buttons = Array.prototype.slice.call(root.querySelectorAll('.run-steps button'));
-    var pane = root.querySelector('.run-pane'), prompt = root.querySelector('.run-prompt');
-    var line = root.querySelector('.run-msg'), again = root.querySelector('.run-again');
+    var buttons = Array.prototype.slice.call(root.querySelectorAll('.run-step'));
+    var prompt = root.querySelector('.run-prompt'), line = root.querySelector('.run-msg'), again = root.querySelector('.run-again');
     var steps = buttons.map(function (b) { return data.steps.filter(function (s) { return s.id === b.dataset.step; })[0]; });
     var message = line.textContent, turn = 0;
 
-    function mark(i) { buttons.forEach(function (b, k) { if (k === i) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); }); }
-    function open(i) {
-      mark(i);
-      pane.replaceChildren(view(steps[i]));
-      pane.scrollTop = 0;
+    function state(i, to) { buttons[i].parentNode.dataset.state = to; }
+    function box(b) { return document.getElementById(b.getAttribute('aria-controls')); }
+    function shut() {
+      buttons.forEach(function (b) { b.setAttribute('aria-expanded', 'false'); box(b).hidden = true; box(b).replaceChildren(); });
     }
-    function settle(i) {                       // the whole run is on the table; show step i
+    function toggle(i) {
+      var open = buttons[i].getAttribute('aria-expanded') === 'true';
+      shut();
+      if (open) return;
+      buttons[i].setAttribute('aria-expanded', 'true');
+      box(buttons[i]).replaceChildren(view(steps[i]));
+      box(buttons[i]).hidden = false;
+    }
+    function settle() {                        // the whole run is on the table
       turn++;
-      buttons.forEach(function (b) { b.dataset.state = 'done'; });
+      buttons.forEach(function (b, i) { state(i, 'done'); });
       line.textContent = message;
       line.classList.remove('typing');
       prompt.style.setProperty('--playing', 0);
+      root.dataset.told = '';
       again.hidden = calm;
-      open(i);
     }
-    // Playing: the message is typed, then each step reports in one line as its file lands. The whole run
-    // took 48 minutes; this takes about nine seconds and ends on the result.
+    // Playing: the message is typed, each step ticks off as its file lands, then the reply comes. The run
+    // took 48 minutes; this takes about nine seconds.
     async function play() {
-      var mine = ++turn, i, n, log = el('ol', 'log');
+      var mine = ++turn, i, n;
       again.hidden = true;
-      buttons.forEach(function (b) { b.dataset.state = 'todo'; b.removeAttribute('aria-current'); });
-      pane.replaceChildren(put(el('div', 'pane'), log));
+      shut();
+      buttons.forEach(function (b, k) { state(k, 'todo'); });
+      delete root.dataset.told;
       prompt.style.setProperty('--done', 0);
       prompt.style.setProperty('--playing', 1);
       line.classList.add('typing');
@@ -134,30 +141,34 @@
       line.classList.remove('typing');
       for (i = 0; i < steps.length; i++) {
         if (mine !== turn) return;
-        buttons[i].dataset.state = 'run';
-        mark(i);
-        await wait(i === 4 ? 620 : 380);
+        state(i, 'run');
+        await wait(i === 4 ? 780 : 460);
         if (mine !== turn) return;
-        buttons[i].dataset.state = 'done';
-        put(log, put(el('li'), el('b', '', steps[i].name), el('span', '', steps[i].summary), el('code', '', steps[i].file)));
+        state(i, 'done');
         prompt.style.setProperty('--done', (i + 1) / steps.length);
-        pane.scrollTop = pane.scrollHeight;
-        await wait(300);
       }
-      await wait(700);
+      await wait(520);
       if (mine !== turn) return;
       prompt.style.setProperty('--playing', 0);
-      open(steps.length - 1);
+      root.dataset.told = '';
       again.hidden = false;
     }
-    buttons.forEach(function (b, i) { b.addEventListener('click', function () { settle(i); }); });
+    buttons.forEach(function (b, i) {
+      b.addEventListener('click', function () {
+        if (!('told' in root.dataset)) settle();
+        toggle(i);
+      });
+    });
     again.addEventListener('click', play);
 
     var first = buttons.map(function (b) { return b.dataset.step; }).indexOf(query.get('step'));
     root.dataset.ready = '';
-    if (calm || first >= 0 || !('IntersectionObserver' in window)) { settle(first >= 0 ? first : steps.length - 1); return; }
-    buttons.forEach(function (b) { b.dataset.state = 'todo'; b.removeAttribute('aria-current'); });
-    pane.replaceChildren();
+    if (calm || first >= 0 || !('IntersectionObserver' in window)) {
+      settle();
+      if (first >= 0) toggle(first);
+      return;
+    }
+    buttons.forEach(function (b, i) { state(i, 'todo'); });
     line.textContent = '';
     var seen = new IntersectionObserver(function (e) {
       if (!e[0].isIntersecting) return;

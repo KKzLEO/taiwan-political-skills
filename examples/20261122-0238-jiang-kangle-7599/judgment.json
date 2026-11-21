@@ -1,0 +1,610 @@
+{
+  "rulings": [
+    {
+      "attack_id": "A-1",
+      "upheld": true,
+      "reason": "已核對三筆資料。聯合新聞網房產報導全文沒有出現西湖、灣仔或斯文里，只在列舉松山機場航道經過的行政區時提到內湖，改列為背景。中天新聞網引述的是國民黨籍議員游淑慧的說法，原文寫的是「部分住宅」「一項重要原因」，同一篇也寫各地困難「有的是產權整合、有的是容積不足、有的是建築限高」。自由時報 2025 年的報導談的是民生社區莊敬里，全文沒有內湖。內湖西湖、灣仔次分區 12 個里是否因航高限制而難以都更，沒有第一手或官方資料，這一部分無法證實。",
+      "verified_urls": [
+        "https://house.udn.com/house/story/123589/9843912",
+        "https://ctinews.com/news/items/4bnbkrXrWP",
+        "https://ec.ltn.com.tw/article/breakingnews/5252298"
+      ]
+    },
+    {
+      "attack_id": "A-2",
+      "upheld": true,
+      "reason": "正方用來說明「另有其他原因」的市府資料，全部是大同區斯文里整宅的資料，不能據此推論內湖的案例也有其他原因被略去；正方答辯也同意這一點。判定維持「誤導」，理由改成分開寫：斯文里二期有市府資料可以核對，內湖 12 個里公開證據不足、無法證實。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "B-1",
+      "upheld": false,
+      "reason": "不改判「大致正確」。攻擊附的四筆資料都核對過，內容屬實：臺北市都市更新處 2018 年的文章和 2016 年時任副市長林欽榮的說法，都把松山機場航高限制列為蘭州、斯文里整宅長期沒有民間業者進場的原因。這些資料已補進證據表，列為支持，只限斯文里部分。但有兩點使主體達不到「大致正確」。第一，同一批資料把產權複雜、土地持分小、整合不易和航高限制並列，而且寫在前面；當天報導顯示，蔣萬安問的是都更難推動的「原因」，沈伯洋回答產權、審議期間、估價等，蔣萬安回應對方沒有回答，接著只舉航高限制一項。第二，這段話所指的內湖 12 個里沒有官方資料可以核對。另外，自由時報 2017 年那篇講的是斯文里三期的 47.05 公尺限高，不是二期。",
+      "verified_urls": [
+        "https://www.ur.org.tw/mynews/view/1948",
+        "https://www.storm.mg/article/148339",
+        "https://news.ltn.com.tw/news/local/paper/1121356",
+        "https://house.ettoday.net/news/1798908"
+      ]
+    },
+    {
+      "attack_id": "B-2",
+      "upheld": true,
+      "reason": "已核對三則市府新聞稿。2023 年那則的主題是斯文里二期借貸資金專款專用，2025 年兩則講的是公辦階段統包工程因造價上漲兩度流標；三則內文都沒有提到航高或松山機場。沒有提到不等於否定，這三則改列為背景，只用來說明市府另外記載了產權複雜、弱勢住戶多、造價上漲等因素。都市更新處 2018 年的文章則明寫，松山機場建築物高度限制使民間開發缺乏財務可行。",
+      "verified_urls": [
+        "https://uro.gov.taipei/News_Content.aspx?n=FDB0CAB1DD42E805&sms=72544237BBE4C5F6&s=E1970E9039FABE60",
+        "https://udd.gov.taipei/events/fhqekzq-19579",
+        "https://www.ur.org.tw/mynews/view/1948"
+      ]
+    },
+    {
+      "attack_id": "C-1",
+      "upheld": true,
+      "reason": "正方原本把沒提航高的新聞稿列為反證，把點名航高的資料只列為背景，兩邊標準不一致。改用同一套標準，不論發言者是誰都一樣：明寫航高限制是該案困難原因的資料列為支持（只限它談到的案例），沒有談航高的資料列為背景，明寫航高不是原因的資料才列為推翻。依此，三則市府新聞稿改列背景；都市更新處維護的斯文里整宅頁面和 ETtoday 房產雲 2020 年的報導改列支持，只限斯文里部分。調整後判定仍是「誤導」，因為點名航高的資料都把產權複雜、整合不易並列在同一句，內湖 12 個里則沒有官方資料。",
+      "verified_urls": [
+        "https://udd.gov.taipei/events/fhqekzq-19579",
+        "https://uro.gov.taipei/News_Content.aspx?n=FDB0CAB1DD42E805&sms=72544237BBE4C5F6&s=E1970E9039FABE60",
+        "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=5F54AFD5C5CC3D2C",
+        "https://zsdo.gov.taipei/News_Content.aspx?n=C2C1165AA5DF44C1&sms=C04230CB75259A56&s=E3DC9B50BF2A8F3A",
+        "https://house.ettoday.net/news/1798908"
+      ]
+    },
+    {
+      "attack_id": "C-2",
+      "upheld": true,
+      "reason": "三點都成立。第一，訊息裡的「都因為」是說這幾個案例都受航高限制影響，不等於「只因為」。第二，當天媒體記下的話沒有「都因為」：ETtoday 記的是「這兩案是因為」，壹蘋新聞網記的是「這11件案例是因為」，台灣事實查核中心內頁標題也沒有「都」字，所以「都因為」是濃縮後的寫法，不算在發言者頭上。第三，市府資料是把產權、整合和航高限制並列，沒有說哪一項是主要原因。判「誤導」的依據改為：蔣萬安問的是案子難推動的「原因」，回答只舉航高限制一項，而市府資料同時列出產權、整合等其他因素；內湖 12 個里沒有官方資料，無法證實。",
+      "verified_urls": [
+        "https://www.ettoday.net/news/20261031/3263904.htm",
+        "https://news.nextapple.com/politics/20261031/D78715B42325A295590BEE2C6F7BA81C",
+        "https://tfc-taiwan.org.tw/kang-le-street-7599-project-songshan-airport-height-restrictions-claim/",
+        "https://zsdo.gov.taipei/News_Content.aspx?n=C2C1165AA5DF44C1&sms=C04230CB75259A56&s=E3DC9B50BF2A8F3A"
+      ]
+    },
+    {
+      "attack_id": "C-3",
+      "upheld": true,
+      "reason": "已核對兩篇報導。辯論後，評論員張禹宣在 Threads 貼文逐項批評蔣萬安的發言（自由時報 2026-11-01 轉述，原貼文沒有直接讀到）；國民黨籍議員游淑慧則在辯論當天發文支持航高限制的說法（中天新聞網 2026-10-31 報導）。兩則都是對同一段發言的後續評論，文字和這則訊息不同源，一則批評、一則支持，應該並列。張禹宣的整理是評論員個人意見，不是查核機構的結論，寫成「逐項批評」比「指出問題」中立。這項修正不影響兩條命題的判定。",
+      "verified_urls": [
+        "https://ctinews.com/news/items/4bnbkrXrWP",
+        "https://news.ltn.com.tw/news/politics/breakingnews/5625731"
+      ]
+    },
+    {
+      "attack_id": "X1-1",
+      "upheld": false,
+      "reason": "不改判「無法證實」。斯文里二期的部分公開證據足夠：都市更新處的資料把航高限制列為原因之一，同時並列產權複雜、整合不易。判「誤導」也不是靠「只因為」這幾個字：當天報導顯示，蔣萬安問的是「原因」，對方回答產權等因素後，他只舉航高限制一項。內湖 12 個里公開證據不足這一點成立，已在判定理由裡分開寫明。攻擊附的兩份市府 PDF（斯文里整宅簡報、松山機場禁限建涉及的行政區）這次沒能讀到內容，無法核對摘錄；辯論發言整理頁的引句核對屬實。",
+      "verified_urls": [
+        "https://neww.tw/2026taipeimayor-debate/"
+      ]
+    },
+    {
+      "attack_id": "X1-2",
+      "upheld": true,
+      "reason": "已核對都市發展局網站上 2023 年 8 月 14 日和 2025 年 10 月 9 日的兩則新聞稿，摘錄屬實，內文都沒有提到航高或松山機場。它們記載的弱勢住戶多、產權複雜、造價上漲和兩度流標，和航高限制可以同時成立，不能當成推翻航高影響的證據，改列為背景。攻擊另附的都發局施政報告 PDF 這次沒能讀到內容，那一句摘錄沒有核對；改列背景不靠這一筆。",
+      "verified_urls": [
+        "https://udd.gov.taipei/events/fhqekzq-19579",
+        "https://udd.gov.taipei/events/fhqekzq-20904"
+      ]
+    },
+    {
+      "attack_id": "X1-3",
+      "upheld": true,
+      "reason": "已核對聯合新聞網房產報導全文：沒有出現西湖、灣仔或斯文里，內容是房市專家對松山機場周邊幾個行政區整體情況的概括說法，不能證明特定次分區的都更案因限高而難以推動。這一筆從支持改列為背景。",
+      "verified_urls": [
+        "https://house.udn.com/house/story/123589/9843912"
+      ]
+    },
+    {
+      "attack_id": "X1-4",
+      "upheld": true,
+      "reason": "已核對三立新聞網的報導和鏡週刊刊登的同一篇，ETtoday 的記載也一致：蔣萬安提問時指的是內湖區西湖次分區 8 個里、灣仔次分區 4 個里，共 12 個里，以及大同區斯文里二期。訊息只寫「內湖」，容易讀成整個內湖區，或讀成「內湖的斯文里二期」；待查範圍應以這 12 個里和大同區斯文里二期為準。判定原本就照這個範圍查，標籤不受影響。",
+      "verified_urls": [
+        "https://www.mirrormedia.mg/external/amp/setn_1931242",
+        "https://www.setn.com/News.aspx?NewsID=1931242"
+      ]
+    },
+    {
+      "attack_id": "X1-5",
+      "upheld": true,
+      "reason": "已核對兩筆資料。都市更新處的虎林街60巷案頁面記的是 2023 年 7 月通過 7599 專案第一階段，只能說明這個案子屬於 7599 專案，不能證明誰先簽約，改列為背景。臺北市住宅及都市更新中心 2026 年 8 月 11 日的新聞稿標題是「臺北市7599首案招商簽約」，已補進證據表，和市府同一天的新聞稿屬同一場簽約。康樂街136巷案屬 575 專案、不是 7599 專案，這項判定不變。",
+      "verified_urls": [
+        "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=A70F95555A969DC0",
+        "https://thurc.org.taipei/ThurcTaipei/Portal/NewsDetail?id=2500"
+      ]
+    },
+    {
+      "attack_id": "X1-6",
+      "upheld": true,
+      "reason": "已核對：三立新聞網的報導標示 2026-10-31 12:46 發布，早於 ETtoday 的 12:55；但三立原頁標示 16:04 更新，鏡週刊刊登的版本標示 15:00 更新。現在讀得到的版本涵蓋康樂街和航高兩段發言，無法確認這兩段是不是 12:46 就已刊出，所以兩篇報導的先後無法排定，不能說 ETtoday 那篇是最早的單篇文字報導。這段話最早出現在 2026-10-31 的辯論會直播，這一點不變。",
+      "verified_urls": [
+        "https://www.mirrormedia.mg/external/amp/setn_1931242",
+        "https://www.setn.com/News.aspx?NewsID=1931242"
+      ]
+    },
+    {
+      "attack_id": "X1-7",
+      "upheld": true,
+      "reason": "已核對：網路上查得到一份署名 richliu 的部落格逐字稿，把蔣萬安的提問標在三立完整版影片 1 時 55 分 36 秒、追問標在 1 時 58 分 14 秒。頁面說明底稿是語音辨識轉錄，二校時沒有逐句聽原音，也不是主辦單位公布的逐字稿，所以只能用來定位發言，不能當成逐字原話。這份稿子把航高那一句記成「這十〔一?〕件案例」並標示不確定，和各家媒體的記載仍有出入，用字要等原片確認。",
+      "verified_urls": [
+        "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/"
+      ]
+    }
+  ],
+  "tactic_checks": [],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "false",
+      "reasoning": "內湖康樂街136巷案屬於「575專案」，不是 7599 專案；7599 專案首件完成招商簽約的是信義區虎林街60巷案。臺北市都市更新處的案件頁面把康樂街136巷案列為 575 專案，記載 2024 年 3 月通過「臺北市高氯離子混凝土建築物575專案計畫」第一階段、2026 年 6 月 29 日簽訂實施契約；市府當天的新聞稿稱它是推動「都更8箭」及「575專案」以來首件完成簽約的案例，全文沒有出現「7599」。虎林街60巷案在都更處頁面列為「公辦都市更新7599」，2026 年 8 月 11 日簽約，市府和住都中心的新聞稿都稱它是 7599 專案的首件招商簽約案。ETtoday、今周刊、壹蘋新聞網當天都記下蔣萬安說「康樂街第一個7599專案」已完成招商、簽約；沒有取得主辦單位的逐字稿，完整影片也沒有逐字核對，但依引言規則，內容和官方資料衝突就判錯誤。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S9",
+        "S18",
+        "S24",
+        "S25",
+        "S27"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C2",
+      "label": "misleading",
+      "reasoning": "松山機場航高限制是市府資料列出的斯文里整宅都更困難原因之一，但同一批資料並列產權複雜、整合不易等因素，這段話只舉航高一項；內湖西湖、灣仔次分區 12 個里的部分沒有查到官方資料，無法證實。依當天報導，蔣萬安所指的案例是大同區斯文里二期，以及內湖區西湖、灣仔次分區共 12 個里，不是整個內湖區。他先問這些案例難以都更的「原因」，沈伯洋回答產權、審議期間、估價等，蔣萬安回應對方沒有回答，接著說這些案例是因為松山機場航高限制。各家媒體記下的用字是「這兩案」「這些案例」「這11件案例」，訊息裡的「都因為」是濃縮後的寫法；沒有取得主辦單位的逐字稿，完整影片也沒有逐字核對。斯文里部分：都市更新處 2018 年的文章寫蘭州國宅及斯文里一、二、三期整宅「產權複雜、土地持分小，更新意願整合不易，且受松山機場建築物高度限制，致民間開發缺乏財務可行」；2016 年時任副市長林欽榮也說，當地因航高限制、容積有限，業者進場意願不高。市府 2023、2025 年的新聞稿另外記載斯文里二期弱勢住戶多、產權複雜，以及工程造價上漲、統包工程兩度流標；這些新聞稿沒有談航高，不能當成否定航高影響的證據。內湖部分：只查到同黨議員的說法（寫的是「部分住宅」「一項重要原因」）、查核機構的轉述，以及房市專家對行政區整體情況的概括說法，沒有取得市府或民航局針對這 12 個里的限高資料。",
+      "evidence_ids": [
+        "S8",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23",
+        "S25",
+        "S26",
+        "S27",
+        "S28"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=357F7413E3D353BE",
+      "title": "臺北市都市更新處-案件列表-內湖康樂街136巷案（575專案）",
+      "publisher": "臺北市都市更新處",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "uro_case_kangle136",
+      "stance": "refutes",
+      "excerpt": "113年3月通過「臺北市高氯離子混凝土建築物575專案計畫」第一階段",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=A6D083ED73B8C53C",
+      "title": "出席內湖康樂街136巷公辦都更實施者簽約　蔣萬安：落實都更8箭政策、樹立重要里程碑",
+      "publisher": "臺北市政府秘書處媒體事務組",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "kangle136_signing_20260629",
+      "stance": "refutes",
+      "excerpt": "這是他上任市長後推動「都更8箭」及「575專案」以來，首件成功完成簽約的案例",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://money.udn.com/money/story/5621/9594969",
+      "title": "打造內湖宜居新地標 北市「575專案」首案成功簽約",
+      "publisher": "經濟日報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "kangle136_signing_20260629",
+      "stance": "refutes",
+      "excerpt": "臺北市危險建築物575專案計畫第一案「內湖康樂街136巷公辦都更案」29日舉行簽約典禮",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&sms=28D96A39D4881924&s=A70F95555A969DC0",
+      "title": "臺北市都市更新處-案件列表-虎林街60巷案（公辦都市更新7599）",
+      "publisher": "臺北市都市更新處",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "uro_case_hulin60",
+      "stance": "context",
+      "excerpt": "112年7月通過「臺北市公辦都市更新7599專案計畫」第一階段。",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=4D7E11B11A945852",
+      "title": "北市「都更八箭」公辦都更7599首案今簽約，打造信義區永續共融「森態城市」",
+      "publisher": "臺北市都市更新處（臺北市政府市府新聞稿）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "hulin60_signing_20260811",
+      "stance": "refutes",
+      "excerpt": "本案為公辦都更7599專案計畫首件完成招商簽約案件",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202608110170.aspx",
+      "title": "北市7599公辦都更首案簽約　蔣萬安：持續推進都更",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "hulin60_signing_20260811",
+      "stance": "refutes",
+      "excerpt": "北市信義虎林街60巷公辦都更案是「公辦都市更新7599專案計畫」首件完成招商簽約案件",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ettoday.net/news/20261031/3263904.htm",
+      "title": "第一題問都更就逮到沈伯洋已讀亂回　蔣萬安：你還真不了解市政",
+      "publisher": "ETtoday新聞雲",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ettoday_debate_20261031",
+      "stance": "context",
+      "excerpt": "另康樂街第一個7599專案已經完成公告招商、也已經簽約了，「這些你都不清楚」。",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.ettoday.net/news/20261031/3263904.htm",
+      "title": "第一題問都更就逮到沈伯洋已讀亂回　蔣萬安：你還真不了解市政",
+      "publisher": "ETtoday新聞雲",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ettoday_debate_20261031",
+      "stance": "context",
+      "excerpt": "這兩案是因為松山機場航高的限制，導致都更困難重重",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610310007/",
+      "title": "台北市長辯論／蔣萬安、沈伯洋交叉詰問互轟不熟市政，沈為何痛批「上樑不正下樑歪」？",
+      "publisher": "今周刊",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "businesstoday_debate_20261031",
+      "stance": "context",
+      "excerpt": "康樂街第一個7599專案也已完成招商、簽約。",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610310007/",
+      "title": "台北市長辯論／蔣萬安、沈伯洋交叉詰問互轟不熟市政，沈為何痛批「上樑不正下樑歪」？",
+      "publisher": "今周刊",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "businesstoday_debate_20261031",
+      "stance": "context",
+      "excerpt": "這些案例是松山機場航高限制讓都更困難重重，你完全不知道。",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://udn.com/news/story/124652/9848767",
+      "title": "直球對決！辯論攻勢拋「都市更新案例」問沈伯洋…蔣萬安轟：已讀亂回",
+      "publisher": "聯合報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn_debate_20261031",
+      "stance": "context",
+      "excerpt": "沈委員，你都不知道，剛剛提到的這些案例，就是因為松山機場航高限制，讓都市更新困難重重。",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://dcsd.gov.taipei/News_Content.aspx?n=763E323D3A511788&sms=C04230CB75259A56&s=E3DC9B50BF2A8F3A",
+      "title": "斯文里三期整宅公辦都更案",
+      "publisher": "臺北市都市更新處（資料維護；頁面掛在臺北市政府公務人員訓練處網站）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "uro_case_siwen3",
+      "stance": "supports",
+      "excerpt": "歷經50年發展更迭，建物面臨窳陋及公安問題，急需進行都更；惟現況產權複雜、土地持分小，更新意願整合不易，且受松山機場建築物高度限制，居住環境品質甚為低落，且有衛生及消防救災等公安問題。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://udd.gov.taipei/events/fhqekzq-19579",
+      "title": "斯文里二期公辦都更案借貸資金皆為專款專用",
+      "publisher": "臺北市都市更新處",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "uro_pr_20230814",
+      "stance": "context",
+      "excerpt": "因弱勢住戶數量龐大，產權複雜，致其不具都市更新市場性",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://uro.gov.taipei/News_Content.aspx?n=FDB0CAB1DD42E805&sms=72544237BBE4C5F6&s=E1970E9039FABE60",
+      "title": "斯文里二期整建住宅「斯文昌龍」公辦都更案今簽約典禮！",
+      "publisher": "臺北市都市更新處",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "siwen2_signing_20251009",
+      "stance": "context",
+      "excerpt": "斯二卻因遭遇疫情與烏俄戰爭等大環境變遷之影響，使工程造價上漲，致二次統包工程流標",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=5F54AFD5C5CC3D2C",
+      "title": "「斯文昌龍」公辦都更簽約　蔣萬安：北大同核心區再現城市新地標",
+      "publisher": "臺北市政府秘書處媒體事務組",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "siwen2_signing_20251009",
+      "stance": "context",
+      "excerpt": "雖然過程中面臨營建物價上漲、兩度流標等挑戰，但市府始終堅持推動都更的決心",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://house.ettoday.net/news/1798908",
+      "title": "歷經三任市長未果…北市最難都更「斯文里二期」終於有好消息！",
+      "publisher": "ETtoday房產雲",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ettoday_house_20200905",
+      "stance": "supports",
+      "excerpt": "歷經台北市前三任市長都想都更，但因產權複雜，位處松機航高限制區，建商意願不高，住戶等了數十年才終於獲得「公辦都更」。",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://house.udn.com/house/story/123589/9843912",
+      "title": "松機搬遷利多不在蓋公園！解禁限高帶動5區都更：老宅價值翻倍",
+      "publisher": "聯合新聞網房產（受訪者：房市專家陳泰源）",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "udn_house_20261029",
+      "stance": "context",
+      "excerpt": "大直、內湖、民生社區以及大同區等航道必經區域，現存大量屋齡偏高的老舊公寓。",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://tfc-taiwan.org.tw/kang-le-street-7599-project-songshan-airport-height-restrictions-claim/",
+      "title": "蔣萬安說：「康樂街案是第一個7599專案……內湖、斯文里二期等案例，因為松山機場航高限制，讓都更困難重重」？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc_20261031",
+      "stance": "context",
+      "excerpt": "但大同斯文里二期都更困難因素眾多，涉及產權複雜、住戶整合不易、開發財務及營建成本等，並非只受松山機場航高限制影響",
+      "access_note": "full"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://ctinews.com/news/items/4bnbkrXrWP",
+      "title": "內湖都更為何動不了？蔣萬安揭致命傷 游淑慧嗆沈伯洋：別只喊口號",
+      "publisher": "中天新聞網（引述國民黨籍台北市議員游淑慧）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "ctinews_yu_20261031",
+      "stance": "supports",
+      "excerpt": "即使有容積獎勵，也未必能充分使用",
+      "access_note": "full"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://ec.ltn.com.tw/article/breakingnews/5252298",
+      "title": "民生社區受航高限制地區 建蔽率擬放寬到75％",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn_minsheng_20251120",
+      "stance": "context",
+      "excerpt": "松山機場周邊限高，容積獎勵無法用盡",
+      "access_note": "full"
+    },
+    {
+      "id": "S21",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.ur.org.tw/mynews/view/1948",
+      "title": "臺北市大同區「斯文首善」公辦都更-駐點辦公室 貼切住戶之所需",
+      "publisher": "臺北市都市更新處（原載《都市更新簡訊》第78期，刊於都市更新研究發展基金會網站）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "uro_case_siwen3",
+      "stance": "supports",
+      "excerpt": "蘭州國宅及斯文里一、二、三期整宅因現況產權複雜、土地持分小，更新意願整合不易，且受松山機場建築物高度限制，致民間開發缺乏財務可行",
+      "access_note": "full"
+    },
+    {
+      "id": "S22",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.storm.mg/article/148339",
+      "title": "斯文里公辦都更》加速蘭州國宅都更 北市府決定花20億自己蓋",
+      "publisher": "風傳媒",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "storm_siwen_20160730",
+      "stance": "supports",
+      "excerpt": "林欽榮解釋，市府探詢市場意願後，發現當地因航高限制、容積有限，業者進場意願不高，市府因此決定攬下建商角色、自己發包興建。",
+      "access_note": "full"
+    },
+    {
+      "id": "S23",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/local/paper/1121356",
+      "title": "公辦都更增購每坪65萬 台北市斯文里民轟太貴",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn_siwen3_20170724",
+      "stance": "context",
+      "excerpt": "又因位於松山機場航線下，因此航高限制為四十七．○五公尺，導致過去長期無法更新。",
+      "access_note": "full"
+    },
+    {
+      "id": "S24",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://thurc.org.taipei/ThurcTaipei/Portal/NewsDetail?id=2500",
+      "title": "臺北市7599首案招商簽約 吉春賞公辦都更案啟動森態幸福場域",
+      "publisher": "臺北市住宅及都市更新中心",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "hulin60_signing_20260811",
+      "stance": "refutes",
+      "excerpt": "臺北市7599首案招商簽約 吉春賞公辦都更案啟動森態幸福場域",
+      "access_note": "full"
+    },
+    {
+      "id": "S25",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://news.nextapple.com/politics/20261031/D78715B42325A295590BEE2C6F7BA81C",
+      "title": "台北辯論｜蔣萬安指松機限制都更！沈伯洋提「陪伴」：怎不一開始充分說明",
+      "publisher": "壹蘋新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "nextapple_debate_20261031",
+      "stance": "context",
+      "excerpt": "更重要的，你完全不知道剛剛這11件案例是因為松山機場航高限制，讓都更困難重重。",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S26",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.setn.com/News.aspx?NewsID=1931242",
+      "title": "北市長辯論／蔣萬安首問都更轟不懂市政！沈伯洋反擊：不能只秀漂亮數據",
+      "publisher": "三立新聞網（鏡週刊刊登同一篇）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn_debate_20261031",
+      "stance": "context",
+      "excerpt": "包含西湖次分區8個里、灣仔次分區4個里，共計12個里",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S27",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+      "title": "2026 台北市長候選人電視辯論會逐字稿（含時間戳）：蔣萬安、沈伯洋",
+      "publisher": "richliu（個人部落格「二相樂園的後門」；語音辨識轉錄，未逐句聽原音）",
+      "accessed": "2026-11-22",
+      "tier": 6,
+      "chain": "richliu_transcript_20261031",
+      "stance": "context",
+      "excerpt": "更重要的，你完全不知道剛剛這十〔一?〕件案例，是因為松山機場航高的限制，讓都更困難重重。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S28",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.nextapple.com/politics/20261101/1904C332E9343F4736D5DDC645174B6E",
+      "title": "蔣萬安「松機限高才是內湖都更難題」遭網酸1句！9.3萬人也打臉",
+      "publisher": "壹蘋新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "nextapple_followup_20261101",
+      "stance": "context",
+      "excerpt": "他特別點名內湖西湖、灣仔次分區12個里，認為松山機場航高限制讓部分建築無法充分利用容積，進而影響建商開發意願及地主整合，成為地方長期推動都更的難題。",
+      "access_note": "full"
+    }
+  ]
+}

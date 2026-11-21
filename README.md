@@ -4,7 +4,7 @@
 
 可以在 **Claude Code** 和 **Codex** 裡使用。
 
-網站：<https://kkzleo.github.io/taiwan-political-skills/>（怎麼查的、發版前的驗證結果、怎麼用）
+網站：<https://kkzleo.github.io/taiwan-political-skills/>（怎麼查的、發版前的驗證結果、怎麼用）。放在 `examples/` 的查核報告可以在網站上直接看：[全部報告](https://kkzleo.github.io/taiwan-political-skills/reports/)、[2026 台北市長選舉，照議題成對的查核](https://kkzleo.github.io/taiwan-political-skills/taipei/)。
 
 ## 它會做什麼
 

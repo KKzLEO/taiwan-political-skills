@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Write site/assets/run-data.js from the worked example, so the run the front page plays is the real one.
+"""Write the window on the front page, and site/assets/run-data.js behind it, from the worked example.
 
     python3 site/tools/build_run.py
 
-Every string the window shows is taken from the files of examples/<run>/; long passages are cut at a
-sentence end and marked with an ellipsis. The counts in the one-line summaries are counted here.
+The window is a session in the host, because that is all the skill has to show: the request, one line for
+each step as its file lands, and how the reply opens. Every string is taken from the files of examples/<run>/;
+long passages are cut at a sentence end and marked with an ellipsis. The counts in the summaries are counted here.
 """
+import html
 import json
 import sys
 from collections import Counter
@@ -18,6 +20,9 @@ from fclib.render import INPUT, LENS  # noqa: E402
 
 RUN = ROOT / "examples/20261120-1441-機車大燈罰三千"
 OUT = ROOT / "site/assets/run-data.js"
+FRONT = ROOT / "site/index.html"
+BEGIN, END = "<!-- run:begin (written by site/tools/build_run.py) -->", "<!-- run:end -->"
+MINUTES = 48  # from the request to the reply, as measured: evals/results/2026-11-20-hosts.md
 SEATS = ("A", "B", "C", "X1")
 MODES = {"full": "完整模式", "quick": "快速模式"}
 HOSTS = {"claude": "Claude Code", "codex": "Codex"}
@@ -138,11 +143,59 @@ def build():
             "at": run["created_at"][:16].replace("T", " "), "steps": steps}
 
 
+def reply():
+    """How the host's reply opens. The skill has it copy these lines out of report.md unchanged: the result,
+    the scale and every note that stands above the conclusions."""
+    lines = (RUN / "report.md").read_text(encoding="utf-8").splitlines()
+    head = next(i for i, ln in enumerate(lines) if ln.startswith("**結果："))
+    at = lines.index("```text")
+    low, bar, high = lines[at + 1].split(" ")
+    notes = [ln[2:] for ln in lines[head + 1:lines.index("## 結論")] if ln.startswith("> ")]
+    return {"result": lines[head].strip("*"), "scale": [low, bar, high, lines[at + 2].strip()], "notes": notes}
+
+
+def block():
+    """The window as it stands when the run is over. The script on the page plays it from the start and
+    opens a step's file when its line is pressed; without the script this is what is read."""
+    e, data, said = html.escape, build(), reply()
+    low, bar, high, value = said["scale"]
+    out = [BEGIN, '<div class="run" id="run">',
+           '  <div class="run-bar">',
+           f'    <p class="run-host"><svg width="16" height="16"><use href="#i-term"/></svg>{e(data["host"])}</p>',
+           f'    <p class="run-meta">{e(data["mode"])}<i>·</i>{MINUTES} 分鐘</p>',
+           '    <button class="run-again" type="button" hidden><svg width="16" height="16"><use href="#i-again"/></svg>重播</button>',
+           '  </div>',
+           f'  <p class="run-prompt"><i aria-hidden="true">&gt;</i><code>/factcheck</code><span class="run-msg">{e(data["steps"][0]["text"])}</span></p>',
+           '  <ol class="run-steps">']
+    for s in data["steps"]:
+        out.append(f'    <li data-state="done"><button class="run-step" type="button" data-step="{s["id"]}" aria-expanded="false" aria-controls="file-{s["id"]}">'
+                   f'<i></i><b>{e(s["name"])}</b><span>{e(s["summary"])}</span><code>{e(s["file"])}</code>'
+                   f'<svg width="16" height="16"><use href="#i-open"/></svg></button><div class="run-file" id="file-{s["id"]}" hidden></div></li>')
+    out += ['  </ol>',
+            '  <div class="run-reply">',
+            f'    <p class="reply-result">{e(said["result"])}</p>',
+            f'    <p class="reply-scale" role="img" aria-label="可信度 {e(value)}（0 是錯誤，100 是正確）" style="--i:{bar.index("▲")}">'
+            f'<span>{e(low)}</span><span>{e(bar)}</span><span>{e(high)}</span><b>{e(value)}</b></p>',
+            '    <ul class="reply-notes">' + "".join(f'<li>{e(note)}</li>' for note in said["notes"]) + '</ul>',
+            '    <p class="reply-skip">中間還有每一條說法的判定和證據，這裡省略。</p>',
+            f'    <p class="reply-path">報告：<a href="reports/{e(RUN.name)}/">factcheck-runs/{e(RUN.name)}/report.md</a></p>',
+            '  </div>',
+            '</div>', END]
+    return "\n".join("    " + line for line in out)
+
+
+def rewritten(text):
+    """The front page with the window as it should be now."""
+    a, b = text.index(BEGIN), text.index(END) + len(END)
+    return text[:text.rindex("\n", 0, a) + 1] + block() + text[b:]
+
+
 TEXT = "// Written by site/tools/build_run.py from examples/. Do not edit by hand.\nwindow.FACTCHECK_RUN = " + \
     json.dumps(build(), ensure_ascii=False, indent=1) + ";\n"
 
 if __name__ == "__main__":
     OUT.write_text(TEXT, encoding="utf-8")
+    FRONT.write_text(rewritten(FRONT.read_text(encoding="utf-8")), encoding="utf-8")
     data = build()
     print(OUT.relative_to(ROOT), len(TEXT), "chars")
     for s in data["steps"]:

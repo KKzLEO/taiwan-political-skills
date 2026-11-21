@@ -1,4 +1,5 @@
 """The second Taipei registration: the list the runner and the pages read is the list that was registered."""
+import hashlib
 import json
 import unittest
 from pathlib import Path
@@ -6,6 +7,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LIST = ROOT / "evals/results/2026-11-22-taipei-issues.json"
 REGISTERED = ROOT / "evals/results/2026-11-22-taipei-issues-preregistration.md"
+
+
+# The registrations as they were pushed (commits c396a80 and 086e40f). A registration is never edited; what turned
+# out wrong in one is said in a file of its own. Changing a line here to make this pass is the edit this guards.
+PUSHED = {
+    "evals/results/2026-11-20-taipei-preregistration.md": "3f2b7074fa8af267cf6082d3ee823fca4ddb99d69b8d47e66a0476678f286ed1",
+    "evals/results/2026-11-22-taipei-issues-preregistration.md": "a961bee7497c3a7158ce4edaea4e0ebe58c5bdcfd76aa7dd95b562663c0da0e1",
+    "evals/results/2026-11-22-taipei-issues.json": "26e246dc1bbb4bc64769e4439c11a1a212115dd5cb84e440baf169c7ba1d2171",
+}
+
+
+class Untouched(unittest.TestCase):
+    def test_the_registrations_are_byte_for_byte_what_was_pushed_before_the_runs(self):
+        for name, digest in PUSHED.items():
+            self.assertEqual(hashlib.sha256((ROOT / name).read_bytes()).hexdigest(), digest, name)
 
 
 class Registration(unittest.TestCase):

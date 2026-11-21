@@ -1,0 +1,45 @@
+{
+  "credibility": {
+    "score": 35,
+    "raw": 35.0,
+    "main_claims": [
+      "C1"
+    ],
+    "main_accuracy": 0.35,
+    "overall_accuracy": 0.35,
+    "capped": false,
+    "context_flags": [],
+    "show_on_spectrum": false
+  },
+  "result": "無法判定",
+  "result_reason": "主要說法有一半以上無法證實，查不到不等於假的",
+  "confidence": {
+    "score": 80,
+    "level": "高",
+    "deductions": [
+      {
+        "points": 10,
+        "reason": "證據品質 0.5：核心命題缺少第一手直接證據，或缺少第二條獨立證據鏈"
+      },
+      {
+        "points": 10,
+        "reason": "C1 覆核沒有完成或沒有通過"
+      }
+    ],
+    "evidence_quality": 0.5
+  },
+  "publishable": false,
+  "publish_blocks": [
+    "結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條",
+    "C1 的覆核沒有完成或沒有通過，裁判判的「大致正確」改列「無法證實」；照裁判原本的判定，結果會是「符合」"
+  ],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "unverified",
+      "importance": 5,
+      "factor": 0.35
+    }
+  ]
+}

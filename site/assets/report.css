@@ -1,0 +1,131 @@
+/* A report as a page. On top, what was checked and how it came out; under it the report as a document to read,
+   its sections listed at the side. Set a size larger than the rest of the site: this is the page people read. */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.nav-links a[aria-current="page"] { color: var(--text); }
+.rep { padding: clamp(2.25rem, 5vw, 3.75rem) 0 clamp(4rem, 8vw, 6rem); }
+.rep-top { display: grid; gap: 1.25rem; max-width: 54rem; }
+.rep-path { display: flex; flex-wrap: wrap; gap: 0.2rem 0.55rem; font-size: 0.84rem; color: var(--muted); }
+.rep-path a { color: var(--muted); text-decoration: none; transition: color 0.15s; }
+.rep-path a:hover { color: var(--text); }
+.rep-path i { font-style: normal; color: var(--dim); }
+.rep-msg { font-size: clamp(1.45rem, 1.05rem + 1.6vw, 2.1rem); line-height: 1.45; font-weight: 500; letter-spacing: 0; text-wrap: pretty; }
+.rep-msg.long { font-size: clamp(1.15rem, 1rem + 0.7vw, 1.45rem); line-height: 1.6; }
+.rep .verdict { margin-top: 0.5rem; padding: 1.5rem 0 0; border-top: 1px solid var(--line); gap: 1.1rem 3rem; }
+.rep .verdict dl { flex-wrap: wrap; gap: 0.9rem 2.25rem; }
+.verdict-alt { margin-left: 0.75rem; font-size: 0.875rem; color: var(--muted); }
+/* where a link the report made leads, beside its label */
+.host { margin-left: 0.45em; font-family: var(--mono); font-size: 0.72em; color: var(--muted); overflow-wrap: anywhere; }
+.rep-notes { display: grid; gap: 0.45rem; font-size: 0.9375rem; color: var(--muted); }
+.rep-notes li { position: relative; padding-left: 1.1rem; }
+.rep-notes li::before { content: ""; position: absolute; left: 0.1rem; top: 0.74em; width: 0.3rem; height: 0.3rem; border-radius: 50%; background: var(--dim); }
+.rep-what { display: grid; gap: 0.5rem; padding: 0.95rem 1.1rem; border-radius: 0.6rem; background: var(--rail); font-size: 0.875rem; color: var(--muted); }
+.rep-links { display: flex; flex-wrap: wrap; gap: 0.3rem 1.5rem; }
+
+.rep-body { display: grid; grid-template-columns: 10.5rem minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); margin-top: clamp(2.5rem, 5vw, 3.75rem); padding-top: clamp(2.5rem, 5vw, 3.75rem); border-top: 1px solid var(--line); }
+.rep-toc { position: sticky; top: 5rem; align-self: start; display: grid; font-size: 0.84rem; }
+.rep-toc a { padding: 0.28rem 0; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+.rep-toc a:hover { color: var(--text); }
+.rep-doc { display: grid; gap: clamp(2.5rem, 5vw, 3.5rem); font-size: 1rem; line-height: 1.8; }
+.rep-doc > section { display: grid; gap: 1rem; scroll-margin-top: 5rem; }
+/* text keeps a measure that reads well; a wide table may use the whole column */
+.rep-doc > section > *, .rep-next { max-width: 46rem; }
+.rep-doc > section > .scroll { max-width: 100%; justify-self: start; }
+.rep-doc > section + section { padding-top: clamp(2.5rem, 5vw, 3.5rem); border-top: 1px solid var(--line); }
+.rep-doc h2 { font-size: 1.4rem; }
+.rep-doc p, .rep-doc li, .rep-doc dd { color: var(--soft); overflow-wrap: anywhere; }
+.rep-doc strong { font-weight: 500; color: var(--text); }
+.rep-doc code { font-size: 0.86em; color: var(--soft); overflow-wrap: anywhere; }
+.rep-doc a { color: inherit; text-decoration-color: var(--line-2); text-underline-offset: 0.28em; transition: color 0.15s, text-decoration-color 0.15s; }
+.rep-doc a:hover { color: var(--accent-deep); text-decoration-color: currentColor; }
+.rep-doc section > ul { display: grid; gap: 0.7rem; padding-left: 1.15rem; list-style: disc; }
+.rep-doc li::marker { color: var(--dim); }
+.rep-doc li ul { display: grid; gap: 0.5rem; margin-top: 0.5rem; padding-left: 1.15rem; list-style: circle; font-size: 0.9375rem; }
+.rep-doc li ul li { color: var(--muted); }
+.rep-doc .aside { padding: 0.7rem 0.95rem; border-radius: 0.5rem; background: var(--rail); font-size: 0.875rem; color: var(--muted); }
+.rep-doc .label { font-size: 0.78rem; line-height: 1.5; color: var(--muted); }
+.rep-doc .scroll table { min-width: 0; font-size: 0.8125rem; }
+.rep-doc .scroll :is(th, td) { white-space: nowrap; }
+
+/* each claim: its number and how it was judged, what the message said, why, and the sources behind it */
+.mark.ok::before { background: var(--ok); }
+.mark.warn::before { background: var(--warn); }
+.claims { display: grid; }
+.claims > li { display: grid; gap: 0.4rem; padding: 1.5rem 0; border-top: 1px solid var(--line); scroll-margin-top: 5rem; }
+.claims > li:last-child { padding-bottom: 0; }
+.claim-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 0.9rem; margin-bottom: 0.35rem; }
+.claim-head code { font-size: 0.875rem; font-weight: 500; color: var(--text); }
+.claim-head .mark { font-size: 1.0625rem; font-weight: 500; }
+.claim-head small { font-size: 0.84rem; color: var(--muted); }
+.claim-imp { margin-left: auto; font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+.claims blockquote { font-weight: 500; color: var(--text); }
+.claims blockquote + .label { margin-top: 0.6rem; }
+.claim-ev { margin-top: 0.6rem; font-family: var(--mono); font-size: 0.78rem; line-height: 1.9; color: var(--muted); }
+.claim-ev .label { margin-right: 0.9rem; font-family: var(--sans); }
+:is(.claims, .sources) li:target { background: var(--accent-wash); box-shadow: 0 0 0 0.6rem var(--accent-wash); border-radius: 0.2rem; border-top-color: transparent; }
+
+/* the sources, one to a line */
+.sources-head, .sources li { display: grid; grid-template-columns: 2.3rem minmax(0, 1fr) 7.4rem 5.2rem 5.4rem; align-items: baseline; gap: 0.9rem; }
+.sources-head { padding-bottom: 0.5rem; font-size: 0.72rem; line-height: 1.5; color: var(--muted); }
+.sources li { padding: 0.6rem 0; border-top: 1px solid var(--line); font-size: 0.875rem; line-height: 1.6; scroll-margin-top: 5rem; }
+.sources li > code { font-size: 0.75rem; color: var(--muted); }
+.sources li > span { font-size: 0.78rem; color: var(--muted); }
+.sources li > span:last-child { font-family: var(--mono); font-size: 0.72rem; font-variant-numeric: tabular-nums; }
+
+/* a table whose cells are paragraphs, set as one entry for each row */
+.records { display: grid; }
+.records dl { display: grid; gap: 0.55rem; padding: 1.2rem 0; border-top: 1px solid var(--line); }
+.records dl > div { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 1rem; }
+.records dt { font-size: 0.84rem; line-height: 1.9; color: var(--muted); }
+
+.rep-files > ul { padding: 0; list-style: none; gap: 0; }
+.rep-files li { display: grid; grid-template-columns: 11.5rem minmax(0, 1fr); align-items: baseline; gap: 1rem; padding: 0.5rem 0; border-top: 1px solid var(--line); font-size: 0.875rem; }
+.rep-files li span { color: var(--muted); }
+.rep-files > p { font-size: 0.875rem; color: var(--muted); }
+.rep-next { padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.9375rem; color: var(--muted); }
+.rep-next .link { margin-left: 0.4rem; color: var(--text); font-weight: 500; }
+
+/* the election page: the rules on top, then an issue at a time with the two statements side by side */
+.tp .top ul { display: grid; gap: 0.6rem; max-width: 46rem; padding-left: 1.15rem; list-style: disc; color: var(--muted); }
+.tp-jump { display: flex; flex-wrap: wrap; gap: 0.4rem; max-width: none !important; margin-top: 0.5rem; font-size: 0.84rem; }
+.tp-jump :is(a, span) { padding: 0.3rem 0.8rem; border: 1px solid var(--line-2); border-radius: 99px; }
+.tp-jump a { background: var(--panel); color: var(--text); text-decoration: none; transition: border-color 0.15s; }
+.tp-jump a:hover { border-color: var(--text); color: var(--text); }
+.tp-jump span { border-style: dashed; color: var(--muted); }
+.tp-issue .duo-row { margin-top: 0.5rem; }
+.tp-issue .case blockquote { font-size: 1rem; }
+
+/* the list of all reports */
+.rep-list { border: 1px solid var(--line-2); border-radius: 0.75rem; background: var(--panel); overflow: hidden; }
+.rep-list a { display: grid; grid-template-columns: 2.9rem minmax(0, 1fr) 5.2rem 3.4rem 3.4rem 4.6rem; align-items: center; gap: 1.25rem; padding: 0.95rem 1.15rem; border-bottom: 1px solid var(--line); color: var(--soft); text-decoration: none; transition: background 0.15s; }
+.rep-list li:last-child a { border-bottom: 0; }
+.rep-list a:hover { background: var(--hover); color: var(--soft); }
+.rep-list time { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+.rl-msg { color: var(--text); overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.rl-msg small, .rl-num small { display: block; font-size: 0.72rem; color: var(--muted); }
+.rep-list strong { font-size: 1rem; font-weight: 500; color: var(--text); white-space: nowrap; }
+.rl-num { font-family: var(--mono); font-size: 0.9375rem; color: var(--text); }
+.rl-num small { font-family: var(--sans); }
+.rl-pub { font-size: 0.8125rem; white-space: nowrap; }
+
+@media (max-width: 62rem) {
+  .rep-body { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .rep-toc { position: static; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .rep-toc a { padding: 0.3rem 0.75rem; border: 1px solid var(--line-2); border-radius: 99px; background: var(--panel); color: var(--soft); }
+}
+@media (max-width: 40rem) {
+  .rep-doc { font-size: 0.9375rem; line-height: 1.75; }
+  .rep-toc a { padding: 0.55rem 0.85rem; }
+  .tp-jump :is(a, span) { padding: 0.55rem 0.85rem; }
+  .sources-head { display: none; }
+  /* the title on its line, then what kind of source it is, how it was read and when, side by side */
+  .sources li { display: flex; flex-wrap: wrap; gap: 0.15rem 0.9rem; }
+  .sources li > code { flex: none; width: 2.1rem; }
+  .sources li > p { flex: 1 1 calc(100% - 3rem); }
+  .sources li > p + span { margin-left: 3rem; }
+  .records dl > div { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rep-files li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rep-list a { grid-template-columns: minmax(0, 1fr) auto auto auto; align-items: end; gap: 0.5rem 1rem; padding: 0.9rem 1rem; }
+  .rep-list time { display: none; }
+  .rl-msg { grid-column: 1 / -1; }
+  .rep-list strong { grid-column: 1; }
+}

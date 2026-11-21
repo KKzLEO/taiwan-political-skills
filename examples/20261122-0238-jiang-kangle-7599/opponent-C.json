@@ -1,0 +1,202 @@
+{
+  "seat": "C",
+  "lens": "stance",
+  "engine": "claude",
+  "searches_run": 6,
+  "attacks": [
+    {
+      "id": "C-1",
+      "claim_id": "C2",
+      "target": "reasoning",
+      "argument": "正方把 S13、S14、S15 三則市府新聞稿列為推翻 C2 的反證，理由是「這三則都沒有提航高」。但這三則都不是在說明航高限制有沒有影響：S13 是都更處回應外界質疑斯文里二期借貸資金用途的新聞稿，S14、S15 是 2025 年簽約典禮的新聞稿，談的是公辦階段統包工程因造價上漲兩度流標。沒有提到，不等於否定。相對地，明白把航高限制寫成原因的兩筆資料，正方只列為背景：S12 的都更處頁面寫斯文里一、二、三期「受松山機場建築物高度限制」，S16 的 2020 年報導寫斯文里二期「位處松機航高限制區，建商意願不高」。沒提航高的算反證、點名航高的不算支持，兩邊用的尺不一樣；不論發言的是哪一位候選人，都應該用同一把尺。建議把 S13 到 S15 改列為只提供背景，把 S12、S16 和其他點名航高的資料同樣對待，再依調整後的證據重新確認 C2 的判定。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE1",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://udd.gov.taipei/events/fhqekzq-19579",
+          "title": "斯文里二期公辦都更案借貸資金皆為專款專用",
+          "publisher": "臺北市都市更新處",
+          "accessed": "2026-11-22",
+          "tier": 2,
+          "chain": "uro_pr_20230814",
+          "stance": "context",
+          "excerpt": "因弱勢住戶數量龐大，產權複雜，致其不具都市更新市場性",
+          "access_note": "full"
+        },
+        {
+          "id": "CE2",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://uro.gov.taipei/News_Content.aspx?n=FDB0CAB1DD42E805&sms=72544237BBE4C5F6&s=E1970E9039FABE60",
+          "title": "斯文里二期整建住宅「斯文昌龍」公辦都更案今簽約典禮！",
+          "publisher": "臺北市都市更新處",
+          "accessed": "2026-11-22",
+          "tier": 2,
+          "chain": "siwen2_signing_20251009",
+          "stance": "context",
+          "excerpt": "斯二卻因遭遇疫情與烏俄戰爭等大環境變遷之影響，使工程造價上漲，致二次統包工程流標",
+          "access_note": "full"
+        },
+        {
+          "id": "CE3",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=5F54AFD5C5CC3D2C",
+          "title": "「斯文昌龍」公辦都更簽約　蔣萬安：北大同核心區再現城市新地標",
+          "publisher": "臺北市政府秘書處媒體事務組",
+          "accessed": "2026-11-22",
+          "tier": 2,
+          "chain": "siwen2_signing_20251009",
+          "stance": "context",
+          "excerpt": "雖然過程中面臨營建物價上漲、兩度流標等挑戰，但市府始終堅持推動都更的決心",
+          "access_note": "full"
+        },
+        {
+          "id": "CE4",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://zsdo.gov.taipei/News_Content.aspx?n=C2C1165AA5DF44C1&sms=C04230CB75259A56&s=E3DC9B50BF2A8F3A",
+          "title": "臺北市中山區公所-重大建設計畫-斯文里三期整宅公辦都更案",
+          "publisher": "臺北市都市更新處（資料維護；頁面掛在臺北市中山區公所網站）",
+          "accessed": "2026-11-22",
+          "tier": 2,
+          "chain": "uro_case_siwen3",
+          "stance": "supports",
+          "excerpt": "惟現況產權複雜、土地持分小，更新意願整合不易，且受松山機場建築物高度限制",
+          "access_note": "full"
+        },
+        {
+          "id": "CE5",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://house.ettoday.net/news/1798908",
+          "title": "歷經三任市長未果…北市最難都更「斯文里二期」終於有好消息！",
+          "publisher": "ETtoday房產雲",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "ettoday_house_20200905",
+          "stance": "supports",
+          "excerpt": "但因產權複雜，位處松機航高限制區，建商意願不高",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-2",
+      "claim_id": "C2",
+      "target": "reasoning",
+      "argument": "正方的理由寫蔣萬安「把這些案例的困難都歸因於」航高限制、「漏掉了市府自己列出的其他主要原因」，有三處超出資料。第一，訊息裡的「都因為」是說這幾個案例都受航高限制影響，沒有寫「只因為」；正方把它讀成單一原因，是推論。第二，「都因為」不在當天媒體記下的話裡：ETtoday 記的是「這兩案是因為松山機場航高的限制，導致都更困難重重」，壹蘋新聞網記的是「這11件案例是因為松山機場航高限制」，正方引用的 S10、S11 也沒有「都因為」或「只因為」；台灣事實查核中心內頁標題同樣沒有「都」字。理由應該分清楚哪些字是訊息濃縮後才有的，不要算在發言者頭上。第三，市府資料是把產權、整合和航高限制並列，沒有說哪一項是「主要」原因；「市府自己」的寫法也帶有指當事人自相矛盾的語氣。蔣萬安當時問的是案子難推動的「原因」，回答只舉航高限制一項，說法是否過於簡化可以討論，但依據應該是這一點，並改用「市府資料同時列出產權、整合等其他因素」這類中性寫法。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE6",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://www.ettoday.net/news/20261031/3263904.htm",
+          "title": "第一題問都更就逮到沈伯洋已讀亂回　蔣萬安：你還真不了解市政",
+          "publisher": "ETtoday新聞雲",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "ettoday_debate_20261031",
+          "stance": "context",
+          "excerpt": "這兩案是因為松山機場航高的限制，導致都更困難重重",
+          "access_note": "no_transcript"
+        },
+        {
+          "id": "CE7",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://news.nextapple.com/politics/20261031/D78715B42325A295590BEE2C6F7BA81C",
+          "title": "台北辯論｜蔣萬安指松機限制都更！沈伯洋提「陪伴」：怎不一開始充分說明",
+          "publisher": "壹蘋新聞網",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "nextapple_debate_20261031",
+          "stance": "context",
+          "excerpt": "剛剛這11件案例是因為松山機場航高限制，讓都更困難重重",
+          "access_note": "no_transcript"
+        },
+        {
+          "id": "CE8",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://tfc-taiwan.org.tw/kang-le-street-7599-project-songshan-airport-height-restrictions-claim/",
+          "title": "蔣萬安說：「康樂街案是第一個7599專案……內湖、斯文里二期等案例，因為松山機場航高限制，讓都更困難重重」？",
+          "publisher": "台灣事實查核中心",
+          "accessed": "2026-11-22",
+          "tier": 4,
+          "chain": "tfc_20261031",
+          "stance": "context",
+          "excerpt": "內湖、斯文里二期等案例，因為松山機場航高限制，讓都更困難重重",
+          "access_note": "full"
+        },
+        {
+          "id": "CE9",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://zsdo.gov.taipei/News_Content.aspx?n=C2C1165AA5DF44C1&sms=C04230CB75259A56&s=E3DC9B50BF2A8F3A",
+          "title": "臺北市中山區公所-重大建設計畫-斯文里三期整宅公辦都更案",
+          "publisher": "臺北市都市更新處（資料維護；頁面掛在臺北市中山區公所網站）",
+          "accessed": "2026-11-22",
+          "tier": 2,
+          "chain": "uro_case_siwen3",
+          "stance": "context",
+          "excerpt": "惟現況產權複雜、土地持分小，更新意願整合不易，且受松山機場建築物高度限制",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-3",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "溯源的傳播跡象第四項列了評論員張禹宣批評蔣萬安的貼文，並寫成「逐項指出蔣萬安發言的問題」。這則貼文的文字和這則訊息不同源，屬於對同一段發言的延伸評論。同一天國民黨籍議員游淑慧發文支持航高限制的說法，也有媒體報導（正方自己引用為 S19），溯源卻沒有列。只列批評的一方，讀者會以為這段話的後續討論只有一個方向。「指出……的問題」的寫法也預設了問題成立；這是評論員個人的整理，不是查核機構的結論。建議兩則都列或都不列，並把第四項改寫成「逐項批評蔣萬安的發言」。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE10",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://ctinews.com/news/items/4bnbkrXrWP",
+          "title": "內湖都更為何動不了？蔣萬安揭致命傷 游淑慧嗆沈伯洋：別只喊口號",
+          "publisher": "中天新聞網（引述國民黨籍台北市議員游淑慧）",
+          "accessed": "2026-11-22",
+          "tier": 5,
+          "chain": "ctinews_yu_20261031",
+          "stance": "context",
+          "excerpt": "因為限高，建築高度受到限制，即使有容積獎勵，也未必能充分使用，讓都更缺乏經濟誘因。",
+          "access_note": "full"
+        },
+        {
+          "id": "CE11",
+          "claim_ids": [
+            "C1",
+            "C2"
+          ],
+          "url": "https://news.ltn.com.tw/news/politics/breakingnews/5625731",
+          "title": "抓包蔣萬安辯論68處瑕疵！ 張禹宣狠批：真的完全不懂市政",
+          "publisher": "自由時報（轉述評論員張禹宣的 Threads 貼文）",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "ltn_zhang_20261101",
+          "stance": "context",
+          "excerpt": "松機限高是都更障礙之一，產權、整合與財務也都會卡關。",
+          "access_note": "not_original"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

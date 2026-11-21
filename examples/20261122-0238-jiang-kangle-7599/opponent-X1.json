@@ -1,0 +1,118 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 29,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C2",
+      "target": "label",
+      "argument": "C2 建議改判「無法證實」。原訊息的「都因為」指向所舉案例共有的因素。正方以另有產權、住戶整合和造價問題為由判為誤導，前提是這段話把航高說成唯一原因。現有文字紀錄不足以確立這層意思。市府的斯文里整宅都更簡報把二期納入航高限制示意圖，並指出限高壓縮開發量體、降低民間參與誘因。市府也把內湖列入松山機場禁限建涉及的行政區，但查到的資料仍不足以確認蔣萬安所指的內湖案例是否都因航高而難以推動。",
+      "proposed_label": "unverified",
+      "evidence": [
+        {
+          "url": "https://neww.tw/2026taipeimayor-debate/",
+          "excerpt": "剛剛這實際案例是因為松山機場航高的限制，讓都更困難重重。"
+        },
+        {
+          "url": "https://www-ws.gov.taipei/001/Upload/public/Attachment/71201355187.pdf#page=11",
+          "excerpt": "航高限制（47至60公尺），開發量體有限，無民間誘因"
+        },
+        {
+          "url": "https://www-ws.gov.taipei/001/Upload/332/relfile/10198/9726265/c0f15b4b-9dc4-4195-9981-37857f1ca220.pdf",
+          "excerpt": "臺北市：士林區、松山區、內湖區、大安區、信義區、南港區、中正區、萬華區、中山區、大同區"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "S13 至 S15 應列為背景。這幾則新聞稿分別解釋斯文里二期缺乏民間投資、營建成本上漲與兩次流標。臺北市都發局另向議會報告，將包含二期在內的整宅計畫面臨的航高限制與產權、住戶整合困難並列。這些官方紀錄可以同時成立。",
+      "evidence": [
+        {
+          "url": "https://udd.gov.taipei/events/fhqekzq-19579",
+          "excerpt": "又因弱勢住戶數量龐大，產權複雜，致其不具都市更新市場性，長期未有民間實施者投入資金整合。"
+        },
+        {
+          "url": "https://udd.gov.taipei/events/fhqekzq-20904",
+          "excerpt": "使工程造價上漲，致二次統包工程流標"
+        },
+        {
+          "url": "https://udd.gov.taipei/assets/8o3YcdtsXYc6GytfJmgWxu/attachs/1100325%E9%83%BD%E7%99%BC%E5%B1%80%E6%96%BD%E6%94%BF%E5%A0%B1%E5%91%8AF.pdf",
+          "excerpt": "本案因計畫範圍內產權複雜、土地所有權人眾多，居民意願整合困難且有地區航高限制，由「市府自行實施」。"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "S17 應列為背景。摘錄只說航道沿線有不少老舊公寓。這項區域概況無法證明西湖、灣仔次分區的特定都更案有多少可建樓地板面積受限，或因此難以推動。",
+      "evidence": [
+        {
+          "url": "https://house.udn.com/house/story/123589/9843912?from=udn-referralnews_ch1025artbottom",
+          "excerpt": "大直、內湖、民生社區以及大同區等航道必經區域，現存大量屋齡偏高的老舊公寓。"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C2",
+      "target": "neutral_rewrite",
+      "argument": "C2 的「內湖」範圍過廣。三立新聞網的辯論報導記載，蔣萬安提問時指定內湖西湖、灣仔兩個次分區共 12 個里，另舉大同區斯文里二期。改寫應保留這些地名和範圍，以免把待查說法擴及整個內湖區。",
+      "evidence": [
+        {
+          "url": "https://www.mirrormedia.mg/external/amp/setn_1931242",
+          "excerpt": "包含西湖次分區8個里、灣仔次分區4個里，共計12個里"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S4 所摘錄的是虎林街案通過 7599 專案第一階段的日期。判斷哪一案最先完成招商簽約，應以簽約紀錄為準。臺北市住都中心的簽約公告把虎林街案列為 7599 首件招商簽約案，這項資料足以維持 C1 的錯誤判定。",
+      "evidence": [
+        {
+          "url": "https://uro.gov.taipei/News_Content.aspx?n=E610C53B71AA15CA&s=A70F95555A969DC0&sms=28D96A39D4881924",
+          "excerpt": "112年7月通過「臺北市公辦都市更新7599專案計畫」第一階段。"
+        },
+        {
+          "url": "https://thurc.org.taipei/ThurcTaipei/Portal/NewsDetail?id=2500",
+          "excerpt": "臺北市7599首案招商簽約 吉春賞公辦都更案啟動森態幸福場域"
+        }
+      ]
+    },
+    {
+      "id": "X1-6",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "ETtoday 的 12 時 55 分報導應從最早單篇報導的位置移除。鏡週刊刊登的三立新聞網報導標示同日 12 時 46 分發布，目前可讀版本涵蓋康樂街和航高兩段發言。該頁也標示 15 時整更新，因此只能確定文章較早發布，兩段內容各自在何時上線仍無法確認。",
+      "evidence": [
+        {
+          "url": "https://www.mirrormedia.mg/external/amp/setn_1931242",
+          "excerpt": "發佈時間2026.10.31 12:46 臺北時間"
+        },
+        {
+          "url": "https://www.mirrormedia.mg/external/amp/setn_1931242",
+          "excerpt": "更新時間2026.10.31 15:00 臺北時間"
+        }
+      ]
+    },
+    {
+      "id": "X1-7",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "溯源應補列可查到的民間逐字稿，以及它指向的三立完整版時間點。該稿將提問列在影片 1 時 55 分 36 秒、追問列在 1 時 58 分 14 秒。作者說明稿件由語音辨識轉錄，校稿時未逐句聽原音。這次也未能播放原片核對，因此它可協助定位發言，逐字引語仍待確認。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "二校對照來源（沒有逐句聽原音）："
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

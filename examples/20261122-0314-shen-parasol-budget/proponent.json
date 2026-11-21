@@ -1,0 +1,240 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.storm.mg/article/11177351",
+      "title": "台北市長電視辯論》沈伯洋批市政SOP掌握不清　蔣萬安反擊：製造不實言論",
+      "publisher": "風傳媒",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-storm",
+      "stance": "supports",
+      "excerpt": "無菸城市沒有做完評估就上路，結果公務員還要排班數菸蒂，而遮陽傘喊了一年多，預算卻在最後3個月從1400萬暴增到5000多萬",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610310007/",
+      "title": "台北市長辯論／蔣萬安、沈伯洋交叉詰問互轟不熟市政，沈為何痛批「上樑不正下樑歪」？",
+      "publisher": "今周刊",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-businesstoday",
+      "stance": "supports",
+      "excerpt": "遮陽傘預算在最後3個月從1400萬暴增到5000多萬",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/124652/9848871",
+      "title": "沈伯洋猛攻營養午餐 蔣萬安嗆：傷害多少家長學生一句道歉都沒有",
+      "publisher": "聯合報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-udn",
+      "stance": "supports",
+      "excerpt": "而遮陽傘預算在最後三個月預算爆增從1400萬增至5000萬",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/breakingnews/5624812",
+      "title": "台北市長辯論》又問A答B！沈伯洋頻問誤砍茄苳樹SOP 蔣萬安：樹冠減少不等於砍樹",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-ltn",
+      "stance": "supports",
+      "excerpt": "沈伯洋表示，蔣萬安對SOP掌握不清楚，從無菸城市政策未完成評估便上路、遮陽傘預算從1400多萬元暴增至5000多萬元",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "北市長候選人辯論會登場 沈伯洋、蔣萬安交鋒政績與城市願景",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-pts",
+      "stance": "context",
+      "excerpt": "以無菸城市、遮陽傘預算及鮮乳等政策為例，質疑蔣對SOP掌握不足",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.youtube.com/watch?v=j4s2_44yHJE",
+      "title": "🔴【LIVE】 2026台北市長候選人電視辯論會｜#蔣萬安 #沈伯洋 #2026台北市長候選人電視辯論會",
+      "publisher": "TVBS（YouTube 直播頁，頻道名稱依搜尋結果，頁面沒有讀到）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "debate-video",
+      "stance": "context",
+      "excerpt": "🔴【LIVE】 2026台北市長候選人電視辯論會｜#蔣萬安 #沈伯洋 #2026台北市長候選人電視辯論會",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=74806083EBDF5A03&sms=72544237BBE4C5F6&s=A20A48FF8C3DB937",
+      "title": "因應高溫打造友善步行環境 北市遮陽設施經費依法編列",
+      "publisher": "臺北市政府都市發展局（市府即時新聞澄清，2026-06-23）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-udd-20260623",
+      "stance": "supports",
+      "excerpt": "本案8座遮陽設施工程預算約4,966萬元，另依公共工程規定編列設計監造費約991萬元。",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.fountmedia.io/article/394777",
+      "title": "簡舒培揭會議紀錄：李四川主導740萬天價遮陽傘　蔣萬安親自拍板",
+      "publisher": "放言 Fount Media",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "jian-presser-20260623",
+      "stance": "supports",
+      "excerpt": "簡舒培指出，這項工程今年2月6日核定基本設計報告時，工程總經費還是1405萬9267元；到了4月16日核定細部設計報告，工程總價暴增到4845萬5897元；4月23日，都發局再向平均地權基金申請『城市降溫人行遮陽設施工程』經費4966萬元。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202606230143.aspx",
+      "title": "議員批遮陽傘單座744萬 北市府：依法編列",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "jian-presser-20260623",
+      "stance": "supports",
+      "excerpt": "根據都發局資料顯示，今年2月建築師所提報價為8座遮陽傘總經費約為新台幣1405萬元；然而僅隔3個月，都發局向平均地權基金申請經費時，總預算竟暴增至4966萬元，增幅逾3.5倍。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.setn.com/news/1860828",
+      "title": "預算暴增3千萬！台北遮陽傘1座比新北貴8.2倍　簡舒培：蔣萬安說清楚",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "jian-presser-20260623",
+      "stance": "context",
+      "excerpt": "遮陽傘體計算成本概估8座1405萬元",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/vote2026/story/124652/9713195",
+      "title": "沈伯洋提遮陽傘五點質疑 北市反擊問：毒油七問還要繼續「小洋逃」?",
+      "publisher": "聯合報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "taipei-response-20260825",
+      "stance": "context",
+      "excerpt": "早已多次解釋，基本設計階段與細部設計階段，計算基礎不同。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202608280123.aspx",
+      "title": "議員批北市花千萬建遮陽傘卻跳票　蔣萬安：不符驗收標準",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "council-20260828",
+      "stance": "context",
+      "excerpt": "從基本設計到細部設計本來就會增加經費",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9632494",
+      "title": "從遮陽傘到索資…蔣萬安嗆簡舒培「索資佛地魔」 簡：覺得不法可去告",
+      "publisher": "聯合報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "council-20260716",
+      "stance": "context",
+      "excerpt": "基本設計與細部設計費用本來就不一樣，請議員不要信口開河。",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5549165",
+      "title": "744萬遮陽傘拖到明年 簡舒培：「李四川留爛攤」蔣萬安也收不了",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "jian-20260823",
+      "stance": "supports",
+      "excerpt": "這項政策早在2025年5月6日市政會議就開始推動",
+      "access_note": "not_original"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "大致正確：辯論當天至少四家媒體各自記載沈伯洋提出這項說法，金額和時間也與市府新聞稿、議員引用的設計文件大致相符，但細節有三處出入。(1) 1405萬是2026年2月6日基本設計報告的成本概估，不是已核定的預算；4966萬是4月23日向平均地權基金申請的工程預算，市府沒有否認這兩個數字，只說兩階段計算基礎不同、經費本來就會增加。(2) 4966萬不到5000萬，加上另列的設計監造費991萬才是5957萬。(3) 兩個時間點相隔約兩個半月；「一年多」則符合政策從2025年5月6日市政會議起算。限制：找到辯論直播影片頁但讀不到發言內容，引言是否一字不差無法確認，媒體都是不加引號的轉述，以風傳媒的文字最接近；基本設計報告和基金申請文件也沒有讀到原件，1405萬出自議員記者會的報導。沒有查到市府在辯論後針對這一句的澄清。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": []
+}

@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>台灣訊息查核</title>
-<meta name="description" content="裝在 Claude Code 和 Codex 裡的開源查核流程：一個 AI 查證，三個 AI 專門挑毛病，再請另一家公司的模型來抗辯。每一步都留下檔案，分數由程式照固定規則算。">
+<title>台灣訊息查核｜Claude Code 和 Codex 的查核 skill</title>
+<meta name="description" content="裝在 Claude Code 和 Codex 裡的開源 skill，不是網站服務：一個 AI 查證，三個 AI 專門挑毛病，再請另一家公司的模型來抗辯。每一步都留下檔案，分數由程式照固定規則算。">
 <meta name="theme-color" content="#fafafa">
 <meta property="og:type" content="website">
 <meta property="og:title" content="台灣訊息查核">
-<meta property="og:description" content="查核一則政治訊息，每一步都留下紀錄。裝在 Claude Code 和 Codex 裡的開源查核流程。">
+<meta property="og:description" content="查核一則政治訊息，每一步都留下紀錄。裝在 Claude Code 和 Codex 裡的開源 skill。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5' fill='%236247d6'/%3E%3Cpath d='M12.2 5.4 7.8 14.6' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
@@ -22,18 +22,20 @@
   <symbol id="i-next" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9M9 4.5 12.5 8 9 11.5"/></symbol>
   <symbol id="i-copy" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1.75"/><path d="M10.5 3.5v-.25A1.25 1.25 0 0 0 9.25 2H3.75A1.75 1.75 0 0 0 2 3.75v5.5c0 .7.55 1.25 1.25 1.25h.25"/></symbol>
   <symbol id="i-done" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5 6.5 11.5 12.5 5"/></symbol>
+  <symbol id="i-open" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 6.5 8 10l3.5-3.5"/></symbol>
+  <symbol id="i-term" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.75" y="2.75" width="12.5" height="10.5" rx="2.25"/><path d="M4.75 6.5 6.6 8 4.75 9.5M8.4 9.9h2.85"/></symbol>
   <symbol id="i-again" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a5 5 0 1 0 1.6-3.7M3 2.75V5h2.25"/></symbol>
 </svg>
 
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="./"><svg width="20" height="20"><use href="#i-mark"/></svg>台灣訊息查核</a>
+    <a class="brand" href="./"><svg width="20" height="20"><use href="#i-mark"/></svg>台灣訊息查核<small>skill</small></a>
     <nav class="nav-links" aria-label="頁面導覽">
-      <!-- taipei-nav:begin --><a href="#taipei">台北市長選舉</a><!-- taipei-nav:end -->
+      <a href="#taipei">台北市長選舉</a>
+      <a href="reports/">全部報告</a>
       <a href="#how">怎麼查的</a>
       <a href="#proof">驗證結果</a>
       <a href="#limits">做不到的事</a>
-      <a href="#use">安裝</a>
     </nav>
     <div class="nav-end">
       <a class="nav-out" href="https://github.com/KKzLEO/taiwan-political-skills">GitHub<svg width="16" height="16"><use href="#i-out"/></svg></a>
@@ -46,106 +48,74 @@
 <section class="hero">
   <div class="wrap">
     <h1>查核一則政治訊息，<br>每一步都留下紀錄</h1>
-    <p class="hero-sub">裝在 Claude Code 和 Codex 裡的開源查核流程。<br>一個 AI 查證，<wbr>三個 AI 專門挑毛病，<wbr>再請另一家公司的模型來抗辯；<wbr>分數由程式照固定規則算。</p>
+    <p class="hero-sub"><b>裝在 Claude Code 和 Codex 裡的開源 skill，<wbr>在對話裡輸入 <code>/factcheck</code> 就能用。</b><br>一個 AI 查證，<wbr>三個 AI 專門挑毛病，<wbr>再請另一家公司的模型來抗辯；<wbr>分數由程式照固定規則算。</p>
     <p class="hero-cta"><a class="btn" href="#use">安裝</a><a class="btn ghost" href="results/">看驗證結果<svg width="16" height="16"><use href="#i-next"/></svg></a></p>
 
+    <!-- run:begin (written by site/tools/build_run.py) -->
     <div class="run" id="run">
       <div class="run-bar">
-        <p class="run-path"><span>factcheck-runs</span><i>/</i><b>20261120-1441-機車大燈罰三千</b></p>
+        <p class="run-host"><svg width="16" height="16"><use href="#i-term"/></svg>Claude Code</p>
         <p class="run-meta">完整模式<i>·</i>48 分鐘</p>
         <button class="run-again" type="button" hidden><svg width="16" height="16"><use href="#i-again"/></svg>重播</button>
       </div>
-      <p class="run-prompt"><code>/factcheck</code><span class="run-msg">立法院昨天三讀通過，以後騎機車一律要開大燈，沒開罰三千！快轉給家人。</span></p>
-      <div class="run-body">
-        <ol class="run-steps">
-          <li><button type="button" data-step="input" data-state="done"><i></i><span>讀入</span><code>input.json</code></button></li>
-          <li><button type="button" data-step="claims" data-state="done"><i></i><span>拆題</span><code>claims.json</code></button></li>
-          <li><button type="button" data-step="trace" data-state="done"><i></i><span>溯源</span><code>trace.json</code></button></li>
-          <li><button type="button" data-step="proponent" data-state="done"><i></i><span>正方查證</span><code>proponent.json</code></button></li>
-          <li><button type="button" data-step="opponents" data-state="done"><i></i><span>反方</span><code>opponent-*.json</code></button></li>
-          <li><button type="button" data-step="rebuttal" data-state="done"><i></i><span>正方答辯</span><code>rebuttal.json</code></button></li>
-          <li><button type="button" data-step="judgment" data-state="done"><i></i><span>裁判</span><code>judgment.json</code></button></li>
-          <li><button type="button" data-step="review" data-state="done"><i></i><span>覆核</span><code>review-*.json</code></button></li>
-          <li><button type="button" data-step="score" data-state="done" aria-current="true"><i></i><span>程式算分</span><code>report.md</code></button></li>
-        </ol>
-        <div class="run-pane" id="run-pane">
-          <div class="pane">
-            <header><h2>程式算分</h2><p>可信度、信心度、能不能公開引用，都由程式照固定規則算，不是 AI 給的。</p></header>
-            <div class="verdict">
-              <p class="verdict-word">不符</p>
-              <dl><div><dt>可信度</dt><dd>0</dd></div><div><dt>信心度</dt><dd>100<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
-              <p class="scale" style="--at:0"><span>錯誤</span><i></i><span>正確</span></p>
-            </div>
-            <ul class="rows">
-              <li class="r-claim"><code>C1</code><p>立法院三讀通過一項法案，內容與騎機車開大燈有關。</p><span class="mark bad">錯誤</span><span class="num">不需覆核</span></li>
-              <li class="r-claim"><code>C2</code><p>往後騎機車一律要開大燈。</p><span class="mark bad">錯誤</span><span class="num">覆核通過</span></li>
-              <li class="r-claim"><code>C3</code><p>騎機車沒開大燈會被罰三千元。</p><span class="mark bad">錯誤</span><span class="num">覆核通過</span></li>
-              <li class="r-claim"><code>C4</code><p>騎機車一律要開大燈、沒開要罰的規定已經生效，現在就適用。<small>問法在辯論中修正過</small></p><span class="mark bad">錯誤</span><span class="num">覆核通過</span></li>
-              <li class="r-claim"><code>C5</code><p>這次三讀是查核日期的前一天（2026 年 11 月 19 日）發生的。</p><span class="mark bad">錯誤</span><span class="num">覆核通過</span></li>
-              <li class="r-claim off"><code>C6</code><p>呼籲讀者把這則訊息轉傳給家人。</p><span class="mark no">非事實陳述</span><span class="num">不需覆核</span></li>
-            </ul>
-          </div>
-        </div>
+      <p class="run-prompt"><i aria-hidden="true">&gt;</i><code>/factcheck</code><span class="run-msg">立法院昨天三讀通過，以後騎機車一律要開大燈，沒開罰三千！快轉給家人。</span></p>
+      <ol class="run-steps">
+        <li data-state="done"><button class="run-step" type="button" data-step="input" aria-expanded="false" aria-controls="file-input"><i></i><b>讀入</b><span>貼上的文字，完整模式</span><code>input.json</code><svg width="16" height="16"><use href="#i-open"/></svg></button><div class="run-file" id="file-input" hidden></div></li>
+        <li data-state="done"><button class="run-step" type="button" data-step="claims" aria-expanded="false" aria-controls="file-claims"><i></i><b>拆題</b><span>拆成 6 條說法，其中 1 條是意見，不計分</span><code>claims.json</code><svg width="16" height="16"><use href="#i-open"/></svg></button><div class="run-file" id="file-claims" hidden></div></li>
+        <li data-state="done"><button class="run-step" type="button" data-step="trace" aria-expanded="false" aria-controls="file-trace"><i></i><b>溯源</b><span>查不到最早的出處；有 2 個相近的舊版本、2 份別人的查核報告</span><code>trace.json</code><svg width="16" height="16"><use href="#i-open"/></svg></button><div class="run-file" id="file-trace" hidden></div></li>
+        <li data-state="done"><button class="run-step" type="button" data-step="proponent" aria-expanded="false" aria-controls="file-proponent"><i></i><b>正方查證</b><span>21 筆來源，其中 11 筆是第一手原始資料</span><code>proponent.json</code><svg width="16" height="16"><use href="#i-open"/></svg></button><div class="run-file" id="file-proponent" hidden></div></li>
+        <li data-state="done"><button class="run-step" type="button" data-step="opponents" aria-expanded="false" aria-controls="file-opponents"><i></i><b>反方</b><span>四席共搜尋 48 次，提出 11 條質疑，其中 7 條來自另一家公司的模型</span><code>opponent-*.json</code><svg width="16" height="16"><use href="#i-open"/></svg></button><div class="run-file" id="file-opponents" hidden></div></li>
+        <li data-state="done"><button class="run-step" type="button" data-step="rebuttal" aria-expanded="false" aria-controls="file-rebuttal"><i></i><b>正方答辯</b><span>11 條質疑：接受 8 條，反駁 3 條</span><code>rebuttal.json</code><svg width="16" height="16"><use href="#i-open"/></svg></button><div class="run-file" id="file-rebuttal" hidden></div></li>
+        <li data-state="done"><button class="run-step" type="button" data-step="judgment" aria-expanded="false" aria-controls="file-judgment"><i></i><b>裁判</b><span>質疑成立 8 條，不成立 3 條；來源增加到 30 筆</span><code>judgment.json</code><svg width="16" height="16"><use href="#i-open"/></svg></button><div class="run-file" id="file-judgment" hidden></div></li>
+        <li data-state="done"><button class="run-step" type="button" data-step="review" aria-expanded="false" aria-controls="file-review"><i></i><b>覆核</b><span>回頭檢查了 5 處，全部通過</span><code>review-*.json</code><svg width="16" height="16"><use href="#i-open"/></svg></button><div class="run-file" id="file-review" hidden></div></li>
+        <li data-state="done"><button class="run-step" type="button" data-step="score" aria-expanded="false" aria-controls="file-score"><i></i><b>程式算分</b><span>同一份判定，每次算出來都是同樣的分數</span><code>score.json、report.md</code><svg width="16" height="16"><use href="#i-open"/></svg></button><div class="run-file" id="file-score" hidden></div></li>
+      </ol>
+      <div class="run-reply">
+        <p class="reply-result">結果：不符｜可信度 0｜信心度 高（100）｜完整模式・跨模型 1 席｜可公開</p>
+        <p class="reply-scale" role="img" aria-label="可信度 0（0 是錯誤，100 是正確）" style="--i:0"><span>錯誤</span><span>▲━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><span>正確</span><b>0</b></p>
+        <ul class="reply-notes"><li>訊息暗示的時間不對（C5 判「錯誤」，理由見逐項判定）；內容本身另外判定。</li><li>結論只涵蓋可以查證的說法。C6 被分成意見、預測或模糊的說法，或被判成非事實陳述，不在結論內。</li><li>「可公開」只代表查核流程完整、信心度高，不保證結論正確。公開貼文前，請先看過下面的證據。</li></ul>
+        <p class="reply-skip">中間還有每一條說法的判定和證據，這裡省略。</p>
+        <p class="reply-path">報告：<a href="reports/20261120-1441-機車大燈罰三千/">factcheck-runs/20261120-1441-機車大燈罰三千/report.md</a></p>
       </div>
     </div>
+    <!-- run:end -->
     <div class="run-note">
-      <p>2026 年 11 月 20 日，<wbr>一個全新的 Claude Code 只拿到說明書和一句請求，<wbr>自己從頭做到尾的一次查核，<wbr>中途沒有人插手。<wbr>訊息是我們為了測試寫的，<wbr>不是實際流傳的原文。<wbr>上面的內容都節錄自它留下的檔案，<wbr>檔案本身沒有改過。</p>
-      <p class="run-links"><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261120-1441-機車大燈罰三千/report.md">完整報告<svg width="16" height="16"><use href="#i-out"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261120-1441-機車大燈罰三千">這一次的全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a></p>
+      <div>
+        <p class="run-what">這個工具沒有自己的畫面。<wbr>你在 Claude Code 或 Codex 的對話裡打一行指令，<wbr>它用文字回覆，<wbr>並把每一步的檔案留在你的電腦上。</p>
+        <p>上面重播的是 2026 年 11 月 20 日的一次實測：<wbr>一個全新的 Claude Code 只拿到說明書和<a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261120-1441-機車大燈罰三千/prompt.txt">一句請求</a>，<wbr>自己從頭做到尾，<wbr>中途沒有人插手，<wbr>花了 48 分鐘。<wbr>每一行都可以點開，<wbr>看那一步留下的檔案。<wbr>訊息是我們為了測試寫的，<wbr>不是實際流傳的原文。</p>
+      </div>
+      <p class="run-links"><a class="link" href="reports/20261120-1441-機車大燈罰三千/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261120-1441-機車大燈罰三千">這一次的全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a></p>
     </div>
   </div>
 </section>
 
 <!-- taipei:begin (written by site/tools/build_cases.py) -->
 <section class="sec" id="taipei">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>台北市長選舉，選前查了四則</h2>
-      <p class="wide">兩位主要候選人各兩則：一則是針對他、正在流傳的說法，一則是他自己在 10 月 31 日辯論會上講的話。選哪四則、怎麼跑，都在開跑前寫好提交；結果不管好不好看，都原樣放在這裡。<a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-20-taipei-preregistration.md">開跑前的登記<svg width="16" height="16"><use href="#i-out"/></svg></a></p>
+  <div class="wrap split">
+    <div class="split-text">
+      <h2>台北市長選舉：<br>一個議題，兩個人各查一句</h2>
+      <p>10 月 31 日辯論會上兩位與會候選人講的事實說法，照議題排成對，各查一次，兩個人被查的則數永遠一樣。清單在開跑前公開登記，結果好不好看都放。</p>
+      <p>報告是工具自動產生的，上線前沒有人逐篇審過；工具自己標「不可公開」的，照樣列出來。</p>
+      <p><a class="btn ghost" href="taipei/">每一則的結果和完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a></p>
     </div>
-    <div class="duo">
-      <h3 class="duo-kind">針對他、在流傳的說法</h3>
-      <div class="duo-row">
-        <article class="case">
-          <p class="case-who"><b>3</b>沈伯洋<small>民進黨</small></p>
-          <blockquote>網路流傳一段錄音，字幕寫「疑似沈姓候選人私下錄音」，內容是沈伯洋自己承認利用黑熊學院在美國軍購案收回扣。</blockquote>
-          <p class="case-result"><strong>不符</strong><span class="scale" style="--at:0"><span>錯誤</span><i></i><span>正確</span></span></p>
-          <dl><div><dt>可信度</dt><dd>0</dd></div><div><dt>信心度</dt><dd>100<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
-          <ul class="case-points"><li><b>錯誤</b><span>這段錄音的聲音經調查局鑑識是深偽內容，不是沈伯洋本人承認收回扣。</span></li><li><b>大致正確</b><span>確有一段影音在網路流傳，字幕把它標示為疑似沈伯洋的私下錄音；但多個來源記載的實際字幕是「疑似沈伯洋私下錄音流出」，「疑似沈姓候選人私下錄音」是桃園地檢署新聞稿去掉姓名後的描述。</span></li></ul>
-          <p class="case-links"><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261121-0238-shen-kickback-recording/report.md">完整報告<svg width="16" height="16"><use href="#i-out"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0238-shen-kickback-recording">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>37 分鐘</span></p>
-        </article>
-        <article class="case">
-          <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
-          <blockquote>在大稻埕聽到垃圾車廣播「市長選舉請支持蔣萬安」，這是公器私用。</blockquote>
-          <p class="case-result"><strong>無法判定</strong><span class="case-reason">主要說法有一半以上無法證實，查不到不等於假的</span></p>
-          <dl><div><dt>可信度</dt><dd>不顯示</dd></div><div><dt>信心度</dt><dd>90<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">不可公開</dd></div></dl>
-          <ul class="case-points"><li><b>無法證實</b><span>裁判判「錯誤」：查得到的紀錄顯示，垃圾車播放的是市長錄製的公費疫苗宣導，裡面沒有「市長選舉請支持蔣萬安」這句話，這個說法和紀錄衝突，判錯誤。</span><span>另一家公司的模型覆核時不同意：現有資料不足以判定大稻埕那次廣播播出拉票語句的說法為錯誤。</span><span>覆核沒有通過，所以這一條改列「無法證實」。</span></li></ul>
-          <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li><li>C1 的覆核沒有完成或沒有通過，裁判判的「錯誤」改列「無法證實」；照裁判原本的判定，結果會是「不符」</li></ul></div>
-          <p class="case-links"><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261120-2249-garbage-truck-broadcast/report.md">完整報告<svg width="16" height="16"><use href="#i-out"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261120-2249-garbage-truck-broadcast">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>34 分鐘</span></p>
-        </article>
+    <div class="split-main">
+      <div class="sheet tp-sheet">
+        <p class="sheet-head"><span>議題</span><span><b>3</b>沈伯洋</span><span><b>5</b>蔣萬安</span></p>
+        <ol class="tp-rows">
+        <li><a href="taipei/#urban-renewal"><span>都更</span><span class="tp-r"><strong>符合</strong><i class="bar" style="--at:80"></i><code>80</code></span><span class="tp-r"><strong>不符</strong><i class="bar" style="--at:18"></i><code>18</code><em>不可公開</em></span></a></li>
+        <li><a href="taipei/#budget"><span>市府預算與財政</span><span class="tp-r"><strong>無法判定</strong><small>不給可信度分數</small><em>不可公開</em></span><span class="tp-r"><strong>符合</strong><i class="bar" style="--at:90"></i><code>90</code></span></a></li>
+        </ol>
+        <p class="sheet-foot">登記了 11 個議題，已經上線 2 個，另外 9 個還沒上線。每一格是他在辯論會上講的那一句查出來的結果；查的是那一句話，不是那個人，分數不能加起來比。</p>
       </div>
-      <h3 class="duo-kind">他在辯論會上說的</h3>
-      <div class="duo-row">
-        <article class="case">
-          <p class="case-who"><b>3</b>沈伯洋<small>民進黨</small></p>
-          <blockquote>沈伯洋在 10 月 31 日台北市長辯論會上說：「都更7599專案，現在動工的數量是零，沒有辦法動工。」</blockquote>
-          <p class="case-result"><strong>符合</strong><span class="scale" style="--at:80"><span>錯誤</span><i></i><span>正確</span></span></p>
-          <dl><div><dt>可信度</dt><dd>80</dd></div><div><dt>信心度</dt><dd>90<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
-          <ul class="case-points"><li><b>大致正確</b><span>沈伯洋在 2026 年 10 月 31 日的辯論會上說過 7599 專案動工是零，當時動工件數是零屬實；「沒有辦法動工」是發言者的評價，沒有查證。</span><span>另一家公司的模型覆核時同意這個判定，但認為理由或證據還有缺漏：「大致正確」可以維持，但判定理由仍把公開案件列表的逐案核對寫成已確認整個專案的動工件數。都更處在辯論前三天更新的新聞稿寫明「7599專案共35案申請」，並指出虎林街與南港兩案已招商成功。</span></li></ul>
-          <p class="case-tfc">台灣事實查核中心的結論：<a href="https://tfc-taiwan.org.tw/taipei-urban-renewal-7599-zero-construction-claim/">資料雖符合，但僅提供部分資訊，無法瞭解全貌</a></p>
-          <p class="case-links"><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261121-0357-shen-7599-urban-renewal/report.md">完整報告<svg width="16" height="16"><use href="#i-out"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0357-shen-7599-urban-renewal">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>35 分鐘</span></p>
-        </article>
-        <article class="case">
-          <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
-          <blockquote>蔣萬安在 10 月 31 日台北市長辯論會上說：「這四年當中，非常重視的施政原則，四年下來，臺北市總共減債超過了400億，是六都第一。」</blockquote>
-          <p class="case-result"><strong>符合</strong><span class="scale" style="--at:90"><span>錯誤</span><i></i><span>正確</span></span></p>
-          <dl><div><dt>可信度</dt><dd>90</dd></div><div><dt>信心度</dt><dd>90<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
-          <ul class="case-points"><li><b>大致正確</b><span>依公共債務法口徑（1 年以上加未滿 1 年債務，不含自償性債務），臺北市債務實際數由 111 年 12 月底的 898 億元降到 115 年 9 月底的 468 億元，減少 430 億元，超過 400 億；加計同期增加約 121 億元的自償性債務後，淨減少約 309 億元，不到 400 億。</span></li><li><b>正確</b><span>依公共債務法口徑（不含自償性債務）以減債金額比較，臺北市減少 430 億元，是六都最多。</span><span>另一家公司的模型覆核時同意這個判定，但認為理由或證據還有缺漏：按不含自償性債務的減債金額比較，臺北市排名第一的判定可維持。理由已交代查核中心與國庫署共用資料來源，仍以 2022 年底含保留數的審定決算數和 2026 年 10 月底實際數估算上限，缺少六都同期間的實際數供讀者重算。</span></li></ul>
-          <p class="case-tfc">台灣事實查核中心的結論：<a href="https://tfc-taiwan.org.tw/chiang-taipei-debt-reduction-40-billion-facts/">與所查資料相符</a></p>
-          <p class="case-links"><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/examples/20261121-0315-taipei-debt-400yi/report.md">完整報告<svg width="16" height="16"><use href="#i-out"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0315-taipei-debt-400yi">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>42 分鐘</span></p>
-        </article>
+      <div class="sheet tp-about">
+        <p class="sheet-bar"><b>針對候選人、在流傳的說法</b></p>
+        <ol>
+        <li><a href="taipei/#about"><span class="tp-whom">針對<b>3</b>沈伯洋</span><span class="tp-claim">網路流傳一段錄音，字幕寫「疑似沈姓候選人私下錄音」，內容是沈伯洋自己承認利用黑熊學院在美國軍購案收回扣。</span><strong>不符</strong></a></li>
+        <li><a href="taipei/#about"><span class="tp-whom">針對<b>5</b>蔣萬安</span><span class="tp-claim">在大稻埕聽到垃圾車廣播「市長選舉請支持蔣萬安」，這是公器私用。</span><strong>無法判定</strong><em>不可公開</em></a></li>
+        </ol>
+        <p class="sheet-foot">這兩則不是候選人說的話。「不符」代表那個說法不成立，對被針對的人是有利的；「無法判定」代表這次查核沒有辦法確定，原因在那一則的報告裡。</p>
       </div>
     </div>
-    <p class="duo-note">候選人照號次排。這四則沒有我們自己寫的答案卷，所以不算評測，是工具實際跑出來的結果；工具標「不可公開」的，代表它自己認為還不能拿去引用。其中一則跑到一半因為額度用完中斷，整則重跑過。<a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-21-taipei.md">跑完後的紀錄<svg width="16" height="16"><use href="#i-out"/></svg></a></p>
   </div>
 </section>
 <!-- taipei:end -->
@@ -289,9 +259,9 @@
 
 <footer class="foot">
   <div class="wrap foot-in">
-    <p class="brand"><svg width="20" height="20"><use href="#i-mark"/></svg>台灣訊息查核</p>
-    <p class="foot-links"><a href="https://github.com/KKzLEO/taiwan-political-skills">GitHub</a><a href="results/">驗證結果</a><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/CHANGELOG.md">修改紀錄</a><a href="https://github.com/KKzLEO/taiwan-political-skills/issues">回報問題</a></p>
-    <p class="fine">程式採 MIT 授權，資料採 CC BY-SA 4.0。評測案例裡的訊息原文取自 Cofacts 真的假的，著作權屬原作者。這個網站列的是工具和答案卷的比對，不是可以拿去引用的查核報告。</p>
+    <p class="brand"><svg width="20" height="20"><use href="#i-mark"/></svg>台灣訊息查核<small>skill</small></p>
+    <p class="foot-links"><a href="taipei/">台北市長選舉</a><a href="reports/">全部報告</a><a href="results/">驗證結果</a><a href="https://github.com/KKzLEO/taiwan-political-skills">GitHub</a><a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/CHANGELOG.md">修改紀錄</a><a href="https://github.com/KKzLEO/taiwan-political-skills/issues">回報問題</a></p>
+    <p class="fine">程式採 MIT 授權，資料採 CC BY-SA 4.0。評測案例裡的訊息原文取自 Cofacts 真的假的，著作權屬原作者。這個網站上的報告是工具自動產生的，不是查核機構的報告。</p>
   </div>
 </footer>
 <script src="assets/run-data.js" defer></script>

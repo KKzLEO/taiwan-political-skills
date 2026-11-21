@@ -1,0 +1,11 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C1",
+      "pass": false,
+      "label_ok": false,
+      "reason": "現有證據不足以支持「大致正確」。補列的民間逐字稿記載沈伯洋說「從1400萬暴增到5000多萬」，可用來核對引文。約1,405萬元的起點仍來自媒體轉述議員引用的「基本設計報告」，原件未取得，無法確認這筆估價與後續核准的工程費涵蓋相同項目。[民間逐字稿](https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/) [放言報導](https://www.fountmedia.io/article/394777)。基金會議紀錄載明，2026年4月23日「同意補助4,966萬元」，工程金額低於5,000萬元。合計超過5,000萬元，是因為加上了2025年7月16日已「同意補助新臺幣（下同）991萬2,800元」的規劃評估及設計監造費。兩份紀錄無法證實同一筆預算在約三個月內從1,400萬元增至5,000多萬元。[基金第137次會議紀錄](https://www-ws.gov.taipei/001/Upload/305/relfile/11455/101769/b1e1fcbf-2ff3-4cde-af51-39df2d976cd2.pdf) [基金第135次會議紀錄](https://www-ws.gov.taipei/001/Upload/305/relfile/11455/101769/9d09ec60-1430-4368-b333-6918a8dbe1f5.pdf)。"
+    }
+  ]
+}
