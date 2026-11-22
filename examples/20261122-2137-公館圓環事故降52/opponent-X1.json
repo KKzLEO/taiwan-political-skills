@@ -1,0 +1,92 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 24,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "label",
+      "argument": "建議改判「誤導」。52% 是改造後約一年與改造前三年相比，包含純財損事故的月平均件數降幅。這個數字沒有按通過路口的車流量換算。交工處曾對同一路口另列按車流量換算的指標。把月均件數降幅說成「事故率降低52%」，會讓讀者以為通過路口時發生事故的風險也降低了同樣幅度。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&s=D8C00D4D16B9C10F",
+          "excerpt": "交通事故共發生128件，月平均10.67件，相較改造前3年月平均22.36件，減少52.30%"
+        },
+        {
+          "url": "https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&s=3F5F01AF4E3B3D44&sms=72544237BBE4C5F6",
+          "excerpt": "將A1、A2及A3事故全數納入，以整體事故碰撞件數作為衡量指標。"
+        },
+        {
+          "url": "https://www-ws.gov.taipei/Download.ashx?icon=..pdf&n=576F5pav56aP6Lev6IiH5Z%2B66ZqG6Lev5Y%2Bj5Lqk6YCa5a6J5YWo5pS55ZaE6Kqq5piOIDA4MjcgdjMucGRm&u=LzAwMS9VcGxvYWQvNDU2L3JlbGZpbGUvMTAxNjIvOTQ2NDUzNi9iYTU1NzZmMC1jYjk1LTQ4YTAtYjNjZi0yMDE0OWM2MjM4MmIucGRm",
+          "excerpt": "每萬PCU之年事故件數及死傷人數皆高於臺北市其他大型正交路口"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "「事實證明」和「大幅」也見於一份附時間戳的民間逐字稿，該稿將這句話列在蔣萬安的申論段，主辦方之一 TVBS 的報導也記為 52%。中央社仍記為 12%。民間逐字稿使用語音轉錄，作者說明申論段沒有第二版可供比對，本次也未能播放三立原始影音核對，因此應補列這份逐字稿及其限制。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "事實證明公館圓環拆除以後，交通事故率大幅降低52%。"
+        },
+        {
+          "url": "https://news.tvbs.com.tw/politics/4043862",
+          "excerpt": "強調該項改革成功讓當地交通事故率降低52%。"
+        },
+        {
+          "url": "https://www.cna.com.tw/news/aloc/202610310085.aspx",
+          "excerpt": "拍板拆除公館圓環，讓交通事故率降低12%"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S11 摘錄的「雙方的說法都『正確』」需要連同緊接著的計算條件閱讀。《報導者》明確說，在比較每月平均事故件數的口徑下，蔣萬安所提的降幅正確。這段支持的是件數降幅，應限制在這個用途。",
+      "evidence": [
+        {
+          "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+          "excerpt": "蔣萬安提到的事故降幅在此種計算方式下正確。"
+        },
+        {
+          "url": "https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&s=D8C00D4D16B9C10F",
+          "excerpt": "月平均交通事故件數大幅下降52.30%"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "交通局與《報導者》的 A2 事故數據即使用相同的三年比較期間，算出的降幅仍分別是 36.84% 和 16.1%。《報導者》改用前後各一年才算出增加 18.2%。正方應交代同一比較期間也有差異，並說明尚未取得事故明細核對兩組統計的路口範圍與計數方式。"
+    },
+    {
+      "id": "X1-5",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "公視在 10 月 31 日 12:35 的蔣萬安申論更新才記載公館圓環事故發生率降低 52%。12:28 的更新記錄的是沈伯洋申論，因此不能以該時間認定公視早於 12:30 的壹蘋報導轉述這句話。",
+      "evidence": [
+        {
+          "url": "https://news.pts.org.tw/live/105",
+          "excerpt": "蔣萬安強調，公館圓環拆除，讓交通事故發生率降低52%"
+        },
+        {
+          "url": "https://news.pts.org.tw/live/105",
+          "excerpt": "【申論】沈伯洋：上任百日完成種樹、正視兒虐與改善營養午餐"
+        },
+        {
+          "url": "https://news.nextapple.com/politics/20261031/15CB6BCC77EB0ED2E1E817D4B61A3704",
+          "excerpt": "2026/10/31 12:30"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

@@ -1,0 +1,11 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C1",
+      "pass": false,
+      "label_ok": false,
+      "reason": "現有證據不足以支持「大致正確」。臺北市府 10 月 31 日確認，公館圓環在 2026 年 1 至 8 月的死傷事故加權排名中列第一，「但若以『事故件數』統計，則排名第二。」10 月 13 日的新聞稿只寫「以A1、A2類事故統計，降至第二」，未交代排名期間與排序方式。即使把「今天早上」理解為查閱排名的時間，仍缺少採相同算法的前後排名來證實公館圓環「重回」第一。辯論全文記載沈伯洋說附近一處路口「本來在十名之外，結果也擠進了前十名」，該路口的前後名次也沒有查證。兩項名次變動都是引言的核心內容。 [臺北市府 10 月 31 日新聞稿](https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=3F5F01AF4E3B3D44&sms=72544237BBE4C5F6)、[臺北市府 10 月 13 日新聞稿](https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=D8C00D4D16B9C10F&sms=72544237BBE4C5F6)、[NOWnews 辯論全文](https://www.nownews.com/news/6888190)"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C1",
+      "pass": false,
+      "label_ok": false,
+      "reason": "「大致正確」高估了證據能支持的結論。修訂已補列民間逐字稿及其限制，也說明中央社記為 12% 的差異。本次仍未能播放主辦方原始影音核對。就引言內容而言，交通局公布的是「月平均交通事故件數大幅下降52.30%」，交工處的改造前簡報則另列「每萬PCU之年事故件數(含A3)」。目前未找到可用同一口徑比較改造前後的車流量資料。把月均件數降幅說成「事故率降低52%」，容易讓讀者以為通過路口時的事故風險也已證實降低約一半，這會改變對核心數字的理解。 [民間逐字稿](https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/) [中央社報導](https://www.cna.com.tw/news/aloc/202610310085.aspx) [交通局新聞稿](https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&s=D8C00D4D16B9C10F) [交工處簡報第15頁](https://www-ws.gov.taipei/001/Upload/456/relfile/10162/9464536/ba5576f0-cb95-48a0-b3cf-20149c62382b.pdf#page=15)"
+    }
+  ]
+}

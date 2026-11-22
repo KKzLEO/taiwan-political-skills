@@ -1,0 +1,277 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=D8C00D4D16B9C10F",
+      "title": "公館圓環事故大減52.3% 交通局籲沈委員勿錯誤解讀數據",
+      "publisher": "臺北市交通管制工程處（臺北市政府交通局）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei_dot_release",
+      "stance": "supports",
+      "excerpt": "自114年9月29日至115年9月30日，交通事故共發生128件，月平均10.67件，相較改造前3年月平均22.36件，減少52.30%",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=3F5F01AF4E3B3D44",
+      "title": "駁公館圓環重回事故熱點第一名 交通局：統計指標不同，事實是改造後事故減少逾五成",
+      "publisher": "臺北市交通管制工程處（臺北市政府交通局）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei_dot_release",
+      "stance": "context",
+      "excerpt": "將A1、A2及A3事故全數納入，以整體事故碰撞件數作為衡量指標……A2類交通事故，改造後月平均4件，相較改造前3年月平均6.33件，減少36.84%",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "北市長候選人辯論會登場 沈伯洋、蔣萬安交鋒政績與城市願景（2026-10-31 12:35【申論】蔣萬安：任內4年政績不只輝達、鮮奶、大巨蛋）",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pts_live",
+      "stance": "supports",
+      "excerpt": "蔣萬安強調，公館圓環拆除，讓交通事故發生率降低52%",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.setn.com/news/1931300",
+      "title": "北市長辯論／閉關兩天！蔣萬安申論再提：大巨蛋、輝達、生生喝鮮奶",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn_nextapple_identical_text",
+      "stance": "supports",
+      "excerpt": "事實證明，公館圓環拆除以後，交通事故率大幅降低52%。",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.nextapple.com/politics/20261031/15CB6BCC77EB0ED2E1E817D4B61A3704",
+      "title": "台北辯論｜不只兌現承諾！蔣萬安細數4大政績：大巨蛋、輝達、營養午餐免費",
+      "publisher": "壹蘋新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn_nextapple_identical_text",
+      "stance": "supports",
+      "excerpt": "事實證明，公館圓環拆除以後，交通事故率大幅降低52%。",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ctwant.com/article/504650/",
+      "title": "台北市長辯論細數政績 蔣萬安：四年前說到、四年後做到",
+      "publisher": "CTWANT",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ctwant",
+      "stance": "supports",
+      "excerpt": "原本預期65天的施工期縮短到17天，拆除後交通事故率大幅降低52%。",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/%E8%94%A3%E8%90%AC%E5%AE%89%E7%94%B3%E8%AB%96%E6%89%B9%E6%B2%88%E4%BC%AF%E6%B4%8B-%E7%A9%BA%E6%B3%9B%E5%8F%A3%E8%99%9F-%E7%B4%B0%E6%95%B8%E5%A4%A7%E5%B7%A8%E8%9B%8B-%E8%BC%9D%E9%81%94-%E9%AE%AE%E5%A5%B6%E6%94%BF%E7%B8%BE-044915953.html",
+      "title": "蔣萬安申論批沈伯洋「空泛口號」！細數大巨蛋、輝達、鮮奶政績：市長要承載市民夢想，不是自己站上舞台",
+      "publisher": "放言 Fount Media（Yahoo新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "fount_media",
+      "stance": "supports",
+      "excerpt": "他指出，工程原先預期需65天，最後縮短為17天，並表示圓環拆除後，交通事故率大幅降低52%。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.chinatimes.com/realtimenews/20261031003290-260407",
+      "title": "沈伯洋稱公館圓環事故率重回第一 北市交通局反駁",
+      "publisher": "中時新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chinatimes",
+      "stance": "supports",
+      "excerpt": "蔣萬安多次提到自己的政績，例如拆除公館圓環後，交通事故率降低百分之52。",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202610310085.aspx",
+      "title": "蔣萬安細數大巨蛋、輝達政績 強調說到做到[影]",
+      "publisher": "中央通訊社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna",
+      "stance": "refutes",
+      "excerpt": "拍板拆除公館圓環，讓交通事故率降低12%",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.nownews.com/news/6888190",
+      "title": "北市辯論／蔣萬安、沈伯洋首度交鋒！2小時辯論全文一次看",
+      "publisher": "NOWnews今日新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "nownews_transcript",
+      "stance": "context",
+      "excerpt": "我們在計算整個交通事故，是要A1、A2、A3一起來討論，但是根據綜整專業的分析數據，目前公館圓環的交通事故率還是大幅地下降",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+      "title": "2026台北市長候選人電視辯論：蔣萬安、沈伯洋互批雙重標準、迴避問題，學者評蔣表現穩健、沈打正面選戰",
+      "publisher": "報導者 The Reporter",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "twreporter",
+      "stance": "supports",
+      "excerpt": "《報導者》比對相關資料，雙方的說法都「正確」，只是切入點不同。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+      "title": "2026台北市長候選人電視辯論：蔣萬安、沈伯洋互批雙重標準、迴避問題，學者評蔣表現穩健、沈打正面選戰",
+      "publisher": "報導者 The Reporter",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "twreporter",
+      "stance": "context",
+      "excerpt": "但若將改造後一年跟改造前一年（2024年9月～2025年9月）比較，A2事故在公館圓環改造後不減反增，從改造前一年的44起增至52起，增幅18.2％。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/paper/1777945",
+      "title": "公館圓環交安改善 沈伯洋、蔣萬安解讀差異大",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn",
+      "stance": "context",
+      "excerpt": "蔣則將統計分母做大，將財損的「A3類」事故納入統計，肇事率排名降為第十名。",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://puma.taipei/live/debate/list",
+      "title": "2026台北市長選舉首場電視辯論會直播字卡列表（字卡 #3）",
+      "publisher": "沈伯洋台北市長競選官方網站",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "shen_campaign",
+      "stance": "context",
+      "excerpt": "公館圓環拆除以後，交通事故率大幅降低52%",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://blocktempo.com/ai-fact-check-taipei-mayor-debate-chiang-wanan-puma-shen",
+      "title": "台北市長辯論 AI 事實查核（蔣萬安、沈伯洋）",
+      "publisher": "動區動趨 BlockTempo",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "blocktempo",
+      "stance": "context",
+      "excerpt": "這個數字含只有財損的事故",
+      "access_note": "full"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "大致正確：2026-10-31 台北市長電視辯論會申論時段，蔣萬安說公館圓環拆除後交通事故率降低 52%，公視文字直播、三立／壹蘋、CTWANT、放言、中時都在當天報導了這段話，對手陣營的查核字卡也用了同一句話當標題。數字和台北市交通局的統計相符：改造後一年月平均 10.67 件，改造前 3 年月平均 22.36 件，重算降幅是 52.28%，約 52.3%。這次沒有取得申論段的完整影片逐字稿，所以「事實證明」「大幅」這些逐字用語，只見於三立和壹蘋兩篇文字相同的報導（算同一條證據鏈）。中央社則記為「降低12%」，這個說法和其他報導及官方數字都對不上，但無法用逐字稿排除。另外，52% 是 A1 到 A3 全部事故（包括只有財損的 A3）月平均件數的降幅，沒有依車流換算，不是嚴格意義的事故率。市府自己的數據顯示，有人受傷的 A2 事故降幅是 36.84%；報導者依警政署資料比對，改造後一年的 A2 事故比改造前一年多了 18.2%。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": [
+    {
+      "org": "報導者（辯論會事實查核段落）",
+      "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+      "their_label": "沒有用標籤；本次讀到的判斷句是「雙方的說法都「正確」，只是切入點不同。」（trace 記載的「蔣萬安提到的事故降幅在此種計算方式下正確。」這句，這次讀取時沒有找到原文）",
+      "claim_ids": [
+        "C1"
+      ],
+      "agree": true,
+      "note": "已獨立核對報導者引用的台北市交通局 10/13 新聞稿，也另外核對了 10/31 新聞稿：128 件、月平均 10.67 件對 22.36 件、降幅 52.30%、統計包括 A1 到 A3，都和報導者的說法一致。降幅數字成立這一點同意，但本方判大致正確，因為逐字用語無法確認，而且統計範圍包括財損事故。報導者的 A2 警政署資料（52 起、186 起、44 起）這次沒有另外取得原始檔，所以沒有重算。報導者引述蔣萬安在交叉詰問說「公館圓環改造後交通事故大幅下降52％」，但 NOWnews 這一段的全文紀錄寫的是「交通事故率還是大幅地下降」，沒有 52 這個數字，兩者用字有出入。另外，頁面標示的日期 2026/10/30 比辯論日早一天。"
+    },
+    {
+      "org": "動區動趨 BlockTempo（AI 事實查核）",
+      "url": "https://blocktempo.com/ai-fact-check-taipei-mayor-debate-chiang-wanan-puma-shen",
+      "their_label": "部分正確（該站定義：數字對，但少了關鍵脈絡或歸屬有爭議）",
+      "claim_ids": [
+        "C1"
+      ],
+      "agree": false,
+      "note": "已獨立核對它引用的台北市交通局 10/31 新聞稿：月平均 10.67 件對 22.36 件、降幅 52.3%、包括財損事故、有人受傷的事故降幅 36.8%，事實部分一致。標籤不同的原因是：本方依查核規則，認為蔣萬安確實在辯論中說了這個數字，數字也和官方統計相符，統計範圍的問題屬於細節差異，所以判大致正確，不判部分正確。"
+    }
+  ]
+}

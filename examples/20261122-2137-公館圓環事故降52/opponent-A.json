@@ -1,0 +1,68 @@
+{
+  "seat": "A",
+  "lens": "evidence",
+  "engine": "claude",
+  "searches_run": 2,
+  "attacks": [
+    {
+      "id": "A-1",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "正方用來確認 52% 這個數字的 S1、S2，都是台北市交通局的新聞稿。台北市政府由說話的蔣萬安主持，所以這是說話者自己機關的統計，不是獨立驗證。正方在覆核既有查核時說「已獨立核對」，核對的也是同一份新聞稿。可以獨立比對的部分，和市府數字對不上。報導者（S12 同一頁）用警政署的 A1、A2 資料，採用和交通局相同的期間比較，結果是改造後一年 52 起 A2 受傷事故、改造前三年 186 起，月平均只降 16.1%。交通局新聞稿寫的 A2 則是改造後月平均 4 件、改造前三年月平均 6.33 件，降 36.84%；換算成件數，改造前三年約 228 件、改造後約 48 件，兩邊都和警政署資料不同。把只有財損的 A3 事故也算進去的 52.3% 沒有公開原始資料，無法重算；可以重算的受傷事故部分，市府算出的降幅是獨立資料的兩倍多。所以「數字和官方統計相符」只能證明蔣萬安說的數字和他的市府公布的一致，不能證明數字本身正確。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+          "excerpt": "《報導者》使用與其相同的資料來源警政署A1、A2數據，採用與台北市交通局相同的區間進行對比分析。"
+        },
+        {
+          "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+          "excerpt": "公館圓環改造後一年（2025年9月29日至30日）有52起A2事故，改造前三年（2022年9月～2025年9月）的A2共有186起，月平均下降16.1%。"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=D8C00D4D16B9C10F",
+          "excerpt": "其中A2類交通事故，改造後月平均4件，相較改造前3年月平均6.33件，減少36.84%。"
+        }
+      ]
+    },
+    {
+      "id": "A-2",
+      "claim_id": "C1",
+      "target": "label",
+      "argument": "正方判大致正確，但它自己在理由裡列出的限制，已經不只是「細節小差異」。第一，52% 是事故件數的降幅，沒有用車流量當分母，不是事故率。第二，這個數字包括只有財損、沒有人受傷的事故；只看受傷事故，市府自己的資料降 36.84%，警政署資料只降 16.1%。第三，和改造前一年相比，受傷事故從 44 起增加到 52 起，多了 18.2%。第四，市府 10 月 31 日的新聞稿也承認，用同時考量事故頻率和嚴重程度的 CBI 指標計算，公館圓環在今年 1 到 8 月仍是台北市事故熱點第一名。訊息用「事實證明」「交通事故率大幅降低52%」，會讓讀者以為這個路口的事故風險少了一半，但可以獨立驗證的受傷事故資料不支持這個印象。數字本身確實出自市府統計，可是引號裡的內容會讓讀者產生錯誤印象；依引言規則，這種情況應判誤導，不是大致正確。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+          "excerpt": "但若將改造後一年跟改造前一年（2024年9月～2025年9月）比較，A2事故在公館圓環改造後不減反增，從改造前一年的44起增至52起，增幅18.2％。"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=3F5F01AF4E3B3D44",
+          "excerpt": "若以「CBI」指標計算，公館圓環路口排名第一；但若以「事故件數」統計，則排名第二。"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=3F5F01AF4E3B3D44",
+          "excerpt": "網路引用的應是交通部「道安總動員」網站今年1至8月的事故熱點資料，該統計僅納入A1、A2類事故。"
+        },
+        {
+          "url": "https://blocktempo.com/ai-fact-check-taipei-mayor-debate-chiang-wanan-puma-shen",
+          "excerpt": "但這個數字含只有財損的事故"
+        }
+      ]
+    },
+    {
+      "id": "A-3",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "正方在理由裡已經寫明，52% 是月平均事故件數的降幅，「沒有依車流換算，不是嚴格意義的事故率」，卻沒有加上「數字缺少分母」的脈絡標記。訊息說的是「事故率」，市府算的卻是件數，沒有用車流量或其他曝光量當分母。正方自己的推理已經指出這個缺口，判定應該加上「數字缺少分母」的標記，讓讀者知道這個百分比不是事故率。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=D8C00D4D16B9C10F",
+          "excerpt": "交通事故共發生128件，月平均10.67件，相較改造前3年月平均22.36件，減少52.30%"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

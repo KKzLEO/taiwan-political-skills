@@ -1,0 +1,330 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+      "title": "2026台北市長電視辯論會（即時更新與查證）",
+      "publisher": "報導者",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "twreporter",
+      "stance": "supports",
+      "excerpt": "剛剛（蔣萬安）有講到交通事故下降，但是我要告訴你，就今天早上而已，它（公館圓環）又重回了事故的第一名。",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+      "title": "2026台北市長電視辯論會（即時更新與查證）",
+      "publisher": "報導者",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "twreporter",
+      "stance": "supports",
+      "excerpt": "他質疑公館圓環改建後，今早又成為台北交通事故發生地第一名，連周遭路口都擠入前十名，代表事前沒有做好評估。",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+      "title": "2026台北市長電視辯論會（即時更新與查證）",
+      "publisher": "報導者",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "twreporter",
+      "stance": "supports",
+      "excerpt": "「基隆路四段、羅斯福路四段」路口確實如排名台北市第1，計27件A1、A2事故、39人受傷，沈伯洋引用數據在此指標下正確。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+      "title": "2026台北市長電視辯論會（即時更新與查證）",
+      "publisher": "報導者",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "twreporter",
+      "stance": "context",
+      "excerpt": "《報導者》查閱在2026年10月31日上午的最新版本，更新日期為2026年10月27日，",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/live/%E5%8F%B0%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96%E6%9C%83%E7%9B%B4%E6%92%AD1200%E7%99%BB%E5%A0%B4-%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%94%A3%E8%90%AC%E5%AE%89%E4%BA%A4%E9%8B%92%EF%BD%9C%E4%B8%8D%E6%96%B7%E6%9B%B4%E6%96%B0-032846919.html",
+      "title": "台北市長辯論會直播12:00登場 沈伯洋蔣萬安交鋒｜不斷更新",
+      "publisher": "Yahoo奇摩新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "yahoo-live-1031",
+      "stance": "supports",
+      "excerpt": "公館圓環今天早上又重回事故第一名，附近原本在十名之外的路口也擠進前10名",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "台北市長電視辯論會即時直播",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pts-live-1031",
+      "stance": "supports",
+      "excerpt": "公館圓環拆除後又重回交通事故第一名，質疑蔣市府事前未做好評估。",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=3F5F01AF4E3B3D44",
+      "title": "駁公館圓環重回事故熱點第一名 交通局：統計指標不同，事實是改造後事故減少逾五成",
+      "publisher": "臺北市政府（發布機關：臺北市交通管制工程處）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-gov-1031",
+      "stance": "supports",
+      "excerpt": "若以「CBI」指標計算，公館圓環路口排名第一；但若以「事故件數」統計，則排名第二。",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=3F5F01AF4E3B3D44",
+      "title": "駁公館圓環重回事故熱點第一名 交通局：統計指標不同，事實是改造後事故減少逾五成",
+      "publisher": "臺北市政府（發布機關：臺北市交通管制工程處）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-gov-1031",
+      "stance": "context",
+      "excerpt": "網路引用的應是交通部「道安總動員」網站今年1至8月的事故熱點資料，該統計僅納入A1、A2類事故。",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&sms=72544237BBE4C5F6&s=3F5F01AF4E3B3D44",
+      "title": "駁公館圓環重回事故熱點第一名 交通局：統計指標不同，事實是改造後事故減少逾五成",
+      "publisher": "臺北市政府（發布機關：臺北市交通管制工程處）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-gov-1031",
+      "stance": "context",
+      "excerpt": "依今年1至9月統計，公館圓環路口在全市事故熱點中排名第十，並非網路所稱的第一名。",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&sms=72544237BBE4C5F6&s=D8C00D4D16B9C10F",
+      "title": "公館圓環事故大減52.3% 交通局籲沈委員勿錯誤解讀數據",
+      "publisher": "臺北市政府交通局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "dot-1013",
+      "stance": "supports",
+      "excerpt": "公館圓環改造後，以A1、A2類事故統計，降至第二；若納入A3類事故，則降至第十",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&sms=72544237BBE4C5F6&s=D8C00D4D16B9C10F",
+      "title": "公館圓環事故大減52.3% 交通局籲沈委員勿錯誤解讀數據",
+      "publisher": "臺北市政府交通局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "dot-1013",
+      "stance": "supports",
+      "excerpt": "不能僅憑事故熱點排名變化，就逕自認定『一個交通事故熱點變成兩個』，恐誤導社會大眾。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/%E5%85%AC%E9%A4%A8%E5%9C%93%E7%92%B0%E6%8B%86%E9%99%A4%E6%A1%88-%E6%B2%88%E4%BC%AF%E6%B4%8B-%E5%80%8B%E4%BA%A4%E9%80%9A%E4%BA%8B%E6%95%85%E7%86%B1%E9%BB%9E%E8%AE%8A%E6%88%90%E5%85%A9%E5%80%8B-024736421.html",
+      "title": "公館圓環拆除案 沈伯洋：一個交通事故熱點變成兩個",
+      "publisher": "中央社（Yahoo奇摩新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-1012",
+      "stance": "context",
+      "excerpt": "自己翻閱今年上半年交通數據，公館圓環肇事率仍高居北市第二名，但辛亥路部分也進入交通事故熱點前十名，「一個交通事故熱點變成兩個」。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/breakingnews/5605336",
+      "title": "沈伯洋指公館圓環改造「1個交通事故熱點變2個」交通局回無具體事證但也沒說原因",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-1014",
+      "stance": "supports",
+      "excerpt": "目前無具體事證顯示，基隆路、辛亥路口的交通事故變化和公館圓環具有直接關聯；但新聞稿也未說明該路口進入事故熱點前10名的可能原因。",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.chinatimes.com/realtimenews/20261031003290-260407",
+      "title": "沈伯洋稱公館圓環事故率重回第一 北市交通局反駁",
+      "publisher": "中時新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chinatimes-1031",
+      "stance": "supports",
+      "excerpt": "不過沈伯洋則反駁，就在31日早上事故率又重回第一名。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624893",
+      "title": "台北市長辯論會 蔣萬安反擊沈伯洋公館圓環說法",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-1031",
+      "stance": "refutes",
+      "excerpt": "這才是你真正錯誤，刻意引用不實的數據。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/paper/1777945",
+      "title": "公館圓環交安改善 沈伯洋、蔣萬安解讀差異大",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-1110",
+      "stance": "context",
+      "excerpt": "沈援引來源為致死的「A1類」及致傷的「A2類」事故總和，公館圓環高居肇事熱點第一或二名；蔣則將統計分母做大，將財損的「A3類」事故納入統計，肇事率排名降為第十名。",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://roadsafety.tw/AccLocCbi",
+      "title": "道安總動員－肇事熱點",
+      "publisher": "交通部道安總動員",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "roadsafety",
+      "stance": "context",
+      "excerpt": "件數係指警政署死亡(A1)及受傷(A2)案件，不包含財損案件(A3)。",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://data.gov.tw/dataset/121152",
+      "title": "臺北市10大多事故路口",
+      "publisher": "臺北市政府交通局（政府資料開放平臺）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "data-gov-121152",
+      "stance": "context",
+      "excerpt": "(112年起採交通部道安總動員CBI指標合值計算)",
+      "access_note": "full"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+      "title": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "setn-video",
+      "stance": "context",
+      "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "access_note": "no_transcript"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "大致正確：沈伯洋確實在 2026 年 10 月 31 日辯論會上說了這段話。前半句有報導者逐字引述（用字是「它」），後半句有 Yahoo、報導者轉述；公館圓環在交通部「道安總動員」只計 A1、A2、依 CBI 加權的肇事熱點排名確實是台北市第一，臺北市府 10 月 31 日新聞稿也承認在這個指標下排第一，交通局 10 月 13 日則說同一統計曾降到第二，和「重回」相符。細節差異：報導者查到的版本在 10 月 27 日更新，並不是當天早上才變動；若以 A1、A2 事故件數算是第二，納入 A3 財損事故是第十，發言沒有說明用哪個指標；「附近路口從十名之外擠進前十」沒有取得第一手排名資料，只有交通局 10 月 13 日新聞稿否認和圓環改造有因果關係、沒有否認基隆路與辛亥路口進入前十名，屬於間接支持。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": [
+    {
+      "org": "報導者",
+      "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+      "their_label": "沒有使用判定標籤；文中寫「沈伯洋引用數據在此指標下正確」",
+      "claim_ids": [
+        "C1"
+      ],
+      "agree": true,
+      "note": "報導者引用的原始資料是交通部道安總動員 10 月 27 日更新的肇事熱點排名。本次打開 roadsafety.tw 肇事熱點頁，排名表是動態載入，沒有讀到表格內容，只確認了計算口徑（只計 A1、A2，CBI＝SRI＋SSI）。改用臺北市府 10 月 31 日新聞稿（承認 CBI 指標下第一、事故件數第二）和交通局 10 月 13 日新聞稿（A1、A2 統計曾降至第二）獨立核對，和報導者「在此指標下正確」的結論一致。報導者沒有查證後半句附近路口的排名。"
+    }
+  ]
+}

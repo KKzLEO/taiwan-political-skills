@@ -1,0 +1,94 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 20,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "label",
+      "proposed_label": "misleading",
+      "argument": "建議改判「誤導」。公館圓環在交通部 2026 年 1 至 8 月的死傷事故加權排名確實是第一，同期按死傷事故件數排第二，市府按 1 至 9 月含財損的總件數排第十。省略期間和算法，容易讓讀者以為公館圓環的事故件數在辯論當天早上升到全市第一。當天上午查閱的版本標示 10 月 27 日更新，現有資料也未證實附近路口的名次如何變動。",
+      "evidence": [
+        {
+          "url": "https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&s=3F5F01AF4E3B3D44&sms=72544237BBE4C5F6",
+          "excerpt": "網路引用的應是交通部「道安總動員」網站今年1至8月的事故熱點資料，該統計僅納入A1、A2類事故。若以「CBI」指標計算，公館圓環路口排名第一；但若以「事故件數」統計，則排名第二。"
+        },
+        {
+          "url": "https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&s=3F5F01AF4E3B3D44&sms=72544237BBE4C5F6",
+          "excerpt": "依今年1至9月統計，公館圓環路口在全市事故熱點中排名第十"
+        },
+        {
+          "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+          "excerpt": "《報導者》查閱在2026年10月31日上午的最新版本，更新日期為2026年10月27日"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "正方把 10 月 13 日交通局所說的第二名，視為同一套加權排名先前的名次。S10 只交代納入死傷事故，沒有說明第二名採加權指標或事故件數，也未交代排名期間。10 月 31 日的新聞稿顯示，同一批死傷事故按兩種方式排序就會得出第一和第二。要證實名次從第二回到第一，仍須核對前後兩份採相同算法的排名。",
+      "evidence": [
+        {
+          "url": "https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&s=D8C00D4D16B9C10F",
+          "excerpt": "公館圓環改造後，以A1、A2類事故統計，降至第二；若納入A3類事故，則降至第十"
+        },
+        {
+          "url": "https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&s=3F5F01AF4E3B3D44&sms=72544237BBE4C5F6",
+          "excerpt": "若以「CBI」指標計算，公館圓環路口排名第一；但若以「事故件數」統計，則排名第二。"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S11 應列為背景。交通局在這段說明中回應的是改造工程與基隆路、辛亥路口事故變化的因果關係。新聞稿開頭把進入前十名列為沈伯洋的說法，並未公布該路口前後兩期的名次。交通局未否認上榜，仍不足以證實該路口原本在十名之外，也無法確認它就是辯論當天所指的路口。",
+      "evidence": [
+        {
+          "url": "https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&s=D8C00D4D16B9C10F",
+          "excerpt": "針對沈伯洋委員聲稱，公館圓環肇事率高，導致基隆路與辛亥路口進入交通事故熱點前十名"
+        },
+        {
+          "url": "https://dot.gov.taipei/News_Content.aspx?n=D739A9F6B5C0AB95&s=D8C00D4D16B9C10F",
+          "excerpt": "目前並無具體事證顯示，基隆路與辛亥路口的事故變化與公館圓環改造具有直接關聯"
+        },
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "它附近的這個路口，甚至本來在十名之外，結果也擠進了前十名。"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C1",
+      "target": "neutral_rewrite",
+      "argument": "建議保留「就今天早上而已」並寫成「附近一處路口」。現有改寫把上午固定成名次變動的時間，也容易讓人以為有多個路口上榜。辯論全文記載沈伯洋指的是一處路口，且發言本身未交代他說的是查閱排名的時間，還是排名變動的時間。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "就今天早上而已，它又重回了事故的第一名，而且它附近的這個路口，甚至本來在十名之外，結果也擠進了前十名。"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "溯源應補入《NOWnews今日新聞》刊出的兩小時辯論全文，以及鏡新聞附影音的報導。兩者都直接引述沈伯洋提到附近一處路口原本在十名之外，現有溯源只列出後半段的媒體摘要。兩家報導的末句用字有差異，這次未能逐字核對主辦方完整影音。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "它附近的這個路口，甚至本來在十名之外，結果也擠進了前十名。"
+        },
+        {
+          "url": "https://www.mnews.tw/story/20261031sot1821001",
+          "excerpt": "它附近的這個路口，甚至本來在10名之外，也擠進了10名內。"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

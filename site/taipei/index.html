@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>台北市長選舉：一個議題，兩個人各查一句｜台灣訊息查核</title>
-<meta name="description" content="2026 台北市長選舉辯論會上的說法，照議題成對查核：已經上線 7 個議題，每一則都有完整報告和全部檔案。">
+<meta name="description" content="2026 台北市長選舉辯論會上的說法，照議題成對查核：已經上線 8 個議題，每一則都有完整報告和全部檔案。">
 <meta name="theme-color" content="#fafafa">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5' fill='%236247d6'/%3E%3Cpath d='M12.2 5.4 7.8 14.6' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
     <li><strong>不放民調數字</strong>，11 月 28 日投票日當天不新增內容。</li>
     <li><strong>不是每一則都用登記寫的模型。</strong>登記寫明用 Claude Fable 5.2；它的額度在清單跑完之前用完了，後面幾則改用 Claude Opus 5.5，主體和查核流程裡的角色都是。同一個議題的兩句一定是同一個模型跑的，每張卡片寫著自己用的模型；什麼時候換的、為什麼，寫在<a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-22-taipei-issues-results.md">結果紀錄</a>的「和登記不一樣的地方」。</li>
   </ul>
-  <p class="tp-jump" aria-label="議題"><a href="#urban-renewal">都更</a><a href="#budget">市府預算與財政</a><a href="#school-lunch">營養午餐</a><a href="#trees">樹木</a><a href="#food-safety">食品安全</a><a href="#twin-city-forum">雙城論壇</a><a href="#songshan-airport">松山機場遷建</a><span>公館圓環</span><span>會議出席</span><span>兒虐修法</span><span>毒駕修法</span><a href="#about">流傳的說法</a></p>
+  <p class="tp-jump" aria-label="議題"><a href="#urban-renewal">都更</a><a href="#budget">市府預算與財政</a><a href="#school-lunch">營養午餐</a><a href="#trees">樹木</a><a href="#food-safety">食品安全</a><a href="#twin-city-forum">雙城論壇</a><a href="#songshan-airport">松山機場遷建</a><a href="#gongguan-roundabout">公館圓環</a><span>會議出席</span><span>兒虐修法</span><span>毒駕修法</span><a href="#about">流傳的說法</a></p>
 </header>
 <section id="urban-renewal" class="tp-issue">
   <h2>都更</h2>
@@ -215,6 +215,32 @@
       </article>
     </div>
 </section>
+<section id="gongguan-roundabout" class="tp-issue">
+  <h2>公館圓環</h2>
+  <p>蔣萬安說公館圓環拆除後事故大幅減少，沈伯洋說它又回到事故第一名。</p>
+    <div class="duo-row">
+      <article class="case">
+        <p class="case-who"><b>3</b>沈伯洋<small>民進黨</small></p>
+        <blockquote>沈伯洋在 10 月 31 日台北市長辯論會上談到公館圓環時說：「就今天早上而已，他又重回了事故的第一名，而且他附近的路口，甚至本來在十名之外，結果也擠進了前十名。」</blockquote>
+        <p class="case-result"><strong>無法判定</strong><span class="case-reason">主要說法有一半以上無法證實，查不到不等於假的</span></p>
+        <dl><div><dt>可信度</dt><dd>不顯示</dd></div><div><dt>信心度</dt><dd>90<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">不可公開</dd></div></dl>
+        <ul class="case-points"><li><b>無法證實</b><span>裁判判「大致正確」：沈伯洋確實在 2026 年 10 月 31 日的台北市長辯論會上說了這段話，公館圓環在交通部「道安總動員」只計死傷事故、依 CBI 加權的肇事熱點排名也確實是台北市第一，但換成其他算法就不是第一，後半句「附近路口從十名之外擠進前十名」則查不到排名資料，無法證實。</span><span>另一家公司的模型覆核時不同意：現有證據不足以支持「大致正確」。</span><span>覆核沒有通過或沒有完成，所以這一條改列「無法證實」。</span></li></ul>
+        <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li><li>C1 的覆核沒有完成或沒有通過，裁判判的「大致正確」改列「無法證實」；照裁判原本的判定，結果會是「符合」</li></ul></div>
+        <p class="case-tfc"><a href="../reports/20261122-2205-公館圓環事故第一名/#others">這份報告有一段和既有查核機構的結論比對</a></p>
+        <p class="case-links"><a class="link" href="../reports/20261122-2205-公館圓環事故第一名/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-2205-公館圓環事故第一名">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>28 分鐘</span><span>Claude Opus 5.5</span></p>
+      </article>
+      <article class="case">
+        <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
+        <blockquote>蔣萬安在 10 月 31 日台北市長辯論會上說：「事實證明公館圓環拆除以後，交通事故率大幅降低52%。」</blockquote>
+        <p class="case-result"><strong>無法判定</strong><span class="case-reason">主要說法有一半以上無法證實，查不到不等於假的</span></p>
+        <dl><div><dt>可信度</dt><dd>不顯示</dd></div><div><dt>信心度</dt><dd>90<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">不可公開</dd></div></dl>
+        <ul class="case-points"><li><b>無法證實</b><span>裁判判「大致正確」：多家媒體記錄蔣萬安在 2026 年 10 月 31 日台北市長電視辯論會申論時說，公館圓環拆除後交通事故率降低 52%，這個數字和台北市交通局公布的全事故月平均件數降幅 52.3% 相符；但這是包括財損事故的件數比較，沒有依車流量換算，有人受傷的事故降幅也比較小。</span><span>另一家公司的模型覆核時不同意：「大致正確」高估了證據能支持的結論。</span><span>覆核沒有通過或沒有完成，所以這一條改列「無法證實」。</span></li></ul>
+        <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li><li>C1 的覆核沒有完成或沒有通過，裁判判的「大致正確」改列「無法證實」；照裁判原本的判定，結果會是「符合」</li></ul></div>
+        <p class="case-tfc"><a href="../reports/20261122-2137-公館圓環事故降52/#others">這份報告有一段和既有查核機構的結論比對</a></p>
+        <p class="case-links"><a class="link" href="../reports/20261122-2137-公館圓環事故降52/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-2137-公館圓環事故降52">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>28 分鐘</span><span>Claude Opus 5.5</span></p>
+      </article>
+    </div>
+</section>
 <section id="about" class="tp-issue">
   <h2>針對候選人、在流傳的說法</h2>
   <p>這兩則不是候選人說的話，是網路上針對他們的說法，一人一則，在 11 月 20 日登記。這裡的結果講的是那個說法站不站得住：「不符」代表說法不成立，對被針對的人是有利的；「無法判定」代表這次查核沒有辦法確定，原因寫在那一則的卡片和報告裡。</p>
@@ -242,8 +268,8 @@
     </div>
 </section>
 <section id="later">
-  <h2>還沒上線的 4 個議題</h2>
-  <p>公館圓環、會議出席、兒虐修法、毒駕修法。照登記的順序一則一則跑，一個議題的兩則都跑完才會出現在這一頁和「全部報告」；只跑完一邊的不放。額度用完就停在那裡，停在哪裡會寫在紀錄裡。</p>
+  <h2>還沒上線的 3 個議題</h2>
+  <p>會議出席、兒虐修法、毒駕修法。照登記的順序一則一則跑，一個議題的兩則都跑完才會出現在這一頁和「全部報告」；只跑完一邊的不放。額度用完就停在那裡，停在哪裡會寫在紀錄裡。</p>
 </section>
 <section id="notes">
   <h2>讀這些結果的時候要注意</h2>
