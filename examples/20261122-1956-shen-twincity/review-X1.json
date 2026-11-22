@@ -1,0 +1,11 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C1",
+      "pass": false,
+      "label_ok": true,
+      "reason": "維持「無法證實」合理。央廣刊出的 2022 年引文「雙城論壇的舉辦前提就是中共不再擾台」可佐證蔣萬安當時的立場，但仍無法確認他是否說過沈伯洋引述的整句話。[央廣報導](https://archive.news.rti.org.tw/news/view/id/2134106) 裁判對最早報導的說明需要修正。TVBS 頁面標示「發佈時間：2026.10.31 13:08」，已記錄沈伯洋把「若共機持續擾台，雙城論壇應再思考暫停」歸於蔣萬安，早於《知新聞》頁面標示的「發布 2026/10/31 13:26」。[TVBS 報導](https://news.tvbs.com.tw/politics/4043873) [知新聞報導](https://www.knews.com.tw/news/200CF166DE830550A5FA2596F9551BD5)"
+    }
+  ]
+}

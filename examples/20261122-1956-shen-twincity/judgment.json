@@ -1,0 +1,307 @@
+{
+  "rulings": [
+    {
+      "attack_id": "X1-1",
+      "upheld": true,
+      "reason": "成立。三立新聞網在 YouTube 上傳了 2026 年 10 月 31 日台北市長辯論會的直播完整版，所以「沒有找到辯論會完整影片」的說法要修正。民間整理的逐字稿把沈伯洋這段發言放在影片 2 小時 25 分 56 秒，寫的是「所以如果今天共機擾台，在一些條件、政治前提的狀況之下，這個時候雙城論壇應該要再思考。」，用字和訊息相同。這份逐字稿先用語音辨識軟體轉錄再校稿，頁面註明第二次校稿沒有逐句聽原音，所以只當輔助資料。本次沒有播放影片原音核對，沈伯洋的確切用字仍以影片為準。媒體寫成「這些條件」「再三思」等，是各家轉錄不同，不能當作訊息改了字的跡象。",
+      "verified_urls": [
+        "https://www.youtube.com/watch?v=0IlnD7rfC88",
+        "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=0IlnD7rfC88&format=json",
+        "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/"
+      ]
+    },
+    {
+      "attack_id": "X1-2",
+      "upheld": true,
+      "reason": "成立。中央廣播電臺 2022 年 5 月 27 日的報導刊出一段標為「原音」的蔣萬安發言：「雙城論壇的舉辦前提就是中共不再擾台、對台灣釋出善意，雙方地位對等，才有舉辦的意義」。TVBS 2022 年 5 月 28 日也刊出他受訪時說的「共軍擾台的情況之下，是不利於兩岸之間的交流」。所以原本說 2022 年的報導「只用轉述方式記錄」並不準確。這兩段直接引文的方向和訊息的引文相近，但都沒有「再思考」「屈服」「政治前提」等字句，也不是同一個場合的完整紀錄。它們既不能證實、也不能推翻訊息的引文，判定維持無法證實。",
+      "verified_urls": [
+        "https://archive.news.rti.org.tw/news/view/id/2134106",
+        "https://news.tvbs.com.tw/politics/1804612"
+      ]
+    },
+    {
+      "attack_id": "X1-3",
+      "upheld": false,
+      "reason": "不成立。匯流新聞網 2022 年 7 月 20 日的報導，圖說原文是「台北市長參選人蔣萬安日前針對雙城論壇舉辦問題，表示共機不擾台是舉辦的前提條件。」原本的摘錄「共機不擾台是舉辦的前提條件」照錄這句的原文，沒有改寫。判定理由也已寫明這是記者轉述。證據表改列完整的圖說句子，讓讀者一看就知道是轉述，但這只是補充，不是更正錯誤。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "X1-4",
+      "upheld": true,
+      "reason": "成立。知新聞記者許皓婷的報導標示 2026 年 10 月 31 日 13:26 發布，比 NOWnews 的 13:30 早。內文有「所以如果今天共機繞台條件、政治前提狀況之下，雙城論壇應該要再思考」，也引述沈伯洋說「這是2022年你說的！」。當天記錄這段內容的報導，目前最早找到的是這篇；它寫「共機繞台」，也沒有「這個時候」。這篇讓「沈伯洋在辯論會上這樣引述」多了一筆佐證，但不影響「蔣萬安 2022 年說過這句話」無法證實的部分。",
+      "verified_urls": [
+        "https://www.knews.com.tw/news/200CF166DE830550A5FA2596F9551BD5"
+      ]
+    }
+  ],
+  "tactic_checks": [],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "unverified",
+      "reasoning": "無法證實：沈伯洋在 2026 年 10 月 31 日台北市長辯論會上確實把這段話說成蔣萬安 2022 年的發言，但找不到蔣萬安 2022 年說過引號裡這句話的原始紀錄。辯論會的部分，三立新聞網在 YouTube 留有直播完整版。民間整理的逐字稿把這段放在 2 小時 25 分 56 秒，寫的是「在一些條件、政治前提的狀況之下，這個時候雙城論壇應該要再思考」，用字和訊息相同，後面接著是「這是 2022 年你說的」。知新聞、NOWnews、自由時報、聯合報、ETtoday、三立、中時當天的報導也都記錄了這段交鋒。本次沒有播放影片原音逐字核對；媒體寫成「這些條件」「共機繞台」「再三思」等，是各家轉錄不同。蔣萬安 2022 年的部分，中央廣播電臺 2022 年 5 月 27 日刊出他的原音引文「雙城論壇的舉辦前提就是中共不再擾台、對台灣釋出善意，雙方地位對等，才有舉辦的意義」，TVBS 5 月 28 日刊出他受訪時說的「共軍擾台的情況之下，是不利於兩岸之間的交流」，中央社、自由時報和匯流新聞網也有同一方向的報導。這些發言和訊息引文的方向相近，但都沒有「屈服」「政治前提」「再思考」等字句，也不知道沈伯洋引用的是哪個場合。沒有找到蔣萬安本人否認，也沒有同一場合的完整紀錄顯示他說的是別的話，所以沒有直接反證。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.nownews.com/news/6888124",
+      "title": "北市辯論／蔣萬安問雙城論壇變舉球手？沈伯洋翻他昔日言論反擊",
+      "publisher": "NOWnews今日新聞（記者蘇柏銓）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "nownews-20261031",
+      "stance": "supports",
+      "excerpt": "雙城論壇，其實不能夠因為對方威脅屈服，所以如果今天共機擾台這些條件、政治前提的狀況之下，這個時候雙城論壇應該要再思考",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ettoday.net/news/20261031/3263943.htm",
+      "title": "台北市長辯論會沈伯洋、蔣萬安交叉詰問報導（ETtoday，2026-10-31 13:19）",
+      "publisher": "ETtoday新聞雲（記者鄭佩玟）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ettoday-20261031",
+      "stance": "supports",
+      "excerpt": "那我想問你，你知道這句話是誰說的嗎？我想直接告訴你答案，這是2022年你說的！",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624996",
+      "title": "送頭?蔣萬安質問雙城論壇立場 沈伯洋翻出2022年「這句」電爆",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-20261031",
+      "stance": "supports",
+      "excerpt": "雙城論壇應該要再思考……這是2022年，你說的！",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/124652/9848817",
+      "title": "蔣萬安連番開火「雙城論壇是滲透破口誰說的？」 沈伯洋反擊這一句",
+      "publisher": "聯合報（記者邱書昱、楊正海）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn-20261031",
+      "stance": "supports",
+      "excerpt": "雙城論壇要再三思，這句話是誰說的？",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.setn.com/news/1931356",
+      "title": "三立新聞網台北市長辯論會雙城論壇交鋒報導（2026-10-31 14:46）",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn-20261031",
+      "stance": "supports",
+      "excerpt": "這是2022年你說的",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.chinatimes.com/realtimenews/20261031002010-260407",
+      "title": "中時新聞網台北市長辯論會報導（2026-10-31 13:24）",
+      "publisher": "中時新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chinatimes-20261031",
+      "stance": "supports",
+      "excerpt": "他反過來引用蔣萬安2022年的發言，強調交流應視情勢重新思考，也質疑論壇後出現軍演的國安風險。",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aipl/202205270037.aspx",
+      "title": "蔣萬安拋雙城論壇前提 堅持主權、認清分治事實進行兩岸交流",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "20220527-chiang-visits-ma",
+      "stance": "context",
+      "excerpt": "雙城論壇舉辦的前提，就是中共不再擾台、對台灣釋出善意，雙方地位對等，才有舉辦的意義",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/3940777",
+      "title": "蔣萬安拜會馬英九 兩岸「雙城論壇」3前提舉辦",
+      "publisher": "自由時報（記者施曉光）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-20220527",
+      "stance": "context",
+      "excerpt": "「雙城論壇」的舉辦前提，就是中共不再擾台，對台灣釋出善意，而且雙方地位要對等",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/3945953",
+      "title": "雙城論壇續辦前提挨批呼應民進黨 蔣萬安：對台武力威脅應停止",
+      "publisher": "自由時報（記者蔡思培）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-20220601",
+      "stance": "context",
+      "excerpt": "任何對台灣安全、區域和平造成武力威脅的舉動都應停止",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://n.yam.com/Article/20220720926810",
+      "title": "【雙城論壇戰火3-3】論壇辦不辦?蔣萬安提共機不擾台 國民黨內解讀不同",
+      "publisher": "CNEWS匯流新聞網（記者屈彥辰，經蕃新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cnews-20220720",
+      "stance": "context",
+      "excerpt": "台北市長參選人蔣萬安日前針對雙城論壇舉辦問題，表示共機不擾台是舉辦的前提條件。",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tfc-taiwan.org.tw/2026-taipei-mayoral-election-debate/",
+      "title": "2026台北市長首場選舉辯論查核",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc-20261031",
+      "stance": "context",
+      "excerpt": "蔣萬安質疑：沈伯洋曾說「雙城論壇是統戰滲透的破口」；現在卻改口「願意保留既有的交流框架」？",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+      "title": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "publisher": "三立新聞網SETN（YouTube 頻道）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "setn-live-20261031",
+      "stance": "context",
+      "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "access_note": "snippet"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+      "title": "2026 台北市長辯論會逐字稿（含時間戳記）",
+      "publisher": "richliu.com（民間整理，語音辨識轉錄後校稿）",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "richliu-20261031",
+      "stance": "supports",
+      "excerpt": "所以如果今天共機擾台，在一些條件、政治前提的狀況之下，這個時候雙城論壇應該要再思考。",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://archive.news.rti.org.tw/news/view/id/2134106",
+      "title": "雙城論壇舉辦前提 蔣萬安：中共不再擾台、對台釋出善意",
+      "publisher": "中央廣播電臺",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "rti-20220527",
+      "stance": "context",
+      "excerpt": "(原音)雙城論壇的舉辦前提就是中共不再擾台、對台灣釋出善意，雙方地位對等，才有舉辦的意義。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.tvbs.com.tw/politics/1804612",
+      "title": "7共機又來　蔣拋共機不擾台、才辦雙城論壇",
+      "publisher": "TVBS新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tvbs-20220528",
+      "stance": "context",
+      "excerpt": "共軍擾台的情況之下，是不利於兩岸之間的交流，我們希望能夠在善意的狀況之下，能夠有實質交流。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.knews.com.tw/news/200CF166DE830550A5FA2596F9551BD5",
+      "title": "台北辯論｜蔣萬安狂挖「廢死、類殖民制憲」昔日發言　沈伯洋酸爆：還是你要回來當立委",
+      "publisher": "知新聞（記者許皓婷）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "knews-20261031",
+      "stance": "supports",
+      "excerpt": "所以如果今天共機繞台條件、政治前提狀況之下，雙城論壇應該要再思考",
+      "access_note": "full"
+    }
+  ]
+}

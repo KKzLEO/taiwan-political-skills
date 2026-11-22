@@ -126,7 +126,8 @@ def case(statement, about=False):
     if compared(run):
         out.append(f'  <p class="case-tfc"><a href="../reports/{e(run.name)}/#others">這份報告有一段和既有查核機構的結論比對</a></p>')
     out.append(f'  <p class="case-links"><a class="link" href="../reports/{e(run.name)}/">完整報告{NEXT}</a>'
-               f'<a class="link" href="{TREE}examples/{e(run.name)}">全部檔案{OUT}</a><span>{int(taipei.TIMES[run.name]["minutes"])} 分鐘</span></p>')
+               f'<a class="link" href="{TREE}examples/{e(run.name)}">全部檔案{OUT}</a><span>{int(taipei.TIMES[run.name]["minutes"])} 分鐘</span>'
+               f'<span>{e(taipei.model(run))}</span></p>')
     out.append('</article>')
     return "\n".join("      " + line for line in out)
 
@@ -147,6 +148,12 @@ def page():
     issues, about = taipei.issues(), taipei.about()
     ready, waiting = [i for i in issues if i["ready"]], [i for i in issues if not i["ready"]]
     jump = "".join(f'<a href="#{i["id"]}">{e(i["name"])}</a>' if i["ready"] else f'<span>{e(i["name"])}</span>' for i in issues)
+    other = sorted({taipei.model(s["run"]) for i in ready for s in i["statements"]} - {taipei.MODELS[taipei.REGISTERED_MODEL]})
+    switched = ""
+    if other:
+        switched = (f'\n    <li><strong>不是每一則都用登記寫的模型。</strong>登記寫明用 {taipei.MODELS[taipei.REGISTERED_MODEL]}；它的額度在清單跑完之前用完了，'
+                    f'後面幾則改用 {"、".join(other)}，主體和查核流程裡的角色都是。同一個議題的兩句一定是同一個模型跑的，每張卡片寫著自己用的模型；'
+                    f'什麼時候換的、為什麼，寫在<a href="{BLOB}evals/results/2026-11-22-taipei-issues-results.md">結果紀錄</a>的「和登記不一樣的地方」。</li>')
     later = ""
     if waiting:
         later = (f'<section id="later">\n  <h2>還沒上線的 {len(waiting)} 個議題</h2>\n'
@@ -160,7 +167,7 @@ def page():
     <li><strong>清單在開跑之前就公開登記</strong>，連結指向登記當時的版本：<a href="{registered(taipei.SECOND)}">照議題成對的二十則</a>、<a href="{registered(taipei.FIRST)}">最早的四則</a>。登記之後發現的幾處出入另外寫在<a href="{BLOB}evals/results/2026-11-22-taipei-issues-notes.md">補充說明</a>，登記本身不改。</li>
     <li><strong>結果好不好看都放。</strong>工具自己標「不可公開」的，照樣列出來並寫明原因。</li>
     <li><strong>報告是工具自動產生的，上線前沒有人逐篇審過。</strong>它不是查核機構的報告；要引用之前，請點進完整報告看證據。</li>
-    <li><strong>不放民調數字</strong>，11 月 28 日投票日當天不新增內容。</li>
+    <li><strong>不放民調數字</strong>，11 月 28 日投票日當天不新增內容。</li>{switched}
   </ul>
   <p class="tp-jump" aria-label="議題">{jump}<a href="#about">流傳的說法</a></p>
 </header>
@@ -212,6 +219,10 @@ def block():
     left = len(issues) - len(ready)
     foot = (f'登記了 {len(issues)} 個議題，已經上線 {len(ready)} 個' + (f'，另外 {left} 個還沒上線' if left else '')
             + '。每一格是他在辯論會上講的那一句查出來的結果；查的是那一句話，不是那個人，分數不能加起來比。')
+    for name in sorted({taipei.model(s["run"]) for i in ready for s in i["statements"]} - {taipei.MODELS[taipei.REGISTERED_MODEL]}):
+        count = sum(1 for i in ready if taipei.model(i["statements"][0]["run"]) == name)
+        foot += f'其中 {count} 個議題改用 {name} 跑（登記寫的模型額度用完了），原因見選舉頁。'
+
     claims = []
     for s in about:
         person, score = taipei.PEOPLE[s["who"]], load(s["run"], "score.json")

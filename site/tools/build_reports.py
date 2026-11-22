@@ -201,7 +201,7 @@ def page(run):
            '<ul class="rep-notes">' + "".join(f"<li>{inline(n)}</li>" for n in notes) + "</ul>" if notes else "",
            '<div class="rep-what">'
            + "".join(f"<p>{e(s)}</p>" for s in said if s)
-           + f"<p>這一頁是工具自動產生的報告，照原始檔排版，沒有人改寫過，上線前也沒有人逐篇審過。它不是查核機構的報告；要引用之前，請先看下面的證據。這次查核花了 {minutes} 分鐘。</p>"
+           + f"<p>這一頁是工具自動產生的報告，照原始檔排版，沒有人改寫過，上線前也沒有人逐篇審過。它不是查核機構的報告；要引用之前，請先看下面的證據。這次查核花了 {minutes} 分鐘；主體和查核流程裡的角色用的模型是 {e(taipei.model(run))}。</p>"
            + f'<p class="rep-links"><a class="link" href="{TREE}examples/{e(run.name)}">這次查核的全部檔案{OUT}</a>'
            + f'<a class="link" href="{BLOB}examples/{e(run.name)}/report.md">報告的原始檔{OUT}</a></p></div>']
 
@@ -286,7 +286,7 @@ def listed(readme):
         else:
             what = taipei.OTHER[run.name]
         parts, _ = result_line(split(report_md.parse((run / "report.md").read_text(encoding="utf-8")))[0])
-        rows.append(f'| `{run.name}` | {what} | {"｜".join(parts).removeprefix("結果：")} | {load(run, "run.json")["host"]} | {int(taipei.TIMES[run.name]["minutes"])} 分鐘 |')
+        rows.append(f'| `{run.name}` | {what} | {"｜".join(parts).removeprefix("結果：")} | {load(run, "run.json")["host"]}・{taipei.model(run)} | {int(taipei.TIMES[run.name]["minutes"])} 分鐘 |')
     a, b = readme.index(LIST_BEGIN), readme.index(LIST_END)
     return readme[:a] + LIST_BEGIN + "\n" + "\n".join(rows) + "\n" + readme[b:]
 

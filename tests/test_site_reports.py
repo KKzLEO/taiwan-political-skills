@@ -271,7 +271,8 @@ class Pages(unittest.TestCase):
             want += ["可信度", cred.removeprefix("可信度 "), "信心度", conf.removeprefix("信心度 "), "模式", mode, "公開引用", public] + notes
             want += [self.build.NOTES.get(run.name, ""), self.data.CAVEATS.get(where["statement"]["id"], "") if where else "",
                      "這一頁是工具自動產生的報告，照原始檔排版，沒有人改寫過，上線前也沒有人逐篇審過。它不是查核機構的報告；要引用之前，請先看下面的證據。"
-                     f'這次查核花了 {self.data.TIMES[run.name]["minutes"]} 分鐘。', "這次查核的全部檔案", "報告的原始檔"]
+                     f'這次查核花了 {self.data.TIMES[run.name]["minutes"]} 分鐘；主體和查核流程裡的角色用的模型是 {self.data.MODELS[self.data.TIMES[run.name]["model"]]}。',
+                     "這次查核的全部檔案", "報告的原始檔"]
             self.assertEqual(squeezed(top), squeezed("".join(want)), run.name)
             self.assertTrue(first.startswith("結果：" + score["result"]), run.name)
 
@@ -402,6 +403,7 @@ class Pages(unittest.TestCase):
                 self.assertIn(f'| {name}的辯論會發言（{where["issue"]["name"]}） |' if where["issue"] else f"| 針對{name}的流傳說法 |", line, run.name)
             self.assertIn(f'| {score["result"]}｜', line, run.name)
             self.assertIn(f'| {self.data.TIMES[run.name]["minutes"]} 分鐘 |', line, run.name)
+            self.assertIn(f'| claude・{self.data.MODELS[self.data.TIMES[run.name]["model"]]} |', line, run.name)
 
     def test_no_page_names_the_machine_it_was_made_on(self):
         for path in SITE.rglob("*.html"):

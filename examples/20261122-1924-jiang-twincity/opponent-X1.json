@@ -1,0 +1,79 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 18,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "label",
+      "argument": "建議改判誤導。三立的辯論報導支持蔣萬安曾這樣質疑。聯合報所載的沈伯洋說法則有「很多時候」的限定，轉傳文字省略這個限定，又把「造成滲透的破口」寫成「是統戰滲透的破口」，容易讓讀者把較強的定性當成沈伯洋原話。此次搜尋未能直接核對沈伯洋的訪談原音。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://www.mirrormedia.mg/external/setn_1931352",
+          "excerpt": "雙城論壇是統戰滲透的破口"
+        },
+        {
+          "url": "https://udn.com/news/story/6656/9796309",
+          "excerpt": "雙城論壇不但不必要，而且很多時候，都是造成滲透的破口。"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C2",
+      "target": "label",
+      "argument": "建議改判誤導。沈伯洋確曾說現有框架可以先留著，並於 10 月 7 日解釋框架指市府既有的承辦安排，是否續辦仍取決於沒有政治前提、具有效益等條件。轉傳文字以「現在卻說」把兩段話寫成政策反轉，省略了區分保留承辦安排與續辦論壇的關鍵脈絡。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://www.fountmedia.io/article/431111",
+          "excerpt": "現有的交流的框架，我們先留著。"
+        },
+        {
+          "url": "https://udn.com/news/story/6656/9801088",
+          "excerpt": "意思是指現有框架的這組人在處理本身沒有大礙"
+        },
+        {
+          "url": "https://udn.com/news/story/6656/9801088",
+          "excerpt": "如果做不到這些的話，那就認為現在不用舉辦。"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S6 應註明引文經台北市府副發言人蔡畹鎣轉述。聯合報把這段 4 月訪談引文放在蔡畹鎣的說法之下，無法據此認定聯合報曾直接核對訪談錄音。",
+      "evidence": [
+        {
+          "url": "https://udn.com/news/story/6656/9796309",
+          "excerpt": "蔡畹鎣表示，樂見沈委員改口，肯定雙城論壇持續交流的重要性。"
+        },
+        {
+          "url": "https://udn.com/news/story/6656/9796309",
+          "excerpt": "今年4月5日的節目上，主持人詢問「會取消雙城論壇嗎？」"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "目前無法確定「我」字在哪個環節出現。三立新聞網的報導省略了「我」，但以三立完整版直播為底稿的民間轉錄，在蔣萬安結論段 3 小時 14 分 26 秒處記有「我」。該轉錄的結論段未經第二版轉錄對照，這次也未能核對原音。現有證據不足以認定是轉傳文字加上「我」字。",
+      "evidence": [
+        {
+          "url": "https://www.mirrormedia.mg/external/setn_1931352",
+          "excerpt": "而現在卻說，願意保留既有的交流框架"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "而現在卻說「我願意保留既有的交流框架」"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

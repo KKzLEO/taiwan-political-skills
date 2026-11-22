@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>台北市長選舉：一個議題，兩個人各查一句｜台灣訊息查核</title>
-<meta name="description" content="2026 台北市長選舉辯論會上的說法，照議題成對查核：已經上線 5 個議題，每一則都有完整報告和全部檔案。">
+<meta name="description" content="2026 台北市長選舉辯論會上的說法，照議題成對查核：已經上線 6 個議題，每一則都有完整報告和全部檔案。">
 <meta name="theme-color" content="#fafafa">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5' fill='%236247d6'/%3E%3Cpath d='M12.2 5.4 7.8 14.6' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,8 +35,9 @@
     <li><strong>結果好不好看都放。</strong>工具自己標「不可公開」的，照樣列出來並寫明原因。</li>
     <li><strong>報告是工具自動產生的，上線前沒有人逐篇審過。</strong>它不是查核機構的報告；要引用之前，請點進完整報告看證據。</li>
     <li><strong>不放民調數字</strong>，11 月 28 日投票日當天不新增內容。</li>
+    <li><strong>不是每一則都用登記寫的模型。</strong>登記寫明用 Claude Fable 5.2；它的額度在清單跑完之前用完了，後面幾則改用 Claude Opus 5.5，主體和查核流程裡的角色都是。同一個議題的兩句一定是同一個模型跑的，每張卡片寫著自己用的模型；什麼時候換的、為什麼，寫在<a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-22-taipei-issues-results.md">結果紀錄</a>的「和登記不一樣的地方」。</li>
   </ul>
-  <p class="tp-jump" aria-label="議題"><a href="#urban-renewal">都更</a><a href="#budget">市府預算與財政</a><a href="#school-lunch">營養午餐</a><a href="#trees">樹木</a><a href="#food-safety">食品安全</a><span>雙城論壇</span><span>松山機場遷建</span><span>公館圓環</span><span>會議出席</span><span>兒虐修法</span><span>毒駕修法</span><a href="#about">流傳的說法</a></p>
+  <p class="tp-jump" aria-label="議題"><a href="#urban-renewal">都更</a><a href="#budget">市府預算與財政</a><a href="#school-lunch">營養午餐</a><a href="#trees">樹木</a><a href="#food-safety">食品安全</a><a href="#twin-city-forum">雙城論壇</a><span>松山機場遷建</span><span>公館圓環</span><span>會議出席</span><span>兒虐修法</span><span>毒駕修法</span><a href="#about">流傳的說法</a></p>
 </header>
 <section id="urban-renewal" class="tp-issue">
   <h2>都更</h2>
@@ -49,7 +50,7 @@
         <dl><div><dt>可信度</dt><dd>80</dd></div><div><dt>信心度</dt><dd>90<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
         <ul class="case-points"><li><b>大致正確</b><span>沈伯洋在 2026 年 10 月 31 日的辯論會上說過 7599 專案動工是零，當時動工件數是零屬實；「沒有辦法動工」是發言者的評價，沒有查證。</span><span>另一家公司的模型覆核時同意這個判定，但認為理由或證據還有缺漏：「大致正確」可以維持，但判定理由仍把公開案件列表的逐案核對寫成已確認整個專案的動工件數。都更處在辯論前三天更新的新聞稿寫明「7599專案共35案申請」，並指出虎林街與南港兩案已招商成功。</span></li></ul>
         <p class="case-tfc"><a href="../reports/20261121-0357-shen-7599-urban-renewal/#others">這份報告有一段和既有查核機構的結論比對</a></p>
-        <p class="case-links"><a class="link" href="../reports/20261121-0357-shen-7599-urban-renewal/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0357-shen-7599-urban-renewal">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>35 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261121-0357-shen-7599-urban-renewal/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0357-shen-7599-urban-renewal">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>35 分鐘</span><span>Claude Fable 5.2</span></p>
       </article>
       <article class="case">
         <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
@@ -59,7 +60,7 @@
         <ul class="case-points"><li><b>錯誤</b><span>內湖康樂街136巷案屬於「575專案」，不是 7599 專案；7599 專案首件完成招商簽約的是信義區虎林街60巷案。</span></li><li><b>無法證實</b><span>裁判判「誤導」：松山機場航高限制是市府資料列出的斯文里整宅都更困難原因之一，但同一批資料並列產權複雜、整合不易等因素，這段話只舉航高一項；內湖西湖、灣仔次分區 12 個里的部分沒有查到官方資料，無法證實。</span><span>另一家公司的模型覆核時不同意：現有證據不足以判為「誤導」。</span><span>覆核沒有通過或沒有完成，所以這一條改列「無法證實」。</span></li></ul>
         <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>C2 的覆核沒有完成或沒有通過，裁判判的「誤導」改列「無法證實」；照裁判原本的判定，結果會是「不符」</li></ul></div>
         <p class="case-tfc"><a href="../reports/20261122-0238-jiang-kangle-7599/#others">這份報告有一段和既有查核機構的結論比對</a></p>
-        <p class="case-links"><a class="link" href="../reports/20261122-0238-jiang-kangle-7599/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-0238-jiang-kangle-7599">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>36 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261122-0238-jiang-kangle-7599/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-0238-jiang-kangle-7599">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>36 分鐘</span><span>Claude Fable 5.2</span></p>
       </article>
     </div>
 </section>
@@ -74,7 +75,7 @@
         <dl><div><dt>可信度</dt><dd>不顯示</dd></div><div><dt>信心度</dt><dd>80<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">不可公開</dd></div></dl>
         <ul class="case-points"><li><b>無法證實</b><span>裁判判「大致正確」：大致正確：沈伯洋在辯論會上說過這句話，遮陽傘工程經費也確實在約兩個半月內從約 1405 萬元變成 4966 萬元，但 1405 萬是基本設計階段的經費概估、不是已編列的預算，4966 萬也不到 5000 萬。</span><span>另一家公司的模型覆核時不同意：現有證據不足以支持「大致正確」。</span><span>覆核沒有通過或沒有完成，所以這一條改列「無法證實」。</span></li></ul>
         <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li><li>C1 的覆核沒有完成或沒有通過，裁判判的「大致正確」改列「無法證實」；照裁判原本的判定，結果會是「符合」</li></ul></div>
-        <p class="case-links"><a class="link" href="../reports/20261122-0314-shen-parasol-budget/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-0314-shen-parasol-budget">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>37 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261122-0314-shen-parasol-budget/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-0314-shen-parasol-budget">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>37 分鐘</span><span>Claude Fable 5.2</span></p>
       </article>
       <article class="case">
         <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
@@ -83,7 +84,7 @@
         <dl><div><dt>可信度</dt><dd>90</dd></div><div><dt>信心度</dt><dd>90<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
         <ul class="case-points"><li><b>大致正確</b><span>依公共債務法口徑（1 年以上加未滿 1 年債務，不含自償性債務），臺北市債務實際數由 111 年 12 月底的 898 億元降到 115 年 9 月底的 468 億元，減少 430 億元，超過 400 億；加計同期增加約 121 億元的自償性債務後，淨減少約 309 億元，不到 400 億。</span></li><li><b>正確</b><span>依公共債務法口徑（不含自償性債務）以減債金額比較，臺北市減少 430 億元，是六都最多。</span><span>另一家公司的模型覆核時同意這個判定，但認為理由或證據還有缺漏：按不含自償性債務的減債金額比較，臺北市排名第一的判定可維持。理由已交代查核中心與國庫署共用資料來源，仍以 2022 年底含保留數的審定決算數和 2026 年 10 月底實際數估算上限，缺少六都同期間的實際數供讀者重算。</span></li></ul>
         <p class="case-tfc"><a href="../reports/20261121-0315-taipei-debt-400yi/#others">這份報告有一段和既有查核機構的結論比對</a></p>
-        <p class="case-links"><a class="link" href="../reports/20261121-0315-taipei-debt-400yi/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0315-taipei-debt-400yi">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>42 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261121-0315-taipei-debt-400yi/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0315-taipei-debt-400yi">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>42 分鐘</span><span>Claude Fable 5.2</span></p>
       </article>
     </div>
 </section>
@@ -99,7 +100,7 @@
         <ul class="case-points"><li><b>大致正確</b><span>大致正確：2026 年 8 月 31 日開學前確實有學校的營養午餐招標流標、重新招標，但「頻頻」的程度沒有公開校數可以核對。</span></li><li><b>無法證實</b><span>無法證實：公開的兌換率數字只到 2025 年 12 月，「一直往下」到 2026 年 10 月發言當時沒有資料可以核對，也沒有直接反證。</span><span>另一家公司的模型覆核時同意這個判定，但認為理由或證據還有缺漏：「無法證實」合理，但理由應納入已可讀取的審計報告原文。表 5 顯示 2025 年第二階段前四週從 61.28% 升至 77.00%，最後六週才逐週降至 64.29%。</span></li></ul>
         <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>信心度 60（中），要到 75 以上才是「高」；扣了哪些分，見後面的「評分拆解」</li><li>結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li><li>C4 的覆核沒有完成或沒有通過，裁判判的「大致正確」改列「無法證實」；照裁判原本的判定，結果會是「無法判定」</li></ul></div>
         <p class="case-tfc"><a href="../reports/20261122-0351-shen-lunch-milk/#others">這份報告有一段和既有查核機構的結論比對</a></p>
-        <p class="case-links"><a class="link" href="../reports/20261122-0351-shen-lunch-milk/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-0351-shen-lunch-milk">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>57 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261122-0351-shen-lunch-milk/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-0351-shen-lunch-milk">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>57 分鐘</span><span>Claude Fable 5.2</span></p>
       </article>
       <article class="case">
         <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
@@ -109,7 +110,7 @@
         <ul class="case-points"><li><b>大致正確</b><span>大致正確：蔣萬安確實在 2026 年 10 月 31 日的台北市長電視辯論會上對沈伯洋說了這段話，但本次沒有對過影片原音。</span></li><li><b>錯誤</b><span>錯誤：查到的紀錄裡沒有沈伯洋說「金華國中在內很多學校是大規模的食物中毒」的原話，他本人在辯論當場否認說過「食物中毒」。</span><span>另一家公司的模型覆核時同意這個判定，但認為理由或證據還有缺漏：「錯誤」可維持，沈伯洋在辯論中明確說「我也沒有講說食物中毒」。裁判已將台視標題列為背景，但判定理由仍把教育局新聞稿和直接指控沈伯洋的來源並列。</span></li></ul>
         <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>信心度 73（中），要到 75 以上才是「高」；扣了哪些分，見後面的「評分拆解」</li><li>結論是「部分符合」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li></ul></div>
         <p class="case-tfc"><a href="../reports/20261122-0448-jiang-lunch-food-poisoning/#others">這份報告有一段和既有查核機構的結論比對</a></p>
-        <p class="case-links"><a class="link" href="../reports/20261122-0448-jiang-lunch-food-poisoning/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-0448-jiang-lunch-food-poisoning">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>53 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261122-0448-jiang-lunch-food-poisoning/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-0448-jiang-lunch-food-poisoning">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>53 分鐘</span><span>Claude Fable 5.2</span></p>
       </article>
     </div>
 </section>
@@ -125,7 +126,7 @@
         <ul class="case-points"><li><b>無法證實</b><span>無法證實：沈伯洋在辯論會上說過「我們並沒有講那是市政府砍的」，但他所指的記者會是哪一場、當時怎麼說，查不到原始紀錄；也沒有查到他明說樹冠減少是市政府砍的紀錄。</span></li><li><b>無法證實</b><span>無法證實：沈伯洋在辯論會上說過這句話，但他所指的記者會是哪一場、當時怎麼說，查不到原始紀錄。</span></li></ul>
         <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li></ul></div>
         <p class="case-tfc"><a href="../reports/20261122-1428-shen-canopy/#others">這份報告有一段和既有查核機構的結論比對</a></p>
-        <p class="case-links"><a class="link" href="../reports/20261122-1428-shen-canopy/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-1428-shen-canopy">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>50 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261122-1428-shen-canopy/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-1428-shen-canopy">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>50 分鐘</span><span>Claude Fable 5.2</span></p>
       </article>
       <article class="case">
         <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
@@ -136,7 +137,7 @@
         <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「部分符合」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li></ul></div>
         <p class="case-note">這一句照查核中心的標題；逐字稿記的原話後面還有「包括中央轄管的地方，以及大學的校園」，少了這一段可能比原話難成立。</p>
         <p class="case-tfc"><a href="../reports/20261122-1347-jiang-canopy-private-land/#others">這份報告有一段和既有查核機構的結論比對</a></p>
-        <p class="case-links"><a class="link" href="../reports/20261122-1347-jiang-canopy-private-land/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-1347-jiang-canopy-private-land">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>41 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261122-1347-jiang-canopy-private-land/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-1347-jiang-canopy-private-land">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>41 分鐘</span><span>Claude Fable 5.2</span></p>
       </article>
     </div>
 </section>
@@ -152,7 +153,7 @@
         <ul class="case-points"><li><b>無法證實</b><span>裁判判「正確」：沈伯洋說過這句話，而且到 2026-10-31 辯論當天為止，蔣萬安還沒有到過成淵高中；他在辯論後的 11 月 6 日才第一次到校。</span><span>另一家公司的模型覆核時不同意：現有證據支持蔣萬安在 10 月 31 日辯論前尚未因成淵高中食安事件到校的推論，但未達「正確」所需的第一手證據門檻。</span><span>覆核沒有通過或沒有完成，所以這一條改列「無法證實」。</span></li><li><b>大致正確</b><span>沈伯洋確實在 2026-10-31 辯論會上這樣說，蔣萬安也確實到過金華國中，但不是「馬上」：他 9 月 29 日中午到校，距 9 月 4 日供餐 25 天、距 9 月 11 日學校接獲反映 18 天、距 9 月 23 日議員披露 6 天。</span></li></ul>
         <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li><li>C4 的覆核沒有完成或沒有通過，裁判判的「正確」改列「無法證實」；照裁判原本的判定，結果會是「符合」</li></ul></div>
         <p class="case-tfc"><a href="../reports/20261122-1518-shen-chengyuan/#others">這份報告有一段和既有查核機構的結論比對</a></p>
-        <p class="case-links"><a class="link" href="../reports/20261122-1518-shen-chengyuan/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-1518-shen-chengyuan">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>33 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261122-1518-shen-chengyuan/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-1518-shen-chengyuan">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>33 分鐘</span><span>Claude Fable 5.2</span></p>
       </article>
       <article class="case">
         <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
@@ -162,7 +163,33 @@
         <ul class="case-points"><li><b>誤導</b><span>廚師手部檢體確實是獲報當天採的，但監察院認定市府獲報後延遲近 5 小時才到場，而且兩次稽查都沒有採食材和餐點，「第一時間」的說法和這項認定不符。</span></li><li><b>誤導</b><span>訊息的引言拿掉了原話裡的「才在後續的起訴當中有非常重要的依據」，「跑不了」的範圍被放寬；照原話的範圍檢驗，刑事起訴和一審有罪查得到，但家屬的賠償是由第三方保險公司給付，不是寶林或被告支付。</span><span>反方 C：立場覆核時同意這個判定，但認為理由或證據還有缺漏：「誤導」的標籤和斷章取義的標示沒有問題，理由也已經把起訴依據、家屬賠償、罰鍰三件事分開寫；法院宣判新聞稿、北檢偵結新聞稿的轉錄、市府 11 月 12 日新聞稿和三立引述的原話都重新打開核對，內容相符…</span></li></ul>
         <p class="case-note">這一句照查核中心的標題；逐字稿記的原話是「採集了生物跡證，才在後續的起訴當中有了非常重要的依據，讓寶林跑不了」，少了中間這一段可能比原話難成立。這是跑完才發現的。</p>
         <p class="case-tfc"><a href="../reports/20261122-1550-jiang-baolin/#others">這份報告有一段和既有查核機構的結論比對</a></p>
-        <p class="case-links"><a class="link" href="../reports/20261122-1550-jiang-baolin/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-1550-jiang-baolin">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>41 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261122-1550-jiang-baolin/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-1550-jiang-baolin">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>41 分鐘</span><span>Claude Fable 5.2</span></p>
+      </article>
+    </div>
+</section>
+<section id="twin-city-forum" class="tp-issue">
+  <h2>雙城論壇</h2>
+  <p>台北和上海的雙城論壇。兩個人各自引了對方以前講過的話。</p>
+    <div class="duo-row">
+      <article class="case">
+        <p class="case-who"><b>3</b>沈伯洋<small>民進黨</small></p>
+        <blockquote>沈伯洋在 10 月 31 日台北市長辯論會上說，蔣萬安在 2022 年說過：「如果今天共機擾台，在一些條件、政治前提的狀況之下，這個時候雙城論壇應該要再思考。」</blockquote>
+        <p class="case-result"><strong>無法判定</strong><span class="case-reason">主要說法有一半以上無法證實，查不到不等於假的</span></p>
+        <dl><div><dt>可信度</dt><dd>不顯示</dd></div><div><dt>信心度</dt><dd>80<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">不可公開</dd></div></dl>
+        <ul class="case-points"><li><b>無法證實</b><span>無法證實：沈伯洋在 2026 年 10 月 31 日台北市長辯論會上確實把這段話說成蔣萬安 2022 年的發言，但找不到蔣萬安 2022 年說過引號裡這句話的原始紀錄。</span><span>另一家公司的模型覆核時同意這個判定，但認為理由或證據還有缺漏：維持「無法證實」合理。央廣刊出的 2022 年引文「雙城論壇的舉辦前提就是中共不再擾台」可佐證蔣萬安當時的立場，但仍無法確認他是否說過沈伯洋引述的整句話。</span></li></ul>
+        <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li></ul></div>
+        <p class="case-links"><a class="link" href="../reports/20261122-1956-shen-twincity/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-1956-shen-twincity">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>50 分鐘</span><span>Claude Opus 5.5</span></p>
+      </article>
+      <article class="case">
+        <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
+        <blockquote>蔣萬安在 10 月 31 日台北市長辯論會上說，沈伯洋過去說「雙城論壇是統戰滲透的破口」，現在卻說「我願意保留既有的交流框架」。</blockquote>
+        <p class="case-result"><strong>部分符合</strong><span class="scale" style="--at:53"><span>錯誤</span><i></i><span>正確</span></span></p>
+        <dl><div><dt>可信度</dt><dd>53</dd></div><div><dt>信心度</dt><dd>80<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">不可公開</dd></div></dl>
+        <ul class="case-points"><li><b>誤導</b><span>蔣萬安在 2026 年 10 月 31 日辯論會的結論確實說過沈伯洋曾稱雙城論壇是「統戰滲透的破口」，但引號裡當成沈伯洋原話的這句，比他 4 月的原話多了「統戰」、少了「很多時候」。</span><span>反方 B：反證覆核時同意這個判定，但認為理由或證據還有缺漏：判為誤導是對的。自由時報和聯合報引述的沈伯洋 4 月原話都是雙城論壇「很多時候」是造成滲透的破口，沒有「統戰」；年代新聞報導，蔣萬安在交叉詰問中引述的也沒有「統戰」。</span></li><li><b>大致正確</b><span>蔣萬安在同一場辯論的結論說沈伯洋現在「願意保留既有的交流框架」，沈伯洋 2026 年 10 月也確實說過現有的交流框架「我們先留著」「框架可以保留」，主體正確；但引號裡省略了「先」字和他附帶的條件。</span></li></ul>
+        <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「部分符合」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li></ul></div>
+        <p class="case-note">這一句是我們照逐字稿改寫的：蔣萬安在結論時說的是「我不會在別人舉辦雙城論壇的時候說，雙城論壇是統戰滲透的破口，而現在卻說『我願意保留既有的交流框架』」，沒有點名，前一句的引號是我們加的；逐字稿的結論段沒有第二份轉錄可以對照。這是開跑前就知道的，寫在登記裡。</p>
+        <p class="case-tfc"><a href="../reports/20261122-1924-jiang-twincity/#others">這份報告有一段和既有查核機構的結論比對</a></p>
+        <p class="case-links"><a class="link" href="../reports/20261122-1924-jiang-twincity/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-1924-jiang-twincity">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>32 分鐘</span><span>Claude Opus 5.5</span></p>
       </article>
     </div>
 </section>
@@ -178,7 +205,7 @@
         <ul class="case-points"><li><b>錯誤</b><span>這段錄音的聲音經調查局鑑識是深偽內容，不是沈伯洋本人承認收回扣。</span></li><li><b>大致正確</b><span>確有一段影音在網路流傳，字幕把它標示為疑似沈伯洋的私下錄音；但多個來源記載的實際字幕是「疑似沈伯洋私下錄音流出」，「疑似沈姓候選人私下錄音」是桃園地檢署新聞稿去掉姓名後的描述。</span></li></ul>
         <p class="case-note">這一則的文字是我們照媒體對起訴內容的報導寫的，不是那段錄音的字幕原文。</p>
         <p class="case-tfc"><a href="../reports/20261121-0238-shen-kickback-recording/#others">這份報告有一段和既有查核機構的結論比對</a></p>
-        <p class="case-links"><a class="link" href="../reports/20261121-0238-shen-kickback-recording/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0238-shen-kickback-recording">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>37 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261121-0238-shen-kickback-recording/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261121-0238-shen-kickback-recording">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>37 分鐘</span><span>Claude Fable 5.2</span></p>
       </article>
       <article class="case">
         <p class="case-who"><span>針對</span><b>5</b>蔣萬安<small>國民黨</small></p>
@@ -188,13 +215,13 @@
         <ul class="case-points"><li><b>無法證實</b><span>裁判判「錯誤」：查得到的紀錄顯示，垃圾車播放的是市長錄製的公費疫苗宣導，裡面沒有「市長選舉請支持蔣萬安」這句話，這個說法和紀錄衝突，判錯誤。</span><span>另一家公司的模型覆核時不同意：現有資料不足以判定大稻埕那次廣播播出拉票語句的說法為錯誤。</span><span>覆核沒有通過或沒有完成，所以這一條改列「無法證實」。</span></li></ul>
         <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「無法判定」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li><li>C1 的覆核沒有完成或沒有通過，裁判判的「錯誤」改列「無法證實」；照裁判原本的判定，結果會是「不符」</li></ul></div>
         <p class="case-note">這一則的文字是我們照媒體對原貼文的轉述寫的，不是原貼文的逐字內容；原貼文已經刪除。</p>
-        <p class="case-links"><a class="link" href="../reports/20261120-2249-garbage-truck-broadcast/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261120-2249-garbage-truck-broadcast">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>34 分鐘</span></p>
+        <p class="case-links"><a class="link" href="../reports/20261120-2249-garbage-truck-broadcast/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261120-2249-garbage-truck-broadcast">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>34 分鐘</span><span>Claude Fable 5.2</span></p>
       </article>
     </div>
 </section>
 <section id="later">
-  <h2>還沒上線的 6 個議題</h2>
-  <p>雙城論壇、松山機場遷建、公館圓環、會議出席、兒虐修法、毒駕修法。照登記的順序一則一則跑，一個議題的兩則都跑完才會出現在這一頁和「全部報告」；只跑完一邊的不放。額度用完就停在那裡，停在哪裡會寫在紀錄裡。</p>
+  <h2>還沒上線的 5 個議題</h2>
+  <p>松山機場遷建、公館圓環、會議出席、兒虐修法、毒駕修法。照登記的順序一則一則跑，一個議題的兩則都跑完才會出現在這一頁和「全部報告」；只跑完一邊的不放。額度用完就停在那裡，停在哪裡會寫在紀錄裡。</p>
 </section>
 <section id="notes">
   <h2>讀這些結果的時候要注意</h2>

@@ -2,66 +2,91 @@
   "20261120-1441-機車大燈罰三千": {
     "start": "2026-11-20 14:40",
     "end": "2026-11-20 15:29",
-    "minutes": 48
+    "minutes": 48,
+    "model": "claude-fable-5-2"
   },
   "20261120-2249-garbage-truck-broadcast": {
     "start": "2026-11-20 22:48",
     "end": "2026-11-20 23:22",
-    "minutes": 34
+    "minutes": 34,
+    "model": "claude-fable-5-2"
   },
   "20261121-0238-shen-kickback-recording": {
     "start": "2026-11-21 02:37",
     "end": "2026-11-21 03:15",
-    "minutes": 37
+    "minutes": 37,
+    "model": "claude-fable-5-2"
   },
   "20261121-0315-taipei-debt-400yi": {
     "start": "2026-11-21 03:15",
     "end": "2026-11-21 03:56",
-    "minutes": 42
+    "minutes": 42,
+    "model": "claude-fable-5-2"
   },
   "20261121-0357-shen-7599-urban-renewal": {
     "start": "2026-11-21 03:56",
     "end": "2026-11-21 04:31",
-    "minutes": 35
+    "minutes": 35,
+    "model": "claude-fable-5-2"
   },
   "20261122-0238-jiang-kangle-7599": {
     "start": "2026-11-22 02:37",
     "end": "2026-11-22 03:13",
-    "minutes": 36
+    "minutes": 36,
+    "model": "claude-fable-5-2"
   },
   "20261122-0314-shen-parasol-budget": {
     "start": "2026-11-22 03:14",
     "end": "2026-11-22 03:50",
-    "minutes": 37
+    "minutes": 37,
+    "model": "claude-fable-5-2"
   },
   "20261122-0351-shen-lunch-milk": {
     "start": "2026-11-22 03:51",
     "end": "2026-11-22 04:48",
-    "minutes": 57
+    "minutes": 57,
+    "model": "claude-fable-5-2"
   },
   "20261122-0448-jiang-lunch-food-poisoning": {
     "start": "2026-11-22 04:48",
     "end": "2026-11-22 05:41",
-    "minutes": 53
+    "minutes": 53,
+    "model": "claude-fable-5-2"
   },
   "20261122-1347-jiang-canopy-private-land": {
     "start": "2026-11-22 13:47",
     "end": "2026-11-22 14:27",
-    "minutes": 41
+    "minutes": 41,
+    "model": "claude-fable-5-2"
   },
   "20261122-1428-shen-canopy": {
     "start": "2026-11-22 14:27",
     "end": "2026-11-22 15:17",
-    "minutes": 50
+    "minutes": 50,
+    "model": "claude-fable-5-2"
   },
   "20261122-1518-shen-chengyuan": {
     "start": "2026-11-22 15:17",
     "end": "2026-11-22 15:50",
-    "minutes": 33
+    "minutes": 33,
+    "model": "claude-fable-5-2"
   },
   "20261122-1550-jiang-baolin": {
     "start": "2026-11-22 15:50",
     "end": "2026-11-22 16:31",
-    "minutes": 41
+    "minutes": 41,
+    "model": "claude-fable-5-2"
+  },
+  "20261122-1924-jiang-twincity": {
+    "start": "2026-11-22 19:24",
+    "end": "2026-11-22 19:56",
+    "minutes": 32,
+    "model": "claude-opus-5-5"
+  },
+  "20261122-1956-shen-twincity": {
+    "start": "2026-11-22 19:56",
+    "end": "2026-11-22 20:46",
+    "minutes": 50,
+    "model": "claude-opus-5-5"
   }
 }

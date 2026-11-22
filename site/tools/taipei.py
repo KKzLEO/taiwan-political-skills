@@ -28,11 +28,20 @@ CAVEATS = {
     "shen-kickback": "這一則的文字是我們照媒體對起訴內容的報導寫的，不是那段錄音的字幕原文。",
     "jiang-garbage-truck": "這一則的文字是我們照媒體對原貼文的轉述寫的，不是原貼文的逐字內容；原貼文已經刪除。",
     "jiang-canopy": "這一句照查核中心的標題；逐字稿記的原話後面還有「包括中央轄管的地方，以及大學的校園」，少了這一段可能比原話難成立。",
+    "jiang-twincity": "這一句是我們照逐字稿改寫的：蔣萬安在結論時說的是「我不會在別人舉辦雙城論壇的時候說，雙城論壇是統戰滲透的破口，而現在卻說『我願意保留既有的交流框架』」，沒有點名，前一句的引號是我們加的；逐字稿的結論段沒有第二份轉錄可以對照。這是開跑前就知道的，寫在登記裡。",
     "jiang-baolin": "這一句照查核中心的標題；逐字稿記的原話是「採集了生物跡證，才在後續的起訴當中有了非常重要的依據，讓寶林跑不了」，少了中間這一段可能比原話難成立。這是跑完才發現的。",
 }
 # Runs in examples/ that are not a registered statement, and what each is.
 OTHER = {"20261120-1441-機車大燈罰三千": "為了測試寫的訊息"}
 TIMES = json.loads((EXAMPLES / "times.json").read_text(encoding="utf-8"))
+# The model each run used, its host and every role it started (examples/times.json). The registration names the first;
+# when its quota ran out before the list was done, the rest ran on the second (the results file says when and why).
+REGISTERED_MODEL = "claude-fable-5-2"
+MODELS = {"claude-fable-5-2": "Claude Fable 5.2", "claude-opus-5-5": "Claude Opus 5.5"}
+
+
+def model(run):
+    return MODELS[TIMES[run.name]["model"]]
 
 
 def given():

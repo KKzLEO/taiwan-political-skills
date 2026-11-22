@@ -153,7 +153,29 @@ class Taipei(unittest.TestCase):
                 self.assertLessEqual(abs((end - start).total_seconds() / 60 - took["minutes"]), 1.5, statement["id"])
                 self.assertIn(f'<span>{took["minutes"]} 分鐘</span>', card, statement["id"])
                 page = read(SITE / "reports" / statement["run"].name / "index.html")
-                self.assertIn(f'這次查核花了 {took["minutes"]} 分鐘。', page, statement["id"])
+                self.assertIn(f'這次查核花了 {took["minutes"]} 分鐘', page, statement["id"])
+
+    def test_which_model_ran_each_statement_is_on_its_card_and_page_and_the_same_for_both_sides_of_an_issue(self):
+        """The registration names one model. When the rest ran on another, every card and page says which, and the
+        two statements of an issue always ran on the same one: that is what keeps an issue fair to both."""
+        times = json.loads(read(ROOT / "examples/times.json"))
+        names = {"claude-fable-5-2": "Claude Fable 5.2", "claude-opus-5-5": "Claude Opus 5.5"}
+        for run in sorted(p.parent for p in (ROOT / "examples").glob("*/report.md")):
+            self.assertIn(times[run.name].get("model"), names, run.name)
+            page = read(SITE / "reports" / run.name / "index.html")
+            self.assertIn(f'主體和查核流程裡的角色用的模型是 {names[times[run.name]["model"]]}。', page, run.name)
+        for name, statements in self.shown:
+            self.assertEqual(len({times[s["run"].name]["model"] for s in statements}), 1, name)
+        for (name, body), statements in zip(self.sections(), [s for _, s in self.shown] + [self.data.about()]):
+            for card, statement in zip(re.findall(r'<article class="case">(.*?)</article>', body, flags=re.S), statements):
+                self.assertIn(f'<span>{names[times[statement["run"].name]["model"]]}</span>', card, statement["id"])
+        shown = {times[s["run"].name]["model"] for _, statements in self.shown for s in statements}
+        mixed = shown - {"claude-fable-5-2"}
+        page, front = read(SITE / "taipei/index.html"), read(FRONT)
+        self.assertEqual("不是每一則都用登記寫的模型" in page, bool(mixed))
+        self.assertEqual("改用 Claude Opus 5.5" in front, "claude-opus-5-5" in shown)
+        if mixed:
+            self.assertIn("同一個議題的兩句一定是同一個模型跑的", page)
 
     def test_each_card_says_what_its_run_s_files_say(self):
         """Card by card against the score file: the words, the result, both numbers, whether it may be quoted and
