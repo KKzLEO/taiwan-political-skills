@@ -1,0 +1,77 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 22,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C3",
+      "target": "label",
+      "argument": "建議判為誤導。沈伯洋未參加國民黨團與民眾黨團共同版本的二讀表決，但在98秒前已對同一條文的行政院、司法院版本投下贊成票。蔣萬安只說「沒有參加投票」，接著以此批評沈伯洋站在加害者一方，容易讓人以為沈伯洋沒有參與這次毒駕修法的任何表決。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html",
+          "excerpt": "贊成：\n\n陳俊宇　　郭昱晴　　范　雲　　蔡其昌　　莊瑞雄　　沈伯洋"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/sittings/meetingLink?id=11-06-05%3B115%2F10%2F30%3B%E9%99%A2%E6%9C%83",
+          "excerpt": "〔二讀時，第一百八十五條之三照台灣民眾黨黨團及國民黨黨團共同所提再修正動議條文通過〖經記名表決結果，予以通過，表決結果附後(1)〗"
+        },
+        {
+          "url": "https://news.pts.org.tw/article/833715",
+          "excerpt": "你人在立法院，卻沒有參加投票，無論酒駕、毒駕、廢死，你都站在加害者的立場"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C3",
+      "target": "neutral_rewrite",
+      "argument": "改寫加上「在這次修法表決時」，把原話的「人在立法院」限縮到特定表決當下，也讓兩次記名表決看起來只有一次。建議改為「蔣萬安表示，沈伯洋當天人在立法院，但沒有參加毒駕修法投票。蔣萬安未說明所指的表決版本。」"
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C3",
+      "target": "evidence",
+      "argument": "S12的聯合報把57票贊成寫成三讀時的表決結果。立法院議事錄記載，這是國民黨團與民眾黨團共同版本的二讀票數，三讀照二讀文字通過。沈伯洋有沒有參加記名表決，應以二讀的兩份名單為準。",
+      "evidence": [
+        {
+          "url": "https://udn.com/news/story/6656/9846960",
+          "excerpt": "全案三讀時，立法院上演表決大戰，出席者共59人、贊成者57人"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/sittings/meetingLink?id=11-06-05%3B115%2F10%2F30%3B%E9%99%A2%E6%9C%83",
+          "excerpt": "三讀時，照二讀文字通過。"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C2",
+      "target": "label",
+      "argument": "建議判為大致正確。三讀條文確實將死刑列為最高法定刑，但適用範圍取決於前案是否已經有罪判決確定或緩起訴處分確定。前案也可以是符合條文的酒駕，因此先前酒駕、後來首次毒駕致死的人也可能適用。原句省略的條件會影響哪些人落入這項規定。",
+      "proposed_label": "mostly_true",
+      "evidence": [
+        {
+          "url": "https://www.president.gov.tw/File/Doc/25c2f072-94c1-47ec-a7e8-b4b9573a8afd#page=2",
+          "excerpt": "曾犯本條或陸海空軍刑法第五十四條之罪，經有罪判決確定\n或經緩起訴處分確定，於十年內再犯第二項之罪因而致人於死者\n，處死刑、無期徒刑或十年以上有期徒刑"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "Yahoo文字直播連結本次查核回傳404，無法重現下午1時18分的摘錄或確認它是最早的文字紀錄。沈伯洋競選網站另有標示下午1時12分的相關發言摘要，可作為較早的公開線索，但該摘要未收錄整段引文。",
+      "evidence": [
+        {
+          "url": "https://puma.taipei/live/debate/list",
+          "excerpt": "2026/10/31 13:12\n\n蔣指控：無論酒駕、毒駕、廢死，沈伯洋都站在加害者的立場"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

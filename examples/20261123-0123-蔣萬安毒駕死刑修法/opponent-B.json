@@ -1,0 +1,50 @@
+{
+  "seat": "B",
+  "lens": "counter",
+  "engine": "claude",
+  "searches_run": 4,
+  "attacks": [
+    {
+      "id": "B-1",
+      "claim_id": "C3",
+      "target": "label",
+      "argument": "C3 應改判為誤導。沈伯洋當天確實在立法院，也確實沒有參加最後通過的國民黨、民眾黨團再修正動議表決；但在同一次院會、同一條文的表決中，他在大約一分半鐘前已對行政院、司法院提出的加重刑度版本投下贊成票，這個版本以 41 票贊成、57 票反對沒有通過。台灣事實查核中心依院會表決畫面、民間司法改革基金會依表決紀錄，都記載他對行政院版本投了贊成票。查核中心也指出，行政院版本對毒駕基本犯、加重結果犯、再犯的刑責全面提高，只是最重沒有到死刑。另外，依立法院公報（S2），三讀是在無人異議下通過，沒有另外記名表決，所以三讀階段任何委員都沒有投票。「你人在立法院卻沒有參加投票」沒有交代他其實參加了這次修法的表決、而且支持另一個加重刑責的版本，容易讓人以為他對這次毒駕加重刑責修法完全沒有表態或刻意迴避。材料屬實，但缺少關鍵前後文，引導出錯誤印象，應判誤導，不是大致正確。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+          "excerpt": "沈伯洋對行政院提出的版本表決有投下同意票"
+        },
+        {
+          "url": "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+          "excerpt": "對毒駕（基本犯、加重結果犯、再犯）的全面刑責是有增加，但皆未提高刑責至死刑"
+        },
+        {
+          "url": "https://jrf.org.tw/articles/3330",
+          "excerpt": "第一，沈伯洋沒有參與10月30日藍白共同再修正動議的表決，但有投票贊成行政院及司法院的加重刑度版本。只是該版本遭到57票反對，未能通過。"
+        },
+        {
+          "url": "https://jrf.org.tw/articles/3330",
+          "excerpt": "沈伯洋未參與藍白版本表決，並不能直接推論他反對嚴懲毒駕"
+        }
+      ]
+    },
+    {
+      "id": "B-2",
+      "claim_id": "C3",
+      "target": "evidence",
+      "argument": "S9 中央社報導被列為直接支持 C3，但其中「民進黨立委離席未投票」是照片說明，泛指民進黨立委，沒有點名沈伯洋，也沒有提到同一天行政院版本的表決，報導裡唯一描述的表決是藍白再修正動議。查核中心的記載顯示，院會當天 12 點 59 分先表決行政院版本，沈伯洋那時有投票。S9 只能說明民進黨立委沒有參加藍白版本的表決，對「沈伯洋沒有參加投票」這個說法只能當背景，不應算是直接支持。",
+      "evidence": [
+        {
+          "url": "https://www.cna.com.tw/news/aipl/202610300146.aspx",
+          "excerpt": "民進黨立委離席未投票"
+        },
+        {
+          "url": "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+          "excerpt": "立法院當日12點59分先針對行政院提出的版本表決"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

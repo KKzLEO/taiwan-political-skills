@@ -1,0 +1,336 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://ppg.ly.gov.tw/ppg/sittings/meetingLink?id=11-06-05;115/10/30;%E9%99%A2%E6%9C%83",
+      "title": "立法院第11屆第6會期第5次會議（院會）",
+      "publisher": "立法院議事暨公報資訊網",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "LY-ppg-sitting-11-06-05",
+      "stance": "supports",
+      "excerpt": "中華民國刑法第一百八十五條之三條文修正通過。",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://lydata.ronny-s3.click/agenda-txt/LCIDC01_1158101_00004.doc",
+      "title": "立法院公報第115卷第81期院會紀錄「中華民國刑法修正第一百八十五條之三條文─完成三讀─」文字檔",
+      "publisher": "立法院（官方 DOC 由 ly.govapi.tw 專案轉為文字檔）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "LY-gazette-115-81",
+      "stance": "supports",
+      "excerpt": "表決時間：中華民國115年10月30日 下午1時01分32秒……全案已經過二讀，現在台灣民眾黨團提議繼續進行三讀，請問院會，有無異議？（無）沒有異議。……現作以下決議：中華民國刑法第一百八十五條之三條文修正通過。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://lydata.ronny-s3.click/agenda-txt/LCIDC01_1158101_00004.doc",
+      "title": "立法院公報第115卷第81期院會紀錄：台灣民眾黨黨團、國民黨黨團再修正動議條文（刑法第185條之3）",
+      "publisher": "立法院（官方 DOC 由 ly.govapi.tw 專案轉為文字檔）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "LY-gazette-115-81",
+      "stance": "supports",
+      "excerpt": "曾犯本條或陸海空軍刑法第五十四條之罪，經有罪判決確定或經緩起訴處分確定，於十年內再犯第二項之罪因而致人於死者，處死刑、無期徒刑或十年以上有期徒刑，得併科一千萬元以下罰金；致重傷者，處七年以上有期徒刑，得併科七百萬元以下罰金。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://lydata.ronny-s3.click/agenda-txt/LCIDC01_1158101_00004.doc",
+      "title": "立法院公報第115卷第81期院會紀錄：刑法第185條之3行政院、司法院版本記名表決結果名單",
+      "publisher": "立法院（官方 DOC 由 ly.govapi.tw 專案轉為文字檔）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "LY-gazette-115-81",
+      "stance": "context",
+      "excerpt": "表決時間：中華民國115年10月30日 下午12時59分54秒……表決議題：中華民國刑法第一百八十五條之三 行政院、司法院版本……出席委員98位，贊成41位，反對57位，贊成者少數，行政院、司法院提案條文不通過。……蔡其昌　　莊瑞雄　　沈伯洋　　吳思瑤　　陳冠廷",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://lydata.ronny-s3.click/agenda-txt/LCIDC01_1158101_00004.doc",
+      "title": "立法院公報第115卷第81期院會紀錄：刑法第185條之3藍白再修正動議記名表決結果名單",
+      "publisher": "立法院（官方 DOC 由 ly.govapi.tw 專案轉為文字檔）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "LY-gazette-115-81",
+      "stance": "supports",
+      "excerpt": "報告表決結果：出席59位，贊成57位，反對1位，棄權1位，贊成者多數，第一百八十五條之三照台灣民眾黨黨團、國民黨黨團共同所提再修正動議條文通過。……表決議題：中華民國刑法第一百八十五條之三 台灣民眾黨黨團、國民黨黨團再修正動議……反對：莊瑞雄……棄權：柯建銘",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://ppg.ly.gov.tw/ppg/bills/latest-pass-third-readings/1150703905/process",
+      "title": "咨請公布：中華民國刑法第一百八十五條之三條文",
+      "publisher": "立法院議事暨公報資訊網",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "LY-ppg-bill",
+      "stance": "context",
+      "excerpt": "發文日期：115年11月11日( 台立院議字第1150703905號 )",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.president.gov.tw/Page/294/50452",
+      "title": "修正中華民國刑法條文（總統府公報第7893號）",
+      "publisher": "總統府",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "president-gazette-7893",
+      "stance": "context",
+      "excerpt": "茲修正中華民國刑法第一百八十五條之三條文，公布之。……華總一義字第11500114671號",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=185-3",
+      "title": "中華民國刑法第185-3條",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "moj-law",
+      "stance": "context",
+      "excerpt": "曾犯本條或陸海空軍刑法第五十四條之罪，經有罪判決確定或經緩起訴處分確定，於十年內再犯第一項之罪因而致人於死者，處無期徒刑或五年以上有期徒刑，得併科三百萬元以下罰金……法規整編資料截止日：民國 115 年 11 月 13 日",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "url": "https://www.cna.com.tw/news/aipl/202610300146.aspx",
+      "title": "立院三讀毒駕刑責加重 累犯10年內再犯致死最重可判死",
+      "publisher": "中央通訊社",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "CNA-202610300146",
+      "stance": "supports",
+      "excerpt": "加重至可處死刑、無期徒刑或10年以上有期徒刑……民進黨立委離席未投票",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5623801",
+      "title": "立院三讀通過毒駕修法 累犯致死最重可處死刑",
+      "publisher": "自由時報",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "LTN-5623801",
+      "stance": "supports",
+      "excerpt": "立法院院會今（30日）三讀通過……三讀條文明定，10年內毒駕再犯致死處死刑、無期徒刑或10年以上有期徒刑，得併科1000萬元以下罰金",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.pts.org.tw/article/833610",
+      "title": "立院三讀加重毒駕刑責 10年內累犯致死者可求處死刑",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "PTS-833610",
+      "stance": "supports",
+      "excerpt": "經有罪判決確定或經緩起訴處分確定，於10年內再犯第二項之罪因而致人於死者，死刑、無期徒刑或10年以上有期徒刑，得併科1000萬元以下罰金",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1",
+        "C3"
+      ],
+      "url": "https://udn.com/news/story/6656/9846960",
+      "title": "立院三讀 毒駕再犯致死最高可判死 沈伯洋等綠委未投票",
+      "publisher": "聯合報",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "UDN-9846960",
+      "stance": "supports",
+      "excerpt": "出席者共59人、贊成者57人、反對者為民進黨立委莊瑞雄1人……全案表決時贊成者57人，民進黨立委沈伯洋等綠委未投票。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "url": "https://news.pts.org.tw/article/833715",
+      "title": "台北市長辯論會報導（2026/10/31）",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "PTS-833715",
+      "stance": "context",
+      "excerpt": "昨天立法院三讀通過修法，針對10年內再犯毒駕致死者，最重可以處以死刑，你人在立法院，卻沒有參加投票，無論酒駕、毒駕、廢死，你都站在加害者的立場",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "url": "https://tw.news.yahoo.com/live/%E5%8F%B0%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96%E6%9C%83%E7%9B%B4%E6%92%AD1200%E7%99%BB%E5%A0%B4-%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%94%A3%E8%90%AC%E5%AE%89%E4%BA%A4%E9%8B%92%EF%BD%9C%E4%B8%8D%E6%96%B7%E6%9B%B4%E6%96%B0-032846919.html",
+      "title": "台北市長辯論會直播12:00登場 沈伯洋蔣萬安交鋒｜不斷更新",
+      "publisher": "Yahoo奇摩新聞",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "Yahoo-live-debate",
+      "stance": "context",
+      "excerpt": "立法院昨天三讀通過修法，十年內再犯毒駕致死者最重可處死刑，沈伯洋人在立法院卻沒有參加投票",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+      "title": "曾酒駕、再毒駕致死也可能判死刑？ 毒駕加重刑責修法爭議一次看",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-23",
+      "tier": 4,
+      "chain": "TFC-drug-driving",
+      "stance": "context",
+      "excerpt": "依據院會當日表決畫面，沈伯洋對行政院提出的版本表決有投下同意票；但對國民黨、民眾黨當日提出的版本，沈退席未投票。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://jrf.org.tw/articles/3330",
+      "title": "辯論X司法｜真假？台北市長候選人說司法？",
+      "publisher": "財團法人民間司法改革基金會",
+      "accessed": "2026-11-23",
+      "tier": 4,
+      "chain": "JRF-3330",
+      "stance": "context",
+      "excerpt": "沈伯洋沒有參與10月30日藍白共同再修正動議的表決，但有投票贊成行政院及司法院的加重刑度版本。",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://www.mirrormedia.mg/external/mirrordaily_94875",
+      "title": "台北市長辯論／毒駕修法未投票遭質疑 沈伯洋再酸：蔣萬安對立院運作也不了解",
+      "publisher": "鏡週刊（鏡報供稿）",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "Mirror-94875",
+      "stance": "context",
+      "excerpt": "毒駕修法未投票遭質疑 沈伯洋再酸：蔣萬安對立院運作也不了解",
+      "access_note": "full"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "true",
+      "reasoning": "正確：立法院在2026年10月30日，也就是10月31日辯論會的前一天，三讀通過刑法第185條之3修正。立法院公報第115卷第81期記載，115年10月30日下午1時01分32秒表決通過藍白再修正動議，三讀時無異議，決議「中華民國刑法第一百八十五條之三條文修正通過」；立法院11月11日咨請公布，總統11月20日公布。蔣萬安在辯論會上說這段話，有公視、Yahoo文字直播等多家媒體分別記載，但未能直接檢視辯論會完整影片。條文取自立法院公報的第三方轉檔文字版，官方DOC/PDF無法直接解析；全國法規資料庫資料截止於115年11月13日，尚未收錄這次修正。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S6",
+        "S7",
+        "S9",
+        "S10",
+        "S12",
+        "S13",
+        "S14"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C2",
+      "label": "true",
+      "reasoning": "正確：三讀條文規定，曾犯本條或陸海空軍刑法第54條之罪，經有罪判決確定或緩起訴處分確定，十年內再犯第二項毒駕之罪因而致人於死者，「處死刑、無期徒刑或十年以上有期徒刑」，和蔣萬安所說「最重可以處以死刑」相符。修正前同類情形最重是無期徒刑，見全國法規資料庫115年11月13日版本。蔣萬安沒有提到兩項條件：前案須經判決或緩起訴確定，前案也可以是酒駕；這不影響「十年內再犯毒駕致死最重可處死刑」的結論。公視、自由時報、中央社的報導內容一致。",
+      "evidence_ids": [
+        "S3",
+        "S8",
+        "S7",
+        "S9",
+        "S10",
+        "S11",
+        "S13"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C3",
+      "label": "mostly_true",
+      "reasoning": "大致正確：沈伯洋當天在立法院，而且沒有參加最後通過的藍白再修正動議表決，這部分屬實；不過「沒有參加投票」沒有交代，他在約一分半鐘前對同一條文的行政院、司法院版本投了贊成票。立法院公報記載，下午12時59分54秒表決行政院、司法院版本（出席98、贊成41、反對57，不通過），沈伯洋列在贊成名單；下午1時01分32秒表決再修正動議（出席59、贊成57、反對莊瑞雄、棄權柯建銘），名單中沒有他；三讀時無異議，沒有另行表決。聯合報、中央社、事實查核中心的說法和公報一致，沈伯洋的回應也沒有否認未投票。",
+      "evidence_ids": [
+        "S4",
+        "S5",
+        "S2",
+        "S12",
+        "S9",
+        "S15",
+        "S16",
+        "S17",
+        "S13"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": [
+    {
+      "org": "台灣事實查核中心",
+      "url": "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+      "their_label": "無判定標籤（議題觀察室的議題整理，不是查核報告）",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "agree": true,
+      "note": "已用立法院公報第115卷第81期院會紀錄獨立核對文中依院會直播畫面整理的內容。三讀日期為10月30日；行政院版本41比57不通過，沈伯洋列在贊成名單；藍白再修正動議57比1、棄權1通過，名單中沒有沈伯洋。三讀條文包含酒駕前案、緩起訴確定與十年內再犯致死可處死刑，也和公報一致。公報只記錄表決名單，沒有記載「退席」這個動作。"
+    }
+  ]
+}

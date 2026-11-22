@@ -1,0 +1,807 @@
+{
+  "rulings": [
+    {
+      "attack_id": "A-1",
+      "upheld": false,
+      "reason": "攻擊引用的紀錄都屬實：10 月 30 日，國民黨團與民眾黨團提出再修正動議，民進黨立委多數退席沒有投票，只有莊瑞雄投反對票；民進黨團當天公開的理由以程序抗議為主。但答辯的回應站得住。依媒體刊出的辯論全文，「單純只是反對不符合比例原則的提案」是在回應蔣萬安指他反對毒駕重刑，限定的是反對哪些提案。沈伯洋在同一段回答裡接著就批評，再修正動議在最後二十分鐘才提出、沒有經過討論，所以他沒有用這句話排除程序理由。民進黨團當天的說明也提到要釐清「刑度是否符合罪責」，發言人林楚茵也說行政院版「兼顧了刑度比例、罪責相當原則」，可見比例原則是當天就提出的理由之一。從具體行為看，沈伯洋贊成提高刑度的行政院、司法院版，沒有參加納入死刑的再修正動議表決，和「只反對部分提案」相符。退席不等於投反對票、當天以程序抗議為主，這兩點已寫進判定理由，屬於細節差異，不足以改判誤導。",
+      "verified_urls": [
+        "https://www.storm.mg/article/11177080",
+        "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+        "https://newtalk.tw/news/view/2026-10-31/1068405",
+        "https://newtalk.tw/news/view/2026-10-31/1068490",
+        "https://news.pchome.com.tw/politics/nownews/20261031/index-79343732501486207001.html",
+        "https://www.cna.com.tw/news/aipl/202610300235.aspx"
+      ]
+    },
+    {
+      "attack_id": "A-2",
+      "upheld": true,
+      "reason": "查核中心原文是「民進黨立委提案多是全面提升毒駕刑責，提高徒刑或罰金，唯一將死刑納入毒駕刑責的是立委李坤城」，「唯一」只限民進黨立委。同一篇文章也記載國民黨立委黃健豪、徐巧芯的提案把死刑納入。原本的摘錄刪掉前半句，會讓人以為全立法院只有李坤城提出死刑，證據表已改回完整句子。各黨都有提案的判定不受影響。",
+      "verified_urls": [
+        "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/"
+      ]
+    },
+    {
+      "attack_id": "A-3",
+      "upheld": true,
+      "reason": "風傳媒的「62個版本」是轉述民進黨立委莊瑞雄在院會的發言，立法院公報也記載他說委員會有 56 案、逕付二讀有 6 案。這個數字屬於當事人的說法，不是記者自己查證的結果，查核中心那段轉述也出自同一個來源，所以只算一條證據鏈。提案數字已改用立法院的議程和委員會公報這些第一手紀錄支撐。",
+      "verified_urls": [
+        "https://www.storm.mg/article/11177080",
+        "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+        "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html",
+        "https://news.ltn.com.tw/news/politics/breakingnews/5513774"
+      ]
+    },
+    {
+      "attack_id": "A-4",
+      "upheld": false,
+      "reason": "中天新聞網那篇確實沒有提案數字，判定理由裡的來源描述已更正。但攻擊的主要論點不成立。今周刊那句省略了「各黨都有提案」，是節錄的引述。今日新聞刊出的辯論全文寫的是「我們有五、六十個提案喔，各黨都有提案，行政院也有院版……」，主詞就是「我們」；訊息和全文只差語助詞「喔」，不能說訊息改動了主詞。「我們」可能被誤解為民進黨自己的提案數，這一點在提案數字那一條處理。",
+      "verified_urls": [
+        "https://www.businesstoday.com.tw/article/category/183027/post/202610310009/",
+        "https://ctinews.com/news/items/2BnEB964WJ",
+        "https://news.pchome.com.tw/politics/nownews/20261031/index-79343732501486207001.html"
+      ]
+    },
+    {
+      "attack_id": "A-5",
+      "upheld": true,
+      "reason": "全國法規資料庫的整編資料只到 115 年 11 月 13 日。沿革最新一筆是 115 年 7 月 22 日修正第 80 條，第 185 條之 3 仍是 112 年 12 月 27 日修正公布的條文。所以這兩筆只能當作修法前條文的背景資料，不能當成已取得 10 月 30 日修法條文的依據。被反對的再修正動議條文，現在改以立法院公報院會紀錄的原文為依據。",
+      "verified_urls": [
+        "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=C0000001",
+        "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html"
+      ]
+    },
+    {
+      "attack_id": "B-1",
+      "upheld": false,
+      "reason": "中國時報和中央社的內容核對屬實：除了莊瑞雄投反對、柯建銘棄權，其餘民進黨立委以太晚拿到再修正動議版本為由退席；民進黨團的說明以程序爭議開頭。但「單純只是」在原話裡限定的是反對的對象，沈伯洋在同一段回答裡也批評了程序；民進黨團當天的說明也提到「刑度是否符合罪責」，所以比例原則不是事後才換的說法。這些差異已寫進判定理由，屬於細節，不足以改判誤導。攻擊另外指出，沈伯洋對行政院版的投票只有查核中心的整理。這一點現在已由立法院公報的記名表決確認：他在行政院、司法院版的贊成名單中，再修正動議的贊成、反對、棄權名單都沒有他。",
+      "verified_urls": [
+        "https://www.chinatimes.com/realtimenews/20261030003515-260407",
+        "https://www.cna.com.tw/news/aipl/202610300235.aspx",
+        "https://newtalk.tw/news/view/2026-10-31/1068490",
+        "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html"
+      ]
+    },
+    {
+      "attack_id": "B-2",
+      "upheld": true,
+      "reason": "立法院 10 月 28 日的議程列出司法及法制委員會併案審查的刑法第 185 條之 3 修正草案 56 案，另外列了張雅琳、顏寬恒、謝衣鳯、呂玉玲各自提出的 4 案，合計 60 案。7 月 22 日的委員會公報也逐一列出 56 案，提案人包括行政院、司法院和各黨立委。媒體刊出的辯論全文裡，這句話後面緊接著「各黨都有提案，行政院也有院版」，所以數字指的是全體提案的總數。原本保留的兩個理由（沒有原始議案清單、「我們」的範圍不明）都已解決，這一條改判正確。",
+      "verified_urls": [
+        "https://ppg.ly.gov.tw/ppg/sittings/2026102287/details?meetingDate=115%2F10%2F28",
+        "https://ppg.ly.gov.tw/ppg/publications/official-gazettes/115/65/02/details",
+        "https://news.pchome.com.tw/politics/nownews/20261031/index-79343732501486207001.html"
+      ]
+    },
+    {
+      "attack_id": "C-1",
+      "upheld": true,
+      "reason": "同一篇查核中心文章也引述，再犯毒駕致死和殺人罪的主刑配置相同，「不一定違憲」。真理大學法律系教授吳景欽的投書一方面認為納入死刑「似有違反罪刑相當之疑慮」，一方面也指出現行刑法其他加重結果犯同樣有死刑選項。原本的理由只引用一個方向的分析，已改為兩個方向並列。判定維持非事實陳述。",
+      "verified_urls": [
+        "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+        "https://udn.com/news/story/7339/9546855"
+      ]
+    },
+    {
+      "attack_id": "C-2",
+      "upheld": true,
+      "reason": "對各政黨要用一致的稱呼。判定理由已改寫為「國民黨團與民眾黨團共同提出的再修正動議」；逐字摘錄裡的用詞照原文保留。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "C-3",
+      "upheld": true,
+      "reason": "「不是反對加重刑責，只反對部分提案」是媒體轉述沈伯洋為自己辯護的說法，不應該拿來當判定標準。判定理由已改為只寫立法院記名表決查得到的具體行為。判定結果不受影響。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "X1-1",
+      "upheld": true,
+      "reason": "今日新聞 10 月 31 日刊出的辯論全文（PChome 新聞轉載）記載：「我們有五、六十個提案喔，各黨都有提案，行政院也有院版，我們單純只是反對不符合比例原則的提案」。訊息的引言和它只差語助詞「喔」，原本說「查到的報導都沒有這種寫法」不成立。這是媒體的轉錄，直播原音沒有逐字核對。",
+      "verified_urls": [
+        "https://news.pchome.com.tw/politics/nownews/20261031/index-79343732501486207001.html"
+      ]
+    },
+    {
+      "attack_id": "X1-2",
+      "upheld": true,
+      "reason": "總統府公報第 7893 號記載，115 年 11 月 20 日公布「茲修正中華民國刑法第一百八十五條之三條文，公布之。」，早於查核日 11 月 23 日。立法院 10 月 30 日三讀、總統 11 月 20 日公布，兩個階段要分開寫。全國法規資料庫仍顯示舊條文，只是因為整編資料截止在 11 月 13 日。",
+      "verified_urls": [
+        "https://www.president.gov.tw/Page/294/50452"
+      ]
+    },
+    {
+      "attack_id": "X1-3",
+      "upheld": true,
+      "reason": "立法院公報的院會紀錄有莊瑞雄的發言：「在司法及法制委員會裡面一共有56案，逕付二讀的有6案」；委員會公報列出的 56 案，提案人包括行政院、司法院和不同黨籍的立委。這些紀錄支持把「五、六十個」理解為跨黨派的提案總數。攻擊附的 YouTube 影片頁面只看得到標題，沒有看到攻擊摘錄的那段文字，所以不列為證據。",
+      "verified_urls": [
+        "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html",
+        "https://ppg.ly.gov.tw/ppg/publications/official-gazettes/115/65/02/details"
+      ]
+    },
+    {
+      "attack_id": "X1-4",
+      "upheld": true,
+      "reason": "立法院公報第 115 卷第 65 期（7 月 22 日司法及法制委員會）的案由，列出徐巧芯等 17 人、李坤城等 19 人和台灣民眾黨黨團各自提出的第 185 條之 3 修正草案。這是第一手紀錄，可以直接支持各黨都有提案。",
+      "verified_urls": [
+        "https://ppg.ly.gov.tw/ppg/publications/official-gazettes/115/65/02/details"
+      ]
+    },
+    {
+      "attack_id": "X1-5",
+      "upheld": true,
+      "reason": "委員會公報的第一案是「行政院、司法院函請審議「中華民國刑法第一百八十五條之三條文修正草案」案」，證明行政院版已經正式送進立法院審議，補足了行政院新聞稿只說院會通過、預定送審的部分。",
+      "verified_urls": [
+        "https://ppg.ly.gov.tw/ppg/publications/official-gazettes/115/65/02/details"
+      ]
+    },
+    {
+      "attack_id": "X1-6",
+      "upheld": false,
+      "reason": "攻擊說支持一個版本，不能證明對另一個版本的異議只涉及比例原則，這一點成立。所以判定理由不拿投票紀錄證明他的動機，只寫具體行為，並註明「不符合比例原則」是他的評價。但改判誤導的理由不足。依辯論全文，這句話限定的是反對的對象，沈伯洋在同一段回答裡也批評了程序；民進黨團當天的說明也提到「刑度是否符合罪責」。從具體行為看，他贊成提高刑度的行政院、司法院版，沒有參加納入死刑的再修正動議表決，和「只反對部分提案」相符。當天以程序抗議為主的紀錄，已寫進理由作為細節差異。",
+      "verified_urls": [
+        "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html",
+        "https://neww.tw/2026taipeimayor-debate/"
+      ]
+    },
+    {
+      "attack_id": "X1-7",
+      "upheld": true,
+      "reason": "立法院公報的記名表決紀錄：行政院、司法院版出席 98 人、贊成 41 人、反對 57 人，沈伯洋在贊成名單中。國民黨團與民眾黨團的再修正動議出席 59 人、贊成 57 人、反對 1 人（莊瑞雄）、棄權 1 人（柯建銘），沈伯洋不在任何名單中。判定理由已改依這份第一手紀錄，並把沒有投票、登記棄權、投反對票分開寫。",
+      "verified_urls": [
+        "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html"
+      ]
+    }
+  ],
+  "tactic_checks": [],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "true",
+      "reasoning": "沈伯洋確實在 2026 年 10 月 31 日台北市長辯論會上，針對前一天立法院三讀的毒駕修法說了這段話；訊息和媒體刊出的辯論全文只差一個語助詞「喔」。今日新聞刊出的辯論全文記載：「我們有五、六十個提案喔，各黨都有提案，行政院也有院版，我們單純只是反對不符合比例原則的提案」。公視、台視、中天新聞網直接引述了後半句，自由時報、三立新聞網轉述了提案數字。這段話是回應蔣萬安質疑他沒有參加表決。訊息只截取回答的前半段；他接著也批評再修正動議在最後二十分鐘才提出、沒有經過討論。修法進度：立法院公報記載，10 月 30 日院會表決再修正動議，57 票贊成通過並三讀；總統府公報記載，11 月 20 日修正公布刑法第 185 條之 3。全國法規資料庫的整編資料只到 11 月 13 日，所以仍顯示 112 年的舊條文。訊息只說「修法」，沒有混淆立法階段。直播影片的原音沒有逐字核對，依據的是媒體的轉錄和多家報導的直接引語。",
+      "evidence_ids": [
+        "S21",
+        "S1",
+        "S4",
+        "S5",
+        "S2",
+        "S3",
+        "S23",
+        "S19",
+        "S24",
+        "S32",
+        "S25",
+        "S17",
+        "S18"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C2",
+      "label": "true",
+      "reasoning": "這次毒駕修法的提案總數在 56 到 62 件之間，和「五、六十個」相符；從上下文看，這是各黨和行政院提案的總數。立法院委員會公報列出 7 月 22 日併案審查的 56 案，提案人包括行政院、司法院和各黨立委。10 月 28 日的院會議程除了併案的 56 案，另外列了張雅琳、顏寬恒、謝衣鳯、呂玉玲各自提出的 4 案，合計 60 案。民進黨立委莊瑞雄在院會說委員會有 56 案、逕付二讀有 6 案，合計 62 案；這是他的說法，風傳媒和查核中心的轉述出自同一個來源。辯論全文裡，這句話後面緊接著「各黨都有提案，行政院也有院版」。如果把「我們」理解為民進黨自己提出了五、六十個提案，沒有證據支持。",
+      "evidence_ids": [
+        "S26",
+        "S27",
+        "S12",
+        "S8",
+        "S28",
+        "S22",
+        "S21",
+        "S2",
+        "S3"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C3",
+      "label": "true",
+      "reasoning": "國民黨、民進黨、民眾黨都提出了刑法第 185 條之 3 修正草案，立法院公報的案由清單可以核對。7 月 22 日的委員會公報列出徐巧芯等 17 人、李坤城等 19 人、台灣民眾黨黨團各自提出的修正草案。查核中心整理指出「各黨立委、行政院皆有提出版本」，並記載民進黨立委中只有李坤城把死刑納入毒駕刑責。中央社報導民眾黨團早已提出草案。最後三讀的是國民黨團與民眾黨團共同提出的再修正動議。",
+      "evidence_ids": [
+        "S26",
+        "S8",
+        "S12",
+        "S13",
+        "S14",
+        "S2"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C4",
+      "label": "true",
+      "reasoning": "行政院在 2026 年 6 月 11 日院會通過刑法第 185 條之 3 修正草案，並和司法院會銜送立法院審議。立法院委員會公報的第一案就是「行政院、司法院函請審議」的修正草案。10 月 30 日院會記名表決行政院、司法院版，出席 98 人、贊成 41 人、反對 57 人，沒有通過。",
+      "evidence_ids": [
+        "S10",
+        "S11",
+        "S26",
+        "S24",
+        "S7",
+        "S9"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C5",
+      "label": "mostly_true",
+      "reasoning": "大致正確：依立法院記名表決，沈伯洋贊成提高毒駕刑度的行政院、司法院版，沒有參加納入死刑的再修正動議表決，和他說只反對部分提案相符；「不符合比例原則」是他的評價，沒有查證。國民黨團與民眾黨團共同提出的再修正動議，表決結果是出席 59 人、贊成 57 人、反對 1 人（莊瑞雄）、棄權 1 人（柯建銘），其餘民進黨立委以太晚拿到版本為由退席，所以對這個版本多數是沒有投票，不是投反對票。民進黨團當天的說明以程序爭議為主：再修正動議提出後 27 分鐘就表決，立委直到表決前一刻才拿到條文。說明裡也提到要釐清「刑度是否符合罪責」，發言人林楚茵說行政院版「兼顧了刑度比例、罪責相當原則」。沈伯洋在辯論的同一段回答裡，也批評再修正動議在最後二十分鐘才提出、沒有經過討論。所以如果把「單純只是」理解為唯一的理由，並不完整；訊息也截掉了回答後半段的程序批評。不過這些屬於細節差異，不改變主體：他反對的是特定提案，不是加重刑責本身。",
+      "evidence_ids": [
+        "S24",
+        "S32",
+        "S29",
+        "S30",
+        "S15",
+        "S31",
+        "S21",
+        "S1",
+        "S4",
+        "S9",
+        "S6",
+        "S7",
+        "S28",
+        "S16"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C6",
+      "label": "not_factual",
+      "reasoning": "非事實陳述：提案「不符合比例原則」是法律評價，憲法法庭沒有對這次修法作出判斷，屬於意見。被反對的再修正動議，依立法院公報的條文，是對十年內再犯毒駕致死者「處死刑、無期徒刑或十年以上有期徒刑」。法律意見兩個方向都有。查核中心引述的律師意見，有的認為僅基於未必故意，不符合科處死刑要求的情節最嚴重門檻；也有的認為，再犯毒駕致死和殺人罪主刑配置相同，「不一定違憲」。真理大學法律系教授吳景欽的投書認為，納入死刑「似有違反罪刑相當之疑慮」，同時也指出現行刑法其他加重結果犯同樣有死刑選項。",
+      "evidence_ids": [
+        "S32",
+        "S20",
+        "S33",
+        "S34"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    }
+  ],
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1",
+        "C5"
+      ],
+      "url": "https://news.pts.org.tw/article/833715",
+      "title": "蔣萬安與沈伯洋辯論市政議題 毒駕、都更、路樹列攻防",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "pts-20261031",
+      "stance": "supports",
+      "excerpt": "「昨天立法院三讀通過修法，針對10年內再犯毒駕致死者，最重可以處以死刑，你人在立法院，卻沒有參加投票」……「我們單純只是反對不符合比例原則的提案，我們大家其實都反對毒駕，地方要做的事情叫做預防。」",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624825",
+      "title": "台北市長辯論》蔣萬安再打「毒駕、酒駕、廢死」意識形態題 沈伯洋反擊：沒反對酒、毒駕重刑",
+      "publisher": "自由時報電子報",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "ltn-gan-20261031",
+      "stance": "supports",
+      "excerpt": "針對昨天的毒駕有關的修法，有5、60個提案，各黨都有提案，行政院也有院版，他是反對「不符比例原則」的提案。",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "url": "https://www.setn.com/News.aspx?NewsID=1931349",
+      "title": "北市長辯論／毒駕修法交鋒！蔣萬安轟「專業傲慢」　沈伯洋嗆：選舉操作",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "setn-1931349",
+      "stance": "supports",
+      "excerpt": "沈伯洋指出，10月30日有關毒駕的修法，各黨及行政院都有提出版本，總計有五、六十項提案，自己反對的並非加重毒駕刑責，而是不符合比例原則的提案。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "url": "https://ctinews.com/news/items/2BnEB964WJ",
+      "title": "蔣萬安批毒駕修法沒投票！沈伯洋提這事反擊：我還特別去學塔羅牌",
+      "publisher": "中天新聞網",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "ctinews-20261031",
+      "stance": "supports",
+      "excerpt": "跟毒駕有關的修法，各黨都有提案，行政院也有院版，我們單純只是反對不符合比例原則的提案，毒駕殺人本來就是死刑……「毒駕、酒駕要重刑，這都沒有問題，這個都是中央立法在做的事情，行政院版其實是更為充分，而且符合比例原則。」",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1",
+        "C5"
+      ],
+      "url": "https://news.ttv.com.tw/news/11510310001100W",
+      "title": "蔣萬安轟「毒駕最重處死」沈沒投票 沈伯洋：反對不符合比例原則提案",
+      "publisher": "台視新聞",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "ttv-20261031",
+      "stance": "supports",
+      "excerpt": "「你人在立法院，卻沒有參加投票」……「單純只是反對不符合比例原則的提案」",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1",
+        "C5"
+      ],
+      "url": "https://udn.com/news/story/6656/9846960",
+      "title": "立院三讀 毒駕再犯致死最高可判死 沈伯洋等綠委未投票",
+      "publisher": "聯合報（聯合新聞網）",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "udn-tang-20261030",
+      "stance": "context",
+      "excerpt": "出席者共59人、贊成者57人、反對者為民進黨立委莊瑞雄1人……全案表決時贊成者57人，民進黨立委沈伯洋等綠委未投票。",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C4",
+        "C5"
+      ],
+      "url": "https://www.storm.mg/article/11177080",
+      "title": "毒駕累犯最重處死！立法院三讀藍白版本刑法修法　民進黨立委退席抗議",
+      "publisher": "風傳媒",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "storm-20261030",
+      "stance": "supports",
+      "excerpt": "行政院版本僅獲民進黨團41席立委贊成，在野黨團則有57席立委投下反對票",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+      "title": "曾酒駕、再毒駕致死也可能判死刑？ 毒駕加重刑責修法爭議一次看",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-23",
+      "tier": 4,
+      "chain": "tfc-20261110",
+      "stance": "supports",
+      "excerpt": "有56案相關法案進入委員會審議，各黨立委、行政院皆有提出版本……民進黨立委提案多是全面提升毒駕刑責，提高徒刑或罰金，唯一將死刑納入毒駕刑責的是立委李坤城",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C4",
+        "C5"
+      ],
+      "url": "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+      "title": "曾酒駕、再毒駕致死也可能判死刑？ 毒駕加重刑責修法爭議一次看",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-23",
+      "tier": 4,
+      "chain": "tfc-20261110",
+      "stance": "supports",
+      "excerpt": "民進黨立委多退席未投，僅有莊瑞雄按下反對，該提案最終以贊成57票大於反對1票，提案通過。……沈伯洋對行政院版本修正案投下贊成票。",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://www.ey.gov.tw/Page/9277F759E41CCD91/a7d52987-85fc-49c3-b3e7-1f76dbe3c111",
+      "title": "政院通過《刑法》第185條之3及《陸海空軍刑法》第54條修正草案 卓揆：全面加重罰責 嚴懲毒駕犯罪",
+      "publisher": "行政院",
+      "accessed": "2026-11-23",
+      "tier": 2,
+      "chain": "ey-1150611",
+      "stance": "supports",
+      "excerpt": "日期：115-06-11……行政院會今（11）日通過《中華民國刑法》第185條之3及《陸海空軍刑法》第54條修正草案。……有關《刑法》修正草案部分，將函請司法院會銜送請立法院審議",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://udn.com/news/story/6656/9560896",
+      "title": "政院拍板修法重懲毒駕 卓榮泰:酒毒駕致死傷可沒收車輛",
+      "publisher": "經濟日報（聯合新聞網）",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "edn-yu-20260611",
+      "stance": "supports",
+      "excerpt": "行政院會11日通過《中華民國刑法》第185條之3及《陸海空軍刑法》第54條修正草案，將分別函請司法院會銜送請立法院及函請立法院審議，以加重毒駕刑責、強化社會安全防護。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5513774",
+      "title": "立院司委會審毒駕修法各黨意見多 56案全保留送朝野協商",
+      "publisher": "自由時報電子報",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "ltn-yang-20260722",
+      "stance": "supports",
+      "excerpt": "院會及各黨團提出56個修法版本，由於各黨的意見不同，最終立法院司法及法制委員會決議修正草案全數保留，送朝野協商。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://money.udn.com/money/story/7307/9847532",
+      "title": "立院三讀毒駕累犯最重可判死 民眾黨團：遏止僥倖",
+      "publisher": "中央社（經濟日報轉載）",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "cna-tseng-20261030",
+      "stance": "supports",
+      "excerpt": "民眾黨團指出，黨團早已提出刑法第185條之3修正草案，今天再與國民黨立法院黨團共同推動修法",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C3",
+        "C5"
+      ],
+      "url": "https://udn.com/news/story/6656/9847553",
+      "title": "毒駕再犯可判死 藍白酸綠委表決落跑…民進黨團：扭曲事實",
+      "publisher": "聯合報（聯合新聞網）",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "udn-tsai-20261030",
+      "stance": "context",
+      "excerpt": "國民黨、民眾黨今天中午12時33分才提出共同再修正動議，下午1時就開始表決，中間僅隔27分鐘……且民進黨立委李坤城提出最高死刑的版本，已足以戳破國民黨將民進黨抹黑為縱容毒駕的說法",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://newtalk.tw/news/view/2026-10-31/1068405",
+      "title": "藍白強推毒駕最高處死刑修法三讀 民進黨：支持重罰不代表可踐踏立法程序",
+      "publisher": "新頭殼（引述民進黨發言人林楚茵）",
+      "accessed": "2026-11-23",
+      "tier": 5,
+      "chain": "newtalk-chang-20261031",
+      "stance": "context",
+      "excerpt": "此等立法程序令人完全無法接受……該版本在提高刑責之際，兼顧了刑度比例、罪責相當原則與司法實務運作",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://udn.com/news/story/6656/9847113",
+      "title": "毒駕再犯致死可判死 洪孟楷：民進黨僅支持關5到12年 人命那麼廉價？",
+      "publisher": "聯合報（引述國民黨立委洪孟楷）",
+      "accessed": "2026-11-23",
+      "tier": 5,
+      "chain": "udn-chu-20261030",
+      "stance": "context",
+      "excerpt": "民進黨今天支持的是毒駕致死處5到12年有期徒刑……遺憾的是民進黨今日全部棄權、棄守，直接離開議場",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C1",
+        "C6"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=185-3",
+      "title": "中華民國刑法 第185-3條",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "moj-law-c0000001",
+      "stance": "context",
+      "excerpt": "因而致人於死者，處三年以上十年以下有期徒刑，得併科二百萬元以下罰金；致重傷者，處一年以上七年以下有期徒刑，得併科一百萬元以下罰金。……法規整編資料截止日：民國 115 年 11 月 13 日",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=C0000001",
+      "title": "中華民國刑法 沿革",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "moj-law-c0000001",
+      "stance": "context",
+      "excerpt": "中華民國一百十二年十二月二十七日總統華總一義字第 11200113021 號令修正公布第 185-3 條條文……中華民國一百十五年七月二十二日總統華總一義字第 11500067801 號令修正公布第 80 條條文",
+      "access_note": "full"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+      "title": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "publisher": "三立新聞網 SETN（YouTube）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "setn-youtube-live-20261031",
+      "stance": "context",
+      "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C6"
+      ],
+      "url": "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+      "title": "曾酒駕、再毒駕致死也可能判死刑？ 毒駕加重刑責修法爭議一次看",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-23",
+      "tier": 4,
+      "chain": "tfc-20261110",
+      "stance": "context",
+      "excerpt": "僅基於未必故意而殺人，即使既遂，仍不符合得科處死刑所要求的個案犯罪情節最嚴重門檻。",
+      "access_note": "full"
+    },
+    {
+      "id": "S21",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C5"
+      ],
+      "url": "https://news.pchome.com.tw/politics/nownews/20261031/index-79343732501486207001.html",
+      "title": "北市辯論／蔣萬安沈伯洋首場辯論全文一次看",
+      "publisher": "今日新聞 NOWnews（PChome 新聞轉載）",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "nownews-20261031-transcript",
+      "stance": "supports",
+      "excerpt": "我們有五、六十個提案喔，各黨都有提案，行政院也有院版，我們單純只是反對不符合比例原則的提案……他們執意在最後二十分鐘丟出一個最高機密版，不經過討論執意要通過",
+      "access_note": "full"
+    },
+    {
+      "id": "S22",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.storm.mg/article/11177080",
+      "title": "毒駕累犯最重處死！立法院三讀藍白版本刑法修法　民進黨立委退席抗議",
+      "publisher": "風傳媒（引述民進黨立委莊瑞雄）",
+      "accessed": "2026-11-23",
+      "tier": 5,
+      "chain": "ly-chuang-20261030",
+      "stance": "supports",
+      "excerpt": "民進黨要在程序上表達抗議，此次修法28日才經司法及法制委員會協商，當時朝野總共有62個版本在討論",
+      "access_note": "full"
+    },
+    {
+      "id": "S23",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610310009/",
+      "title": "台北市長辯論／蔣萬安「九連問」追昔發言...沈伯洋嗆「回來當立委！」交叉詰問後加碼要LINE再約戰",
+      "publisher": "今周刊",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "businesstoday-20261031",
+      "stance": "context",
+      "excerpt": "昨天的修法有五、六十個提案，行政院也有院版，我們只是反對不符比例原則的提案。",
+      "access_note": "full"
+    },
+    {
+      "id": "S24",
+      "claim_ids": [
+        "C1",
+        "C4",
+        "C5"
+      ],
+      "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html",
+      "title": "立法院公報 院會紀錄（115 年 10 月 30 日刑法第 185 條之 3 修正案表決）",
+      "publisher": "立法院公報（立法院 API 鏡像）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "ly-gazette-1158101",
+      "stance": "supports",
+      "excerpt": "出席人數：98　　贊成人數：41　　反對人數：57　　棄權人數：0……陳俊宇　　郭昱晴　　范　雲　　蔡其昌　　莊瑞雄　　沈伯洋……出席人數：59　　贊成人數：57　　反對人數：1　　棄權人數：1",
+      "access_note": "full"
+    },
+    {
+      "id": "S25",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.president.gov.tw/Page/294/50452",
+      "title": "總統府公報 第7893號",
+      "publisher": "總統府",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "president-gazette-7893",
+      "stance": "context",
+      "excerpt": "公布日期：115年11月20日 號次：第7893號……茲修正中華民國刑法第一百八十五條之三條文，公布之。",
+      "access_note": "full"
+    },
+    {
+      "id": "S26",
+      "claim_ids": [
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://ppg.ly.gov.tw/ppg/publications/official-gazettes/115/65/02/details",
+      "title": "立法院公報 第115卷第65期 委員會紀錄（司法及法制委員會 115 年 7 月 22 日）",
+      "publisher": "立法院議事暨公報資訊網",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "ly-gazette-115-65-02",
+      "stance": "supports",
+      "excerpt": "(一)行政院、司法院函請審議「中華民國刑法第一百八十五條之三條文修正草案」案……(十八)委員徐巧芯等17人擬具「中華民國刑法第一百八十五條之三條文修正草案」案……(二十)台灣民眾黨黨團擬具「中華民國刑法第一百八十五條之三條文修正草案」案……(三十四)委員李坤城等19人擬具「中華民國刑法第一百八十五條之三條文修正草案」案",
+      "access_note": "full"
+    },
+    {
+      "id": "S27",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://ppg.ly.gov.tw/ppg/sittings/2026102287/details?meetingDate=115%2F10%2F28",
+      "title": "立法院 115 年 10 月 28 日朝野協商議程",
+      "publisher": "立法院議事暨公報資訊網",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "ly-sitting-20261028",
+      "stance": "supports",
+      "excerpt": "本院司法及法制委員會報告併案審查行政院、司法院函請審議「中華民國刑法第一百八十五條之三條文修正草案」等56案。……委員張雅琳等16人擬具「中華民國刑法第一百八十五條之三條文修正草案」。……委員呂玉玲等16人擬具「中華民國刑法第一百八十五條之三條文修正草案」。",
+      "access_note": "full"
+    },
+    {
+      "id": "S28",
+      "claim_ids": [
+        "C2",
+        "C5"
+      ],
+      "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html",
+      "title": "立法院公報 院會紀錄（115 年 10 月 30 日莊瑞雄發言）",
+      "publisher": "立法院公報（立法院 API 鏡像）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "ly-chuang-20261030",
+      "stance": "context",
+      "excerpt": "我們知道這整個案子在司法及法制委員會裡面一共有56案，逕付二讀的有6案……程序上，民主進步黨在這個地方要表達抗議。",
+      "access_note": "full"
+    },
+    {
+      "id": "S29",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://www.chinatimes.com/realtimenews/20261030003515-260407",
+      "title": "毒駕再犯致死最重判死 陳智菡：綠委除1反對、1棄權外 全體落跑",
+      "publisher": "中時新聞網",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "chinatimes-20261030",
+      "stance": "context",
+      "excerpt": "值得一提的是，民進黨團幹事長莊瑞雄1票反對、民進黨立委柯建銘棄權外，其餘民進黨立委以太晚拿到再修正動議版本為由，退席抗議未投票。",
+      "access_note": "full"
+    },
+    {
+      "id": "S30",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://www.cna.com.tw/news/aipl/202610300235.aspx",
+      "title": "民進黨團：支持嚴懲毒駕　勿將程序爭議抹黑成縱容犯罪",
+      "publisher": "中央社（引述民進黨立法院黨團）",
+      "accessed": "2026-11-23",
+      "tier": 5,
+      "chain": "cna-dpp-caucus-20261030",
+      "stance": "context",
+      "excerpt": "國民黨、民眾黨中午12時33分才提出共同再修正動議，13時就開始表決，中間僅隔27分鐘，內容又與週三（28日）朝野協商的版本不同。……涉及刑法重大修正，尤其納入死刑，更應釐清犯罪構成要件、故意與過失的區別、刑度是否符合罪責，以及法院如何適用",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S31",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://newtalk.tw/news/view/2026-10-31/1068490",
+      "title": "北市長辯論》蔣質疑毒駕立場 沈伯洋收回建議：你好像也不了解立院運作",
+      "publisher": "新頭殼",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "newtalk-lee-20261031",
+      "stance": "context",
+      "excerpt": "沈伯洋先針對昨日毒駕三讀的事情表示，自己反對的是「不符合比例原則」的提案，甚至昨日立院討論中，對於「先毒後酒」或「先酒後毒」都出現了不同的評價標準，但藍白卻在最後二十分鐘丟出一個最高機密版，不經過討論執意要通過。",
+      "access_note": "full"
+    },
+    {
+      "id": "S32",
+      "claim_ids": [
+        "C1",
+        "C5",
+        "C6"
+      ],
+      "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html",
+      "title": "立法院公報 院會紀錄（115 年 10 月 30 日再修正動議條文與三讀）",
+      "publisher": "立法院公報（立法院 API 鏡像）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "ly-gazette-1158101",
+      "stance": "context",
+      "excerpt": "曾犯本條或陸海空軍刑法第五十四條之罪，經有罪判決確定或經緩起訴處分確定，於十年內再犯第二項之罪因而致人於死者，處死刑、無期徒刑或十年以上有期徒刑，得併科一千萬元以下罰金……─與經過二讀內容同，略─",
+      "access_note": "full"
+    },
+    {
+      "id": "S33",
+      "claim_ids": [
+        "C6"
+      ],
+      "url": "https://tfc-taiwan.org.tw/drug-driving-penalties-death-penalty-legal-reform/",
+      "title": "曾酒駕、再毒駕致死也可能判死刑？ 毒駕加重刑責修法爭議一次看",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-23",
+      "tier": 4,
+      "chain": "tfc-20261110",
+      "stance": "context",
+      "excerpt": "再犯毒駕致死與刑法第271條殺人罪的主刑配置相同，不一定違憲，但兩者主觀責任的差異必須被正視。",
+      "access_note": "full"
+    },
+    {
+      "id": "S34",
+      "claim_ids": [
+        "C6"
+      ],
+      "url": "https://udn.com/news/story/7339/9546855",
+      "title": "毒駕撞死人判死？ 刑法之思辨",
+      "publisher": "聯合報民意論壇（真理大學法律系教授吳景欽）",
+      "accessed": "2026-11-23",
+      "tier": 4,
+      "chain": "udn-opinion-wu-20260605",
+      "stance": "context",
+      "excerpt": "至於要否增加死刑，如從毒駕致死的「加重結果犯」本質，似有違反罪刑相當之疑慮。……此等同屬「加重結果犯」之罪，卻均有死刑之選項。",
+      "access_note": "full"
+    }
+  ]
+}

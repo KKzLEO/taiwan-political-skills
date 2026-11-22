@@ -1,0 +1,122 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 21,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "正方稱查到的報導都沒有「我們有五、六十個提案」的寫法，但《NOWnews 今日新聞》刊出的辯論全文有這段話，並保留句尾的「喔」。這份轉錄支持引言大致正確。完整直播的原音仍未逐字核對。",
+      "evidence": [
+        {
+          "url": "https://news.pchome.com.tw/politics/nownews/20261031/index-79343732501486207001.html",
+          "excerpt": "我們有五、六十個提案喔，各黨都有提案，行政院也有院版，我們單純只是反對不符合比例原則的提案"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S17 和 S18 的資料只涵蓋到 11 月 13 日。總統府公報記載，同一條文已於 11 月 20 日修正公布，早於 11 月 23 日查核日。應補列公布紀錄，並保留 10 月 30 日院會三讀的日期。",
+      "evidence": [
+        {
+          "url": "https://www.president.gov.tw/Page/294/50452",
+          "excerpt": "公布日期：115年11月20日 號次：第7893號"
+        },
+        {
+          "url": "https://www.president.gov.tw/Page/294/50452",
+          "excerpt": "茲修正中華民國刑法第一百八十五條之三條文，公布之。"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "立法院公報可以直接核對「五、六十個」的計算範圍。委員會併審的 56 案包含行政院、司法院及不同黨籍立委的提案。院會發言另列 6 件逕付二讀案。這些數字支持把「五、六十個」理解為跨黨派的提案總數，無法用來證明民進黨單獨提出了這麼多案。",
+      "evidence": [
+        {
+          "url": "https://www.youtube.com/watch?v=IfTK5EDG65c",
+          "excerpt": "併案審查行政院、司法院函請審議「中華民國刑法第一百八十五條之三條文修正草案」等56案。"
+        },
+        {
+          "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html",
+          "excerpt": "在司法及法制委員會裡面一共有56案，逕付二讀的有6案"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C3",
+      "target": "evidence",
+      "argument": "正方列出三黨的提案時，主要引用媒體和查核報告。立法院司法及法制委員會的原始公報已列出國民黨立委徐巧芯、民進黨立委李坤城及台灣民眾黨黨團各自提出的草案，可直接支持「各黨都有提案」的判定。",
+      "evidence": [
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/publications/official-gazettes/115/65/02/details",
+          "excerpt": "委員徐巧芯等17人擬具「中華民國刑法第一百八十五條之三條文修正草案」案"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/publications/official-gazettes/115/65/02/details",
+          "excerpt": "委員李坤城等19人擬具「中華民國刑法第一百八十五條之三條文修正草案」案"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/publications/official-gazettes/115/65/02/details",
+          "excerpt": "台灣民眾黨黨團擬具「中華民國刑法第一百八十五條之三條文修正草案」案"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": "C4",
+      "target": "evidence",
+      "argument": "行政院新聞稿說明的是院會通過草案及預定送審。立法院委員會公報直接記載行政院、司法院已函請立法院審議，可補足草案正式送入立法院的證據。",
+      "evidence": [
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/publications/official-gazettes/115/65/02/details",
+          "excerpt": "行政院、司法院函請審議「中華民國刑法第一百八十五條之三條文修正草案」案"
+        }
+      ]
+    },
+    {
+      "id": "X1-6",
+      "claim_id": "C5",
+      "target": "label",
+      "argument": "「單純只是」容易讓讀者以為比例原則是沈伯洋和民進黨團反對藍白版本的唯一理由。沈伯洋在同一段答覆也批評版本在表決前才提出，莊瑞雄則在院會代表民進黨公開抗議程序。正方核對了沈伯洋支持院版的行為，但支持一個版本只能證明他支持該版本，無法證明他對另一版本的異議只涉及比例原則。依完整發言脈絡，建議判為誤導。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://neww.tw/2026taipeimayor-debate/#:~:text=結果呢，他們執意在最後",
+          "excerpt": "他們執意在最後 20 分鐘丟出一個最高機密版、不經過討論執意要通過"
+        },
+        {
+          "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html#:~:text=程序上",
+          "excerpt": "程序上，民主進步黨在這個地方要表達抗議。"
+        }
+      ]
+    },
+    {
+      "id": "X1-7",
+      "claim_id": "C5",
+      "target": "evidence",
+      "argument": "立法院記名表決確認沈伯洋對行政院、司法院版投贊成票，未列入藍白再修正動議的投票名單。後一場表決還有一票棄權，投票者是民進黨立委柯建銘。應補列這一票，並把未投票、登記棄權和投反對票分清楚。",
+      "evidence": [
+        {
+          "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html#:~:text=贊成人數：41",
+          "excerpt": "贊成：\n\n陳俊宇　　郭昱晴　　范　雲　　蔡其昌　　莊瑞雄　　沈伯洋"
+        },
+        {
+          "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html#:~:text=出席人數：59",
+          "excerpt": "出席人數：59　　贊成人數：57　　反對人數：1　　棄權人數：1"
+        },
+        {
+          "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html#:~:text=棄權人數：1",
+          "excerpt": "棄權：\n\n柯建銘"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

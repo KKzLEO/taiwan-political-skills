@@ -1,0 +1,45 @@
+{
+  "credibility": {
+    "score": 25,
+    "raw": 25.0,
+    "main_claims": [
+      "C3"
+    ],
+    "main_accuracy": 0.25,
+    "overall_accuracy": 0.6875,
+    "capped": false,
+    "context_flags": [],
+    "show_on_spectrum": true
+  },
+  "result": "不符",
+  "result_reason": null,
+  "confidence": {
+    "score": 100,
+    "level": "高",
+    "deductions": [],
+    "evidence_quality": 1.0
+  },
+  "publishable": true,
+  "publish_blocks": [],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "true",
+      "importance": 4,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C2",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C3",
+      "label": "misleading",
+      "importance": 5,
+      "factor": 0.25
+    }
+  ]
+}

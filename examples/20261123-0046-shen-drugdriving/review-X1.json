@@ -1,0 +1,31 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C1",
+      "pass": true,
+      "reason": "《NOWnews 今日新聞》刊出的辯論全文確有「我們有五、六十個提案喔」，裁判已補列這份轉錄，並註明直播原音未逐字核對。立法院院會紀錄載明「三讀時，照二讀文字通過」，總統府公報另載「公布日期：115年11月20日」，裁判已分開交代10月30日三讀與11月20日公布。[辯論全文](https://www.nownews.com/news/6888190)、[立法院院會紀錄](https://ppg.ly.gov.tw/ppg/sittings/2026102811/details?meetingDate=115%2F10%2F30)、[總統府公報](https://www.president.gov.tw/Page/294/50452)"
+    },
+    {
+      "claim_id": "C2",
+      "pass": false,
+      "label_ok": true,
+      "reason": "「五、六十個」符合跨黨派提案規模，判為正確有據，但裁判把不同階段的件數寫成總數範圍。10月28日朝野協商議程列出「等56案」及另外4案，10月30日院會紀錄則逐案列出另外6案，並記載「第(二)案至第(七)案均逕付二讀」。因此，10月30日併案討論的草案可直接核計為56加6，共62案。[10月28日協商議程](https://ppg.ly.gov.tw/ppg/sittings/2026102287/details?meetingDate=115%2F10%2F28)、[10月30日院會紀錄](https://ppg.ly.gov.tw/ppg/sittings/2026102811/details?meetingDate=115%2F10%2F30)"
+    },
+    {
+      "claim_id": "C3",
+      "pass": true,
+      "reason": "修正後引用立法院委員會公報，案由分別列有「委員徐巧芯等17人」、「委員李坤城等19人」及「台灣民眾黨黨團」提出的草案。立法院委員資料分別載明徐巧芯「黨籍：中國國民黨」、李坤城「黨籍：民主進步黨」，足以支持三黨均有提案。[委員會公報](https://ppg.ly.gov.tw/ppg/publications/official-gazettes/115/65/02/details)、[徐巧芯委員資料](https://www.ly.gov.tw/Pages/List.aspx?nodeid=46796)、[李坤城委員資料](https://www.ly.gov.tw/Pages/List.aspx?nodeid=46863)"
+    },
+    {
+      "claim_id": "C4",
+      "pass": true,
+      "reason": "修正後已補上正式送審的第一手證據。委員會公報首案記載「行政院、司法院函請審議」，院會公報另載「行政院、司法院提案條文不通過」，可分別確認草案已送立法院審議及院會表決結果。[委員會公報](https://ppg.ly.gov.tw/ppg/publications/official-gazettes/115/65/02/details)、[院會公報](https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html)"
+    },
+    {
+      "claim_id": "C5",
+      "pass": true,
+      "reason": "修正後已依記名表決確認沈伯洋贊成行政院、司法院版，並區分他未參與再修正動議表決、莊瑞雄投反對票與柯建銘投棄權票。辯論全文以「我們反對的是什麼？」帶出這段答覆，後文也批評「不經過討論執意要通過」。裁判按他所反對的提案範圍判為大致正確，並交代程序異議及表決紀錄所能證明的範圍。[院會公報](https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html)、[辯論全文](https://www.nownews.com/news/6888190)"
+    }
+  ]
+}
