@@ -1,0 +1,42 @@
+{
+  "seat": "B",
+  "lens": "counter",
+  "engine": "claude",
+  "searches_run": 14,
+  "attacks": [
+    {
+      "id": "B-1",
+      "claim_id": "C1",
+      "target": "label",
+      "argument": "正方判 C1「大致正確」時，只從 9 月 23 日議員爆料起算，認為蔣萬安 6 天後到校只是「馬上」說得寬鬆。但教育局 9 月 23 日新聞稿和三立同日報導都寫明，金華國中學生是 9 月 4 日腹瀉、學校 9 月 11 日接獲反映。蔣萬安是 9 月 29 日中午才到金華國中，距學生不適 25 天、距學校接獲反映 18 天、距議員爆料 6 天。市府說明這次到校是視察營養午餐並感謝承受壓力的師生，蔣萬安自己說主要考量是該校遭不實指控，不是事發後趕赴現場處理。「蔣萬安到過金華國中」屬實，但這句話是用「馬上就趕到現場」來和成淵對比，時間和性質都和紀錄不符，會讓人以為他在金華國中事發時立刻到場。這個修飾語是對比的重點，建議改判「誤導」。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&sms=72544237BBE4C5F6&s=BEF8280DE6D9A2AF",
+          "excerpt": "金華國中是在9月11日接獲一名學生反應"
+        },
+        {
+          "url": "https://www.setn.com/ampnews/1911832",
+          "excerpt": "金華國中是在9月11日接獲一名學生反應9月4日曾有腹瀉"
+        },
+        {
+          "url": "https://news.ltn.com.tw/news/politics/breakingnews/5589412",
+          "excerpt": "民進黨籍台北市議員簡舒培23日爆料大安區金華國中營養午餐食安問題"
+        },
+        {
+          "url": "https://news.ltn.com.tw/news/politics/breakingnews/5589412",
+          "excerpt": "蔣萬安今天中午視察金華國中營養午餐，感謝這段時間承受許多壓力的校長、老師、廚師、家長志工以及孩子們。"
+        },
+        {
+          "url": "https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&sms=72544237BBE4C5F6&s=6C8E42D2A96900DB",
+          "excerpt": "金華國中則為9月23日接獲輿情，於次日(24日)進行稽查採樣。"
+        },
+        {
+          "url": "https://www.ettoday.net/news/20260930/3246319.htm",
+          "excerpt": "最主要考量是金華國中在此次事件中遭受到了不實指控"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

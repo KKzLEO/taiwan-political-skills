@@ -1,0 +1,983 @@
+{
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "misleading",
+      "importance": 5,
+      "type": "F",
+      "time": null,
+      "core": true,
+      "legal": false,
+      "law_text_obtained": null,
+      "context_flags": [],
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S16",
+        "S33",
+        "S34",
+        "S35",
+        "S36",
+        "S47"
+      ],
+      "reasoning": "廚師手部檢體確實是獲報當天採的，但監察院認定市府獲報後延遲近 5 小時才到場，而且兩次稽查都沒有採食材和餐點，「第一時間」的說法和這項認定不符。屬實的部分：監察院糾正案文記載 2024 年 3 月 24 日抽驗胡姓廚師手部檢體和 1 件環境檢體（砧板），這份手部檢體後來驗出邦克列酸。不符的部分：案文記載市府中午獲報，稽查人員 16 時 30 分才準備出發、傍晚首次到場，和市府「已儘快於第一時間到現場調查」的說法不符；監察院新聞稿並指市府「未第一時間採樣食物檢體，錯失採樣黃金期」。衛生局的說法是 12 時 42 分獲報後立即前往、約 17 時完成查核，沒有說明幾點到場。鏡週刊轉述一審判決書的時序是稽查人員晚間 6 時 12 分離開、6 時 30 分店家清消，粿條一併丟棄；判決書原文沒有取得。蔣萬安有這段發言，自由時報和三立的引述一致，他 11 月 3 日受訪又重申一次；辯論完整影片沒有播放核對，引號內的文字無法逐字確認。",
+      "rewrite_revised": false,
+      "review_status": "passed",
+      "upheld_attacks": [
+        "A-1",
+        "B-1",
+        "B-2",
+        "C-2",
+        "X1-1"
+      ],
+      "rejected_attacks": []
+    },
+    {
+      "claim_id": "C2",
+      "label": "misleading",
+      "importance": 5,
+      "type": "F",
+      "time": null,
+      "core": true,
+      "legal": false,
+      "law_text_obtained": null,
+      "context_flags": [
+        "out_of_context"
+      ],
+      "evidence_ids": [
+        "S8",
+        "S12",
+        "S13",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23",
+        "S24",
+        "S25",
+        "S26",
+        "S32",
+        "S44",
+        "S45",
+        "S46",
+        "S47",
+        "S48"
+      ],
+      "reasoning": "訊息的引言拿掉了原話裡的「才在後續的起訴當中有非常重要的依據」，「跑不了」的範圍被放寬；照原話的範圍檢驗，刑事起訴和一審有罪查得到，但家屬的賠償是由第三方保險公司給付，不是寶林或被告支付。自由時報、三立的引述和一份民間語音辨識轉錄記錄的原話都是「採集了生物跡證，才在後續的起訴當中有非常重要的依據，讓寶林跑不了」，後面接家屬獲得賠償；濃縮引言的人查不到，不推論用意。(1) 起訴依據：北檢 2025 年 1 月起訴 5 人，台北地院 2026 年 11 月 12 日一審判 4 人有罪（負責人 1 年 10 月、代班廚師 8 月；店長過失傷害部分公訴不受理、其餘無罪；可上訴）。法院宣判新聞稿寫代班廚師的手部檢體和糞便檢體都呈邦克列酸陽性，可以佐證粿條含邦克列酸。手部檢體是「起訴關鍵證據」只見於衛生局的說法；北檢偵結新聞稿（依維基文庫轉錄，原始 PDF 讀不到）沒有提到手部檢體，少了它能不能起訴無法確認。(2) 家屬賠償：法院新聞稿寫明調解金由大食代、遠百各自投保的保險公司給付，不是被告以個人財產支付。市府 11 月 12 日的資料是消基會代表 31 人提起團體訴訟，22 人已和解獲償，9 名傷者仍在訴訟中；沒有查到採檢促成賠償的證據。(3) 罰鍰：原話沒有提到，是批評者提出的，只列背景。衛生局開出的罰鍰（報導稱累計 706 萬元）移送執行後只追回一千多元。辯論完整影片沒有播放核對，判決書原文也沒有取得。",
+      "rewrite_revised": false,
+      "review_status": "failed",
+      "upheld_attacks": [
+        "C-1",
+        "X1-4",
+        "X1-5"
+      ],
+      "rejected_attacks": [
+        "X1-3"
+      ]
+    },
+    {
+      "claim_id": "C3",
+      "label": "misleading",
+      "importance": 3,
+      "type": "S",
+      "time": null,
+      "core": false,
+      "legal": false,
+      "law_text_obtained": null,
+      "context_flags": [],
+      "evidence_ids": [
+        "S7",
+        "S14",
+        "S15",
+        "S28",
+        "S29",
+        "S37",
+        "S38",
+        "S39",
+        "S40",
+        "S41",
+        "S43",
+        "S47"
+      ],
+      "reasoning": "新增的 33 名是食安約聘人力，市府食品安全委員會的會議資料寫明其中 20 名是第一線稽查人員，不是 33 名都是稽查人力。這份 2025 年 3 月的會議資料沒有寫其餘 13 名的職務；市府 2026 年 10 月的說法是「33名食安專業人力」，用在稽查、抽驗、檢驗和重大食安事件應變。2024 年 7 月核定時是「增聘33名約聘人員」，當時食藥科、稽查科、檢驗科都有缺額。衛生局自己也用過「33 名稽查人力」的說法（2025 年 1 月新聞稿、2025 年 10 月稽查科長）。另外，33 是核定名額，不是到職人數：2025 年 1 月已增聘 30 人；2025 年 10 月稽查員額 84 位、到聘 78 位；2026 年 5 月稽查員原額 85 人、聘用 73 人。這些數字都出自市府，沒有找到獨立的員額明細。辯論中的原話只查到即時更新頁的轉述和民間語音辨識轉錄（「增加了 33 名稽查人力」），沒有逐字核對影片。",
+      "rewrite_revised": false,
+      "review_status": "passed",
+      "upheld_attacks": [
+        "A-2",
+        "B-3",
+        "X1-2"
+      ],
+      "rejected_attacks": []
+    },
+    {
+      "claim_id": "C4",
+      "label": "true",
+      "importance": 3,
+      "type": "F",
+      "time": null,
+      "core": false,
+      "legal": false,
+      "law_text_obtained": null,
+      "context_flags": [],
+      "evidence_ids": [
+        "S7",
+        "S14",
+        "S15",
+        "S27",
+        "S30",
+        "S31",
+        "S42",
+        "S47"
+      ],
+      "reasoning": "屬實：臺北市政府食品安全委員會 2025 年 3 月的會議資料寫明 114 年（2025 年）正式成立「食因性疾病病因物質檢測組」，在 2026 年 10 月辯論之前。衛生局 2024 年 4 月宣布將成立「食因性疾病檢驗組」（報導稱儀器設備與業務費合計 4,450 萬元、新增檢驗人力 5 人）；2025 年 1 月新聞稿說已撥補經費成立，並建立邦克列酸檢驗技術；2026 年 10 月的報導也寫已成立。文件上的組名和發言的「食因性疾病檢驗組」略有不同；衛生局檢驗科網頁列有「食因性疾病病因物質檢驗」業務，沒有出現這個組名。查到的資料都出自市府。辯論中的原話只查到轉述和民間語音辨識轉錄，其中一篇報導把組名寫成「新興疾病檢驗組」。",
+      "rewrite_revised": false,
+      "review_status": "passed",
+      "upheld_attacks": [
+        "X1-6"
+      ],
+      "rejected_attacks": []
+    },
+    {
+      "claim_id": "C5",
+      "label": "not_factual",
+      "importance": 2,
+      "type": "O",
+      "time": null,
+      "core": false,
+      "legal": false,
+      "law_text_obtained": null,
+      "context_flags": [],
+      "evidence_ids": [
+        "S3",
+        "S12",
+        "S13"
+      ],
+      "reasoning": "這是評價，不是可以查證的事實陳述。「非常機警」是蔣萬安對市府同仁的評語；監察院對同一段處置的評語是「專業警覺性不足」，兩者都是評價。稽查和採檢的具體經過，在「第一時間採集生物跡證」那一條判定。",
+      "rewrite_revised": false,
+      "review_status": "none",
+      "upheld_attacks": [],
+      "rejected_attacks": []
+    }
+  ],
+  "unverified_rulings": [],
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=32397",
+      "title": "臺北市政府辦理該市寶林茶室食品中毒案件，專業警覺性不足，於被害人已住院休克，未即時進行下架、保留、封存等預防性措施，亦未第一時間採樣食物檢體，錯失採樣黃金期，肇致本案迄今仍未查獲病原菌來源，監察院通過糾正臺北市政府",
+      "publisher": "監察院",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "cy-correction-20250122",
+      "stance": "supports",
+      "excerpt": "然臺北市政府於接獲食品中毒案件通報後，2次至寶林茶室現場稽查，於個案表示餐廳「炒粿條」有發苦、發酸異狀，且個案已住院休克甚或死亡等情下，均未針對餐廳食材及餐點進行採樣，而僅抽驗廚師手部檢體及菜刀、砧板等環境檢體。",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=32397",
+      "title": "監察院通過糾正臺北市政府（寶林茶室食品中毒案）新聞稿",
+      "publisher": "監察院",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "cy-correction-20250122",
+      "stance": "refutes",
+      "excerpt": "臺北市政府於113年3月24日中午即接獲新北市政府通報2件疑似食品中毒個案，且其中1名個案已休克住院，惟該府稽查人員遲至當日傍晚始至寶林茶室現場稽查",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C5"
+      ],
+      "url": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=32397",
+      "title": "監察院通過糾正臺北市政府（寶林茶室食品中毒案）新聞稿",
+      "publisher": "監察院",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "cy-correction-20250122",
+      "stance": "context",
+      "excerpt": "專業警覺性不足，於被害人已住院休克，未即時進行下架、保留、封存等預防性措施，亦未第一時間採樣食物檢體，錯失採樣黃金期，肇致本案迄今仍未查獲病原菌來源",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cy.gov.tw/public/Data/114mo/114%E7%A4%BE%E6%AD%A30001.pdf",
+      "title": "寶林茶室食品中毒案糾正案文（114社正0001）",
+      "publisher": "監察院",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "cy-correction-20250122",
+      "stance": "refutes",
+      "excerpt": "至實際抵達現場查核，延遲近 5 小時",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aipl/202501220275.aspx",
+      "title": "寶林茶室6死案食材採樣下架慢半拍 監院糾正北市府",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cy-correction-20250122",
+      "stance": "refutes",
+      "excerpt": "獲報疑似食物中毒案後5小時才去稽查",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&sms=72544237BBE4C5F6&s=6BA0E3367E49B573",
+      "title": "臺北市政府衛生局說明寶林茶室食品中毒案件後續精進措施及防堵作為",
+      "publisher": "臺北市政府衛生局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "tpe-health-20250121",
+      "stance": "supports",
+      "excerpt": "113年3月24日接獲寶林茶室A13店疑似食品中毒案件後，於24日及25日連續稽查作業場所，並採集作業人員手部檢體及環境檢體",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&sms=72544237BBE4C5F6&s=6BA0E3367E49B573",
+      "title": "臺北市政府衛生局說明寶林茶室食品中毒案件後續精進措施及防堵作為",
+      "publisher": "臺北市政府衛生局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "tpe-health-20250121",
+      "stance": "supports",
+      "excerpt": "臺北市政府已擴增衛生局33名稽查人力及撥補經費成立「食因性疾病檢驗組」，並完成建立邦克列酸檢驗技術，於113年5月起截至113年12月，累計抽驗34件產品，檢驗結果均未檢出",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.fda.gov.tw/TC/csmnewsContent.aspx?id=t623383&mid=267",
+      "title": "臺北市政府衛生局說明寶林茶室食品中毒案件後續精進措施及防堵作為",
+      "publisher": "衛生福利部食品藥物管理署網站（刊載臺北市政府衛生局新聞稿）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "tpe-health-20250121",
+      "stance": "supports",
+      "excerpt": "於本案作業人員手部跡證檢出邦克列酸陽性，為本次檢調起訴之關鍵證據，也確認寶林茶室最終之責任。",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.twreporter.org/a/poisoning-case-at-baolin-teahouse-ntu-forensic-medicine",
+      "title": "半小時驗出台灣首例邦克列酸──專訪「寶林茶室中毒案」檢測團隊台大法醫研究所",
+      "publisher": "報導者",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "twreporter-2024",
+      "stance": "supports",
+      "excerpt": "於3月24日及25日共抽驗1件廚師手部檢體及3件環境檢體（砧板、菜刀、水果刀）",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/4931475",
+      "title": "寶林案事後採檢落空 台北市衛生局：餐廳「留樣48小時」難度高",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-20250122-sampling",
+      "stance": "supports",
+      "excerpt": "台北市衛生局當天趕往餐廳稽查，因無剩餘同批食材，只能採集菜刀、水果刀、砧板及廚師手部檢體，未帶回任何食物檢體",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/4932227",
+      "title": "寶林茶室惡意隱瞞藏粿條 台北市衛生局重罰300萬元",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpe-health-response-20250122",
+      "stance": "context",
+      "excerpt": "去年3月24日12時42分接獲新北市衛生局通報後，立即前往作業場所稽查，並於同日約17時完成查核並撰寫工作報告表，並未延宕稽查。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C5"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5625086",
+      "title": "打臉！蔣萬安自豪稱「讓寶林跑不了」 業者早脫產未繳1毛罰款",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-20261031-ltn",
+      "stance": "supports",
+      "excerpt": "寶林茶室這個案子，當時發生第一時間，因為我們同仁非常機警，採集了生物跡證，才在後續的起訴當中有非常重要的依據，讓寶林跑不了，讓受害家屬都能獲得賠償。",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C5"
+      ],
+      "url": "https://www.setn.com/news/1931635",
+      "title": "蔣萬安稱「讓寶林跑不了」　律師點破真相轟：草菅人命、這樣叫有做事？",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-20261031-setn",
+      "stance": "supports",
+      "excerpt": "寶林茶室這個案子，當時發生的第一時間，也因為我們同仁非常機警，採集了生物跡證，才在後續的起訴當中有非常重要的依據，讓寶林跑不了，讓後續家屬都能獲得賠償。",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://tw.news.yahoo.com/live/%E5%8F%B0%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96%E6%9C%83%E7%9B%B4%E6%92%AD1200%E7%99%BB%E5%A0%B4-%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%94%A3%E8%90%AC%E5%AE%89%E4%BA%A4%E9%8B%92%EF%BD%9C%E4%B8%8D%E6%96%B7%E6%9B%B4%E6%96%B0-032846919.html",
+      "title": "台北市長辯論會直播1200登場 沈伯洋蔣萬安交鋒｜不斷更新",
+      "publisher": "Yahoo 新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-20261031-yahoo-live",
+      "stance": "supports",
+      "excerpt": "市府也增加33名稽查人力，率全國之先成立食因性疾病檢驗組",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://tw.news.yahoo.com/%E6%B2%88%E4%BC%AF%E6%B4%8B-%E8%94%A3%E8%90%AC%E5%AE%89%E7%AC%AC%E4%BA%8C%E9%9A%8E%E6%AE%B5%E4%BA%A4%E5%8F%89%E8%A9%B0%E5%95%8F-%E9%9B%99%E5%9F%8E%E8%AB%96%E5%A3%87-%E5%85%92%E8%99%90%E9%A3%9F%E5%AE%89-%E6%AF%92%E9%A7%95%E8%88%87%E6%9D%BE%E6%A9%9F%E9%81%B7%E7%A7%BB%E4%BA%A4%E9%8B%92-054803715.html",
+      "title": "沈伯洋、蔣萬安第二階段交叉詰問！雙城論壇、兒虐食安、毒駕與松機遷移交鋒　沈邀再辯一場：晚點加LINE也可以",
+      "publisher": "放言 Fount Media（Yahoo 新聞刊載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-20261031-fount",
+      "stance": "supports",
+      "excerpt": "市府增加33名稽查人力、成立11人的新興疾病檢驗組，並率先將邦克列酸納入地方政府篩檢項目",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202611030178.aspx",
+      "title": "寶林茶室案爭議　蔣萬安：第一時間採集生物跡證",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-20261103",
+      "stance": "supports",
+      "excerpt": "我們第一時間就有採集生物跡證，也因此讓檢察官後續有依據可以起訴。",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.tvbs.com.tw/local/4049549",
+      "title": "寶林茶室「毒粿條」釀集體中毒6死　北院公布一審判決理由",
+      "publisher": "TVBS 新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpd-verdict-20261112",
+      "stance": "supports",
+      "excerpt": "均驗出「邦克列酸」陽性反應，但身上未驗得病原菌，可佐證他當時處理、後續遭丟棄的粿條，確含邦克列酸。",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.pts.org.tw/article/835377",
+      "title": "寶林茶室6死中毒案 負責人黎仿軒一審判1年10個月",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpd-verdict-20261112",
+      "stance": "supports",
+      "excerpt": "判處負責人黎仿軒1年10個月有期徒刑，代班廚師胡清富則判刑8個月。",
+      "access_note": "full"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.pts.org.tw/article/835377",
+      "title": "寶林茶室6死中毒案 負責人黎仿軒一審判1年10個月",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpd-verdict-20261112",
+      "stance": "refutes",
+      "excerpt": "調解金均由台灣大食代、遠東百貨各自投保的保險公司依保險契約給付，並非黎仿軒等4名被告以個人財產支付。",
+      "access_note": "full"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/breakingnews/5638358",
+      "title": "寶林茶室判決理由出爐！ 調解金一毛都沒給、4被告均不認罪",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpd-verdict-20261112",
+      "stance": "supports",
+      "excerpt": "而代班主廚胡清富手部與糞便採檢，皆呈現邦克列酸陽性",
+      "access_note": "full"
+    },
+    {
+      "id": "S21",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://zh.wikisource.org/wiki/1140121%E8%87%BA%E5%8C%97%E5%9C%B0%E6%AA%A2%E5%81%B5%E7%B5%90%E5%AF%B6%E6%9E%97%E8%8C%B6%E5%AE%A4A13%E5%BA%97%E9%A3%9F%E7%89%A9%E4%B8%AD%E6%AF%92%E6%A1%88%E4%BB%B6%E6%96%B0%E8%81%9E%E7%A8%BF",
+      "title": "1140121臺北地檢偵結寶林茶室A13店食物中毒案件新聞稿",
+      "publisher": "臺灣臺北地方檢察署（維基文庫轉錄）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "tpc-indictment-20250121",
+      "stance": "supports",
+      "excerpt": "刑法第 276 條過失致死、同法第 284 條前段過失傷害等 罪嫌，均提起公訴",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S22",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202609100188.aspx",
+      "title": "北市3年多食安罰鍰呆帳610萬元　寶林茶室累積350萬最多",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-20260910-fines",
+      "stance": "refutes",
+      "excerpt": "累積罰鍰350萬元，但實際強制扣押金額是0元",
+      "access_note": "full"
+    },
+    {
+      "id": "S23",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://udn.com/news/story/7315/9875565",
+      "title": "寶林疑脫產 衛生局罰706萬只追回千元",
+      "publisher": "聯合報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "fines-enforcement-20261113",
+      "stance": "refutes",
+      "excerpt": "衛生局另對寶林開出七○六萬元罰單，但迄今行政執行署只追回一千餘元。",
+      "access_note": "full"
+    },
+    {
+      "id": "S24",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.ettoday.net/news/20261113/3271439.htm",
+      "title": "寶林茶室中毒案6死！衛生局開罰706萬只追回1千　還欠勞健保費",
+      "publisher": "ETtoday 新聞雲",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "fines-enforcement-20261113",
+      "stance": "refutes",
+      "excerpt": "發現法人帳戶內僅有約1000元可供執行。",
+      "access_note": "full"
+    },
+    {
+      "id": "S25",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://legalaffairs.gov.taipei/News_Content.aspx?n=9DCD6AAC1B9B2ACB&s=AC60100A10A6E669&sms=72544237BBE4C5F6",
+      "title": "北市府跨局處積極處置寶林茶室案：千萬墊付款全數追回、亡者家屬皆獲理賠，6筆罰鍰皆已移送行政執行",
+      "publisher": "臺北市政府法務局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "tpe-legal-20260914",
+      "stance": "context",
+      "excerpt": "最終6名亡者中，5名家屬順利調解獲償；另1名家屬亦在各方努力下，順利達成私下和解。",
+      "access_note": "full"
+    },
+    {
+      "id": "S26",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://legalaffairs.gov.taipei/News_Content.aspx?n=9DCD6AAC1B9B2ACB&s=AC60100A10A6E669&sms=72544237BBE4C5F6",
+      "title": "北市府跨局處積極處置寶林茶室案：千萬墊付款全數追回、亡者家屬皆獲理賠，6筆罰鍰皆已移送行政執行",
+      "publisher": "臺北市政府法務局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "tpe-legal-20260914",
+      "stance": "context",
+      "excerpt": "消基會已於113年12月11日向臺灣臺北地方法院民事庭遞交起訴狀，代表30位受害者及家屬共計求償2億9,301萬9,053元",
+      "access_note": "full"
+    },
+    {
+      "id": "S27",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://chinatimes.com/realtimenews/20240411001708-263301?chdtv=",
+      "title": "提升食安檢驗量能 北市砸4450萬成立「食因性疾病檢驗組」",
+      "publisher": "中時新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chinatimes-20240411",
+      "stance": "context",
+      "excerpt": "衛生局未來將成立「食因性疾病檢驗組」",
+      "access_note": "full"
+    },
+    {
+      "id": "S28",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://www.ctee.com.tw/news/20240706700631-431401",
+      "title": "人手短缺！議員批市府食安稽查不力 衛生局出招解困",
+      "publisher": "工商時報（中時即時）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ctee-20240706",
+      "stance": "supports",
+      "excerpt": "市府同意增聘人力後，目前核定增聘33名約聘人員，今年也獲中央補助4名約聘人員經費",
+      "access_note": "full"
+    },
+    {
+      "id": "S29",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://udn.com/news/story/124652/9795174",
+      "title": "讓市民食得安心蔣萬安推四大革新 增33名食安人力查核量提高25%",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpe-lab-visit-20261005",
+      "stance": "context",
+      "excerpt": "衛生局增補33名食安專業人力，強化食品稽查、抽驗、檢驗及重大食安事件應變",
+      "access_note": "full"
+    },
+    {
+      "id": "S30",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202610050100.aspx",
+      "title": "強化食安應變力 蔣萬安：擴編33人、地方之最",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpe-lab-visit-20261005",
+      "stance": "supports",
+      "excerpt": "成立「食因性疾病檢驗組」，投入高階儀器操作及檢驗技術開發",
+      "access_note": "full"
+    },
+    {
+      "id": "S31",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://health.gov.taipei/cp.aspx?n=766678DC0BC12C28",
+      "title": "臺北市政府衛生局-檢驗科",
+      "publisher": "臺北市政府衛生局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "tpe-health-lab-page",
+      "stance": "context",
+      "excerpt": "食因性疾病病因物質檢驗(微生物、分子生物、毒素、化學物質等)。",
+      "access_note": "full"
+    },
+    {
+      "id": "S32",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://tfc-taiwan.org.tw/polam-cuisine-case-evidence-collection-and-33-inspectors-claim/",
+      "title": "蔣萬安說：「寶林茶室案發生第一時間，同仁非常機警採集了生物跡證，才讓寶林跑不了，……我們也增加33名稽查人力，成立食因性疾病檢驗組」？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc-20261031",
+      "stance": "context",
+      "excerpt": "資料雖符合，但僅提供部分資訊，無法瞭解全貌",
+      "access_note": "full"
+    },
+    {
+      "id": "S33",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/society/breakingnews/5637916",
+      "title": "寶林茶室中毒案一審出爐！北市衛生局少做1件事 讓院檢傷透腦筋",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-20261112-court",
+      "stance": "context",
+      "excerpt": "北市衛生局於3月24日前到寶林茶室稽查，但只採樣了廚師的手部、砧板等環境檢體而未對現場食材進行採樣",
+      "access_note": "full"
+    },
+    {
+      "id": "S34",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cy.gov.tw/public/Data/114mo/114%E7%A4%BE%E6%AD%A30001.pdf",
+      "title": "寶林茶室食品中毒案糾正案文（114社正0001）",
+      "publisher": "監察院",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "cy-correction-20250122",
+      "stance": "refutes",
+      "excerpt": "該局稽查人員遲至當日 16 時 30 分始準備出發前往現場，並於傍晚方首次抵達寶林茶室",
+      "access_note": "full"
+    },
+    {
+      "id": "S35",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cy.gov.tw/public/Data/114mo/114%E7%A4%BE%E6%AD%A30001.pdf",
+      "title": "寶林茶室食品中毒案糾正案文（114社正0001）",
+      "publisher": "監察院",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "cy-correction-20250122",
+      "stance": "supports",
+      "excerpt": "僅抽驗本案胡姓廚師手部檢體及 1 件環境檢體（砧板）。",
+      "access_note": "full"
+    },
+    {
+      "id": "S36",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/%E5%AF%B6%E6%9E%97%E8%8C%B6%E5%AE%A46%E6%AD%BB%E6%A1%88%E5%8C%97%E5%B8%82%E5%BA%9C%E9%87%8D%E5%A4%A7%E7%96%8F%E5%A4%B1-%E5%88%A4%E6%B1%BA%E6%9B%B8%E5%87%BA%E7%88%90%E6%8F%AD%E7%9C%9F%E7%9B%B8-063300953.html",
+      "title": "寶林茶室6死案北市府重大疏失 判決書出爐揭真相",
+      "publisher": "鏡週刊（Yahoo 新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "mirror-20261120-verdict",
+      "stance": "context",
+      "excerpt": "依判決書記載的時序，3月24日首度稽查當天晚間6時12分衛生局人員離開寶林茶室，6時30分寶林茶室隨即進行大清消，關鍵證物毒粿條也一併遭丟棄滅失。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S37",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://health.ltn.com.tw/article/breakingnews/4930979",
+      "title": "寶林案後北市改善防堵措施 死亡、重症立即停業並擴大採檢",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpe-health-20250121",
+      "stance": "context",
+      "excerpt": "台北市衛生局原本食安人力編制為97人，已擴增33名編制稽查人力，目前增聘30人",
+      "access_note": "full"
+    },
+    {
+      "id": "S38",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://www.ctee.com.tw/news/20251014701099-431401",
+      "title": "萊豬若放寬稽查陷人力窘境？北市衛生局：滾動調整",
+      "publisher": "工商時報（中時即時）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ctee-20251014",
+      "stance": "supports",
+      "excerpt": "由於去年有食安事件，所以市府增聘33位稽查人力",
+      "access_note": "full"
+    },
+    {
+      "id": "S39",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://www.chinatimes.com/realtimenews/20260505004287-260407",
+      "title": "食安與鼠患雙重壓力 議員憂北市衛生局人力不足",
+      "publisher": "中時新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chinatimes-20260505",
+      "stance": "context",
+      "excerpt": "衛生局稽查員原額85人，目前聘用73人，特別專案將重新規畫及調度人力，利用有限人力達到目標。",
+      "access_note": "full"
+    },
+    {
+      "id": "S40",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://tw.news.yahoo.com/%E9%A1%A7%E9%A3%9F%E5%AE%89-%E8%94%A3%E8%90%AC%E5%AE%89-%E6%93%B4%E7%B7%A833%E5%90%8D%E6%AA%A2%E9%A9%97%E4%BA%BA%E5%8A%9B-124731838.html",
+      "title": "顧食安 蔣萬安：擴編33名檢驗人力",
+      "publisher": "中華日報（Yahoo 新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpe-lab-visit-20261005",
+      "stance": "context",
+      "excerpt": "市府增補三十三名食安專業人力",
+      "access_note": "full"
+    },
+    {
+      "id": "S41",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD56ysNDHmrKHmnIPorbDorbDnqIsucGRm&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTM5MDE1Mi9lY2UyYjIzZi0yODAwLTRhMzUtYjkwNi1mODczMzVmZGU1ODMucGRm",
+      "title": "臺北市政府食品安全委員會第41次會議議程",
+      "publisher": "臺北市政府",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "tpe-foodsafety-committee-41",
+      "stance": "refutes",
+      "excerpt": "本府已擴增食安約聘人力共計 33 名，其中 20 名為第一線稽查人員並於 113 年5月對外招募後任職",
+      "access_note": "full"
+    },
+    {
+      "id": "S42",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD56ysNDHmrKHmnIPorbDorbDnqIsucGRm&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTM5MDE1Mi9lY2UyYjIzZi0yODAwLTRhMzUtYjkwNi1mODczMzVmZGU1ODMucGRm",
+      "title": "臺北市政府食品安全委員會第41次會議議程",
+      "publisher": "臺北市政府",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "tpe-foodsafety-committee-41",
+      "stance": "supports",
+      "excerpt": "另 114 年正式成立「食因性疾病病因物質檢測組」",
+      "access_note": "full"
+    },
+    {
+      "id": "S43",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://english.udd.gov.taipei/News_Content.aspx?n=DD9CEC17A97FBC64&s=064134E8655ABA5B&sms=72544237BBE4C5F6",
+      "title": "臺北市衛生局實驗室「四大革新」 全面升級食安防線",
+      "publisher": "臺北市政府衛生局（臺北市政府都市發展局網站刊載）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "tpe-lab-visit-20261005",
+      "stance": "context",
+      "excerpt": "臺北市衛生局增補33名食安專業人力，強化食品稽查、抽驗、檢驗及重大食安事件應變",
+      "access_note": "full"
+    },
+    {
+      "id": "S44",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.judicial.gov.tw/tw/dl-278368-f7e3388399054af99ab85fff052e4639.html",
+      "title": "臺灣臺北地方法院114年度訴字第333號被告黎仿軒等過失致死等案件宣判新聞稿",
+      "publisher": "臺灣臺北地方法院（司法院網站）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "tpd-verdict-20261112",
+      "stance": "supports",
+      "excerpt": "該結果反足佐證其所處理、嗣後遭丟棄之粿條確含邦克列酸。",
+      "access_note": "full"
+    },
+    {
+      "id": "S45",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.judicial.gov.tw/tw/dl-278368-f7e3388399054af99ab85fff052e4639.html",
+      "title": "臺灣臺北地方法院114年度訴字第333號被告黎仿軒等過失致死等案件宣判新聞稿",
+      "publisher": "臺灣臺北地方法院（司法院網站）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "tpd-verdict-20261112",
+      "stance": "refutes",
+      "excerpt": "調解金係由台灣大食代餐飲有限公司、遠東百貨股份有限公司信義分公司各自投保之保險公司依保險契約給付，並非由黎仿軒等4人以個人財產支付。",
+      "access_note": "full"
+    },
+    {
+      "id": "S46",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://sec.gov.taipei/News_Content.aspx?n=49B4C3242CB7658C&s=926E6FDA10E57BE6&sms=72544237BBE4C5F6",
+      "title": "寶林茶室案刑事一審宣判 北市府：重大食安事件應加重刑責 持續協助受害者求償",
+      "publisher": "臺北市政府秘書處",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "tpe-sec-20261112",
+      "stance": "context",
+      "excerpt": "代表31名受害者及家屬提起的團體訴訟，已有22人達成和解獲償，包括8名傷者及14名亡者家屬，另有9名傷者仍在訴訟程序中。",
+      "access_note": "full"
+    },
+    {
+      "id": "S47",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+      "title": "2026 台北市長辯論會轉錄與時間戳（民間整理，語音辨識底稿）",
+      "publisher": "richliu（個人網站）",
+      "accessed": "2026-11-22",
+      "tier": 6,
+      "chain": "debate-20261031-richliu-asr",
+      "stance": "context",
+      "excerpt": "才在後續的起訴當中有了非常重要的依據，讓寶林跑不了，讓後續家屬都能獲得賠償。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S48",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://tfc-taiwan.org.tw/2026-taipei-mayoral-election-debate/",
+      "title": "2026 台北市長首場選舉辯論查核專頁",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc-20261031",
+      "stance": "context",
+      "excerpt": "蔣萬安說：「寶林茶室案發生第一時間，同仁非常機警採集了生物跡證，才讓寶林跑不了，我們也增加33名稽查人力，成立食因性疾病檢驗組」？",
+      "access_note": "full"
+    }
+  ],
+  "disputes": [
+    {
+      "claim_id": "C2",
+      "judge_label": "misleading",
+      "label_kept": true,
+      "judge_reasoning": "訊息的引言拿掉了原話裡的「才在後續的起訴當中有非常重要的依據」，「跑不了」的範圍被放寬；照原話的範圍檢驗，刑事起訴和一審有罪查得到，但家屬的賠償是由第三方保險公司給付，不是寶林或被告支付。自由時報、三立的引述和一份民間語音辨識轉錄記錄的原話都是「採集了生物跡證，才在後續的起訴當中有非常重要的依據，讓寶林跑不了」，後面接家屬獲得賠償；濃縮引言的人查不到，不推論用意。(1) 起訴依據：北檢 2025 年 1 月起訴 5 人，台北地院 2026 年 11 月 12 日一審判 4 人有罪（負責人 1 年 10 月、代班廚師 8 月；店長過失傷害部分公訴不受理、其餘無罪；可上訴）。法院宣判新聞稿寫代班廚師的手部檢體和糞便檢體都呈邦克列酸陽性，可以佐證粿條含邦克列酸。手部檢體是「起訴關鍵證據」只見於衛生局的說法；北檢偵結新聞稿（依維基文庫轉錄，原始 PDF 讀不到）沒有提到手部檢體，少了它能不能起訴無法確認。(2) 家屬賠償：法院新聞稿寫明調解金由大食代、遠百各自投保的保險公司給付，不是被告以個人財產支付。市府 11 月 12 日的資料是消基會代表 31 人提起團體訴訟，22 人已和解獲償，9 名傷者仍在訴訟中；沒有查到採檢促成賠償的證據。(3) 罰鍰：原話沒有提到，是批評者提出的，只列背景。衛生局開出的罰鍰（報導稱累計 706 萬元）移送執行後只追回一千多元。辯論完整影片沒有播放核對，判決書原文也沒有取得。",
+      "objections": [
+        {
+          "attack_id": "C-1",
+          "seat": "C",
+          "argument": "C2 的理由沒有交代「跑不了」的範圍是被訊息截寬的，誤導的判定因此全落在說話者身上。自由時報和三立記錄的原話是「採集了生物跡證，才在後續的起訴當中有非常重要的依據，讓寶林跑不了，讓後續家屬都能獲得賠償」（S12、S13）。訊息拿掉了中間的「在後續的起訴當中有非常重要的依據」，「跑不了」才讀成所有責任。正方的理由第一句寫「整句會讓人以為業者已經負起全部責任」，「全部責任」是正方自己設的門檻，原話沒有這樣說。罰鍰收繳也不在原話裡；依 Yahoo 新聞即時頁的轉述（不是逐字稿），沈伯洋當時問的是處理事件的標準和出席會議，不是罰鍰。另外，正方從訊息沒有的原話裡取了「家屬獲得賠償」來檢驗，卻沒有用同一句的「起訴依據」來界定範圍，只取了對說話者不利的一半。理由應分開寫三件事：原話講的起訴依據（有起訴和一審判決可查）、原話講的家屬賠償（由第三方保險公司給付、團體訴訟未結）、原話沒講而由批評者提出的罰鍰。理由也應寫明訊息截掉了前後文，脈絡問題標上「斷章取義」。不論說話者屬於哪個政黨，都應先用他自己講的範圍來檢驗。",
+          "ruling_reason": "成立，「讓寶林跑不了」這一條維持「誤導」，理由重寫，並標上斷章取義。自由時報和三立記錄的原話是「採集了生物跡證，才在後續的起訴當中有非常重要的依據，讓寶林跑不了」，後面接家屬獲得賠償；訊息拿掉了「在後續的起訴當中有非常重要的依據」，「跑不了」的範圍因此變寬。原判定用的「業者已經負起全部責任」不是原話的說法，予以刪除。理由改成分開寫三件事：原話講的起訴依據、原話講的家屬賠償、原話沒講而由批評者提出的罰鍰（只列背景）。Yahoo 新聞即時頁的轉述顯示，沈伯洋當時問的是處理事件的標準，不是罰鍰。"
+        },
+        {
+          "attack_id": "X1-4",
+          "seat": "X1",
+          "argument": "台北地院的宣判新聞稿直接確認，廚師手部與糞便的陽性結果是認定粿條含毒的佐證之一。應以法院原始說明補足 S17 至 S20 的媒體轉述，並用北檢原稿取代 S21 的維基文庫轉錄。現有原始資料可以確認起訴和一審採用的佐證，仍不足以確認少了手部檢體就無法起訴。",
+          "ruling_reason": "成立。台北地院宣判新聞稿直接開啟只有二進位內容，經文字轉換服務讀到全文，確有「該結果反足佐證其所處理、嗣後遭丟棄之粿條確含邦克列酸」一句，新增為法院的原始說明，媒體報導改為輔助。同一份新聞稿也寫明調解金由保險公司給付；新聞稿沒有提到衛生局的稽查或採樣，也沒有說手部檢體由哪個機關採集。北檢偵結新聞稿的原始 PDF 這次讀不到（轉換服務回傳錯誤），內容仍依維基文庫的轉錄核對；轉錄版沒有提到廚師手部檢體。現有資料能確認起訴和一審採用的佐證，不能確認少了手部檢體就無法起訴；「起訴關鍵證據」只是衛生局的說法。"
+        },
+        {
+          "attack_id": "X1-5",
+          "seat": "X1",
+          "argument": "S26 的 30 人是 9 月公告的提告資料。台北市政府 11 月 12 日更新為消基會代表 31 人，22 人已和解獲償，另有 9 名傷者仍在訴訟中。應補上這項進度，並區分有多少人獲償、款項由誰支付，以及有沒有證據顯示採檢促成賠償。",
+          "ruling_reason": "成立。臺北市政府秘書處 2026 年 11 月 12 日的新聞稿寫明：消基會代表 31 名受害者及家屬提起團體訴訟，22 人已和解獲償（8 名傷者、14 名亡者家屬），另有 9 名傷者仍在訴訟中。原本引用的 30 人是 2026 年 9 月新聞稿裡的提告資料。理由補上這項進度，並分開寫多少人獲償、款項由誰支付（法院新聞稿寫明是保險公司）、採檢和賠償之間沒有查到因果證據。這篇是市府自己的新聞稿，照實標示。"
+        }
+      ],
+      "review_reasons": [
+        "席位 C：「誤導」的標籤和斷章取義的標示沒有問題，理由也已經把起訴依據、家屬賠償、罰鍰三件事分開寫；法院宣判新聞稿、北檢偵結新聞稿的轉錄、市府 11 月 12 日新聞稿和三立引述的原話都重新打開核對，內容相符。剩下的問題在證據表：理由寫明罰鍰是發言沒有提到、由批評者提出的事項，只列背景，但三筆罰鍰報導（S22、S23、S24）在證據表裡仍標示為推翻這一條命題，和理由不一致，應改為只提供背景。另外，S22 寫的累積罰鍰是 350 萬元，S23、S24 寫的是 706 萬元（聯合報的算法是 2024 年 5 筆共 406 萬元，加上 2025 年 2 月的 300 萬元），理由只寫了 706 萬元，沒有交代兩個數字為什麼不同。",
+        "席位 X1：省略「才在後續的起訴當中有了非常重要的依據」，使「跑不了」從刑事追責擴大為泛指無法規避責任，判「誤導」合理。法院所載的調解金由「各自投保之保險公司依保險契約給付」，說明的是部分家屬獲償的付款來源，不能用來反駁家屬有獲償，也不能證明採檢促成賠償。北檢偵結新聞稿原件現可直接查閱，其中記載對五名被告「均提起公訴」，應以原件取代維基文庫轉錄。[中央社辯論發言引述](https://www.cna.com.tw/news/aloc/202611030178.aspx) [臺北地院宣判新聞稿](https://www.judicial.gov.tw/tw/dl-278368-f7e3388399054af99ab85fff052e4639.html#page=4) [臺北地檢署偵結新聞稿](https://www.tpc.moj.gov.tw/media/386115/1140121%E8%87%BA%E5%8C%97%E5%9C%B0%E6%AA%A2%E5%81%B5%E7%B5%90%E5%AF%B6%E6%9E%97%E8%8C%B6%E5%AE%A4a13%E5%BA%97%E9%A3%9F%E7%89%A9%E4%B8%AD%E6%AF%92%E6%A1%88%E4%BB%B6%E6%96%B0%E8%81%9E%E7%A8%BF-%E7%99%BC%E4%BD%88.pdf?mediaDL=true)"
+      ]
+    }
+  ],
+  "checked_objections": [
+    {
+      "attack_id": "X1-3",
+      "seat": "X1",
+      "claim_id": "C2",
+      "target": "neutral_rewrite",
+      "argument": "把「跑不了」寫成「無法規避責任」，會讓讀者以為蔣萬安也明確談到罰鍰繳納。可查到的辯論轉錄把這句接在起訴依據之後、家屬獲賠之前。改寫應保留這兩項具體脈絡，並說明貼文引言省略了這些內容。",
+      "ruling_reason": "不成立。中立改寫的對象是訊息實際寫出來的句子；訊息的引言是「採集了生物跡證，才讓寶林跑不了」，沒有「起訴依據」和「家屬獲賠」。把這兩句補進改寫，查核的就變成辯論原話，不是讀者看到的訊息。「無法規避責任」是「跑不了」的字面解釋，沒有提到罰鍰，也沒有說蔣萬安談過罰鍰繳納。攻擊指出的省略確實存在，民間轉錄的句子已打開核對；這個問題在判定上處理：該條判「誤導」並標示斷章取義，罰鍰改列背景。"
+    }
+  ],
+  "trace_attacks_upheld": [
+    {
+      "attack_id": "C-3",
+      "seat": "C",
+      "target": "trace",
+      "argument": "溯源列的用詞問題只講了一半，而且容易讓人以為是說話者自己刪的。它只指出「跑不了，」後面省略了「讓後續家屬都能獲得賠償」和記者會。它沒有列「才」和「讓寶林跑不了」之間被拿掉的「在後續的起訴當中有非常重要的依據」（S12、S13 記錄的原話）。這一句是說話者自己對「跑不了」的限定，拿掉後意思變寬，是對說話者不利的省略。只列引來批評的那一句被省略、不列這一句，不夠公允。另外，這項問題列在蔣萬安名下，但濃縮引言的不是他：溯源自己找到字句相同的最早版本，是台灣事實查核中心辯論專頁的條目標題。報告應寫明引號內的文字是整理者濃縮的，兩處省略都要列出。",
+      "ruling_reason": "成立。溯源只列了「跑不了，」之後省略的家屬賠償和記者會，沒有列「才」和「讓寶林跑不了」之間被拿掉的「在後續的起訴當中有非常重要的依據」；自由時報的引述裡有這一句，兩處省略都應列出。這項用詞問題也不該掛在蔣萬安名下：媒體記錄的原話比訊息完整，沒有證據顯示濃縮出自說話者。台灣事實查核中心辯論專頁的條目標題和訊息引言字句相同，「跑不了，」之後沒有刪節號。修正後的寫法是：引號內的文字經過濃縮，不是說話者的逐字原話；公開網頁上字句相同的最早版本是查核中心專頁的標題，訊息是不是取自該頁無法確認。"
+    },
+    {
+      "attack_id": "X1-7",
+      "seat": "X1",
+      "target": "trace",
+      "argument": "查到一份附三立完整直播連結及時間戳的民間轉錄，相關答覆從影片的 2 小時 34 分 10 秒開始。轉錄列出「跑不了」與「增加33名」之間提到的家屬賠償及連續六天記者會。原始直播頁可定位，但未能播放核對，轉錄只能用於比對上下文。",
+      "ruling_reason": "成立，列為溯源的補充版本。這份民間轉錄已打開核對：它把蔣萬安的回答標在三立直播影片的 2 小時 34 分 10 秒，順序是生物跡證、起訴依據、跑不了、家屬賠償、連續六天記者會，再接「增加了 33 名稽查人力」和食因性疾病檢驗組。這和自由時報、三立的引述及 Yahoo 新聞即時頁的轉述一致。限制：頁面自述底稿是語音辨識軟體自動轉錄，校稿時沒有逐句對照原音；影片本身這次也沒有播放核對。所以它只用來比對上下文和順序，不當作逐字稿，「沒有取得完整影片或逐字稿」的限制保留。"
+    },
+    {
+      "attack_id": "X1-8",
+      "seat": "X1",
+      "target": "trace",
+      "argument": "貼文引言與台灣事實查核中心辯論專頁的標題文字相同，只能確認公開網頁上有相同措辭。蔣萬安是辯論發言者，貼上這段文字的訊息發布者仍不明，也無法確認貼文是否取自該專頁。",
+      "ruling_reason": "成立。訊息是貼上的文字，沒有網址、署名和發布時間。蔣萬安是辯論會上的發言者，貼出這段文字的人不明，兩者應分開寫。訊息引言和台灣事實查核中心辯論專頁的條目標題字句相同，只能說公開網頁上有相同措辭，不能確認訊息取自該頁，也不推論是誰濃縮的。"
+    }
+  ],
+  "removed_tactics": []
+}

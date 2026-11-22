@@ -1,0 +1,374 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.nownews.com/news/6888190",
+      "title": "北市辯論／蔣萬安、沈伯洋首度交鋒！2小時辯論全文一次看",
+      "publisher": "NOWnews今日新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-nownews-fulltext",
+      "stance": "supports",
+      "excerpt": "再來，食安也是，金華國中剛剛提到了，你馬上就趕到現場，但成淵國中部驗出金黃色葡萄球菌，累積高達96名的學生因為這樣受害，你卻沒有前往。",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624826",
+      "title": "台北市長辯論》兒虐食安政策交鋒！沈伯洋批「一個台北兩個世界」蔣萬安又問A答B",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-ltn",
+      "stance": "supports",
+      "excerpt": "沈伯洋說，再來食安議題，針對金華高中你馬上就趕到現場，但是成淵高中部驗出精黃色葡萄球菌，導致高達96名的學生因為這樣受害，你卻沒有去現場。",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C4"
+      ],
+      "url": "https://news.tvbs.com.tw/politics/4043889",
+      "title": "台北市長辯論／沈伯洋轟兒虐、食安雙標　蔣萬安反擊「不懂市政」：好意思質疑市府",
+      "publisher": "TVBS新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-tvbs",
+      "stance": "supports",
+      "excerpt": "沈伯洋也提到金華國中爆出食安問題，蔣萬安就馬上趕到現場；但成淵高中國中部的午餐驗出金黃色葡萄球菌，蔣萬安卻沒有前往。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://udn.com/news/story/124652/9849211",
+      "title": "台北市長首場辯論超激烈 蔣萬安、沈伯洋金句一次看",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-udn",
+      "stance": "supports",
+      "excerpt": "食安也是，金華國中你馬上趕到現場，成淵國中部驗出金黃色葡萄球菌，累積高達96名學生因為這樣受害，你卻沒有前往。",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.youtube.com/watch?v=j4s2_44yHJE",
+      "title": "🔴【LIVE】 2026台北市長候選人電視辯論會｜#蔣萬安 #沈伯洋 #2026台北市長候選人電視辯論會",
+      "publisher": "YouTube（辯論會直播影片）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "debate-video",
+      "stance": "context",
+      "excerpt": "🔴【LIVE】 2026台北市長候選人電視辯論會｜#蔣萬安 #沈伯洋 #2026台北市長候選人電視辯論會",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5589412",
+      "title": "簡舒培質問關心金華國中孩子健康 蔣萬安衝學校慰問了解午餐運作",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "jinhua-visit-ltn",
+      "stance": "supports",
+      "excerpt": "市府下午3點左右說明，蔣萬安今天中午視察金華國中營養午餐，感謝這段時間承受許多壓力的校長、老師、廚師、家長志工以及孩子們。",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9785446",
+      "title": "蔣萬安赴金華國中測鹹度遭質疑 藍議員嗆簡舒培、沈伯洋：無知",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "jinhua-visit-udn",
+      "stance": "supports",
+      "excerpt": "台北市長蔣萬安昨天到金華國中視察營養午餐流程，更參與測試菜品鹹度",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&sms=72544237BBE4C5F6&s=6C8E42D2A96900DB",
+      "title": "北市校園餐點抽驗出爐 金華國中、景興國小、民族國小等校檢驗均合格",
+      "publisher": "臺北市政府衛生局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-health-1007",
+      "stance": "context",
+      "excerpt": "金華國中則為9月23日接獲輿情，於次日(24日)進行稽查採樣。",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.cts.com.tw/cts/society/202609/202609233082254.html",
+      "title": "金華國中食安遭被動處理？　北市教育局：不實指控",
+      "publisher": "華視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "jinhua-exposure-cts",
+      "stance": "context",
+      "excerpt": "這是烏龍爆料，該校沒有出現集體食物中毒，所謂要求被動處理更是不實指控",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "url": "https://health.gov.taipei/News_Content.aspx?n=4F01EBDF8F61F315&sms=72544237BBE4C5F6&s=27105732CFA2BEAA",
+      "title": "成淵高中熱食部留樣便當檢驗出爐 衛生局重罰18萬元 校設專責服務窗口求償",
+      "publisher": "臺北市政府衛生局",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-health-0918",
+      "stance": "supports",
+      "excerpt": "臺北市政府於115年9月8日11時接獲成淵高中通報國中部87名學生於9月7日中午時段食用學校熱食部供應之餐食後，陸續發生腹瀉之疑似食品中毒症狀……檢驗結果1件學校午餐食餘檢體（留樣便當）檢出食品中金黃色葡萄球菌腸毒素B",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/5578799",
+      "title": "北市成淵高中爆食物中毒！檢出金黃色葡萄球菌毒素 重罰18萬",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "taipei-health-0918",
+      "stance": "supports",
+      "excerpt": "檢驗結果1件學校午餐食餘檢體（留樣便當）檢出食品中金黃色葡萄球菌腸毒素B，違反食品安全衛生管理法第15條第1項第4款之規定",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/5592337",
+      "title": "北市校園食安連環爆 許淑華轟市府未預防性停餐",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "health-director-96",
+      "stance": "supports",
+      "excerpt": "另，成淵高中案，經衛生局調查後共有96名學生反映不適。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://tw.news.yahoo.com/%E9%A3%9F%E5%AE%89%E9%A2%A8%E6%9A%B4-%E7%88%86%E6%88%90%E6%B7%B5%E9%A3%9F%E7%89%A9%E4%B8%AD%E6%AF%92%E4%B8%8D%E5%8F%AA87%E4%BA%BA-%E8%AD%B0%E5%93%A1%E6%9B%9D-%E9%A9%9A%E4%BA%BA%E6%95%B8%E5%AD%97-130000607.html",
+      "title": "食安風暴！爆成淵食物中毒不只87人？議員曝「驚人數字」！",
+      "publisher": "民視新聞網（Yahoo新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "councilor-hung-96",
+      "stance": "supports",
+      "excerpt": "成淵事件還有後續，近期索資發現案例竟有96人快破百人。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C4",
+        "C1"
+      ],
+      "url": "https://www.ettoday.net/news/20260930/3246319.htm",
+      "title": "成淵高中87人腹瀉無視察　蔣萬安曝原因：金華國中學生受大傷害",
+      "publisher": "ETtoday新聞雲",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chiang-0930-qa",
+      "stance": "supports",
+      "excerpt": "另外，記者也關切受影響人數高達87人的成淵高中，為何蔣萬安並未前往、而是選擇受影響人數僅3人的金華國中？蔣萬安則說，最主要考量是金華國中在此次事件中遭受到了不實指控，包括學生、家長、校方與老師都受到非常大的傷害。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://news.nextapple.com/politics/20261106/06A83921E7A0863707A8A3C20F76EEDF",
+      "title": "終於去成淵高中視察營養午餐　蔣萬安：了解重新招標後供餐狀況",
+      "publisher": "壹蘋新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chengyuan-visit-1106-nextapple",
+      "stance": "supports",
+      "excerpt": "台北市成淵高中國中部9月時有87名學生食用午餐後出現腹瀉，當時台北市長蔣萬安並未前往，反而選擇到有3名學生疑因營養午餐不適的金華國中視察。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://www.mirrordaily.news/story/96172",
+      "title": "事隔2個月！蔣萬安突襲成淵高中視察「營養午餐」　與學生開心擊掌",
+      "publisher": "鏡報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chengyuan-visit-1106-mirror",
+      "stance": "supports",
+      "excerpt": "成淵高中爆出87人腹瀉，卻遲未見到蔣萬安親自視察，引發外界質疑。",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202611060304.aspx",
+      "title": "赴成淵高中視察營養午餐　蔣萬安：了解重新招標後供餐狀況",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chengyuan-visit-1106-cna",
+      "stance": "context",
+      "excerpt": "蔣萬安今天中午前往成淵高中，視察營養午餐供餐狀況。",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "url": "https://tfc-taiwan.org.tw/taipei-school-lunch-food-poisoning-and-safety-inspection-claims/",
+      "title": "蔣萬安說：「你（沈伯洋）剛提到很多問題…其實我們推動營養午餐，免費不是等於品質打折…金華國中在內很多學校，是大規模的食物中毒，但是事實證明，事後的檢查都完全合格」？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "taipei-health-0918",
+      "stance": "context",
+      "excerpt": "成淵高中國中部：9月7日87名學生在食用學校熱食部供應的餐食後，陸續發生腹瀉疑似食品中毒症狀。衛生局採樣留樣便當後，檢出金黃色葡萄球菌腸毒素B，開罰18萬元。",
+      "access_note": "full"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "大致正確：沈伯洋確實在 2026-10-31 辯論會上這樣說，蔣萬安也確實到過金華國中，但「馬上」是寬鬆的說法。辯論全文（S1）和自由、TVBS、聯合三家各自的報導（S2–S4）都記下這句話；辯論影片頁面讀不到內容和字幕（S5），沒有直接對照影片。蔣萬安是 2026-09-29 中午到金華國中（S6、S7、S14），距 9 月 23 日議員披露、衛生局接獲輿情（S8、S9）相隔 6 天，他說明是因該校遭不實指控而去打氣（S14）。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S14"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C2",
+      "label": "mostly_true",
+      "reasoning": "大致正確：沈伯洋說過這句話（S1–S4），成淵高中國中部的午餐留樣便當確實驗出問題，但官方公布的是「金黃色葡萄球菌腸毒素B」，不是細菌本身。衛生局 2026-09-18 新聞稿寫明採樣留樣便當 1 件、環境檢體 5 件、工作人員手部檢體 5 件，其中留樣便當檢出腸毒素B，並裁罰 18 萬元（S10）；自由時報報導（S11）和台灣事實查核中心（S18）引用的是同一份新聞稿。「成淵國中部」指成淵高中國中部。菌名與毒素的差別不影響「午餐檢出致病因子」的主體。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S10",
+        "S11",
+        "S18"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C3",
+      "label": "mostly_true",
+      "reasoning": "大致正確：沈伯洋說過「96 名」（S1、S2、S4），這個數字有出處，但官方用詞是「反映不適」，不是確認受害。自由時報 2026-10-01 報導衛生局長黃建華說「經衛生局調查後共有96名學生反映不適」（S12）；同日民視報導議員洪婉臻稱索資後人數由 87 增為 96（S13）。衛生局 9 月 18 日新聞稿的通報人數是 87 名（S10），之後多數報導仍沿用 87。沒有找到衛生局載明 96 名的新聞稿，這個數字只查到媒體轉述局長發言和議員說法兩條來源。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S4",
+        "S10",
+        "S12",
+        "S13"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C4",
+      "label": "true",
+      "reasoning": "正確：沈伯洋說過這句話（S1–S4），而且到 2026-10-31 辯論當天為止，查不到蔣萬安到過成淵高中的紀錄。9 月 30 日記者問他為何沒去成淵而去金華，他沒有否認，只說明去金華的考量（S14）；辯論中他回答的是解約、備援和關懷，也沒有說自己去過（S1）。11 月 6 日的報導寫他事發當時並未前往、遲未親自視察（S15、S16）。他是在辯論後的 11 月 6 日中午才到成淵高中視察（S17），那是這句話說出之後的事，不影響依說話時間的判定。辯論影片讀不到字幕（S5），引述是和辯論全文及多家報導比對的。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S14",
+        "S15",
+        "S16",
+        "S17"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": [
+    {
+      "org": "台灣事實查核中心",
+      "url": "https://tfc-taiwan.org.tw/taipei-school-lunch-food-poisoning-and-safety-inspection-claims/",
+      "their_label": "部分與所查資料不符（查核對象是蔣萬安同場的另一句發言，不是沈伯洋這一句）",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "agree": null,
+      "note": "該報告查的是蔣萬安「事後的檢查都完全合格」的發言，沒有查沈伯洋這一句，也沒有提蔣萬安是否到過成淵或 96 名，所以它的標籤無法和本案判定比對。它列出 11 項資料來源，已獨立打開其中 4 項。衛生局 9 月 18 日新聞稿：內容和它寫的「87 名學生、留樣便當檢出金黃色葡萄球菌腸毒素B、開罰 18 萬元」一致，也支持本案 C2。衛生局 10 月 7 日新聞稿：載明金華國中 9 月 23 日接獲輿情、24 日稽查採樣。教育局 10 月 30 日新聞稿：談的是天母國中，和本案命題無關。市長專案報告頁面：只有附件連結，PDF 內文讀不到。其餘 7 項（簡舒培臉書貼文、中央社 3 則、教育局 2 則、市府 10 月 21 日新聞稿）沒有逐一重驗。它寫的人數是 87 名，和 C3 的 96 名不同，差別在於 96 名是衛生局長 10 月 1 日說的後續調查數字。"
+    }
+  ]
+}

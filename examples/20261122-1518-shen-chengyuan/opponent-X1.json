@@ -1,0 +1,80 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 30,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "label",
+      "argument": "「馬上」影響兩校處理速度的比較，建議改判誤導。北市衛生局在 9 月 23 日得知金華國中的爭議，蔣萬安在 9 月 29 日中午到校，相隔 6 天。蔣萬安是在 29 日上午表示會關心師生後，當天中午到校。辯論中的說法省略了爭議傳出到市長到校的時間差。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&s=6C8E42D2A96900DB&sms=72544237BBE4C5F6",
+          "excerpt": "金華國中則為9月23日接獲輿情，於次日(24日)進行稽查採樣。"
+        },
+        {
+          "url": "https://www.cna.com.tw/news/aloc/202609290256.aspx",
+          "excerpt": "台北市長蔣萬安今天上午表示會關心該校師生，中午即前往視察供餐流程。"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C2",
+      "target": "label",
+      "argument": "把「檢出腸毒素」說成「驗出細菌」會讓讀者誤解實際檢驗結果，建議改判誤導。衛生局公布在一件留樣便當中檢出金黃色葡萄球菌腸毒素 B。食藥署將驗出腸毒素與驗出菌株或菌數列為不同的判明依據。檢出腸毒素足以支持這起食物中毒事件的病因判斷，公開結果只證實檢出了腸毒素。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&s=27105732CFA2BEAA&sms=72544237BBE4C5F6",
+          "excerpt": "檢驗結果1件學校午餐食餘檢體（留樣便當）檢出食品中金黃色葡萄球菌腸毒素B。"
+        },
+        {
+          "url": "https://www.fda.gov.tw/tc/includes/GetFile.ashx?id=f636694204692768837",
+          "excerpt": "自可疑食物檢體中檢出腸毒素之存在； 或 自每克可疑食物檢體中檢出之菌數大於105CFU。"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C3",
+      "target": "label",
+      "argument": "「96 名學生因為這樣受害」把問卷回報的不適人數說成已確定由這起食物中毒造成的人數，建議改判誤導。北市衛生局食藥科科長林冠蓁說明，87 人是最初通報人數，96 人是攝食問卷中反映不適的人數。留樣檢驗支持事件的病因判斷，現有資料仍無法確認問卷中的 96 人都因同一病因受害。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://www.mnews.tw/story/20261001sot1922001",
+          "excerpt": "第一時間通報的時候是87人，最後攝食問卷調查，有96個小朋友反映身體不適。"
+        },
+        {
+          "url": "https://health.gov.taipei/News_Content.aspx?n=BB5A41BA1E6CA260&s=27105732CFA2BEAA&sms=72544237BBE4C5F6",
+          "excerpt": "檢驗結果1件學校午餐食餘檢體（留樣便當）檢出食品中金黃色葡萄球菌腸毒素B。"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C4",
+      "target": "evidence",
+      "argument": "正方引用的資料支持蔣萬安在辯論前尚未親赴成淵高中視察的推論，但缺少直接證實這段期間未到校的第一手資料。辯論中蔣萬安談的是解約、備援與關懷，未答覆自己有沒有去。教育局只確認他在辯論後的 11 月 6 日到校。鏡新聞報導那是事發後首次到校，可作為旁證。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "成淵國中這個個案，我們即刻跟業者解約，啟動備援機制，而且給予所有學生、家長關懷以及法律的支援"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=501DFBF453174D5D&sms=72544237BBE4C5F6",
+          "excerpt": "臺北市長蔣萬安今（6）日前往成淵高中，實地了解校內營養午餐重新招標後的供餐情形"
+        },
+        {
+          "url": "https://www.mnews.tw/story/20261106sot1819001",
+          "excerpt": "蔣萬安也在食品中毒案後，首度到成淵高中。"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

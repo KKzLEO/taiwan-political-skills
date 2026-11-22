@@ -1,0 +1,109 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 30,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "label",
+      "proposed_label": "misleading",
+      "argument": "北市衛生局確實在獲報當天採到廚師手部檢體，但監察院查閱稽查紀錄後，認定市府中午獲報、傍晚才首次到場，延遲近五小時。當天也未採集疑似問題食材或餐點。「第一時間」是這句話用來說明市府反應及時的重點，延誤會改變讀者對處置經過的理解，應判為「誤導」。",
+      "evidence": [
+        {
+          "url": "https://www.cy.gov.tw/public/Data/114mo/114%E7%A4%BE%E6%AD%A30001.pdf#page=5",
+          "excerpt": "延遲近5 小時，與該府所述已儘快於第一時間到現場調查一節不符。"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C3",
+      "target": "label",
+      "proposed_label": "misleading",
+      "argument": "新增 33 名是整體食安約聘人力。台北市政府食品安全委員會第 41 次會議資料明列，其中 20 名是第一線稽查人員。市府在辯論前也把 33 人稱為食安專業人力，工作涵蓋稽查、抽驗、檢驗及事件應變。將全數 33 人概稱為稽查人力，會高估第一線稽查增員 13 人，應判為「誤導」。",
+      "evidence": [
+        {
+          "url": "https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD56ysNDHmrKHmnIPorbDorbDnqIsucGRm&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTM5MDE1Mi9lY2UyYjIzZi0yODAwLTRhMzUtYjkwNi1mODczMzVmZGU1ODMucGRm#page=24",
+          "excerpt": "本府已擴增食安約聘人力共計33名，其中20名為第一線稽查人員"
+        },
+        {
+          "url": "https://english.udd.gov.taipei/News_Content.aspx?n=DD9CEC17A97FBC64&s=064134E8655ABA5B&sms=72544237BBE4C5F6",
+          "excerpt": "臺北市衛生局增補33名食安專業人力，強化食品稽查、抽驗、檢驗及重大食安事件應變"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C2",
+      "target": "neutral_rewrite",
+      "argument": "把「跑不了」寫成「無法規避責任」，會讓讀者以為蔣萬安也明確談到罰鍰繳納。可查到的辯論轉錄把這句接在起訴依據之後、家屬獲賠之前。改寫應保留這兩項具體脈絡，並說明貼文引言省略了這些內容。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "才在後續的起訴當中有了非常重要的依據，讓寶林跑不了，讓後續家屬都能獲得賠償。"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "台北地院的宣判新聞稿直接確認，廚師手部與糞便的陽性結果是認定粿條含毒的佐證之一。應以法院原始說明補足 S17 至 S20 的媒體轉述，並用北檢原稿取代 S21 的維基文庫轉錄。現有原始資料可以確認起訴和一審採用的佐證，仍不足以確認少了手部檢體就無法起訴。",
+      "evidence": [
+        {
+          "url": "https://www.judicial.gov.tw/tw/dl-278368-f7e3388399054af99ab85fff052e4639.html#page=2",
+          "excerpt": "該結果反足佐證其所處理、嗣後遭丟棄之粿條確含邦克列酸。"
+        },
+        {
+          "url": "https://www.tpc.moj.gov.tw/media/386115/1140121%E8%87%BA%E5%8C%97%E5%9C%B0%E6%AA%A2%E5%81%B5%E7%B5%90%E5%AF%B6%E6%9E%97%E8%8C%B6%E5%AE%A4a13%E5%BA%97%E9%A3%9F%E7%89%A9%E4%B8%AD%E6%AF%92%E6%A1%88%E4%BB%B6%E6%96%B0%E8%81%9E%E7%A8%BF-%E7%99%BC%E4%BD%88.pdf?mediaDL=true",
+          "excerpt": "以及刑法第276條過失致死、同法第284條前段過失傷害等罪嫌，均提起公訴。"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "S26 的 30 人是 9 月公告的提告資料。台北市政府 11 月 12 日更新為消基會代表 31 人，22 人已和解獲償，另有 9 名傷者仍在訴訟中。應補上這項進度，並區分有多少人獲償、款項由誰支付，以及有沒有證據顯示採檢促成賠償。",
+      "evidence": [
+        {
+          "url": "https://sec.gov.taipei/News_Content.aspx?n=49B4C3242CB7658C&s=926E6FDA10E57BE6&sms=72544237BBE4C5F6",
+          "excerpt": "代表31名受害者及家屬提起的團體訴訟，已有22人達成和解獲償，包括8名傷者及14名亡者家屬，另有9名傷者仍在訴訟程序中。"
+        }
+      ]
+    },
+    {
+      "id": "X1-6",
+      "claim_id": "C4",
+      "target": "evidence",
+      "argument": "S27 只能證明當時宣布籌設，S31 只能證明檢驗科有相關業務。台北市政府食品安全委員會第 41 次會議資料明載該組於 2025 年正式成立，可直接支持成立的說法。",
+      "evidence": [
+        {
+          "url": "https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD56ysNDHmrKHmnIPorbDorbDnqIsucGRm&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTM5MDE1Mi9lY2UyYjIzZi0yODAwLTRhMzUtYjkwNi1mODczMzVmZGU1ODMucGRm#page=25",
+          "excerpt": "另114年正式成立「食因性疾病病因物質檢測組」"
+        }
+      ]
+    },
+    {
+      "id": "X1-7",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "查到一份附三立完整直播連結及時間戳的民間轉錄，相關答覆從影片的 2 小時 34 分 10 秒開始。轉錄列出「跑不了」與「增加33名」之間提到的家屬賠償及連續六天記者會。原始直播頁可定位，但未能播放核對，轉錄只能用於比對上下文。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "而且我連續六天親自召開記者會"
+        }
+      ]
+    },
+    {
+      "id": "X1-8",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "貼文引言與台灣事實查核中心辯論專頁的標題文字相同，只能確認公開網頁上有相同措辭。蔣萬安是辯論發言者，貼上這段文字的訊息發布者仍不明，也無法確認貼文是否取自該專頁。"
+    }
+  ],
+  "status": "ok"
+}

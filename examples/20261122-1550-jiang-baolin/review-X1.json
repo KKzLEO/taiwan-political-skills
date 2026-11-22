@@ -1,0 +1,26 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C1",
+      "pass": true,
+      "reason": "改判「誤導」合理。監察院糾正案文確認市府在獲報當天採到廚師手部檢體，但記載從獲報到抵達現場「延遲近 5 小時」。裁判已區分採檢確有其事與「第一時間」造成的印象。[監察院糾正案文](https://www.cy.gov.tw/public/Data/114mo/114%E7%A4%BE%E6%AD%A30001.pdf#page=5)"
+    },
+    {
+      "claim_id": "C2",
+      "pass": false,
+      "label_ok": true,
+      "reason": "省略「才在後續的起訴當中有了非常重要的依據」，使「跑不了」從刑事追責擴大為泛指無法規避責任，判「誤導」合理。法院所載的調解金由「各自投保之保險公司依保險契約給付」，說明的是部分家屬獲償的付款來源，不能用來反駁家屬有獲償，也不能證明採檢促成賠償。北檢偵結新聞稿原件現可直接查閱，其中記載對五名被告「均提起公訴」，應以原件取代維基文庫轉錄。[中央社辯論發言引述](https://www.cna.com.tw/news/aloc/202611030178.aspx) [臺北地院宣判新聞稿](https://www.judicial.gov.tw/tw/dl-278368-f7e3388399054af99ab85fff052e4639.html#page=4) [臺北地檢署偵結新聞稿](https://www.tpc.moj.gov.tw/media/386115/1140121%E8%87%BA%E5%8C%97%E5%9C%B0%E6%AA%A2%E5%81%B5%E7%B5%90%E5%AF%B6%E6%9E%97%E8%8C%B6%E5%AE%A4a13%E5%BA%97%E9%A3%9F%E7%89%A9%E4%B8%AD%E6%AF%92%E6%A1%88%E4%BB%B6%E6%96%B0%E8%81%9E%E7%A8%BF-%E7%99%BC%E4%BD%88.pdf?mediaDL=true)"
+    },
+    {
+      "claim_id": "C3",
+      "pass": true,
+      "reason": "改判「誤導」合理。市府食安委員會第 41 次會議議程記載「本府已擴增食安約聘人力共計33名，其中20名為第一線稽查人員」。裁判已區分食安增員總數、第一線稽查人數與各時點的到聘人數。[臺北市政府食品安全委員會第 41 次會議議程](https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD56ysNDHmrKHmnIPorbDorbDnqIsucGRm&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTM5MDE1Mi9lY2UyYjIzZi0yODAwLTRhMzUtYjkwNi1mODczMzVmZGU1ODMucGRm#page=24)"
+    },
+    {
+      "claim_id": "C4",
+      "pass": true,
+      "reason": "維持「正確」合理。市府食安委員會第 41 次會議議程明載「另114年正式成立『食因性疾病病因物質檢測組』」。2025 年的成立紀錄直接支持這項說法，裁判也已交代正式組名與發言用語的差異。[臺北市政府食品安全委員會第 41 次會議議程](https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD56ysNDHmrKHmnIPorbDorbDnqIsucGRm&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTM5MDE1Mi9lY2UyYjIzZi0yODAwLTRhMzUtYjkwNi1mODczMzVmZGU1ODMucGRm#page=25)"
+    }
+  ]
+}

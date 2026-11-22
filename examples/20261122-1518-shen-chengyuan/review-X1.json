@@ -1,0 +1,11 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C4",
+      "pass": false,
+      "label_ok": false,
+      "reason": "現有證據支持蔣萬安在 10 月 31 日辯論前尚未因成淵高中食安事件到校的推論，但未達「正確」所需的第一手證據門檻。鏡新聞寫「首度到成淵高中」，民視寫「首度親自進入成淵校園」，兩篇報導都指向 11 月 6 日。市府新聞稿記載「臺北市長蔣萬安今（6）日前往成淵高中」，只確認當天到校。目前仍缺少能直接確認事發後至辯論當天未到校的第一手紀錄，因此應判「無法證實」。[鏡新聞](https://www.mnews.tw/story/20261106sot1819001)、[民視新聞](https://www.ftvnews.com.tw/news/detail/2026B06L11M1)、[臺北市政府新聞稿](https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=501DFBF453174D5D&sms=72544237BBE4C5F6)"
+    }
+  ]
+}

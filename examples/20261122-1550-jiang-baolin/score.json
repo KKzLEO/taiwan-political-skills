@@ -1,0 +1,65 @@
+{
+  "credibility": {
+    "score": 25,
+    "raw": 25.0,
+    "main_claims": [
+      "C1",
+      "C2"
+    ],
+    "main_accuracy": 0.25,
+    "overall_accuracy": 0.3906,
+    "capped": false,
+    "context_flags": [
+      "out_of_context"
+    ],
+    "show_on_spectrum": true
+  },
+  "result": "不符",
+  "result_reason": null,
+  "confidence": {
+    "score": 90,
+    "level": "高",
+    "deductions": [
+      {
+        "points": 10,
+        "reason": "C2 覆核沒有完成或沒有通過"
+      }
+    ],
+    "evidence_quality": 1.0
+  },
+  "publishable": true,
+  "publish_blocks": [],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "misleading",
+      "importance": 5,
+      "factor": 0.25
+    },
+    {
+      "claim_id": "C2",
+      "label": "misleading",
+      "importance": 5,
+      "factor": 0.25
+    },
+    {
+      "claim_id": "C3",
+      "label": "misleading",
+      "importance": 3,
+      "factor": 0.25
+    },
+    {
+      "claim_id": "C4",
+      "label": "true",
+      "importance": 3,
+      "factor": 1.0
+    },
+    {
+      "claim_id": "C5",
+      "label": "not_factual",
+      "importance": 2,
+      "factor": null
+    }
+  ]
+}

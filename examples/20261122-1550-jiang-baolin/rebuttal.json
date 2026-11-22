@@ -1,0 +1,240 @@
+{
+  "responses": [
+    {
+      "attack_id": "A-1",
+      "accept": true,
+      "response": "接受，C1 改判「誤導」。採了廚師手部檢體屬實：監察院糾正案文記載 3 月 24 日抽驗胡姓廚師手部檢體。但「第一時間」和監察院的正式認定不符：中午獲報、16 時 30 分才準備出發、傍晚首次到場，延遲近 5 小時，兩次稽查都沒採食材和餐點。支持「立即前往」的只有衛生局自己的回應，那篇報導沒有寫到場時間。「第一時間」是這句話用來表示處置及時的重點，不算小差異。理由會改寫成：採檢屬實、時間修飾語被監察院否定、略去沒採食材。糾正案文 PDF 直接讀取只有二進位內容，是經文字轉換服務讀到全文；S4 會換成這個網址並註明讀取方式。",
+      "evidence": [
+        {
+          "url": "https://www.cy.gov.tw/public/Data/114mo/114%E7%A4%BE%E6%AD%A30001.pdf",
+          "excerpt": "臺北市政府衛生局自接獲食品中毒個案通報，至實際抵達現場查核，延遲近 5 小時，與該府所述已儘快於第一時間到現場調查一節不符。"
+        },
+        {
+          "url": "https://www.cy.gov.tw/public/Data/114mo/114%E7%A4%BE%E6%AD%A30001.pdf",
+          "excerpt": "遲至當日 16 時 30 分始準備出發前往現場，並於傍晚方首次抵達寶林茶室"
+        },
+        {
+          "url": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=32397",
+          "excerpt": "惟該府稽查人員遲至當日傍晚始至寶林茶室現場稽查"
+        }
+      ]
+    },
+    {
+      "attack_id": "A-2",
+      "accept": true,
+      "response": "接受，C3 的理由會刪掉「查不到員額分配」，改列這些數字。三筆都已打開核對：2025 年 1 月衛生局說擴增 33 名、已增聘 30 人；2025 年 10 月稽查科長說增聘 33 位稽查人力、員額 84 位、到聘 78 位；2026 年 5 月稽查科長說稽查員原額 85 人、聘用 73 人。理由會註明 33 是核定名額、不是到職人數，而且這些數字都出自衛生局。另外，X1-2 提出的食安委員會資料列出 33 名中 20 名是第一線稽查人員，C3 的標籤一併改判（見 B-3、X1-2）。",
+      "evidence": [
+        {
+          "url": "https://health.ltn.com.tw/article/breakingnews/4930979",
+          "excerpt": "台北市衛生局原本食安人力編制為97人，已擴增33名編制稽查人力，目前增聘30人"
+        },
+        {
+          "url": "https://www.ctee.com.tw/news/20251014701099-431401",
+          "excerpt": "由於去年有食安事件，所以市府增聘33位稽查人力"
+        },
+        {
+          "url": "https://www.chinatimes.com/realtimenews/20260505004287-260407",
+          "excerpt": "衛生局稽查科長李慧芝坦言，衛生局稽查員原額85人，目前聘用73人，特別專案將重新規畫及調度人力，利用有限人力達到目標。"
+        }
+      ]
+    },
+    {
+      "attack_id": "B-1",
+      "accept": true,
+      "response": "接受，C1 改判「誤導」，理由同 A-1。監察院新聞稿的「未第一時間採樣食物檢體」和「同日仍有8名民眾」兩句已核對，確有其文。鏡週刊（Yahoo 新聞轉載，2026-11-20）的報導也已打開：它轉述判決書，寫首次稽查對粿條「僅目視查看及拍攝照片」，稽查人員晚間 6 時 12 分離開，6 時 30 分店家清消。判決書原文沒有取得，這筆只能列為媒體轉述。理由會保留屬實的部分：手部檢體是獲報當天採的，後來驗出邦克列酸。",
+      "evidence": [
+        {
+          "url": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=32397",
+          "excerpt": "致使同日仍有8名民眾陸續至該餐廳用餐"
+        },
+        {
+          "url": "https://www.cy.gov.tw/News_Content.aspx?n=125&s=32397",
+          "excerpt": "而僅抽驗廚師手部檢體及菜刀、砧板等環境檢體"
+        }
+      ]
+    },
+    {
+      "attack_id": "B-2",
+      "accept": true,
+      "response": "接受，S11 改列為只提供背景，並註明是被糾正機關自己的說法。重新打開 S11：報導只寫 12 時 42 分獲報、「立即前往」、約 17 時完成查核，沒有寫到場時間。這和監察院糾正案文的時序衝突：案文記載 16 時 30 分才準備出發、傍晚首次到場。鏡週刊轉述的判決書時序則是晚間 6 時 12 分離開，也和「約 17 時完成查核」對不上。C1 的理由會並列這三種說法，不再用 S11 支持「第一時間」。",
+      "evidence": [
+        {
+          "url": "https://www.cy.gov.tw/public/Data/114mo/114%E7%A4%BE%E6%AD%A30001.pdf",
+          "excerpt": "遲至當日 16 時 30 分始準備出發前往現場，並於傍晚方首次抵達寶林茶室"
+        },
+        {
+          "url": "https://news.ltn.com.tw/news/life/breakingnews/4932227",
+          "excerpt": "立即前往作業場所稽查"
+        }
+      ]
+    },
+    {
+      "attack_id": "B-3",
+      "accept": true,
+      "response": "接受，C3 改判「誤導」。反方的五筆證據都已打開核對，字句相符。再加上 X1-2 的食安委員會第 41 次會議資料（2025-03-18），員額分配已查得到：33 名是食安約聘人力，其中 20 名是第一線稽查人員，其餘 13 名的職務文件沒有寫。人數 33 有依據，「稽查人力」多算了 13 人；檢驗組的人力又算在這 33 人裡，訊息卻把兩項並列。理由也會寫明兩點：衛生局自己在 2025 年 1 月和 10 月都用過「33 名稽查人力」的說法；「原額 85 人、聘用 73 人」只能說明稽查員額沒補滿，沒有基期數字，不能單獨推出淨增多少。",
+      "evidence": [
+        {
+          "url": "https://r.jina.ai/https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD56ysNDHmrKHmnIPorbDorbDnqIsucGRm&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTM5MDE1Mi9lY2UyYjIzZi0yODAwLTRhMzUtYjkwNi1mODczMzVmZGU1ODMucGRm",
+          "excerpt": "其中 20 名為第一線稽查人員並於 113 年5月對外招募後任職"
+        },
+        {
+          "url": "https://tw.news.yahoo.com/%E9%A1%A7%E9%A3%9F%E5%AE%89-%E8%94%A3%E8%90%AC%E5%AE%89-%E6%93%B4%E7%B7%A833%E5%90%8D%E6%AA%A2%E9%A9%97%E4%BA%BA%E5%8A%9B-124731838.html",
+          "excerpt": "市府增補三十三名食安專業人力"
+        }
+      ]
+    },
+    {
+      "attack_id": "C-1",
+      "accept": true,
+      "response": "接受，C2 維持「誤導」，但理由重寫，並加上 `out_of_context`。自由時報、三立和民間轉錄三個版本都記錄原話在「跑不了」之前有「才在後續的起訴當中有非常重要的依據」，訊息拿掉了這一句。理由會分三段寫。(1) 原話講的起訴依據：北檢起訴、一審判 4 人有罪，法院新聞稿把廚師手部與糞便陽性列為粿條含毒的佐證；北檢偵結新聞稿（維基文庫轉錄）沒有提到手部檢體，少了它能不能起訴無法確認。(2) 原話講的家屬賠償：法院指出調解金由大食代、遠百的保險公司給付，不是被告支付，另有 9 名傷者還在訴訟，也沒有資料顯示採檢促成賠償。(3) 罰鍰：原話沒有講，是批評者提出的，只列為背景，不當作判誤導的依據。「全部責任」這個門檻會刪掉。誤導的依據改成兩項：訊息截掉了說話者自己的限定語；就算照原話的範圍，賠償也不是寶林支付。濃縮是誰做的查不到，理由不推論用意。",
+      "evidence": [
+        {
+          "url": "https://www.setn.com/news/1931635",
+          "excerpt": "寶林茶室這個案子，當時發生的第一時間，也因為我們同仁非常機警，採集了生物跡證，才在後續的起訴當中有非常重要的依據，讓寶林跑不了，讓後續家屬都能獲得賠償。"
+        },
+        {
+          "url": "https://r.jina.ai/https://www.judicial.gov.tw/tw/dl-278368-f7e3388399054af99ab85fff052e4639.html",
+          "excerpt": "調解金係由台灣大食代餐飲有限公司、遠東百貨股份有限公司信義分公司各自投保之保險公司依保險契約給付，並非由黎仿軒等4人以個人財產支付。"
+        }
+      ]
+    },
+    {
+      "attack_id": "C-2",
+      "accept": true,
+      "response": "接受，兩條改用同一個標準，理由會寫明。標準是：先用說話者自己講的範圍檢驗；材料屬實、但缺少的前後文會改變讀者對事實的理解，就判「誤導」；發言沒講、由別人提出的事項只列背景。依這個標準，C1 改判「誤導」：「第一時間」是說話者自己用的字，監察院糾正案文認定延遲近 5 小時、和市府「第一時間到現場」的說法不符，而且沒採食材。C2 維持「誤導」，但不再靠罰鍰，改以訊息截掉「起訴依據」和賠償由第三方保險公司給付為依據（見 C-1）。",
+      "evidence": [
+        {
+          "url": "https://www.cy.gov.tw/public/Data/114mo/114%E7%A4%BE%E6%AD%A30001.pdf",
+          "excerpt": "臺北市政府衛生局自接獲食品中毒個案通報，至實際抵達現場查核，延遲近 5 小時，與該府所述已儘快於第一時間到現場調查一節不符。"
+        }
+      ]
+    },
+    {
+      "attack_id": "C-3",
+      "accept": true,
+      "response": "接受。對照 trace.json，`wording_issues` 只列了「跑不了，」之後的省略，沒有列「才」和「讓寶林跑不了」之間被拿掉的「在後續的起訴當中有非常重要的依據」。這一句在自由時報、三立的引述裡都有，兩處省略都應列出。這項問題掛在蔣萬安名下也不準確：媒體記錄的原話比訊息完整，沒有證據顯示濃縮出自說話者。台灣事實查核中心專頁的條目標題和訊息引言字句相同，已打開核對，「跑不了，」之後沒有刪節號。報告會寫成「引號內的文字經過濃縮，不是說話者的逐字原話；公開網頁上字句相同的最早版本是查核中心專頁標題」。訊息是不是取自該頁無法確認（見 X1-8）。",
+      "evidence": [
+        {
+          "url": "https://news.ltn.com.tw/news/politics/breakingnews/5625086",
+          "excerpt": "寶林茶室這個案子，當時發生第一時間，因為我們同仁非常機警，採集了生物跡證，才在後續的起訴當中有非常重要的依據，讓寶林跑不了，讓受害家屬都能獲得賠償。"
+        },
+        {
+          "url": "https://tfc-taiwan.org.tw/2026-taipei-mayoral-election-debate/",
+          "excerpt": "蔣萬安說：「寶林茶室案發生第一時間，同仁非常機警採集了生物跡證，才讓寶林跑不了，我們也增加33名稽查人力，成立食因性疾病檢驗組」？"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-1",
+      "accept": true,
+      "response": "接受，C1 改判「誤導」，理由同 A-1。反方附的糾正案文 PDF 直接讀取只有二進位內容，經文字轉換服務讀到全文，摘錄的句子確有其文。案文另外記載稽查人員 16 時 30 分才準備出發、傍晚首次到場，手部檢體的採檢日期是 3 月 24 日，兩次稽查都沒有採食材和餐點。這份全文會取代原本只看到搜尋摘要的 S4。",
+      "evidence": [
+        {
+          "url": "https://www.cy.gov.tw/public/Data/114mo/114%E7%A4%BE%E6%AD%A30001.pdf",
+          "excerpt": "臺北市政府衛生局自接獲食品中毒個案通報，至實際抵達現場查核，延遲近 5 小時，與該府所述已儘快於第一時間到現場調查一節不符。"
+        },
+        {
+          "url": "https://www.cy.gov.tw/public/Data/114mo/114%E7%A4%BE%E6%AD%A30001.pdf",
+          "excerpt": "僅抽驗本案胡姓廚師手部檢體及 1 件環境檢體"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-2",
+      "accept": true,
+      "response": "接受，C3 改判「誤導」。食安委員會第 41 次會議資料（會議日期 2025-03-18）直接讀取只有二進位內容，經文字轉換服務讀到全文，兩句摘錄都確有其文：33 名是食安約聘人力，其中 20 名是第一線稽查人員。文件沒有寫其餘 13 名的職務。市府 2026 年 10 月的新聞稿也改稱「33名食安專業人力」，已核對。原判定「查不到員額分配」不再成立：人數 33 屬實，全數稱為稽查人力則多算 13 人。理由會註明衛生局自己在 2025 年也用過「33 名稽查人力」的說法，以及 33 是核定名額（見 A-2）。",
+      "evidence": [
+        {
+          "url": "https://r.jina.ai/https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD56ysNDHmrKHmnIPorbDorbDnqIsucGRm&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTM5MDE1Mi9lY2UyYjIzZi0yODAwLTRhMzUtYjkwNi1mODczMzVmZGU1ODMucGRm",
+          "excerpt": "本府已擴增食安約聘人力共計 33 名"
+        },
+        {
+          "url": "https://r.jina.ai/https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD56ysNDHmrKHmnIPorbDorbDnqIsucGRm&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTM5MDE1Mi9lY2UyYjIzZi0yODAwLTRhMzUtYjkwNi1mODczMzVmZGU1ODMucGRm",
+          "excerpt": "其中 20 名為第一線稽查人員並於 113 年5月對外招募後任職"
+        },
+        {
+          "url": "https://english.udd.gov.taipei/News_Content.aspx?n=DD9CEC17A97FBC64&s=064134E8655ABA5B&sms=72544237BBE4C5F6",
+          "excerpt": "臺北市衛生局增補33名食安專業人力"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-3",
+      "accept": false,
+      "response": "不接受改寫。中立改寫的對象是訊息實際寫出來的句子，訊息的引言是「採集了生物跡證，才讓寶林跑不了」，沒有「起訴依據」和「家屬獲賠」。把這兩句補進改寫，查核的就變成辯論原話，不是讀者看到的訊息；依共同規則，引言被截掉前後文是在判定上處理（判「誤導」），不是靠改寫補回。「無法規避責任」是「跑不了」的字面解釋，沒有提到罰鍰，也沒有說蔣萬安談過罰鍰繳納。反方指出的省略確實存在，轉錄的句子已核對；這部分已在 C-1 接受，會寫進 C2 的理由並標 `out_of_context`，罰鍰改列背景。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "才在後續的起訴當中有了非常重要的依據，讓寶林跑不了，讓後續家屬都能獲得賠償。"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-4",
+      "accept": true,
+      "response": "接受。台北地院宣判新聞稿直接讀取只有二進位內容，經文字轉換服務讀到全文，摘錄的句子確有其文，會新增為第一手來源，S17 到 S20 改為輔助。同一份新聞稿也寫明調解金由保險公司給付，可取代 S19 的媒體轉述；新聞稿沒有提到衛生局的稽查或採樣。北檢原始 PDF 兩種方式都讀不到（直接讀取是二進位、轉換服務回 HTTP 422），S21 會補上原始網址並註明沒讀到，內容仍依維基文庫轉錄核對。轉錄版沒有出現手部檢體，提到的是病患的血液、尿液、糞便檢體。同意反方的限制：現有資料能確認起訴和一審採用的佐證，不能確認少了手部檢體就無法起訴；「起訴關鍵證據」仍只是衛生局的說法。",
+      "evidence": [
+        {
+          "url": "https://r.jina.ai/https://www.judicial.gov.tw/tw/dl-278368-f7e3388399054af99ab85fff052e4639.html",
+          "excerpt": "該結果反足佐證其所處理、嗣後遭丟棄之粿條確含邦克列酸。"
+        },
+        {
+          "url": "https://zh.wikisource.org/wiki/1140121%E8%87%BA%E5%8C%97%E5%9C%B0%E6%AA%A2%E5%81%B5%E7%B5%90%E5%AF%B6%E6%9E%97%E8%8C%B6%E5%AE%A4A13%E5%BA%97%E9%A3%9F%E7%89%A9%E4%B8%AD%E6%AF%92%E6%A1%88%E4%BB%B6%E6%96%B0%E8%81%9E%E7%A8%BF",
+          "excerpt": "經就醫後採集血液、尿液或糞便等檢體，檢測結果均為邦克列酸陽性"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-5",
+      "accept": true,
+      "response": "接受。台北市政府秘書處的新聞稿已打開核對：消基會代表 31 人提起團體訴訟，22 人已和解獲償（8 名傷者、14 名亡者家屬），另有 9 名傷者仍在訴訟中。C2 的理由會補上這項進度，S26 的 30 人註明是較早的提告資料。理由會分開寫三件事：多少人獲償、款項由誰支付（法院新聞稿寫明是大食代、遠百的保險公司）、採檢和賠償之間沒有查到因果證據。這篇是市府自己的新聞稿，會照實標示。",
+      "evidence": [
+        {
+          "url": "https://sec.gov.taipei/News_Content.aspx?n=49B4C3242CB7658C&s=926E6FDA10E57BE6&sms=72544237BBE4C5F6",
+          "excerpt": "已有22人達成和解獲償，包括8名傷者及14名亡者家屬"
+        },
+        {
+          "url": "https://sec.gov.taipei/News_Content.aspx?n=49B4C3242CB7658C&s=926E6FDA10E57BE6&sms=72544237BBE4C5F6",
+          "excerpt": "另有9名傷者仍在訴訟程序中"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-6",
+      "accept": true,
+      "response": "接受，C4 維持「正確」。食安委員會第 41 次會議資料經文字轉換服務讀到全文，確有這一句，會新增為直接支持「成立」的來源。S27 改註明只能證明 2024 年 4 月宣布籌設，S31 改註明只能證明檢驗科有這項業務。理由會補兩點：文件寫的名稱是「食因性疾病病因物質檢測組」，和發言的「食因性疾病檢驗組」略有不同；正式成立是 2025 年（民國 114 年），在 2026 年 10 月辯論之前。",
+      "evidence": [
+        {
+          "url": "https://r.jina.ai/https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD56ysNDHmrKHmnIPorbDorbDnqIsucGRm&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTM5MDE1Mi9lY2UyYjIzZi0yODAwLTRhMzUtYjkwNi1mODczMzVmZGU1ODMucGRm",
+          "excerpt": "114 年正式成立「食因性疾病病因物質檢測組」"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-7",
+      "accept": true,
+      "response": "接受，列為溯源的補充版本。頁面已打開核對：這份轉錄把蔣萬安的回答標在三立直播影片（https://www.youtube.com/watch?v=0IlnD7rfC88 ）的 2:34:10，發言順序是生物跡證、起訴依據、跑不了、家屬賠償、連續六天記者會，再接 33 名稽查人力和檢驗組。這和自由時報、三立的引述及 Yahoo 即時頁的轉述一致，也顯示「33 名稽查人力」是說話者自己的用詞。限制要照實寫：頁面自述底稿是語音辨識軟體自動轉錄，校稿時沒有逐句對照原音；影片本身這次也沒有播放核對。所以它只用來比對上下文和順序，不當作逐字稿，「沒有取得完整影片或逐字稿」的限制保留。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "而且我們也增加了 33 名稽查人力，我們也率全國之先成立了食因性疾病的檢驗組"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "而且我連續六天親自召開記者會"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-8",
+      "accept": true,
+      "response": "接受。對照 source.json，訊息是貼上的文字，沒有網址、署名和發布時間；trace.json 的限制也寫了查不到訊息經由哪個平台、哪些帳號傳來。溯源把 `publisher` 填成蔣萬安，容易把發言者和訊息發布者混在一起。報告會分開寫：蔣萬安是辯論發言者，貼出這段文字的人不明。訊息引言和查核中心專頁標題字句相同，只能說公開網頁上有相同措辭，不能確認訊息取自該頁，也不推論是誰濃縮的。",
+      "evidence": [
+        {
+          "url": "https://tfc-taiwan.org.tw/2026-taipei-mayoral-election-debate/",
+          "excerpt": "蔣萬安說：「寶林茶室案發生第一時間，同仁非常機警採集了生物跡證，才讓寶林跑不了，我們也增加33名稽查人力，成立食因性疾病檢驗組」？"
+        }
+      ]
+    }
+  ]
+}
