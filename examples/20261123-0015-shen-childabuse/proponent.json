@@ -1,0 +1,370 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://tw.news.yahoo.com/live/%E5%8F%B0%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96%E6%9C%83%E7%9B%B4%E6%92%AD1200%E7%99%BB%E5%A0%B4-%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%94%A3%E8%90%AC%E5%AE%89%E4%BA%A4%E9%8B%92%EF%BD%9C%E4%B8%8D%E6%96%B7%E6%9B%B4%E6%96%B0-032846919.html",
+      "title": "台北市長辯論會直播12:00登場 沈伯洋蔣萬安交鋒｜不斷更新（下午1:15 交叉詰問第2輪段落）",
+      "publisher": "Yahoo奇摩新聞",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "yahoo-live",
+      "stance": "supports",
+      "excerpt": "不論是托育專法或院版提案他們都支持，不支持的是違反比例原則的提案",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/live/%E5%8F%B0%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96%E6%9C%83%E7%9B%B4%E6%92%AD1200%E7%99%BB%E5%A0%B4-%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%94%A3%E8%90%AC%E5%AE%89%E4%BA%A4%E9%8B%92%EF%BD%9C%E4%B8%8D%E6%96%B7%E6%9B%B4%E6%96%B0-032846919.html",
+      "title": "台北市長辯論會直播12:00登場 沈伯洋蔣萬安交鋒｜不斷更新（下午12:48 交叉詰問第1輪段落）",
+      "publisher": "Yahoo奇摩新聞",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "yahoo-live",
+      "stance": "supports",
+      "excerpt": "兒虐相關的托育專法是他的提案，在參選前就在推動",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624826",
+      "title": "台北市長辯論》兒虐食安政策交鋒！沈伯洋批「一個台北兩個世界」蔣萬安又問A答B（記者孫唯容，2026/10/31 13:53）",
+      "publisher": "自由時報",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "ltn-1031",
+      "stance": "supports",
+      "excerpt": "沈伯洋再追問蔣萬安，他說，針對這個兒虐的修法，不管是托育專法或是我們自己院版的提案，他們都有支持，他們不支持的是什麼？是違反比例原則的提案，這是第一個。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202610310101.aspx",
+      "title": "沈伯洋質疑食安、兒虐議題雙標　蔣萬安反擊不熟市府處理（記者葉蓁芸，2026/10/31 14:02）",
+      "publisher": "中央通訊社",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "cna-1031",
+      "stance": "supports",
+      "excerpt": "沈伯洋追問，他稍早已提過，針對托育專法或院版提案都有支持，不支持的是違反比例原則的提案，並批評蔣萬安並未回答問題。",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202610310101.aspx",
+      "title": "沈伯洋質疑食安、兒虐議題雙標　蔣萬安反擊不熟市府處理（蔣萬安發言段落）",
+      "publisher": "中央通訊社",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "cna-1031",
+      "stance": "context",
+      "excerpt": "反觀沈伯洋，在立院並未支持加重兒虐刑責，傷透家長的心，也未清楚說明立場。",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "北市長候選人辯論會登場 沈伯洋、蔣萬安交鋒政績與城市願景（第三輪【交互詰問2】食安事件，2026-10-31 13:39）",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "pts-live",
+      "stance": "supports",
+      "excerpt": "沈伯洋追問：「自己不支持的是違反比例原則修法。」",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "北市長候選人辯論會登場 沈伯洋、蔣萬安交鋒政績與城市願景（第一輪【交互詰問2】市政了解度，2026-10-31 13:00）",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "pts-live",
+      "stance": "supports",
+      "excerpt": "沈伯洋追問：「自己在立院推動托育專法」",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+      "title": "2026 台北市長電視辯論會報導（頁面標示 2026/10/30，內文報導 10 月 31 日辯論）",
+      "publisher": "報導者",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "twreporter",
+      "stance": "supports",
+      "excerpt": "至於修法，他始終支持「行政院」版的各項提案，而非在野黨「違反或不符比例原則」的版本。",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+      "title": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "publisher": "三立新聞網（YouTube）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "setn-video",
+      "stance": "context",
+      "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ey.gov.tw/Page/9277F759E41CCD91//7a3ee334-3832-4ba7-8475-6b67792f8aed",
+      "title": "政院通過「兒童托育服務法」草案 完備托育服務體系管理與輔導機制 保護兒童安全健康成長（114年5月8日）",
+      "publisher": "行政院",
+      "accessed": "2026-11-23",
+      "tier": 2,
+      "chain": "ey-0508",
+      "stance": "supports",
+      "excerpt": "行政院會今（8）日通過衛生福利部擬具之「兒童托育服務法」草案，將函請立法院審議。",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://mohw.gov.tw/cp-16-86108-1.html",
+      "title": "立法院三讀通過兒童托育服務法 托育制度邁入新里程碑（建檔日期 115-04-14）",
+      "publisher": "衛生福利部",
+      "accessed": "2026-11-23",
+      "tier": 2,
+      "chain": "mohw-0414",
+      "stance": "supports",
+      "excerpt": "立法院院會今(14)日三讀通過",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0050217",
+      "title": "兒童托育服務法 第1條（民國115年05月08日制定公布，全94條；施行日期由行政院定之）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "moj-law-childcare",
+      "stance": "supports",
+      "excerpt": "為促進兒童身心健全發展及性別平等，保障兒童接受適齡適性之保育照顧，確保兒童托育服務品質，提升公共托育服務量能，支持人民兼顧育兒與工作，並建構完善托育服務體系，特制定本法。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9440616",
+      "title": "兒托法今三讀 藍委：要用最高強度罰則讓虐兒者付出代價（2026-04-14）",
+      "publisher": "聯合報（udn.com）",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "udn-0414",
+      "stance": "supports",
+      "excerpt": "三讀通過不是結束，而是落實正義的開始。",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/article/778951",
+      "title": "兒虐致死、故意殺人判刑10年以上者 政院提不得假釋修法草案（2025/10/30）",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "pts-1030",
+      "stance": "context",
+      "excerpt": "凌虐未滿7歲的兒童致死、致重傷等罪，若經判處無期徒刑或有期徒刑逾10年者，將不得假釋。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=286",
+      "title": "中華民國刑法 第286條第6項（現行條文；法規整編資料截止日 民國115年11月13日）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "moj-law-criminal",
+      "stance": "context",
+      "excerpt": "對於未滿七歲之人，犯第一項之罪，因而致人於死者，處死刑、無期徒刑或十年以上有期徒刑；致重傷者，處十年以上有期徒刑。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=C0000001",
+      "title": "中華民國刑法 法規沿革（第286條版本日期：114年8月1日總統令修正）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "moj-law-criminal",
+      "stance": "context",
+      "excerpt": "修正第286條；增訂第272-1條",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "url": "https://news.pts.org.tw/article/761426",
+      "title": "《刑法》加重兒虐刑責三讀 施虐未滿7歲兒童致死可判死刑（2025/7/18）",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "pts-0718",
+      "stance": "context",
+      "excerpt": "第286條修正案則以60票贊成、45票反對通過民眾黨團與國民黨團共同提案版本",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C2",
+        "C3"
+      ],
+      "url": "https://www.cna.com.tw/news/aipl/202507190093.aspx",
+      "title": "藍白指刑法修正未投票　綠委批拿虐童案攻擊其心可議（記者郭建伸，2025/7/19）",
+      "publisher": "中央通訊社",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "cna-0719",
+      "stance": "context",
+      "excerpt": "惡性嚴重的行為罰得卻比較輕，這是嚴重謬誤",
+      "access_note": "full"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://udn.com/news/story/6656/9848866",
+      "title": "蔣萬安轟毒駕修法未投票、站加害者立場 沈伯洋反擊：地方職責是預防（記者邱書昱，2026-10-31 13:59）",
+      "publisher": "聯合報（udn.com）",
+      "accessed": "2026-11-23",
+      "tier": 3,
+      "chain": "udn-1031",
+      "stance": "context",
+      "excerpt": "反對的是不符合比例原則的提案，蔣是法律人對於比例原則熟悉吧？",
+      "access_note": "full"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=A0000001&flno=23",
+      "title": "中華民國憲法 第23條",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-23",
+      "tier": 1,
+      "chain": "moj-law-constitution",
+      "stance": "context",
+      "excerpt": "以上各條列舉之自由權利，除為防止妨礙他人自由、避免緊急危難、維持社會秩序，或增進公共利益所必要者外，不得以法律限制之。",
+      "access_note": "full"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "大致正確：自由時報和中央社兩家獨立媒體都報導，沈伯洋在 2026 年 10 月 31 日辯論會的交叉詰問中表示托育專法和院版提案都有支持。自由時報的引述除了把「我們都有支持」寫成「他們都有支持」，其餘和訊息幾乎逐字相同；中央社的「他稍早已提過」對應訊息的「我剛剛前面就有提到」，Yahoo 和公視的文字直播也記載他稍早提過自己在立院推動托育專法。三立的完整直播影片沒有逐字稿，所以訊息第一人稱的完整措辭沒有逐段比對影片，這是唯一沒能核實的細節。內容方面，發言提到的法案查得到對應：《兒童托育服務法》是行政院 2025 年 5 月 8 日通過送立法院的院版草案，2026 年 4 月 14 日三讀、5 月 8 日制定公布（第 1 條已取得）；行政院 2025 年 10 月 30 日另通過兒虐致死不得假釋的刑法修正草案。但發言沒有具體說明「院版」指哪一案。",
+      "evidence_ids": [
+        "S3",
+        "S4",
+        "S1",
+        "S2",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C2",
+      "label": "mostly_true",
+      "reasoning": "大致正確：自由時報、中央社和公視文字直播都記載，沈伯洋在兒虐修法的交鋒中說不支持的是違反比例原則的提案。自由時報的引述是「他們不支持的是什麼？是違反比例原則的提案」，和訊息只差在人稱，同樣沒有拿完整影片逐字核對。中央社報導，這句話是在回應蔣萬安指他在立院沒有支持加重兒虐刑責。背景是 2025 年 7 月 18 日刑法第 286 條以 60 票對 45 票通過藍白共同提案版本，現行條文第 286 條依 114 年 8 月 1 日總統令修正。同一場辯論談毒駕修法時，他另外說過「反對的是不符合比例原則的提案」（聯合報），那是另一段發言；訊息這句和兒虐段落的報導相符，沒有把兩段混在一起。",
+      "evidence_ids": [
+        "S3",
+        "S4",
+        "S6",
+        "S1",
+        "S8",
+        "S5",
+        "S15",
+        "S16",
+        "S17",
+        "S19",
+        "S9"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C3",
+      "label": "not_factual",
+      "reasoning": "非事實陳述：說某項兒虐修法提案「違反比例原則」是法律評價，目前沒有憲法法庭判決可以當判準，無法用事實查證。背景是民進黨立委當時反對第 286 條藍白版本的理由是刑度失衡，也就是凌虐致死的刑度可能比故意殺人還重，當時的報導沒有用「比例原則」這個詞。現行第 286 條第 6 項規定，凌虐未滿七歲之人致死者處死刑、無期徒刑或十年以上有期徒刑。",
+      "evidence_ids": [
+        "S18",
+        "S15",
+        "S20"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": []
+}

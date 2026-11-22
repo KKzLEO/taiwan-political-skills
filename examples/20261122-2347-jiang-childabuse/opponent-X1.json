@@ -1,0 +1,70 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 20,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "label",
+      "argument": "C1 應判為誤導。辯論全文記載蔣萬安確實指沈伯洋在立法院沒有支持加重兒虐刑責，但這段發言沒有指明是哪個版本。立法院議案關係文書顯示，沈伯洋在 2025 年連署郭昱晴等人的刑法草案，主張將第 286 條加重刑責的適用範圍由未滿七歲擴大至未滿十二歲。他也曾在 2024 年院會說明，當時修法先提高刑度以求嚇阻。沈伯洋未參加 2025 年藍白版第 286 條動議及全案的記名表決，將這項紀錄概括為他在立法院沒有支持加重兒虐刑責，會讓讀者忽略他連署支持的版本。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "你竟然在立法院沒有支持，這傷透了多少家長的心？"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/03/21/LCEWA01_110321_00189.pdf",
+          "excerpt": "連署人：\n林宜瑾　沈伯洋　王美惠　陳亭妃　鍾佳濱"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/03/21/LCEWA01_110321_00189.pdf",
+          "excerpt": "對於未滿十二歲之人，犯前四項之罪者，依各該項之規定加重其刑至二分之一。"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/PublicationBulletinDetail/download/communique1/final/pdf/113/71/LCIDC01_1137115.pdf",
+          "excerpt": "必須要先提高刑度來做威嚇的不得已的作法。"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S8 和 S9 應列為背景資料。立法院原始議事錄把會議出席名單與各案記名表決分開，沈伯洋列在會議出席名單，兩次記名表決的投票名單都沒有他。這份紀錄只能證明他在這兩次表決都未投票，無法據此判定他對其他加重兒虐刑責草案的立場。",
+      "evidence": [
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/21LCEWC03_110321.pdf",
+          "excerpt": "洪孟楷  沈伯洋  江啟臣\n委員出席 112 人"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/21LCEWC03_110321.pdf",
+          "excerpt": "出席人數：105  贊成人數：60  反對人數：45  棄權人數：0"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/03/21LCEWC03_110321.pdf",
+          "excerpt": "出席人數：59  贊成人數：59  反對人數：0  棄權人數：0"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "應補入《NOWnews 今日新聞》的辯論全文及附時間戳的逐字稿。這兩份文字都記為「當面告訴我」和「兒虐刑責」，這兩處與待查文字相符。附時間戳的逐字稿把這段定位在三立直播的 2 小時 32 分 45 秒。我查閱了文字紀錄，未能直接播放原始影音核聽。這些資料可定位發言並比較措辭，仍無法確認待查文字最早由誰發布。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "當所有家長當面告訴我，希望對於兒虐刑責要來加重的時候"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "當所有家長當面告訴我，希望對於兒虐刑責要來加重的時候"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

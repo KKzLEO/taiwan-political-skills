@@ -1,0 +1,297 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624826",
+      "title": "台北市長辯論會報導（2026/10/31 13:53，記者孫唯容）",
+      "publisher": "自由時報電子報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-20261031",
+      "stance": "supports",
+      "excerpt": "但是沈委員，當所有家長當面告訴他，希望對於兒虐行者要來加重的時候，非常訝異，也覺得匪夷所思，你竟然在立法院沒有支持，這傷透了多少家長的心",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202610310101.aspx",
+      "title": "沈伯洋質疑食安、兒虐議題雙標　蔣萬安反擊不熟市府處理",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-20261031",
+      "stance": "supports",
+      "excerpt": "反觀沈伯洋，在立院並未支持加重兒虐刑責，傷透家長的心，也未清楚說明立場。",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "台北市長辯論會即時文字紀錄：第三輪【交互詰問2】（2026-10-31 13:39）",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pts-live-20261031",
+      "stance": "supports",
+      "excerpt": "同時反問立法院提出加重兒虐刑責，為何沈卻沒有支持。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.setn.com/news/1931334",
+      "title": "北市長辯論／沈伯洋逼問兒虐食安有雙標？蔣萬安搬「三寶爸」防守",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn-20261031",
+      "stance": "supports",
+      "excerpt": "反問沈伯洋身為立委，為何在立法院未支持部分「加重兒虐刑責」的修法主張？",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/live/%E5%8F%B0%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96%E6%9C%83%E7%9B%B4%E6%92%AD1200%E7%99%BB%E5%A0%B4-%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%94%A3%E8%90%AC%E5%AE%89%E4%BA%A4%E9%8B%92%EF%BD%9C%E4%B8%8D%E6%96%B7%E6%9B%B4%E6%96%B0-032846919.html",
+      "title": "台北市長辯論會直播 12:00 登場 沈伯洋、蔣萬安交鋒｜不斷更新",
+      "publisher": "Yahoo奇摩新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "yahoo-live-20261031",
+      "stance": "supports",
+      "excerpt": "他反批沈伯洋在立法院沒有支持加重兒虐刑責，「傷透了多少家長的心」。",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://city.gvm.com.tw/article/134193",
+      "title": "蔣萬安狂翻沈黑歷史？沈伯洋反挖2022年蔣一句話嗆爆！台北市長辯論誰在雙標？",
+      "publisher": "遠見雜誌",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "gvm-20261101",
+      "stance": "context",
+      "excerpt": "沈伯洋回應，自己並非反對兒虐修法，而是對部分可能違反比例原則的提案持保留態度，並指出立法院另有托育相關修法及不同版本的提案。",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+      "title": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "publisher": "三立新聞網（YouTube）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "setn-youtube-debate-20261031",
+      "stance": "context",
+      "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://lydata.ronny-s3.click/agenda-html/LCIDC01_1146801_00004.doc.html",
+      "title": "立法院第11屆第3會期第21次會議議事錄（114年7月18日）",
+      "publisher": "立法院（議事錄；g0v 立法院資料 API 鏡像檔）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "ly-gazette-1140718",
+      "stance": "supports",
+      "excerpt": "王鴻薇　　洪孟楷　　沈伯洋　　江啟臣……(3)「討論事項第二案第二百八十六條照台灣民眾黨黨團及國民黨黨團共同所提再修正動議條文予以通過」部分：……出席人數：105　 贊成人數：60　 反對人數：45　 棄權人數：0",
+      "access_note": "archived"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://lydata.ronny-s3.click/agenda-html/LCIDC01_1146801_00004.doc.html",
+      "title": "立法院第11屆第3會期第21次會議議事錄（114年7月18日）",
+      "publisher": "立法院（議事錄；g0v 立法院資料 API 鏡像檔）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "ly-gazette-1140718",
+      "stance": "supports",
+      "excerpt": "增訂第二百七十二條之一照協商條文通過；三讀時，均照二讀文字通過；全案並經記名表決結果，予以通過……(4)「討論事項第二案全案付表決予以通過」部分：……出席人數：59　 贊成人數：59　 反對人數：0　 棄權人數：0",
+      "access_note": "archived"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/article/761426",
+      "title": "《刑法》加重兒虐刑責三讀 施虐未滿7歲兒童致死可判死刑",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pts-20250718",
+      "stance": "supports",
+      "excerpt": "第286條修正案則以60票贊成、45票反對通過民眾黨團與國民黨團共同提案版本",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aipl/202507180112.aspx",
+      "title": "立院三讀　以凌虐方式殺害未滿7歲幼童最重可判死",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-20250718",
+      "stance": "context",
+      "excerpt": "黨團協商後朝野達成共識，包括朝野都支持增訂刑法第272條之1條文，但保留刑法第286條條文送立法院會處理。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aipl/202507190093.aspx",
+      "title": "藍白指刑法修正未投票　綠委批拿虐童案攻擊其心可議",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-20250719",
+      "stance": "context",
+      "excerpt": "陳培瑜表示，這個修法結果會造成惡性嚴重的行為罰得卻比較輕，這是嚴重謬誤，也是民進黨團反對原因。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=286",
+      "title": "中華民國刑法 第286條",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "moj-law-C0000001",
+      "stance": "context",
+      "excerpt": "對於未滿七歲之人，犯第一項之罪，因而致人於死者，處死刑、無期徒刑或十年以上有期徒刑；致重傷者，處十年以上有期徒刑。",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=C0000001&flno=272-1",
+      "title": "中華民國刑法 第272條之1",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "moj-law-C0000001",
+      "stance": "context",
+      "excerpt": "對於未滿七歲之人，以凌虐方式犯第二百七十一條第一項之罪者，處死刑或無期徒刑。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=C0000001",
+      "title": "中華民國刑法 沿革",
+      "publisher": "法務部全國法規資料庫",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "moj-law-C0000001",
+      "stance": "context",
+      "excerpt": "中華民國一百十四年八月一日總統華總一義字第 11400076421 號令 修正公布第 286 條條文；增訂第 272-1 條條文",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://lydata.ronny-s3.click/agenda-html/LCIDC01_1137501_00007.doc.html",
+      "title": "立法院第11屆第1會期第22次會議議事錄（113年7月12日、15日、16日）",
+      "publisher": "立法院（議事錄；g0v 立法院資料 API 鏡像檔）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "ly-gazette-1130716",
+      "stance": "context",
+      "excerpt": "第二百八十六條照協商條文通過；三讀時，照二讀文字通過。",
+      "access_note": "archived"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1137115_00005/html",
+      "title": "立法院公報第113卷第71期 院會紀錄：中華民國刑法修正第二百八十六條條文─完成三讀─",
+      "publisher": "立法院（公報；g0v 立法院資料 API 鏡像檔）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "ly-gazette-1130716",
+      "stance": "refutes",
+      "excerpt": "請問院會，對以上協商結論有無異議？……因為我們必須要先提高刑度來做威嚇的不得已的作法。",
+      "access_note": "archived"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "大致正確：自由時報、中央社、公視、三立、Yahoo 各自報導 2026 年 10 月 31 日的辯論會，都記載蔣萬安當場指沈伯洋在立法院沒有支持加重兒虐刑責。立法院 2025 年 7 月 18 日議事錄顯示沈伯洋列名出席，但刑法第 286 條藍白再修正動議（贊成 60、反對 45）和全案三讀（贊成 59、反對 0）兩次記名表決的贊成、反對名單都沒有他，第 272 條之 1 則是照協商條文通過；條文已由全國法規資料庫核對（114 年 8 月 1 日華總一義字第 11400076421 號令公布）。細節差異有以下幾點，不影響主體：一、訊息措辭（「告訴我」「兒虐刑責」、少了「竟然」和後半句）沒有用完整影片逐字核對。二、「沒有支持」是沒有投贊成票，不是投反對。三、2024 年 7 月 16 日刑法第 286 條加重未滿 7 歲兒虐刑度是照協商條文、在沒有異議下通過，沈伯洋會後發言稱提高刑度是「不得已的作法」。四、「所有家長當面告訴我」是蔣萬安自述，沒有查證。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17"
+      ],
+      "context_flags": [],
+      "law_text_obtained": true
+    },
+    {
+      "claim_id": "C2",
+      "label": "not_factual",
+      "reasoning": "非事實陳述：「非常訝異」「匪夷所思」是蔣萬安表達的個人感受，不是可以查證的事實。這段話是不是出自蔣萬安，已在 C1 一併處理。",
+      "evidence_ids": [],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": []
+}

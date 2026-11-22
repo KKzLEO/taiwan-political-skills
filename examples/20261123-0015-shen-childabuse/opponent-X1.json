@@ -1,0 +1,73 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 44,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "溯源漏列了兩份保留第一人稱的辯論全文。附時間戳的民間轉錄在三立影片的 2:33:06 記下與訊息相同的用字，《NOWnews今日新聞》則在第三輪追問記成「我們都很支持」。兩份資料都把這段放在第三輪的兒虐與食安攻防。本次未能播放原音，這些文字可用來定位發言，仍無法確定哪一版逐字正確，或貼文最早出自哪裡。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "還是我們自己院版的提案，我們都有支持。"
+        },
+        {
+          "url": "https://www.nownews.com/amp/news/6888190",
+          "excerpt": "還是我們自己院版的提案，我們都很支持。"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S10 至 S12 的摘錄能確認行政院送案、立法院三讀與法律內容。要查沈伯洋本人是否支持托育專法，立法院的提案文書直接列他為共同提案人。立法院也記載三讀通過的是併案協商後的條文。這些紀錄可確認他曾參與提出托育專法，但他在辯論所說的「我們自己院版」仍無法據此對應到特定提案。",
+      "evidence": [
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/SittingRelatedDocumentReportMatter/download/agenda1/02/pdf/11/03/13/LCEWA01_110313_00087.pdf",
+          "excerpt": "提案人：吳沛憶  林俊憲  沈伯洋"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/sittings/2026040830/details?meetingDate=115%2F04%2F14",
+          "excerpt": "二讀、三讀均依協商結論照協商名稱、章名及條文通過"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "S6 替公視的文字直播加上了原頁沒有的引號。公視以第三人稱轉述沈伯洋的立場，可支持他在兒虐攻防中表達過這個意思。第一人稱問答句可另引《NOWnews今日新聞》的辯論全文，並註明原音尚未核對。",
+      "evidence": [
+        {
+          "url": "https://news.pts.org.tw/live/105",
+          "excerpt": "沈伯洋追問：自己不支持的是違反比例原則修法。"
+        },
+        {
+          "url": "https://www.nownews.com/amp/news/6888190",
+          "excerpt": "我們不支持的是什麼？是違反比例原則的提案，這是第一個。"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C3",
+      "target": "reasoning",
+      "argument": "C3 可以維持「非事實陳述」，因為這是沈伯洋對修法的法律評價。他在這段發言沒有指明條號或提案版本，把 2025 年《刑法》第 286 條的表決列為背景時，應說明其與發言所指提案的關係尚未確認。憲法法庭的死刑判決可以提供相關背景，其主文審查的是其他刑法條文，因此也不能直接判定沈伯洋所指的提案是否違反比例原則。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "我們不支持的是什麼？是違反比例原則的提案，這是第一個。"
+        },
+        {
+          "url": "https://cons.judicial.gov.tw/docdata.aspx?fid=97&id=351689",
+          "excerpt": "僅得適用於個案犯罪情節屬最嚴重"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

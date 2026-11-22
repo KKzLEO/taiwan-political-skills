@@ -1,0 +1,50 @@
+{
+  "credibility": {
+    "score": 80,
+    "raw": 80.0,
+    "main_claims": [
+      "C1"
+    ],
+    "main_accuracy": 0.8,
+    "overall_accuracy": 0.8,
+    "capped": false,
+    "context_flags": [],
+    "show_on_spectrum": true
+  },
+  "result": "符合",
+  "result_reason": null,
+  "confidence": {
+    "score": 90,
+    "level": "高",
+    "deductions": [
+      {
+        "points": 10,
+        "reason": "證據品質 0.5：核心命題缺少第一手直接證據，或缺少第二條獨立證據鏈"
+      }
+    ],
+    "evidence_quality": 0.5
+  },
+  "publishable": true,
+  "publish_blocks": [],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "importance": 5,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C2",
+      "label": "mostly_true",
+      "importance": 3,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C3",
+      "label": "not_factual",
+      "importance": 2,
+      "factor": null
+    }
+  ]
+}
