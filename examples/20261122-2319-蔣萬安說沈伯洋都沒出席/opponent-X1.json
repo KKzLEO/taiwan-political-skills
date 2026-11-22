@@ -1,0 +1,70 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 37,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "label",
+      "argument": "建議將 C1 改判為「誤導」。10 月 30 日院會的記名表決顯示，沈伯洋對行政院、司法院提出的毒駕修法版本投下贊成票，未參與稍後通過的國民黨、民眾黨共同版本表決。正方只提到後一場表決，漏掉了能直接反駁「毒品相關會議都沒有出席」的同日出席紀錄。辯論引語的精確用字仍待原音核對，颱風假與教師權益所指的會議也仍未確認。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html",
+          "excerpt": "贊成：\n\n陳俊宇　　郭昱晴　　范　雲　　蔡其昌　　莊瑞雄　　沈伯洋　　吳思瑤"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/SittingYuanInfo/download/agendarec1/02/pdf/11/06/05LCEWC03_110605.pdf#page=1",
+          "excerpt": "羅智強 張智倫 沈伯洋 洪孟楷 陳永康 吳宗憲 林沛祥"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "三立的完整直播有一份公開的非官方機器轉錄稿，將這段發言定位在影片 2 小時 3 分 13 秒，並列出訊息所寫的四項議題。《NOWnews》的直接引語則在同一位置寫成「反詐騙」。這兩份紀錄可用來定位並指出用詞分歧，目前仍未能直接聽核原音。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "最近在立法院，對於兒虐、對於毒品、對於放颱風假、對於教師權益"
+        },
+        {
+          "url": "https://www.nownews.com/news/6888107",
+          "excerpt": "最近在立法院，對於兒虐、對於毒品、對於反詐騙、對於教師權益"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "立法院在 2025 年 6 月印發的《兒童托育服務法》草案已列沈伯洋為提案人，2026 年 7 月 30 日的兒虐專題報告也收錄了他的書面質詢。這兩項紀錄應納入對「最近突然很關心」的評估。書面質詢能證明他有就兒虐議題提出問題，當天有無到場應依會議出席紀錄判斷。",
+      "evidence": [
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/SittingRelatedDocumentReportMatter/download/agenda1/02/pdf/11/03/13/LCEWA01_110313_00087.pdf",
+          "excerpt": "提案人：吳沛憶  林俊憲  沈伯洋"
+        },
+        {
+          "url": "https://ppg.ly.gov.tw/ppg/PublicationBulletinDetail/download/communique1/final/pdf/115/69/LCIDC01_1156902.pdf",
+          "excerpt": "案由：鑑於近期台北市私立夏莉絲國際大安森林幼兒園發生兒虐事件。"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S3 的摘錄在「都突然」後加上原文沒有的「很」字，並在原文只有逗號的位置插入省略號。這段是記者對四項議題的轉述，應照原文摘錄，並只用來佐證蔣萬安曾提出這項質疑。",
+      "evidence": [
+        {
+          "url": "https://udn.com/news/story/124652/9848809",
+          "excerpt": "颱風假、教師權益等都突然很關心，但沈卻都沒有出席立院相關議題會議"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>台北市長選舉：一個議題，兩個人各查一句｜台灣訊息查核</title>
-<meta name="description" content="2026 台北市長選舉辯論會上的說法，照議題成對查核：已經上線 8 個議題，每一則都有完整報告和全部檔案。">
+<meta name="description" content="2026 台北市長選舉辯論會上的說法，照議題成對查核：已經上線 9 個議題，每一則都有完整報告和全部檔案。">
 <meta name="theme-color" content="#fafafa">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='5' fill='%236247d6'/%3E%3Cpath d='M12.2 5.4 7.8 14.6' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
     <li><strong>不放民調數字</strong>，11 月 28 日投票日當天不新增內容。</li>
     <li><strong>不是每一則都用登記寫的模型。</strong>登記寫明用 Claude Fable 5.2；它的額度在清單跑完之前用完了，後面幾則改用 Claude Opus 5.5，主體和查核流程裡的角色都是。同一個議題的兩句一定是同一個模型跑的，每張卡片寫著自己用的模型；什麼時候換的、為什麼，寫在<a href="https://github.com/KKzLEO/taiwan-political-skills/blob/main/evals/results/2026-11-22-taipei-issues-results.md">結果紀錄</a>的「和登記不一樣的地方」。</li>
   </ul>
-  <p class="tp-jump" aria-label="議題"><a href="#urban-renewal">都更</a><a href="#budget">市府預算與財政</a><a href="#school-lunch">營養午餐</a><a href="#trees">樹木</a><a href="#food-safety">食品安全</a><a href="#twin-city-forum">雙城論壇</a><a href="#songshan-airport">松山機場遷建</a><a href="#gongguan-roundabout">公館圓環</a><span>會議出席</span><span>兒虐修法</span><span>毒駕修法</span><a href="#about">流傳的說法</a></p>
+  <p class="tp-jump" aria-label="議題"><a href="#urban-renewal">都更</a><a href="#budget">市府預算與財政</a><a href="#school-lunch">營養午餐</a><a href="#trees">樹木</a><a href="#food-safety">食品安全</a><a href="#twin-city-forum">雙城論壇</a><a href="#songshan-airport">松山機場遷建</a><a href="#gongguan-roundabout">公館圓環</a><a href="#attendance">會議出席</a><span>兒虐修法</span><span>毒駕修法</span><a href="#about">流傳的說法</a></p>
 </header>
 <section id="urban-renewal" class="tp-issue">
   <h2>都更</h2>
@@ -241,6 +241,30 @@
       </article>
     </div>
 </section>
+<section id="attendance" class="tp-issue">
+  <h2>會議出席</h2>
+  <p>兩個人互相指對方不出席會議：沈伯洋講蔣萬安在市政府的會議，蔣萬安講沈伯洋在立法院的會議。</p>
+    <div class="duo-row">
+      <article class="case">
+        <p class="case-who"><b>3</b>沈伯洋<small>民進黨</small></p>
+        <blockquote>沈伯洋在 10 月 31 日台北市長辯論會上對蔣萬安說：「托育制度管理委員會，你沒有出席；毒防會議你出席率只有7%；兒少福利權益促進會只有7%；寶林茶室案作為召集人，你沒有出席。」「連韌性城市現在18次的跨局處會議，你一次也都沒有出席。」</blockquote>
+        <p class="case-result"><strong>部分符合</strong><span class="scale" style="--at:46"><span>錯誤</span><i></i><span>正確</span></span></p>
+        <dl><div><dt>可信度</dt><dd>46</dd></div><div><dt>信心度</dt><dd>80<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">不可公開</dd></div></dl>
+        <ul class="case-points"><li><b>大致正確</b><span>沈伯洋說過這句話；核對到的市府會議紀錄都顯示蔣萬安沒有主持會議或請假，沒有查到反證，但不是每一次會議都核對過。</span></li><li><b>無法證實</b><span>沈伯洋說過毒防會議出席率 7%，但市府毒品危害防制相關會議的紀錄沒有公開，無法核對這個數字。</span><span>另一家公司的模型覆核時同意這個判定，但認為理由或證據還有缺漏：出席率 7% 維持「無法證實」合理，但判定理由把不同期間的統計寫成互相矛盾。張育萌所說的「以上 10 次，蔣萬安一次都沒到」指 2024 年 3 月至 2026 年 6 月列出的 10 場。</span></li></ul>
+        <div class="case-why"><p>工具自己標了不可公開，原因：</p><ul><li>結論是「部分符合」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條</li></ul></div>
+        <p class="case-note">這一句照逐字稿，逐字稿寫的是「韌性城市」；沈伯洋陣營在辯論當下發的字卡、今日新聞刊出的文字稿，還有中央社、鏡週刊的報導，寫的都是「無菸城市」。逐字稿的作者沒有逐句聽原音，我們也沒有核對。報告判「錯誤」的那一項，理由正是這組數字講的是無菸城市、不是韌性城市；如果現場說的是無菸城市，這個理由就不存在。這是跑完才發現的。</p>
+        <p class="case-links"><a class="link" href="../reports/20261122-2233-shen-attendance/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-2233-shen-attendance">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>46 分鐘</span><span>Claude Opus 5.5</span></p>
+      </article>
+      <article class="case">
+        <p class="case-who"><b>5</b>蔣萬安<small>國民黨</small></p>
+        <blockquote>蔣萬安在 10 月 31 日台北市長辯論會上對沈伯洋說：「最近在立法院，對於兒虐、對於毒品、對於放颱風假、對於教師權益，這些都是你最近突然很關心的議題，但是你都沒有出席。」</blockquote>
+        <p class="case-result"><strong>不符</strong><span class="scale" style="--at:25"><span>錯誤</span><i></i><span>正確</span></span></p>
+        <dl><div><dt>可信度</dt><dd>25</dd></div><div><dt>信心度</dt><dd>90<small>高</small></dd></div><div><dt>公開引用</dt><dd class="word">可公開</dd></div></dl>
+        <ul class="case-points"><li><b>誤導</b><span>蔣萬安在辯論會上大致說過這段話，但「這些議題你都沒有出席」和紀錄不符：2026 年 10 月 30 日立法院院會表決毒駕修法時，沈伯洋在場並對行政院、司法院版本投下贊成票。</span><span>另一家公司的模型覆核時同意這個判定，但認為理由或證據還有缺漏：維持「誤導」，但須修正表決細節。沈伯洋出席了處理毒駕修法的院會，因此他未參與國民黨、民眾黨共同提出的再修正動議表決，不能證明他缺席整場會議。</span></li></ul>
+        <p class="case-links"><a class="link" href="../reports/20261122-2319-蔣萬安說沈伯洋都沒出席/">完整報告<svg width="16" height="16"><use href="#i-next"/></svg></a><a class="link" href="https://github.com/KKzLEO/taiwan-political-skills/tree/main/examples/20261122-2319-蔣萬安說沈伯洋都沒出席">全部檔案<svg width="16" height="16"><use href="#i-out"/></svg></a><span>28 分鐘</span><span>Claude Opus 5.5</span></p>
+      </article>
+    </div>
+</section>
 <section id="about" class="tp-issue">
   <h2>針對候選人、在流傳的說法</h2>
   <p>這兩則不是候選人說的話，是網路上針對他們的說法，一人一則，在 11 月 20 日登記。這裡的結果講的是那個說法站不站得住：「不符」代表說法不成立，對被針對的人是有利的；「無法判定」代表這次查核沒有辦法確定，原因寫在那一則的卡片和報告裡。</p>
@@ -268,8 +292,8 @@
     </div>
 </section>
 <section id="later">
-  <h2>還沒上線的 3 個議題</h2>
-  <p>會議出席、兒虐修法、毒駕修法。照登記的順序一則一則跑，一個議題的兩則都跑完才會出現在這一頁和「全部報告」；只跑完一邊的不放。額度用完就停在那裡，停在哪裡會寫在紀錄裡。</p>
+  <h2>還沒上線的 2 個議題</h2>
+  <p>兒虐修法、毒駕修法。照登記的順序一則一則跑，一個議題的兩則都跑完才會出現在這一頁和「全部報告」；只跑完一邊的不放。額度用完就停在那裡，停在哪裡會寫在紀錄裡。</p>
 </section>
 <section id="notes">
   <h2>讀這些結果的時候要注意</h2>

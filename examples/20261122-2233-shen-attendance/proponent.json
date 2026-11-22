@@ -1,0 +1,619 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202610310098.aspx",
+      "title": "沈伯洋質疑未出席市府會議　蔣萬安指分層負責分工合作",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-20261031",
+      "stance": "supports",
+      "excerpt": "沈伯洋質疑台北市長蔣萬安未出席托育制度管理委員會；台北市毒品防治會議的出席率只有7%；兒少福利與權益促進會出席率只有6.7%；寶林茶室臨時會議，蔣萬安做為召集人從未出席",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C6"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202610310098.aspx",
+      "title": "沈伯洋質疑未出席市府會議　蔣萬安指分層負責分工合作",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-20261031",
+      "stance": "refutes",
+      "excerpt": "且無菸城市的18次跨局處會議，蔣萬安也沒出席",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610310007/",
+      "title": "台北市長辯論／蔣萬安、沈伯洋交叉詰問互轟不熟市政，沈為何痛批「上樑不正下樑歪」？",
+      "publisher": "今周刊",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "businesstoday-20261031",
+      "stance": "supports",
+      "excerpt": "托育制度管理委員會你沒出席。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C6"
+      ],
+      "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610310007/",
+      "title": "台北市長辯論／蔣萬安、沈伯洋交叉詰問互轟不熟市政，沈為何痛批「上樑不正下樑歪」？",
+      "publisher": "今周刊",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "businesstoday-20261031",
+      "stance": "refutes",
+      "excerpt": "毒防會議、兒少福利會議出席率只有7%，無菸城市18次跨局處會議一次都沒到。",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://puma.taipei/live/debate/list",
+      "title": "辯論直播字卡 #18 蔣市府上樑不正下樑歪！批沈不懂市政，卻頻缺席重大市政會議",
+      "publisher": "沈伯洋競選官網",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "shen-campaign-card",
+      "stance": "supports",
+      "excerpt": "不僅寶林茶室作為召集人沒有出席、托育制度管理委員會未出席、毒防會議出席率只有7%，兒少福利促進會只有7%",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C6"
+      ],
+      "url": "https://puma.taipei/live/debate/list",
+      "title": "辯論直播字卡 #18 蔣市府上樑不正下樑歪！批沈不懂市政，卻頻缺席重大市政會議",
+      "publisher": "沈伯洋競選官網",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "shen-campaign-card",
+      "stance": "refutes",
+      "excerpt": "連無菸城市現在 18 次的跨局處會議一次也都沒有出席。",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://newtalk.tw/news/view/2026-10-31/1068474",
+      "title": "北市長辯論》沈伯洋緊咬會議出席率低、還嗆蔣萬安「你的回答跟我的問題有搭嗎？」",
+      "publisher": "新頭殼",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "newtalk-20261031",
+      "stance": "supports",
+      "excerpt": "托育制度管理委員會0%、台北市毒品防治會議7%、兒少福利與權益促進會6.7%、寶林茶室作為召集人也沒出席",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C6"
+      ],
+      "url": "https://newtalk.tw/news/view/2026-10-31/1068474",
+      "title": "北市長辯論》沈伯洋緊咬會議出席率低、還嗆蔣萬安「你的回答跟我的問題有搭嗎？」",
+      "publisher": "新頭殼",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "newtalk-20261031",
+      "stance": "refutes",
+      "excerpt": "連無菸城市18次跨局處會議，蔣也一次也都沒出席？",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/breakingnews/5624798",
+      "title": "台北市長辯論》沈伯洋問會議出席率低 蔣萬安反擊：糾結各項工作會議不切實際",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-20261031",
+      "stance": "supports",
+      "excerpt": "請問你是不是在帶領著你的局處首長，連會議都不主持跟參加。",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1",
+        "C5"
+      ],
+      "url": "https://www.setn.com/news/1931264",
+      "title": "北市長辯論／沈伯洋揭會議出席率0%！蔣萬安答「即刻出席」 沈傻眼",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn-20261031",
+      "stance": "supports",
+      "excerpt": "連寶林茶室臨時會議都未出席",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C6"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/breakingnews/5621493",
+      "title": "蔣萬安18場無菸城市會議全缺席！ 張育萌轟：慣性蹺班的薪水小偷",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chang-yumeng-fb-20261028",
+      "stance": "context",
+      "excerpt": "蔣萬安18場無菸城市會議全缺席！",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C6"
+      ],
+      "url": "https://www.4gtv.tv/article/2026102608000013",
+      "title": "喊假的？蔣萬安推台北無菸城　18次跨局處會議「零出席」",
+      "publisher": "民視新聞網（四季線上轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ftv-20261026",
+      "stance": "context",
+      "excerpt": "至今開了18次的跨局處會議，蔣市長你是一次都沒有到",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://laws.gov.taipei/Law/LawSearch/LawArticleContent/FL048934",
+      "title": "臺北市政府托育制度管理委員會設置要點（民國114年01月22日修正）",
+      "publisher": "臺北市法規查詢系統",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-law-FL048934",
+      "stance": "context",
+      "excerpt": "本會置委員二十一人，主任委員由市長兼任，副主任委員一人，由市長指派之副秘書長兼任；會議由主任委員擔任主席，主任委員因故不能出席時，由副主任委員代理之",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://dosw.gov.taipei/News_Content.aspx?n=FF64DD65FA5D804A&sms=00CB9A0952096ACF&s=AADF8B52662EB61C",
+      "title": "第8屆托育制度管理委員會委員名單及歷次會議紀錄",
+      "publisher": "臺北市政府社會局",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-dosw-childcare",
+      "stance": "context",
+      "excerpt": "第8屆第8次托育制度管理委員會紀錄",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://dosw.gov.taipei/News_Content.aspx?n=FF64DD65FA5D804A&sms=00CB9A0952096ACF&s=50B3415168F620D5",
+      "title": "第9屆托育制度管理委員會委員名單及歷次會議紀錄",
+      "publisher": "臺北市政府社會局",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-dosw-childcare",
+      "stance": "context",
+      "excerpt": "臺北市政府托育制度管理委員會第9屆第6次紀錄",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www-ws.gov.taipei/Download.ashx?u=LzAwMS9VcGxvYWQvMzU4L3JlbGZpbGUvMTc5NTYvODk2MjY0OC82ZWUzYWYwMi1jNjUxLTRhMmQtOWIxNy1lM2FhMmRiM2EyYjEucGRm&n=MTEyMDYyMOesrDjlsYbnrKwx5qyh5omY6IKy5Yi25bqm566h55CG5aeU5ZOh5pyD57SA6YyELnBkZg%3D%3D&icon=..pdf",
+      "title": "臺北市政府托育制度管理委員會第8屆第1次會議紀錄（112年6月20日）",
+      "publisher": "臺北市政府社會局",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-dosw-childcare-minutes",
+      "stance": "supports",
+      "excerpt": "參、 主席：林奕華副主任委員",
+      "access_note": "snippet"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www-ws.gov.taipei/001/Upload/358/relfile/17956/8962648/fbdf470f-e41a-4c35-82ca-e8ddc5ea7a6e.pdf",
+      "title": "臺北市政府托育制度管理委員會第8屆第8次會議紀錄（114年3月28日）",
+      "publisher": "臺北市政府社會局",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-dosw-childcare-minutes",
+      "stance": "supports",
+      "excerpt": "出席：蔣萬安主任委員(請假)、俞振華副主任委員",
+      "access_note": "snippet"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/breakingnews/5513913",
+      "title": "顏若芳揭蔣萬安掛名各委員會主委平均缺席率77％ 狠酸做總統夢",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "yen-councilor-20260722",
+      "stance": "supports",
+      "excerpt": "蔣任內召開13次會議、市長出席0次，缺席率100%，大多交由副秘書長或社會局長代理。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/breakingnews/5513913",
+      "title": "顏若芳揭蔣萬安掛名各委員會主委平均缺席率77％ 狠酸做總統夢",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "yen-councilor-20260722",
+      "stance": "supports",
+      "excerpt": "開會14次、蔣只去1次，缺席率93%。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://laws.gov.taipei/Law/LawSearch/LawArticleContent/FL033279",
+      "title": "臺北市兒童及少年福利與權益促進委員會設置要點（民國114年12月23日修正）",
+      "publisher": "臺北市法規查詢系統",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-law-FL033279",
+      "stance": "context",
+      "excerpt": "召集人由市長兼任；會議由召集人擔任主席；本會至少每年召開會議四次",
+      "access_note": "full"
+    },
+    {
+      "id": "S21",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://dosw.gov.taipei/News.aspx?n=D1D232516B2EED94&sms=DD635AE813AFA1DA",
+      "title": "臺北市政府社會局-兒少委員會",
+      "publisher": "臺北市政府社會局",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-dosw-youth",
+      "stance": "context",
+      "excerpt": "第10屆兒童及少年福利促進委員會(委員名冊、會議資料暨會議紀錄：112.2.1-114.1.31)",
+      "access_note": "full"
+    },
+    {
+      "id": "S22",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://dosw.gov.taipei/News_Content.aspx?n=D1D232516B2EED94&sms=DD635AE813AFA1DA&s=FCA8652B915D8CAB",
+      "title": "第10屆兒童及少年福利促進委員會會議紀錄",
+      "publisher": "臺北市政府社會局",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-dosw-youth",
+      "stance": "context",
+      "excerpt": "第8次委員會紀錄發言摘要",
+      "access_note": "full"
+    },
+    {
+      "id": "S23",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://dosw.gov.taipei/News_Content.aspx?n=D1D232516B2EED94&sms=DD635AE813AFA1DA&s=7DD9AD32B22D1E09",
+      "title": "第11屆兒童及少年福利與權益促進委員會會議紀錄",
+      "publisher": "臺北市政府社會局",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-dosw-youth",
+      "stance": "context",
+      "excerpt": "兒少委員會會議紀錄暨發言摘要",
+      "access_note": "full"
+    },
+    {
+      "id": "S24",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://newtalk.tw/news/view/2026-10-12/1064941",
+      "title": "曝蔣萬安市政沒出席驚人數據 苗博雅：反毒、兒少沒時間 紅毯走秀出席率100%",
+      "publisher": "新頭殼",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "miao-fb-20261011",
+      "stance": "context",
+      "excerpt": "苗博雅列舉，台北市毒品防治會議出席7%、兒少福利促進委員會出席7%、台北市食安委員會出席27%",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S25",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5520132",
+      "title": "蔣萬安否認缺席「毒防會議」 他細數蔣行程「缺席跑去作秀」",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chang-yumeng-fb-202607",
+      "stance": "context",
+      "excerpt": "蔣萬安不來開毒防會議，都是跑去作秀。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S26",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5519030",
+      "title": "藍8/1再上凱道反毒酒、被指毒防會議0出席 蔣萬安：不是事實",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-20260727",
+      "stance": "context",
+      "excerpt": "這不是事實。",
+      "access_note": "full"
+    },
+    {
+      "id": "S27",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://udn.com/news/story/7323/9661265",
+      "title": "遭點毒防會議僅出席1次 侯友宜：43次治安會報僅請假3次",
+      "publisher": "聯合報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "chang-chialing-20260730",
+      "stance": "context",
+      "excerpt": "張嘉玲質詢時出示雙北市長出席毒防會議資料，指出蔣萬安未曾出席，侯友宜則曾出席1次。",
+      "access_note": "full"
+    },
+    {
+      "id": "S28",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://laws.gov.taipei/Law/LawSearch/LawArticleContent/FL042898",
+      "title": "臺北市政府毒品危害防制中心設置要點（民國108年03月18日修正）",
+      "publisher": "臺北市法規查詢系統",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-law-FL042898",
+      "stance": "context",
+      "excerpt": "本中心置主任一人，由市長兼任；副主任一人，由市長指派之副市長兼任；執行長一人，由市長指派之副秘書長兼任；",
+      "access_note": "full"
+    },
+    {
+      "id": "S29",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://laws.gov.taipei/Law/LawSearch/LawArticleContent/FL076452",
+      "title": "臺北市政府食品安全委員會設置要點（民國114年01月22日修正）",
+      "publisher": "臺北市法規查詢系統",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-law-FL076452",
+      "stance": "context",
+      "excerpt": "會議由召集人擔任主席，召集人因故不能出席時，由副召集人代理之",
+      "access_note": "full"
+    },
+    {
+      "id": "S30",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://health.gov.taipei/News.aspx?n=0433017AC8C92673&sms=3B67A05355AABB7D&page=2",
+      "title": "臺北市政府衛生局-食品安全委員會會議紀錄列表（第2頁）",
+      "publisher": "臺北市政府衛生局",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-health-foodsafety",
+      "stance": "context",
+      "excerpt": "臺北市政府食品安全委員會臨時會議會議紀錄",
+      "access_note": "full"
+    },
+    {
+      "id": "S31",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://www-ws.gov.taipei/Download.ashx?u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTE4MDgwNy82NzZiYjViYy05ZWJhLTRhNTktOTMxOC0wMDcyNmE2ZWEzOGYucGRm&n=6Ie65YyX5biC5pS%2f5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD6Ieo5pmC5pyD6K2w5pyD6K2w57SA6YyELnBkZg%3d%3d&icon=.pdf",
+      "title": "臺北市政府食品安全委員會臨時會議會議紀錄（113年5月7日）",
+      "publisher": "臺北市政府衛生局",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "taipei-health-foodsafety",
+      "stance": "context",
+      "excerpt": "臺北市政府食品安全委員會臨時會議 會議紀錄 時間：中華民國113 年5 月7 日（星期二） 14：30 地點：本府市政大樓12 樓中央區劉銘傳廳",
+      "access_note": "snippet"
+    },
+    {
+      "id": "S32",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202607160242.aspx",
+      "title": "議員揭食安會缺席率逾7成　蔣萬安：有做好分工",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "miao-interpellation-20260716",
+      "stance": "supports",
+      "excerpt": "但寶林茶室案等重大食安事件發生時，蔣萬安也沒有出席食安會。",
+      "access_note": "full"
+    },
+    {
+      "id": "S33",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://tw.news.yahoo.com/%E8%94%A3%E8%90%AC%E5%AE%89%E7%BC%BA%E5%B8%AD11%E6%AC%A1%E9%A3%9F%E5%AE%89%E6%9C%83-%E5%AF%B6%E6%9E%97%E6%A1%88%E4%B9%9F%E8%AB%8B%E5%81%87-094755691.html",
+      "title": "蔣萬安缺席11次食安會！寶林案也請假",
+      "publisher": "NOWnews今日新聞（Yahoo新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "miao-interpellation-20260716",
+      "stance": "supports",
+      "excerpt": "你哪有去？你請假啊！我會議記錄都查得一清二楚啊！",
+      "access_note": "full"
+    },
+    {
+      "id": "S34",
+      "claim_ids": [
+        "C5"
+      ],
+      "url": "https://cnews.com.tw/262171105a01/",
+      "title": "寶林茶室案　沈伯洋批蔣萬安未回答缺席食安會議原因",
+      "publisher": "匯流新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cnews-20261105",
+      "stance": "context",
+      "excerpt": "他在辯論時曾詢問蔣萬安，為何沒有參加寶林茶室事件的臨時食安會議，但蔣萬安並未正面回答缺席原因。",
+      "access_note": "full"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "大致正確：沈伯洋確實在 2026 年 10 月 31 日臺北市長電視辯論會交叉詰問時，對蔣萬安列舉托育、毒防、兒少、寶林茶室和 18 次跨局處會議的出席情形，但訊息把「無菸城市」寫成了「韌性城市」。中央社、今周刊、新頭殼、三立、自由時報的當日報導和沈伯洋陣營的字卡內容一致，其中兒少出席率有 7% 和 6.7% 兩種寫法。這次沒有逐段比對完整影音或主辦單位的逐字稿。",
+      "evidence_ids": [
+        "S1",
+        "S3",
+        "S5",
+        "S7",
+        "S9",
+        "S10"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C2",
+      "label": "mostly_true",
+      "reasoning": "大致正確：沈伯洋說過這句話，內容也和查得到的市府紀錄一致，但我沒有逐次讀完全部會議紀錄。依設置要點，托育制度管理委員會的主任委員由市長兼任，也由主任委員擔任主席；社會局網站列出蔣萬安任內第 8 屆 8 次、第 9 屆 6 次會議。搜尋引擎索引到的兩份紀錄顯示，第 8 屆第 1 次由林奕華副主任委員主持，第 8 屆第 8 次寫明「蔣萬安主任委員(請假)」。議員顏若芳依會議紀錄統計 13 次會議 0 出席；蔣萬安在辯論中以分層負責回應，沒有否認這個數字。",
+      "evidence_ids": [
+        "S1",
+        "S3",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C3",
+      "label": "unverified",
+      "reasoning": "無法證實：沈伯洋確實說過毒防會議出席率 7%，但市府毒品危害防制中心的會議紀錄沒有在網路上公開，無法核對。7% 最早出自苗博雅的臉書貼文。張育萌說蔣萬安上任後至少缺席 13 次，新北市議員張嘉玲說蔣萬安從未出席，蔣萬安則回應「0 出席」的說法「不是事實」。各方說法不一，查不到第一手證據，也沒有直接反證。",
+      "evidence_ids": [
+        "S1",
+        "S24",
+        "S25",
+        "S26",
+        "S27",
+        "S28"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C4",
+      "label": "mostly_true",
+      "reasoning": "大致正確：沈伯洋說過兒少會議出席率 7%（中央社和新頭殼寫 6.7%），和社會局公開的會議次數及議員依紀錄做的統計相符。社會局網站列出蔣萬安任內第 10 屆 8 次、第 11 屆 7 次，共 15 次會議。顏若芳在 2026 年 7 月統計 14 次只出席 1 次，約 7.1%；15 次中出席 1 次則約 6.7%，兩個數字只差在四捨五入和統計截止日。設置要點規定會議由市長兼任的召集人主持；我沒有讀到各次會議紀錄的主席欄位，但市府也沒有否認這個數字。",
+      "evidence_ids": [
+        "S1",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23",
+        "S24"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C5",
+      "label": "mostly_true",
+      "reasoning": "大致正確：沈伯洋說過這句話，指的是 2024 年 5 月 7 日因應寶林茶室等中毒案召開的市府食品安全委員會臨時會議。依規定市長是這個委員會的召集人，苗博雅引用會議紀錄質詢時，指蔣萬安當天請假。衛生局網站確實列有 113 年 5 月 7 日的臨時會議紀錄；但請假欄位我只在搜尋引擎的索引摘要中看到，沒有直接讀到 PDF 原文。蔣萬安被質詢和辯論時，回應的是重大事件會親自主持，沒有否認請假。訊息省略了「臨時會議」，容易被讀成蔣萬安完全沒有參與寶林案的處理。",
+      "evidence_ids": [
+        "S1",
+        "S10",
+        "S29",
+        "S30",
+        "S31",
+        "S32",
+        "S33",
+        "S34"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C6",
+      "label": "false",
+      "reasoning": "錯誤：沈伯洋在辯論會上講的是「無菸城市」的 18 次跨局處會議，不是「韌性城市」。中央社、今周刊、新頭殼的當日報導和沈伯洋陣營的字卡都寫「無菸城市」。「18 次」這個數字在辯論前已由張育萌、洪婉臻提出，指的是無菸城市政策的跨局處會議；我沒有查到韌性城市開過 18 次跨局處會議的資料。至於無菸城市 18 次零出席，目前只有議員和政治人物的說法，我沒有逐次核對市府紀錄。",
+      "evidence_ids": [
+        "S2",
+        "S4",
+        "S6",
+        "S8",
+        "S11",
+        "S12"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": []
+}

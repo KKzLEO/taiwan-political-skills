@@ -1,0 +1,16 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C3",
+      "pass": false,
+      "label_ok": true,
+      "reason": "出席率 7% 維持「無法證實」合理，但判定理由把不同期間的統計寫成互相矛盾。張育萌所說的「以上 10 次，蔣萬安一次都沒到」指 2024 年 3 月至 2026 年 6 月列出的 10 場。若把他另列的 2023 年 4 場納入，並把當年 3 月 22 日短暫到場算作出席，才會得出 1／14，約 7.1%。兩個數字可以同時成立。截至辯論當日的總場次及出席情形，仍缺少完整市府紀錄可核對。[張育萌全文（台灣放送轉載）](https://www.telltaiwan.org/27621)"
+    },
+    {
+      "claim_id": "C5",
+      "pass": true,
+      "reason": "維持「大致正確」合理。修正後已指明缺席的是 2024 年 5 月 7 日臺北市政府食品安全委員會的臨時會議。這次覆核讀到市府紀錄全文，請假欄列「蔣萬安 召集人」，首項報告案為「寶林茶室疑似食品中毒案件本府辦理情形及因應作為」。[臺北市政府食品安全委員會臨時會議紀錄](https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD6Ieo5pmC5pyD6K2w5pyD6K2w57SA6YyELnBkZg%3D%3D&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTE4MDgwNy82NzZiYjViYy05ZWJhLTRhNTktOTMxOC0wMDcyNmE2ZWEzOGYucGRm)"
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 56,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C6",
+      "target": "label",
+      "proposed_label": "unverified",
+      "argument": "現有證據支持改判為無法證實。《NOWnews》刊出的辯論全文和沈伯洋競選團隊的字卡寫「無菸城市」，但依三立完整直播製作的民間轉錄在 2 小時 1 分 22 秒起的段落寫「韌性城市」。轉錄版本有出入，這次未能直接核對原音。辯論前的報導也把 18 次會議指向無菸城市，但目前缺少可直接核對韌性城市會議場次及出席情形的紀錄。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "連無菸城市現在十八次的跨局處會議，你一次也都沒有出席。"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "連韌性城市現在18次的跨局處會議，你一次也都沒有出席。"
+        },
+        {
+          "url": "https://www.ftvnews.com.tw/news/detail/2026A26L05M1",
+          "excerpt": "無菸城市政策18次會議，蔣萬安一次都沒出席。"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C6",
+      "target": "tactic",
+      "tactic_id": "TW-T01",
+      "argument": "建議撤下斷章取義標記。訊息未附完整影音，這只是一項線索。辯論轉錄對政策名稱的記載有出入，現有材料不足以確認轉傳文字把原話接到另一項政策上。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript/",
+          "excerpt": "連韌性城市現在18次的跨局處會議，你一次也都沒有出席。"
+        },
+        {
+          "url": "https://puma.taipei/live/debate/list",
+          "excerpt": "連無菸城市現在 18 次的跨局處會議一次也都沒有出席。"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C5",
+      "target": "evidence",
+      "argument": "臺北市衛生局公布的 2024 年 5 月 7 日臨時食安會議紀錄可讀到全文。紀錄直接列出蔣萬安以召集人身分請假，也列出寶林茶室案的議程，可補強 S31 對這場會議出席情形的證明。",
+      "evidence": [
+        {
+          "url": "https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD6Ieo5pmC5pyD6K2w5pyD6K2w57SA6YyELnBkZg%3D%3D&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTE4MDgwNy82NzZiYjViYy05ZWJhLTRhNTktOTMxOC0wMDcyNmE2ZWEzOGYucGRm",
+          "excerpt": "請假：蔣萬安 召集人"
+        },
+        {
+          "url": "https://www-ws.gov.taipei/Download.ashx?icon=.pdf&n=6Ie65YyX5biC5pS%2F5bqc6aOf5ZOB5a6J5YWo5aeU5ZOh5pyD6Ieo5pmC5pyD6K2w5pyD6K2w57SA6YyELnBkZg%3D%3D&u=LzAwMS9VcGxvYWQvNjg0L3JlbGZpbGUvNDY4MzIvOTE4MDgwNy82NzZiYjViYy05ZWJhLTRhNTktOTMxOC0wMDcyNmE2ZWEzOGYucGRm",
+          "excerpt": "案由一：寶林茶室疑似食品中毒案件本府辦理情形及因應作為"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C5",
+      "target": "neutral_rewrite",
+      "argument": "中立改寫應指明蔣萬安是臺北市食品安全委員會的召集人，所稱缺席的是該委員會討論寶林茶室案的臨時會議。「在寶林茶室案中是召集人，沒有出席」省略了職務所屬的委員會和缺席的會議，容易讓讀者把範圍理解成整起案件。北市府另有蔣萬安為寶林案出席行政院會的紀錄。",
+      "evidence": [
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=2044902FC839D045&s=06B090852903197E&sms=72544237BBE4C5F6",
+          "excerpt": "蔣萬安為寶林茶室事件出席行政院會"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "若按蔣萬安整段任期核對托育委員會出席情形，還應查更名前的紀錄。市府法規沿革記載委員會在 2023 年 4 月更名，社會局另有同年 3 月 13 日第 7 屆第 8 次會議紀錄，由林奕華主持，出席名單未列蔣萬安。這場會議增加了可核對的場次，原紀錄也支持該場未出席。",
+      "evidence": [
+        {
+          "url": "https://laws.gov.taipei/law/LawSearch/LawExport/FL048934?date=20221202&type=2",
+          "excerpt": "修正名稱及全文7點；並自112年4月1日生效"
+        },
+        {
+          "url": "https://www-ws.gov.taipei/Download.ashx?icon=..pdf&n=6Ie65YyX5biC5pS%2F5bqc5L%2Bd5q%2BN5omY6IKy5Yi25bqm566h55CG5aeU5ZOh5pyD56ysN%2BWxhuesrDjmrKHmnIPorbDntIDpjIQucGRm&u=LzAwMS9VcGxvYWQvMzU4L3JlbGZpbGUvMTc5NTYvODMzMzcyNS82NGU5NzU1ZS1iYTRhLTQ3MTMtODNlOS1mZmNhM2M2NzJhNzYucGRm",
+          "excerpt": "參、主席：林奕華副主任委員"
+        }
+      ]
+    },
+    {
+      "id": "X1-6",
+      "claim_id": "C4",
+      "target": "evidence",
+      "argument": "社會局的原始紀錄可直接確認蔣萬安主持 2023 年 4 月 12 日的兒少委員會。正方用 7 月的統計推算到辯論當日，仍須核對新增的第 11 屆第 7 次會議出席名單。只有在該次也未出席的情況下，才能用 1 除以 15 得出約 6.7%，取整數為 7%。",
+      "evidence": [
+        {
+          "url": "https://www-ws.gov.taipei/001/Upload/358/relfile/17865/8946551/68079520-23a3-42b6-b05f-de0a8f634883.pdf",
+          "excerpt": "參、主席：蔣萬安召集人"
+        },
+        {
+          "url": "https://dosw.gov.taipei/News_Content.aspx?n=D1D232516B2EED94&s=7DD9AD32B22D1E09&sms=DD635AE813AFA1DA",
+          "excerpt": "11-7兒少委員會會議紀錄暨發言摘要"
+        }
+      ]
+    },
+    {
+      "id": "X1-7",
+      "claim_id": "C3",
+      "target": "reasoning",
+      "argument": "維持無法證實，但理由應交代 7% 可以如何重算。《新頭殼》轉述張育萌列出 2024 至 2026 年的 10 場和 2023 年另 3 場缺席，再加上他所稱蔣萬安曾到場但提前離席的首次會議。依這個統計範圍，若把短暫到場計為出席，1 除以 14 約為 7.1%。是否應計入、以及到辯論當日的總場次，仍待原始紀錄確認。",
+      "evidence": [
+        {
+          "url": "https://newtalk.tw/news/view/2026-07-28/1049717",
+          "excerpt": "2024年至2026年共10次毒品防制會報"
+        },
+        {
+          "url": "https://newtalk.tw/news/view/2026-07-28/1049717",
+          "excerpt": "2023年6月29日及12月26日的會議由副市長林奕華主持，9月22日更由衛生局長陳彥元主持。"
+        },
+        {
+          "url": "https://newtalk.tw/news/view/2026-07-28/1049717",
+          "excerpt": "蔣萬安開會未久便提前離場。"
+        }
+      ]
+    },
+    {
+      "id": "X1-8",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "「毒防 7%、兒少 7%」在 10 月 11 日臉書貼文前已有公開紀錄。《太報》10 月 7 日報導苗博雅在 10 月 6 日的政論節目提出兩項數字，應補入這筆較早的紀錄，並保留更早來源是否存在的可能性。",
+      "evidence": [
+        {
+          "url": "https://www.taisounds.com/news/content/70/292743",
+          "excerpt": "社民黨台北市議員苗博雅昨日（10/6）在政論節目《狠狠抖內幕》談及反毒議題"
+        },
+        {
+          "url": "https://www.taisounds.com/news/content/70/292743",
+          "excerpt": "相關會議出席率僅7%、兒少福利促進委員會出席率同樣僅7%"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

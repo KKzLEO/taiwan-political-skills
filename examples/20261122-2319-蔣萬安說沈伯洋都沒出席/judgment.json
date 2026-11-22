@@ -1,0 +1,494 @@
+{
+  "rulings": [
+    {
+      "attack_id": "A-1",
+      "upheld": true,
+      "reason": "今周刊記者鄭鴻達在 2026 年 10 月 31 日 13:51 發布的報導，引號內確實寫著「反而最近立法院討論兒虐、毒品、颱風假、教師權益，你都沒有出席」。聯合報 13:27 的報導也在轉述中列出兒虐。原本的理由說兒虐只出現在轉述裡，這個說法錯誤。不過各家直接引語的用字不同，也沒有和原音逐字比對過，所以確切用字仍無法確認。",
+      "verified_urls": [
+        "https://www.businesstoday.com.tw/article/category/183027/post/202610310007/",
+        "https://udn.com/news/story/124652/9848809"
+      ]
+    },
+    {
+      "attack_id": "A-2",
+      "upheld": true,
+      "reason": "聯合報寫的是沈伯洋「未投票」，匯流新聞網寫的是「未出席投票」，兩篇講的都是表決。這只能說明他沒有參與某一次表決，不能證明他沒有出席會議。立法院公報的記名表決也顯示，10 月 30 日他在場並參加了另一次表決。兒虐專案報告在 7 月 30 日舉行，算不算引語裡的「最近」並不確定。依報導，他本會期在外交及國防委員會質詢。原本的理由把這些資料寫成「都沒有出席」有一部分已經證實，是推理錯誤。",
+      "verified_urls": [
+        "https://udn.com/news/story/6656/9847367",
+        "https://cnews.com.tw/247261030a04/",
+        "https://udn.com/news/story/6656/9809610"
+      ]
+    },
+    {
+      "attack_id": "A-3",
+      "upheld": true,
+      "reason": "打開這部 YouTube 影片的網址，只看得到標題，看不到上傳頻道、片長、說明欄或字幕，所以影片內容沒有核對過。這筆資料不能當成命題已有第一手影音證據支持，只能當背景。",
+      "verified_urls": [
+        "https://www.youtube.com/watch?v=0IlnD7rfC88"
+      ]
+    },
+    {
+      "attack_id": "B-1",
+      "upheld": false,
+      "reason": "聯合報 2026 年 9 月 28 日的報導記載，國民黨台北市議員楊植斗說沈伯洋在「去年」對包含教師節放假的修法版本投下反對票。那是 2025 年的表決，離辯論會已經一年以上，不是引語說的「最近」立法院會議。蔣萬安在辯論會上指的教師權益會議是哪一場，查不到，所以這次表決不能當成直接反證。另外兩則證據引的是蔣萬安本人的說法，不是出席紀錄。本命題改判誤導，依據的是 10 月 30 日毒駕修法的記名表決，不是這項攻擊的論證。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "B-2",
+      "upheld": true,
+      "reason": "兩則報導都確實存在。聯合報 2026 年 10 月 22 日報導，國民黨立委徐巧芯質疑沈伯洋談颱風假和股市脫鉤，卻沒有到財政委員會質詢金管會專案報告。聯合報 10 月 30 日報導，徐巧芯批評民進黨在毒駕修法表決時「用退席的方式」，那一句沒有點名沈伯洋。兩則都是國民黨立委的說法，只能說明颱風假和毒品兩項可能指哪些事件，不能當成沈伯洋的出席紀錄。依報導，財政委員會可能不是沈伯洋所屬的委員會。",
+      "verified_urls": [
+        "https://udn.com/news/story/6656/9830455",
+        "https://udn.com/news/story/6656/9847729",
+        "https://udn.com/news/story/6656/9809610"
+      ]
+    },
+    {
+      "attack_id": "C-1",
+      "upheld": true,
+      "reason": "原句的語序是「最近在立法院……這些都是你最近突然很關心的議題，但是你都沒有出席」。今周刊的直接引語也寫「這些議題的會議卻不參加」。可見「在立法院」指的是沒有出席的地方，不是他表現關心的地方。原本的中立改寫把它移到「關心」前面，會讓人搞不清楚要核對哪些會議。較準確的改寫是：兒虐、毒品、放颱風假、教師權益是沈伯洋最近突然很關心的議題，但是立法院最近處理這些議題時，沈伯洋都沒有出席。這項攻擊不涉及重要性。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "C-2",
+      "upheld": true,
+      "reason": "聯合報報導，10 月 30 日表決國民黨、民眾黨修正動議時，民進黨立委集體退席，只有莊瑞雄投反對票。當時出席 59 人、贊成 57 人。在那之前表決行政院版時，民進黨 41 席都投贊成。所以沈伯洋沒有投票是黨團的集體行動。院會表決和蔣萬安說的「這些議題的會議」也不能直接畫上等號，原本的理由沒有交代這段背景。",
+      "verified_urls": [
+        "https://udn.com/news/story/7315/9848120",
+        "https://udn.com/news/story/6656/9846960"
+      ]
+    },
+    {
+      "attack_id": "X1-1",
+      "upheld": true,
+      "reason": "立法院公報的民間鏡像頁面顯示，2026 年 10 月 30 日第 11 屆第 6 會期第 5 次會議表決刑法第 185 條之 3 時，12 時 59 分表決行政院、司法院版本，出席 98 人，沈伯洋列在贊成名單。13 時 01 分表決國民黨、民眾黨再修正動議，出席 59 人，沈伯洋不在任何名單。聯合報也報導民進黨 41 席對行政院版投贊成票。毒品這一項如果指的是這次院會，沈伯洋其實在場並參加了表決，和「都沒有出席」不符。這項攻擊附的立法院 PDF 打不開，沒有核對到。",
+      "verified_urls": [
+        "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html",
+        "https://udn.com/news/story/7315/9848120"
+      ]
+    },
+    {
+      "attack_id": "X1-2",
+      "upheld": true,
+      "reason": "一份依三立完整直播製作的非官方轉錄稿，在 2 小時 3 分 13 秒記下與訊息相同的句子，開頭多了「但是反而沈委員，我很好奇，」。頁面說明這份稿子是用 whisper.cpp 機器轉錄，再經過校稿，校稿時沒有逐句聽核原音，所以只能用來定位和比對用字，不能代替原音。NOWnews 記者崔至雲 12:55 的直接引語，在同一位置寫的是「反詐騙」而不是「放颱風假」，兩份紀錄的用字確實不一致。",
+      "verified_urls": [
+        "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+        "https://www.nownews.com/news/6888107"
+      ]
+    },
+    {
+      "attack_id": "X1-3",
+      "upheld": true,
+      "reason": "攻擊附的兩份立法院 PDF 打不開（一份是無法解析的二進位內容，一份超過大小上限），所以改從其他來源核對相同的事實。立法院議案資料的民間鏡像顯示，「兒童托育服務法草案」的提案人是吳沛憶、林俊憲、沈伯洋，屬第 11 屆第 3 會期第 13 次會議，時間在 2025 年。NOWnews 報導，沈伯洋登記質詢後改提書面質詢。這些資料可以當作評估「最近突然很關心」的背景，但書面質詢不等於到場，他沒有出席 7 月 30 日那場專案報告這一點不受影響。",
+      "verified_urls": [
+        "https://v2.ly.govapi.tw/bills?提案人=沈伯洋&q=兒童托育服務法",
+        "https://www.nownews.com/news/6862108"
+      ]
+    },
+    {
+      "attack_id": "X1-4",
+      "upheld": true,
+      "reason": "聯合報原文是「沈伯洋對於毒品、兒虐、颱風假、教師權益等都突然很關心，但沈卻都沒有出席立院相關議題會議」，中間是逗號，原本的摘錄改成省略號，不是逐字照抄。攻擊說摘錄多加了「很」字，這一點不成立，原文本來就有「很」。摘錄已改成逐字原文，這段只用來佐證蔣萬安提出過這項質疑。",
+      "verified_urls": [
+        "https://udn.com/news/story/124652/9848809"
+      ]
+    }
+  ],
+  "tactic_checks": [],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "misleading",
+      "reasoning": "蔣萬安在辯論會上大致說過這段話，但「這些議題你都沒有出席」和紀錄不符：2026 年 10 月 30 日立法院院會表決毒駕修法時，沈伯洋在場並對行政院、司法院版本投下贊成票。有沒有說過：NOWnews 12:55 的直接引語和訊息幾乎相同，只把「放颱風假」寫成「反詐騙」；今周刊和聯合報的金句整理也有直接引語，但用字不同；一份依三立完整直播製作的非官方機器轉錄稿在 2 小時 3 分 13 秒記下和訊息相同的句子。三立直播影片沒有取得字幕或逐字稿，原音沒有核對，所以確切用字，特別是颱風假這一項，仍有出入。內容方面，毒品這一項：立法院公報的記名表決顯示，沈伯洋參加了行政院版的表決；之後表決國民黨、民眾黨再修正動議時，民進黨立委除了莊瑞雄都集體退席，沈伯洋沒有投票。媒體寫的「未投票」不等於沒有出席。兒虐這一項：媒體報導沈伯洋沒有出席 7 月 30 日衛環委員會的兒虐專案報告，他說當天在口試，改提書面質詢；這場會議比辯論會早三個月，算不算「最近」不確定。颱風假這一項：只有國民黨立委徐巧芯說他沒有到財政委員會質詢；依報導，他本會期在外交及國防委員會質詢，沒有查到相關出席紀錄。教師權益這一項：指的是哪一場會議查不到；2025 年教師節放假修法時他投了反對票，但那是一年前的表決，不能當作直接反證。「最近突然很關心」是說話者的評價，沒有查證；沈伯洋 2025 年已列名兒童托育服務法草案的提案人，可以當背景。沈伯洋競選網站說他院會出席率 100%，這是當事陣營的說法，沒有獨立核對。整體來看，兒虐那場會議確實缺席，但「都沒有出席」會讓人以為他缺席了所有相關會議，毒品這一項的紀錄和這個印象不符，所以判誤導。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23",
+        "S24"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/live/%E5%8F%B0%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96%E6%9C%83%E7%9B%B4%E6%92%AD1200%E7%99%BB%E5%A0%B4-%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%94%A3%E8%90%AC%E5%AE%89%E4%BA%A4%E9%8B%92%EF%BD%9C%E4%B8%8D%E6%96%B7%E6%9B%B4%E6%96%B0-032846919.html",
+      "title": "台北市長辯論會懶人包 沈伯洋蔣萬安正面交鋒全紀錄（即時直播頁，12:48 交叉詰問第 2 輪條目）",
+      "publisher": "Yahoo奇摩新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "yahoo-live",
+      "stance": "supports",
+      "excerpt": "他反批沈伯洋在立法院對兒虐、毒品、放颱風假、教師權益等議題的會議都沒有出席，「你自己的本職是立法委員，對於這些議題的會議，你卻不參加」。",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/124652/9849211",
+      "title": "台北市長首場辯論超激烈 蔣萬安、沈伯洋金句一次看",
+      "publisher": "聯合報（記者林佳彣，2026-10-31 19:16）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn",
+      "stance": "supports",
+      "excerpt": "對於毒品、放颱風假、教師權益，都是你最近突然很關心的議題，但是你都沒有出席",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/124652/9848809",
+      "title": "沈伯洋批會議出席率低 蔣萬安諷沈「突然關心毒品…卻不到立院開會」",
+      "publisher": "聯合報（記者洪子凱，2026-10-31 13:27）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn",
+      "stance": "supports",
+      "excerpt": "蔣也質疑，沈伯洋對於毒品、兒虐、颱風假、教師權益等都突然很關心，但沈卻都沒有出席立院相關議題會議",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624781",
+      "title": "台北市長辯論》蔣萬安回答這樣扯 沈伯洋聊天室「闢謠功能」秒發動",
+      "publisher": "自由時報（2026-10-31 12:52）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn",
+      "stance": "supports",
+      "excerpt": "他還反質疑沈伯洋，因為選舉到了，突然很關心很多議題，卻不出席相關會議。",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.setn.com/news/1931264",
+      "title": "北市長辯論／沈伯洋揭會議出席率0%！蔣萬安答「即刻出席」 沈傻眼",
+      "publisher": "三立新聞網（記者李紹宏，2026-10-31 12:57，14:36 更新）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn",
+      "stance": "supports",
+      "excerpt": "選舉到了才突然很關心",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.mirrormedia.mg/story/20261031edi015",
+      "title": "藍綠都在問A答B…蔣萬安「無菸城市會議0出席」嗆別糾結出席率　沈伯洋談縫合：讓人流從sogo走到微風",
+      "publisher": "鏡週刊（記者吳妍）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "mirror",
+      "stance": "supports",
+      "excerpt": "並反問沈柏洋身為立委，平時不關心毒品、颱風假、教師權益等議題，連會議都不參加，選舉到了才開始畫餅。",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://puma.taipei/fact-checks/2026-debate-factcheck-3",
+      "title": "闢謠專區：2026 辯論會",
+      "publisher": "沈伯洋台北市長競選官方網站",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "shen-campaign",
+      "stance": "supports",
+      "excerpt": "蔣萬安稱沈伯洋： 1. 選舉到了才開始關心兒虐、毒品、教師權益等議題，卻不出席相關立法院會議。",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://puma.taipei/live/debate/list",
+      "title": "2026台北市長選舉首場電視辯論會直播字卡列表（字卡 21，12:57）",
+      "publisher": "沈伯洋台北市長競選官方網站",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "shen-campaign",
+      "stance": "context",
+      "excerpt": "沈伯洋在選前早已提案通過托育專法、杜絕兒虐議題、甚至見了剴剴案家長四次。",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+      "title": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "publisher": "YouTube（上傳頻道未經確認，標題標示三立新聞網 SETN）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "setn-video",
+      "stance": "context",
+      "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/124652/9665318",
+      "title": "兒虐話題不斷 台北市長選戰 藍綠攻防加溫",
+      "publisher": "聯合報（記者楊正海、林佳彣，2026-08-02）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn",
+      "stance": "context",
+      "excerpt": "沈伯洋反被爆出，去上節目因此未出席衛環委員會七月卅日兒虐專案報告。",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.nownews.com/news/6862108",
+      "title": "被指控兒虐專報未到上節目　沈伯洋揭真相：當天進行口試",
+      "publisher": "NOWnews今日新聞（2026-08-01）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "nownews",
+      "stance": "context",
+      "excerpt": "立法院衛環委員會民進黨籍召委林月琴日前安排兒虐專案報告，不過民進黨台北市長參選人沈伯洋當天未出席，引起藍營批評。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9847367",
+      "title": "「毒駕可處死刑」沈伯洋未投票 蔣萬安競辦反問：不要有死刑？",
+      "publisher": "聯合報（記者楊正海，2026-10-30）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn",
+      "stance": "context",
+      "excerpt": "立法院今三讀修正通過藍白黨團修法，將毒駕致死最重處以死刑，民進黨立委沈伯洋等綠委未投票。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://cnews.com.tw/247261030a04/",
+      "title": "毒駕再犯判死修法表決缺席　蔣萬安競辦爆沈伯洋曾嘲「酒駕預防性羈押」",
+      "publisher": "匯流新聞網（2026-10-30）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cnews",
+      "stance": "context",
+      "excerpt": "全案表決時贊成者57人，代表民進黨參選縣市首長的皆未參與投票。",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9809610",
+      "title": "沈伯洋質詢心疼官員犧牲假期 蔣萬安：勞動教師節放假為何你反對？",
+      "publisher": "聯合報（記者林麗玉，2026-10-12）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn",
+      "stance": "context",
+      "excerpt": "立院外交國防委員會今開本會期首場委員會，立委沈伯洋質詢時說，今連假後周一就排專案報告「相信蠻多人犧牲假期」準備，將提議將周一委員會排至周二。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610310007/",
+      "title": "台北市長辯論會報導（記者鄭鴻達，2026-10-31 13:51）",
+      "publisher": "今周刊",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "businesstoday",
+      "stance": "supports",
+      "excerpt": "反而最近立法院討論兒虐、毒品、颱風假、教師權益，你都沒有出席，選舉到了才突然很關心。你的本職是立法委員，這些議題的會議卻不參加。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.nownews.com/news/6888107",
+      "title": "台北市長辯論會報導（記者崔至雲，2026-10-31 12:55）",
+      "publisher": "NOWnews今日新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "nownews",
+      "stance": "supports",
+      "excerpt": "沈委員，我很好奇，最近在立法院，對於兒虐、對於毒品、對於反詐騙、對於教師權益，這些都是你最近突然很關心的議題，但是你都沒有出席",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+      "title": "2026 台北市長辯論會逐字稿（含時間戳記，非官方機器轉錄）",
+      "publisher": "richliu 個人部落格",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "richliu-transcript",
+      "stance": "supports",
+      "excerpt": "最近在立法院，對於兒虐、對於毒品、對於放颱風假、對於教師權益，這些都是你最近突然很關心的議題，但是你都沒有出席。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://v2.ly.govapi.tw/gazette_agenda_doc/1158101_00004/html",
+      "title": "立法院公報 第11屆第6會期第5次會議（115年10月30日）記名表決紀錄",
+      "publisher": "立法院（ly.govapi.tw 民間鏡像）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "ly-gazette",
+      "stance": "refutes",
+      "excerpt": "陳俊宇　　郭昱晴　　范　雲　　蔡其昌　　莊瑞雄　　沈伯洋　　吳思瑤",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/7315/9848120",
+      "title": "立院三讀！毒駕十年內再犯致死 可判死、罰千萬",
+      "publisher": "聯合報（記者唐筱恬、屈彥辰、王小萌、楊正海，2026-10-31）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn",
+      "stance": "context",
+      "excerpt": "民進黨四十一席立委對政院版按下贊成票，但遭在野黨立委五十七席立委反對封殺；當藍白修正動議版本表決時，民進黨立委集體退席，僅莊瑞雄一人投下反對票",
+      "access_note": "full"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9846960",
+      "title": "立院三讀 毒駕再犯致死最高可判死 沈伯洋等綠委未投票",
+      "publisher": "聯合報（記者唐筱恬，2026-10-30）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn",
+      "stance": "context",
+      "excerpt": "出席者共59人、贊成者57人、反對者為民進黨立委莊瑞雄1人",
+      "access_note": "full"
+    },
+    {
+      "id": "S21",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9830455",
+      "title": "徐巧芯質疑沈伯洋颱風假與股市脫鉤說法（記者王小萌，2026-10-22）",
+      "publisher": "聯合報（引述國民黨立委徐巧芯）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "udn",
+      "stance": "context",
+      "excerpt": "沈伯洋若真的關心，禮拜一金管會才到立法院做專案報告，怎麼沒有到財政委員會質詢？",
+      "access_note": "full"
+    },
+    {
+      "id": "S22",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9847729",
+      "title": "徐巧芯批民進黨毒駕修法表決退席（記者楊正海，2026-10-30）",
+      "publisher": "聯合報（引述國民黨立委徐巧芯）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "udn",
+      "stance": "context",
+      "excerpt": "真正表決、能做決定的時候，又不做決定，用退席的方式，請問你到底是支持還是不支持呢？",
+      "access_note": "full"
+    },
+    {
+      "id": "S23",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://v2.ly.govapi.tw/bills?提案人=沈伯洋&q=兒童托育服務法",
+      "title": "立法院議案資料：兒童托育服務法草案（第11屆第3會期第13次會議）",
+      "publisher": "立法院（ly.govapi.tw 民間鏡像）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "ly-bills",
+      "stance": "context",
+      "excerpt": "「兒童托育服務法草案」，請審議案。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S24",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9781559",
+      "title": "楊植斗批沈伯洋反對教師節放假修法（記者林麗玉、邱書昱，2026-09-28）",
+      "publisher": "聯合報（引述國民黨台北市議員楊植斗）",
+      "accessed": "2026-11-22",
+      "tier": 5,
+      "chain": "udn",
+      "stance": "context",
+      "excerpt": "楊說，去年立法院通過修法，讓教師節成為國定假日，沈伯洋卻對包含教師節放假的版本投下反對票。……事後沈說，反對的是修法版本和程序。",
+      "access_note": "full"
+    }
+  ]
+}
