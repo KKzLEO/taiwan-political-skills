@@ -1,0 +1,149 @@
+{
+  "seat": "C",
+  "lens": "stance",
+  "engine": "claude",
+  "searches_run": 8,
+  "attacks": [
+    {
+      "id": "C-1",
+      "claim_id": "C3",
+      "target": "reasoning",
+      "argument": "正方判 C3「無法證實」，但理由對兩邊說法的處理不一致。S10 是沈伯洋本人 10/18 的事後說明，談的是全市 1.3 萬棵的換算，時間在公園處 10/17 新聞稿之後，不能證明他先前那次發言沒有說是市府砍的，卻被標成「支持」C3。另一邊，公園處的說法（S9、S11）、蔣萬安在辯論中的指控（S16）和聯合報社論（S15）都只標成提供背景。照同一套標準，當事人自己的事後說法和對手的說法都只能當背景。另外，理由把蔣萬安說他「一再的影射」（S16）和社論說他把責任歸給市府（S15）列為方向相反的旁證。這兩項是競選對手和評論的評價，不是沈伯洋說過什麼的紀錄，而且「影射」本身就表示沒有明說。公園處隸屬台北市政府，是這場爭議中被質疑的一方，S11 內文用了「惡意造謠」這類評價用語。建議理由改寫成：雙方各自的說法都只提供背景，沒有任何一筆是那次發言的原始紀錄。判定維持「無法證實」。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE1",
+          "claim_ids": [
+            "C3"
+          ],
+          "url": "https://news.ltn.com.tw/news/politics/breakingnews/5610758",
+          "title": "沈伯洋松信政見4大秘寶 完整論述一次看",
+          "publisher": "自由時報",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "ltn-1018-minquan-park",
+          "stance": "context",
+          "excerpt": "不是在說市府移了1.3萬棵，而是對市民來說綠蔭減少、不足",
+          "access_note": "full"
+        },
+        {
+          "id": "CE2",
+          "claim_ids": [
+            "C3"
+          ],
+          "url": "https://ctinews.com/news/items/gOnL19pYWk",
+          "title": "沈伯洋打砍樹、營養午餐　蔣萬安大反擊：在辯論會還散布不實謠言！",
+          "publisher": "中天新聞網",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "debate-ctinews",
+          "stance": "context",
+          "excerpt": "但是你卻一再的影射台北市政府公務員亂砍樹",
+          "access_note": "full"
+        },
+        {
+          "id": "CE3",
+          "claim_ids": [
+            "C3"
+          ],
+          "url": "https://n.yam.com/Article/20261019676582",
+          "title": "公園處駁斥沈伯洋樹冠減少說　稱9/26已公開澄清衛星影像",
+          "publisher": "蕃新聞（報新聞，刊登臺北市公園處 2026-10-19 說法）",
+          "accessed": "2026-11-22",
+          "tier": 2,
+          "chain": "pkl-1019-statement",
+          "stance": "context",
+          "excerpt": "惡意造謠讓市民產生錯誤印象",
+          "access_note": "not_original"
+        }
+      ]
+    },
+    {
+      "id": "C-2",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "正方在 C1 的理由寫「記者會部分只有公園處 10/17 新聞稿的二手引述，用詞是松山區『被移除的樹木面積非常大、非常大』而不是『樹冠的減少』」。這等於預設公園處引述的那句話，就是沈伯洋所指那場記者會的內容。查到的報導都沒有說那句話出自記者會：聯合報只寫他談台北 AI 園區、科技廊帶規劃時「更稱松山區移除的樹木面積相當大」，ETtoday 只寫「指稱」，兩篇都沒有寫日期和場合。那句引述又只來自爭議中另一方（公園處）的新聞稿。拿它和辯論中的說法對比用詞，會讓讀者以為兩者談的是同一場發言，而且前後不一。建議理由改成：他所指的記者會是哪一場查不到；公園處引述的那句話場合不明，不能確定是同一場，所以不拿來比對用詞。判定維持「無法證實」。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE4",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://udn.com/news/story/124652/9821851",
+          "title": "沈伯洋稱松山區移樹面積大遭打臉 賴士葆：還要繼續烏賊戰？",
+          "publisher": "聯合新聞網（聯合報）",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "pkl-1017-release",
+          "stance": "context",
+          "excerpt": "更稱松山區移除的樹木面積相當大",
+          "access_note": "full"
+        },
+        {
+          "id": "CE5",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://www.ettoday.net/news/20261017/3256473.htm",
+          "title": "北市府反擊沈伯洋！松山區喬灌木年增1.6萬棵：不做功課還造謠",
+          "publisher": "ETtoday新聞雲",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "pkl-1017-release",
+          "stance": "context",
+          "excerpt": "民進黨台北市長參選人沈伯洋指稱，台北市松山區移除的樹木面積相當大",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-3",
+      "claim_id": "C2",
+      "target": "reasoning",
+      "argument": "正方在 C2 的理由寫這份數據是研究員沈聖峰在個人臉書發表，「不是中研院機構發布」。證據表裡 S13、S14 的摘錄只有樹冠面積數字和衛星判讀的限制，沒有一句說明它不是機構發布；事實查核中心那篇也只寫到這是研究員的臉書貼文。同一場辯論裡，蔣萬安把同一份資料叫作「中研院報告」，自由時報寫「中央研究院資料」。如果「中研院的數據」這個叫法要算成沈伯洋說法的瑕疵，同樣的標準也要用在蔣萬安和媒體的叫法上。建議理由只留下確實查不到的部分，也就是中研院研究員的公開資料裡沒有查到松山區的分區數字，並註明雙方對這份資料用的是同樣的稱呼。判定維持「無法證實」。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE6",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://www.storm.mg/article/11177351",
+          "title": "台北市長電視辯論》沈伯洋批市政SOP掌握不清　蔣萬安反擊：製造不實言論",
+          "publisher": "風傳媒",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "debate-storm",
+          "stance": "context",
+          "excerpt": "沈伯洋提出的中研院報告",
+          "access_note": "full"
+        },
+        {
+          "id": "CE7",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624812",
+          "title": "台北市長辯論》又問A答B！沈伯洋頻問誤砍茄苳樹SOP 蔣萬安：樹冠減少不等於砍樹",
+          "publisher": "自由時報",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "debate-ltn",
+          "stance": "context",
+          "excerpt": "沈伯洋曾引用中央研究院資料，指台北市樹冠覆蓋面積減少",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-4",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "溯源的事件脈絡寫「10/17 公園處新聞稿駁斥沈伯洋稱松山區『被移除的樹木面積非常大、非常大』」。「駁斥」帶有斥責的語感，同一段描述沈伯洋一方時用的是「要求」「表示」，兩邊用詞輕重不同。這句也把沈伯洋說過那句話寫成既定事實，但目前只有公園處新聞稿的引述，沒有原始發言紀錄。建議改成「10/17 公園處發新聞稿回應，稱沈伯洋說松山區『被移除的樹木面積非常大、非常大』」。",
+      "proposed_label": null,
+      "evidence": []
+    }
+  ],
+  "status": "ok"
+}

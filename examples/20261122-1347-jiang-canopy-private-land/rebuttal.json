@@ -1,0 +1,242 @@
+{
+  "responses": [
+    {
+      "attack_id": "A-1",
+      "accept": true,
+      "response": "接受，C2 改判「誤導」（和 A-2 的截斷合併）。已打開核對：中天的直接引語確認蔣萬安先說「你剛說到中研院研究員這個報告」，接著說「而且證明這整個分析的報告裡面，如果你有仔細看」。研究團隊網站和方法文件寫明衛星結果無法區分成因、分區不是產權或管理權。分區資料檔的表頭共 17 欄，沒有土地權屬、管理機關或成因的欄位。原理由寫「圖表和下載檔的數值沒有讀到」，這個缺口現在補上：公開的研究資料本身沒有「絕大部分是私人用地開發」這項內容。修正後的理由會寫明三點：一、公開研究沒有權屬分類，也不判定成因；二、各處減少地點實際的權屬占比沒有公開資料，這次沒有把「私人用地占多數」判為錯；三、NOWnews 刊出的辯論文字在這句中間還有「我手上這邊有一份」，他手上的文件是不是公開的研究資料，無法確認。",
+      "evidence": [
+        {
+          "url": "https://ctinews.com/news/items/gOnL19pYWk",
+          "excerpt": "而且證明這整個分析的報告裡面，如果你有仔細看"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/",
+          "excerpt": "衛星結果本身無法區分砍除、修剪、天然擾動或其他成因。"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/reader_district_change.csv",
+          "excerpt": "district,zone,year_from,year_to,zone_ha,common_classified_ha,common_classified_pct,tree_class_from_ha,tree_class_to_ha,gain_ha,loss_ha,net_ha,change_pp,qc_pass,relative_tree_change_pct,tree_class_from_pct,tree_class_to_pct"
+        },
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "如果你有仔細看，我手上這邊有一份"
+        }
+      ]
+    },
+    {
+      "attack_id": "A-2",
+      "accept": true,
+      "response": "接受，C2 改判「誤導」，保留 out_of_context。原判定標了斷章取義卻維持「無法證實」，和共同規則「被截掉前後文判誤導」不一致。中天的直接引語和 NOWnews 刊出的辯論文字都確認，原話在「私人用地的開發」之後接著「包括中央轄管的地方，以及大學的校園」。市府 9 月 26 日新聞稿把台大校地、國道交流道列為「包含中央建設的案例」，和私人土地開發分開寫。後半句怎麼讀有歧義：公視記成三類並列，中央社轉述成「也包括」。截斷後只剩「絕大部分是私人用地」，讀者看不到這個歧義。理由第一句改為：「誤導：蔣萬安確實說了這段話，但訊息的引文在『私人用地的開發』截斷，原話後面還接『包括中央轄管的地方，以及大學的校園』；公開的研究資料沒有土地權屬分類，實際占比沒有資料可以核對。」截斷出現在訊息文字，不是發言者所為（見 C-2 的回應）。",
+      "evidence": [
+        {
+          "url": "https://ctinews.com/news/items/gOnL19pYWk",
+          "excerpt": "絕大部分都是屬於私人用地的開發，包括中央轄管的地方，以及大學的校園"
+        },
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "絕大部分都是屬於私人用地的開發，包括中央轄管的地方以及大學的校園"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "報告指出的樹冠面積減少較大的地點成因，私人土地開發外，亦包含台大校地開發、國道交流道綠蔭減少等包含中央建設的案例"
+        },
+        {
+          "url": "https://news.pts.org.tw/live/105",
+          "excerpt": "樹冠減少不等於市府砍樹，相關報告涉及的土地多為私人開發、中央機關及大學校園"
+        },
+        {
+          "url": "https://www.cna.com.tw/news/aloc/202610310107.aspx",
+          "excerpt": "分析報告也指出，絕大部分都是屬於私人用地的開發，也包括中央轄管及大學校園"
+        }
+      ]
+    },
+    {
+      "attack_id": "B-1",
+      "accept": true,
+      "response": "接受，C2 改判「誤導」，處理方式和 A-1 相同。已核對方法文件，「分區不是產權或管理權」「衛星變化不能歸因於市府。」兩句都在原文；市府 9 月 26 日新聞稿的兩段摘錄一字不差，全文沒有「絕大部分」，也沒有各類成因的面積或百分比。修正後的理由會寫：公開的研究資料沒有權屬分類、不判定成因；市府公開的說明只講「減少較大的地點」的個案，並另外列出公共工程、天災和修剪。有兩點照實保留：一、實際的權屬占比沒有資料，沒有判定為錯；二、「紅點幾乎布滿整個盆地」是自由時報對研究者說法的轉述，這次沒有核對到研究者的原始貼文，只當背景，不當反證。",
+      "evidence": [
+        {
+          "url": "https://taipei-tree-cover.pages.dev/SATELLITE_RESULTS.md",
+          "excerpt": "F為這些林地在市街範圍外的部分，不稱已證實天然林；分區不是產權或管理權。"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/SATELLITE_RESULTS.md",
+          "excerpt": "衛星變化不能歸因於市府。"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "除了配合中央與地方公共工程的調整，樹冠面積減少的原因也包含天災因素（如颱風造成倒伏、病蟲害），以及為預防風災而進行樹木的全樹型修剪"
+        }
+      ]
+    },
+    {
+      "attack_id": "B-2",
+      "accept": true,
+      "response": "接受，理由和 A-2 相同，C2 改判「誤導」並保留 out_of_context。已核對：中天的直接引語在「私人用地的開發」之後還有「包括中央轄管的地方，以及大學的校園」；中央社是記者轉述，同樣有「也包括中央轄管及大學校園」。市府新聞稿點名的台灣大學校舍興建用地和高速公路用地都不是私人土地。修正後的理由會註明，截斷的是訊息文字，不推論截短的用意。",
+      "evidence": [
+        {
+          "url": "https://ctinews.com/news/items/gOnL19pYWk",
+          "excerpt": "絕大部分都是屬於私人用地的開發，包括中央轄管的地方，以及大學的校園"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "大安區減少樹冠的地點，則是台灣大學校舍興建用地"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "是在高速公路用地範圍，非市府權管"
+        }
+      ]
+    },
+    {
+      "attack_id": "B-3",
+      "accept": true,
+      "response": "接受，把資料檔列入證據表（第 1 級，證據鏈 shen-canopy-research），但立場填 context，不填 refutes。已核對資料檔：表頭 17 欄，沒有權屬或成因欄位；市街內部 2024 到 2026 年全市增加 0.35、減少 14.08、淨減 13.73 公頃。各區數值是讀取工具整理後的數字，沒有逐列照抄原文。重算結果和反方一致：12 個行政區的減少量加總是 14.08 公頃；北投 2.77、大安 0.80、文山 0.97 合計 4.54 公頃，約 32%；加上大同 2.01 是 6.55 公頃，約 46.5%。這筆資料的用法有三個限制：一、行政區的減少總量不等於市府點名個案的面積；二、新聞稿沒有寫交流道在哪個行政區，已核對全文；三、資料檔看不出其餘地點的權屬。所以它只能說明「市府公開點名的個案撐不起『絕大部分』」，不能反證實際占比。C2 改判「誤導」的依據是引文截斷和報告沒有這項內容，不是這筆算術。",
+      "evidence": [
+        {
+          "url": "https://taipei-tree-cover.pages.dev/reader_district_change.csv",
+          "excerpt": "district,zone,year_from,year_to,zone_ha,common_classified_ha,common_classified_pct,tree_class_from_ha,tree_class_to_ha,gain_ha,loss_ha,net_ha,change_pp,qc_pass,relative_tree_change_pct,tree_class_from_pct,tree_class_to_pct"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "報告指出的樹冠面積減少較大的地點成因，私人土地開發外，亦包含台大校地開發、國道交流道綠蔭減少等包含中央建設的案例"
+        }
+      ]
+    },
+    {
+      "attack_id": "C-1",
+      "accept": true,
+      "response": "接受。已核對，市府 9 月 26 日新聞稿確實有這一句；原理由只寫了私地、台大校舍用地和高速公路用地，漏掉同一份新聞稿列的其他成因。C2 的理由會把成因寫完整：私人土地開發、台大校地、國道交流道用地、配合中央與地方公共工程的調整、颱風倒伏和病蟲害等天災，以及為防風災做的全樹型修剪。這些成因都沒有面積或比例。",
+      "evidence": [
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "除了配合中央與地方公共工程的調整，樹冠面積減少的原因也包含天災因素（如颱風造成倒伏、病蟲害），以及為預防風災而進行樹木的全樹型修剪"
+        }
+      ]
+    },
+    {
+      "attack_id": "C-2",
+      "accept": true,
+      "response": "接受。source.json 記載這則訊息沒有來源網址、媒體名稱和署名；trace.json 查到它的文字連刪節號位置都和台灣事實查核中心的條目標題相同。已核對：蔣萬安的原話在「私人用地的開發」之後還有後半句，查核中心的內文沒有引述那半句。所以發言者是蔣萬安，編寫這段文字的人不明，兩者應分開寫。C2 的「誤導」和 out_of_context 指的是訊息文字截短了引文，不是蔣萬安本人斷章取義；報告不推論截短的用意。",
+      "evidence": [
+        {
+          "url": "https://ctinews.com/news/items/gOnL19pYWk",
+          "excerpt": "絕大部分都是屬於私人用地的開發，包括中央轄管的地方，以及大學的校園"
+        }
+      ]
+    },
+    {
+      "attack_id": "C-3",
+      "accept": true,
+      "response": "接受。trace.json 的 publisher.flagged 和 prior_factchecks 列的是同一則查核，也就是這次要重新驗證的對象，不是發言者另一筆過往紀錄。它的結論是「部分資料相符，但尚待更多證據驗證」，不是判定錯誤。已核對壹蘋新聞網的報導：查核中心逐一檢視辯論會 11 項發言，涵蓋兩位候選人。這一筆應只留在先前查核紀錄，避免同一件事算兩次。",
+      "evidence": [
+        {
+          "url": "https://news.nextapple.com/politics/20261101/DBAF0BAAB1180B457EC187CDDCDC9DBE",
+          "excerpt": "事實查核中心公布雙方發言查核結果"
+        },
+        {
+          "url": "https://tfc-taiwan.org.tw/tree-canopy-loss-private-land-development-claim/",
+          "excerpt": "蔣萬安稱「樹冠減少不等於市府砍樹」，在科學概念上正確；但目前尚無公開的資料證實「絕大部分都是私人用地開發」。"
+        }
+      ]
+    },
+    {
+      "attack_id": "C-4",
+      "accept": true,
+      "response": "接受。已核對 S18：文末只寫「（作者為自由撰稿人）」，移除株數的出處只寫「公開資料顯示」，不符合第 4 級「具名專家分析」的條件。我另外查了研究團隊網站的官方樹木資料檔，裡面沒有移除株數，所以這兩個數字沒有核對到原始統計。修正方式：把 S18 從 C1 的證據裡拿掉，理由不再引用移除株數；若留在證據表當背景，不列第 4 級，並註明數字出處不明。C1 的判定不受影響。",
+      "evidence": [
+        {
+          "url": "https://talk.ltn.com.tw/article/breakingnews/5597383",
+          "excerpt": "（作者為自由撰稿人）"
+        },
+        {
+          "url": "https://talk.ltn.com.tw/article/breakingnews/5597383",
+          "excerpt": "公開資料顯示，2024年台北市移除1,425棵樹，2025年增加至3,164棵，一年增加1,739棵，增幅約122%，兩年合計4,589棵。"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-1",
+      "accept": false,
+      "response": "反駁，C1 維持「大致正確」。已核對，NOWnews 和中天都記為「樹冠減少不等於我們砍樹」，訊息確實少了「我們」。原判定已經因此從「正確」降為「大致正確」。少這兩個字不會讓讀者得到錯誤印象，理由有三：一、兩種寫法都有研究團隊自己的說明支持，一般性的說法對應「無法區分砍除、修剪、天然擾動或其他成因」，針對市府的說法對應「衛星變化不能歸因於市府」；二、「不等於」不是否認有樹被移除；三、中央社的轉述也寫成北市多次澄清「樹冠減少不等於砍樹」，這個一般性的說法本來就是市府的公開立場。這和 C2 不同：C2 被截掉的是兩類土地，會改變「絕大部分」涵蓋的範圍，內容也沒有資料可以核對。我會採納其中一點：理由寫明原話有「我們」，並補上 NOWnews 的辯論文字當證據。完整影片這次仍然讀不到字幕，沒有核聽原音。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "因為很清楚，樹冠減少不等於我們砍樹"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/",
+          "excerpt": "衛星結果本身無法區分砍除、修剪、天然擾動或其他成因。"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/SATELLITE_RESULTS.md",
+          "excerpt": "衛星變化不能歸因於市府。"
+        },
+        {
+          "url": "https://www.cna.com.tw/news/aloc/202610310107.aspx",
+          "excerpt": "但北市已經多次澄清，樹冠減少不等於砍樹"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-2",
+      "accept": false,
+      "response": "反駁，C2 的改寫不補後半句。改寫要中立重述的是訊息寫了什麼，而訊息的引文就停在「私人用地的開發」，現在的改寫和訊息相符。如果把「中央轄管的地方」和「大學的校園」補進改寫，查核對象就從「訊息呈現的引文」變成「蔣萬安完整的原話」，引文被截斷這件事反而從命題裡消失。截斷應該反映在判定、理由和 out_of_context，這部分已經接受 A-2、B-2 並改判「誤導」。反方提的歧義有道理，會寫進 C2 的理由：後半句可以讀成三類並列，也可以讀成附帶補充；辯論文字能核對他提了哪些類別，私人開發的實際占比仍然無法證實。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "絕大部分都是屬於私人用地的開發，包括中央轄管的地方以及大學的校園"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-3",
+      "accept": true,
+      "response": "接受。已核對方法文件的兩句原文，以及 NOWnews 刊出的「如果你有仔細看，我手上這邊有一份」；中天的引語沒有「我手上這邊有一份」這幾個字。C2 的理由會補上三點：一、公開研究寫明分區不是產權或管理權，目視檢查用的是同一批影像，不是獨立驗證，所以公開研究無法支持把變化歸為私人開發；二、蔣萬安提到手上有一份文件，它和公開研究是不是同一份，無法確認；三、私人開發的實際占比和那份文件的內容都還沒有資料可查。",
+      "evidence": [
+        {
+          "url": "https://taipei-tree-cover.pages.dev/SATELLITE_RESULTS.md",
+          "excerpt": "此檢查僅用同一批10m影像，不是獨立驗證，也不因此改動既定門檻。"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/SATELLITE_RESULTS.md",
+          "excerpt": "F為這些林地在市街範圍外的部分，不稱已證實天然林；分區不是產權或管理權。"
+        },
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "如果你有仔細看，我手上這邊有一份"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-4",
+      "accept": true,
+      "response": "接受。已打開台北市公園處 10 月 19 日的原始新聞稿，摘錄一字不差；全文沒有「絕大部分」，也沒有各類成因的面積或占比。S17 改引原稿：來源層級第 2 級，access_note 填 full，證據鏈維持 taipei-pkl-pr-20261019，和蕃薯藤的轉述算同一條。",
+      "evidence": [
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=79BFC79FAB857BD2&sms=72544237BBE4C5F6",
+          "excerpt": "相關區域包含中央權管土地、私人開發基地，甚至部分原本就是農地或草地"
+        }
+      ]
+    },
+    {
+      "attack_id": "X1-5",
+      "accept": true,
+      "response": "接受，trace.json 的「沒有找到完整逐字稿」應更新。已核對：NOWnews 在 2026-10-31 17:02 刊出標題為「2小時辯論全文一次看」的辯論文字，裡面有「A2-2 蔣萬安回答追問」一段；這次只核對了交叉詰問這一段，沒有確認開場和結論是否完整收錄。民間轉錄有同一段文字，頁面的時間戳連到三立完整版影片；轉錄者註明二校「沒有逐句聽原音」。補進溯源時要寫明限制：NOWnews 是媒體整理的文字，不是主辦方的逐字稿；民間轉錄出自語音辨識，只用來定位影片時間（2 小時 16 分 57 秒），不當獨立證據。三立完整版影片這次再試一次，仍然讀不到字幕，沒有核聽原音。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "A2-2 蔣萬安回答追問"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "但是你卻一再的影射台北市政府還有我們公務員亂砍樹"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+          "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com"
+        }
+      ]
+    }
+  ]
+}

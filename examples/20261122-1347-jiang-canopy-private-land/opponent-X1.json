@@ -1,0 +1,94 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 18,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "label",
+      "argument": "C1 建議改判誤導。NOWnews 刊出的辯論全文與附時間戳的民間轉錄都記為「樹冠減少不等於我們砍樹」，同段也提到台北市府及其公務員。引文刪去「我們」，把針對市府是否砍樹的回應改成對砍樹成因的一般說法。研究資料支持單靠衛星影像無法判定成因，但這無法補足引文省略的範圍。本次核對到兩份全文紀錄，未能直接播放主辦方影片核聽原音。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "因為很清楚，樹冠減少不等於我們砍樹"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "但是你卻一再的影射台北市政府還有我們公務員亂砍樹"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/",
+          "excerpt": "衛星結果本身無法區分砍除、修剪、天然擾動或其他成因。"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C2",
+      "target": "neutral_rewrite",
+      "argument": "C2 的改寫應補上蔣萬安緊接著提到的中央轄管地點和大學校園，並保留他所稱「絕大部分」涵蓋哪些類別的歧義。引文停在私人用地開發，容易讓讀者把占比理解成只計私人用地。辯論全文可核對他提到了哪些類別，私人開發的實際占比仍無法證實。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "絕大部分都是屬於私人用地的開發，包括中央轄管的地方以及大學的校園"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C2",
+      "target": "reasoning",
+      "argument": "C2 的理由應交代公開研究能否支持這項報告歸因。研究團隊的技術報告明載，研究分區不代表產權或管理權，並說明目視檢查使用同一批衛星影像。辯論全文也記載蔣萬安提到手上有一份文件，現有資料無法確認那份文件與公開研究是否相同。公開研究無法支持把變動歸為私人開發，私人開發的實際占比與他手上文件的內容仍待證實。",
+      "evidence": [
+        {
+          "url": "https://taipei-tree-cover.pages.dev/SATELLITE_RESULTS.md",
+          "excerpt": "此檢查僅用同一批10m影像，不是獨立驗證，也不因此改動既定門檻。"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/SATELLITE_RESULTS.md",
+          "excerpt": "分區不是產權或管理權。"
+        },
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "如果你有仔細看，我手上這邊有一份"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "S17 可改引台北市公園處 10 月 19 日的原始新聞稿。原稿重列中央權管土地、私人開發基地及原為農地或草地的地點，全文沒有提供各類成因的面積或占比。原稿與轉述屬於同一條證據鏈。",
+      "evidence": [
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=79BFC79FAB857BD2&sms=72544237BBE4C5F6",
+          "excerpt": "相關區域包含中央權管土地、私人開發基地，甚至部分原本就是農地或草地"
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "溯源紀錄應補上 NOWnews 刊出的辯論全文，以及民間轉錄標出的三立完整版影片時間 2 小時 16 分 57 秒。民間轉錄使用語音辨識，作者說明未逐句聽原音。本次查核可提供原片定位，未能直接核聽。",
+      "evidence": [
+        {
+          "url": "https://www.nownews.com/news/6888190",
+          "excerpt": "A2-2 蔣萬安回答追問"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "[2:16:57] 蔣萬安：你剛說到中研院研究員這個報告"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "二校對照來源（沒有逐句聽原音）："
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

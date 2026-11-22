@@ -1,0 +1,10 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C2",
+      "pass": true,
+      "reason": "改判「誤導」合理。NOWnews 的辯論紀錄在「私人用地的開發」後還有「包括中央轄管的地方以及大學的校園」，截短後容易讓讀者以為「絕大部分」只指私人開發。研究方法明載「分區不是產權或管理權」，公園處原稿也只列舉「中央權管土地、私人開發基地」，未提供占比。裁判保留了兩項未能確認的事實：實際占比，以及蔣萬安手上文件是否就是公開研究。引文依辯論文字紀錄核對，未核聽原音。[辯論全文](https://www.nownews.com/news/6888190) [研究方法](https://taipei-tree-cover.pages.dev/SATELLITE_RESULTS.md) [公園處新聞稿](https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=79BFC79FAB857BD2&sms=72544237BBE4C5F6)"
+    }
+  ]
+}

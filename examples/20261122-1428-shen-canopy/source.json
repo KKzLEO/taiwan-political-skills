@@ -1,0 +1,10 @@
+{
+  "input_type": "text",
+  "original_text": "沈伯洋在 10 月 31 日台北市長辯論會上說：「樹冠的減少，我在記者會講得很清楚，是松山區樹冠的減少，是中研院的數據，但是我們並沒有講那是市政府砍的，我們還特別強調，有可能是私人，有可能是工程。」\n",
+  "url": null,
+  "outlet": null,
+  "byline": null,
+  "published_at": null,
+  "retrieved_at": "2026-11-22T12:00:00+08:00",
+  "notes": "輸入是貼上的文字，沒有來源網址、媒體、署名和發布時間。訊息裡的「10 月 31 日」沒有寫年份；上網查到 2026 年台北市長候選人電視辯論會於 2026 年 10 月 31 日中午舉行（報導者 https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate ）。讀入階段沒有核對辯論會完整影片或逐字稿，引言是否逐字相符、引言所指記者會的日期和內容，都留待後續查證。retrieved_at 只確定日期，時刻是概略值。"
+}

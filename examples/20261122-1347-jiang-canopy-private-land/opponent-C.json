@@ -1,0 +1,136 @@
+{
+  "seat": "C",
+  "lens": "stance",
+  "engine": "claude",
+  "searches_run": 4,
+  "attacks": [
+    {
+      "id": "C-1",
+      "claim_id": "C2",
+      "target": "reasoning",
+      "argument": "正方對 C2 的理由，把台北市公園處 9 月 26 日新聞稿寫成只列舉北投和文山的私地、台大校舍用地、高速公路用地這幾類不屬於市府管理的個案。同一份新聞稿其實還寫了其他成因：配合中央與地方公共工程的調整、颱風倒伏和病蟲害等天災，以及為了防風所做的全樹型修剪。理由只留下和「私人用地開發」方向一致的部分，漏掉市府自己列出的其他成因，讀者看不到完整的官方說明。這些成因同樣沒有面積或比例，判定可以維持「無法證實」，但理由應該把新聞稿列的成因寫完整。溯源資料描述同一份新聞稿時也有同樣的遺漏。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE1",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "title": "中研院衛星影像分析樹冠 北市公園處：含國立大學校舍、國道交流道等開發 顯非市府隨意砍樹",
+          "publisher": "臺北市政府工務局公園路燈工程管理處",
+          "accessed": "2026-11-22",
+          "tier": 2,
+          "chain": "taipei-pkl-pr-20260926",
+          "stance": "context",
+          "excerpt": "除了配合中央與地方公共工程的調整，樹冠面積減少的原因也包含天災因素（如颱風造成倒伏、病蟲害），以及為預防風災而進行樹木的全樹型修剪",
+          "access_note": "full"
+        },
+        {
+          "id": "CE2",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://tw.news.yahoo.com/%E8%B7%AF%E6%A8%B9%E6%82%B2%E6%AD%8C-%E4%B8%AD%E7%A0%94%E9%99%A2%E7%A0%94%E7%A9%B6%E5%93%A1%E6%8F%AD%E5%8C%97%E5%B8%82%E6%A8%B9%E5%86%A02%E5%B9%B4%E6%9A%B4%E6%B8%9B1-3%E8%90%AC%E6%A3%B5-%E5%B8%82%E5%BA%9C%E6%9B%9D%E5%8E%9F%E5%9B%A0-%E9%9D%9E%E7%A0%8D%E6%A8%B9-082908392.html",
+          "title": "【路樹悲歌】中研院研究員揭北市樹冠2年暴減1.3萬棵 市府駁斥：反增1.3萬棵樹",
+          "publisher": "太報（Yahoo新聞轉載）",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "taipei-pkl-pr-20260926",
+          "stance": "context",
+          "excerpt": "樹冠面積減少的原因也包含天災因素（如颱風造成倒伏、病蟲害）",
+          "access_note": "not_original"
+        }
+      ]
+    },
+    {
+      "id": "C-2",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "溯源資料把這則訊息的發布者寫成蔣萬安本人。但溯源自己查到，訊息的文字連刪節號的位置都和台灣事實查核中心的條目標題相同；蔣萬安的原話在「私人用地的開發」之後，還接著「包括中央轄管的地方，以及大學的校園」。把引文截短的是編寫這段文字的人，不是發言者。報告如果只寫發布者是蔣萬安，C2 標的「斷章取義」容易被讀成是他本人斷章取義。建議把「說這句話的人」和「編寫這段文字的人」分開寫，後者照實寫成來源不明、文字和查核中心條目標題相同，也不要推論截短的用意。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE3",
+          "claim_ids": [
+            "C2"
+          ],
+          "url": "https://ctinews.com/news/items/gOnL19pYWk",
+          "title": "沈伯洋打砍樹、營養午餐　蔣萬安大反擊：在辯論會還散布不實謠言！",
+          "publisher": "中天新聞網",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "cti-20261031-debate",
+          "stance": "context",
+          "excerpt": "包括中央轄管的地方，以及大學的校園，但是你卻一再的影射台北市政府公務員亂砍樹",
+          "access_note": "full"
+        }
+      ]
+    },
+    {
+      "id": "C-3",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "溯源資料在發布者項下，把台灣事實查核中心對這一句話的查核，列為發言者被查核機構點名的紀錄。這一筆和先前查核紀錄裡列的是同一則，也正是這次要重新驗證的對象，不是另一筆獨立的過往紀錄。它的結論是「部分資料相符，但尚待更多證據驗證」，不是判定錯誤；同一批辯論查核也同時檢視了兩位候選人的發言。報告如果把它當成發言者過去被點名的紀錄，等於同一件事算兩次。建議這一筆只留在先前查核紀錄裡。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE4",
+          "claim_ids": [
+            "C1",
+            "C2"
+          ],
+          "url": "https://news.nextapple.com/politics/20261101/DBAF0BAAB1180B457EC187CDDCDC9DBE",
+          "title": "蔣萬安、沈伯洋辯論各自說錯什麼？事實查核中心公布了",
+          "publisher": "壹蘋新聞網",
+          "accessed": "2026-11-22",
+          "tier": 3,
+          "chain": "tfc-20261031",
+          "stance": "context",
+          "excerpt": "事實查核中心公布雙方發言查核結果",
+          "access_note": "not_original"
+        }
+      ]
+    },
+    {
+      "id": "C-4",
+      "claim_id": "C1",
+      "target": "reasoning",
+      "argument": "正方對 C1 的理由引用 S18 的樹木移除數字，並把 S18 列為第 4 級來源（具名專家分析）。S18 是自由評論網的投書，文末只寫作者是自由撰稿人，移除數字的出處只寫「公開資料顯示」，文章立場偏向批評市府的樹木管理。這樣的評論不符合具名專家分析的條件；換成一篇替市府辯護的投書，也不該列為專家分析。建議調降 S18 的來源層級，或從 C1 的證據裡拿掉；移除數字要核對到公園處的原始統計再引用。這一點不影響 C1 的判定。",
+      "proposed_label": null,
+      "evidence": [
+        {
+          "id": "CE5",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://talk.ltn.com.tw/article/breakingnews/5597383",
+          "title": "自由開講》2年少了13.7公頃樹冠：台北的樹發生什麼事？",
+          "publisher": "自由評論網（投書，作者蕭錫惠）",
+          "accessed": "2026-11-22",
+          "tier": 6,
+          "chain": "ltn-talk-20261008",
+          "stance": "context",
+          "excerpt": "（作者為自由撰稿人）",
+          "access_note": "full"
+        },
+        {
+          "id": "CE6",
+          "claim_ids": [
+            "C1"
+          ],
+          "url": "https://talk.ltn.com.tw/article/breakingnews/5597383",
+          "title": "自由開講》2年少了13.7公頃樹冠：台北的樹發生什麼事？",
+          "publisher": "自由評論網（投書，作者蕭錫惠）",
+          "accessed": "2026-11-22",
+          "tier": 6,
+          "chain": "ltn-talk-20261008",
+          "stance": "context",
+          "excerpt": "公開資料顯示，2024年台北市移除1,425棵樹，2025年增加至3,164棵",
+          "access_note": "full"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

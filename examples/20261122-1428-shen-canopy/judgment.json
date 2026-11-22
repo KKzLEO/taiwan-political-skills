@@ -1,0 +1,766 @@
+{
+  "rulings": [
+    {
+      "attack_id": "A-1",
+      "upheld": true,
+      "reason": "成立。逐篇核對後，寫到「記者會講得很清楚」的是中天新聞網的直接引語和風傳媒的轉述，另有今日新聞的辯論全文和依三立直播轉錄的逐字稿。自由時報寫的是「已說明」，公視寫的是「曾強調」，都沒有寫是在記者會說的。ETtoday 的引句是「樹木減少是松山區減少」，沒有「樹冠」，沈伯洋的發言段落裡也沒有「記者會」。這三篇不能用來支持「在記者會講得很清楚」和「樹冠」這兩個用詞，ETtoday 那句在這一條只當背景。判定維持無法證實。",
+      "verified_urls": [
+        "https://www.ettoday.net/news/20261031/3263924.htm",
+        "https://news.ltn.com.tw/news/politics/breakingnews/5624812",
+        "https://news.pts.org.tw/live/105",
+        "https://ctinews.com/news/items/gOnL19pYWk",
+        "https://www.storm.mg/article/11177351"
+      ]
+    },
+    {
+      "attack_id": "A-2",
+      "upheld": true,
+      "reason": "成立。自由時報報導的是沈伯洋 10 月 18 日在松山區民權公園的說法，談的是兩年市區少 13.7 公頃樹冠。公園處回應他松山區說法的新聞稿是 10 月 17 日發布，這句話說在那之後。它只能說明他在辯論前公開說過「不是在說市府移了1.3萬棵」，不能證明更早那次談松山區時怎麼說，所以改列為背景。判定維持無法證實。",
+      "verified_urls": [
+        "https://news.ltn.com.tw/news/politics/breakingnews/5610758",
+        "https://ctinews.com/news/items/Z3WgYeBlxK",
+        "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=C12C522367A0A0D5"
+      ]
+    },
+    {
+      "attack_id": "A-3",
+      "upheld": true,
+      "reason": "成立。這篇署名「報新聞/公共事務特派」，內文是公園處的說法和用語，不是記者獨立採訪。文中也沒有寫沈伯洋哪一天、在哪個場合「承認」。這筆改列為官方說明，只當作市府一方的說法，不當成沈伯洋先前沒有歸咎市府的旁證。判定維持無法證實。",
+      "verified_urls": [
+        "https://n.yam.com/Article/20261019676582"
+      ]
+    },
+    {
+      "attack_id": "B-1",
+      "upheld": false,
+      "reason": "不成立。沈伯洋在辯論會上說過「我們並沒有講那是市政府砍的」可以確認，這一點採納。但這句話的內容是他先前在記者會沒有這樣說，而他所指的記者會是哪一場、當時怎麼說，查不到原始紀錄。攻擊列的三筆紀錄都不是那次發言的紀錄：公園處 10 月 19 日的說法沒有寫他何時何地「承認」，是爭議另一方的描述；10 月 18 日民權公園的說法在公園處 10 月 17 日新聞稿之後，談的是全市數字，分不出是原本就沒講還是事後說明；中央社 9 月 27 日那句談的是減少的原因和占比，不是有沒有歸咎市府。沒有查到相反紀錄，依規則是判無法證實的理由，不足以改判大致正確。",
+      "verified_urls": [
+        "https://n.yam.com/Article/20261019676582",
+        "https://news.ltn.com.tw/news/politics/breakingnews/5610758",
+        "https://www.cna.com.tw/news/aloc/202609270166.aspx"
+      ]
+    },
+    {
+      "attack_id": "B-2",
+      "upheld": false,
+      "reason": "不成立。數據出自中研院研究員沈聖峰團隊的衛星影像分析，這一點可以確認，公園處 9 月 26 日新聞稿也這樣寫，這部分採納。但這一條說的是「松山區樹冠減少」是中研院的數據，松山區的部分查不到：自由時報寫的「紅點幾乎布滿整個盆地」沒有點名任何行政區，全文沒有分區數字；公園處 9 月 26 日新聞稿列的是大安區、北投區、文山區和國道交流道，沒有松山區；中央社那句「內湖、松山、大同區」是沈伯洋自己對資料的解讀。沈聖峰的臉書原文沒有直接讀到。這場交鋒裡市府反駁的正是松山區的數字，分區資料不算小細節，不改判大致正確。",
+      "verified_urls": [
+        "https://news.ltn.com.tw/news/life/breakingnews/5587325",
+        "https://www.cna.com.tw/news/aloc/202609270166.aspx",
+        "https://n.yam.com/Article/20261019676582",
+        "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262"
+      ]
+    },
+    {
+      "attack_id": "B-3",
+      "upheld": true,
+      "reason": "成立。中央社 9 月 27 日報導確有這兩句：沈伯洋說樹木減少「有些當然是跟開發相關，但如內湖、松山、大同區，看起來跟河岸有點關係」，並要市府釐清「樹木生病或是私人等占比」。所以辯論前他公開提過私人和開發，也點到松山區，原本「沒有提松山區」的說法要修正。不過那句是把松山區和「跟開發相關」的部分對比，說的是和河岸有關。中央社沒有寫發言場合，民視同日報導寫的是出席活動時談到；用詞也沒有「工程」。他所指的記者會有沒有特別強調私人或工程，仍然無法證實。",
+      "verified_urls": [
+        "https://www.cna.com.tw/news/aloc/202609270166.aspx",
+        "https://ctinews.com/news/items/Z3WgYeBlxK",
+        "https://tw.news.yahoo.com/%E4%B8%AD%E7%A0%94%E9%99%A2%E5%AD%B8%E8%80%85%E7%99%BC%E8%81%B2-%E5%8C%97%E5%B8%82%E5%B0%91%E4%BA%8613-7%E5%85%AC%E9%A0%83%E7%B6%A0%E5%9C%B0-%E6%B2%88%E4%BC%AF%E6%B4%8B-%E5%B8%82%E5%BA%9C%E6%87%89%E6%B8%85%E6%A5%9A%E8%AA%AA%E6%98%8E-101602845.html"
+      ]
+    },
+    {
+      "attack_id": "C-1",
+      "upheld": true,
+      "reason": "成立。原本的理由把沈伯洋本人 10 月 18 日的事後說明列為支持，卻把市府、對手和社論的說法列為背景，標準不一致。修正後兩邊都只當背景：沈伯洋 10 月 18 日的說法在公園處 10 月 17 日新聞稿之後，談的是全市數字；公園處的說法是爭議另一方的描述；蔣萬安說他「一再的影射」和聯合報社論說他把責任歸給市府，是對手和評論對他發言的評價，不是發言紀錄。沒有任何一筆是他所指那次發言的原始紀錄。判定維持無法證實。",
+      "verified_urls": [
+        "https://news.ltn.com.tw/news/politics/breakingnews/5610758",
+        "https://ctinews.com/news/items/gOnL19pYWk",
+        "https://n.yam.com/Article/20261019676582",
+        "https://www.worldjournal.com/wj/story/121218/9868739"
+      ]
+    },
+    {
+      "attack_id": "C-2",
+      "upheld": true,
+      "reason": "成立。公園處 10 月 17 日新聞稿原文，以及聯合報、ETtoday、今日新聞、中天的報導，都沒有寫「被移除的樹木面積非常大、非常大」是哪一天、在什麼場合說的。聯合報只寫是談台北 AI 園區、科技廊帶規劃時說的。這句話不能當成沈伯洋所指那場記者會的內容，所以不拿它和辯論中的「樹冠的減少」比對用詞。他所指的記者會是哪一場查不到。判定維持無法證實。",
+      "verified_urls": [
+        "https://udn.com/news/story/124652/9821851",
+        "https://www.ettoday.net/news/20261017/3256473.htm",
+        "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=C12C522367A0A0D5",
+        "https://www.nownews.com/news/6884443",
+        "https://ctinews.com/news/items/Z3WgYeBlxK"
+      ]
+    },
+    {
+      "attack_id": "C-3",
+      "upheld": true,
+      "reason": "成立。這份分析是中研院研究員沈聖峰團隊做的，在他的臉書發表。蔣萬安在同場辯論稱它是「中研院報告」，自由時報寫「中央研究院資料」，公園處新聞稿標題也寫「中研院衛星影像分析」。各方用的是同樣的稱呼，不把「中研院的數據」這個叫法單獨算成沈伯洋說法的瑕疵。理由只保留確實查不到的部分：公開資料裡沒有查到松山區的分區結果。判定維持無法證實。",
+      "verified_urls": [
+        "https://www.storm.mg/article/11177351",
+        "https://news.ltn.com.tw/news/politics/breakingnews/5624812",
+        "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+        "https://tfc-taiwan.org.tw/tree-canopy-loss-private-land-development-claim/"
+      ]
+    },
+    {
+      "attack_id": "C-4",
+      "upheld": true,
+      "reason": "成立。「嚴正駁斥」是公園處新聞稿自己的用語，但事件經過的敘述直接沿用，和描述沈伯洋一方的「要求」「表示」輕重不同。那句話目前只見於公園處新聞稿和依它寫的報導，沒有原始發言紀錄，不宜寫成既定事實。事件經過改寫為：10 月 17 日公園處發新聞稿回應，稱沈伯洋說松山區「被移除的樹木面積非常大、非常大」。這是用詞修正，不影響各條判定。",
+      "verified_urls": [
+        "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=C12C522367A0A0D5"
+      ]
+    },
+    {
+      "attack_id": "X1-1",
+      "upheld": true,
+      "reason": "成立。今日新聞 10 月 31 日刊出的辯論全文有這段話，和訊息只差標點。另一份是個人部落格依三立直播、用語音辨識轉錄再校對的逐字稿，這段在影片 2:16:19，文字和訊息相同；頁面自述校對時沒有逐句聽原音。加上中天新聞網的直接引語，沈伯洋在辯論會上說過這段話可以確認。影片原音沒有直接核對，他所指的記者會說過什麼仍查不到。",
+      "verified_urls": [
+        "https://www.nownews.com/news/6888190",
+        "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/"
+      ]
+    },
+    {
+      "attack_id": "X1-2",
+      "upheld": true,
+      "reason": "成立。公園處 9 月 26 日新聞稿原文寫明，比對的是中研院研究員沈聖峰團隊利用衛星影像做的臺北市樹冠變化分析，並列出大安區、北投區、文山區和國道交流道的地點。全文沒有提到松山區，也沒有分區統計。數據來源可以確認，松山區的資料仍查不到。",
+      "verified_urls": [
+        "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262"
+      ]
+    },
+    {
+      "attack_id": "X1-3",
+      "upheld": true,
+      "reason": "成立。公園處 10 月 17 日新聞稿原文引述的是松山區「被移除的樹木面積非常大、非常大」，沒有寫是誰移除，也沒有寫發言日期和場合。蔣萬安的辯論指控和聯合報社論，是他們對沈伯洋發言的理解，不是他說過市府砍樹的紀錄。10 月 18 日民權公園的報導只確認他當天否認是市府移了 1.3 萬棵，不能確認他所指的記者會怎麼說。攻擊附的自由時報影音頁打不開，同一句改用自由時報的文字報導核對。判定維持無法證實。",
+      "verified_urls": [
+        "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=C12C522367A0A0D5",
+        "https://ctinews.com/news/items/gOnL19pYWk",
+        "https://www.worldjournal.com/wj/story/121218/9868739",
+        "https://news.ltn.com.tw/news/politics/breakingnews/5610758"
+      ]
+    },
+    {
+      "attack_id": "X1-4",
+      "upheld": true,
+      "reason": "成立。民視新聞網 10 月 19 日上傳的影片頁有自動產生的文字稿，頁面標示 AI 生成、可能有錯，其中有「我們不是說市政府 移了1.3萬棵樹」和「比如說有些工程 有些可能是私人土地」。這是辯論前同時提到工程和私人土地的一筆紀錄，補進證據。限制有幾點：文字稿沒有核對原音；同場活動的 ETtoday、中央社、自由時報文字報導都沒有寫到工程或私人；報導稱這場是車掃和公布政見，沒有稱作記者會；談的是全市 13.7 公頃樹冠；時間在公園處 10 月 17 日新聞稿之後。判定維持無法證實。",
+      "verified_urls": [
+        "https://www.ganjingworld.com/video/1iu547q4qh22JZjptjY1svIwS1q51c",
+        "https://www.ettoday.net/news/20261018/3256957.htm",
+        "https://cna.com.tw/news/aipl/202610180194.aspx",
+        "https://news.ltn.com.tw/news/politics/breakingnews/5610758"
+      ]
+    },
+    {
+      "attack_id": "X1-5",
+      "upheld": true,
+      "reason": "成立。中天這篇報導裡，第一段摘錄停在「但是我們並沒有講那是市政府砍的，」，沒有涵蓋私人或工程。「我們還特別強調，有可是私人，有可能是工程。」是緊接在後的另一句，私人和工程這一條在這篇報導的直接依據改列後一句。",
+      "verified_urls": [
+        "https://ctinews.com/news/items/gOnL19pYWk"
+      ]
+    }
+  ],
+  "tactic_checks": [],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "unverified",
+      "reasoning": "無法證實：沈伯洋在辯論會上說過這句話，但他所指的記者會是哪一場、當時怎麼說，查不到原始紀錄。今日新聞刊出的辯論全文、依三立直播轉錄的逐字稿（影片 2:16:19，語音辨識後校對，沒有逐句核對原音）和中天新聞網的直接引語，都有「我在記者會講得很清楚」和松山區樹冠減少；風傳媒的轉述也寫到記者會。自由時報、公視的轉述沒有寫是在記者會說的，ETtoday 的引句用的是「樹木減少」，各家用字不一致；辯論影片原音沒有直接核對。記者會部分：公園處 10 月 17 日新聞稿引述他稱松山區「被移除的樹木面積非常大、非常大」，聯合報寫他是談台北 AI 園區、科技廊帶規劃時說的，但新聞稿和各家報導都沒有寫日期和場合，不能確定就是他所指的記者會。10 月 18 日民權公園那場也談到樹冠，報導稱作車掃和公布政見，同樣不能確定。",
+      "evidence_ids": [
+        "S1",
+        "S3",
+        "S17",
+        "S18",
+        "S30",
+        "S8",
+        "S9",
+        "S20",
+        "S25",
+        "S26",
+        "S32",
+        "S27"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C2",
+      "label": "unverified",
+      "reasoning": "無法證實：數據來源是中研院研究員沈聖峰團隊的衛星影像分析，這一點可以確認，但公開資料裡查不到松山區的分區結果。沈伯洋在辯論會上說過「是中研院的數據」，見於今日新聞的辯論全文、依三立直播轉錄的逐字稿，以及中天、ETtoday、今周刊的報導；影片原音沒有直接核對。沈聖峰在臉書發表的分析，報導所載只有全市市街內部樹冠由 628 公頃降到 615 公頃、淨減 13.7 公頃，以及減少位置畫在地圖上「紅點幾乎布滿整個盆地」，沒有點名行政區。公園處 9 月 26 日新聞稿列舉的是大安區、北投區、文山區和國道交流道，沒有松山區。中央社 9 月 27 日報導沈伯洋談這份資料時提到「內湖、松山、大同區，看起來跟河岸有點關係」，這是他自己對資料的解讀。沈聖峰的臉書原文和地圖沒有直接讀到，不能確定有沒有松山區的資料，所以不判錯誤。蔣萬安在同場辯論、公園處新聞稿和媒體也都用「中研院」稱呼這份分析。",
+      "evidence_ids": [
+        "S1",
+        "S5",
+        "S6",
+        "S17",
+        "S18",
+        "S8",
+        "S13",
+        "S14",
+        "S19",
+        "S21",
+        "S23",
+        "S28",
+        "S29",
+        "S11"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C3",
+      "label": "unverified",
+      "reasoning": "無法證實：沈伯洋在辯論會上說過「我們並沒有講那是市政府砍的」，但他所指的記者會是哪一場、當時怎麼說，查不到原始紀錄；也沒有查到他明說樹冠減少是市政府砍的紀錄。辯論會上的發言見於今日新聞的辯論全文、依三立直播轉錄的逐字稿和中天的直接引語，風傳媒、自由時報、公視、今周刊也有相同內容；影片原音沒有直接核對。辯論前查得到的紀錄都只提供背景。公園處 10 月 17 日新聞稿引述他稱松山區「被移除的樹木面積非常大、非常大」，沒有寫是誰移除，也沒有寫發言日期和場合。10 月 18 日他在民權公園說「不是在說市府移了1.3萬棵」，時間在公園處新聞稿之後，談的是全市 13.7 公頃樹冠。公園處 10 月 19 日的說法寫他「自己也承認，樹冠變化不等於市府砍樹」，沒有寫何時何地，是市府一方的描述。蔣萬安在辯論中說他「一再的影射」市府亂砍樹、聯合報社論說他把責任歸給市府，是對手和評論對他發言的評價，不是發言紀錄。",
+      "evidence_ids": [
+        "S1",
+        "S3",
+        "S4",
+        "S5",
+        "S7",
+        "S17",
+        "S18",
+        "S8",
+        "S9",
+        "S20",
+        "S10",
+        "S11",
+        "S15",
+        "S16",
+        "S21",
+        "S24",
+        "S27"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C4",
+      "label": "unverified",
+      "reasoning": "無法證實：沈伯洋在辯論會上說過「我們還特別強調，有可能是私人，有可能是工程」，但他所指的記者會是哪一場、當時有沒有這樣強調，查不到原始紀錄。辯論會上的發言見於今日新聞的辯論全文、依三立直播轉錄的逐字稿和中天的直接引語（中天作「有可是私人」），風傳媒、自由時報、公視、今周刊也有相同內容；影片原音沒有直接核對。辯論前查得到的相關紀錄有兩筆。第一筆是 9 月 27 日，他出席活動時要市府釐清「樹木生病或是私人等占比」，並說樹木減少「有些當然是跟開發相關，但如內湖、松山、大同區，看起來跟河岸有點關係」；那次不是記者會，用詞是「開發」「私人」，沒有「工程」。第二筆是 10 月 18 日民權公園活動的民視影片頁，自動產生的文字稿有「我們不是說市政府 移了1.3萬棵樹」「比如說有些工程 有些可能是私人土地」。這是辯論前同時提到工程和私人的唯一一筆，但文字稿沒有核對原音，同場的文字報導沒有寫到這段，活動被稱作車掃和公布政見，談的是全市 13.7 公頃樹冠，時間也在公園處 10 月 17 日新聞稿之後。公園處 10 月 17 日新聞稿引述的那句話沒有提到私人或工程，場合不明。",
+      "evidence_ids": [
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S7",
+        "S17",
+        "S18",
+        "S8",
+        "S9",
+        "S20",
+        "S12",
+        "S21",
+        "S22",
+        "S24",
+        "S27",
+        "S31",
+        "S15"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "url": "https://ctinews.com/news/items/gOnL19pYWk",
+      "title": "沈伯洋打砍樹、營養午餐　蔣萬安大反擊：在辯論會還散布不實謠言！",
+      "publisher": "中天新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-ctinews",
+      "stance": "supports",
+      "excerpt": "然後再來樹冠的減少，我在記者會講的很清楚，松山區樹冠減少是中研院的數據，但是我們並沒有講那是市政府砍的，",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://ctinews.com/news/items/gOnL19pYWk",
+      "title": "沈伯洋打砍樹、營養午餐　蔣萬安大反擊：在辯論會還散布不實謠言！",
+      "publisher": "中天新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-ctinews",
+      "stance": "supports",
+      "excerpt": "我們還特別強調，有可是私人，有可能是工程。",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.storm.mg/article/11177351",
+      "title": "台北市長電視辯論》沈伯洋批市政SOP掌握不清 蔣萬安反擊：製造不實言論",
+      "publisher": "風傳媒",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-storm",
+      "stance": "supports",
+      "excerpt": "沈伯洋說，有關樹冠減少，他記者會講得很清楚，松山區樹冠減少是中研院數據，他沒講是台北市政府砍的，還特別強調有可能是私人、工程，",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624812",
+      "title": "台北市長辯論》又問A答B！沈伯洋頻問誤砍茄苳樹SOP 蔣萬安：樹冠減少不等於砍樹",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-ltn",
+      "stance": "supports",
+      "excerpt": "沈伯洋說，關於松山區樹冠覆蓋面積減少，是引用中央研究院研究資料，且已說明相關變化可能涉及私人土地或工程，並未直接歸因於市府",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610310007/",
+      "title": "台北市長辯論／蔣萬安、沈伯洋交叉詰問互轟不熟市政，沈為何痛批「上樑不正下樑歪」？",
+      "publisher": "今周刊",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-businesstoday",
+      "stance": "supports",
+      "excerpt": "樹冠減少是中研院的數據，我們沒講是市政府砍的，還特別強調有可能是私人或工程。",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.ettoday.net/news/20261031/3263924.htm",
+      "title": "被問砍樹SOP！蔣萬安怒斥不實 沈伯洋笑：看起來沒回答到",
+      "publisher": "ETtoday新聞雲",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-ettoday-ttv",
+      "stance": "supports",
+      "excerpt": "樹木減少是松山區減少，這是中研院的數據",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "北市長候選人辯論會登場 沈伯洋、蔣萬安交鋒政績與城市願景",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-pts",
+      "stance": "supports",
+      "excerpt": "針對松山區樹冠減少，沈稱引用的是中研院數據，且曾強調可能涉及私人用地或工程，未指稱是市政府砍樹。",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.youtube.com/watch?v=_uCYujz1rd4",
+      "title": "🔴【LIVE】 2026台北市長候選人電視辯論會｜#蔣萬安 #沈伯洋 #2026台北市長候選人電視辯論會",
+      "publisher": "TVBS（YouTube 直播頁，依 trace.json 記載）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "debate-full-video",
+      "stance": "context",
+      "excerpt": "🔴【LIVE】 2026台北市長候選人電視辯論會｜#蔣萬安 #沈伯洋 #2026台北市長候選人電視辯論會",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1",
+        "C3",
+        "C4"
+      ],
+      "url": "https://ctinews.com/news/items/Z3WgYeBlxK",
+      "title": "沈伯洋稱松山區「樹木被大量移除」 北市府打臉：勿以不實言論抹煞成果",
+      "publisher": "中天新聞網（報導臺北市公園處 2026-10-17 新聞稿）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pkl-1017-release",
+      "stance": "context",
+      "excerpt": "被移除的樹木面積非常大、非常大",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5610758",
+      "title": "沈伯洋松信政見4大秘寶 完整論述一次看",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-1018-minquan-park",
+      "stance": "context",
+      "excerpt": "不是在說市府移了1.3萬棵，而是對市民來說綠蔭減少、不足",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C3",
+        "C2"
+      ],
+      "url": "https://n.yam.com/Article/20261019676582",
+      "title": "公園處駁斥沈伯洋樹冠減少說 稱9/26已公開澄清衛星影像",
+      "publisher": "蕃新聞（報新聞稿，刊登臺北市公園處 2026-10-19 說法）",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "pkl-1019-statement",
+      "stance": "context",
+      "excerpt": "沈伯洋自己也承認，樹冠變化不等於市府砍樹，卻仍反覆強調1.3萬棵樹的「換算數字」，模糊樹冠覆蓋變化與實際樹木減損的差異，惡意造謠讓市民產生錯誤印象。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/breakingnews/5587955",
+      "title": "北市樹冠面積縮水！沈伯洋質疑又提中央 洪婉臻轟市府硬凹",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-0927-interview",
+      "stance": "context",
+      "excerpt": "如果有些是中央、有些是私人或是生病，那到底佔比是多少？",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/paper/1772472",
+      "title": "北市2年樹冠減13.7公頃 等於少1.3萬棵樹",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "shen-shengfeng-fb-0925",
+      "stance": "context",
+      "excerpt": "市街內部的樹冠面積從二〇二四年的六二八公頃降至今年的六一五公頃",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://tfc-taiwan.org.tw/tree-canopy-loss-private-land-development-claim/",
+      "title": "蔣萬安說：「樹冠減少不等於砍樹，……這整個分析的報告裡面，絕大部分都是屬於私人用地的開發」？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "shen-shengfeng-fb-0925",
+      "stance": "context",
+      "excerpt": "衛星看到的是地表覆蓋的變化，無法分辨是砍除、移植、修剪還是颱風。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.worldjournal.com/wj/story/121218/9868739",
+      "title": "新聞評論／從「猜兒虐」翻車 看沈伯洋認知戰逃生術",
+      "publisher": "世界新聞網（轉載聯合報社論）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn-editorial-1110",
+      "stance": "context",
+      "excerpt": "但他也坦承，樹冠變化可能來自「私人開發」，他卻把責任全栽在市府頭上。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C3"
+      ],
+      "url": "https://ctinews.com/news/items/gOnL19pYWk",
+      "title": "沈伯洋打砍樹、營養午餐　蔣萬安大反擊：在辯論會還散布不實謠言！",
+      "publisher": "中天新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-ctinews",
+      "stance": "context",
+      "excerpt": "但是你卻一再的影射台北市政府公務員亂砍樹",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.nownews.com/news/6888190",
+      "title": "北市辯論／蔣萬安、沈伯洋首度交鋒！2小時辯論全文一次看",
+      "publisher": "NOWnews今日新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-nownews-fulltext",
+      "stance": "supports",
+      "excerpt": "然後再來樹冠的減少，我在記者會講得很清楚，是松山區樹冠的減少是中研院的數據，但是我們並沒有講那是市政府砍的，我們還特別強調有可能是私人，有可能是工程。",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+      "title": "2026 台北市長候選人電視辯論會逐字稿（含時間戳）：蔣萬安、沈伯洋",
+      "publisher": "二相樂園的後門（個人部落格；依三立直播語音辨識轉錄後校對，未逐句核對原音）",
+      "accessed": "2026-11-22",
+      "tier": 6,
+      "chain": "debate-blog-asr-transcript",
+      "stance": "supports",
+      "excerpt": "我在記者會講得很清楚，是松山區樹冠的減少，是中研院的數據，但是我們並沒有講那是市政府砍的，我們還特別強調，有可能是私人，有可能是工程。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+      "title": "中研院衛星影像分析樹冠 北市公園處：含國立大學校舍、國道交流道等開發 顯非市府隨意砍樹",
+      "publisher": "臺北市政府工務局公園路燈工程管理處",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "pkl-0926-release",
+      "stance": "context",
+      "excerpt": "沈聖峰研究員團隊利用衛星影像分析臺北市樹冠變化",
+      "access_note": "full"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C1",
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=C12C522367A0A0D5",
+      "title": "北市府嚴正駁斥沈伯洋：松山區綠地不減反增、喬灌木增加1.6萬株！勿以不實指控抹煞市府綠化成果",
+      "publisher": "臺北市政府工務局公園路燈工程管理處",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "pkl-1017-release",
+      "stance": "context",
+      "excerpt": "針對沈伯洋委員宣稱，松山區「被移除的樹木面積非常大、非常大」，臺北市政府嚴正駁斥，沈伯洋的說法完全與事實不符！",
+      "access_note": "full"
+    },
+    {
+      "id": "S21",
+      "claim_ids": [
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202609270166.aspx",
+      "title": "學者計算2年來北市樹冠面積減少　蔣萬安：增1.3萬棵樹",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-0927",
+      "stance": "context",
+      "excerpt": "有些當然是跟開發相關，但如內湖、松山、大同區，看起來跟河岸有點關係",
+      "access_note": "full"
+    },
+    {
+      "id": "S22",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202609270166.aspx",
+      "title": "學者計算2年來北市樹冠面積減少　蔣萬安：增1.3萬棵樹",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-0927",
+      "stance": "context",
+      "excerpt": "應釐清如樹木生病或是私人等占比",
+      "access_note": "full"
+    },
+    {
+      "id": "S23",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/5587325",
+      "title": "衛星揭台北「樹變少」！ 中研院研究員憂：2年樹冠減13.7公頃",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "shen-shengfeng-fb-0925",
+      "stance": "context",
+      "excerpt": "把減少的位置畫在地圖上，紅點幾乎布滿整個盆地，並不只集中在少數幾處。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S24",
+      "claim_ids": [
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.ganjingworld.com/video/1iu547q4qh22JZjptjY1svIwS1q51c",
+      "title": "發燒新聞／前進松信祭「四大秘寶」　沈伯洋：對故鄉的承諾｜民視新聞｜",
+      "publisher": "民視新聞網（乾淨世界影片頁；文字稿為 AI 生成，未核對原音）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ftv-1018-minquan-park",
+      "stance": "context",
+      "excerpt": "我們不是說市政府 移了1.3萬棵樹 不是 因爲它有可能是 比如說有些工程 有些可能是私人土地",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S25",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/124652/9821851",
+      "title": "沈伯洋稱松山區移樹面積大遭打臉 賴士葆：還要繼續烏賊戰？",
+      "publisher": "聯合新聞網（聯合報）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pkl-1017-release",
+      "stance": "context",
+      "excerpt": "更稱松山區移除的樹木面積相當大",
+      "access_note": "full"
+    },
+    {
+      "id": "S26",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ettoday.net/news/20261017/3256473.htm",
+      "title": "北市府反擊沈伯洋！松山區喬灌木年增1.6萬棵：不做功課還造謠",
+      "publisher": "ETtoday新聞雲",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pkl-1017-release",
+      "stance": "context",
+      "excerpt": "民進黨台北市長參選人沈伯洋指稱，台北市松山區移除的樹木面積相當大",
+      "access_note": "full"
+    },
+    {
+      "id": "S27",
+      "claim_ids": [
+        "C1",
+        "C3",
+        "C4"
+      ],
+      "url": "https://www.ettoday.net/news/20261018/3256957.htm",
+      "title": "沈伯洋松信4大秘寶：樹種回來、出門就上山　巨蛋好鄰居、留住好老師",
+      "publisher": "ETtoday新聞雲",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ettoday-1018-minquan-park",
+      "stance": "context",
+      "excerpt": "台北大洋流",
+      "access_note": "full"
+    },
+    {
+      "id": "S28",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.storm.mg/article/11177351",
+      "title": "台北市長電視辯論》沈伯洋批市政SOP掌握不清 蔣萬安反擊：製造不實言論",
+      "publisher": "風傳媒",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-storm",
+      "stance": "context",
+      "excerpt": "沈伯洋提出的中研院報告",
+      "access_note": "full"
+    },
+    {
+      "id": "S29",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624812",
+      "title": "台北市長辯論》又問A答B！沈伯洋頻問誤砍茄苳樹SOP 蔣萬安：樹冠減少不等於砍樹",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-ltn",
+      "stance": "context",
+      "excerpt": "沈伯洋曾引用中央研究院資料，指台北市樹冠覆蓋面積減少",
+      "access_note": "full"
+    },
+    {
+      "id": "S30",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ettoday.net/news/20261031/3263924.htm",
+      "title": "被問砍樹SOP！蔣萬安怒斥不實 沈伯洋笑：看起來沒回答到",
+      "publisher": "ETtoday新聞雲",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate-ettoday-ttv",
+      "stance": "context",
+      "excerpt": "樹木減少是松山區減少，這是中研院的數據",
+      "access_note": "full"
+    },
+    {
+      "id": "S31",
+      "claim_ids": [
+        "C4"
+      ],
+      "url": "https://tw.news.yahoo.com/%E4%B8%AD%E7%A0%94%E9%99%A2%E5%AD%B8%E8%80%85%E7%99%BC%E8%81%B2-%E5%8C%97%E5%B8%82%E5%B0%91%E4%BA%8613-7%E5%85%AC%E9%A0%83%E7%B6%A0%E5%9C%B0-%E6%B2%88%E4%BC%AF%E6%B4%8B-%E5%B8%82%E5%BA%9C%E6%87%89%E6%B8%85%E6%A5%9A%E8%AA%AA%E6%98%8E-101602845.html",
+      "title": "中研院學者發聲！北市少了13.7公頃綠地　沈伯洋：市府應清楚說明",
+      "publisher": "民視新聞網（Yahoo新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ftv-0927",
+      "stance": "context",
+      "excerpt": "出席兒少公民行動活動時",
+      "access_note": "full"
+    },
+    {
+      "id": "S32",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.nownews.com/news/6884443",
+      "title": "沈伯洋喊松山區樹木移除非常大？北市府駁：喬灌木反增1.6萬株",
+      "publisher": "NOWnews今日新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pkl-1017-release",
+      "stance": "context",
+      "excerpt": "被移除的樹木面積非常大、非常大",
+      "access_note": "not_original"
+    }
+  ]
+}

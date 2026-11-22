@@ -1,0 +1,104 @@
+{
+  "seat": "B",
+  "lens": "counter",
+  "engine": "claude",
+  "searches_run": 10,
+  "attacks": [
+    {
+      "id": "B-1",
+      "claim_id": "C2",
+      "target": "label",
+      "argument": "C2 不應只判「無法證實」，應判「誤導」。蔣萬安的原話是「這整個分析的報告裡面，如果你有仔細看，絕大部分都是屬於私人用地的開發」，意思是報告本身就看得出這件事。但中研院團隊公開的報告沒有土地權屬分類，也不判斷成因：網站寫「衛星結果本身無法區分砍除、修剪、天然擾動或其他成因」，方法文件寫「分區不是產權或管理權」「衛星變化不能歸因於市府」，也就是既沒有歸給市府，也沒有歸給私人土地。市府 9 月 26 日新聞稿講的只是「樹冠面積減少較大的地點」，用詞是「私人土地開發外，亦包含」台大校地和國道交流道，同一份新聞稿還列了地方公共工程、颱風、病蟲害和修剪。研究者則說減少的位置「幾乎布滿整個盆地，並不只集中在少數幾處」。幾處較大地點確實有私人土地，這部分材料是真的；但把它說成「整個報告絕大部分」，會讓人以為中研院的分析本身支持這個結論，和報告原文不符。實際比例仍然沒有資料可查，這一點和正方相同。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://ctinews.com/news/items/gOnL19pYWk",
+          "excerpt": "而且證明這整個分析的報告裡面，如果你有仔細看，絕大部分都是屬於私人用地的開發，包括中央轄管的地方，以及大學的校園"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/",
+          "excerpt": "衛星結果本身無法區分砍除、修剪、天然擾動或其他成因。"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/SATELLITE_RESULTS.md",
+          "excerpt": "分區不是產權或管理權"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/SATELLITE_RESULTS.md",
+          "excerpt": "衛星變化不能歸因於市府。"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "報告指出的樹冠面積減少較大的地點成因，私人土地開發外，亦包含台大校地開發、國道交流道綠蔭減少等包含中央建設的案例"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "除了配合中央與地方公共工程的調整，樹冠面積減少的原因也包含天災因素（如颱風造成倒伏、病蟲害），以及為預防風災而進行樹木的全樹型修剪"
+        },
+        {
+          "url": "https://news.ltn.com.tw/news/life/breakingnews/5587325",
+          "excerpt": "把減少的位置畫在地圖上，紅點幾乎布滿整個盆地，並不只集中在少數幾處。"
+        }
+      ]
+    },
+    {
+      "id": "B-2",
+      "claim_id": "C2",
+      "target": "label",
+      "argument": "C2 的引文被截掉後半句，應判「誤導」。訊息的引文停在「私人用地的開發」就加上句號，但中天刊出的原話和中央社的轉述，後面都還接著「包括中央轄管的地方，以及大學的校園」。少了這半句，意思從「不屬於市府權管的土地」變成「私人土地」。市府自己點名的地點裡，台灣大學校舍用地和高速公路用地都不是私人土地。正方已經把這條標為斷章取義，也確認了被截掉的半句，卻仍判「無法證實」。引言被截掉前後文、意思因此改變時，應判「誤導」。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://ctinews.com/news/items/gOnL19pYWk",
+          "excerpt": "絕大部分都是屬於私人用地的開發，包括中央轄管的地方，以及大學的校園"
+        },
+        {
+          "url": "https://www.cna.com.tw/news/aloc/202610310107.aspx",
+          "excerpt": "分析報告也指出，絕大部分都是屬於私人用地的開發，也包括中央轄管及大學校園"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "大安區減少樹冠的地點，則是台灣大學校舍興建用地"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "是在高速公路用地範圍，非市府權管"
+        }
+      ]
+    },
+    {
+      "id": "B-3",
+      "claim_id": "C2",
+      "target": "evidence",
+      "argument": "正方說 C2「沒有公開的面積或比例資料可以核對」，但沒有讀研究團隊公開的資料檔。資料檔列出各行政區的面積：2024 到 2026 年，市街內部 12 個行政區的樹冠全部淨減少，全市減少 14.08 公頃、增加 0.35 公頃，淨減少 13.73 公頃。市府點名個案所在的大安區（0.80 公頃）、北投區（2.77 公頃）、文山區（0.97 公頃），三區減少量合計 4.54 公頃，約占 32%；其餘九區合計 9.54 公頃，約占 68%。交流道個案在讀到的新聞稿文字裡沒有標明行政區，就算把其餘各區中減少最多的大同區（2.01 公頃）整區算進去，也只有約 46.5%。這份資料不能證明其餘地點不是私人土地；但市府公開點名的個案，即使把所在行政區的減少全部算進去也不到一半，撐不起「絕大部分」。這筆第一手資料應列入證據，並支持把 C2 改判「誤導」。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://taipei-tree-cover.pages.dev/reader_district_change.csv",
+          "excerpt": "全市,U,2024,2026,8742.62,6704.72,76.69005401126893,628.25,614.52,0.35,14.08,-13.73"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/reader_district_change.csv",
+          "excerpt": "北投區,U,2024,2026,914.69,641.63,70.14726300713903,80.49,77.82000000000001,0.1,2.77,-2.67"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/reader_district_change.csv",
+          "excerpt": "大安區,U,2024,2026,932.99,731.83,78.43921156711218,71.46000000000001,70.66,0.0,0.8,-0.8"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/reader_district_change.csv",
+          "excerpt": "文山區,U,2024,2026,531.44,435.02,81.85684178834863,103.82,102.85,0.0,0.97,-0.97"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/reader_district_change.csv",
+          "excerpt": "大同區,U,2024,2026,423.13,349.61,82.6247252617399,13.71,11.71,0.01,2.01,-2.0"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "報告指出的樹冠面積減少較大的地點成因，私人土地開發外，亦包含台大校地開發、國道交流道綠蔭減少等包含中央建設的案例"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

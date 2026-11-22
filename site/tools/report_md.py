@@ -15,7 +15,7 @@ e = html.escape
 # Where a bare address ends: at a space, a bracket or a mark that closes the sentence it stands in. A pair of
 # brackets inside it (the name of a Wikipedia page) belongs to it; a lone closing bracket after it does not.
 BARE = r"https?://(?:[^\s<>\"'()）」』】》，。；、]|\([^\s<>\"'()]*\))+"
-TOKEN = re.compile(r"\*\*(?P<bold>.+?)\*\*|`(?P<code>[^`]+)`|\[(?P<label>[^\[\]]{1,300})\]\((?P<target>[^)\s]+)\)|(?P<bare>" + BARE + ")")
+TOKEN = re.compile(r"\*\*(?P<bold>.+?)\*\*|`(?P<code>[^`]+)`|\[(?P<label>(?:[^\[\]]|\[[^\[\]]{0,40}\]){1,300})\]\((?P<target>[^)\s]+)\)|(?P<bare>" + BARE + ")")
 SEPARATOR = re.compile(r"\|[-| :]+\|")
 
 

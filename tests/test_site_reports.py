@@ -46,6 +46,13 @@ class Inline(unittest.TestCase):
                          '<a href="https://tfc-taiwan.org.tw/a-b/" rel="noopener nofollow">查核中心</a><small class="host">tfc-taiwan.org.tw</small>')
 
     def test_a_label_that_reads_like_an_address_cannot_hide_where_the_link_goes(self):
+        # a headline with a bracket of its own, as news agencies write them: still one link, to where it really goes
+        out = self.md.inline("[蔣萬安反指講錯三章一Q[影]](https://www.cna.com.tw/news/aloc/1.aspx)")
+        self.assertEqual(out.count("<a "), 1)
+        self.assertIn('href="https://www.cna.com.tw/news/aloc/1.aspx"', out)
+        self.assertIn('<small class="host">www.cna.com.tw</small>', out)
+        out = self.md.inline("[a [b](https://evil.example/x) c](https://real.example/y)")  # and a link dressed up inside a label is not one
+        self.assertEqual((out.count("<a "), "real.example" in out, 'href="https://evil.example' in out), (1, True, False))
         out = self.md.inline("[https://tfc-taiwan.org.tw/x](https://evil.example/tfc)")
         self.assertEqual(out.count("<a "), 1)  # the label is text, not a second link inside the first
         self.assertIn('href="https://evil.example/tfc"', out)

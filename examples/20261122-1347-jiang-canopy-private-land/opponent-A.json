@@ -1,0 +1,63 @@
+{
+  "seat": "A",
+  "lens": "evidence",
+  "engine": "claude",
+  "searches_run": 5,
+  "attacks": [
+    {
+      "id": "A-1",
+      "claim_id": "C2",
+      "target": "label",
+      "argument": "正方判「無法證實」，理由是沒有比例資料、也沒有直接反證。但這句話說的是「這整個分析的報告裡面」有什麼內容，而那份報告是讀得到的。中天的逐字引述（S2）和中央社的轉述（S4）都顯示，蔣萬安說的報告就是沈伯洋引用的中研院研究員報告：他先說「你剛說到中研院研究員這個報告」，接著說「而且證明這整個分析的報告裡面，如果你有仔細看，絕大部分都是屬於私人用地的開發」。研究團隊的網站（S9）寫明衛星結果無法區分成因，分區也不代表產權或管理權。正方說圖表和下載檔沒有讀到；我讀了網站提供的分區資料檔 reader_district_change.csv，共 17 個欄位，只有行政區、分區代碼、年度和面積變化，沒有土地權屬或開發案的欄位。所以報告本身沒有「絕大部分是私人用地開發」這項內容，也沒有做成因判定。市府 9 月 26 日新聞稿（S12、S13）自己列的成因，除了私人土地開發，還有台大校地、國道用地、公共工程、颱風、病蟲害和市府為防災做的修剪。訊息讓讀者以為報告已經顯示減少的樹冠絕大部分出自私人用地開發，這和報告原文不符，應判「誤導」。至於各處減少地點實際的權屬比例，確實沒有公開資料。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://ctinews.com/news/items/gOnL19pYWk",
+          "excerpt": "你剛說到中研院研究員這個報告，你一直引用說台北市我們整個樹冠面積少了13.7公頃"
+        },
+        {
+          "url": "https://ctinews.com/news/items/gOnL19pYWk",
+          "excerpt": "而且證明這整個分析的報告裡面，如果你有仔細看，絕大部分都是屬於私人用地的開發，包括中央轄管的地方，以及大學的校園"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/",
+          "excerpt": "衛星結果本身無法區分砍除、修剪、天然擾動或其他成因。"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/",
+          "excerpt": "森林背景並不表示產權、管理權，也不全是天然林。"
+        },
+        {
+          "url": "https://taipei-tree-cover.pages.dev/reader_district_change.csv",
+          "excerpt": "district,zone,year_from,year_to,zone_ha,common_classified_ha,common_classified_pct,tree_class_from_ha,tree_class_to_ha,gain_ha,loss_ha,net_ha,change_pp,qc_pass,relative_tree_change_pct,tree_class_from_pct,tree_class_to_pct"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "除了配合中央與地方公共工程的調整，樹冠面積減少的原因也包含天災因素（如颱風造成倒伏、病蟲害），以及為預防風災而進行樹木的全樹型修剪"
+        }
+      ]
+    },
+    {
+      "id": "A-2",
+      "claim_id": "C2",
+      "target": "reasoning",
+      "argument": "正方自己查到訊息的引文在「私人用地的開發」就截斷，原話後面還有「包括中央轄管的地方，以及大學的校園」，也標了「斷章取義」，判定卻停在「無法證實」，還寫「補回後半句，判定不變」。這一步前後不一致：查核規則寫明，引言被截掉前後文要判「誤導」。被截掉的半句也不是小細節。市府 9 月 26 日新聞稿（S12、S13）把台大校舍用地和高速公路用地列為「包含中央建設的案例」，和私人土地開發分開寫；這兩類是國立大學和中央機關的用地，不是私人用地。補回後半句，原話的意思比較接近「大多不是市府權管的土地」；截斷之後，讀者看到的是「絕大部分是私人用地」，要查的事變成另一件。正方的證據（S2、S4、S7）已經足以確認截斷，判定應反映這一點，改為「誤導」。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://ctinews.com/news/items/gOnL19pYWk",
+          "excerpt": "絕大部分都是屬於私人用地的開發，包括中央轄管的地方，以及大學的校園"
+        },
+        {
+          "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+          "excerpt": "報告指出的樹冠面積減少較大的地點成因，私人土地開發外，亦包含台大校地開發、國道交流道綠蔭減少等包含中央建設的案例"
+        },
+        {
+          "url": "https://www.cna.com.tw/news/aloc/202610310107.aspx",
+          "excerpt": "分析報告也指出，絕大部分都是屬於私人用地的開發，也包括中央轄管及大學校園"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

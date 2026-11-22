@@ -1,0 +1,347 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://ctinews.com/news/items/gOnL19pYWk",
+      "title": "沈伯洋打砍樹、營養午餐　蔣萬安大反擊：在辯論會還散布不實謠言！",
+      "publisher": "中天新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cti-20261031-debate",
+      "stance": "supports",
+      "excerpt": "因為很清楚，樹冠減少不等於我們砍樹",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://ctinews.com/news/items/gOnL19pYWk",
+      "title": "沈伯洋打砍樹、營養午餐　蔣萬安大反擊：在辯論會還散布不實謠言！",
+      "publisher": "中天新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cti-20261031-debate",
+      "stance": "context",
+      "excerpt": "而且證明這整個分析的報告裡面，如果你有仔細看，絕大部分都是屬於私人用地的開發，包括中央轄管的地方，以及大學的校園",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202610310107.aspx",
+      "title": "沈伯洋質疑誤砍茄苳樹　蔣萬安反指講錯三章一Q[影]",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-20261031-debate",
+      "stance": "supports",
+      "excerpt": "但北市已經多次澄清，樹冠減少不等於砍樹",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.cna.com.tw/news/aloc/202610310107.aspx",
+      "title": "沈伯洋質疑誤砍茄苳樹　蔣萬安反指講錯三章一Q[影]",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "cna-20261031-debate",
+      "stance": "context",
+      "excerpt": "分析報告也指出，絕大部分都是屬於私人用地的開發，也包括中央轄管及大學校園",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "北市長候選人辯論會登場 沈伯洋、蔣萬安交鋒政績與城市願景",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pts-20261031-live",
+      "stance": "supports",
+      "excerpt": "樹冠減少不等於市府砍樹，相關報告涉及的土地多為私人開發、中央機關及大學校園",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/live/%E5%8F%B0%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96%E6%9C%83%E7%9B%B4%E6%92%AD1200%E7%99%BB%E5%A0%B4-%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%94%A3%E8%90%AC%E5%AE%89%E4%BA%A4%E9%8B%92%EF%BD%9C%E4%B8%8D%E6%96%B7%E6%9B%B4%E6%96%B0-032846919.html",
+      "title": "台北市長辯論會懶人包 沈伯洋蔣萬安正面交鋒全紀錄",
+      "publisher": "Yahoo新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "yahoo-20261031-live",
+      "stance": "supports",
+      "excerpt": "沈伯洋一再引用中研院研究員的報告，稱北市樹冠面積少了13.7公頃，但「樹冠減少不等於我們砍樹」。",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610310007/",
+      "title": "台北市長辯論／蔣萬安、沈伯洋交叉詰問互轟不熟市政，沈為何痛批「上樑不正下樑歪」？",
+      "publisher": "今周刊",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "businesstoday-20261031-debate",
+      "stance": "context",
+      "excerpt": "樹冠減少不等於砍樹，我手上這份報告，絕大部分是私人用地開發，包括中央轄管地方與大學校園",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://taipei-tree-cover.pages.dev/",
+      "title": "台北樹冠面積｜最近兩年的變化",
+      "publisher": "中央研究院生物多樣性研究中心 生態與社會生物實驗室（台北樹冠觀測）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "shen-canopy-research",
+      "stance": "supports",
+      "excerpt": "衛星觀察到的是地表覆蓋變化，無法直接換算成樹木株數或判定變化原因。",
+      "access_note": "full"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://taipei-tree-cover.pages.dev/",
+      "title": "台北樹冠面積｜最近兩年的變化",
+      "publisher": "中央研究院生物多樣性研究中心 生態與社會生物實驗室（台北樹冠觀測）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "shen-canopy-research",
+      "stance": "context",
+      "excerpt": "衛星觀察到的是地表覆蓋變化，無法直接換算成樹木株數或判定變化原因。",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/5587325",
+      "title": "衛星揭台北「樹變少」！ 中研院研究員憂：2年樹冠減13.7公頃",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "shen-canopy-research",
+      "stance": "supports",
+      "excerpt": "不過沈聖峰強調，衛星看到的是地表覆蓋的變化，無法分辨是砍除、移植、修剪還是颱風，他們不打算替這些數字下結論",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/life/breakingnews/5587325",
+      "title": "衛星揭台北「樹變少」！ 中研院研究員憂：2年樹冠減13.7公頃",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "shen-canopy-research",
+      "stance": "context",
+      "excerpt": "把減少的位置畫在地圖上，紅點幾乎布滿整個盆地，並不只集中在少數幾處。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+      "title": "中研院衛星影像分析樹冠 北市公園處：含國立大學校舍、國道交流道等開發 顯非市府隨意砍樹",
+      "publisher": "臺北市政府工務局公園路燈工程管理處",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-pkl-pr-20260926",
+      "stance": "context",
+      "excerpt": "大安區減少樹冠的地點，則是台灣大學校舍興建用地；北投區漢諾威馬場旁的私地是將原本的農地或草地進行整理，現場原本就不是樹木；文山區光輝路旁的樹冠減少處則是私人建築基地。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=8DCD753F29154262",
+      "title": "中研院衛星影像分析樹冠 北市公園處：含國立大學校舍、國道交流道等開發 顯非市府隨意砍樹",
+      "publisher": "臺北市政府工務局公園路燈工程管理處",
+      "accessed": "2026-11-22",
+      "tier": 2,
+      "chain": "taipei-pkl-pr-20260926",
+      "stance": "context",
+      "excerpt": "是在高速公路用地範圍，非市府權管",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5587737",
+      "title": "台北砍樹爭議未歇 蔣萬安：原則只增不減、明年底續增3550棵樹",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-20260927-chiang-interview",
+      "stance": "context",
+      "excerpt": "蔣萬安說，公園處昨天也有對外說明，其實在研究內容很大部分，包括中央還有私人開發的部分。",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/breakingnews/5587955",
+      "title": "北市樹冠面積縮水！沈伯洋質疑又提中央 洪婉臻轟市府硬凹",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn-20260927-shen-response",
+      "stance": "context",
+      "excerpt": "如果有些是中央、有些是私人或是生病，那到底佔比是多少？",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://tfc-taiwan.org.tw/tree-canopy-loss-private-land-development-claim/",
+      "title": "蔣萬安說：「樹冠減少不等於砍樹，……這整個分析的報告裡面，絕大部分都是屬於私人用地的開發」？",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc-20261031",
+      "stance": "context",
+      "excerpt": "蔣萬安稱「樹冠減少不等於市府砍樹」，在科學概念上正確；但目前尚無公開的資料證實「絕大部分都是私人用地開發」。",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C2"
+      ],
+      "url": "https://n.yam.com/Article/20261019676582",
+      "title": "公園處駁斥沈伯洋樹冠減少說　稱9/26已公開澄清衛星影像",
+      "publisher": "蕃薯藤 yam News（轉述北市公園處 10 月 19 日新聞稿）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "taipei-pkl-pr-20261019",
+      "stance": "context",
+      "excerpt": "相關區域包含中央權管土地、私人開發基地，甚至部分原本就是農地或草地",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://talk.ltn.com.tw/article/breakingnews/5597383",
+      "title": "自由開講》2年少了13.7公頃樹冠：台北的樹發生什麼事？",
+      "publisher": "自由評論網（投書，作者蕭錫惠）",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "ltn-talk-20261008",
+      "stance": "context",
+      "excerpt": "2024年台北市移除1,425棵樹，2025年增加至3,164棵",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+      "title": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "publisher": "三立新聞網（YouTube）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "debate-video-20261031",
+      "stance": "context",
+      "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "access_note": "no_transcript"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "大致正確：蔣萬安在 2026-10-31 辯論會的交叉詰問中說過這句話，內容也和研究團隊自己的說明一致。中天的直接引述和 Yahoo 即時紀錄寫「樹冠減少不等於我們砍樹」，中央社寫「不等於砍樹」，公視寫「不等於市府砍樹」；訊息少了「我們」，意思相近。完整影片讀不到逐字稿（S19），用字是靠四家各自報導互相比對。中研院團隊的網站寫明衛星「無法直接換算成樹木株數或判定變化原因」，所以樹冠減少不能直接當成砍樹；這句話本身沒有否認有樹被移除（S18 的移除數字出自投書，沒有核對原始統計）。",
+      "evidence_ids": [
+        "S1",
+        "S3",
+        "S5",
+        "S6",
+        "S8",
+        "S10",
+        "S16",
+        "S18",
+        "S19"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    },
+    {
+      "claim_id": "C2",
+      "label": "unverified",
+      "reasoning": "無法證實：蔣萬安確實說了這段話，但「絕大部分」沒有公開的面積或比例資料可以核對，也沒有直接反證。中研院團隊的網站寫明衛星無法判定變化原因，讀到的頁面文字沒有土地權屬分類（圖表和下載檔的數值沒有讀到，沈聖峰兩則臉書貼文也只讀到開頭）。市府 9 月 26 日新聞稿只列舉個案（北投、文山的私地，台大校舍用地，高速公路用地），沒有寫「絕大部分」；沈伯洋 9 月 27 日問過占比，之後沒有查到市府或競選團隊公布數字。訊息的引文停在「私人用地的開發」，原話後面還接「包括中央轄管的地方，以及大學的校園」；補回後半句，同樣沒有比例資料，判定不變。",
+      "evidence_ids": [
+        "S2",
+        "S4",
+        "S7",
+        "S9",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S19"
+      ],
+      "context_flags": [
+        "out_of_context"
+      ],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": [
+    {
+      "org": "台灣事實查核中心",
+      "url": "https://tfc-taiwan.org.tw/tree-canopy-loss-private-land-development-claim/",
+      "their_label": "部分資料相符，但尚待更多證據驗證",
+      "claim_ids": [
+        "C1",
+        "C2"
+      ],
+      "agree": true,
+      "note": "它引用 3 項原始資料。市府 9 月 26 日新聞稿讀到全文，內容和它的描述相符：只列個案，沒有面積或比例。沈聖峰 9 月 25 日、10 月 22 日兩則臉書貼文只讀到開頭，改用研究團隊網站（taipei-tree-cover.pages.dev）和自由時報的引述核對，「衛星無法判定原因」的說法一致。另外比對中天、中央社、公視、今周刊、Yahoo 的辯論報導，確認蔣萬安原話在「私人用地的開發」之後還有「包括中央轄管的地方，以及大學的校園」。結論一致：C1 概念正確，C2 沒有公開資料可以證實。"
+    }
+  ]
+}

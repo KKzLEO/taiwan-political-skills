@@ -1,0 +1,25 @@
+{
+  "seat": "X1",
+  "reviews": [
+    {
+      "claim_id": "C1",
+      "pass": true,
+      "reason": "維持無法證實合理。今日新聞的辯論全文載有「我在記者會講得很清楚，是松山區樹冠的減少」，依三立直播轉錄的文字也記載這段話。辯論原音未直接核對，現有紀錄仍無法確認沈伯洋所指的是哪場記者會，以及他當時怎麼說。[今日新聞辯論全文](https://www.nownews.com/news/6888190) [三立直播轉錄](https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/)"
+    },
+    {
+      "claim_id": "C2",
+      "pass": true,
+      "reason": "維持無法證實合理。公園處新聞稿寫明「沈聖峰研究員團隊利用衛星影像分析臺北市樹冠變化」，可確認全市分析的來源。新聞稿未列松山區的結果，研究者的原始貼文也未能直接讀取，仍無法確認這份分析是否支持松山區樹冠減少的說法。[公園處新聞稿](https://www.gov.taipei/News_Content.aspx?n=74806083EBDF5A03&s=8DCD753F29154262&sms=72544237BBE4C5F6)"
+    },
+    {
+      "claim_id": "C3",
+      "pass": true,
+      "reason": "維持無法證實合理。裁判已將市府與對手的說法視為背景。公園處引述的「被移除的樹木面積非常大、非常大」未指明由誰移除，蔣萬安稱「你卻一再的影射台北市政府公務員亂砍樹」是他對發言的解讀。現有資料仍無法確認沈伯洋在所指的記者會上有沒有把樹冠減少歸因於市府。[公園處新聞稿](https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=C12C522367A0A0D5) [中天新聞網辯論報導](https://ctinews.com/news/items/gOnL19pYWk)"
+    },
+    {
+      "claim_id": "C4",
+      "pass": true,
+      "reason": "維持無法證實合理。裁判已改引中天報導中包含「有可是私人，有可能是工程」的完整句子，也補入民視影片頁的自動轉錄「比如說有些工程 有些可能是私人土地」。後者是10月18日民權公園活動談全市樹冠變化的紀錄，原音未核對，仍無法確認沈伯洋在辯論所指的記者會上是否也這樣說。[中天新聞網辯論報導](https://ctinews.com/news/items/gOnL19pYWk) [民視影片頁](https://www.ganjingworld.com/video/1iu547q4qh22JZjptjY1svIwS1q51c)"
+    }
+  ]
+}

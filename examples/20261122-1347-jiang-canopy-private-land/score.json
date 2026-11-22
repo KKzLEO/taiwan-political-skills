@@ -1,0 +1,49 @@
+{
+  "credibility": {
+    "score": 53,
+    "raw": 52.5,
+    "main_claims": [
+      "C1",
+      "C2"
+    ],
+    "main_accuracy": 0.525,
+    "overall_accuracy": 0.525,
+    "capped": false,
+    "context_flags": [
+      "out_of_context"
+    ],
+    "show_on_spectrum": true
+  },
+  "result": "部分符合",
+  "result_reason": null,
+  "confidence": {
+    "score": 90,
+    "level": "高",
+    "deductions": [
+      {
+        "points": 10,
+        "reason": "證據品質 0.5：核心命題缺少第一手直接證據，或缺少第二條獨立證據鏈"
+      }
+    ],
+    "evidence_quality": 0.5
+  },
+  "publishable": false,
+  "publish_blocks": [
+    "結論是「部分符合」，只有「符合」或「不符」才標可公開；逐項判定和出處仍然可以引用，引用時請說明是哪一條"
+  ],
+  "without_importance_changes": null,
+  "claims": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "importance": 5,
+      "factor": 0.8
+    },
+    {
+      "claim_id": "C2",
+      "label": "misleading",
+      "importance": 5,
+      "factor": 0.25
+    }
+  ]
+}
