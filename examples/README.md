@@ -26,6 +26,8 @@ python3 skills/factcheck/scripts/fc.py status --run examples/<資料夾>
 | `20261122-1550-jiang-baolin` | 蔣萬安的辯論會發言（食品安全） | 不符｜可信度 25｜信心度 高（90）｜完整模式・跨模型 1 席｜可公開 | claude・Claude Fable 5.2 | 41 分鐘 |
 | `20261122-1924-jiang-twincity` | 蔣萬安的辯論會發言（雙城論壇） | 部分符合｜可信度 53｜信心度 高（80）｜完整模式・跨模型 1 席｜不可公開 | claude・Claude Opus 5.5 | 32 分鐘 |
 | `20261122-1956-shen-twincity` | 沈伯洋的辯論會發言（雙城論壇） | 無法判定｜可信度 —｜信心度 高（80）｜完整模式・跨模型 1 席｜不可公開 | claude・Claude Opus 5.5 | 50 分鐘 |
+| `20261122-2046-shen-songshan-relocation` | 沈伯洋的辯論會發言（松山機場遷建） | 符合｜可信度 80｜信心度 高（80）｜完整模式・跨模型 1 席｜可公開 | claude・Claude Opus 5.5 | 26 分鐘 |
+| `20261122-2112-蔣萬安松機公文` | 蔣萬安的辯論會發言（松山機場遷建） | 符合｜可信度 80｜信心度 高（80）｜完整模式・跨模型 1 席｜可公開 | claude・Claude Opus 5.5 | 24 分鐘 |
 <!-- runs:end -->
 
 - `機車大燈罰三千` 是 0.2.0 發版前的真實主體實測：用無人值守的 `claude -p` 載入這個外掛，只給 `prompt.txt` 裡那一句話，中途沒有人介入。經過寫在 `evals/results/2026-11-20-hosts.md`。

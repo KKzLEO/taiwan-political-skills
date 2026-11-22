@@ -1,0 +1,78 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 34,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "label",
+      "argument": "建議判為誤導。辯論逐字稿支持蔣萬安確實說過這段話，北市府也確實曾以書面建議將松機遷建納入後續規劃。這份公文是回覆國發會的徵詢。交通部當年的施政報告也分別記載整體規劃陳報行政院及國發會審議的程序。國發會隸屬行政院、行政院後來核定整體規劃，均無法證明北市府曾直接把這份函文送交行政院。把回覆國發會說成發函給行政院，會讓讀者誤解北市府當時採取的行動。",
+      "proposed_label": "misleading",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "112 年白紙黑字的公文，我們就給行政院，告訴他們我們台北市政府的立場，就是希望松機遷移"
+        },
+        {
+          "url": "https://www.businesstoday.com.tw/article/category/183027/post/202610150019/",
+          "excerpt": "根據台北市政府提供的資料，這份公文是台北市政府112年8月8日函復國發會，檢送規劃成果報告的書面意見一份。"
+        },
+        {
+          "url": "https://www.cna.com.tw/news/ahel/202610150219.aspx",
+          "excerpt": "國發會徵詢各方對松山機場整體規劃意見，市府回文國發會時，表達意見與交通部審查會時一致"
+        },
+        {
+          "url": "https://www.motc.gov.tw/ch/app/data/doc?aplistdn=&detailNo=1161859125840187392&id=811&module=policy&preview=&serno=ac091962-4c93-4118-81c5-9455c9fb676f&type=s",
+          "excerpt": "已於112年7月陳報行政院，刻由國家發展委員會審議中。"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S2 應改用原文摘錄，並註明這是《聯合報》記者的轉述。原文在「對整個城市發展有利」後還有「能夠期待」，溯源也不宜把這段列為直接引語。",
+      "evidence": [
+        {
+          "url": "https://udn.com/news/story/124652/9848967",
+          "excerpt": "蔣萬安則要沈伯洋要多了解一下台北市政府的各項的主張、立場，112年白紙黑字就給行政院，台北市政府立場就是希望松機遷建，對整個城市發展有利，能夠期待"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S14 引述的是民航局副局長轉述的 2023 年 5 月交通部審查會議紀錄，應用來說明北市府在會中表達的立場。這則摘錄無法證明同年 8 月函文的內容或收文機關。",
+      "evidence": [
+        {
+          "url": "https://udn.com/news/story/6656/9816748",
+          "excerpt": "民航局副局長楊國峯引用審查會議記錄指出，2023年5月交通部審查松機2040年整體規畫時"
+        },
+        {
+          "url": "https://www.cna.com.tw/news/aipl/202610150173.aspx",
+          "excerpt": "北市府代表在當年5月參與會議時曾說，以長期規劃角度來看，松山機場遷建有利台北市發展"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "已有公開逐字稿收錄與待查文字相同的引句，並將這段回答定位在三立完整版約 2 小時 42 分 44 秒處。應補列這份逐字稿和三立完整版，並註明逐字稿由語音辨識轉錄後校訂，這次未能播放原始影音核對。逐字稿也無法證明這則無網址訊息的轉述者或首發平台。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "告訴他們我們台北市政府的立場，就是希望松機遷移"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=0IlnD7rfC88&t=9764s",
+          "excerpt": "2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}

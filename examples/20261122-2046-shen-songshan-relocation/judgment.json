@@ -1,0 +1,546 @@
+{
+  "rulings": [
+    {
+      "attack_id": "A-1",
+      "upheld": true,
+      "reason": "成立。立委在立法院問民航局副局長的，是北市府近 4 年有沒有提出遷移松山機場的「建言主張」，或申請預算規劃研議，不是有沒有把遷建計畫送到中央。副局長回答「最近4年沒有」，和另外兩筆紀錄有出入：交通部說北市府代表在 2023 年審查會上表達過遷建有利都市發展；北市府 2023 年 8 月 8 日也發過函文，對《松山國際機場2040年整體規劃》表示意見。所以這筆資料不能當成「零計畫送中央」的佐證，只列為背景。",
+      "verified_urls": [
+        "https://news.ltn.com.tw/news/Taipei/breakingnews/5606193",
+        "https://www.ctee.com.tw/news/20261015701821-431401",
+        "https://udn.com/news/story/6656/9816337"
+      ]
+    },
+    {
+      "attack_id": "A-2",
+      "upheld": true,
+      "reason": "成立。從公視文字直播的前後文看，這句話是沈伯洋批評多項政策「在執政4年都沒討論，直到選前3個月才提出」的一部分。自由時報報導，蔣萬安 10 月 21 日在市議會說曾和都發、交通、產發等局處開會，但當場講不出開過幾次。這兩筆都和「零會議」直接相關，應列入證據。蔣萬安的說法沒有會議紀錄佐證，不算可靠的直接反證，不影響判定。",
+      "verified_urls": [
+        "https://news.pts.org.tw/live/105",
+        "https://news.ltn.com.tw/news/Taipei/breakingnews/5613473"
+      ]
+    },
+    {
+      "attack_id": "A-3",
+      "upheld": true,
+      "reason": "成立。原本列為第一手資料的 YouTube 直播頁面，看不到頻道名稱、影片長度和直播日期，無法確認是主辦單位的完整影片。聯合新聞網的直播頁只有一段說明，沒有影片長度，也沒有逐字稿。前者改列來源不明，後者改列媒體轉播。合辦單位三立新聞網另外上傳了標示為「直播完整版」的影片，三立的報導也附了這個連結，但本次沒有播放影片核對原音。",
+      "verified_urls": [
+        "https://www.youtube.com/live/j4s2_44yHJE",
+        "https://udn.com/vote2026/video/ycEUGBGrZso"
+      ]
+    },
+    {
+      "attack_id": "A-4",
+      "upheld": true,
+      "reason": "成立。原理由說 Yahoo、公視和三立懶人包的字句相同、「可能來自同一來源」，證據表卻把三者分成三條證據鏈，前後矛盾。核對後，Yahoo 和公視文字直播在引號外的前後文寫法不同，看得出是各自整理的。三立 11 月 1 日的懶人包是隔天的整理稿，寫法和同一家媒體前一天的現場報導不同。理由刪掉「可能同源」的說法，並註明三立懶人包是整理稿。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "A-5",
+      "upheld": true,
+      "reason": "成立。台灣事實查核中心頁面上的原文是：沈伯洋說：「都更7599專案，現在動工的數量是零，沒有辦法動工」？原本的摘錄不是逐字照抄，已經改正。該頁列出的 11 項查核裡，沒有松機遷建「零會議、零計畫」這一項，所以這筆資料只能說明查核中心沒有查這句話。",
+      "verified_urls": [
+        "https://tfc-taiwan.org.tw/2026-taipei-mayoral-election-debate/"
+      ]
+    },
+    {
+      "attack_id": "B-1",
+      "upheld": true,
+      "reason": "成立，改判大致正確。自由時報記者何玉華 10 月 31 日 14:00 的報導記為「松機的遷建零會議、零計畫送中央」，和訊息只差一個逗號。一份依三立新聞網完整版影片製作的第三方轉錄，在沈伯洋 2 小時 41 分 40 秒起的發言中，記下「松機的遷建，零會議、零計畫送中央」。Yahoo、公視、CTWANT、三立等媒體當天也各自記下相同的核心字詞。三立上傳的「直播完整版」影片確實存在。原判定說網路上找不到相同的版本，這點不正確。不判正確，是因為轉錄稿用語音辨識製作，校稿者沒有逐句聽原音，原音也還沒有核對。攻擊中說 Yahoo 和公視可能同源，這點核對後不成立；辯論會的起訖時間也沒有另外查證。這些細節不影響結論。",
+      "verified_urls": [
+        "https://news.ltn.com.tw/news/politics/breakingnews/5624827",
+        "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+        "https://www.youtube.com/watch?v=0IlnD7rfC88",
+        "https://www.ctwant.com/article/504659/",
+        "https://www.setn.com/news/1931350",
+        "https://news.pts.org.tw/live/105",
+        "https://tw.news.yahoo.com/live/%E5%8F%B0%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96%E6%9C%83%E6%87%B6%E4%BA%BA%E5%8C%85-%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%94%A3%E8%90%AC%E5%AE%89%E6%AD%A3%E9%9D%A2%E4%BA%A4%E9%8B%92%E5%85%A8%E7%B4%80%E9%8C%84-070432100.html"
+      ]
+    },
+    {
+      "attack_id": "B-2",
+      "upheld": true,
+      "reason": "成立。三立新聞網 10 月 31 日記為「0 計畫、0 會議就直接送中央」；CTWANT 在「送中央」前面斷句；自由時報記錄的前一句是批評蔣萬安執政 4 年沒討論、選前 3 個月才突然提出政策。沈伯洋 10 月 15 日也說過「提出政策是好事，但應該是在討論之後才是正確的」。原句可以讀成「送交中央的計畫是零」，也可以讀成「沒開會、沒有計畫就送到中央」，原本的改寫只採用了前一種讀法。改寫應保留原句，兩種讀法在理由裡分別說明。",
+      "verified_urls": [
+        "https://www.setn.com/news/1931350",
+        "https://www.ctwant.com/article/504659/",
+        "https://news.ltn.com.tw/news/politics/breakingnews/5624827",
+        "https://udn.com/news/story/6656/9815792"
+      ]
+    },
+    {
+      "attack_id": "C-1",
+      "upheld": true,
+      "reason": "成立。原本的改寫加了原文沒有的「開過的」，把「零會議」寫成不分對象、不分場合的絕對說法，比原句更強。上報轉述沈伯洋質疑市府「至今沒有提出具體計畫送交中央」，三立新聞網則記為「0 計畫、0 會議就直接送中央」，可見原句至少有兩種讀法。改寫應逐字保留引文，並註明原句沒有說明「零會議」指哪一類會議。溯源紀錄把訊息讀成「送中央的計畫是零」，也應改成中性的描述。",
+      "verified_urls": [
+        "https://www.setn.com/news/1931350",
+        "https://tw.news.yahoo.com/%E4%BA%A4%E5%8F%89%E8%A9%B0%E5%95%8F2-%E6%B2%88%E4%BC%AF%E6%B4%8B%E6%89%B9%E6%9D%BE%E6%A9%9F%E9%81%B7%E5%BB%BA%E7%BC%BA%E5%85%B7%E9%AB%94%E8%A8%88%E7%95%AB-%E9%82%80%E8%94%A3%E8%90%AC%E5%AE%89%E5%86%8D%E8%BE%AF%E8%AB%96-%E6%99%9A%E9%BB%9E%E5%8A%A0line%E4%B9%9F%E5%8F%AF%E4%BB%A5-055000815.html"
+      ]
+    },
+    {
+      "attack_id": "C-2",
+      "upheld": true,
+      "reason": "成立。原理由寫「三者」，卻只列出行政院和民航局兩個單位；這兩者都屬於中央行政部門，不是彼此獨立的佐證。原理由也漏列了北市府一方的主要說法。核對後，北市府表示曾「明確多次要求中央納入遷移規劃」；依公視直播紀錄，蔣萬安在辯論中說北市府 2023 年已經發公文，向行政院表達希望松機遷移的立場；沈伯洋則認為那份函文只表達遷建的可能性，不是具體計畫。修改後的理由並列雙方說法，不判定哪一方正確。CTWANT 報導中「白紙黑字發文給行政院」這句是不是蔣萬安的直接引語，從報導內容無法確定，所以改以公視直播記錄的蔣萬安回應為準。",
+      "verified_urls": [
+        "https://www.ctwant.com/article/504659/",
+        "https://udn.com/news/story/6656/9816518",
+        "https://news.pts.org.tw/live/105",
+        "https://tw.news.yahoo.com/%E4%BA%A4%E5%8F%89%E8%A9%B0%E5%95%8F2-%E6%B2%88%E4%BC%AF%E6%B4%8B%E6%89%B9%E6%9D%BE%E6%A9%9F%E9%81%B7%E5%BB%BA%E7%BC%BA%E5%85%B7%E9%AB%94%E8%A8%88%E7%95%AB-%E9%82%80%E8%94%A3%E8%90%AC%E5%AE%89%E5%86%8D%E8%BE%AF%E8%AB%96-%E6%99%9A%E9%BB%9E%E5%8A%A0line%E4%B9%9F%E5%8F%AF%E4%BB%A5-055000815.html"
+      ]
+    },
+    {
+      "attack_id": "X1-1",
+      "upheld": true,
+      "reason": "成立。附時間戳記的第三方轉錄，在三立完整版影片 2 小時 41 分 40 秒起的沈伯洋發言中，記下「松機的遷建，零會議、零計畫送中央」，和訊息只差句末標點。這份轉錄用 whisper 語音辨識製作，校過一輪稿，也和另一個轉錄版本交叉比對過；但頁面說明校稿者沒有逐句聽原音，所以列為具名的第三方資料，不當成主辦單位的逐字稿。",
+      "verified_urls": [
+        "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/"
+      ]
+    },
+    {
+      "attack_id": "X1-2",
+      "upheld": false,
+      "reason": "不成立。行政院 10 月 15 日的院會紀錄，和中央社轉述的交通部說明都確實存在。但這則訊息只是轉述沈伯洋在辯論會上說的話，沒有把「零會議」當成事實要讀者相信，所以依引言規則，判斷的是他有沒有說過。原句也可以讀成批評「沒開會、沒有計畫就送到中央」。照這個讀法，10 月 15 日院會正是送到中央的那一次；2023 年那場會是交通部審查自己的 2040 規劃，北市府代表只表達遷建有利都市發展。原句沒有說明「零會議」指哪一類會議，所以這兩筆紀錄都不是可靠的直接反證。攻擊本身也承認，北市府開過幾次會、有沒有正式報送計畫，還要另外查證。這兩筆紀錄列為判定理由裡的背景資料。",
+      "verified_urls": []
+    },
+    {
+      "attack_id": "X1-3",
+      "upheld": true,
+      "reason": "成立。原本的改寫把「零會議」展開成「開過的會議是零」，省略了前後文：沈伯洋是在質疑蔣萬安市府執政 4 年沒討論、選前才提出政策。公視文字直播記錄他接著問：「是準備很久但沒找人討論，還是急忙搬出來？」改寫應加上這層前後文，並逐字保留引文。",
+      "verified_urls": [
+        "https://news.pts.org.tw/live/105"
+      ]
+    },
+    {
+      "attack_id": "X1-4",
+      "upheld": true,
+      "reason": "成立。三立新聞網 10 月 31 日的辯論報導附了 YouTube「直播完整版」影片連結，第三方轉錄也指向同一支影片的 2 小時 41 分 40 秒處。溯源原本寫主辦單位的完整影片沒有找到，應改為：合辦單位三立已經上傳完整版影片，沈伯洋的發言約在 2 小時 41 分 40 秒，原音還沒有核對。使用者貼上的這段文字最早在哪個平台出現，仍然無法確認。",
+      "verified_urls": [
+        "https://rwdnews.sanlih.com.tw/news/1931365",
+        "https://www.setn.com/news/1931350",
+        "https://www.youtube.com/watch?v=0IlnD7rfC88",
+        "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/"
+      ]
+    },
+    {
+      "attack_id": "X1-5",
+      "upheld": true,
+      "reason": "成立。FTNN 新聞網 11 月 19 日的原始報導記錄，行政院發言人說「10月15日算起，至今第36天，行政院沒有收到相關文件，市府也沒有為此跟中央聯繫」，證據改引這篇原始報導。這段說法只涵蓋 10 月 15 日到 11 月 19 日，談的也只是行政院收到的文件，不能用來說明 10 月 15 日以前的情況，或其他中央機關有沒有收到資料。",
+      "verified_urls": [
+        "https://www.ftnn.com.tw/news/597223"
+      ]
+    }
+  ],
+  "tactic_checks": [],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "沈伯洋在 2026 年 10 月 31 日台北市長辯論會上說過這段話，大致屬實，但原音還沒有逐字核對。自由時報記者當天 14:00 的報導記為「松機的遷建零會議、零計畫送中央」。一份依三立新聞網上傳的辯論會完整版影片製作、附時間戳記的第三方轉錄，在沈伯洋 2 小時 41 分 40 秒起的發言中，記為「松機的遷建，零會議、零計畫送中央」，和訊息只差標點。其他媒體的記錄如下：Yahoo 新聞、公視新聞網的文字直播，和三立新聞網 11 月 1 日的整理稿，都記為「零會議、零計畫送中央」；CTWANT 記為「零會議零計劃，送中央」；三立新聞網 10 月 31 日的報導記為「0 計畫、0 會議就直接送中央」。各家的語序和斷句不完全一致。公視的紀錄也顯示，蔣萬安在同一段交叉詰問中回應，北市府 2023 年已經發公文表達遷建立場，和這段質疑前後相符。目前沒有查到沈伯洋否認說過這段話。不判正確，是因為轉錄稿用語音辨識製作，頁面說明校稿者沒有逐句聽原音，本次查核也沒有播放影片核對原音。這句話的意思有兩種讀法：可以讀成「送交中央的計畫是零」，也可以讀成「沒開會、沒有計畫就送到中央」；原句沒有說明「零會議」指哪一類會議。本判定只針對他有沒有說過這段話，不判定這段批評的內容對不對。關於內容，雙方說法不同。中央這一方：行政院發言人 10 月 15 日說這 4 年來台北市沒有提出遷建計畫，10 月 22 日說沒有收到北市府的會議紀錄，11 月 19 日說 10 月 15 日院會後行政院沒有收到相關文件；交通部說北市府代表只在 2023 年的審查會上表達遷建有利都市發展。民航局副局長在立法院回答北市府近 4 年沒有提出建言主張，但這和 2023 年的紀錄有出入。北市府這一方：蔣萬安在辯論中說北市府 2023 年已經發公文向行政院表達遷建立場，北市府也說曾多次要求中央納入遷移規劃；媒體看到的公文，是北市府 2023 年 8 月 8 日回覆國發會、對交通部 2040 整體規劃表示意見的函文。蔣萬安 10 月 21 日在市議會說曾和都發、交通、產發等局處開會，但沒有說出次數，也沒有公開會議紀錄。沈伯洋在辯論中則認為那份函文只是表達遷建的可能性，不是具體計畫。台灣事實查核中心這次的辯論查核沒有查這句話。",
+      "evidence_ids": [
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S25",
+        "S1",
+        "S2",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S21",
+        "S22",
+        "S23",
+        "S24"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.youtube.com/live/j4s2_44yHJE",
+      "title": "🔴【LIVE】 2026台北市長候選人電視辯論會｜#蔣萬安 #沈伯洋 #2026台北市長候選人電視辯論會",
+      "publisher": "YouTube（頁面沒有顯示頻道名稱）",
+      "accessed": "2026-11-22",
+      "tier": 6,
+      "chain": "debate_video",
+      "stance": "context",
+      "excerpt": "🔴【LIVE】 2026台北市長候選人電視辯論會｜#蔣萬安 #沈伯洋 #2026台北市長候選人電視辯論會",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/vote2026/video/ycEUGBGrZso",
+      "title": "【LIVE】1031台北市長候選人電視辯論登場 蔣萬安、沈伯洋正面交鋒",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "debate_video",
+      "stance": "context",
+      "excerpt": "2026台北市長選舉電視辯論會今（31日）登場，爭取連任的國民黨台北市長蔣萬安，與民進黨候選人沈伯洋，針對市政議題正面交鋒。",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/live/%E5%8F%B0%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96%E6%9C%83%E6%87%B6%E4%BA%BA%E5%8C%85-%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%94%A3%E8%90%AC%E5%AE%89%E6%AD%A3%E9%9D%A2%E4%BA%A4%E9%8B%92%E5%85%A8%E7%B4%80%E9%8C%84-070432100.html",
+      "title": "台北市長辯論會懶人包 沈伯洋蔣萬安正面交鋒全紀錄（10/31 下午1:29 更新）",
+      "publisher": "Yahoo奇摩新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "yahoo_live",
+      "stance": "supports",
+      "excerpt": "他說，蔣萬安執政四年一直沒有討論，選前三個月才突然端出多項方案，例如七年AI方案；松機遷建「零會議、零計畫送中央」；離島醫療後送則要民眾去桃園搭高鐵。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "北市長候選人辯論會登場 沈伯洋、蔣萬安交鋒政績與城市願景（14:05 第四輪【交互詰問2】）",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pts_live",
+      "stance": "supports",
+      "excerpt": "沈伯洋問：蔣許多政策包含7年AI方案、松機遷建「零會議、零計畫送中央」、離島醫療後改去桃園搭高鐵等，在執政4年都沒討論，直到選前3個月才提出，是準備很久但沒找人討論，還是急忙搬出來？",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.setn.com/news/1931650",
+      "title": "台北市長辯論會懶人包（2026/11/01 09:53，記者盧素梅；隔日整理稿）",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn_1101",
+      "stance": "supports",
+      "excerpt": "沈伯洋：質疑蔣萬安執政四年未討論，選前才突然端出方案，且「零會議、零計畫送中央」；",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ctwant.com/article/504659/",
+      "title": "北市長辯論／松山機場遷移攻防 沈伯洋質疑選前急推、蔣萬安：112年就向政院表態",
+      "publisher": "CTWANT",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ctwant",
+      "stance": "supports",
+      "excerpt": "松山機場遷移零會議零計劃，送中央",
+      "access_note": "full"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.setn.com/news/1931350",
+      "title": "北市長辯論／沈伯洋批松機遷建0計畫！蔣萬安回嗆「反對有100個藉口」",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn_1031",
+      "stance": "context",
+      "excerpt": "其中爭議最大的，就是松山機場遷建「0 計畫、0 會議就直接送中央」。",
+      "access_note": "full"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/%E4%BA%A4%E5%8F%89%E8%A9%B0%E5%95%8F2-%E6%B2%88%E4%BC%AF%E6%B4%8B%E6%89%B9%E6%9D%BE%E6%A9%9F%E9%81%B7%E5%BB%BA%E7%BC%BA%E5%85%B7%E9%AB%94%E8%A8%88%E7%95%AB-%E9%82%80%E8%94%A3%E8%90%AC%E5%AE%89%E5%86%8D%E8%BE%AF%E8%AB%96-%E6%99%9A%E9%BB%9E%E5%8A%A0line%E4%B9%9F%E5%8F%AF%E4%BB%A5-055000815.html",
+      "title": "交叉詰問2／沈伯洋批松機遷建缺具體計畫 邀蔣萬安再辯論：晚點加LINE也可以",
+      "publisher": "上報（Yahoo奇摩新聞轉載）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "upmedia",
+      "stance": "context",
+      "excerpt": "市府至今沒有提出具體計畫送交中央……112年函文，只是表達松山機場遷建的可能性，並非具體計畫",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ey.gov.tw/Page/4EC2394BE4EE9DD0/9084ccec-0b1c-4cb8-bd94-49aa41b4cb8f",
+      "title": "行政院第4025次院會決議（115-10-15）",
+      "publisher": "行政院",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "ey_meeting_1015",
+      "stance": "context",
+      "excerpt": "台北市蔣市長在今天院會提到的松山機場遷建，包括桃園市張市長、台中市鄭副市長、交通部陳部長、馬永成政委及國防部顧部長陸續都有相關的說明。……都可以將相關的資料送到行政院，讓各部會可以瞭解蔣市長的訴求",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/breakingnews/5606193",
+      "title": "蔣市府4年未提遷松機 對2040成為「首都國際商務機場」也沒意見",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ly_1014_caa",
+      "stance": "context",
+      "excerpt": "台北市政府在過去4年有沒有針對遷移或者廢掉台北松山機場提出任何建言主張，或者申請預算來補助進行規劃的研議？……最近4年沒有",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ctee.com.tw/news/20261015701821-431401",
+      "title": "蔣萬安提松機遷建 交通部還原2023年審查會：北市未提時間表",
+      "publisher": "工商時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "motc_1015",
+      "stance": "context",
+      "excerpt": "審查過程，台北市府代表未再提及遷移松山機場時間表，僅表達遷建有利於整體都市發展規劃，請交通部在後續規劃時整體思考。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9816748",
+      "title": "政院:北市4年來未提松機遷建計畫 卓揆不解蔣萬安為何巨大轉折?",
+      "publisher": "聯合報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ey_spokesperson_1015",
+      "stance": "context",
+      "excerpt": "這4年來台北市並未提出遷建計畫……今天也是蔣萬安第一次跟中央做相關討論",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/paper/1775567",
+      "title": "北市府松機遷建會議紀錄 政院︰仍未收到",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ey_spokesperson_1022",
+      "stance": "context",
+      "excerpt": "行政院發言人李慧芝昨表示，行政院沒有收到相關資料，所以無法進一步討論。",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9816518",
+      "title": "駁松機遷移未提主張說法...北市：多次向中央表達、AI布局更超前部署",
+      "publisher": "聯合報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "taipei_gov_1015",
+      "stance": "context",
+      "excerpt": "松山機場遷移有利於台北市整體都市發展規劃，仍為市民所殷盼……明確多次要求中央納入遷移規劃",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ftnn.com.tw/news/597223",
+      "title": "蔣萬安赴政院報告松機遷移 政院證實：市府過36天沒下文也沒聯繫",
+      "publisher": "FTNN新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ey_spokesperson_1119",
+      "stance": "context",
+      "excerpt": "從蔣萬安上次行政院會報告松機遷建想法，10月15日算起，至今第36天，行政院沒有收到相關文件，市府也沒有為此跟中央聯繫。",
+      "access_note": "full"
+    },
+    {
+      "id": "S16",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tfc-taiwan.org.tw/2026-taipei-mayoral-election-debate/",
+      "title": "2026台北市長首場選舉辯論查核",
+      "publisher": "台灣事實查核中心",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "tfc_debate",
+      "stance": "context",
+      "excerpt": "沈伯洋說：「都更7599專案，現在動工的數量是零，沒有辦法動工」？",
+      "access_note": "full"
+    },
+    {
+      "id": "S17",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5624827",
+      "title": "台北市長辯論會報導（2026/10/31 14:00，記者何玉華）",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn_1031",
+      "stance": "supports",
+      "excerpt": "沈伯洋提出蔣萬安執政4年沒討論，選前3個月突然出現的政策包括：……松機的遷建零會議、零計畫送中央",
+      "access_note": "full"
+    },
+    {
+      "id": "S18",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+      "title": "2026 台北市長辯論會轉錄（附時間戳記）",
+      "publisher": "richliu（具名個人網站，第三方語音辨識轉錄）",
+      "accessed": "2026-11-22",
+      "tier": 4,
+      "chain": "richliu_transcript",
+      "stance": "supports",
+      "excerpt": "松機的遷建，零會議、零計畫送中央",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S19",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.youtube.com/watch?v=0IlnD7rfC88",
+      "title": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "publisher": "三立新聞網（YouTube）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "debate_video_setn",
+      "stance": "context",
+      "excerpt": "【直播完整版】2026台北市長候選人電視辯論會 蔣萬安、沈伯洋正面交鋒｜三立新聞網 SETN.com",
+      "access_note": "no_transcript"
+    },
+    {
+      "id": "S20",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://rwdnews.sanlih.com.tw/news/1931365",
+      "title": "北市長辯論／沈伯洋約第二場辯論、加LINE 蔣萬安：沒問題啊可以溝通",
+      "publisher": "三立新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn_1031_live",
+      "stance": "context",
+      "excerpt": "台北市長電視辯論會，可透過直播觀看：",
+      "access_note": "full"
+    },
+    {
+      "id": "S21",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9816337",
+      "title": "蔣萬安出示 2023 年北市府函文報導",
+      "publisher": "聯合報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "taipei_letter_2023",
+      "stance": "context",
+      "excerpt": "檢送『松山國際機場2040年整體規劃』成果報告之本府書函意見",
+      "access_note": "full"
+    },
+    {
+      "id": "S22",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/Taipei/breakingnews/5613473",
+      "title": "市議會質詢松機遷移報導（2026/10/21）",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ltn_council_1021",
+      "stance": "context",
+      "excerpt": "許淑華再問，上任後有跟局處開過幾次會討論，蔣說都有跟都發、交通、產發局等局處開過會。不過蔣現場講不出開過幾次，表示可以會後提供。",
+      "access_note": "full"
+    },
+    {
+      "id": "S23",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.cna.com.tw/news/aall/202610150219.aspx",
+      "title": "交通部說明松山機場 2040 整體規劃審查會報導（2026/10/15）",
+      "publisher": "中央社",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "motc_1015",
+      "stance": "context",
+      "excerpt": "僅在112年的會議中有表達過松機遷移有利都市發展，請交通部在後續規劃時整體思考",
+      "access_note": "full"
+    },
+    {
+      "id": "S24",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9815792",
+      "title": "沈伯洋受訪談蔣萬安列席院會提松機遷建（2026/10/15）",
+      "publisher": "聯合報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn_1015_shen",
+      "stance": "context",
+      "excerpt": "提出政策是好事，但應該是在討論之後才是正確的",
+      "access_note": "full"
+    },
+    {
+      "id": "S25",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "北市長候選人辯論會登場 沈伯洋、蔣萬安交鋒政績與城市願景（14:05 第四輪【交互詰問2】蔣萬安回應）",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pts_live",
+      "stance": "context",
+      "excerpt": "蔣萬安答：北市2023年就已發公文，向政院表達希望松機遷移立場",
+      "access_note": "full"
+    }
+  ]
+}

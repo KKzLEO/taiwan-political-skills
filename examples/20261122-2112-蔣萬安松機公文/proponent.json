@@ -1,0 +1,256 @@
+{
+  "ledger": [
+    {
+      "id": "S1",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://tw.news.yahoo.com/live/%E5%8F%B0%E5%8C%97%E5%B8%82%E9%95%B7%E8%BE%AF%E8%AB%96%E6%9C%83%E6%87%B6%E4%BA%BA%E5%8C%85-%E6%B2%88%E4%BC%AF%E6%B4%8B%E8%94%A3%E8%90%AC%E5%AE%89%E6%AD%A3%E9%9D%A2%E4%BA%A4%E9%8B%92%E5%85%A8%E7%B4%80%E9%8C%84-070432100.html",
+      "title": "台北市長辯論會懶人包 沈伯洋蔣萬安正面交鋒全紀錄",
+      "publisher": "Yahoo奇摩新聞",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "yahoo-live-1031",
+      "stance": "supports",
+      "excerpt": "蔣萬安：112年就發文行政院",
+      "access_note": "full"
+    },
+    {
+      "id": "S2",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/124652/9848967",
+      "title": "松機遷移議題交鋒 蔣萬安「20年才能解決」：行政院要卡台北打造AI園區？",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "udn-debate-1031",
+      "stance": "supports",
+      "excerpt": "112年白紙黑字就給行政院，台北市政府立場就是希望松機遷建，對整個城市發展有利",
+      "access_note": "full"
+    },
+    {
+      "id": "S3",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.ctwant.com/article/504659/",
+      "title": "台北市長辯論會 蔣萬安回應松機遷移質疑（CTWANT 報導）",
+      "publisher": "CTWANT",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ctwant-1031",
+      "stance": "supports",
+      "excerpt": "市府早在112年就白紙黑字發文給行政院，表明希望松山機場遷移，這對城市發展有利，也是市民共同的期待。",
+      "access_note": "full"
+    },
+    {
+      "id": "S4",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.pts.org.tw/live/105",
+      "title": "北市長候選人辯論會登場 沈伯洋、蔣萬安交鋒政績與城市願景",
+      "publisher": "公視新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "pts-live-1031",
+      "stance": "supports",
+      "excerpt": "北市2023年就已發公文",
+      "access_note": "full"
+    },
+    {
+      "id": "S5",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.twreporter.org/a/2026-local-elections-taipei-mayoral-televised-debate",
+      "title": "2026 地方選舉台北市長電視辯論會報導",
+      "publisher": "報導者",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "twreporter-1031",
+      "stance": "supports",
+      "excerpt": "蔣萬安回應，2023年就曾向行政院提及機場遷移意願",
+      "access_note": "full"
+    },
+    {
+      "id": "S6",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9816337",
+      "title": "親赴政院談松機遷移 蔣萬安秀公文:2023年曾回函中央表達遷建立場",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpe-letter-2023",
+      "stance": "supports",
+      "excerpt": "為2023年8月8日北市府針對『松山國際機場2040年整體規畫』成果報告意見，回覆中央國發會的函文",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S7",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9816489",
+      "title": "北市府 2023 年函文四點意見報導",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpe-letter-2023",
+      "stance": "supports",
+      "excerpt": "第一、以長期規畫角度，松山機場遷建有利於台北市整體都市發展規畫，仍為市民所殷盼，仍請交通部應將松山機場遷建案納入後續機場整體規畫思考。",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S8",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9816518",
+      "title": "北市府反駁「未提松機遷移主張」報導",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "tpe-letter-2023",
+      "stance": "supports",
+      "excerpt": "更於112年7月20日國發會函文徵詢意見後，蔣市府就在同年8月8日正式回函，白紙黑字明確指出：「松山機場遷移有利於台北市整體都市發展規劃，仍為市民所殷盼」",
+      "access_note": "not_original"
+    },
+    {
+      "id": "S9",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9817267",
+      "title": "蔣萬安攜函文稱曾提松機遷建 交通部還原時間線:從未主動討論",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "motc-timeline",
+      "stance": "context",
+      "excerpt": "交通部官員指出，2023年8月國發會徵詢各方對松山機場整體規畫意見，北市府回文國發會時，表達意見與交通部審查會時一致，民航局也依照國發會要求，彙整相關意見回覆。",
+      "access_note": "full"
+    },
+    {
+      "id": "S10",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://news.ltn.com.tw/news/politics/breakingnews/5607348",
+      "title": "交通部說明北市府松機遷建意見表達經過（自由時報即時新聞）",
+      "publisher": "自由時報",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "motc-timeline",
+      "stance": "context",
+      "excerpt": "從來沒有主動與交通部或民航局討論此一議題",
+      "access_note": "full"
+    },
+    {
+      "id": "S11",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=A0010106",
+      "title": "國家發展委員會組織法（修正日期：民國111年01月19日）",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "law-ndc",
+      "stance": "context",
+      "excerpt": "第1條：行政院為辦理國家發展之規劃、協調、審議、資源分配業務，特設國家發展委員會（以下簡稱本會）。",
+      "access_note": "full"
+    },
+    {
+      "id": "S12",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=A0010032&flno=4",
+      "title": "行政院組織法第4條",
+      "publisher": "全國法規資料庫（法務部）",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "law-ey",
+      "stance": "context",
+      "excerpt": "行政院設下列各委員會：一、國家發展委員會。",
+      "access_note": "full"
+    },
+    {
+      "id": "S13",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.mirrormedia.mg/external/setn_1922301",
+      "title": "交通部次長說明松山機場2040年整體規劃（三立新聞網稿，鏡週刊轉載）",
+      "publisher": "鏡週刊（轉載三立新聞網）",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "setn-motc",
+      "stance": "context",
+      "excerpt": "行政院早在2023年11月核定「松山國際機場2040年整體規劃」，將松山機場定位為「首都國際商務機場」及「國內航空運輸服務樞紐」",
+      "access_note": "full"
+    },
+    {
+      "id": "S14",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://udn.com/news/story/6656/9816748",
+      "title": "政院:北市4年來未提松機遷建計畫 卓揆不解蔣萬安為何巨大轉折?",
+      "publisher": "聯合新聞網",
+      "accessed": "2026-11-22",
+      "tier": 3,
+      "chain": "ey-presser-1015",
+      "stance": "supports",
+      "excerpt": "以長期規畫角度，松山機場遷建有利台北市發展規畫，建請納入整體思考",
+      "access_note": "full"
+    },
+    {
+      "id": "S15",
+      "claim_ids": [
+        "C1"
+      ],
+      "url": "https://www.youtube.com/watch?v=j4s2_44yHJE",
+      "title": "🔴【LIVE】 2026台北市長候選人電視辯論會｜#蔣萬安 #沈伯洋 #2026台北市長候選人電視辯論會",
+      "publisher": "YouTube",
+      "accessed": "2026-11-22",
+      "tier": 1,
+      "chain": "debate-video",
+      "stance": "context",
+      "excerpt": "2026台北市長候選人電視辯論會",
+      "access_note": "no_transcript"
+    }
+  ],
+  "verdicts": [
+    {
+      "claim_id": "C1",
+      "label": "mostly_true",
+      "reasoning": "大致正確：五家媒體的即時報導各自記載，蔣萬安在 2026 年 10 月 31 日辯論會上表示北市府 112 年已書面向行政院表達希望松機遷移；北市府也確實在 2023 年 8 月 8 日發出函文，寫明遷建「仍為市民所殷盼」，並請交通部把遷建案納入後續規劃。細節上的差異是：函文的收文機關是國發會，是回覆國發會 7 月 20 日的徵詢，並不是直接發給行政院本部。不過依組織法，國發會是行政院所設、負責審議的委員會，該規劃之後也由行政院在 2023 年 11 月核定，所以「給行政院」是簡化的說法。訊息引號內的逐字字句沒有完整影片逐字稿可以核對，各媒體版本用字不一（遷移／遷建、有沒有「公文」二字）。交通部則指出，北市府當時只在受邀開會或受徵詢時被動表達，也沒有提出遷移時程；這屬於背景資訊，不影響「曾以書面表達希望遷移」這個核心內容。",
+      "evidence_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15"
+      ],
+      "context_flags": [],
+      "law_text_obtained": null
+    }
+  ],
+  "prior_factchecks_rechecked": []
+}

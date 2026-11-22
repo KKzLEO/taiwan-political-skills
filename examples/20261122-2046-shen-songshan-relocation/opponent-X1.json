@@ -1,0 +1,78 @@
+{
+  "seat": "X1",
+  "lens": "external",
+  "engine": "codex",
+  "searches_run": 26,
+  "attacks": [
+    {
+      "id": "X1-1",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "正方稱網路上找不到與訊息相同的引文，但一份附時間戳記的辯論轉錄，在三立完整版影片 2 小時 41 分 40 秒開始的發言段落，記下了相同字句，句末標點不同。這份轉錄採語音辨識及校稿，原始影音在本次查核中未能播放，因此仍無法獨立核對原音。",
+      "evidence": [
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "松機的遷建，零會議、零計畫送中央；"
+        }
+      ]
+    },
+    {
+      "id": "X1-2",
+      "claim_id": "C1",
+      "target": "label",
+      "proposed_label": "misleading",
+      "argument": "「零會議」未限定會議種類，容易讓讀者以為蔣萬安市府任內從未在會議上與中央談過松機遷建。行政院紀錄顯示，辯論前的 10 月 15 日院會上，蔣萬安已提出此議題，多位官員也發言。交通部另透過中央社說明，北市府在 2023 年受邀參加審查會時已表達遷建意見。這兩筆紀錄足以反駁廣義的「零會議」。北市府自行召開幾次專案會議，以及是否正式報送完整遷建計畫，仍須分別查證。",
+      "evidence": [
+        {
+          "url": "https://www.ey.gov.tw/Page/4EC2394BE4EE9DD0/9084ccec-0b1c-4cb8-bd94-49aa41b4cb8f",
+          "excerpt": "台北市蔣市長在今天院會提到的松山機場遷建，包括桃園市張市長、台中市鄭副市長、交通部陳部長、馬永成政委及國防部顧部長陸續都有相關的說明。"
+        },
+        {
+          "url": "https://www.cna.com.tw/news/aall/202610150219.aspx",
+          "excerpt": "僅在112年的會議中有表達過松機遷移有利都市發展，請交通部在後續規劃時整體思考。"
+        }
+      ]
+    },
+    {
+      "id": "X1-3",
+      "claim_id": "C1",
+      "target": "neutral_rewrite",
+      "argument": "把「零會議」展開成「開過的會議是零」，省略了沈伯洋在詰問中針對蔣萬安市府任內政策準備的脈絡，也讓讀者以為所有機關、各類會議都已納入計算。建議寫成「沈伯洋在 10 月 31 日台北市長辯論會上，質疑蔣萬安市府推出松山機場遷建構想前的討論與報送情況，並用『零會議、零計畫送中央』形容。」",
+      "evidence": [
+        {
+          "url": "https://news.pts.org.tw/live/105",
+          "excerpt": "在執政4年都沒討論，直到選前3個月才提出，是準備很久但沒找人討論，還是急忙搬出來？"
+        }
+      ]
+    },
+    {
+      "id": "X1-4",
+      "claim_id": null,
+      "target": "trace",
+      "argument": "三立新聞網自己的辯論報導有刊登完整版影片連結，附時間戳記的轉錄也指向同一支影片。溯源應記錄主辦方完整影片的入口和發言位置，並註明原音尚未核對。影片及轉錄可以用來追查發言，使用者貼上的文字最早在哪個平台出現仍無法確認。",
+      "evidence": [
+        {
+          "url": "https://rwdnews.sanlih.com.tw/news/1931365",
+          "excerpt": "https://www.youtube.com/watch?v=0IlnD7rfC88"
+        },
+        {
+          "url": "https://article.richliu.com/2026/2026-taipei-mayor-debate-transcript-timestamps/",
+          "excerpt": "[2:41:40] 沈伯洋："
+        }
+      ]
+    },
+    {
+      "id": "X1-5",
+      "claim_id": "C1",
+      "target": "evidence",
+      "argument": "S15 可改引 FTNN 的原始報導。行政院發言人的說法限定在 10 月 15 日院會到 11 月 19 日之間，並指行政院未收到相關文件。這段引文無法確認 10 月 15 日以前的情況，或其他中央機關是否曾收到資料。",
+      "evidence": [
+        {
+          "url": "https://www.ftnn.com.tw/news/597223",
+          "excerpt": "10月15日算起，至今第36天，行政院沒有收到相關文件，市府也沒有為此跟中央聯繫。"
+        }
+      ]
+    }
+  ],
+  "status": "ok"
+}
